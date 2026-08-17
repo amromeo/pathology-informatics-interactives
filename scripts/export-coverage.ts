@@ -9,6 +9,7 @@ const output = {
   lessonCount: lessons.length,
   topics: topics.map((topic) => ({
     id: topic.id,
+    slug: topic.slug,
     title: topic.title,
     objectives: topic.objectives,
     lessons: lessons.filter((lesson) => lesson.manifest.topic === topic.id).map((lesson) => ({
