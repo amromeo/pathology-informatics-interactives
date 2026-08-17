@@ -23,3 +23,18 @@ test("all four pilot interaction patterns are present", () => {
     ["data-quality", "digital-pathology", "downtime", "interoperability"],
   );
 });
+
+test("the morning-huddle artifact compares two medians for one defined cohort", () => {
+  const lesson = lessons.find((item) => item.manifest.slug === "steward-at-morning-huddle");
+  assert.ok(lesson);
+  assert.match(lesson.artifactTitle, /receipt-to-verification TAT/);
+  assert.deepEqual(
+    lesson.evidence.map((item) => item.label),
+    [
+      "Automated dashboard median",
+      "Manual bench-review median",
+      "Dashboard rows missing receipt time",
+    ],
+  );
+  assert.equal(lesson.evidence[2].value, "8 of 43 (18.6%)");
+});

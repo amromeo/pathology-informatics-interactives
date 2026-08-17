@@ -3,7 +3,7 @@
 Learner-facing teaching copy is stored in Markdown/MDX, not React components.
 Each lesson has a folder under `content/lessons/` containing:
 
-- `introduction.mdx` — title, case hook, learner task, and concept lens.
+- `introduction.mdx` — title, case hook, learner task, and key point.
 - `debrief.mdx` — principle, failure layers, roles, and safety implications.
 - `faculty.mdx` — facilitation notes, expected reasoning, and review cautions.
 - `practicum.mdx` — optional institution-based extension when present.

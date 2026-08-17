@@ -2,12 +2,15 @@
 
 ## Expected reasoning
 
-Learners should resist choosing a single department to blame. The central move is to reconcile specimen-level source data with the patient- or service-level dashboard before changing operations.
+The 38- and 71-minute values are medians for the same 43-specimen cohort and the same receipt-to-verification interval. The difference is that the warehouse can calculate an interval for only 35 specimens, while the charge technologist can recover physical receipt times for all 43 from the bench log.
+
+Learners should check the calculation and exclusions before accepting either report as the official quality measure. The problem crosses LIS build, analytics, bench workflow, and medical oversight; it is not simply an IT outage or a bench performance problem.
 
 ## Watch for
 
 - Confusing system availability with information quality.
+- Mistaking 71 minutes for the age of the worklist or a single delayed specimen rather than a manually calculated median.
 - Treating a median as self-validating without inspecting exclusions.
 - Assigning clinical approval to a technical analyst.
 
-Use the case to ask which informatics activities the residents have already encountered in routine rotations.
+Ask learners which source they would use to reproduce the number specimen by specimen and what documentation they would require before putting the corrected dashboard back into use.

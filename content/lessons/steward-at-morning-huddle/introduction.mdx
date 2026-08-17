@@ -6,10 +6,24 @@
 
 At 07:15, the chemistry bench describes worsening delays. The executive dashboard reports the best turnaround time of the quarter. Both observations feel credible to the people reporting them.
 
-Your job is to determine whether the disagreement is primarily an IT problem, an informatics problem, an operational problem, or a combination—and to identify who should own each part of the response.
+### What the two numbers mean
 
-## Concept lens
+Both reports are intended to describe the **median time from physical receipt in the laboratory to verification** for the same 43 STAT chemistry specimens received between 06:00 and 07:00.
+
+- **Dashboard: 38 minutes.** Calculated automatically from LIS timestamps sent to the data warehouse.
+- **Bench review: 71 minutes.** Calculated by the charge technologist from the bench receipt log and verification times for the same 43 specimens.
+
+The 71-minute value is a median from the manual review. It is not the age of one specimen and it is not the current worklist wait time. At the start of the case, you know that the two reports are trying to measure the same thing—but not why they disagree.
+
+## What you need to do
+
+1. Compare the two reports and note what each one includes.
+2. Select each system step to find where specimens drop out of the dashboard calculation.
+3. Decide whether the dashboard is ready to use at the morning huddle.
+4. Choose a correction and run the validation cases.
+
+## Key point
 
 - IT keeps systems available and functioning.
 - Informatics asks whether those systems represent and support clinical work correctly.
-- Laboratory information stewardship connects provenance, fitness for purpose, approval, and communication.
+- The laboratory must know how a quality metric is calculated, what it leaves out, and who has approved it for operational use.

@@ -14,6 +14,7 @@ test("shared lesson controls expose semantic groups and labels", () => {
   assert.match(html, /aria-label="Repair choices"/);
   assert.match(html, /aria-live="polite"/);
   assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
+  assert.doesNotMatch(html, /Evidence-supported|Incomplete correction|Unsafe shortcut/);
 });
 
 test("the WSI viewer has text alternatives and labeled controls", () => {

@@ -38,8 +38,9 @@ export function GenericExperience({ lesson, onAttempt }: { lesson: LessonDefinit
       <section className="lesson-section" aria-labelledby="trace-title">
         <div className="section-heading">
           <span className="section-number">02</span>
-          <div><p className="eyebrow">System trace</p><h2 id="trace-title">Follow the information</h2></div>
+          <div><p className="eyebrow">Trace</p><h2 id="trace-title">Follow it through the system</h2></div>
         </div>
+        <p className="section-guidance">Select each step in order. Look for where the data, meaning, or included cases change.</p>
         <div className="trace-tabs" role="tablist" aria-label="Trace steps">
           {lesson.trace.map((step, index) => <button key={step.system} type="button" role="tab" aria-selected={activeTrace === index} className={activeTrace === index ? "active" : ""} onClick={() => setActiveTrace(index)}><span>{index + 1}</span>{step.system}</button>)}
         </div>
@@ -52,16 +53,16 @@ export function GenericExperience({ lesson, onAttempt }: { lesson: LessonDefinit
       <section className="lesson-section decision-section" aria-labelledby="decision-title">
         <div className="section-heading"><span className="section-number">03</span><div><p className="eyebrow">Diagnosis</p><h2 id="decision-title">{lesson.decisionPrompt}</h2></div></div>
         <div className="choice-grid" role="radiogroup" aria-label="Diagnosis choices">
-          {lesson.decisionChoices.map((choice) => <button key={choice.id} type="button" role="radio" aria-checked={decision === choice.id} className={decision === choice.id ? "selected" : ""} onClick={() => setDecision(choice.id)}><span className="choice-marker"/><strong>{choice.label}</strong><small>{choice.detail}</small></button>)}
+          {lesson.decisionChoices.map((choice) => <button key={choice.id} type="button" role="radio" aria-checked={decision === choice.id} className={decision === choice.id ? "selected" : ""} onClick={() => setDecision(choice.id)}><span className="choice-marker"/><strong>{choice.label}</strong></button>)}
         </div>
-        {selectedDecision && <div className={`feedback ${selectedDecision.correct ? "correct" : "incorrect"}`} role="status"><strong>{selectedDecision.correct ? "Evidence aligned." : "Look across the whole trace."}</strong><p>{selectedDecision.feedback}</p></div>}
+        {selectedDecision && <div className={`feedback ${selectedDecision.correct ? "correct" : "incorrect"}`} role="status"><strong>{selectedDecision.correct ? "Correct." : "Not quite."}</strong><p>{selectedDecision.feedback}</p></div>}
       </section>
 
       <section className="lesson-section repair-section" aria-labelledby="repair-title">
         <div className="section-heading"><span className="section-number">04</span><div><p className="eyebrow">Corrective action</p><h2 id="repair-title">{lesson.repairPrompt}</h2></div></div>
         <div className="repair-layout">
           <div className="choice-stack" role="radiogroup" aria-label="Repair choices">
-            {lesson.repairChoices.map((choice) => <button key={choice.id} type="button" role="radio" aria-checked={repair === choice.id} className={repair === choice.id ? "selected" : ""} onClick={() => { setRepair(choice.id); setTestsRun(false); }}><strong>{choice.label}</strong><small>{choice.detail}</small></button>)}
+            {lesson.repairChoices.map((choice) => <button key={choice.id} type="button" role="radio" aria-checked={repair === choice.id} className={repair === choice.id ? "selected" : ""} onClick={() => { setRepair(choice.id); setTestsRun(false); }}><strong>{choice.label}</strong></button>)}
           </div>
           <article className="test-console" aria-live="polite">
             <header><span>Validation set</span><strong>{testsRun ? `${passed}/${lesson.validationCases.length} passed` : "Not run"}</strong></header>
@@ -72,7 +73,7 @@ export function GenericExperience({ lesson, onAttempt }: { lesson: LessonDefinit
             <button className="primary-button" type="button" disabled={!repair} onClick={() => { setTestsRun(true); onAttempt?.(true); }}>Run validation cases</button>
           </article>
         </div>
-        {testsRun && selectedRepair && <div className={`feedback ${passed === lesson.validationCases.length ? "correct" : "incorrect"}`} role="status"><strong>{passed === lesson.validationCases.length ? "Ready for controlled approval." : "Do not approve this change yet."}</strong><p>{selectedRepair.feedback}</p></div>}
+        {testsRun && selectedRepair && <div className={`feedback ${passed === lesson.validationCases.length ? "correct" : "incorrect"}`} role="status"><strong>{passed === lesson.validationCases.length ? "Validation passed. Ready for review and approval." : "Validation is incomplete. Do not approve this change."}</strong><p>{selectedRepair.feedback}</p></div>}
       </section>
 
       <div className="reset-row"><button type="button" className="text-button" onClick={reset}>Reset lesson interactions</button></div>

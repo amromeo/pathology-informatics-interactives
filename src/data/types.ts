@@ -38,7 +38,6 @@ export type TraceStep = {
 export type Choice = {
   id: string;
   label: string;
-  detail: string;
   correct?: boolean;
   feedback: string;
 };

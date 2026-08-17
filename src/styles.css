@@ -130,6 +130,7 @@ h3 { line-height: 1.2; }
 .lesson-section, .pilot-lab { margin: 34px 0; padding: 54px; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 16px 45px rgba(23,49,45,.06); }
 .section-heading { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 34px; }
 .section-heading h2 { margin: 0; font-size: clamp(2rem, 4vw, 3.1rem); }
+.section-guidance { max-width: 760px; margin: -12px 0 28px 62px; color: var(--muted); }
 .section-number { width: 42px; height: 42px; display: grid; place-items: center; flex: 0 0 auto; border: 1px solid var(--green); border-radius: 50%; color: var(--green); font-family: ui-monospace, monospace; font-size: 11px; }
 .artifact-card { border: 1px solid #c9cec8; background: #f7f8f3; }
 .artifact-card header, .test-console header { display: flex; justify-content: space-between; gap: 16px; padding: 14px 18px; background: #e6e9e2; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
@@ -256,6 +257,7 @@ h3 { line-height: 1.2; }
   .coverage-head { font-size: 9px; }
   .lesson-meta { align-items: flex-start; flex-direction: column; }
   .lesson-section, .pilot-lab { padding: 26px 20px; margin-left: -6px; margin-right: -6px; }
+  .section-guidance { margin-left: 0; }
   .trace-panel { grid-template-columns: 1fr; }
   .trace-panel > div, .trace-panel aside { padding: 25px; }
   .metric-preview, .timeline-lab { grid-template-columns: 1fr; }

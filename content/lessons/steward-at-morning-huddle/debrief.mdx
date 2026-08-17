@@ -1,7 +1,7 @@
 ## Debrief
 
-**Informatics principle:** A technically available dashboard can still be semantically unsafe for operational use.
+**Key point:** A dashboard can be online and calculating exactly as programmed but still give the laboratory a misleading result.
 
-The technical defect is the loss of structured received timestamps for manual accessions. The analytic consequence is denominator bias; delayed cases disappear before the median is calculated. The workflow consequence is false reassurance at the huddle, creating a risk that real delays remain uncorrected.
+Eight converted or manually accessioned specimens had no structured receipt time in the LIS extract. The warehouse query dropped those records before calculating the median. Because those specimens included delayed work, the dashboard reported 38 minutes for 35 specimens while the bench review reported 71 minutes for all 43.
 
-The LIS and analytics teams investigate and repair the data path. Laboratory operations confirms the workflow meaning. The medical director approves the metric’s clinical interpretation and use.
+The LIS and analytics teams correct and test the data feed. Chemistry operations confirms that the calculation matches the bench workflow. The laboratory medical director approves the metric before it is used to judge performance or change staffing.
