@@ -31,6 +31,11 @@
 | 8. Cybersecurity | Lessons 7–9 |
 | 9. Implementation and Management | Lessons 8, 11–12, and 22–23 |
 
+## Additional professional guidance
+
+- **College of American Pathologists — “Don't Forget Your Rules When Harmonizing Laboratory Testing Across Multiple Sites.”** Used in Lesson 1 to support the laboratory's responsibility to verify accurate transmission of patient results into the EHR. The article discusses CAP checklist requirement GEN.48500 and validation in the downstream system clinicians use. The lesson cites and summarizes the principle; CAP wording is not reproduced.
+- Source: <https://www.cap.org/member-resources/clinical-informatics-resources/dont-forget-your-rules-when-harmonizing-laboratory-testing-across-multiple-sites>
+
 ## Asset policy
 
 All interface displays, logs, tables, messages, and image artifacts in this

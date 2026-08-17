@@ -13,8 +13,11 @@ on GitHub. Commit the change to `main`; the Pages workflow rebuilds and
 republishes the curriculum automatically.
 
 Structured interaction content—evidence labels, answer choices, system-trace
-steps, and validation cases—lives in `src/data/curriculum.ts`. Those items drive
-application state, so preserve IDs and punctuation when editing them.
+steps, and validation cases—usually lives in `src/data/curriculum.ts`. Lesson 1
+keeps its role assignments and data-view questions beside the MDX files in
+`content/lessons/steward-at-morning-huddle/interaction.ts`. These items drive
+application state, so preserve the `id`, `owner`, and `answer` values when
+editing the visible wording.
 
 Do not paste patient information, proprietary screenshots, or text copied from
 the PIER PDF. All cases and artifacts must remain synthetic and independently

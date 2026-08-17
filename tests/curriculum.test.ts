@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { lessons } from "../src/data/curriculum";
 import { validationResult } from "../src/data/validation";
+import { orientationTasks, orientationViews } from "../content/lessons/steward-at-morning-huddle/interaction";
 
 test("the controlled repair passes every lesson validation set", () => {
   for (const lesson of lessons) {
@@ -24,17 +25,16 @@ test("all four pilot interaction patterns are present", () => {
   );
 });
 
-test("the morning-huddle artifact compares two medians for one defined cohort", () => {
+test("lesson 1 teaches the Topic 1 role and ownership boundaries", () => {
   const lesson = lessons.find((item) => item.manifest.slug === "steward-at-morning-huddle");
   assert.ok(lesson);
-  assert.match(lesson.artifactTitle, /receipt-to-verification TAT/);
-  assert.deepEqual(
-    lesson.evidence.map((item) => item.label),
-    [
-      "Automated dashboard median",
-      "Manual bench-review median",
-      "Dashboard rows missing receipt time",
-    ],
-  );
-  assert.equal(lesson.evidence[2].value, "8 of 43 (18.6%)");
+  assert.equal(lesson.manifest.title, "Who Needs to Be at the Table?");
+  assert.deepEqual(lesson.manifest.pierObjectives, ["1.1", "1.2", "1.3"]);
+  assert.match(lesson.artifactTitle, /troponin go-live/i);
+  assert.match(lesson.trace.map((step) => `${step.system} ${step.role} ${step.sees} ${step.implication}`).join(" "), /Clinical informatics/);
+  assert.match(lesson.trace.map((step) => `${step.system} ${step.role} ${step.sees} ${step.implication}`).join(" "), /laboratory owns the report/i);
+  assert.equal(orientationTasks.find((task) => task.id === "report")?.owner, "laboratory");
+  assert.equal(orientationTasks.find((task) => task.id === "cds")?.owner, "clinical-informatics");
+  assert.match(orientationTasks.find((task) => task.id === "cds")?.explanation ?? "", /does not own the laboratory report/i);
+  assert.deepEqual(orientationViews.map((view) => view.answer), ["specimen", "patient", "both"]);
 });

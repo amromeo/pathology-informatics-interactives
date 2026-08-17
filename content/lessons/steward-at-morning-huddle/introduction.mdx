@@ -1,29 +1,31 @@
-# The Steward at Morning Huddle
+# Who Needs to Be at the Table?
 
 > **Synthetic case:** No patient data or proprietary system display is used.
 
-## The inconsistency
+## Monday is go-live
 
-At 07:15, the chemistry bench describes worsening delays. The executive dashboard reports the best turnaround time of the quarter. Both observations feel credible to the people reporting them.
+The chemistry laboratory is scheduled to start a new high-sensitivity troponin assay on Monday. The analyzer is connected, and test messages reach the EHR. At the final huddle, however, several people are using the words *IT*, *pathology informatics*, *clinical informatics*, and *laboratory administration* as if they mean the same thing.
 
-### What the two numbers mean
+You are the pathology resident at the huddle. Your job is to decide who leads each part of the work, where the pathologist must be involved, and whether the laboratory can approve go-live.
 
-Both reports are intended to describe the **median time from physical receipt in the laboratory to verification** for the same 43 STAT chemistry specimens received between 06:00 and 07:00.
+## The terms
 
-- **Dashboard: 38 minutes.** Calculated automatically from LIS timestamps sent to the data warehouse.
-- **Bench review: 71 minutes.** Calculated by the charge technologist from the bench receipt log and verification times for the same 43 specimens.
+- **Information technology (IT)** installs and operates hardware, software, networks, accounts, and connections.
+- **Pathology informatics** applies information systems and data to laboratory and pathology work. It helps the laboratory specify how the LIS and EHR should be built, how they should be tested, and how laboratory data can be used.
+- **Clinical informatics** works across patient care and the EHR. It may consult on difficult ordering or result-display problems and often has a central role in clinical decision support (CDS) and other uses of laboratory data in the EHR.
+- **Laboratory administration** manages staffing, procedures, training, resources, accreditation, and day-to-day operations.
+- **The pathologist or laboratory director** is responsible for the laboratory service. The laboratory owns the laboratory report, including its content and how it is validated in the EHR.
 
-The 71-minute value is a median from the manual review. It is not the age of one specimen and it is not the current worklist wait time. At the start of the case, you know that the two reports are trying to measure the same thing—but not why they disagree.
+These groups work together, and one person may wear more than one hat. The names still matter because the responsibilities are different.
 
 ## What you need to do
 
-1. Compare the two reports and note what each one includes.
-2. Select each system step to find where specimens drop out of the dashboard calculation.
-3. Decide whether the dashboard is ready to use at the morning huddle.
-4. Choose a correction and run the validation cases.
+1. Assign a lead or owner to each part of the go-live work.
+2. Decide when a question needs the specimen-centered laboratory view, the patient-centered EHR view, or both.
+3. Review the open items and decide whether the laboratory can approve go-live.
 
 ## Key point
 
-- IT keeps systems available and functioning.
-- Informatics asks whether those systems represent and support clinical work correctly.
-- The laboratory must know how a quality metric is calculated, what it leaves out, and who has approved it for operational use.
+- IT runs the technology. Informatics connects the technology and data to clinical work.
+- Pathology informatics starts with laboratory specimens, testing, results, reports, and laboratory workflow. Clinical informatics works across the patient's care and the wider EHR.
+- Clinical informatics can help with CDS and difficult EHR problems, but it does not own the laboratory report. The laboratory does.
