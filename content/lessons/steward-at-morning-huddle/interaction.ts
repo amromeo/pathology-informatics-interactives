@@ -3,6 +3,7 @@ export type OrientationRoleId =
   | "laboratory"
   | "pathology-informatics"
   | "clinical-informatics"
+  | "shared-cds"
   | "laboratory-administration";
 
 export type OrientationViewId = "specimen" | "patient" | "both";
@@ -12,6 +13,7 @@ export const orientationRoles: { id: OrientationRoleId; label: string }[] = [
   { id: "laboratory", label: "Pathologist / laboratory" },
   { id: "pathology-informatics", label: "Pathology informatics" },
   { id: "clinical-informatics", label: "Clinical informatics" },
+  { id: "shared-cds", label: "Shared CDS group" },
   { id: "laboratory-administration", label: "Laboratory administration" },
 ];
 
@@ -29,25 +31,25 @@ export const orientationTasks: {
   },
   {
     id: "report",
-    task: "Set the report name, units, reference information, comments, flags, and required EHR display.",
+    task: "Sets the order name, units, reference information, comments, flags, and required EHR display.",
     owner: "laboratory",
     explanation: "The laboratory owns the report and approves how it appears in the EHR. Analysts configure the build to the laboratory's requirements.",
   },
   {
-    id: "workflow",
-    task: "Turn the laboratory workflow into an end-to-end build and test plan.",
+    id: "result-design",
+    task: "Review the proposed order and result build for the new assay. Make sure the names, result fields, units, reference information, comments, and correction handling follow laboratory-wide standards.",
     owner: "pathology-informatics",
-    explanation: "Pathology informatics connects laboratory practice with the technical build. The pathologist or laboratory director still gives clinical approval.",
+    explanation: "Pathology informatics knows how laboratory orders and results are implemented across sections and helps keep those builds consistent. The laboratory determines and owns the clinical content, and the technical teams configure the systems.",
   },
   {
     id: "cds",
-    task: "Help design an EHR alert that uses the new result together with diagnoses and medications.",
-    owner: "clinical-informatics",
-    explanation: "Clinical informatics helps design and govern the broader EHR and CDS workflow with the clinical service. Pathology reviews how the laboratory result is interpreted and used; clinical informatics does not own the laboratory report.",
+    task: "Design an EHR alert that uses the new result together with diagnoses and medications.",
+    owner: "shared-cds",
+    explanation: "Laboratory-related CDS is within the scope of pathology informatics. Clinical informatics and the clinical service are also involved when the rule uses broader EHR data or changes patient-care workflow. The laboratory remains responsible for how the laboratory result is interpreted and used.",
   },
   {
     id: "operations",
-    task: "Finish the SOPs, staffing, training, and go-live coverage.",
+    task: "Drafts the SOPs, staffing, training, and go-live coverage.",
     owner: "laboratory-administration",
     explanation: "Laboratory administration prepares the service to run. The pathologist or laboratory director provides medical oversight.",
   },

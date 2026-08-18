@@ -39,17 +39,17 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
       <section className="lesson-section" aria-labelledby="role-title">
         <div className="section-heading">
           <span className="section-number">01</span>
-          <div><p className="eyebrow">People and responsibilities</p><h2 id="role-title">Who takes the lead?</h2></div>
+          <div><p className="eyebrow">People and responsibilities</p><h2 id="role-title">Who is responsible?</h2></div>
         </div>
-        <p className="section-guidance">Choose the role that leads or owns each piece of work. Other teams may help.</p>
+        <p className="section-guidance">Choose the role or group responsible for each piece of work. Some work is shared.</p>
         <div className="role-assignment-list">
           {orientationTasks.map((task, index) => {
             const answer = roleAnswers[task.id];
             const correct = answer === task.owner;
             return <article className="role-assignment-card" key={task.id}>
               <span className="task-number">{String(index + 1).padStart(2, "0")}</span>
-              <div><h3>{task.task}</h3>{answer && <p className={correct ? "answer-note correct-note" : "answer-note incorrect-note"} aria-live="polite"><strong>{correct ? "Correct." : "Not quite."}</strong> {correct ? task.explanation : `${roleLabel(task.owner)} takes the lead here. ${task.explanation}`}</p>}</div>
-              <label><span>Lead or owner</span><select value={answer ?? ""} onChange={(event) => { setRoleAnswers((current) => ({ ...current, [task.id]: event.target.value as OrientationRoleId })); setReviewed(false); }}><option value="" disabled>Choose a role</option>{orientationRoles.map((role) => <option value={role.id} key={role.id}>{role.label}</option>)}</select></label>
+              <div><h3>{task.task}</h3>{answer && <p className={correct ? "answer-note correct-note" : "answer-note incorrect-note"} aria-live="polite"><strong>{correct ? "Correct." : "Not quite."}</strong> {correct ? task.explanation : `${roleLabel(task.owner)} is the best choice here. ${task.explanation}`}</p>}</div>
+              <label><span>Responsible role or group</span><select value={answer ?? ""} onChange={(event) => { setRoleAnswers((current) => ({ ...current, [task.id]: event.target.value as OrientationRoleId })); setReviewed(false); }}><option value="" disabled>Choose a role or group</option>{orientationRoles.map((role) => <option value={role.id} key={role.id}>{role.label}</option>)}</select></label>
             </article>;
           })}
         </div>

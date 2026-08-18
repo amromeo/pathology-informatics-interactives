@@ -31,10 +31,12 @@ test("lesson 1 teaches the Topic 1 role and ownership boundaries", () => {
   assert.equal(lesson.manifest.title, "Who Needs to Be at the Table?");
   assert.deepEqual(lesson.manifest.pierObjectives, ["1.1", "1.2", "1.3"]);
   assert.match(lesson.artifactTitle, /troponin go-live/i);
-  assert.match(lesson.trace.map((step) => `${step.system} ${step.role} ${step.sees} ${step.implication}`).join(" "), /Clinical informatics/);
+  assert.match(lesson.trace.map((step) => `${step.system} ${step.role} ${step.sees} ${step.implication}`).join(" "), /clinical informatics/i);
   assert.match(lesson.trace.map((step) => `${step.system} ${step.role} ${step.sees} ${step.implication}`).join(" "), /laboratory owns the report/i);
   assert.equal(orientationTasks.find((task) => task.id === "report")?.owner, "laboratory");
-  assert.equal(orientationTasks.find((task) => task.id === "cds")?.owner, "clinical-informatics");
-  assert.match(orientationTasks.find((task) => task.id === "cds")?.explanation ?? "", /does not own the laboratory report/i);
+  assert.equal(orientationTasks.find((task) => task.id === "result-design")?.owner, "pathology-informatics");
+  assert.match(orientationTasks.find((task) => task.id === "result-design")?.explanation ?? "", /across sections/i);
+  assert.equal(orientationTasks.find((task) => task.id === "cds")?.owner, "shared-cds");
+  assert.match(orientationTasks.find((task) => task.id === "cds")?.explanation ?? "", /scope of pathology informatics/i);
   assert.deepEqual(orientationViews.map((view) => view.answer), ["specimen", "patient", "both"]);
 });
