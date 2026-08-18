@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { lessons } from "../src/data/curriculum";
 import { validationResult } from "../src/data/validation";
-import { orientationTasks, orientationViews } from "../content/lessons/steward-at-morning-huddle/interaction";
+import { orientationTasks, orientationTickets } from "../content/lessons/steward-at-morning-huddle/interaction";
 
 test("the controlled repair passes every lesson validation set", () => {
   for (const lesson of lessons) {
@@ -33,10 +33,12 @@ test("lesson 1 teaches the Topic 1 role and ownership boundaries", () => {
   assert.match(lesson.artifactTitle, /troponin go-live/i);
   assert.match(lesson.trace.map((step) => `${step.system} ${step.role} ${step.sees} ${step.implication}`).join(" "), /clinical informatics/i);
   assert.match(lesson.trace.map((step) => `${step.system} ${step.role} ${step.sees} ${step.implication}`).join(" "), /laboratory owns the report/i);
+  assert.equal(orientationTasks.find((task) => task.id === "lis-build")?.owner, "lis-team");
+  assert.match(orientationTasks.find((task) => task.id === "lis-build")?.explanation ?? "", /often called the LIS team/i);
   assert.equal(orientationTasks.find((task) => task.id === "report")?.owner, "laboratory");
   assert.equal(orientationTasks.find((task) => task.id === "result-design")?.owner, "pathology-informatics");
   assert.match(orientationTasks.find((task) => task.id === "result-design")?.explanation ?? "", /across sections/i);
   assert.equal(orientationTasks.find((task) => task.id === "cds")?.owner, "shared-cds");
   assert.match(orientationTasks.find((task) => task.id === "cds")?.explanation ?? "", /scope of pathology informatics/i);
-  assert.deepEqual(orientationViews.map((view) => view.answer), ["specimen", "patient", "both"]);
+  assert.deepEqual(orientationTickets.map((ticket) => ticket.answer), ["laboratory", "ehr", "both"]);
 });

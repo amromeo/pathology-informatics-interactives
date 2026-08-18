@@ -41,7 +41,26 @@ function LessonPage({ slug }: { slug: string }) {
   const { Introduction, Debrief } = lessonContent(slug);
   const topic = topics.find((item) => item.id === lesson.manifest.topic)!;
   const isOrientation = slug === "steward-at-morning-huddle";
-  return <main className="lesson-main"><nav className="breadcrumbs" aria-label="Breadcrumb"><a href={href()}>Curriculum</a><span>→</span><a href={href(`topics/${topic.slug}/`)}>Topic {topic.id}</a><span>→</span><span>Lesson {lesson.manifest.id}</span></nav><header className="lesson-meta"><div className="tag-row">{lesson.manifest.pierObjectives.map((objective) => <span key={objective}>PIER {objective}</span>)}</div><div><span>{lesson.manifest.durationMinutes} minutes</span><span>{lesson.manifest.difficulty}</span><a href={href(`faculty/${slug}/`)}>Faculty guide</a></div></header><section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section><PilotLab kind={lesson.manifest.pilot}/>{isOrientation ? <OrientationExperience onAttempt={setAttempted}/> : <GenericExperience lesson={lesson} onAttempt={setAttempted}/>} {attempted ? <section className="mdx-content debrief-content">{Debrief ? <Debrief/> : <p>Debrief content is missing.</p>}</section> : <section className="debrief-locked" aria-label="Debrief locked"><span aria-hidden="true">{isOrientation ? "03 → 04" : "04 → 05"}</span><div><strong>Complete the case to continue</strong><p>{isOrientation ? "Answer each question and review your assignments to open the debrief." : "Choose a change and run the validation cases to open the debrief."}</p></div></section>}<nav className="lesson-end-nav"><a href={href(`topics/${topic.slug}/`)}>← Back to Topic {topic.id}</a><a href={href(`faculty/${slug}/`)}>Open faculty guide →</a></nav></main>;
+  return (
+    <main className="lesson-main">
+      <nav className="breadcrumbs" aria-label="Breadcrumb"><a href={href()}>Curriculum</a><span>→</span><a href={href(`topics/${topic.slug}/`)}>Topic {topic.id}</a><span>→</span><span>Lesson {lesson.manifest.id}</span></nav>
+      <header className="lesson-meta"><div className="tag-row">{lesson.manifest.pierObjectives.map((objective) => <span key={objective}>PIER {objective}</span>)}</div><div><span>{lesson.manifest.durationMinutes} minutes</span><span>{lesson.manifest.difficulty}</span><a href={href(`faculty/${slug}/`)}>Faculty guide</a></div></header>
+      <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>
+      <PilotLab kind={lesson.manifest.pilot}/>
+      {isOrientation ? <OrientationExperience onAttempt={setAttempted}/> : <GenericExperience lesson={lesson} onAttempt={setAttempted}/>}
+      {attempted ? (
+        <section className="mdx-content debrief-content" id="lesson-debrief">{Debrief ? <Debrief/> : <p>Debrief content is missing.</p>}</section>
+      ) : isOrientation ? (
+        <section className="debrief-ready" aria-label="Debrief available">
+          <span aria-hidden="true">03 → 04</span>
+          <div><strong>Open the debrief when you are ready</strong><p>You do not need to answer every question first.</p><button type="button" className="secondary-button" onClick={() => setAttempted(true)}>Open debrief</button></div>
+        </section>
+      ) : (
+        <section className="debrief-locked" aria-label="Debrief locked"><span aria-hidden="true">04 → 05</span><div><strong>Complete the case to continue</strong><p>Choose a change and run the validation cases to open the debrief.</p></div></section>
+      )}
+      <nav className="lesson-end-nav"><a href={href(`topics/${topic.slug}/`)}>← Back to Topic {topic.id}</a><a href={href(`faculty/${slug}/`)}>Open faculty guide →</a></nav>
+    </main>
+  );
 }
 
 function FacultyPage({ slug }: { slug: string }) {

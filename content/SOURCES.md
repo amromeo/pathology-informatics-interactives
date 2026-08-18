@@ -22,16 +22,23 @@
 | --- | --- |
 | 0. Pathology Informatics and Data | Lessons 1, 3, 4, and 16 |
 | 1. Hardware, Software, and Networking | Lesson 2 |
-| 2. Databases | Lessons 3–5 |
-| 3. LIS and Health Information Systems | Lessons 10–13, 16, 22, and 23 |
+| 2. Databases | Lessons 3–5 and 16 |
+| 3. LIS and Health Information Systems | Lessons 1–2, 10–13, 16, 22, and 23 |
 | 4. Interoperability and Interfaces | Lessons 13–16 |
 | 5. Digital Imaging | Lessons 5 and 19–21 |
 | 6. Artificial Intelligence | Lessons 6 and 21 |
-| 7. Clinical Decision Support | Lessons 17–18 |
+| 7. Clinical Decision Support | Lessons 12 and 17–18 |
 | 8. Cybersecurity | Lessons 7–9 |
-| 9. Implementation and Management | Lessons 8, 11–12, and 22–23 |
+| 9. Implementation and Management | Lessons 1, 8, 11–12, and 22–23 |
+
+The slide-level planning map for every tutorial is maintained in
+[`content/HARRISON-SLIDE-MAP.md`](HARRISON-SLIDE-MAP.md). It records the exact
+sessions and slide ranges that should shape each case and learner decision.
 
 ## Additional professional guidance
+
+- **Henricks WH, Wilkerson ML, Castellani WJ, Whitsitt MS, Sinard JH — “Pathologists as Stewards of Laboratory Information.”** Used in Lesson 1 to explain why pathology remains responsible for the integrity and effective use of laboratory information even when it is displayed or used in systems outside the laboratory's direct administrative control. The article is cited and summarized; its wording is not reproduced.
+- Source: <https://pubmed.ncbi.nlm.nih.gov/25724030/>
 
 - **College of American Pathologists — “Don't Forget Your Rules When Harmonizing Laboratory Testing Across Multiple Sites.”** Used in Lesson 1 to support the laboratory's responsibility to verify accurate transmission of patient results into the EHR. The article discusses CAP checklist requirement GEN.48500 and validation in the downstream system clinicians use. The lesson cites and summarizes the principle; CAP wording is not reproduced.
 - Source: <https://www.cap.org/member-resources/clinical-informatics-resources/dont-forget-your-rules-when-harmonizing-laboratory-testing-across-multiple-sites>

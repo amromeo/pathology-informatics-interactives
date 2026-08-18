@@ -1,15 +1,17 @@
 export type OrientationRoleId =
   | "it"
+  | "lis-team"
   | "laboratory"
   | "pathology-informatics"
   | "clinical-informatics"
   | "shared-cds"
   | "laboratory-administration";
 
-export type OrientationViewId = "specimen" | "patient" | "both";
+export type TicketOwnerId = "laboratory" | "ehr" | "both";
 
 export const orientationRoles: { id: OrientationRoleId; label: string }[] = [
-  { id: "it", label: "IT / application team" },
+  { id: "it", label: "Enterprise IT" },
+  { id: "lis-team", label: "Laboratory IT / LIS team" },
   { id: "laboratory", label: "Pathologist / laboratory" },
   { id: "pathology-informatics", label: "Pathology informatics" },
   { id: "clinical-informatics", label: "Clinical informatics" },
@@ -25,9 +27,15 @@ export const orientationTasks: {
 }[] = [
   {
     id: "connection",
-    task: "Install the interface connection and set system access controls.",
+    task: "Provide the servers, network, enterprise accounts, and secure connections used by the laboratory systems.",
     owner: "it",
-    explanation: "IT builds and runs the connection. The laboratory still tests that results arrive correctly.",
+    explanation: "Enterprise IT runs the shared infrastructure. The LIS team supports the laboratory applications, and the laboratory still tests that orders and results work correctly.",
+  },
+  {
+    id: "lis-build",
+    task: "Enter the approved order and result definitions in the LIS, configure the interface changes, and carry out technical testing.",
+    owner: "lis-team",
+    explanation: "The laboratory IT team, often called the LIS team, performs and supports the application build. The laboratory approves the clinical content, and pathology informatics helps keep the build consistent across laboratory sections.",
   },
   {
     id: "report",
@@ -55,31 +63,31 @@ export const orientationTasks: {
   },
 ];
 
-export const orientationViews: { id: string; prompt: string; answer: OrientationViewId; explanation: string }[] = [
+export const orientationTickets: { id: string; prompt: string; answer: TicketOwnerId; explanation: string }[] = [
   {
-    id: "corrected-specimen",
-    prompt: "Which accession and specimen produced the corrected troponin result?",
-    answer: "specimen",
-    explanation: "Start with the specimen-centered record: patient and specimen identification, accession, processing, result history, verification, and correction.",
+    id: "wrong-report",
+    prompt: "The corrected troponin result is wrong in the laboratory report.",
+    answer: "laboratory",
+    explanation: "The laboratory owns the report. Pathology and the laboratory determine the correct content and work with the analyst to correct the build.",
   },
   {
-    id: "patient-trend",
-    prompt: "How does the result appear with the patient's earlier values, encounter, and treatment?",
-    answer: "patient",
-    explanation: "This is the patient-centered EHR view: results over time and in the context of the rest of the patient's care.",
+    id: "wrong-trend",
+    prompt: "The laboratory report is correct, but the EHR trend graph groups the result with a different troponin assay.",
+    answer: "ehr",
+    explanation: "Clinical informatics and the EHR team lead because the problem is in a downstream patient-chart view. Pathology confirms the result identity and how it should be represented.",
   },
   {
-    id: "corrected-cds",
-    prompt: "Should a corrected result trigger the EHR alert again?",
+    id: "repeat-alert",
+    prompt: "A corrected troponin result causes an EHR alert to fire again.",
     answer: "both",
-    explanation: "Both views are needed. The laboratory must establish what the corrected result means; the EHR and CDS teams must define what happens in the patient workflow.",
+    explanation: "Both groups are needed. The laboratory explains the correction and the intended use of the result. Pathology informatics, clinical informatics, and the clinical service decide what the CDS rule should do.",
   },
 ];
 
-export const orientationViewOptions: { id: OrientationViewId; label: string }[] = [
-  { id: "specimen", label: "Specimen / laboratory view" },
-  { id: "patient", label: "Patient / EHR view" },
-  { id: "both", label: "Both views" },
+export const ticketOwnerOptions: { id: TicketOwnerId; label: string }[] = [
+  { id: "laboratory", label: "Pathology / laboratory" },
+  { id: "ehr", label: "Clinical informatics / EHR team" },
+  { id: "both", label: "Both groups" },
 ];
 
 export const goLiveEvidence = [

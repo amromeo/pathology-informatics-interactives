@@ -24,6 +24,13 @@ const capInterfaceSource: SourceReference = {
   use: "Identifies GEN.48500 and supports the laboratory's responsibility to verify accurate transmission of patient results into the EHR. No CAP text is reproduced.",
 };
 
+const stewardshipSource: SourceReference = {
+  label: "Henricks et al. — Pathologists as Stewards of Laboratory Information",
+  url: "https://pubmed.ncbi.nlm.nih.gov/25724030/",
+  license: "Copyright © Archives of Pathology & Laboratory Medicine; cited and summarized",
+  use: "Supports the pathologist's stewardship role for laboratory information throughout the health system, including systems outside direct laboratory control.",
+};
+
 export const topics: TopicDefinition[] = [
   { id: 1, slug: "informatics-practice", title: "Informatics in Pathology Practice", objectives: ["1.1", "1.2", "1.3", "1.4"], summary: "Roles, stewardship, data literacy, and technical foundations." },
   { id: 2, slug: "data-science", title: "Data Science", objectives: ["2.1", "2.2", "2.3", "2.4"], summary: "Data quality, statistics, scale, and responsible AI." },
@@ -46,8 +53,8 @@ type CaseSeed = {
 };
 
 const manifests: ManifestSeed[] = [
-  { slug: "steward-at-morning-huddle", title: "Who Needs to Be at the Table?", topic: 1, pierObjectives: ["1.1", "1.2", "1.3"], durationMinutes: 22, difficulty: "foundational", interactionKinds: ["field-map", "role-assignment", "data-view", "go-live-decision"], apiSessions: [0], hasLocalPracticum: true },
-  { slug: "inside-a-results-journey", title: "Inside a Result’s Journey", topic: 1, pierObjectives: ["1.4"], durationMinutes: 18, difficulty: "foundational", interactionKinds: ["system-trace", "fault-localization"], apiSessions: [1], hasLocalPracticum: false },
+  { slug: "steward-at-morning-huddle", title: "Who Needs to Be at the Table?", topic: 1, pierObjectives: ["1.1", "1.2", "1.3"], durationMinutes: 22, difficulty: "foundational", interactionKinds: ["field-map", "role-assignment", "support-ticket-triage", "go-live-decision"], apiSessions: [0, 3, 9], hasLocalPracticum: true },
+  { slug: "inside-a-results-journey", title: "Inside a Result’s Journey", topic: 1, pierObjectives: ["1.4"], durationMinutes: 18, difficulty: "foundational", interactionKinds: ["system-trace", "fault-localization"], apiSessions: [1, 3], hasLocalPracticum: false },
   { slug: "dirty-data-clean-decision", title: "Dirty Data, Clean Decision", topic: 2, pierObjectives: ["2.1"], durationMinutes: 24, difficulty: "foundational", interactionKinds: ["data-lineage", "query-repair", "regression"], apiSessions: [0, 2], hasLocalPracticum: true, pilot: "data-quality" },
   { slug: "is-the-shift-real", title: "Is the Shift Real?", topic: 2, pierObjectives: ["2.2"], durationMinutes: 22, difficulty: "applied", interactionKinds: ["distribution", "statistics-choice"], apiSessions: [0, 2], hasLocalPracticum: false },
   { slug: "five-vs-slide-archive", title: "Five Vs in the Slide Archive", topic: 2, pierObjectives: ["2.3"], durationMinutes: 20, difficulty: "applied", interactionKinds: ["capacity-planning", "data-flow"], apiSessions: [2, 5], hasLocalPracticum: false },
@@ -57,11 +64,11 @@ const manifests: ManifestSeed[] = [
   { slug: "not-anonymous-enough", title: "Not Anonymous Enough", topic: 3, pierObjectives: ["3.2", "3.4"], durationMinutes: 22, difficulty: "applied", interactionKinds: ["privacy-review", "release-decision"], apiSessions: [8], hasLocalPracticum: false },
   { slug: "where-is-the-specimen", title: "Where Is the Specimen?", topic: 4, pierObjectives: ["4.1", "4.2", "4.4"], durationMinutes: 22, difficulty: "applied", interactionKinds: ["audit-trail", "routing-repair"], apiSessions: [3], hasLocalPracticum: true },
   { slug: "autoverification-at-the-edge", title: "Autoverification at the Edge", topic: 4, pierObjectives: ["4.3", "4.5"], durationMinutes: 25, difficulty: "applied", interactionKinds: ["rule-builder", "regression"], apiSessions: [3, 9], hasLocalPracticum: true },
-  { slug: "reflex-rule-ripple-effect", title: "The Reflex Rule Ripple Effect", topic: 4, pierObjectives: ["4.3", "4.5"], durationMinutes: 23, difficulty: "applied", interactionKinds: ["rule-map", "utilization"], apiSessions: [3, 9], hasLocalPracticum: false },
+  { slug: "reflex-rule-ripple-effect", title: "The Reflex Rule Ripple Effect", topic: 4, pierObjectives: ["4.3", "4.5"], durationMinutes: 23, difficulty: "applied", interactionKinds: ["rule-map", "utilization"], apiSessions: [3, 7, 9], hasLocalPracticum: false },
   { slug: "follow-the-flag", title: "Follow the Flag", topic: 5, pierObjectives: ["5.2", "5.3", "5.4", "8.1"], durationMinutes: 20, difficulty: "foundational", interactionKinds: ["system-trace", "field-inspector", "mapping", "regression"], apiSessions: [3, 4], hasLocalPracticum: false, pilot: "interoperability" },
   { slug: "newborn-screen-to-public-health", title: "Newborn Screen to Public Health", topic: 5, pierObjectives: ["5.1", "5.2", "5.3"], durationMinutes: 25, difficulty: "applied", interactionKinds: ["message-inspector", "terminology-map"], apiSessions: [4], hasLocalPracticum: true },
   { slug: "code-the-meaning", title: "Code the Meaning, Not the Label", topic: 5, pierObjectives: ["5.3"], durationMinutes: 22, difficulty: "applied", interactionKinds: ["terminology-browser", "mapping-review"], apiSessions: [4], hasLocalPracticum: false },
-  { slug: "invisible-bottleneck", title: "The Invisible Bottleneck", topic: 5, pierObjectives: ["5.5", "2.1"], durationMinutes: 23, difficulty: "applied", interactionKinds: ["dashboard", "metric-design"], apiSessions: [0, 3, 4], hasLocalPracticum: false },
+  { slug: "invisible-bottleneck", title: "The Invisible Bottleneck", topic: 5, pierObjectives: ["5.5", "2.1"], durationMinutes: 23, difficulty: "applied", interactionKinds: ["dashboard", "metric-design"], apiSessions: [0, 2, 3, 4], hasLocalPracticum: false },
   { slug: "five-rights-right-test", title: "Five Rights for the Right Test", topic: 6, pierObjectives: ["6.1", "6.2"], durationMinutes: 22, difficulty: "applied", interactionKinds: ["workflow-map", "cds-builder"], apiSessions: [7], hasLocalPracticum: true },
   { slug: "alert-everyone-ignores", title: "The Alert Everyone Ignores", topic: 6, pierObjectives: ["6.3", "6.4"], durationMinutes: 24, difficulty: "applied", interactionKinds: ["alert-redesign", "evaluation"], apiSessions: [7], hasLocalPracticum: true },
   { slug: "pixel-budget", title: "The Pixel Budget", topic: 7, pierObjectives: ["7.1", "7.2"], durationMinutes: 22, difficulty: "foundational", interactionKinds: ["image-compare", "compression"], apiSessions: [5], hasLocalPracticum: true },
@@ -113,7 +120,7 @@ export const lessons: LessonDefinition[] = manifests.map((manifest, index) => {
   const item = cases[manifest.slug];
   if (!item) throw new Error(`Missing case data for ${manifest.slug}`);
   return {
-    manifest: { ...manifest, id: String(index + 1).padStart(2, "0"), sources: [pierSource, apiSource(manifest.apiSessions), ...(manifest.slug === "steward-at-morning-huddle" ? [capInterfaceSource] : [])] },
+    manifest: { ...manifest, id: String(index + 1).padStart(2, "0"), sources: [pierSource, apiSource(manifest.apiSessions), ...(manifest.slug === "steward-at-morning-huddle" ? [stewardshipSource, capInterfaceSource] : [])] },
     artifactTitle: item.artifact,
     evidence: item.evidence.map(([label, value, tone]) => ({ label, value, tone: tone ?? "neutral" })),
     trace: item.trace.map(([system, role, sees, implication]) => ({ system, role, sees, implication })),

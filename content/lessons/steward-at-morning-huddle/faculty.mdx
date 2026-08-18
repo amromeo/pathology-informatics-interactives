@@ -4,23 +4,31 @@
 
 - **1.1:** Learners distinguish IT, pathology informatics, and laboratory administration by assigning actual go-live work.
 - **1.2:** Learners identify the laboratory and EHR data needed to manage a corrected result and decide whether the available go-live evidence is enough for clinical use.
-- **1.3:** Learners compare the specimen-centered laboratory view with the patient-centered EHR view and distinguish pathology informatics from clinical informatics.
+- **1.3:** Learners triage problems involving the laboratory report, downstream EHR use, and CDS to distinguish pathology informatics from clinical informatics and identify shared work.
 
 ## Expected reasoning
 
 The expected assignments are:
 
-1. **Interface connection and access controls — IT/application team.** The laboratory then validates accurate result transmission.
-2. **Laboratory report content and required EHR display — pathologist/laboratory.** Analysts perform the build; the laboratory owns and approves the report.
-3. **Laboratory-wide order and result build standards — pathology informatics.** Pathology informatics knows the general practices used across laboratory sections and checks that the proposed names, fields, units, reference information, comments, and correction handling are consistent. The laboratory owns the clinical content, and the technical teams configure the systems.
-4. **EHR alert using the result with diagnoses and medications — shared work.** Laboratory-related CDS is within the scope of pathology informatics. Clinical informatics and the clinical service are also involved when the rule uses broader EHR data or changes patient-care workflow. The laboratory remains responsible for how its result is interpreted and used.
-5. **SOPs, staffing, training, and go-live coverage — laboratory administration.**
+1. **Shared infrastructure — enterprise IT.** Enterprise IT provides the servers, network, identity and access services, security controls, and secure connections used by laboratory systems.
+2. **LIS and interface configuration — laboratory IT/LIS team.** The LIS team enters approved test definitions, configures interfaces and rules, performs technical testing, and supports the application. It does not independently set the report's clinical content.
+3. **Laboratory report content and required EHR display — pathologist/laboratory.** Analysts perform the build; the laboratory owns and approves the report.
+4. **Laboratory-wide order and result build standards — pathology informatics.** Pathology informatics knows the general practices used across laboratory sections and checks that the proposed names, fields, units, reference information, comments, and correction handling are consistent. The laboratory owns the clinical content, and the technical teams configure the systems.
+5. **EHR alert using the result with diagnoses and medications — shared work.** Laboratory-related CDS is within the scope of pathology informatics. Clinical informatics and the clinical service are also involved when the rule uses broader EHR data or changes patient-care workflow. The laboratory remains responsible for how its result is interpreted and used.
+6. **SOPs, staffing, training, and go-live coverage — laboratory administration.**
+
+The expected support-ticket answers are:
+
+1. **Incorrect laboratory report — pathology/laboratory.** The laboratory owns the report and determines the correction.
+2. **Correct report grouped incorrectly in an EHR trend graph — clinical informatics/EHR team.** The error is in a downstream patient-chart view. Pathology confirms the result identity and intended representation.
+3. **Corrected result causes an EHR alert to fire again — both groups.** The laboratory explains the corrected result; pathology informatics, clinical informatics, and the clinical service determine the CDS behavior.
 
 Learners should hold the go-live. Transmission passed, but the laboratory report is not displayed correctly, the proposed CDS use has not had pathology review, and operations are not ready.
 
 ## Watch for
 
 - Describing IT and informatics as synonyms.
+- Treating enterprise IT and the laboratory IT/LIS team as the same function.
 - Treating pathology informatics and clinical informatics as competing owners rather than related fields with different scopes.
 - Giving ownership of the laboratory report to IT, the EHR team, or clinical informatics.
 - Assigning all CDS to clinical informatics and overlooking the role of pathology informatics in laboratory-related CDS.

@@ -3,32 +3,32 @@ import {
   goLiveEvidence,
   orientationRoles,
   orientationTasks,
-  orientationViewOptions,
-  orientationViews,
+  orientationTickets,
+  ticketOwnerOptions,
   type OrientationRoleId,
-  type OrientationViewId,
+  type TicketOwnerId,
 } from "../../content/lessons/steward-at-morning-huddle/interaction";
 
 type RoleAnswers = Record<string, OrientationRoleId>;
-type ViewAnswers = Record<string, OrientationViewId>;
+type TicketAnswers = Record<string, TicketOwnerId>;
 
 export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: boolean) => void }) {
   const [roleAnswers, setRoleAnswers] = useState<RoleAnswers>({});
-  const [viewAnswers, setViewAnswers] = useState<ViewAnswers>({});
+  const [ticketAnswers, setTicketAnswers] = useState<TicketAnswers>({});
   const [goLiveAnswer, setGoLiveAnswer] = useState<"yes" | "no" | null>(null);
   const [reviewed, setReviewed] = useState(false);
 
   const roleLabel = (id: OrientationRoleId) => orientationRoles.find((role) => role.id === id)?.label ?? id;
   const allAnswered = orientationTasks.every((task) => roleAnswers[task.id])
-    && orientationViews.every((view) => viewAnswers[view.id])
+    && orientationTickets.every((ticket) => ticketAnswers[ticket.id])
     && goLiveAnswer !== null;
   const roleScore = orientationTasks.filter((task) => roleAnswers[task.id] === task.owner).length;
-  const viewScore = orientationViews.filter((view) => viewAnswers[view.id] === view.answer).length;
-  const passed = roleScore === orientationTasks.length && viewScore === orientationViews.length && goLiveAnswer === "no";
+  const ticketScore = orientationTickets.filter((ticket) => ticketAnswers[ticket.id] === ticket.answer).length;
+  const passed = roleScore === orientationTasks.length && ticketScore === orientationTickets.length && goLiveAnswer === "no";
 
   const reset = () => {
     setRoleAnswers({});
-    setViewAnswers({});
+    setTicketAnswers({});
     setGoLiveAnswer(null);
     setReviewed(false);
     onAttempt?.(false);
@@ -55,22 +55,22 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
         </div>
       </section>
 
-      <section className="lesson-section" aria-labelledby="view-title">
+      <section className="lesson-section" aria-labelledby="ticket-title">
         <div className="section-heading">
           <span className="section-number">02</span>
-          <div><p className="eyebrow">Two views of laboratory data</p><h2 id="view-title">Which view do you need?</h2></div>
+          <div><p className="eyebrow">Support queue</p><h2 id="ticket-title">Who gets the call?</h2></div>
         </div>
-        <p className="section-guidance">A laboratory result is part of a specimen record and part of a patient's chart. Some questions need one view; some need both.</p>
+        <p className="section-guidance">Each ticket was opened after go-live. Choose who should lead the investigation. Some problems need both groups.</p>
         <div className="perspective-list">
-          {orientationViews.map((view) => {
-            const answer = viewAnswers[view.id];
-            const correct = answer === view.answer;
-            return <article className="perspective-card" key={view.id}>
-              <h3>{view.prompt}</h3>
-              <div className="perspective-options" role="radiogroup" aria-label={view.prompt}>
-                {orientationViewOptions.map((option) => <button type="button" role="radio" aria-checked={answer === option.id} className={answer === option.id ? "selected" : ""} key={option.id} onClick={() => { setViewAnswers((current) => ({ ...current, [view.id]: option.id })); setReviewed(false); }}>{option.label}</button>)}
+          {orientationTickets.map((ticket) => {
+            const answer = ticketAnswers[ticket.id];
+            const correct = answer === ticket.answer;
+            return <article className="perspective-card" key={ticket.id}>
+              <h3>{ticket.prompt}</h3>
+              <div className="perspective-options" role="radiogroup" aria-label={ticket.prompt}>
+                {ticketOwnerOptions.map((option) => <button type="button" role="radio" aria-checked={answer === option.id} className={answer === option.id ? "selected" : ""} key={option.id} onClick={() => { setTicketAnswers((current) => ({ ...current, [ticket.id]: option.id })); setReviewed(false); }}>{option.label}</button>)}
               </div>
-              {answer && <p className={correct ? "answer-note correct-note" : "answer-note incorrect-note"} aria-live="polite"><strong>{correct ? "Correct." : "Not quite."}</strong> {view.explanation}</p>}
+              {answer && <p className={correct ? "answer-note correct-note" : "answer-note incorrect-note"} aria-live="polite"><strong>{correct ? "Correct." : "Not quite."}</strong> {ticket.explanation}</p>}
             </article>;
           })}
         </div>
@@ -93,9 +93,9 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
         {goLiveAnswer && <div className={`feedback ${goLiveAnswer === "no" ? "correct" : "incorrect"}`} role="status"><strong>{goLiveAnswer === "no" ? "Correct." : "Not quite."}</strong><p>A working connection is necessary, but it does not make the laboratory report or the clinical service ready for use.</p></div>}
         <div className="orientation-review">
           <button className="primary-button" type="button" disabled={!allAnswered} onClick={() => { setReviewed(true); onAttempt?.(true); }}>Review my assignments</button>
-          {!allAnswered && <p>Answer all role, data-view, and go-live questions to review the case.</p>}
+          {!allAnswered && <p>Complete all questions if you want a score. You can open the debrief below at any time.</p>}
         </div>
-        {reviewed && <div className={`feedback ${passed ? "correct" : "incorrect"}`} role="status"><strong>{passed ? "The responsibilities are clear. Open the debrief below." : "Some responsibilities are still assigned to the wrong group."}</strong><p>{passed ? "The laboratory can now see who builds, who advises, who runs the operation, and who owns the report." : `You have ${roleScore} of ${orientationTasks.length} role assignments and ${viewScore} of ${orientationViews.length} data-view questions correct. Review the marked items and try again.`}</p></div>}
+        {reviewed && <div className={`feedback ${passed ? "correct" : "incorrect"}`} role="status"><strong>{passed ? "The responsibilities are clear. Open the debrief below." : "Some responsibilities are still assigned to the wrong group."}</strong><p>{passed ? "The laboratory can now see who builds, who advises, who runs the operation, and who owns the report." : `You have ${roleScore} of ${orientationTasks.length} responsibility assignments and ${ticketScore} of ${orientationTickets.length} support tickets correct. Review the marked items and try again.`}</p></div>}
       </section>
 
       <div className="reset-row"><button type="button" className="text-button" onClick={reset}>Reset lesson interactions</button></div>

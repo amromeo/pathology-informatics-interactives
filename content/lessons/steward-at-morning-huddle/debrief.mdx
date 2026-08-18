@@ -1,11 +1,45 @@
-## Debrief
+# Debrief
 
-**Key point:** A working interface does not settle who is responsible for the report or make a new laboratory service ready for use.
+## A message reaching the EHR is only one part of go-live
 
-IT builds and runs the connection. Pathology informatics helps set laboratory-wide practices for building orders and results and checks that laboratory sections use those practices consistently. Laboratory administration gets the people, procedures, and daily operation ready.
+The successful transmission test answers a narrow question: can a message move from the analyzer, through the LIS and interface, into the EHR? It does not show that clinicians can find the right order, that the specimen requirements are correct, that the result is displayed properly, that corrections behave safely, or that the laboratory is ready to run the assay around the clock.
 
-The laboratory owns the laboratory report. That includes the report name, result fields, units, reference information, comments, flags, corrections, and the required display in the EHR. The pathologist or laboratory director must be able to review and approve the report as clinicians will see it.
+For this assay, go-live requires all of those pieces. Passing the interface test does not cancel the open report, CDS, SOP, training, or staffing work.
 
-Pathology informatics and clinical informatics can both work on CDS. Pathology informatics brings the laboratory workflow and the meaning of the result. Clinical informatics and the clinical service bring the broader patient-care and EHR workflow. Clinical informatics can also advise on difficult ordering and display problems, but it does not take ownership of the laboratory report.
+## The groups do different work
 
-The specimen-centered and patient-centered views are connected. The laboratory needs the specimen record to know what was collected, tested, verified, corrected, and reported. The clinical team needs the patient record to use that result with the rest of the patient's care. Difficult problems often require both views.
+- **Enterprise IT** runs the shared infrastructure: servers, networks, identity and access services, security controls, and enterprise communications.
+- **The laboratory IT team, often called the LIS team,** is the technical team closest to the laboratory applications. Its analysts enter approved test definitions, configure LIS rules and interfaces, move changes through build and test environments, support users, and investigate failures. The LIS team performs the build; it does not independently decide the clinical content of the test or report.
+- **Pathology informatics** works between laboratory practice and the technical build. It asks whether the order, specimen workflow, result structure, display, rules, interfaces, and downstream uses fit together. It also helps the laboratory use the same naming, result, correction, and testing practices across sections. That does not mean the pathology informaticist personally enters every field in the LIS.
+- **Laboratory administration** makes the service operational: procedures, staffing, training, supplies, coverage, and day-to-day management.
+- **The pathologist or laboratory director** has medical responsibility for the service and approves the clinical content and performance of the order and report.
+
+One person may hold more than one of these roles. The distinction is about the work and the approval, not the job title on a badge.
+
+## The laboratory report is still a laboratory product in the EHR
+
+The report includes more than the numeric result. It includes the test identity, result fields, units, reference information, comments, flags, and correction history. The laboratory must review the report in the downstream system where clinicians use it, not just in the LIS.
+
+This matters because the EHR is often managed outside the laboratory. The stewardship literature makes the practical point that clinicians still look to the laboratory for reliable laboratory information even when the laboratory does not control the EHR. Moving the report into another system changes who must collaborate; it does not remove the laboratory's responsibility to check the report and correct problems.
+
+## Some problems cross the LIS–EHR boundary
+
+The laboratory record is organized around the order, specimen, method, testing, verification, and correction. The EHR combines the result with encounters, diagnoses, medications, trend displays, messages, and CDS. A problem may begin in one record and appear in the other, so the investigation may need both views.
+
+The support tickets show how to start:
+
+- If the laboratory report itself is wrong, pathology and the laboratory lead. The LIS team usually makes the approved technical correction.
+- If the report is correct but a downstream EHR trend graph groups it with the wrong assay, the clinical informatics or EHR team leads the display investigation. Pathology confirms what the result represents and how it should be grouped.
+- If a corrected result causes an EHR alert to fire again, the work is shared. Pathology informatics supplies the laboratory workflow and meaning of the correction. Clinical informatics and the clinical service supply the broader EHR and patient-care workflow. The group must decide what the alert should do and then test that behavior.
+
+Pathology informatics can design and govern laboratory-related CDS. Clinical informatics is not the sole owner of CDS, and shared CDS work does not transfer ownership of the laboratory report away from the laboratory.
+
+## Sources behind this debrief
+
+- API *Pathology Informatics and Data*, Session 0, especially slides 5, 8, and 11–13: the distinction between IT and informatics, laboratory information stewardship, and informatics work for pathologists.
+- API *Laboratory Information Systems and Health Information Systems*, Session 3, especially slides 7–13 and 18: LIS content, test build and testing, laboratory signoff, and review of the downstream result display.
+- API *System Implementation and Management*, Session 9, especially slides 4–7: the scope, makeup, governance, and routine work of the pathology IT application-management group, often locally called the LIS team.
+- Henricks WH, Wilkerson ML, Castellani WJ, Whitsitt MS, Sinard JH. [Pathologists as stewards of laboratory information](https://pubmed.ncbi.nlm.nih.gov/25724030/). *Arch Pathol Lab Med.* 2015;139(3):332–337.
+- College of American Pathologists. [Don't Forget Your Rules When Harmonizing Laboratory Testing Across Multiple Sites](https://www.cap.org/member-resources/clinical-informatics-resources/dont-forget-your-rules-when-harmonizing-laboratory-testing-across-multiple-sites).
+
+The case, role assignments, and support tickets are original educational material. The source concepts are summarized rather than reproduced.

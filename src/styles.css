@@ -121,11 +121,14 @@ h3 { line-height: 1.2; }
 .introduction-content { padding-bottom: 50px; }
 .debrief-content { max-width: 1050px; margin: 70px 0 0; padding: 52px; background: var(--green-dark); color: white; border-radius: 3px 50px 3px 3px; }
 .debrief-content h2 { margin-top: 0; color: white; }
-.debrief-content p { color: #d8e7e2; }
+.debrief-content p, .debrief-content li { color: #d8e7e2; }
 .debrief-content strong { color: white; }
-.debrief-locked { max-width: 1050px; margin-top: 44px; padding: 26px; display: flex; gap: 22px; align-items: center; border: 1px dashed #a8b3ad; color: var(--muted); }
-.debrief-locked > span { font-family: ui-monospace, monospace; color: var(--green); }
-.debrief-locked p { margin: 4px 0 0; }
+.debrief-content a { color: #f4d8a1; text-underline-offset: 3px; }
+.debrief-locked, .debrief-ready { max-width: 1050px; margin-top: 44px; padding: 26px; display: flex; gap: 22px; align-items: center; border: 1px dashed #a8b3ad; color: var(--muted); }
+.debrief-ready { border-style: solid; background: var(--green-pale); color: var(--ink); }
+.debrief-locked > span, .debrief-ready > span { font-family: ui-monospace, monospace; color: var(--green); }
+.debrief-locked p, .debrief-ready p { margin: 4px 0 0; }
+.debrief-ready .secondary-button { margin-top: 14px; }
 
 .lesson-section, .pilot-lab { margin: 34px 0; padding: 54px; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 16px 45px rgba(23,49,45,.06); }
 .section-heading { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 34px; }
