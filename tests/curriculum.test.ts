@@ -28,17 +28,17 @@ test("all four pilot interaction patterns are present", () => {
 test("lesson 1 teaches the Topic 1 role and ownership boundaries", () => {
   const lesson = lessons.find((item) => item.manifest.slug === "steward-at-morning-huddle");
   assert.ok(lesson);
-  assert.equal(lesson.manifest.title, "Who Needs to Be at the Table?");
+  assert.equal(lesson.manifest.title, "Who Does What in Laboratory Informatics?");
   assert.deepEqual(lesson.manifest.pierObjectives, ["1.1", "1.2", "1.3"]);
   assert.match(lesson.artifactTitle, /troponin go-live/i);
   assert.match(lesson.trace.map((step) => `${step.system} ${step.role} ${step.sees} ${step.implication}`).join(" "), /clinical informatics/i);
-  assert.match(lesson.trace.map((step) => `${step.system} ${step.role} ${step.sees} ${step.implication}`).join(" "), /laboratory owns the report/i);
+  assert.match(lesson.trace.map((step) => `${step.system} ${step.role} ${step.sees} ${step.implication}`).join(" "), /laboratory owns the complete result report/i);
   assert.equal(orientationTasks.find((task) => task.id === "lis-build")?.owner, "lis-team");
-  assert.match(orientationTasks.find((task) => task.id === "lis-build")?.explanation ?? "", /often called the LIS team/i);
+  assert.match(orientationTasks.find((task) => task.id === "lis-build")?.explanation ?? "", /technical build/i);
   assert.equal(orientationTasks.find((task) => task.id === "report")?.owner, "laboratory");
   assert.equal(orientationTasks.find((task) => task.id === "result-design")?.owner, "pathology-informatics");
-  assert.match(orientationTasks.find((task) => task.id === "result-design")?.explanation ?? "", /across sections/i);
+  assert.match(orientationTasks.find((task) => task.id === "result-design")?.explanation ?? "", /across the laboratory/i);
   assert.equal(orientationTasks.find((task) => task.id === "cds")?.owner, "shared-cds");
-  assert.match(orientationTasks.find((task) => task.id === "cds")?.explanation ?? "", /scope of pathology informatics/i);
-  assert.deepEqual(orientationTickets.map((ticket) => ticket.answer), ["laboratory", "ehr", "both"]);
+  assert.match(orientationTasks.find((task) => task.id === "cds")?.explanation ?? "", /not cleanly divided/i);
+  assert.deepEqual(orientationTickets.map((ticket) => ticket.answer), ["laboratory", "pathology-informatics", "clinical-informatics"]);
 });

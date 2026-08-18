@@ -21,12 +21,12 @@ The slide decks were downloaded from the [API teaching-slide page](https://www.p
 
 ## Lesson plans
 
-### 01 — Who Needs to Be at the Table?
+### 01 — Who Does What in Laboratory Informatics?
 
 Lesson slug: `steward-at-morning-huddle`
 
 - **Harrison plan:** Session 0, slides 5–13 and 21; Session 3, slides 7–13 and 18; Session 9, slides 4–7.
-- **Build into the lesson:** Distinguish IT operations from informatics work; introduce laboratory information stewardship; show the practical roles pathologists have in order, result, interface, and CDS work; introduce the LIS team as the application team that performs approved builds and technical testing; preserve laboratory review and signoff of the report in the downstream clinical display.
+- **Build into the lesson:** Distinguish hospital IT from the LIS team and from informatics work; introduce the pathologist's responsibility for laboratory information; show the practical roles pathologists have in order, result-report, interface, and CDS work; introduce the LIS team as the group that performs approved builds and technical testing; preserve laboratory review and approval of the complete result report in the EHR.
 
 ### 02 — Inside a Result's Journey
 

@@ -7,16 +7,16 @@ export type OrientationRoleId =
   | "shared-cds"
   | "laboratory-administration";
 
-export type TicketOwnerId = "laboratory" | "ehr" | "both";
+export type TicketOwnerId = "laboratory" | "pathology-informatics" | "clinical-informatics";
 
 export const orientationRoles: { id: OrientationRoleId; label: string }[] = [
-  { id: "it", label: "Enterprise IT" },
-  { id: "lis-team", label: "Laboratory IT / LIS team" },
-  { id: "laboratory", label: "Pathologist / laboratory" },
+  { id: "it", label: "Hospital IT" },
+  { id: "lis-team", label: "LIS team" },
+  { id: "laboratory", label: "Pathologist or laboratory director" },
   { id: "pathology-informatics", label: "Pathology informatics" },
   { id: "clinical-informatics", label: "Clinical informatics" },
-  { id: "shared-cds", label: "Shared CDS group" },
-  { id: "laboratory-administration", label: "Laboratory administration" },
+  { id: "shared-cds", label: "Pathology and clinical informatics" },
+  { id: "laboratory-administration", label: "Laboratory operations" },
 ];
 
 export const orientationTasks: {
@@ -27,72 +27,72 @@ export const orientationTasks: {
 }[] = [
   {
     id: "connection",
-    task: "Provide the servers, network, enterprise accounts, and secure connections used by the laboratory systems.",
+    task: "Keep the network and shared systems available so the LIS and instrument connections can operate.",
     owner: "it",
-    explanation: "Enterprise IT runs the shared infrastructure. The LIS team supports the laboratory applications, and the laboratory still tests that orders and results work correctly.",
+    explanation: "Hospital IT keeps the network and shared systems running. The LIS team supports the laboratory applications, and the laboratory still tests that orders and results work correctly.",
   },
   {
     id: "lis-build",
-    task: "Enter the approved order and result definitions in the LIS, configure the interface changes, and carry out technical testing.",
+    task: "Build the new test in the LIS, make the required interface changes, and complete technical testing before laboratory review.",
     owner: "lis-team",
-    explanation: "The laboratory IT team, often called the LIS team, performs and supports the application build. The laboratory approves the clinical content, and pathology informatics helps keep the build consistent across laboratory sections.",
+    explanation: "The LIS team performs and supports the technical build. The laboratory determines what should be reported and reviews the completed work.",
   },
   {
     id: "report",
-    task: "Sets the order name, units, reference information, comments, flags, and required EHR display.",
+    task: "Approve the order and complete result report, including how the report appears in the EHR.",
     owner: "laboratory",
-    explanation: "The laboratory owns the report and approves how it appears in the EHR. Analysts configure the build to the laboratory's requirements.",
+    explanation: "The laboratory is responsible for the complete result report and for how the report appears in the EHR. The technical teams configure the systems to the laboratory's requirements.",
   },
   {
     id: "result-design",
-    task: "Review the proposed order and result build for the new assay. Make sure the names, result fields, units, reference information, comments, and correction handling follow laboratory-wide standards.",
+    task: "Help chemistry fit the new assay into the laboratory's usual approach to orders and results, including names, units, comments, flags, corrections, and EHR display.",
     owner: "pathology-informatics",
-    explanation: "Pathology informatics knows how laboratory orders and results are implemented across sections and helps keep those builds consistent. The laboratory determines and owns the clinical content, and the technical teams configure the systems.",
+    explanation: "Pathology informatics helps chemistry fit the new assay into the practices used across the laboratory for naming, reporting, corrections, and EHR display.",
   },
   {
     id: "cds",
-    task: "Design an EHR alert that uses the new result together with diagnoses and medications.",
+    task: "Develop and review an EHR alert that uses the troponin result along with diagnoses and medications.",
     owner: "shared-cds",
-    explanation: "Laboratory-related CDS is within the scope of pathology informatics. Clinical informatics and the clinical service are also involved when the rule uses broader EHR data or changes patient-care workflow. The laboratory remains responsible for how the laboratory result is interpreted and used.",
+    explanation: "Responsibility for CDS is not cleanly divided between pathology informatics and clinical informatics. Laboratory-related CDS may be led by pathology informatics, but its design and review often involve clinical informatics, the laboratory, and the clinical services affected by it.",
   },
   {
     id: "operations",
-    task: "Drafts the SOPs, staffing, training, and go-live coverage.",
+    task: "Make sure the procedures, staffing, training, supplies, and support plan are ready before patient testing begins.",
     owner: "laboratory-administration",
-    explanation: "Laboratory administration prepares the service to run. The pathologist or laboratory director provides medical oversight.",
+    explanation: "Laboratory operations prepares the section to perform the test routinely. The pathologist or laboratory director provides medical oversight.",
   },
 ];
 
 export const orientationTickets: { id: string; prompt: string; answer: TicketOwnerId; explanation: string }[] = [
   {
     id: "wrong-report",
-    prompt: "The corrected troponin result is wrong in the laboratory report.",
+    prompt: "The laboratory issued a corrected troponin result report, but the report displayed in the EHR is still wrong.",
     answer: "laboratory",
-    explanation: "The laboratory owns the report. Pathology and the laboratory determine the correct content and work with the analyst to correct the build.",
+    explanation: "The laboratory should lead. It is responsible for the complete result report and must verify that the corrected report appears properly in the EHR.",
   },
   {
     id: "wrong-trend",
-    prompt: "The laboratory report is correct, but the EHR trend graph groups the result with a different troponin assay.",
-    answer: "ehr",
-    explanation: "Clinical informatics and the EHR team lead because the problem is in a downstream patient-chart view. Pathology confirms the result identity and how it should be represented.",
+    prompt: "The troponin report is correct. In the EHR trend graph, however, the result is plotted with results from a different assay.",
+    answer: "pathology-informatics",
+    explanation: "Although the error appears in the EHR, pathology informatics should lead because the problem is how two laboratory tests are represented in the patient's chart. Test identity, method changes, and whether results are sufficiently comparable to be trended together are laboratory questions. An EHR analyst may be needed to make the configuration change.",
   },
   {
     id: "repeat-alert",
-    prompt: "A corrected troponin result causes an EHR alert to fire again.",
-    answer: "both",
-    explanation: "Both groups are needed. The laboratory explains the correction and the intended use of the result. Pathology informatics, clinical informatics, and the clinical service decide what the CDS rule should do.",
+    prompt: "A corrected troponin result causes the same EHR alert to fire again for the treating clinician.",
+    answer: "clinical-informatics",
+    explanation: "The alert firing is an EHR and CDS workflow problem, so clinical informatics should lead. Pathology contributes the laboratory information needed to set the rule correctly.",
   },
 ];
 
 export const ticketOwnerOptions: { id: TicketOwnerId; label: string }[] = [
-  { id: "laboratory", label: "Pathology / laboratory" },
-  { id: "ehr", label: "Clinical informatics / EHR team" },
-  { id: "both", label: "Both groups" },
+  { id: "laboratory", label: "Pathologist or laboratory director" },
+  { id: "pathology-informatics", label: "Pathology informatics" },
+  { id: "clinical-informatics", label: "Clinical informatics" },
 ];
 
 export const goLiveEvidence = [
-  { label: "Analyzer to EHR", value: "Transmission tests passed", tone: "positive" },
-  { label: "Laboratory report", value: "Interpretive comment is clipped", tone: "critical" },
-  { label: "Proposed EHR alert", value: "Result use not reviewed by pathology", tone: "warning" },
-  { label: "SOP and training", value: "Not complete", tone: "critical" },
+  { label: "Analyzer to EHR", value: "Test results transmitted successfully", tone: "positive" },
+  { label: "Laboratory result report", value: "The interpretive comment does not appear in full in the verified EHR report location", tone: "critical" },
+  { label: "Troponin alert", value: "The alert logic has not been reviewed by pathology or the chemistry laboratory", tone: "warning" },
+  { label: "Operational readiness", value: "Procedures, training, and staffing coverage remain incomplete", tone: "critical" },
 ] as const;

@@ -39,9 +39,9 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
       <section className="lesson-section" aria-labelledby="role-title">
         <div className="section-heading">
           <span className="section-number">01</span>
-          <div><p className="eyebrow">People and responsibilities</p><h2 id="role-title">Who is responsible?</h2></div>
+          <div><p className="eyebrow">People and responsibilities</p><h2 id="role-title">Assign the work</h2></div>
         </div>
-        <p className="section-guidance">Choose the role or group responsible for each piece of work. Some work is shared.</p>
+        <p className="section-guidance">Choose the group primarily responsible for each part of the work.</p>
         <div className="role-assignment-list">
           {orientationTasks.map((task, index) => {
             const answer = roleAnswers[task.id];
@@ -58,9 +58,9 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
       <section className="lesson-section" aria-labelledby="ticket-title">
         <div className="section-heading">
           <span className="section-number">02</span>
-          <div><p className="eyebrow">Support queue</p><h2 id="ticket-title">Who gets the call?</h2></div>
+          <div><p className="eyebrow">After go-live</p><h2 id="ticket-title">Who should lead the investigation?</h2></div>
         </div>
-        <p className="section-guidance">Each ticket was opened after go-live. Choose who should lead the investigation. Some problems need both groups.</p>
+        <p className="section-guidance">After go-live, three calls reach the laboratory. For each call, decide who needs to be involved and who should coordinate the response.</p>
         <div className="perspective-list">
           {orientationTickets.map((ticket) => {
             const answer = ticketAnswers[ticket.id];
@@ -79,18 +79,18 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
       <section className="lesson-section" aria-labelledby="go-live-title">
         <div className="section-heading">
           <span className="section-number">03</span>
-          <div><p className="eyebrow">Monday go-live</p><h2 id="go-live-title">Is the assay ready?</h2></div>
+          <div><p className="eyebrow">Monday go-live</p><h2 id="go-live-title">Would you approve the go-live?</h2></div>
         </div>
         <article className="artifact-card go-live-brief">
           <header><span>Synthetic educational artifact</span><strong>Go-live readiness review</strong></header>
           <dl className="evidence-grid">{goLiveEvidence.map((item) => <div className={`tone-${item.tone}`} key={item.label}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl>
         </article>
         <fieldset className="go-live-choice">
-          <legend>Can the laboratory approve go-live as planned?</legend>
+          <legend>Would you approve the go-live?</legend>
           <label className={goLiveAnswer === "yes" ? "selected" : ""}><input type="radio" name="go-live" value="yes" checked={goLiveAnswer === "yes"} onChange={() => { setGoLiveAnswer("yes"); setReviewed(false); }}/>Yes — the interface test passed</label>
-          <label className={goLiveAnswer === "no" ? "selected" : ""}><input type="radio" name="go-live" value="no" checked={goLiveAnswer === "no"} onChange={() => { setGoLiveAnswer("no"); setReviewed(false); }}/>No — the report, CDS use, and operations are not ready</label>
+          <label className={goLiveAnswer === "no" ? "selected" : ""}><input type="radio" name="go-live" value="no" checked={goLiveAnswer === "no"} onChange={() => { setGoLiveAnswer("no"); setReviewed(false); }}/>No — the interface works, but the report and laboratory operation are not ready</label>
         </fieldset>
-        {goLiveAnswer && <div className={`feedback ${goLiveAnswer === "no" ? "correct" : "incorrect"}`} role="status"><strong>{goLiveAnswer === "no" ? "Correct." : "Not quite."}</strong><p>A working connection is necessary, but it does not make the laboratory report or the clinical service ready for use.</p></div>}
+        {goLiveAnswer && <div className={`feedback ${goLiveAnswer === "no" ? "correct" : "incorrect"}`} role="status"><strong>{goLiveAnswer === "no" ? "Correct." : "Not quite."}</strong><p>{goLiveAnswer === "no" ? "Successful result transmission is only one part of go-live. The report, CDS, procedures, training, and staffing must also be ready." : "The interface test passed, but the assay is not ready for patient use."}</p></div>}
         <div className="orientation-review">
           <button className="primary-button" type="button" disabled={!allAnswered} onClick={() => { setReviewed(true); onAttempt?.(true); }}>Review my assignments</button>
           {!allAnswered && <p>Complete all questions if you want a score. You can open the debrief below at any time.</p>}
