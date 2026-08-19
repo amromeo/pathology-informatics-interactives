@@ -4,6 +4,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { GenericExperience } from "../src/components/GenericExperience";
 import { WsiValidationLab } from "../src/components/PilotLabs";
+import { ResultJourneyExperience } from "../src/components/ResultJourneyExperience";
 import { lessons } from "../src/data/curriculum";
 
 test("shared lesson controls expose semantic groups and labels", () => {
@@ -23,4 +24,14 @@ test("the WSI viewer has text alternatives and labeled controls", () => {
   assert.match(html, /aria-label="Image navigation"/);
   assert.match(html, /<legend>Evidence required for the intended scope<\/legend>/);
   assert.match(html, /type="checkbox"/);
+});
+
+test("the missing CBC map and decisions expose labeled controls", () => {
+  const html = renderToStaticMarkup(<ResultJourneyExperience />);
+  assert.match(html, /aria-label="First laboratory check"/);
+  assert.match(html, /aria-label="Laboratory result reporting path"/);
+  assert.match(html, /aria-label="Available system checks"/);
+  assert.match(html, /aria-label="Connections in the result reporting path"/);
+  assert.match(html, /aria-label="Corrective action choices"/);
+  assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
 });

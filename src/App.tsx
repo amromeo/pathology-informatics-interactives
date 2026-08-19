@@ -3,6 +3,7 @@ import { lessonContent } from "./content";
 import { GenericExperience } from "./components/GenericExperience";
 import { OrientationExperience } from "./components/OrientationExperience";
 import { PilotLab } from "./components/PilotLabs";
+import { ResultJourneyExperience } from "./components/ResultJourneyExperience";
 import { SiteChrome, href } from "./components/SiteChrome";
 import { lessonBySlug, lessons, PIER_URL, API_URL, topicBySlug, topics } from "./data/curriculum";
 import type { LessonDefinition } from "./data/types";
@@ -38,21 +39,27 @@ function LessonPage({ slug }: { slug: string }) {
   const lesson = lessonBySlug.get(slug);
   if (!lesson) return <NotFound/>;
   const [attempted, setAttempted] = useState(false);
-  const { Introduction, Debrief } = lessonContent(slug);
+  const { Introduction, Debrief, Concepts, Downtime } = lessonContent(slug);
   const topic = topics.find((item) => item.id === lesson.manifest.topic)!;
   const isOrientation = slug === "steward-at-morning-huddle";
+  const isResultJourney = slug === "inside-a-results-journey";
+  const allowsEarlyDebrief = isOrientation || isResultJourney;
   return (
     <main className="lesson-main">
       <nav className="breadcrumbs" aria-label="Breadcrumb"><a href={href()}>Curriculum</a><span>→</span><a href={href(`topics/${topic.slug}/`)}>Topic {topic.id}</a><span>→</span><span>Lesson {lesson.manifest.id}</span></nav>
       <header className="lesson-meta"><div className="tag-row">{lesson.manifest.pierObjectives.map((objective) => <span key={objective}>PIER {objective}</span>)}</div><div><span>{lesson.manifest.durationMinutes} minutes</span><span>{lesson.manifest.difficulty}</span><a href={href(`faculty/${slug}/`)}>Faculty guide</a></div></header>
       <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>
       <PilotLab kind={lesson.manifest.pilot}/>
-      {isOrientation ? <OrientationExperience onAttempt={setAttempted}/> : <GenericExperience lesson={lesson} onAttempt={setAttempted}/>}
+      {isOrientation
+        ? <OrientationExperience onAttempt={setAttempted}/>
+        : isResultJourney
+          ? <ResultJourneyExperience Concepts={Concepts} Downtime={Downtime} onAttempt={setAttempted}/>
+          : <GenericExperience lesson={lesson} onAttempt={setAttempted}/>}
       {attempted ? (
         <section className="mdx-content debrief-content" id="lesson-debrief">{Debrief ? <Debrief/> : <p>Debrief content is missing.</p>}</section>
-      ) : isOrientation ? (
+      ) : allowsEarlyDebrief ? (
         <section className="debrief-ready" aria-label="Debrief available">
-          <span aria-hidden="true">03 → 04</span>
+          <span aria-hidden="true">Review</span>
           <div><strong>Open the debrief when you are ready</strong><p>You do not need to answer every question first.</p><button type="button" className="secondary-button" onClick={() => setAttempted(true)}>Open debrief</button></div>
         </section>
       ) : (

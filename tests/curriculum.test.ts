@@ -3,6 +3,7 @@ import test from "node:test";
 import { lessons } from "../src/data/curriculum";
 import { validationResult } from "../src/data/validation";
 import { orientationTasks, orientationTickets } from "../content/lessons/steward-at-morning-huddle/interaction";
+import { connectionChoices, pathwayNodes, repairChoices, validationCases } from "../content/lessons/inside-a-results-journey/interaction";
 
 test("the controlled repair passes every lesson validation set", () => {
   for (const lesson of lessons) {
@@ -41,4 +42,15 @@ test("lesson 1 teaches the Topic 1 role and ownership boundaries", () => {
   assert.equal(orientationTasks.find((task) => task.id === "cds")?.owner, "shared-cds");
   assert.match(orientationTasks.find((task) => task.id === "cds")?.explanation ?? "", /not cleanly divided/i);
   assert.deepEqual(orientationTickets.map((ticket) => ticket.answer), ["laboratory", "pathology-informatics", "clinical-informatics"]);
+});
+
+test("lesson 2 covers PIER 1.4 through an observable result-reporting investigation", () => {
+  const lesson = lessons.find((item) => item.manifest.slug === "inside-a-results-journey");
+  assert.ok(lesson);
+  assert.equal(lesson.manifest.title, "The Missing CBC");
+  assert.deepEqual(lesson.manifest.pierObjectives, ["1.4"]);
+  assert.deepEqual(pathwayNodes.map((node) => node.id), ["analyzer", "lis", "interface", "network", "ehr"]);
+  assert.equal(connectionChoices.find((choice) => choice.correct)?.id, "interface-ehr");
+  assert.equal(repairChoices.find((choice) => choice.correct)?.id, "restore-firewall");
+  assert.deepEqual(validationCases.map((item) => item.id), ["original", "queue", "new-cbc", "other-section", "downtime"]);
 });

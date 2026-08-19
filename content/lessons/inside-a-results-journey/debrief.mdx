@@ -1,7 +1,21 @@
 ## Debrief
 
-**Informatics principle:** A result journey is an end-to-end clinical service, not a list of isolated computers.
+**A result can be final in the LIS and still be unavailable to the clinical team.** The investigation must follow the result through the entire reporting path.
 
-The analyzer and LIS completed their work. The outbound application connection repeatedly reset, leaving final results queued. The clinical risk is delayed access to CBC information even though analysis succeeded.
+In this case, the analyzer completed the CBC and the LIS released it. The result then waited in the interface queue because a hospital firewall rule blocked the connection to the vendor-hosted EHR. This was a failure in the result-reporting pathway, not a problem with the analytical performance of the analyzer.
 
-The integration team restores transport and reconciles the queue. Laboratory leadership verifies that every result appears once, on the correct chart, with the correct display.
+## Who was involved
+
+The **LIS team** usually begins by determining whether the result left the LIS and where transmission stopped. **Hospital IT** manages the network and firewall. The **EHR vendor or EHR team** helps confirm whether the receiving system accepted the message.
+
+The laboratory remains responsible for making sure its reports reach the correct patient charts. After the connection was restored, the laboratory did not check only this CBC. Staff also checked the queued reports, a new CBC, a report from another laboratory section using the same connection, and the record of results communicated during downtime.
+
+## Local and hosted systems
+
+Local and vendor-hosted systems fail in different places. The laboratory should know who runs each part, how failures are detected, and how results will be reported during an outage.
+
+You cannot tell whether a system is more reliable just because it is local or vendor-hosted. You have to look at how it is connected, monitored, backed up, and supported.
+
+## PIER R5 connection
+
+This case addresses PIER objective **1.4** by asking you to identify common computer and network components and use them to explain a real laboratory reporting problem.

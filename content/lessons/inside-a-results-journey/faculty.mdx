@@ -1,5 +1,35 @@
-# Faculty guide: Inside a Result’s Journey
+# Faculty guide: The Missing CBC
 
-Ask learners to name the evidence that clears each earlier component. The desired habit is fault localization from logs, queues, and acknowledgments—not a memorized infrastructure diagram.
+## Learning objective
 
-Emphasize that a successful analytical result and a final LIS status do not establish clinical availability in the EHR.
+By the end of the lesson, the learner should be able to identify the hardware, software, network connections, and interfaces involved in electronic result reporting.
+
+## Case mechanism
+
+- The ED sees the CBC as pending and does not know whether testing is complete.
+- Hematology checks the LIS and finds a final result verified at 09:42.
+- The result reached the interface engine, where it joined a growing outbound queue.
+- The interface server and application are running.
+- A hospital firewall change blocks the connection from the interface server to the vendor-hosted EHR.
+- Hospital IT corrects the firewall setting. The LIS team checks the queue and confirms that reporting resumes.
+- The laboratory confirms that delayed and new reports reached the correct patient charts and reconciles results communicated during downtime.
+
+## Discussion points
+
+Ask learners what finding clears each earlier part of the path. A final result in the LIS clears neither the interface nor the EHR. A running interface application also does not prove that it can connect to the receiving system.
+
+The lesson distinguishes the analyzer's analytical work from the postanalytic result-reporting pathway. The network is essential to delivering the report, but it is not part of the analyzer's analytical process.
+
+Do not imply that every institution organizes support in the same way. The LIS team may be part of Hospital IT or may be housed in the pathology department. The roles shown here describe the work that must occur, not a mandatory reporting structure.
+
+The technical terms are drawn from the API Pathology Informatics Introductory Course sessions on computer hardware, software, networking, and laboratory information systems. The case and artifacts are original.
+
+## Suggested facilitation
+
+1. Before opening the LIS record, ask what the ED actually knows.
+2. During the map, ask learners to name the comparable systems at their institution.
+3. In the evidence section, ask what each finding rules out before opening the next check.
+4. After repair, ask why checking only the original CBC would be inadequate.
+5. Use the hosting discussion to compare local support arrangements without claiming that one model is inherently safer or more reliable.
+
+The debrief may be opened without completing every interaction. This lesson is formative practice, not a scored assessment.

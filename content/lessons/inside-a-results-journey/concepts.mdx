@@ -1,0 +1,32 @@
+## Hardware, software, and networks
+
+A laboratory information system is not one machine. It depends on physical equipment, software running on that equipment, and network connections to other systems.
+
+**Hardware** is the physical equipment: processors, memory, storage, network adapters, workstations, servers, and switches.
+
+**System software** provides the environment in which other software runs. The operating system is the main example in this case.
+
+**Application software** performs work for users. The LIS and interface engine are both applications. The LIS stores and manages laboratory orders and results. The interface engine sends, receives, and routes messages between systems.
+
+## How the systems communicate
+
+Several things must work before one system can send a result to another:
+
+1. The equipment and physical connection must be working. A network switch connects devices on the local network.
+2. Each system needs the correct network address and route. An **IP address** is like a street address; a **port** is like the particular door used by an application.
+3. A firewall must allow the connection. Think of the route as the road and the firewall rule as the checkpoint that decides which traffic may pass.
+4. **TCP** opens and maintains the connection between the sending and receiving applications. Once that connection is available, the interface engine can send the laboratory message, often an HL7 message.
+
+In a **client-server** arrangement, one application requests or sends information and another provides or receives the service. The names describe how the applications communicate; they do not tell you whether either system is physically inside the hospital.
+
+## Where the software runs
+
+| Term | Practical meaning |
+| --- | --- |
+| On-premises | The system runs in the hospital or in a data center operated by the health system. |
+| Vendor-hosted | The system runs in an environment operated by the vendor. This may or may not be a cloud service. |
+| Cloud | Computing resources are provided through shared, scalable infrastructure rather than a single server assigned only to that institution. |
+| Software as a service (SaaS) | The vendor operates and updates the application, which is generally purchased by subscription. The health system still configures, validates, and uses it. |
+| Hybrid | Some parts run in the health system and other parts run in an outside environment. |
+
+These labels do not tell you whether a system is reliable. To answer that question, you need to know how it is connected, monitored, backed up, and supported.

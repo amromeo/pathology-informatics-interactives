@@ -202,6 +202,82 @@ h3 { line-height: 1.2; }
 .orientation-review { display: flex; align-items: center; gap: 16px; margin-top: 22px; }
 .orientation-review p { margin: 0; color: var(--muted); font-size: .9rem; }
 
+.journey-call-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+.ehr-pending-card, .lis-result-card, .system-evidence { border: 1px solid #c9cec8; background: #f8f8f4; }
+.ehr-pending-card header, .lis-result-card header, .system-evidence > header { display: flex; justify-content: space-between; gap: 14px; padding: 13px 17px; background: #e6e9e2; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+.ehr-pending-card > div { padding: 26px; }
+.ehr-pending-card > div > span { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .07em; }
+.ehr-pending-card h3 { margin: 10px 0 18px; font-size: 1.55rem; }
+.ehr-pending-card small { display: block; margin-top: 24px; padding: 15px; background: var(--gold-soft); font-size: .92rem; }
+.journey-guidance { margin: 0 0 14px; }
+.compact-choices button { min-height: 64px; }
+.lis-result-card { margin-top: 22px; }
+.lis-result-card dl { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; }
+.lis-result-card dl > div { padding: 19px; border-right: 1px solid var(--line); }
+.lis-result-card dt, .system-evidence dt { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .07em; }
+.lis-result-card dd, .system-evidence dd { margin: 8px 0 0; font-family: ui-monospace, monospace; }
+
+.pathway-map { display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px; margin-bottom: 22px; }
+.pathway-position { position: relative; min-height: 112px; padding: 18px; border: 1px solid #bfc8c2; background: #f9faf6; }
+.pathway-position:not(:last-child)::after { content: "→"; position: absolute; z-index: 2; top: 40%; right: -23px; color: var(--green); font-size: 1.35rem; }
+.pathway-position strong, .pathway-position small, .pathway-palette strong, .pathway-palette small { display: block; }
+.pathway-position strong { margin-top: 12px; }
+.pathway-position small, .pathway-palette small { margin-top: 6px; color: var(--muted); font-size: 10px; }
+.pathway-node-number { color: var(--green); font-family: ui-monospace, monospace; font-size: 10px; }
+.pathway-palette { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.pathway-palette button { min-height: 80px; padding: 12px; border: 1px solid #aebbb4; background: white; color: var(--ink); text-align: left; cursor: pointer; }
+.pathway-palette button:disabled { opacity: .38; cursor: default; }
+.pathway-status { display: flex; align-items: center; gap: 16px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+.pathway-status > span { color: var(--green); font-family: ui-monospace, monospace; font-size: 11px; }
+.pathway-status p { margin: 0; color: var(--muted); }
+.pathway-status .text-button { margin-left: auto; }
+
+.journey-concepts { margin-top: 44px; padding-top: 34px; border-top: 3px solid var(--green); }
+.embedded-mdx { max-width: none; }
+.embedded-mdx h2 { margin-top: 0; }
+.embedded-mdx h3 { margin-top: 32px; }
+.embedded-mdx table { width: 100%; margin: 24px 0 34px; border-collapse: collapse; background: white; }
+.embedded-mdx th, .embedded-mdx td { padding: 14px 16px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+.embedded-mdx th { background: #e6e9e2; font-size: 11px; text-transform: uppercase; letter-spacing: .07em; }
+.journey-concepts > h3 { margin-top: 42px; font-size: 1.8rem; }
+.classification-list { display: grid; gap: 12px; }
+.classification-list fieldset { margin: 0; padding: 18px; border: 1px solid var(--line); background: #fafaf6; }
+.classification-list legend { padding: 0 8px; font-weight: 700; }
+.classification-list fieldset > div { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+.classification-list label { display: flex; gap: 8px; align-items: center; min-height: 48px; padding: 10px; border: 1px solid #c5cdc7; background: white; cursor: pointer; font-size: .88rem; }
+.classification-list label.selected { border-color: var(--green); background: var(--mint); }
+.classification-list input { accent-color: var(--green); }
+.classification-list fieldset > p { margin: 12px 0 0; font-size: .9rem; font-weight: 700; }
+.class-correct { color: var(--green) !important; }
+.class-incorrect { color: var(--red) !important; }
+.classification-summary { margin-top: 16px; padding: 13px 16px; background: var(--green-pale); font-weight: 700; }
+
+.evidence-tabs { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); }
+.evidence-tabs button { min-height: 64px; padding: 12px 14px; border: 0; border-right: 1px solid var(--line); border-bottom: 4px solid transparent; background: #fafaf6; color: var(--muted); cursor: pointer; text-align: left; }
+.evidence-tabs button:last-child { border-right: 0; }
+.evidence-tabs button.active { border-bottom-color: var(--green); background: var(--mint); color: var(--ink); font-weight: 700; }
+.evidence-tabs button span { display: inline-grid; place-items: center; width: 23px; height: 23px; margin-right: 8px; border: 1px solid currentColor; border-radius: 50%; font-family: ui-monospace, monospace; font-size: 9px; }
+.evidence-tabs button small { display: block; margin: 5px 0 0 33px; color: var(--green); font-size: 9px; text-transform: uppercase; letter-spacing: .07em; }
+.system-evidence { border-top: 0; }
+.system-evidence-heading { padding: 28px 28px 10px; }
+.system-evidence-heading h3 { margin: 0 0 8px; font-size: 1.65rem; }
+.system-evidence-heading p { max-width: 780px; color: var(--muted); }
+.system-evidence dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); margin: 0; }
+.system-evidence dl > div { min-height: 88px; padding: 18px 22px; border-top: 1px solid var(--line); border-right: 1px solid var(--line); }
+.system-evidence pre { overflow-x: auto; margin: 0; padding: 24px 28px; background: #112b27; color: #e7f2ee; font-size: .88rem; line-height: 1.7; }
+
+.diagnosis-path { display: grid; grid-template-columns: 1fr .8fr 1fr .8fr 1.2fr .8fr 1fr; align-items: stretch; gap: 8px; }
+.diagnosis-node { display: grid; place-items: center; min-height: 105px; padding: 16px; border: 1px solid #c3cbc5; background: #fafaf6; text-align: center; font-weight: 700; }
+.diagnosis-path button { min-height: 105px; padding: 12px; border: 1px dashed #8da098; background: transparent; color: var(--ink); cursor: pointer; text-align: center; }
+.diagnosis-path button span, .diagnosis-path button strong { display: block; }
+.diagnosis-path button span { color: var(--green); font-size: 1.5rem; }
+.diagnosis-path button strong { margin-top: 7px; font-size: .76rem; }
+.diagnosis-path button.selected { border-style: solid; border-color: var(--green); background: var(--mint); box-shadow: inset 0 0 0 1px var(--green); }
+.downtime-note { margin-top: 28px; padding: 22px 24px; border-left: 4px solid var(--gold); background: var(--gold-soft); }
+.downtime-note h3 { margin: 0 0 8px; }
+.downtime-note p { margin-bottom: 0; }
+.journey-validation { max-width: 850px; }
+
 .pilot-lab { background: linear-gradient(135deg, #eef5f0, #fffdf7); border-top: 6px solid var(--gold); }
 .pilot-lab h2 { max-width: 900px; }
 .lab-controls { display: flex; flex-wrap: wrap; gap: 18px; margin: 30px 0; }
@@ -271,6 +347,12 @@ h3 { line-height: 1.2; }
   .role-assignment-card { grid-template-columns: 36px 1fr; }
   .role-assignment-card label { grid-column: 2; }
   .wsi-viewport { height: 400px; }
+  .pathway-map, .pathway-palette { grid-template-columns: 1fr; }
+  .pathway-position { min-height: 82px; }
+  .pathway-position:not(:last-child)::after { content: "↓"; top: auto; right: 50%; bottom: -25px; }
+  .diagnosis-path { grid-template-columns: 1fr; }
+  .diagnosis-path button { min-height: 74px; }
+  .classification-list fieldset > div { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 720px) {
@@ -291,6 +373,14 @@ h3 { line-height: 1.2; }
   .perspective-options, .go-live-choice { grid-template-columns: 1fr; }
   .role-assignment-card { padding: 18px; gap: 12px; }
   .orientation-review { align-items: flex-start; flex-direction: column; }
+  .journey-call-grid { grid-template-columns: 1fr; }
+  .lis-result-card dl { grid-template-columns: 1fr 1fr; }
+  .pathway-status { align-items: flex-start; flex-direction: column; }
+  .pathway-status .text-button { margin-left: 0; }
+  .classification-list fieldset > div, .evidence-tabs { grid-template-columns: 1fr; }
+  .evidence-tabs button { border-right: 0; border-bottom: 1px solid var(--line); }
+  .evidence-tabs button.active { border-left: 4px solid var(--green); border-bottom-color: var(--line); }
+  .embedded-mdx table { display: block; overflow-x: auto; }
   .field-repair-grid { grid-template-columns: 1fr; }
   .field-list button { grid-template-columns: 58px 1fr; }
   .field-list code { grid-column: 2; }

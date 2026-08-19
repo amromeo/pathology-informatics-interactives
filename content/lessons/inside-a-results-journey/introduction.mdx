@@ -1,11 +1,11 @@
-# Inside a Result’s Journey
+# The Missing CBC
 
-> **Synthetic case:** A verified CBC is visible on the analyzer and in the LIS, but not in the EHR.
+> **Synthetic case:** The emergency department is treating a patient with a suspected gastrointestinal bleed. The CBC is still listed as pending in the EHR, and the team is waiting for the hemoglobin.
+
+The ED calls hematology to ask whether the specimen has been tested. The clinician does not know whether the CBC is complete; the only information available in the EHR is **Pending**.
 
 ## Your task
 
-Trace the result through hardware, system software, application software, networks, and communication protocols. Use the evidence at each boundary to localize the fault instead of guessing from the clinical symptom.
+Identify the hardware, software, network connections, and interfaces involved in electronic result reporting. Then use the records from each system to find where the report stopped.
 
-## Key point
-
-Hardware executes work. System software manages resources. Application software supports laboratory tasks. Network protocols define how components exchange data. In a clinical system, all four layers contribute to whether a result reaches the correct user.
+This lesson follows the CBC from the analyzer to a vendor-hosted EHR. All patients, results, screens, and logs are synthetic educational artifacts.

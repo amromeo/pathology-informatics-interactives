@@ -8,6 +8,12 @@ Each lesson has a folder under `content/lessons/` containing:
 - `faculty.mdx` — facilitation notes, expected reasoning, and review cautions.
 - `practicum.mdx` — optional institution-based extension when present.
 
+Some lessons use additional MDX files when teaching copy appears between
+interactive sections. Lesson 2, for example, uses `concepts.mdx` for its
+hardware, software, networking, and hosting explanation and `downtime.mdx` for
+the downtime note. These files can be edited in the same way as the standard
+lesson files.
+
 You can edit ordinary paragraphs, headings, links, bold text, and lists directly
 on GitHub. Commit the change to `main`; the Pages workflow rebuilds and
 republishes the curriculum automatically.
@@ -23,6 +29,11 @@ keeps its role assignments and support-ticket questions beside the MDX files in
 `content/lessons/steward-at-morning-huddle/interaction.ts`. These items drive
 application state, so preserve the `id`, `owner`, and `answer` values when
 editing the visible wording.
+
+Lesson 2 keeps its pathway components, synthetic system records, answer
+choices, and restoration checks in
+`content/lessons/inside-a-results-journey/interaction.ts`. Preserve the `id`,
+`answer`, and `correct` values when editing the visible wording.
 
 Do not paste patient information, proprietary screenshots, or text copied from
 the PIER PDF. All cases and artifacts must remain synthetic and independently
