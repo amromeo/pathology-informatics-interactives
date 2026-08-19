@@ -4,6 +4,7 @@ import {
   componentClasses,
   connectionChoices,
   evidenceViews,
+  pathwayOrder,
   pathwayNodes,
   repairChoices,
   validationCases,
@@ -16,7 +17,7 @@ const firstChecks = [
     id: "lis",
     label: "Check the CBC in the LIS.",
     correct: true,
-    feedback: "Yes. The ED can only see that the CBC is still pending in the EHR. Hematology checks the LIS and finds that the result is already final.",
+    feedback: "Yes. The ED can only see that the CBC is still pending in the EHR. The hematology lab checks the LIS and finds that the result is already final.",
   },
   {
     id: "repeat",
@@ -32,7 +33,7 @@ const firstChecks = [
   },
 ] as const;
 
-const expectedPath = pathwayNodes.map((node) => node.id);
+const expectedPath = [...pathwayOrder];
 
 export function ResultJourneyExperience({
   Concepts,

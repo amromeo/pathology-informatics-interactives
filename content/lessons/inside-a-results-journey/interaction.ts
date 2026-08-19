@@ -4,12 +4,14 @@ export type PathwayNode = {
   location: string;
 };
 
+export const pathwayOrder = ["analyzer", "lis", "interface", "network", "ehr"] as const;
+
 export const pathwayNodes: PathwayNode[] = [
-  { id: "analyzer", label: "Analyzer", location: "Hematology laboratory" },
-  { id: "lis", label: "LIS", location: "Health-system data center" },
   { id: "interface", label: "Interface engine", location: "Health-system data center" },
-  { id: "network", label: "Firewall and network", location: "Hospital boundary" },
   { id: "ehr", label: "EHR", location: "Vendor-hosted service" },
+  { id: "analyzer", label: "Analyzer", location: "Hematology lab" },
+  { id: "network", label: "Firewall and network", location: "Hospital boundary" },
+  { id: "lis", label: "LIS", location: "Health-system data center" },
 ];
 
 export const componentClasses = [
@@ -69,7 +71,7 @@ export const evidenceViews = [
     id: "lis",
     tab: "LIS",
     heading: "The result is final in the LIS",
-    summary: "Hematology can see that the CBC was reviewed and released. The ED cannot see this screen.",
+    summary: "The hematology lab can see that the CBC was reviewed and released. The ED cannot see this screen.",
     fields: [
       ["Status", "Final"],
       ["Verified by", "M. Chen, MLS"],
