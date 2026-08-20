@@ -1,11 +1,20 @@
 # The Missing CBC
 
-> **Synthetic case:** The emergency department is treating a patient with a suspected gastrointestinal bleed. The CBC is still listed as pending in the EHR, and the team is waiting for the hemoglobin.
+> **Synthetic case:** The emergency department is treating a patient with a suspected gastrointestinal bleed. The CBC is still listed as pending in the EHR, and the team is waiting for the hemoglobin result.
 
-The ED calls the hematology lab to ask whether the specimen has been tested. The clinician does not know whether the CBC is complete; the only information available in the EHR is **Pending**.
+The ED calls the hematology lab. The clinical team cannot tell whether the specimen has been received in the laboratory, whether there is a problem with the specimen, or whether testing is complete. All they know is that the CBC is **Pending**.
+
+## Terms used in this case
+
+- **Analyzer** — the instrument that performs the CBC.
+- **LIS** — the laboratory information system used to manage orders, specimens, and results.
+- **Interface engine** — software that sends laboratory results between systems.
+- **Firewall** — a network control that allows or blocks connections between systems.
+- **EHR** — the electronic health record used by the clinical team.
+- **Vendor-hosted** — the application runs in an environment operated by the vendor rather than on a server operated by the health system.
 
 ## Your task
 
 Identify the hardware, software, network connections, and interfaces involved in electronic result reporting. Then use the records from each system to find where the report stopped.
 
-This lesson follows the CBC from the analyzer to a vendor-hosted EHR. All patients, results, screens, and logs are synthetic educational artifacts.
+This lesson follows the CBC from the analyzer to a vendor-hosted EHR.

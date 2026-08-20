@@ -235,7 +235,7 @@ export function ResultJourneyExperience({
           <header><span>Synthetic educational artifact</span><strong>{selectedEvidence.tab} check</strong></header>
           <div className="system-evidence-heading"><h3>{selectedEvidence.heading}</h3><p>{selectedEvidence.summary}</p></div>
           <dl>
-            {selectedEvidence.fields.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
+            {selectedEvidence.fields.map((field) => <div className={`tone-${"tone" in field ? field.tone : "neutral"}`} key={field.label}><dt>{field.label}</dt><dd>{field.value}</dd></div>)}
           </dl>
           {"log" in selectedEvidence && selectedEvidence.log && <pre aria-label={`${selectedEvidence.tab} log`}><code>{selectedEvidence.log.join("\n")}</code></pre>}
         </article>

@@ -3,7 +3,7 @@ import test from "node:test";
 import { lessons } from "../src/data/curriculum";
 import { validationResult } from "../src/data/validation";
 import { orientationTasks, orientationTickets } from "../content/lessons/steward-at-morning-huddle/interaction";
-import { connectionChoices, pathwayNodes, pathwayOrder, repairChoices, validationCases } from "../content/lessons/inside-a-results-journey/interaction";
+import { connectionChoices, evidenceViews, pathwayNodes, pathwayOrder, repairChoices, validationCases } from "../content/lessons/inside-a-results-journey/interaction";
 
 test("the controlled repair passes every lesson validation set", () => {
   for (const lesson of lessons) {
@@ -51,6 +51,9 @@ test("lesson 2 covers PIER 1.4 through an observable result-reporting investigat
   assert.deepEqual(lesson.manifest.pierObjectives, ["1.4"]);
   assert.deepEqual(pathwayOrder, ["analyzer", "lis", "interface", "network", "ehr"]);
   assert.notDeepEqual(pathwayNodes.map((node) => node.id), pathwayOrder);
+  const interfaceEvidence = evidenceViews.find((view) => view.id === "interface");
+  assert.ok(interfaceEvidence);
+  assert.deepEqual(interfaceEvidence.fields.find((field) => field.label === "Outbound queue"), { label: "Outbound queue", value: "214 results", tone: "critical" });
   assert.equal(connectionChoices.find((choice) => choice.correct)?.id, "interface-ehr");
   assert.equal(repairChoices.find((choice) => choice.correct)?.id, "restore-firewall");
   assert.deepEqual(validationCases.map((item) => item.id), ["original", "queue", "new-cbc", "other-section", "downtime"]);
