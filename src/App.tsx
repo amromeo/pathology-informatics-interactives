@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState, type ComponentType, type ReactNode } from "react";
 import { lessonContent } from "./content";
+import { DataQualityExperience } from "./components/DataQualityExperience";
 import { GenericExperience } from "./components/GenericExperience";
 import { OrientationExperience } from "./components/OrientationExperience";
 import { PilotLab } from "./components/PilotLabs";
@@ -7,6 +8,30 @@ import { ResultJourneyExperience } from "./components/ResultJourneyExperience";
 import { SiteChrome, href } from "./components/SiteChrome";
 import { lessonBySlug, lessons, PIER_URL, API_URL, topicBySlug, topics } from "./data/curriculum";
 import type { LessonDefinition } from "./data/types";
+import type { LessonExperience } from "./data/types";
+
+type MdxComponent = ComponentType<Record<string, unknown>>;
+type ExperienceRenderProps = {
+  lesson: LessonDefinition;
+  Concepts?: MdxComponent;
+  Bridge?: MdxComponent;
+  Downtime?: MdxComponent;
+  Comparison?: MdxComponent;
+  Investigation?: MdxComponent;
+  onAttempt: (attempted: boolean) => void;
+};
+
+const experienceRegistry: Partial<Record<LessonExperience, (props: ExperienceRenderProps) => ReactNode>> = {
+  orientation: ({ onAttempt }) => <OrientationExperience onAttempt={onAttempt}/>,
+  "result-journey": ({ Concepts, Downtime, onAttempt }) => <ResultJourneyExperience Concepts={Concepts} Downtime={Downtime} onAttempt={onAttempt}/>,
+  "data-quality": ({ Concepts, Bridge, Comparison, Investigation, onAttempt }) => <DataQualityExperience Concepts={Concepts} Bridge={Bridge} Comparison={Comparison} Investigation={Investigation} onAttempt={onAttempt}/>,
+};
+
+const useDocumentTitle = (title: string) => {
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+};
 
 const routePath = () => {
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -15,6 +40,7 @@ const routePath = () => {
 };
 
 function HubPage() {
+  useDocumentTitle("Pathology Informatics Interactives");
   return <main><section className="hub-hero"><div><p className="eyebrow">23 cases · 8 PIER topics · 34 objectives</p><h1>Learn informatics by following the evidence.</h1><p className="hero-lede">An independent, case-based curriculum for pathology residents, aligned to PIER Essentials Release 5.</p><div className="hero-actions"><a className="primary-button" href={href("lessons/steward-at-morning-huddle/")}>Start lesson 1</a><a className="secondary-button" href="#topics">Browse all topics</a></div></div><aside className="hero-card"><span>Curriculum route</span><ol><li>Notice a clinical inconsistency</li><li>Trace systems and meaning</li><li>Diagnose the failure layer</li><li>Repair and regression-test</li></ol><small>All artifacts are synthetic and educational.</small></aside></section><section className="catalog-section" id="topics"><div className="section-copy"><p className="eyebrow">Curriculum catalog</p><h2>Eight connected topic areas</h2><p>Lessons progress from foundational vocabulary to applied configuration and stewardship decisions.</p></div><div className="topic-grid">{topics.map((topic) => { const count = lessons.filter((lesson) => lesson.manifest.topic === topic.id).length; return <a className="topic-card" href={href(`topics/${topic.slug}/`)} key={topic.id}><span>Topic {topic.id}</span><h3>{topic.title}</h3><p>{topic.summary}</p><footer><strong>{count} lessons</strong><small>{topic.objectives.join(" · ")}</small></footer></a>; })}</div></section><Coverage/><section className="about-section" id="about"><div><p className="eyebrow">Source and editorial model</p><h2>Aligned, attributed, and independently authored</h2></div><div><p><a href={PIER_URL}>PIER Essentials R5</a> defines the coverage contract. The <a href={API_URL}>API teaching slide sets</a> supplement foundational concepts under CC BY 4.0. Case narratives, artifacts, questions, and visuals are original.</p><p>This project is independently developed and is not an official PIER product.</p></div></section></main>;
 }
 
@@ -25,6 +51,7 @@ function Coverage() {
 
 function TopicPage({ slug }: { slug: string }) {
   const topic = topicBySlug.get(slug);
+  useDocumentTitle(topic ? `${topic.title} | Pathology Informatics Interactives` : "Topic not found | Pathology Informatics Interactives");
   if (!topic) return <NotFound/>;
   const topicLessons = lessons.filter((lesson) => lesson.manifest.topic === topic.id);
   return <main className="inner-main"><nav className="breadcrumbs" aria-label="Breadcrumb"><a href={href()}>Curriculum</a><span>→</span><span>Topic {topic.id}</span></nav><header className="topic-hero"><p className="eyebrow">PIER Topic {topic.id}</p><h1>{topic.title}</h1><p>{topic.summary}</p><div className="objective-row">{topic.objectives.map((objective) => <span key={objective}>{objective}</span>)}</div></header><section className="lesson-list"><h2>{topicLessons.length} interactive lessons</h2>{topicLessons.map((lesson, index) => <LessonListItem key={lesson.manifest.slug} lesson={lesson} index={index}/>)}</section></main>;
@@ -37,24 +64,23 @@ function LessonListItem({ lesson, index }: { lesson: LessonDefinition; index: nu
 
 function LessonPage({ slug }: { slug: string }) {
   const lesson = lessonBySlug.get(slug);
+  useDocumentTitle(lesson ? `${lesson.manifest.title} | Pathology Informatics Interactives` : "Lesson not found | Pathology Informatics Interactives");
   if (!lesson) return <NotFound/>;
   const [attempted, setAttempted] = useState(false);
-  const { Introduction, Debrief, Concepts, Downtime } = lessonContent(slug);
+  const { Introduction, Debrief, Concepts, Bridge, Downtime, Comparison, Investigation } = lessonContent(slug);
   const topic = topics.find((item) => item.id === lesson.manifest.topic)!;
-  const isOrientation = slug === "steward-at-morning-huddle";
-  const isResultJourney = slug === "inside-a-results-journey";
-  const allowsEarlyDebrief = isOrientation || isResultJourney;
+  const experience = lesson.manifest.experience ?? "generic";
+  const renderSpecializedExperience = experienceRegistry[experience];
+  const allowsEarlyDebrief = ["orientation", "result-journey", "data-quality"].includes(experience);
   return (
     <main className="lesson-main">
       <nav className="breadcrumbs" aria-label="Breadcrumb"><a href={href()}>Curriculum</a><span>→</span><a href={href(`topics/${topic.slug}/`)}>Topic {topic.id}</a><span>→</span><span>Lesson {lesson.manifest.id}</span></nav>
       <header className="lesson-meta"><div className="tag-row">{lesson.manifest.pierObjectives.map((objective) => <span key={objective}>PIER {objective}</span>)}</div><div><span>{lesson.manifest.durationMinutes} minutes</span><span>{lesson.manifest.difficulty}</span><a href={href(`faculty/${slug}/`)}>Faculty guide</a></div></header>
       <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>
-      <PilotLab kind={lesson.manifest.pilot}/>
-      {isOrientation
-        ? <OrientationExperience onAttempt={setAttempted}/>
-        : isResultJourney
-          ? <ResultJourneyExperience Concepts={Concepts} Downtime={Downtime} onAttempt={setAttempted}/>
-          : <GenericExperience lesson={lesson} onAttempt={setAttempted}/>}
+      {experience === "generic" && <PilotLab kind={lesson.manifest.pilot}/>}
+      {renderSpecializedExperience
+        ? renderSpecializedExperience({ lesson, Concepts, Bridge, Downtime, Comparison, Investigation, onAttempt: setAttempted })
+        : <GenericExperience lesson={lesson} onAttempt={setAttempted}/>}
       {attempted ? (
         <section className="mdx-content debrief-content" id="lesson-debrief">{Debrief ? <Debrief/> : <p>Debrief content is missing.</p>}</section>
       ) : allowsEarlyDebrief ? (
@@ -72,12 +98,13 @@ function LessonPage({ slug }: { slug: string }) {
 
 function FacultyPage({ slug }: { slug: string }) {
   const lesson = lessonBySlug.get(slug);
+  useDocumentTitle(lesson ? `${lesson.manifest.title} — Faculty Guide | Pathology Informatics Interactives` : "Faculty guide not found | Pathology Informatics Interactives");
   if (!lesson) return <NotFound/>;
   const { Faculty, Practicum } = lessonContent(slug);
   return <main className="inner-main faculty-main"><nav className="breadcrumbs" aria-label="Breadcrumb"><a href={href()}>Curriculum</a><span>→</span><a href={href(`lessons/${slug}/`)}>{lesson.manifest.title}</a><span>→</span><span>Faculty</span></nav><header className="faculty-hero"><p className="eyebrow">Editable faculty material</p><h1>{lesson.manifest.title}</h1><p>Objectives: {lesson.manifest.pierObjectives.join(", ")}</p></header><section className="mdx-content faculty-content">{Faculty ? <Faculty/> : <p>Faculty guide is missing.</p>}</section>{Practicum && <section className="mdx-content practicum-content"><Practicum/></section>}<section className="source-panel"><h2>Lesson sources</h2>{lesson.manifest.sources.map((source) => <article key={source.label}><h3><a href={source.url}>{source.label}</a></h3><p>{source.use}</p><small>{source.license}</small></article>)}</section></main>;
 }
 
-function NotFound() { return <main className="not-found"><p className="eyebrow">404</p><h1>This curriculum route does not exist.</h1><a className="primary-button" href={href()}>Return to the catalog</a></main>; }
+function NotFound() { useDocumentTitle("Page not found | Pathology Informatics Interactives"); return <main className="not-found"><p className="eyebrow">404</p><h1>This curriculum route does not exist.</h1><a className="primary-button" href={href()}>Return to the catalog</a></main>; }
 
 export default function App() {
   const parts = routePath().replace(/^\/+|\/+$/g, "").split("/").filter(Boolean);

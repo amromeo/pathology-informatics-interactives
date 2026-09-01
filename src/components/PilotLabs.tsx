@@ -1,12 +1,5 @@
 import { useMemo, useState } from "react";
 
-export function DataQualityLab() {
-  const [includeConverted, setIncludeConverted] = useState(false);
-  const [showMissing, setShowMissing] = useState(false);
-  const median = includeConverted ? 55 : 37;
-  return <section className="pilot-lab" aria-labelledby="data-lab-title"><p className="eyebrow">Pilot lab · live query preview</p><h2 id="data-lab-title">Rebuild the analytic population</h2><div className="lab-controls"><label><input type="checkbox" checked={includeConverted} onChange={(event) => setIncludeConverted(event.target.checked)}/> Include converted manual accessions</label><label><input type="checkbox" checked={showMissing} onChange={(event) => setShowMissing(event.target.checked)}/> Display residual missingness</label></div><div className="metric-preview"><div><span>Recomputed median</span><strong>{median} min</strong></div><div><span>Missingness shown</span><strong>{showMissing ? "3.1%" : "Hidden"}</strong></div><div><span>Operational status</span><strong className={includeConverted && showMissing ? "status-good" : "status-warn"}>{includeConverted && showMissing ? "Reviewable" : "Biased"}</strong></div></div></section>;
-}
-
 const hl7Fields = [
   ["OBX-3", "Observation identifier", "K^Potassium"],
   ["OBX-5", "Observation value", "6.8"],
@@ -51,7 +44,6 @@ export function WsiValidationLab() {
 
 export function PilotLab({ kind }: { kind?: string }) {
   return useMemo(() => {
-    if (kind === "data-quality") return <DataQualityLab />;
     if (kind === "interoperability") return <FlagLab />;
     if (kind === "downtime") return <DowntimeLab />;
     if (kind === "digital-pathology") return <WsiValidationLab />;

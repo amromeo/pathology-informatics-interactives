@@ -14,6 +14,13 @@ hardware, software, networking, and hosting explanation and `downtime.mdx` for
 the downtime note. These files can be edited in the same way as the standard
 lesson files.
 
+Lesson 3 uses `concepts.mdx` for the data-quality teaching and `bridge.mdx` for
+the closing examples of pathology data science. Its complete synthetic case
+table is `content/lessons/can-we-trust-this-report/report.csv`. You may edit the
+CSV in a spreadsheet program or as text. Development, testing, and production
+builds compile it automatically; no React edit is needed. The visible prompts,
+choices, feedback, and report checks are in the lesson's `interaction.ts` file.
+
 You can edit ordinary paragraphs, headings, links, bold text, and lists directly
 on GitHub. Commit the change to `main`; the Pages workflow rebuilds and
 republishes the curriculum automatically.
@@ -34,6 +41,13 @@ Lesson 2 keeps its pathway components, synthetic system records, answer
 choices, and restoration checks in
 `content/lessons/inside-a-results-journey/interaction.ts`. Preserve the `id`,
 `answer`, and `correct` values when editing the visible wording.
+
+Lesson 3 keeps its audit prompts, correction choices, and report checks in
+`content/lessons/can-we-trust-this-report/interaction.ts`. Preserve each `id`,
+`answer`, and `correct` value when changing visible wording. The command
+`npm run data:lesson3` resets the CSV to the original 455-case teaching dataset,
+so do not run it after making your own CSV edits unless you intend to replace
+them.
 
 Do not paste patient information, proprietary screenshots, or text copied from
 the PIER PDF. All cases and artifacts must remain synthetic and independently

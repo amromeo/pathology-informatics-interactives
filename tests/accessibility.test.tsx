@@ -5,6 +5,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { GenericExperience } from "../src/components/GenericExperience";
 import { WsiValidationLab } from "../src/components/PilotLabs";
 import { ResultJourneyExperience } from "../src/components/ResultJourneyExperience";
+import { DataQualityExperience } from "../src/components/DataQualityExperience";
 import { lessons } from "../src/data/curriculum";
 
 test("shared lesson controls expose semantic groups and labels", () => {
@@ -33,5 +34,19 @@ test("the missing CBC map and decisions expose labeled controls", () => {
   assert.match(html, /aria-label="Available system checks"/);
   assert.match(html, /aria-label="Connections in the result reporting path"/);
   assert.match(html, /aria-label="Corrective action choices"/);
+  assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
+});
+
+test("the surgical pathology report has labeled controls and a semantic table", () => {
+  const html = renderToStaticMarkup(<DataQualityExperience/>);
+  assert.match(html, /aria-label="Report readiness choices"/);
+  assert.match(html, /<ol class="case-data-flow">/);
+  assert.match(html, /aria-label="Source used for the cutover TAT calculation"/);
+  assert.match(html, /<caption>All surgical pathology cases used to prepare the turnaround-time report/);
+  assert.match(html, /<th scope="col">Accession<\/th>/);
+  assert.match(html, /Download editable CSV/);
+  assert.match(html, /role="img" aria-labelledby="tat-chart-title tat-chart-description"/);
+  assert.match(html, /<caption>Weekly mean and median TAT<\/caption>/);
+  assert.match(html, /Reset lesson interactions/);
   assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
 });

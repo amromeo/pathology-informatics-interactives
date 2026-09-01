@@ -7,12 +7,15 @@
     "node": ">=22"
   },
   "scripts": {
-    "dev": "vite --configLoader runner",
+    "dev": "npm run data:compile && vite --configLoader runner",
+    "data:lesson3": "node scripts/generate-lesson3-report.mjs",
+    "data:compile": "node scripts/compile-lesson-data.mjs",
     "assets:optimize": "node scripts/optimize-images.mjs",
-    "build": "tsc --noEmit && vite build --configLoader runner && tsx scripts/export-coverage.ts && node scripts/create-pages-fallback.mjs",
-    "build:pages": "tsc --noEmit && vite build --base /pathology-informatics-interactives/ --configLoader runner && tsx scripts/export-coverage.ts && node scripts/create-pages-fallback.mjs",
+    "build": "npm run data:compile && tsc --noEmit && vite build --configLoader runner && tsx scripts/export-coverage.ts && node scripts/create-pages-fallback.mjs",
+    "build:pages": "npm run data:compile && tsc --noEmit && vite build --base /pathology-informatics-interactives/ --configLoader runner && tsx scripts/export-coverage.ts && node scripts/create-pages-fallback.mjs",
+    "preview:pages": "node scripts/serve-pages-build.mjs",
     "test:curriculum": "tsx scripts/validate-curriculum.ts",
-    "test:unit": "tsx --test tests/*.test.ts tests/*.test.tsx",
+    "test:unit": "npm run data:compile && tsx --test tests/*.test.ts tests/*.test.tsx",
     "test": "npm run test:curriculum && npm run test:unit && npm run build"
   },
   "dependencies": {

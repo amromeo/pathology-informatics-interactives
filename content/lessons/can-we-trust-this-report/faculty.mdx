@@ -1,0 +1,40 @@
+# Faculty guide
+
+## PIER 2.1 coverage
+
+This lesson uses one surgical pathology quality report to teach four parts of PIER 2.1:
+
+- **Structured and unstructured data:** compare a blank structured LIS field with a time documented on the requisition and paper cutover log.
+- **Seven data-quality dimensions:** apply accuracy, completeness, validity, consistency, uniqueness, timeliness, and fitness for purpose to specific checks.
+- **Data flow:** follow the accession time from the source documents and LIS into the spreadsheet and quality report.
+- **Pathology data science:** compare mean and median, recognize a skewed distribution, separate an unusual interval from routine performance, and review TAT over time.
+
+## Case mechanism
+
+The dataset contains 455 unique surgical pathology accessions: 210 pre-go-live cases, 35 cutover cases, and 210 post-go-live cases after cutover.
+
+The original report combines cutover week with the following six weeks. The 245-case post-go-live group has a mean of 3.8 working days and a median of 2.5, compared with a pre-go-live mean of 3.3 and median of 2.7. The higher mean and lower median should prompt the learner to look for a smaller group of unusually long cases.
+
+The cutover cases have a mean of 8.4 and a median of 9.5 working days. The six weeks after cutover have a mean of 3.0 and median of 2.5. The first eight cutover cases were accessioned directly in the new LIS. The remaining 27 were recorded on requisitions and in a paper cutover log after the accessioning function was taken offline. Their original accession times were not entered into the structured LIS field. The quality coordinator recovered those documented times and used them to calculate TAT, keeping all 35 cutover cases in the report.
+
+## Answers and rationale
+
+The first safe action is to review TAT by week. Choosing either the mean or median alone would give an incomplete account of what happened.
+
+The correct report keeps all 455 cases but shows pre-go-live, cutover week, and post-go-live after cutover as separate groups. This makes the temporary cutover delay visible without allowing that week to describe the later routine workflow. Removing only the 27 delayed cases would selectively hide the longest TAT values.
+
+The final conclusion is two-part: cutover caused severe temporary delays, and routine TAT was modestly better after cutover than before go-live.
+
+## Facilitation
+
+Ask residents why the mean and median appear to disagree and what each statistic tells them. Then ask what changed when the same 245 post-go-live cases were separated by week. Emphasize that the cutover cases were not deleted from the report.
+
+When discussing the 27 blank LIS fields, distinguish the event from its source. The original accession event was documented on the requisition and cutover log, allowing the cases to remain in the analysis after review. The structured LIS data were still incomplete and required a prospective workflow correction.
+
+The debrief is intentionally available at any time. Residents do not need to complete every audit item to read it.
+
+## Sources
+
+- [PIER Essentials R5](https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf), Topic 2.1, establishes the curricular content.
+- [Government Data Quality Framework](https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework) supplies the formal data-quality definitions, adapted here with original pathology examples.
+- [API Pathology Informatics Introductory Course](https://www.pathologyinformatics.org/teaching-slide-sets), especially Harrison sessions 0 and 2, informs the discussion of data representation, data quality, and the path from data creation to use.

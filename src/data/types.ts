@@ -1,5 +1,23 @@
 export type Difficulty = "foundational" | "applied" | "stewardship";
 
+export type LessonExperience =
+  | "generic"
+  | "orientation"
+  | "result-journey"
+  | "data-quality"
+  | "statistics"
+  | "multimodal"
+  | "ai-foundations"
+  | "ai-deployment";
+
+export type PierCoverageClaim = {
+  id: string;
+  objective: string;
+  summary: string;
+  learnerAction: string;
+  primary: boolean;
+};
+
 export type SourceReference = {
   label: string;
   url: string;
@@ -19,6 +37,8 @@ export type LessonManifest = {
   apiSessions: number[];
   sources: SourceReference[];
   hasLocalPracticum: boolean;
+  experience?: LessonExperience;
+  pierCoverage?: PierCoverageClaim[];
   pilot?: "data-quality" | "interoperability" | "downtime" | "digital-pathology";
 };
 

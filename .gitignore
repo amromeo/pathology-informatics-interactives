@@ -1,4 +1,5 @@
 node_modules/
+src/generated/lesson3Report.ts
 pages-dist/
 .vite/
 *.log

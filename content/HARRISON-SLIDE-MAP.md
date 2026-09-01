@@ -35,12 +35,12 @@ Lesson slug: `inside-a-results-journey`
 - **Harrison plan:** Session 1, slides 5 and 10–15; Session 3, slide 20.
 - **Build into the lesson:** Make learners identify hardware, operating system/application software, LAN components, protocols, and the interface engine as separate failure points. Use the connected-systems view to place the analyzer, LIS, interface engine, and EHR in one trace.
 
-### 03 — Dirty Data, Clean Decision
+### 03 — Can We Trust This Report?
 
-Lesson slug: `dirty-data-clean-decision`
+Lesson slug: `can-we-trust-this-report`
 
 - **Harrison plan:** Session 0, slides 10 and 15–20; Session 2, slides 5–12 and 24–26.
-- **Build into the lesson:** Connect data representation, completeness, correctness, concordance, plausibility, and currency to the dashboard defect. Contrast the operational LIS source with an analytic database and make learners trace extraction, cleaning, and reuse before changing the metric.
+- **Build into the lesson:** Start with structured and unstructured representation, then connect PIER's seven dimensions to Harrison's related terms without treating them as exact synonyms. Trace the accession time from the source document and LIS field through the export and spreadsheet to the quality meeting. The learner must identify the omitted cutover cases, inspect all 455 rows, and choose a fair comparison before the laboratory presents the report.
 
 ### 04 — Is the Shift Real?
 

@@ -58,3 +58,18 @@ test("lesson 2 covers PIER 1.4 through an observable result-reporting investigat
   assert.equal(repairChoices.find((choice) => choice.correct)?.id, "restore-firewall");
   assert.deepEqual(validationCases.map((item) => item.id), ["original", "queue", "new-cbc", "other-section", "downtime"]);
 });
+
+test("lesson 3 covers each active PIER 2.1 subtopic with an observable action", () => {
+  const lesson = lessons.find((item) => item.manifest.slug === "can-we-trust-this-report");
+  assert.ok(lesson);
+  assert.equal(lesson.manifest.title, "Can We Trust This Report?");
+  assert.equal(lesson.manifest.experience, "data-quality");
+  assert.deepEqual(lesson.manifest.pierObjectives, ["2.1"]);
+  assert.deepEqual(lesson.manifest.pierCoverage?.map((claim) => claim.id), [
+    "2.1-data-representation",
+    "2.1-data-quality",
+    "2.1-data-flow",
+    "2.1-pathology-data-science",
+  ]);
+  assert.ok(lesson.manifest.pierCoverage?.every((claim) => claim.primary && claim.learnerAction.length > 20));
+});

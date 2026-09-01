@@ -37,6 +37,21 @@ sessions and slide ranges that should shape each case and learner decision.
 
 ## Additional professional guidance
 
+- **UK Government Data Quality Framework** — Used in Lesson 3 for the formal
+  definitions of accuracy, completeness, consistency, timeliness, validity,
+  and uniqueness. Definitions are paraphrased and followed by original
+  surgical pathology examples. Fitness for purpose is taught as the overall
+  judgment required by PIER Topic 2.1. Licensed under the Open Government
+  Licence v3.0.
+- Source: <https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework>
+
+- **Harrison/API sessions 0 and 2** — Slides 15–20 in session 0 and slides
+  24–26 in session 2 inform Lesson 3's explanation of data representation,
+  related data-quality language, and the path from data creation to use. The
+  lesson paraphrases the ideas, explicitly labels the PIER–Harrison pairs as
+  related rather than identical, and uses an original surgical pathology case.
+
+
 - **Henricks WH, Wilkerson ML, Castellani WJ, Whitsitt MS, Sinard JH — “Pathologists as Stewards of Laboratory Information.”** Used in Lesson 1 to explain why pathology remains responsible for the integrity and effective use of laboratory information even when it is displayed or used in systems outside the laboratory's direct administrative control. The article is cited and summarized; its wording is not reproduced.
 - Source: <https://pubmed.ncbi.nlm.nih.gov/25724030/>
 
