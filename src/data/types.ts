@@ -66,6 +66,7 @@ export type ValidationCase = {
   name: string;
   note: string;
   passingRepairs: string[];
+  failNotes?: Record<string, string>;
 };
 
 export type LessonDefinition = {

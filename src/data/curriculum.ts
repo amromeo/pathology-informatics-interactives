@@ -1,4 +1,4 @@
-import type { Choice, LessonDefinition, LessonManifest, SourceReference, TopicDefinition } from "./types";
+import type { Choice, LessonDefinition, LessonManifest, SourceReference, TopicDefinition, ValidationCase } from "./types";
 
 export const PIER_URL = "https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf";
 export const API_URL = "https://www.pathologyinformatics.org/teaching-slide-sets";
@@ -50,14 +50,24 @@ export const topics: TopicDefinition[] = [
 ];
 
 type ManifestSeed = Omit<LessonManifest, "id" | "sources">;
-type CaseSeed = {
+type CaseSeedBase = {
   artifact: string;
   evidence: [string, string, ("neutral" | "warning" | "critical" | "positive")?][];
   trace: [string, string, string, string][];
+};
+type LegacyCaseSeed = CaseSeedBase & {
   diagnosis: [string, string, string, string];
   repair: [string, string, string, string];
   tests: [string, string, boolean?][];
 };
+type StructuredCaseSeed = CaseSeedBase & {
+  decisionPrompt: string;
+  decisionChoices: Choice[];
+  repairPrompt: string;
+  repairChoices: Choice[];
+  validationCases: ValidationCase[];
+};
+type CaseSeed = LegacyCaseSeed | StructuredCaseSeed;
 
 const manifests: ManifestSeed[] = [
   { slug: "steward-at-morning-huddle", title: "Who Does What in Laboratory Informatics?", topic: 1, pierObjectives: ["1.1", "1.2", "1.3"], durationMinutes: 22, difficulty: "foundational", interactionKinds: ["field-map", "role-assignment", "support-ticket-triage", "go-live-decision"], apiSessions: [0, 3, 9], hasLocalPracticum: true, experience: "orientation" },
@@ -84,9 +94,9 @@ const manifests: ManifestSeed[] = [
   { slug: "is-the-shift-real", title: "Is the Shift Real?", topic: 2, pierObjectives: ["2.2"], durationMinutes: 22, difficulty: "applied", interactionKinds: ["distribution", "statistics-choice"], apiSessions: [0, 2], hasLocalPracticum: false },
   { slug: "five-vs-slide-archive", title: "Five Vs in the Slide Archive", topic: 2, pierObjectives: ["2.3"], durationMinutes: 20, difficulty: "applied", interactionKinds: ["capacity-planning", "data-flow"], apiSessions: [2, 5], hasLocalPracticum: false },
   { slug: "model-under-pressure", title: "Model Under Pressure", topic: 2, pierObjectives: ["2.4"], durationMinutes: 26, difficulty: "applied", interactionKinds: ["model-verification", "monitoring"], apiSessions: [6], hasLocalPracticum: false },
-  { slug: "server-behind-the-analyzer", title: "The Server Behind the Analyzer", topic: 3, pierObjectives: ["3.1", "3.2"], durationMinutes: 23, difficulty: "applied", interactionKinds: ["threat-model", "control-builder"], apiSessions: [8], hasLocalPracticum: false },
-  { slug: "twelve-hours-offline", title: "Twelve Hours Offline", topic: 3, pierObjectives: ["3.1", "3.3"], durationMinutes: 28, difficulty: "applied", interactionKinds: ["tabletop", "timeline", "reconciliation"], apiSessions: [8, 9], hasLocalPracticum: false, pilot: "downtime" },
-  { slug: "not-anonymous-enough", title: "Not Anonymous Enough", topic: 3, pierObjectives: ["3.2", "3.4"], durationMinutes: 22, difficulty: "applied", interactionKinds: ["privacy-review", "release-decision"], apiSessions: [8], hasLocalPracticum: false },
+  { slug: "server-behind-the-analyzer", title: "The Server Behind the Analyzer", topic: 3, pierObjectives: ["3.1", "3.2"], durationMinutes: 12, difficulty: "applied", interactionKinds: ["evidence-review", "system-trace", "guided-decision", "regression-checks"], apiSessions: [8], hasLocalPracticum: true },
+  { slug: "twelve-hours-offline", title: "Twelve Hours Offline", topic: 3, pierObjectives: ["3.1", "3.3"], durationMinutes: 12, difficulty: "applied", interactionKinds: ["staged-tabletop", "evidence-review", "system-trace", "guided-decision", "regression-checks"], apiSessions: [8, 9], hasLocalPracticum: true, pilot: "downtime" },
+  { slug: "not-anonymous-enough", title: "Not Anonymous Enough", topic: 3, pierObjectives: ["3.2", "3.4"], durationMinutes: 12, difficulty: "applied", interactionKinds: ["evidence-review", "system-trace", "guided-decision", "regression-checks"], apiSessions: [8], hasLocalPracticum: true },
   { slug: "where-is-the-specimen", title: "Where Is the Specimen?", topic: 4, pierObjectives: ["4.1", "4.2", "4.4"], durationMinutes: 22, difficulty: "applied", interactionKinds: ["audit-trail", "routing-repair"], apiSessions: [3], hasLocalPracticum: true },
   { slug: "autoverification-at-the-edge", title: "Autoverification at the Edge", topic: 4, pierObjectives: ["4.3", "4.5"], durationMinutes: 25, difficulty: "applied", interactionKinds: ["rule-builder", "regression"], apiSessions: [3, 9], hasLocalPracticum: true },
   { slug: "reflex-rule-ripple-effect", title: "The Reflex Rule Ripple Effect", topic: 4, pierObjectives: ["4.3", "4.5"], durationMinutes: 23, difficulty: "applied", interactionKinds: ["rule-map", "utilization"], apiSessions: [3, 7, 9], hasLocalPracticum: false },
@@ -110,9 +120,78 @@ const cases: Record<string, CaseSeed> = {
   "is-the-shift-real": { artifact: "Reagent-lot comparison", evidence: [["Before mean", "18.4"], ["After mean", "22.9", "warning"], ["Before median", "17.8"], ["After median", "18.1"], ["Extreme values", "4 of 120", "critical"]], trace: [["Extract", "Resident", "Periods have different tails.", "Shape affects summary choice."], ["Description", "Biostatistician", "Mean shifts; median is stable.", "Outliers drive the change."], ["Inference", "Medical director", "A small central shift remains possible.", "Precision and clinical importance differ."]], diagnosis: ["What analysis is defensible?", "Inspect shape and use a robust comparison", "Compare means only", "Declare no change"], repair: ["Choose the report.", "Report distributions, effect, precision, and clinical thresholds", "Report a p-value only", "Delete every outlier"], tests: [["Central comparison", "Interpretable", false], ["Extreme values", "Investigated"], ["Clinical thresholds", "Visible", false]] },
   "five-vs-slide-archive": { artifact: "Digital slide capacity review", evidence: [["Annual volume", "1.9 PB"], ["Peak ingest", "8.4 GB/s", "warning"], ["Unlinked slides", "1.8%", "critical"], ["Retrieval target", "< 2 s"]], trace: [["Scanner", "Histotechnologist", "Image production arrives in bursts.", "Velocity starts at capture."], ["Clinical archive", "Pathologist", "Active cases need fast retrieval.", "Clinical work needs predictable latency."], ["Analytic store", "Data scientist", "Cohorts join to outcomes.", "Analytics needs flexible integration."], ["Governance", "Medical director", "Cost and utility must be balanced.", "Volume is not value without veracity."]], diagnosis: ["Which architecture fits?", "Tiered clinical and analytic services with governed linkage", "Buy more disk", "Use one research database"], repair: ["Choose the safeguard.", "Validate peak ingest, linkage, retrieval, and analytic copies", "Test average volume only", "Compress until it fits"], tests: [["Peak ingest", "Meets target", false], ["Clinical retrieval", "Remains responsive"], ["Analytic copy", "Preserves linkage", false]] },
   "model-under-pressure": { artifact: "Local AI verification", evidence: [["Vendor sensitivity", "96%"], ["Local sensitivity", "84%", "critical"], ["Small lesions", "68%", "critical"], ["Scanner profile", "Absent from training", "warning"]], trace: [["Training", "Vendor", "Supported profiles are curated.", "Performance is conditional."], ["Preparation", "Histology", "Stain and scanner differ.", "The domain changed."], ["Verification", "Pathologist", "Subgroup sensitivity falls.", "Aggregate results conceal risk."], ["Workflow", "End user", "Negative overlays look confident.", "Automation bias can amplify failure."]], diagnosis: ["What best explains the failure?", "Generalizability failure with subgroup brittleness", "Longitudinal drift", "Generative hallucination"], repair: ["Choose the response.", "Hold use; expand verification, oversight, and monitoring", "Use only macro cases without governance", "Average vendor and local results"], tests: [["Small lesions", "Meet threshold", false], ["Scanner strata", "Represented"], ["Human review", "Catches discordance", false]] },
-  "server-behind-the-analyzer": { artifact: "Middleware installation review", evidence: [["Location", "Beside heat vent", "critical"], ["Login", "Shared / no password", "critical"], ["Vendor access", "Always on", "warning"], ["Data", "Orders + results + PHI"]], trace: [["Room", "Facilities", "Heat and walkway exposure.", "Availability is weak."], ["Host", "Laboratory", "Access is shared.", "Accountability is weak."], ["Network", "Security", "Instrument segment is flat.", "Compromise can spread."], ["Vendor", "Support", "Remote channel is persistent.", "Access and contracts require control."]], diagnosis: ["What is the governance finding?", "Layered confidentiality, integrity, and availability risks", "Only the password is wrong", "The server has no clinical risk"], repair: ["Choose the installation plan.", "Use a controlled room, named access, segmentation, monitoring, and tested backup", "Lock the keyboard", "Accept vendor defaults"], tests: [["Power event", "Recovers from backup", false], ["Technologist", "Uses named least privilege"], ["Vendor support", "Approved and logged", false]] },
-  "twelve-hours-offline": { artifact: "Trauma-center downtime board", evidence: [["Network", "Unavailable", "critical"], ["Estimate", "12 hours", "warning"], ["Active trauma patients", "17"], ["Pending critical tests", "9", "critical"]], trace: [["Registration", "ED registrar", "Identifiers do not flow.", "Temporary identity control is essential."], ["Laboratory", "Technologist", "Orders and results are manual.", "Priority and accession rules must be explicit."], ["Clinical units", "Care teams", "Phones carry results.", "Read-back and documentation matter."], ["Recovery", "IT + LIS", "Records overlap after restoration.", "Reconciliation is a high-risk phase."]], diagnosis: ["What happens in the first hour?", "Activate coordinated downtime workflows", "Wait for the network", "Let each unit improvise"], repair: ["Choose recovery.", "Stage restoration and reconcile every identity, order, and result", "Back-enter only abnormal results", "Discard paper after reboot"], tests: [["Patient identity", "Reconciles to one chart", false], ["Critical result", "Read-back and EHR agree"], ["Duplicate order", "Caught before recollection", false]] },
-  "not-anonymous-enough": { artifact: "Research dataset release", evidence: [["Names", "Removed", "positive"], ["Exact dates", "Retained", "warning"], ["Full ZIP", "Retained", "warning"], ["Rare cohort", "3 people", "critical"], ["Linkage key", "Shared folder", "critical"]], trace: [["Extract", "Analyst", "Dates and geography remain.", "Removing names is insufficient."], ["Workspace", "Investigator", "Rare cases can be singled out.", "Context changes risk."], ["Linkage", "Data steward", "The key is broadly accessible.", "Coded data remain identifiable."], ["Release", "Privacy office", "Recipient is undefined.", "Controls depend on intended use."]], diagnosis: ["How is the data classified?", "Coded and reidentifiable", "Deidentified because names are gone", "Public data"], repair: ["Choose the release path.", "Minimize fields, separate the key, assess risk, and govern the recipient", "Rename the patient code", "Email the spreadsheet"], tests: [["Rare cohort", "Not trivially singled out", false], ["Approved linkage", "Uses a controlled key"], ["Recipient", "Has documented safeguards", false]] },
+  "server-behind-the-analyzer": {
+    artifact: "Middleware installation review",
+    evidence: [["Location", "Beside heat vent", "critical"], ["Login", "Shared / no password", "critical"], ["Vendor access", "Always on", "warning"], ["Data", "Orders + results + PHI"]],
+    trace: [["Room", "Facilities", "Heat and walkway exposure.", "Availability is weak."], ["Host", "Laboratory", "Access is shared.", "Accountability is weak."], ["Network", "Security", "Instrument segment is flat.", "Compromise can spread."], ["Vendor", "Support", "Remote channel is persistent.", "Access and contracts require control."]],
+    decisionPrompt: "What is the governance finding?",
+    decisionChoices: [
+      { id: "correct", label: "Layered confidentiality, integrity, and availability risks must be addressed together.", correct: true, feedback: "The room, shared account, flat network, persistent vendor channel, and untested recovery threaten different parts of laboratory service. Approval requires a coordinated control plan rather than one isolated correction." },
+      { id: "narrow", label: "The only material finding is the shared login; require individual passwords and approve the installation.", feedback: "Named accounts would improve accountability, but they would not correct the heat and power exposure, flat instrument network, persistent vendor channel, or untested recovery." },
+      { id: "unsafe", label: "Server placement and network configuration are IT infrastructure decisions outside the laboratory director's review.", feedback: "Facilities and IT perform much of the technical work, but the laboratory director must review how the installation protects patient data, result integrity, and continuity of testing." },
+    ],
+    repairPrompt: "Which installation plan should be approved?",
+    repairChoices: [
+      { id: "validated", label: "Place the server in a controlled room; use named least-privilege accounts, segmented networking, controlled vendor sessions, and tested recovery.", correct: true, feedback: "This plan addresses the physical, identity, network, vendor, and recovery findings together. It requires facilities work, security configuration, vendor-contract changes, staff access review, and time for a documented restore test before approval." },
+      { id: "narrow", label: "Move the server to protected data-center power and cooling but keep the shared login and always-on vendor channel.", feedback: "Protected power and cooling reduce the environmental risk, but staff actions remain unattributed, vendor access remains persistent, the network remains flat, and backup restoration has not been demonstrated." },
+      { id: "unsafe", label: "Require the vendor to request each remote session, but leave local access shared and the network flat.", feedback: "Session approval improves vendor accountability, but shared local access, network spread, environmental exposure, and untested recovery still prevent approval." },
+    ],
+    validationCases: [
+      { name: "Environmental resilience", note: "The result-routing server remains available through a local heat or power event.", passingRepairs: ["validated", "narrow"], failNotes: { unsafe: "Controlling vendor sessions does not move the server away from the heat vent or provide protected power." } },
+      { name: "Named laboratory access", note: "Each technologist uses a named account with only the access required for the job.", passingRepairs: ["validated"], failNotes: { narrow: "The data-center move leaves the shared local login unchanged, so laboratory actions still cannot be attributed to one person.", unsafe: "Vendor approval does not replace the shared local login with named least-privilege accounts." } },
+      { name: "Network containment", note: "A compromised device cannot move freely from the instrument segment to the middleware server.", passingRepairs: ["validated"], failNotes: { narrow: "Protected hosting does not segment the flat instrument network.", unsafe: "The proposed vendor-session change leaves the instrument network flat." } },
+      { name: "Vendor access", note: "Each support session is approved, time-limited, and logged.", passingRepairs: ["validated", "unsafe"], failNotes: { narrow: "The always-on vendor channel remains available without approval or a session-specific audit record." } },
+      { name: "Tested recovery", note: "The laboratory restores the middleware service and verifies queued orders and results from backup.", passingRepairs: ["validated"], failNotes: { narrow: "Protected power reduces one outage risk but does not show that the backup can restore the service and its queued messages.", unsafe: "Vendor-session control does not test whether the laboratory can restore middleware data after a failure." } },
+    ],
+  },
+  "twelve-hours-offline": {
+    artifact: "Trauma-center downtime board",
+    evidence: [["Network", "Unavailable", "critical"], ["Estimate", "12 hours", "warning"], ["Active trauma patients", "17"], ["Pending critical tests", "9", "critical"]],
+    trace: [["Registration", "ED registrar", "Identifiers do not flow.", "Temporary identity control is essential."], ["Laboratory", "Technologist", "Orders and results are manual.", "Priority and accession rules must be explicit."], ["Clinical units", "Care teams", "Phones carry results.", "Read-back and documentation matter."], ["Recovery", "IT + LIS", "Records overlap after restoration.", "Reconciliation is a high-risk phase."]],
+    decisionPrompt: "What should the laboratory do in the first hour?",
+    decisionChoices: [
+      { id: "correct", label: "Declare downtime and activate coordinated procedures with controlled temporary identifiers and a defined command structure.", correct: true, feedback: "A declared, coordinated response gives registration, the laboratory, clinical units, and IT one identity method, communication plan, priority scheme, and incident lead while systems are unavailable." },
+      { id: "narrow", label: "Hold all non-STAT testing until the network returns and run STAT work on paper in the meantime.", feedback: "Restricting work may reduce volume, but STAT testing still needs controlled registration, temporary identifiers, result communication, and one coordinated incident plan." },
+      { id: "unsafe", label: "Have each unit start its own downtime forms now and consolidate the paperwork after restoration.", feedback: "Separate local methods create incompatible identifiers and call records. Those differences become patient-matching and result-reconciliation hazards after restoration." },
+    ],
+    repairPrompt: "Which recovery plan should medical leadership approve?",
+    repairChoices: [
+      { id: "validated", label: "Freeze transitions, restore in stages, and reconcile temporary identities, orders, results, critical calls, and repeats before normal operation.", correct: true, feedback: "This plan controls the high-risk transition back to electronic work and accounts for each temporary record. It requires added staffing, an operational pause, and medical review before normal workflows resume." },
+      { id: "narrow", label: "Begin back-entering all paper results, including documented critical calls, immediately and in collection order.", feedback: "This captures all result categories and preserves documented critical calls, but entry before identity reconciliation can place a correct result on the wrong chart or create duplicate work." },
+      { id: "unsafe", label: "Back-enter only the results that were phoned as critical and retain the rest on paper for the record.", feedback: "This preserves the most urgent communicated results, but it leaves routine and abnormal results outside the longitudinal chart and does not resolve temporary identities or duplicate orders." },
+    ],
+    validationCases: [
+      { name: "Controlled transition", note: "New electronic work pauses while active paper records are identified and assigned for reconciliation.", passingRepairs: ["validated"], failNotes: { narrow: "Immediate back-entry starts before staff know which temporary records belong to which restored charts.", unsafe: "Entering only critical results still begins without a controlled transition or assigned reconciliation work." } },
+      { name: "Temporary identities", note: "Every temporary identifier maps to one verified medical record number before result entry.", passingRepairs: ["validated"], failNotes: { narrow: "Collection order does not establish which restored chart belongs to each temporary identifier.", unsafe: "The critical-only plan does not reconcile temporary identifiers before placing results in the chart." } },
+      { name: "Critical-result documentation", note: "Phoned critical results, read-backs, and restored chart entries agree.", passingRepairs: ["validated", "narrow", "unsafe"], failNotes: {} },
+      { name: "Duplicate and repeat review", note: "Duplicate orders and tests repeated during downtime are resolved before recollection or billing.", passingRepairs: ["validated"], failNotes: { narrow: "Back-entry in collection order does not compare restored orders with paper orders and repeat tests.", unsafe: "A critical-only entry process leaves duplicate routine orders and repeat testing unreconciled." } },
+      { name: "Complete result inclusion", note: "Routine, abnormal, and critical downtime results are represented in the longitudinal chart.", passingRepairs: ["validated", "narrow"], failNotes: { unsafe: "Retaining noncritical results only on paper leaves part of the downtime episode absent from the electronic chart." } },
+    ],
+  },
+  "not-anonymous-enough": {
+    artifact: "Research dataset release",
+    evidence: [["Names", "Removed", "positive"], ["Exact dates", "Retained", "warning"], ["Full ZIP", "Retained", "warning"], ["Rare cohort", "3 people", "critical"], ["Linkage key", "Shared folder", "critical"]],
+    trace: [["Extract", "Analyst", "Dates and geography remain.", "Removing names is insufficient."], ["Workspace", "Investigator", "Rare cases can be singled out.", "Context changes risk."], ["Linkage", "Data steward", "The key is broadly accessible.", "Coded data remain identifiable."], ["Release", "Privacy office", "Recipient is undefined.", "Controls depend on intended use."]],
+    decisionPrompt: "How should the privacy office classify this export as presented?",
+    decisionChoices: [
+      { id: "correct", label: "Coded and reidentifiable protected health information because the key and quasi-identifiers remain available.", correct: true, feedback: "Exact dates, five-digit ZIP codes, and a rare diagnosis can distinguish records, while the accessible key provides a direct route back to identity. Removing names did not make this export deidentified." },
+      { id: "narrow", label: "Deidentified under the HIPAA Safe Harbor method because names and medical record numbers were removed.", feedback: "Safe Harbor requires more than removing names and record numbers. Exact admission dates and most five-digit ZIP codes are among the identifiers that must be removed or generalized, and the reidentification mechanism cannot be disclosed." },
+      { id: "unsafe", label: "A limited data set that may be shared with the investigator under a data use agreement exactly as it is.", feedback: "A limited data set may retain dates and some geography, but it remains protected health information. The institution must first confirm the permitted purpose and recipient, remove prohibited direct identifiers, protect the linkage mechanism, and execute the required data use agreement." },
+    ],
+    repairPrompt: "Which release path should be approved?",
+    repairChoices: [
+      { id: "validated", label: "Minimize fields, generalize dates and geography, protect the key, address rare cases, and require privacy-office approval.", correct: true, feedback: "This path matches the disclosed fields and safeguards to the research question and intended recipient. It preserves less detail and requires privacy review, data-steward work, and an appropriate agreement before release." },
+      { id: "narrow", label: "Remove the linkage key but retain exact dates and five-digit ZIP codes, then release the file publicly because it has no names.", feedback: "Separating the key removes one direct route to identity, but the detailed dates, geography, and rare cohort still create a distinguishable dataset. Public release also removes the recipient controls needed for protected health information." },
+      { id: "unsafe", label: "Keep the fields but require the investigator to sign a confidentiality agreement before receiving the file.", feedback: "A confidentiality commitment is useful, but it does not minimize unnecessary fields, protect a broadly accessible linkage key, resolve the rare cohort, or substitute for privacy-office review and the agreement required for the approved release path." },
+    ],
+    validationCases: [
+      { name: "Minimum necessary fields", note: "The release contains only the detail needed to answer the approved research question.", passingRepairs: ["validated"], failNotes: { narrow: "Removing the key does not explain why exact dates and five-digit ZIP codes are necessary for the research question.", unsafe: "A confidentiality agreement does not remove fields that the investigator does not need." } },
+      { name: "Linkage key control", note: "The reidentification key is separated from the released data and limited to approved stewards.", passingRepairs: ["validated", "narrow"], failNotes: { unsafe: "The proposal leaves the linkage key in the broadly accessible shared folder." } },
+      { name: "Uniqueness-risk review", note: "Detailed dates, geography, and the three-person rare cohort are reviewed and reduced as required.", passingRepairs: ["validated"], failNotes: { narrow: "The public file still contains exact dates, five-digit ZIP codes, and the rare cohort even though the linkage key was removed.", unsafe: "The confidentiality agreement does not reduce the combinations that distinguish rare records." } },
+      { name: "Approved recipient and purpose", note: "The privacy office documents who will receive the data, for which permitted purpose, and under which release path.", passingRepairs: ["validated"], failNotes: { narrow: "A public release has no named recipient, bounded purpose, or institutional approval.", unsafe: "The investigator's signature alone does not document privacy-office approval or the permitted disclosure pathway." } },
+      { name: "Recipient confidentiality commitment", note: "The recipient accepts enforceable limits on use, disclosure, and attempts to identify individuals.", passingRepairs: ["validated", "unsafe"], failNotes: { narrow: "Public release provides no enforceable recipient commitment or restriction on reidentification." } },
+    ],
+  },
   "where-is-the-specimen": { artifact: "Specimen audit trail", evidence: [["Patient match", "Confirmed", "positive"], ["Container scan", "08:11"], ["Gross arrival", "Missing", "critical"], ["Queue", "Cytology", "warning"]], trace: [["Collection", "Clinician", "Patient and container match.", "Identification begins correctly."], ["Accession", "Processor", "Barcode resolves correctly.", "Identity is intact."], ["Routing", "LIS", "Procedure maps to cytology.", "A valid code drives a wrong route."], ["Gross room", "PA", "Expected specimen is absent.", "Tracking reveals the handoff gap."]], diagnosis: ["What failed?", "Routing configuration", "Barcode symbology", "Patient identification"], repair: ["Choose the correction.", "Correct the rule, recover the specimen, and test the route matrix", "Move this specimen only", "Disable all routing"], tests: [["Reported procedure", "Routes to gross room", false], ["Cytology", "Still routes correctly"], ["Manual exception", "Retains audit trail", false]] },
   "autoverification-at-the-edge": { artifact: "Autoverification trace", evidence: [["Troponin", "48 ng/L", "warning"], ["Prior", "12 ng/L"], ["Delta", "+300%", "critical"], ["QC", "Acceptable", "positive"], ["Release", "Automatic", "critical"]], trace: [["Analyzer", "Technologist", "No instrument flag.", "Instrument validity is insufficient."], ["Middleware", "Rule owner", "Only absolute delta is checked.", "Relative change escapes."], ["LIS", "Analyst", "Rule returns pass.", "The result releases."], ["Clinical service", "Physician", "A marked rise has no review.", "A safety checkpoint is lost."]], diagnosis: ["Why did it release?", "Delta logic was incomplete", "QC was acceptable", "It was below a critical limit"], repair: ["Choose the rule change.", "Add approved absolute/relative delta logic and full regression", "Hold this exact value", "Disable review"], tests: [["Relative delta", "Held for review", false], ["Stable elevation", "Uses approved criteria"], ["Missing history", "Has a safe branch", false], ["Routine normal", "Still autoverifies"]] },
   "reflex-rule-ripple-effect": { artifact: "Thyroid reflex rule", evidence: [["Old lower limit", "0.40"], ["New lower limit", "0.27"], ["Rule threshold", "< 0.40", "warning"], ["Free T4 orders", "+31%", "critical"]], trace: [["Assay", "Chemistry", "Reference interval changed.", "A clinical input changed."], ["LIS", "Analyst", "Display was updated.", "Visible maintenance succeeded."], ["Reflex engine", "Rule owner", "Old threshold remains.", "A hidden dependency was missed."], ["Utilization", "Medical director", "Extra testing appears.", "Monitoring reveals impact."]], diagnosis: ["What is the diagnosis?", "Incomplete dependency-aware change control", "Analyzer calibration failure", "Appropriate utilization growth"], repair: ["Choose the repair.", "Update approved logic, test boundaries, document, and monitor", "Change the displayed interval only", "Stop all reflex testing"], tests: [["New low TSH", "Triggers approved reflex", false], ["Boundary", "Follows new policy", false], ["Normal TSH", "Does not reflex"], ["Utilization", "Returns to expected range", false]] },
@@ -144,16 +223,27 @@ const toChoices = (labels: [string, string, string], repair = false): Choice[] =
 export const lessons: LessonDefinition[] = manifests.map((manifest, index) => {
   const item = cases[manifest.slug];
   if (!item) throw new Error(`Missing case data for ${manifest.slug}`);
+  const interaction = "decisionChoices" in item
+    ? {
+        decisionPrompt: item.decisionPrompt,
+        decisionChoices: item.decisionChoices,
+        repairPrompt: item.repairPrompt,
+        repairChoices: item.repairChoices,
+        validationCases: item.validationCases,
+      }
+    : {
+        decisionPrompt: item.diagnosis[0],
+        decisionChoices: toChoices(item.diagnosis.slice(1) as [string, string, string]),
+        repairPrompt: item.repair[0],
+        repairChoices: toChoices(item.repair.slice(1) as [string, string, string], true),
+        validationCases: item.tests.map(([name, note, strict]) => ({ name, note, passingRepairs: strict === false ? ["validated"] : ["validated", "narrow"] })),
+      };
   return {
     manifest: { ...manifest, id: String(index + 1).padStart(2, "0"), sources: [pierSource, apiSource(manifest.apiSessions), ...(manifest.slug === "steward-at-morning-huddle" ? [stewardshipSource, capInterfaceSource] : []), ...(manifest.slug === "can-we-trust-this-report" ? [governmentDataQualitySource] : [])] },
     artifactTitle: item.artifact,
     evidence: item.evidence.map(([label, value, tone]) => ({ label, value, tone: tone ?? "neutral" })),
     trace: item.trace.map(([system, role, sees, implication]) => ({ system, role, sees, implication })),
-    decisionPrompt: item.diagnosis[0],
-    decisionChoices: toChoices(item.diagnosis.slice(1) as [string, string, string]),
-    repairPrompt: item.repair[0],
-    repairChoices: toChoices(item.repair.slice(1) as [string, string, string], true),
-    validationCases: item.tests.map(([name, note, strict]) => ({ name, note, passingRepairs: strict === false ? ["validated"] : ["validated", "narrow"] })),
+    ...interaction,
   };
 });
 

@@ -172,6 +172,7 @@ h3 { line-height: 1.2; }
 .test-row { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 13px 18px; border-bottom: 1px solid #dfe2dc; }
 .test-row strong, .test-row small { display: block; }
 .test-row small { color: var(--muted); }
+.test-row .test-fail-note { max-width: 62ch; margin-top: 7px; color: var(--red); line-height: 1.45; }
 .test-row b { font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; }
 .test-row .pending { color: var(--muted); }
 .test-row .pass { color: var(--green); }
@@ -585,6 +586,8 @@ h3 { line-height: 1.2; }
   .pagination { justify-content: space-between; gap: 8px; }
   .pagination .secondary-button { padding: 7px 10px; }
   .debrief-content { padding: 30px 24px; }
+  .faculty-content, .practicum-content, .source-panel { padding: 28px 20px; }
+  .faculty-content h1, .practicum-content h1 { font-size: 2.5rem; overflow-wrap: anywhere; }
   .lesson-list-item { grid-template-columns: 38px 1fr 25px; gap: 12px; }
   .lesson-list-item h3 { font-size: 1.55rem; }
   .site-frame > footer, .lesson-end-nav { align-items: flex-start; flex-direction: column; }

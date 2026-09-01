@@ -66,10 +66,16 @@ export function GenericExperience({ lesson, onAttempt }: { lesson: LessonDefinit
           </div>
           <article className="test-console" aria-live="polite">
             <header><span>Validation set</span><strong>{testsRun ? `${passed}/${lesson.validationCases.length} passed` : "Not run"}</strong></header>
-            {lesson.validationCases.map((item) => {
-              const itemPassed = Boolean(repair && item.passingRepairs.includes(repair));
-              return <div className="test-row" key={item.name}><span><strong>{item.name}</strong><small>{item.note}</small></span><b className={!testsRun ? "pending" : itemPassed ? "pass" : "fail"}>{!testsRun ? "Pending" : itemPassed ? "Pass" : "Fail"}</b></div>;
-            })}
+            {validation.cases.map((item) => (
+              <div className="test-row" key={item.name}>
+                <span>
+                  <strong>{item.name}</strong>
+                  <small>{item.note}</small>
+                  {testsRun && item.failNote && <small className="test-fail-note">{item.failNote}</small>}
+                </span>
+                <b className={!testsRun ? "pending" : item.passed ? "pass" : "fail"}>{!testsRun ? "Pending" : item.passed ? "Pass" : "Fail"}</b>
+              </div>
+            ))}
             <button className="primary-button" type="button" disabled={!repair} onClick={() => { setTestsRun(true); onAttempt?.(true); }}>Run validation cases</button>
           </article>
         </div>

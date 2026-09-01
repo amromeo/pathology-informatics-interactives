@@ -14,6 +14,7 @@ for (const objective of covered) if (!expected.has(objective)) fail(`Unknown obj
 
 const ids = new Set<string>();
 const slugs = new Set<string>();
+const topic3Slugs = new Set(["server-behind-the-analyzer", "twelve-hours-offline", "not-anonymous-enough"]);
 const harrisonPlan = readFileSync(resolve("content", "HARRISON-SLIDE-MAP.md"), "utf8");
 const plannedSlugs = [...harrisonPlan.matchAll(/Lesson slug: `([^`]+)`/g)].map((match) => match[1]);
 if (new Set(plannedSlugs).size !== 23) fail(`Expected 23 unique lesson entries in the Harrison slide plan; found ${new Set(plannedSlugs).size}`);
@@ -27,6 +28,34 @@ for (const lesson of lessons) {
   if (lesson.decisionChoices.filter((choice) => choice.correct).length !== 1) fail(`${manifest.slug} must have one correct diagnosis`);
   if (lesson.repairChoices.filter((choice) => choice.correct).length !== 1) fail(`${manifest.slug} must have one controlled repair`);
   if (lesson.validationCases.length < 3) fail(`${manifest.slug} needs at least three validation cases`);
+  if (topic3Slugs.has(manifest.slug)) {
+    if (!manifest.hasLocalPracticum) fail(`${manifest.slug} must enable its Topic 3 local practicum`);
+
+    for (const [choiceKind, choices] of [["diagnosis", lesson.decisionChoices], ["repair", lesson.repairChoices]] as const) {
+      const correctChoice = choices.find((choice) => choice.correct);
+      const distractors = choices.filter((choice) => !choice.correct);
+      if (!correctChoice || !distractors.length) fail(`${manifest.slug} lacks a complete ${choiceKind} choice set`);
+      const meanDistractorLength = distractors.reduce((sum, choice) => sum + choice.label.length, 0) / distractors.length;
+      if (correctChoice!.label.length > meanDistractorLength * 1.5) {
+        fail(`${manifest.slug} ${choiceKind} answer is more than 1.5 times the mean distractor length`);
+      }
+    }
+
+    const correctRepair = lesson.repairChoices.find((choice) => choice.correct)!;
+    if (lesson.validationCases.some((testCase) => !testCase.passingRepairs.includes(correctRepair.id))) {
+      fail(`${manifest.slug} controlled repair must pass every validation case`);
+    }
+    for (const repair of lesson.repairChoices.filter((choice) => !choice.correct)) {
+      if (!lesson.validationCases.some((testCase) => testCase.passingRepairs.includes(repair.id))) {
+        fail(`${manifest.slug} repair ${repair.id} must pass at least one validation case`);
+      }
+      for (const testCase of lesson.validationCases.filter((item) => !item.passingRepairs.includes(repair.id))) {
+        if (!testCase.failNotes?.[repair.id]?.trim()) {
+          fail(`${manifest.slug} repair ${repair.id} lacks a failure note for ${testCase.name}`);
+        }
+      }
+    }
+  }
   if (manifest.pierCoverage) {
     const claimIds = new Set<string>();
     for (const claim of manifest.pierCoverage) {
