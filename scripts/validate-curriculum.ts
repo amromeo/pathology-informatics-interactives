@@ -15,6 +15,7 @@ for (const objective of covered) if (!expected.has(objective)) fail(`Unknown obj
 const ids = new Set<string>();
 const slugs = new Set<string>();
 const topic3Slugs = new Set(["server-behind-the-analyzer", "twelve-hours-offline", "not-anonymous-enough"]);
+const topic3InstitutionName = "North River University Hospital";
 const harrisonPlan = readFileSync(resolve("content", "HARRISON-SLIDE-MAP.md"), "utf8");
 const plannedSlugs = [...harrisonPlan.matchAll(/Lesson slug: `([^`]+)`/g)].map((match) => match[1]);
 if (new Set(plannedSlugs).size !== 23) fail(`Expected 23 unique lesson entries in the Harrison slide plan; found ${new Set(plannedSlugs).size}`);
@@ -69,6 +70,12 @@ for (const lesson of lessons) {
   const folder = resolve("content", "lessons", manifest.slug);
   for (const file of ["introduction.mdx", "debrief.mdx", "faculty.mdx"]) {
     if (!existsSync(resolve(folder, file))) fail(`${manifest.slug} is missing ${file}`);
+  }
+  if (topic3Slugs.has(manifest.slug)) {
+    const introduction = readFileSync(resolve(folder, "introduction.mdx"), "utf8");
+    if (!introduction.includes(topic3InstitutionName)) {
+      fail(`${manifest.slug} introduction must name the shared Topic 3 institution: ${topic3InstitutionName}`);
+    }
   }
   if (manifest.hasLocalPracticum && !existsSync(resolve(folder, "practicum.mdx"))) fail(`${manifest.slug} is missing practicum.mdx`);
   if (manifest.experience === "data-quality") {
