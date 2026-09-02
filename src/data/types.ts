@@ -6,6 +6,7 @@ export type LessonExperience =
   | "result-journey"
   | "data-quality"
   | "statistics"
+  | "privacy"
   | "multimodal"
   | "ai-foundations"
   | "ai-deployment";

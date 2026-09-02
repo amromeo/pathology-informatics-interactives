@@ -1,0 +1,7 @@
+### What the uniqueness counter means
+
+First ask a plain-language question: what is the smallest number of records that share the same displayed combination of birth year, sex, geography, admission period, and diagnosis category? That smallest group size is called *k*-anonymity. A value of 1 means at least one displayed combination belongs to only one record in this 18-row file.
+
+In this lesson, *k*-anonymity is only a visible signal of uniqueness in the synthetic table. It does not establish that data are deidentified under the Health Insurance Portability and Accountability Act (HIPAA). Federal guidance describes two HIPAA deidentification methods: Safe Harbor and Expert Determination. A limited data set is a separate release pathway; it remains protected health information and requires an eligible purpose, an appropriate recipient, and a data use agreement.
+
+The linkage key is also separate from the counter. Moving it to a restricted location is an important safeguard, but it does not change which displayed field combinations are unique.

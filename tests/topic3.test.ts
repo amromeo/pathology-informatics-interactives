@@ -81,15 +81,17 @@ test("Topic 3 failure results explain the laboratory consequence", () => {
   }
 });
 
-test("Topic 3 Phase 1 metadata describes the generic experience honestly", () => {
-  const expectedInteractionKinds: Record<string, string[]> = {
-    "server-behind-the-analyzer": ["evidence-review", "system-trace", "guided-decision", "regression-checks"],
-    "twelve-hours-offline": ["staged-tabletop", "evidence-review", "system-trace", "guided-decision", "regression-checks"],
-    "not-anonymous-enough": ["evidence-review", "system-trace", "guided-decision", "regression-checks"],
+test("Topic 3 metadata names only the interactions currently implemented", () => {
+  const expectedMetadata: Record<string, { duration: number; interactionKinds: string[]; experience?: string }> = {
+    "server-behind-the-analyzer": { duration: 12, interactionKinds: ["evidence-review", "system-trace", "guided-decision", "regression-checks"] },
+    "twelve-hours-offline": { duration: 12, interactionKinds: ["staged-tabletop", "evidence-review", "system-trace", "guided-decision", "regression-checks"] },
+    "not-anonymous-enough": { duration: 25, interactionKinds: ["reidentification-attempt", "redaction-workbench", "release-decision"], experience: "privacy" },
   };
   for (const lesson of topic3Lessons) {
-    assert.equal(lesson.manifest.durationMinutes, 12, lesson.manifest.slug);
-    assert.deepEqual(lesson.manifest.interactionKinds, expectedInteractionKinds[lesson.manifest.slug], lesson.manifest.slug);
+    const expected = expectedMetadata[lesson.manifest.slug];
+    assert.equal(lesson.manifest.durationMinutes, expected.duration, lesson.manifest.slug);
+    assert.deepEqual(lesson.manifest.interactionKinds, expected.interactionKinds, lesson.manifest.slug);
+    assert.equal(lesson.manifest.experience, expected.experience, lesson.manifest.slug);
     assert.equal(lesson.manifest.hasLocalPracticum, true, lesson.manifest.slug);
   }
 });

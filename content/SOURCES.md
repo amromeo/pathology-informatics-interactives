@@ -69,6 +69,20 @@ sessions and slide ranges that should shape each case and learner decision.
   of the paired data in Lesson 4. They are not presented as the source of the
   lesson's statistical methods.
 
+- **HHS Office for Civil Rights — Guidance Regarding Methods for
+  De-identification of Protected Health Information.** Used in Lesson 9 to
+  distinguish the HIPAA Safe Harbor and Expert Determination methods and to
+  explain why a disclosed reidentification mechanism matters. The lesson's
+  18-row dataset and uniqueness exercise are original and synthetic.
+- Source: <https://www.hhs.gov/hipaa/for-professionals/special-topics/de-identification/index.html>
+
+- **HHS Office for Civil Rights — HIPAA Audit Protocol.** Used in Lesson 9 for
+  the limited-data-set pathway: retained dates or geography do not make a file
+  deidentified, and an eligible purpose, appropriate recipient, and data use
+  agreement are required. Local privacy-office and legal review remain
+  authoritative.
+- Source: <https://www.hhs.gov/hipaa/for-professionals/compliance-enforcement/audit/protocol/index.html>
+
 
 - **Henricks WH, Wilkerson ML, Castellani WJ, Whitsitt MS, Sinard JH — “Pathologists as Stewards of Laboratory Information.”** Used in Lesson 1 to explain why pathology remains responsible for the integrity and effective use of laboratory information even when it is displayed or used in systems outside the laboratory's direct administrative control. The article is cited and summarized; its wording is not reproduced.
 - Source: <https://pubmed.ncbi.nlm.nih.gov/25724030/>

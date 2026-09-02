@@ -52,6 +52,20 @@ const nistStatisticsSource: SourceReference = {
   use: "Supports the explanations of paired observations, descriptive statistics, confidence intervals, hypothesis tests, and common test selection.",
 };
 
+const hhsDeidentificationSource: SourceReference = {
+  label: "HHS Office for Civil Rights — Guidance Regarding Methods for De-identification of Protected Health Information",
+  url: "https://www.hhs.gov/hipaa/for-professionals/special-topics/de-identification/index.html",
+  license: "United States government guidance; cited and paraphrased",
+  use: "Supports the distinction between the HIPAA Safe Harbor and Expert Determination methods and the treatment of a reidentification mechanism.",
+};
+
+const hhsLimitedDataSetSource: SourceReference = {
+  label: "HHS Office for Civil Rights — HIPAA Audit Protocol: Limited Data Set",
+  url: "https://www.hhs.gov/hipaa/for-professionals/compliance-enforcement/audit/protocol/index.html",
+  license: "United States government guidance; cited and paraphrased",
+  use: "Supports the limited-data-set requirements for an eligible purpose, appropriate recipient, and data use agreement.",
+};
+
 export const topics: TopicDefinition[] = [
   { id: 1, slug: "informatics-practice", title: "Informatics in Pathology Practice", objectives: ["1.1", "1.2", "1.3", "1.4"], summary: "Roles, stewardship, data literacy, and technical foundations." },
   { id: 2, slug: "data-science", title: "Data Science", objectives: ["2.1", "2.2", "2.3", "2.4"], summary: "Data quality, statistics, scale, and responsible AI." },
@@ -128,7 +142,7 @@ const manifests: ManifestSeed[] = [
   { slug: "model-under-pressure", title: "Model Under Pressure", topic: 2, pierObjectives: ["2.4"], durationMinutes: 26, difficulty: "applied", interactionKinds: ["model-verification", "monitoring"], apiSessions: [6], hasLocalPracticum: false },
   { slug: "server-behind-the-analyzer", title: "The Server Behind the Analyzer", topic: 3, pierObjectives: ["3.1", "3.2"], durationMinutes: 12, difficulty: "applied", interactionKinds: ["evidence-review", "system-trace", "guided-decision", "regression-checks"], apiSessions: [8], hasLocalPracticum: true },
   { slug: "twelve-hours-offline", title: "Twelve Hours Offline", topic: 3, pierObjectives: ["3.1", "3.3"], durationMinutes: 12, difficulty: "applied", interactionKinds: ["staged-tabletop", "evidence-review", "system-trace", "guided-decision", "regression-checks"], apiSessions: [8, 9], hasLocalPracticum: true, pilot: "downtime" },
-  { slug: "not-anonymous-enough", title: "Not Anonymous Enough", topic: 3, pierObjectives: ["3.2", "3.4"], durationMinutes: 12, difficulty: "applied", interactionKinds: ["evidence-review", "system-trace", "guided-decision", "regression-checks"], apiSessions: [8], hasLocalPracticum: true },
+  { slug: "not-anonymous-enough", title: "Not Anonymous Enough", topic: 3, pierObjectives: ["3.2", "3.4"], durationMinutes: 25, difficulty: "applied", interactionKinds: ["reidentification-attempt", "redaction-workbench", "release-decision"], apiSessions: [8], hasLocalPracticum: true, experience: "privacy" },
   { slug: "where-is-the-specimen", title: "Where Is the Specimen?", topic: 4, pierObjectives: ["4.1", "4.2", "4.4"], durationMinutes: 22, difficulty: "applied", interactionKinds: ["audit-trail", "routing-repair"], apiSessions: [3], hasLocalPracticum: true },
   { slug: "autoverification-at-the-edge", title: "Autoverification at the Edge", topic: 4, pierObjectives: ["4.3", "4.5"], durationMinutes: 25, difficulty: "applied", interactionKinds: ["rule-builder", "regression"], apiSessions: [3, 9], hasLocalPracticum: true },
   { slug: "reflex-rule-ripple-effect", title: "The Reflex Rule Ripple Effect", topic: 4, pierObjectives: ["4.3", "4.5"], durationMinutes: 23, difficulty: "applied", interactionKinds: ["rule-map", "utilization"], apiSessions: [3, 7, 9], hasLocalPracticum: false },
@@ -271,7 +285,7 @@ export const lessons: LessonDefinition[] = manifests.map((manifest, index) => {
         validationCases: item.tests.map(([name, note, strict]) => ({ name, note, passingRepairs: strict === false ? ["validated"] : ["validated", "narrow"] })),
       };
   return {
-    manifest: { ...manifest, id: String(index + 1).padStart(2, "0"), sources: [pierSource, apiSource(manifest.apiSessions), ...(manifest.slug === "steward-at-morning-huddle" ? [stewardshipSource, capInterfaceSource] : []), ...(manifest.slug === "can-we-trust-this-report" ? [governmentDataQualitySource] : []), ...(manifest.slug === "can-we-accept-this-lot" ? [clsiEp26Source, nistStatisticsSource] : [])] },
+    manifest: { ...manifest, id: String(index + 1).padStart(2, "0"), sources: [pierSource, apiSource(manifest.apiSessions), ...(manifest.slug === "steward-at-morning-huddle" ? [stewardshipSource, capInterfaceSource] : []), ...(manifest.slug === "can-we-trust-this-report" ? [governmentDataQualitySource] : []), ...(manifest.slug === "can-we-accept-this-lot" ? [clsiEp26Source, nistStatisticsSource] : []), ...(manifest.slug === "not-anonymous-enough" ? [hhsDeidentificationSource, hhsLimitedDataSetSource] : [])] },
     artifactTitle: item.artifact,
     evidence: item.evidence.map(([label, value, tone]) => ({ label, value, tone: tone ?? "neutral" })),
     trace: item.trace.map(([system, role, sees, implication]) => ({ system, role, sees, implication })),

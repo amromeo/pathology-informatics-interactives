@@ -7,6 +7,7 @@ import { WsiValidationLab } from "../src/components/PilotLabs";
 import { ResultJourneyExperience } from "../src/components/ResultJourneyExperience";
 import { DataQualityExperience } from "../src/components/DataQualityExperience";
 import { StatisticsExperience } from "../src/components/StatisticsExperience";
+import { PrivacyExperience } from "../src/components/PrivacyExperience";
 import { lessons } from "../src/data/curriculum";
 
 test("shared lesson controls expose semantic groups and labels", () => {
@@ -63,6 +64,22 @@ test("the reagent-lot lesson exposes tables, chart alternatives, and labeled cho
   assert.match(html, /aria-label="P-value interpretation choices"/);
   assert.match(html, /aria-label="Confidence-interval interpretation choices"/);
   assert.match(html, /aria-label="Reagent-lot decision choices"/);
+  assert.match(html, /Reset lesson interactions/);
+  assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
+});
+
+test("the privacy workbench exposes native filters, semantic tables, and live results", () => {
+  const lesson = lessons.find((item) => item.manifest.slug === "not-anonymous-enough")!;
+  const html = renderToStaticMarkup(<PrivacyExperience lesson={lesson}/>);
+  assert.match(html, /<caption>Synthetic educational research export — matching records<\/caption>/);
+  assert.match(html, /<th scope="col">Record<\/th>/);
+  assert.match(html, /<th scope="row">NR-001<\/th>/);
+  assert.match(html, /<select>/);
+  assert.match(html, /<legend>Transform displayed fields<\/legend>/);
+  assert.match(html, /type="checkbox"/);
+  assert.match(html, /type="radio"/);
+  assert.match(html, /aria-live="polite"/);
+  assert.match(html, /Run release checks/);
   assert.match(html, /Reset lesson interactions/);
   assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
 });
