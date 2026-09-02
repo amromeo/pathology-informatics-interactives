@@ -1,6 +1,7 @@
 import { useEffect, useState, type ComponentType, type ReactNode } from "react";
 import { lessonContent } from "./content";
 import { DataQualityExperience } from "./components/DataQualityExperience";
+import { DowntimeExperience } from "./components/DowntimeExperience";
 import { GenericExperience } from "./components/GenericExperience";
 import { OrientationExperience } from "./components/OrientationExperience";
 import { PilotLab } from "./components/PilotLabs";
@@ -29,6 +30,7 @@ const experienceRegistry: Partial<Record<LessonExperience, (props: ExperienceRen
   "data-quality": ({ Concepts, Bridge, Comparison, Investigation, onAttempt }) => <DataQualityExperience Concepts={Concepts} Bridge={Bridge} Comparison={Comparison} Investigation={Investigation} onAttempt={onAttempt}/>,
   statistics: ({ Concepts, Bridge, Comparison, Investigation, onAttempt }) => <StatisticsExperience Concepts={Concepts} Bridge={Bridge} Comparison={Comparison} Investigation={Investigation} onAttempt={onAttempt}/>,
   privacy: ({ lesson, Concepts, onAttempt }) => <PrivacyExperience lesson={lesson} Concepts={Concepts} onAttempt={onAttempt}/>,
+  downtime: ({ lesson, Concepts, onAttempt }) => <DowntimeExperience lesson={lesson} Concepts={Concepts} onAttempt={onAttempt}/>,
 };
 
 const useDocumentTitle = (title: string) => {
@@ -75,7 +77,7 @@ function LessonPage({ slug }: { slug: string }) {
   const topic = topics.find((item) => item.id === lesson.manifest.topic)!;
   const experience = lesson.manifest.experience ?? "generic";
   const renderSpecializedExperience = experienceRegistry[experience];
-  const allowsEarlyDebrief = ["orientation", "result-journey", "data-quality", "statistics", "privacy"].includes(experience);
+  const allowsEarlyDebrief = ["orientation", "result-journey", "data-quality", "statistics", "privacy", "downtime"].includes(experience);
   return (
     <main className="lesson-main">
       <nav className="breadcrumbs" aria-label="Breadcrumb"><a href={href()}>Curriculum</a><span>→</span><a href={href(`topics/${topic.slug}/`)}>Topic {topic.id}</a><span>→</span><span>Lesson {lesson.manifest.id}</span></nav>

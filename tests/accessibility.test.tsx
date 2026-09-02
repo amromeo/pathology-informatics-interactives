@@ -8,6 +8,7 @@ import { ResultJourneyExperience } from "../src/components/ResultJourneyExperien
 import { DataQualityExperience } from "../src/components/DataQualityExperience";
 import { StatisticsExperience } from "../src/components/StatisticsExperience";
 import { PrivacyExperience } from "../src/components/PrivacyExperience";
+import { DowntimeExperience } from "../src/components/DowntimeExperience";
 import { lessons } from "../src/data/curriculum";
 
 test("shared lesson controls expose semantic groups and labels", () => {
@@ -80,6 +81,23 @@ test("the privacy workbench exposes native filters, semantic tables, and live re
   assert.match(html, /type="radio"/);
   assert.match(html, /aria-live="polite"/);
   assert.match(html, /Run release checks/);
+  assert.match(html, /Reset lesson interactions/);
+  assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
+});
+
+test("the downtime tabletop exposes phased choices and semantic reconciliation controls", () => {
+  const lesson = lessons.find((item) => item.manifest.slug === "twelve-hours-offline")!;
+  const html = renderToStaticMarkup(<DowntimeExperience lesson={lesson}/>);
+  assert.match(html, /aria-label="Downtime phases"/);
+  assert.match(html, /<legend>How will staff assign temporary patient identifiers\?<\/legend>/);
+  assert.match(html, /type="radio"/);
+  assert.match(html, /<caption>Synthetic paper records compared with the restored laboratory information system<\/caption>/);
+  assert.match(html, /<th scope="col">Temporary ID<\/th>/);
+  assert.match(html, /<th scope="row">DT-201<\/th>/);
+  assert.match(html, /aria-label="Medical record number for DT-201"/);
+  assert.match(html, /<legend>Recovery actions<\/legend>/);
+  assert.match(html, /aria-live="polite"/);
+  assert.match(html, /Check reconciliation/);
   assert.match(html, /Reset lesson interactions/);
   assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
 });

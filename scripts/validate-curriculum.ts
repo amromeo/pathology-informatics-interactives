@@ -91,6 +91,9 @@ for (const lesson of lessons) {
   if (manifest.experience === "privacy" && !existsSync(resolve(folder, "interaction.ts"))) {
     fail(`${manifest.slug} is missing interaction.ts`);
   }
+  if (manifest.experience === "downtime" && !existsSync(resolve(folder, "interaction.ts"))) {
+    fail(`${manifest.slug} is missing interaction.ts`);
+  }
 
   const marker = `Lesson slug: \`${manifest.slug}\``;
   const sectionStart = harrisonPlan.indexOf(marker);
@@ -124,6 +127,6 @@ for (const plannedLesson of publishedTopic2Plans) {
 if (publishedTopic2Plans.length !== 2) fail("Completed Topic 2 Lessons 3 and 4 must be published from the staged plan");
 
 const pilots = lessons.filter((lesson) => lesson.manifest.pilot);
-if (pilots.length !== 4) fail(`Expected four pilot interaction patterns; found ${pilots.length}`);
+if (pilots.length !== 3) fail(`Expected three remaining pilot interaction patterns; found ${pilots.length}`);
 
 console.log(`Validated ${lessons.length} lessons, ${covered.size}/${expected.size} objectives, ${requiredTopic2Subtopics.size} staged Topic 2 subtopics, ${pilots.length} pilot patterns, all required MDX files, and 23 Harrison slide plans.`);

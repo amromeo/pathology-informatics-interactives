@@ -19,10 +19,10 @@ test("unsafe shortcuts fail at least one validation case", () => {
   }
 });
 
-test("all four pilot interaction patterns are present", () => {
+test("the three remaining pilot interaction patterns are present", () => {
   assert.deepEqual(
     lessons.map((lesson) => lesson.manifest.pilot).filter(Boolean).sort(),
-    ["data-quality", "digital-pathology", "downtime", "interoperability"],
+    ["data-quality", "digital-pathology", "interoperability"],
   );
 });
 
