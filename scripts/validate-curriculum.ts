@@ -94,6 +94,9 @@ for (const lesson of lessons) {
   if (manifest.experience === "downtime" && !existsSync(resolve(folder, "interaction.ts"))) {
     fail(`${manifest.slug} is missing interaction.ts`);
   }
+  if (manifest.experience === "security-review" && !existsSync(resolve(folder, "interaction.ts"))) {
+    fail(`${manifest.slug} is missing interaction.ts`);
+  }
 
   const marker = `Lesson slug: \`${manifest.slug}\``;
   const sectionStart = harrisonPlan.indexOf(marker);

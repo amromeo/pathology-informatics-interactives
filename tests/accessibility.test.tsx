@@ -9,6 +9,7 @@ import { DataQualityExperience } from "../src/components/DataQualityExperience";
 import { StatisticsExperience } from "../src/components/StatisticsExperience";
 import { PrivacyExperience } from "../src/components/PrivacyExperience";
 import { DowntimeExperience } from "../src/components/DowntimeExperience";
+import { SecurityReviewExperience } from "../src/components/SecurityReviewExperience";
 import { lessons } from "../src/data/curriculum";
 
 test("shared lesson controls expose semantic groups and labels", () => {
@@ -98,6 +99,21 @@ test("the downtime tabletop exposes phased choices and semantic reconciliation c
   assert.match(html, /<legend>Recovery actions<\/legend>/);
   assert.match(html, /aria-live="polite"/);
   assert.match(html, /Check reconciliation/);
+  assert.match(html, /Reset lesson interactions/);
+  assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
+});
+
+test("the security review exposes native threat mapping and portfolio controls", () => {
+  const lesson = lessons.find((item) => item.manifest.slug === "server-behind-the-analyzer")!;
+  const html = renderToStaticMarkup(<SecurityReviewExperience lesson={lesson}/>);
+  assert.match(html, /aria-label="Security review areas"/);
+  assert.match(html, /<legend>Properties threatened<\/legend>/);
+  assert.match(html, /type="checkbox"/);
+  assert.match(html, /<progress value="0" max="15">/);
+  assert.match(html, /<strong>0 \/ 15<\/strong>/);
+  assert.match(html, /<strong>0 \/ 11<\/strong>/);
+  assert.match(html, /Run stress test/);
+  assert.match(html, /aria-live="polite"/);
   assert.match(html, /Reset lesson interactions/);
   assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
 });

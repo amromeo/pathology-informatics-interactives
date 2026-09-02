@@ -8,6 +8,7 @@ export type LessonExperience =
   | "statistics"
   | "privacy"
   | "downtime"
+  | "security-review"
   | "multimodal"
   | "ai-foundations"
   | "ai-deployment";

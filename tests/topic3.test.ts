@@ -83,7 +83,7 @@ test("Topic 3 failure results explain the laboratory consequence", () => {
 
 test("Topic 3 metadata names only the interactions currently implemented", () => {
   const expectedMetadata: Record<string, { duration: number; interactionKinds: string[]; experience?: string }> = {
-    "server-behind-the-analyzer": { duration: 12, interactionKinds: ["evidence-review", "system-trace", "guided-decision", "regression-checks"] },
+    "server-behind-the-analyzer": { duration: 25, interactionKinds: ["threat-model", "control-builder", "stress-test"], experience: "security-review" },
     "twelve-hours-offline": { duration: 30, interactionKinds: ["tabletop", "timeline", "reconciliation"], experience: "downtime" },
     "not-anonymous-enough": { duration: 25, interactionKinds: ["reidentification-attempt", "redaction-workbench", "release-decision"], experience: "privacy" },
   };
