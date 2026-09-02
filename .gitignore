@@ -1,5 +1,6 @@
 node_modules/
 src/generated/lesson3Report.ts
+src/generated/lesson4LotComparison.ts
 pages-dist/
 .vite/
 *.log

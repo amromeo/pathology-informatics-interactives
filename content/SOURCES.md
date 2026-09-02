@@ -51,6 +51,24 @@ sessions and slide ranges that should shape each case and learner decision.
   lesson paraphrases the ideas, explicitly labels the PIER–Harrison pairs as
   related rather than identical, and uses an original surgical pathology case.
 
+- **CLSI EP26 — User Evaluation of Acceptability of a Reagent Lot Change.**
+  Used in Lesson 4 to support comparison with patient samples, acceptance
+  criteria established before testing, and medical review of a reagent-lot
+  change. The interactive case is an original teaching example and is not a
+  complete EP26 procedure.
+- Source: <https://clsi.org/shop/standards/ep26/>
+
+- **NIST/SEMATECH e-Handbook of Statistical Methods.** Used in Lesson 4 for
+  paired observations, descriptive statistics, confidence intervals,
+  hypothesis testing, and the selection of common statistical tests. The
+  explanations and all numerical examples are independently written.
+- Source: <https://www.itl.nist.gov/div898/handbook/>
+
+- **Harrison/API sessions 0 and 2** — Slides 10 and 18–20 in session 0 and
+  slides 6, 12, and 24–26 in session 2 provide background on the source and use
+  of the paired data in Lesson 4. They are not presented as the source of the
+  lesson's statistical methods.
+
 
 - **Henricks WH, Wilkerson ML, Castellani WJ, Whitsitt MS, Sinard JH — “Pathologists as Stewards of Laboratory Information.”** Used in Lesson 1 to explain why pathology remains responsible for the integrity and effective use of laboratory information even when it is displayed or used in systems outside the laboratory's direct administrative control. The article is cited and summarized; its wording is not reproduced.
 - Source: <https://pubmed.ncbi.nlm.nih.gov/25724030/>

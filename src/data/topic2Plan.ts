@@ -16,7 +16,7 @@ const claim = (id: string, objective: "2.1" | "2.2" | "2.3" | "2.4", summary: st
   primary: true,
 });
 
-// Lessons 4–7 remain an internal curriculum plan. They are intentionally not
+// Lessons 5–7 remain an internal curriculum plan. They are intentionally not
 // added to the public lesson registry until their complete packages are built.
 export const topic2CurriculumPlan: PlannedTopic2Lesson[] = [
   {
@@ -35,7 +35,7 @@ export const topic2CurriculumPlan: PlannedTopic2Lesson[] = [
     proposedId: 4,
     slug: "can-we-accept-this-lot",
     title: "Can We Accept This Lot?",
-    published: false,
+    published: true,
     claims: [
       claim("2.2-central-tendency", "2.2", "Mean and median", "Compare the mean and median of paired troponin lot differences and explain what each shows."),
       claim("2.2-dispersion", "2.2", "Standard deviation and distributions", "Inspect the spread, shape, and outliers in a paired reagent-lot comparison."),

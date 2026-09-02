@@ -83,6 +83,11 @@ for (const lesson of lessons) {
       if (!existsSync(resolve(folder, file))) fail(`${manifest.slug} is missing ${file}`);
     }
   }
+  if (manifest.experience === "statistics") {
+    for (const file of ["concepts.mdx", "bridge.mdx", "comparison.mdx", "investigation.mdx", "interaction.ts", "lot-comparison.csv"]) {
+      if (!existsSync(resolve(folder, file))) fail(`${manifest.slug} is missing ${file}`);
+    }
+  }
 
   const marker = `Lesson slug: \`${manifest.slug}\``;
   const sectionStart = harrisonPlan.indexOf(marker);
@@ -105,13 +110,15 @@ for (const subtopic of requiredTopic2Subtopics) {
   }
   if (!claim.learnerAction.trim()) fail(`Topic 2 subtopic ${subtopic} lacks an observable learner action`);
 }
-const activeTopic2Plan = topic2CurriculumPlan.find((lesson) => lesson.slug === "can-we-trust-this-report");
-const activeTopic2Manifest = lessons.find((lesson) => lesson.manifest.slug === "can-we-trust-this-report")?.manifest;
-if (!activeTopic2Plan || !activeTopic2Manifest) fail("The active Lesson 3 Topic 2 plan is missing");
-if (JSON.stringify(activeTopic2Plan!.claims.map((claim) => claim.id)) !== JSON.stringify((activeTopic2Manifest!.pierCoverage ?? []).map((claim) => claim.id))) {
-  fail("The active Lesson 3 manifest does not agree with the staged Topic 2 plan");
+const publishedTopic2Plans = topic2CurriculumPlan.filter((lesson) => lesson.published);
+for (const plannedLesson of publishedTopic2Plans) {
+  const manifest = lessons.find((lesson) => lesson.manifest.slug === plannedLesson.slug)?.manifest;
+  if (!manifest) fail(`Published Topic 2 lesson ${plannedLesson.slug} is missing from the registry`);
+  if (JSON.stringify(plannedLesson.claims.map((claim) => claim.id)) !== JSON.stringify((manifest!.pierCoverage ?? []).map((claim) => claim.id))) {
+    fail(`${plannedLesson.slug} manifest does not agree with the staged Topic 2 plan`);
+  }
 }
-if (topic2CurriculumPlan.filter((lesson) => lesson.published).length !== 1) fail("Only completed Lesson 3 may be published from the staged Topic 2 plan");
+if (publishedTopic2Plans.length !== 2) fail("Completed Topic 2 Lessons 3 and 4 must be published from the staged plan");
 
 const pilots = lessons.filter((lesson) => lesson.manifest.pilot);
 if (pilots.length !== 4) fail(`Expected four pilot interaction patterns; found ${pilots.length}`);

@@ -73,3 +73,19 @@ test("lesson 3 covers each active PIER 2.1 subtopic with an observable action", 
   ]);
   assert.ok(lesson.manifest.pierCoverage?.every((claim) => claim.primary && claim.learnerAction.length > 20));
 });
+
+test("lesson 4 covers every PIER 2.2 statistics element with an observable action", () => {
+  const lesson = lessons.find((item) => item.manifest.slug === "can-we-accept-this-lot");
+  assert.ok(lesson);
+  assert.equal(lesson.manifest.title, "Can We Accept This Lot?");
+  assert.equal(lesson.manifest.experience, "statistics");
+  assert.deepEqual(lesson.manifest.pierObjectives, ["2.2"]);
+  assert.deepEqual(lesson.manifest.pierCoverage?.map((claim) => claim.id), [
+    "2.2-central-tendency",
+    "2.2-dispersion",
+    "2.2-confidence-intervals",
+    "2.2-hypothesis-testing",
+    "2.2-test-selection",
+  ]);
+  assert.ok(lesson.manifest.pierCoverage?.every((claim) => claim.primary && claim.learnerAction.length > 20));
+});

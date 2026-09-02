@@ -42,12 +42,12 @@ Lesson slug: `can-we-trust-this-report`
 - **Harrison plan:** Session 0, slides 10 and 15–20; Session 2, slides 5–12 and 24–26.
 - **Build into the lesson:** Start with structured and unstructured representation, then connect PIER's seven dimensions to Harrison's related terms without treating them as exact synonyms. Trace the accession time from the source document and LIS field through the export and spreadsheet to the quality meeting. The learner must identify the omitted cutover cases, inspect all 455 rows, and choose a fair comparison before the laboratory presents the report.
 
-### 04 — Is the Shift Real?
+### 04 — Can We Accept This Lot?
 
-Lesson slug: `is-the-shift-real`
+Lesson slug: `can-we-accept-this-lot`
 
 - **Harrison plan:** Session 0, slides 10 and 18–20; Session 2, slides 6, 12, and 24–26.
-- **Build into the lesson:** Use the Harrison material to establish the source, quality, and analytic context of the dataset. Statistical summaries, confidence intervals, and test selection require PIER's statistics references in addition to Harrison; do not imply that the database slides alone teach the statistical objective.
+- **Build into the lesson:** Use the Harrison material only to establish where the paired results came from and how the worksheet is used. The statistical teaching comes from PIER Topic 2.2, the NIST statistical handbook, and reagent-lot guidance. Learners inspect paired troponin results, describe the distribution, interpret the confidence interval and p-value against a limit set before testing, choose common statistical tests, and make a laboratory lot decision.
 
 ### 05 — Five Vs in the Slide Archive
 

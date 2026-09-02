@@ -6,6 +6,7 @@ import { GenericExperience } from "../src/components/GenericExperience";
 import { WsiValidationLab } from "../src/components/PilotLabs";
 import { ResultJourneyExperience } from "../src/components/ResultJourneyExperience";
 import { DataQualityExperience } from "../src/components/DataQualityExperience";
+import { StatisticsExperience } from "../src/components/StatisticsExperience";
 import { lessons } from "../src/data/curriculum";
 
 test("shared lesson controls expose semantic groups and labels", () => {
@@ -47,6 +48,21 @@ test("the surgical pathology report has labeled controls and a semantic table", 
   assert.match(html, /Download editable CSV/);
   assert.match(html, /role="img" aria-labelledby="tat-chart-title tat-chart-description"/);
   assert.match(html, /<caption>Weekly mean and median TAT<\/caption>/);
+  assert.match(html, /Reset lesson interactions/);
+  assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
+});
+
+test("the reagent-lot lesson exposes tables, chart alternatives, and labeled choices", () => {
+  const html = renderToStaticMarkup(<StatisticsExperience/>);
+  assert.match(html, /<caption>Paired current- and new-lot troponin results<\/caption>/);
+  assert.match(html, /Download editable CSV/);
+  assert.match(html, /role="img" aria-labelledby="difference-chart-title difference-chart-description"/);
+  assert.match(html, /<caption>Values shown in the paired-difference plot<\/caption>/);
+  assert.match(html, /role="img" aria-labelledby="ci-chart-title ci-chart-description"/);
+  assert.match(html, /aria-label="Paired-difference pattern choices"/);
+  assert.match(html, /aria-label="P-value interpretation choices"/);
+  assert.match(html, /aria-label="Confidence-interval interpretation choices"/);
+  assert.match(html, /aria-label="Reagent-lot decision choices"/);
   assert.match(html, /Reset lesson interactions/);
   assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
 });
