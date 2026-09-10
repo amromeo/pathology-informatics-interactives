@@ -8,6 +8,7 @@ import { PilotLab } from "./components/PilotLabs";
 import { PrivacyExperience } from "./components/PrivacyExperience";
 import { ResultJourneyExperience } from "./components/ResultJourneyExperience";
 import { SecurityReviewExperience } from "./components/SecurityReviewExperience";
+import { SpecimenRoutingExperience } from "./components/SpecimenRoutingExperience";
 import { StatisticsExperience } from "./components/StatisticsExperience";
 import { SiteChrome, href } from "./components/SiteChrome";
 import { lessonBySlug, lessons, PIER_URL, API_URL, topicBySlug, topics } from "./data/curriculum";
@@ -26,6 +27,7 @@ type ExperienceRenderProps = {
 };
 
 const experienceRegistry: Partial<Record<LessonExperience, (props: ExperienceRenderProps) => ReactNode>> = {
+  "specimen-routing": ({ Concepts, onAttempt }) => <SpecimenRoutingExperience Concepts={Concepts} onAttempt={onAttempt}/>,
   orientation: ({ onAttempt }) => <OrientationExperience onAttempt={onAttempt}/>,
   "result-journey": ({ Concepts, Downtime, onAttempt }) => <ResultJourneyExperience Concepts={Concepts} Downtime={Downtime} onAttempt={onAttempt}/>,
   "data-quality": ({ Concepts, Bridge, Comparison, Investigation, onAttempt }) => <DataQualityExperience Concepts={Concepts} Bridge={Bridge} Comparison={Comparison} Investigation={Investigation} onAttempt={onAttempt}/>,
@@ -79,7 +81,7 @@ function LessonPage({ slug }: { slug: string }) {
   const topic = topics.find((item) => item.id === lesson.manifest.topic)!;
   const experience = lesson.manifest.experience ?? "generic";
   const renderSpecializedExperience = experienceRegistry[experience];
-  const allowsEarlyDebrief = ["orientation", "result-journey", "data-quality", "statistics", "privacy", "downtime", "security-review"].includes(experience);
+  const allowsEarlyDebrief = ["orientation", "result-journey", "data-quality", "statistics", "privacy", "downtime", "security-review", "specimen-routing"].includes(experience);
   return (
     <main className="lesson-main">
       <nav className="breadcrumbs" aria-label="Breadcrumb"><a href={href()}>Curriculum</a><span>→</span><a href={href(`topics/${topic.slug}/`)}>Topic {topic.id}</a><span>→</span><span>Lesson {lesson.manifest.id}</span></nav>

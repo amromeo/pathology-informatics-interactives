@@ -1,3 +1,21 @@
 # Faculty guide: Where Is the Specimen?
 
 Do not let learners relabel or recollect without evidence of an identification failure. The case deliberately separates positive identification from routing logic.
+
+Ask learners to open all four events and distinguish a person documenting receipt from a routing service assigning work. Accessioning is the last documented physical location; the current location remains unknown until staff confirm it. Ask what evidence would establish a subsequent handoff.
+
+Replay the original configuration first: three of five routes pass. SP-EX incorrectly goes to cytology, and an unmatched code goes to the gross room. Change SP-EX alone and rerun to show the remaining exception failure. The complete repair sends SP-EX to the gross room and holds unmatched codes for accessioning review, preserving the other three entries.
+
+Try routing every procedure to the gross room. Cytology and frozen-section checks fail even though the reported excision is corrected. Discuss why adding a new dictionary entry requires a test of that entry, plus neighboring routes, rather than only repeating existing examples.
+
+Select the electronic-receipt shortcut after a passing replay. The final review still fails because it would record a handoff that has not occurred. The approved recovery plan requires accessioning and receiving staff to locate, verify, and document the real container. The LIS team implements the configuration; the laboratory supervisor and pathologist review its clinical meaning and authorize use under local procedures.
+
+## Assess the explanation as well as the selections
+
+Ask the learner to explain why a valid barcode can retrieve the right case while a dictionary lookup assigns it incorrectly. A complete explanation identifies the patient/part check, SP-EX as the input to routing, and revision 17 as the configuration that supplies the destination. “The LIS made an error” is too general to guide a repair.
+
+Ask what the assistant can conclude at 08:40. The answer should distinguish the last documented receipt from the current physical location. Accept possible explanations for the missing handoff, but require the learner to name the evidence needed to choose among them. The case does not establish that the container was physically delivered to cytology.
+
+For the change review, ask the learner to describe expected and observed destinations for all five test cases. A strong answer explains why the unknown-code test adds information beyond the reported excision and why a corrected routing table does not automatically update a previously assigned worklist. In a real LIS, the analyst must verify how configuration changes affect existing cases before selecting a recovery method.
+
+Close with a short handoff to the supervisor: affected case and procedure, observed configuration, last documented location, proposed repair, test results, and outstanding physical recovery. Ask who will confirm receipt and how the original audit trail will be preserved.

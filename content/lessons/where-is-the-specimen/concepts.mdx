@@ -1,0 +1,66 @@
+### A worklist is not a location record
+
+The **accession** connects the patient, requested examination, specimen, and parts
+under one laboratory case number. Here S26-1042 is the case and C-1042-A identifies
+its container. A barcode scan retrieves that record; it does not decide the
+clinical meaning of the procedure code.
+
+One accession may contain several separately labeled parts. Matching only the
+patient is therefore insufficient: staff also compare the accession, part, and
+requested examination. In this case, the patient and part agree at receipt, so
+there is no evidence that changing the barcode or creating a replacement
+accession would solve the worklist problem.
+
+A **procedure dictionary** stores configuration for each examination. The routing
+process reads its destination and adds the case to a **worklist**, the electronic
+list a team uses to find assigned work. A receiving scan records a different fact:
+who documented physical receipt, where, and when. The **audit trail** keeps these
+events distinguishable.
+
+For this case, the sequence is: staff scan C-1042-A, the LIS retrieves S26-1042
+part A, and the routing process reads the stored SP-EX procedure code. It then
+looks up the destination in revision 17 of the procedure dictionary. This
+lookup succeeds technically even though its configured destination is wrong
+for a tissue excision. A valid code is not evidence that the associated
+configuration has the intended clinical meaning.
+
+### Compare three different questions
+
+1. **Which patient and part does the container represent?** Compare the requisition
+   with the accessioning identity check. Agreement supports the identity, but
+   does not tell you where the container went after receipt.
+2. **Which team was assigned the case?** Inspect the procedure entry and worklist
+   assignment event. These establish the electronic destination, but do not tell
+   you whether that team received the container.
+3. **Where was receipt last documented?** Find the named receiving scan with its
+   time and workstation. This establishes the last recorded location, but not
+   necessarily the present location if no later handoff was recorded.
+
+A missing scan is an information gap. It may reflect an undocumented transfer,
+a container still at accessioning, or another handling problem. Contacting the
+staff involved and checking the container resolves that uncertainty. Inferring
+a location from the worklist does not.
+
+### Repair a rule, then challenge it
+
+The cards below show the supervisor's approved routing plan for this synthetic
+laboratory beside the editable configuration. Change individual destinations,
+then replay the reported case and neighboring procedures. An unrecognized code
+must remain available for accessioning review rather than being silently assigned
+to a work area.
+
+Start by replaying the unchanged configuration. Then fix only SP-EX and replay
+again. The additional unknown-code case asks what should happen when an incoming
+procedure has no approved entry. Review staff must clarify that examination and
+document the destination; a default gross-room assignment would conceal the gap.
+
+The neighboring tests are **regression checks**: they ask whether a correction
+changed behavior that was already correct. Cytology and intraoperative specimens
+need their own work areas in this laboratory. Moving every route to the gross
+room would correct the reported excision while disrupting those workflows.
+
+Configuration changes apply to future routing decisions in this simulation. They
+do not relocate the existing container or reconstruct an unrecorded handoff.
+The LIS analyst documents the proposed change and test results for laboratory
+review; accessioning and receiving staff separately correct the existing worklist
+assignment under the approved procedure and document the physical handoff.

@@ -903,3 +903,30 @@ h3 { line-height: 1.2; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+
+/* Topic 4 specimen audit and routing workbench. */
+.specimen-event-nav, .specimen-route-grid, .specimen-results, .specimen-question-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 24px 0; }
+.specimen-event-nav button { display: flex; gap: 18px; align-items: center; padding: 18px; border: 1px solid var(--line); background: #f7f7f0; color: #17312d; text-align: left; cursor: pointer; }
+.specimen-event-nav button[aria-pressed="true"] { background: #dcece5; border-color: #226a5d; }
+.specimen-event-record > div, .specimen-annotation { padding: 22px; }
+.specimen-record-code { font-family: monospace; overflow-wrap: anywhere; }
+.specimen-annotation { border-left: 4px solid #226a5d; background: #edf2ec; }
+.specimen-question-grid fieldset, .specimen-recovery { min-width: 0; border: 1px solid var(--line); padding: 20px; }
+.specimen-question-grid legend, .specimen-recovery legend { font-weight: 700; padding: 0 8px; }
+.specimen-question-grid label, .specimen-recovery label { display: flex; align-items: flex-start; gap: 12px; padding: 15px 0; line-height: 1.6; cursor: pointer; }
+.specimen-question-grid input, .specimen-recovery input { flex: 0 0 auto; margin-top: 6px; }
+.specimen-route-grid article, .specimen-results article { min-width: 0; padding: 22px; border: 1px solid var(--line); background: #fafaf6; }
+.specimen-route-grid h3, .specimen-results h3 { margin-top: 0; }
+.specimen-route-grid label, .specimen-fallback { display: grid; gap: 10px; font-weight: 700; }
+.specimen-route-grid select, .specimen-fallback select { width: 100%; min-width: 0; font: inherit; font-weight: 400; padding: 12px 8px; border: 1px solid #9caaa3; background: white; }
+.specimen-fallback { max-width: 550px; margin: 24px 0; }
+.specimen-results .passed { border-top: 4px solid #226a5d; }
+.specimen-results .failed { border-top: 4px solid #a33b35; }
+.specimen-pass { color: #226a5d; }
+.specimen-fail { color: #a33b35; }
+.specimen-routing-experience :focus-visible { outline: 3px solid #bb7b12; outline-offset: 3px; }
+@media (max-width: 700px) {
+  .specimen-event-nav, .specimen-route-grid, .specimen-results, .specimen-question-grid { grid-template-columns: 1fr; }
+  .specimen-event-record > div, .specimen-route-grid article, .specimen-question-grid fieldset, .specimen-recovery { padding: 16px; }
+  .specimen-routing-experience .primary-button { width: 100%; }
+}

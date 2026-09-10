@@ -62,3 +62,10 @@ on the communication decision, and security coverage includes partial
 mitigation. Run `npm test` and `npm run build:pages` after interaction edits.
 Desktop and phone review captures and the verification record are in
 `review/topic3/`.
+
+Topic 4's `where-is-the-specimen` lesson now uses a dedicated audit-trail and
+routing workbench. Edit `concepts.mdx` for the LIS explanation and `interaction.ts`
+for timestamped records, procedure entries, routing cases, and feedback. The
+five-case replay computes destinations from the learner's configuration; changing
+a route clears its prior test result. The remaining Topic 4 conversion plan is
+in `content/TOPIC4-BUILDOUT.md`.

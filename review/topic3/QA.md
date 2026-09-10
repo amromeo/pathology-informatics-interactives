@@ -38,3 +38,7 @@ JavaScript chunk advisory; this is not a build failure.
 Scope: Chromium desktop and responsive-width review, not physical-device or
 screen-reader certification. Lesson 2 captures outside this folder predate this
 review and were not included in the Topic 3 change.
+
+Publication verified: commit a40d33b, Pages run 34425084509 succeeded. The three
+lesson routes render their bespoke controls in the public browser. Home, lesson
+and faculty routes, and the referenced JavaScript/CSS assets returned HTTP 200.
