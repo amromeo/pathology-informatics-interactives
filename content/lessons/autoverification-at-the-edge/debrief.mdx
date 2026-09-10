@@ -2,6 +2,22 @@
 
 **Informatics principle:** Automated release rules require explicit boundaries and regression testing.
 
-The rule checked an absolute change but omitted the clinically important relative delta. The result therefore bypassed intended review even though the analyzer and QC were functioning.
+AV-01 had a 36 ng/L absolute difference and a 300% relative difference. The
+absolute-only configuration released it because 36 is below 50. The approved
+relative branch requires at least 200% and at least 20 ng/L; both are met.
+Combining the branches with OR restores the intended hold. Combining them with
+AND still permits the reported result to release.
+
+Compare that result with the 2-to-8 ng/L record. It has the same percentage change
+but does not meet the 20 ng/L minimum. Removing that minimum causes an unintended
+hold. Missing history, older or different-assay results, QC failure, instrument
+flags, and result status each need their own decision; none can be inferred from
+the delta alone.
+
+The replay demonstrates the configured behavior against the laboratory's policy.
+It does not determine whether a held troponin represents disease, an analytical
+problem, or a specimen problem. Staff investigate holds and avoid delaying urgent
+communication. A stable higher result may release under this policy without being
+clinically normal.
 
 The LIS or middleware analyst implements the rule. Technical and medical leadership approve criteria, validation, monitoring, and change control.

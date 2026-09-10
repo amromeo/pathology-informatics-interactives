@@ -930,3 +930,45 @@ h3 { line-height: 1.2; }
   .specimen-event-record > div, .specimen-route-grid article, .specimen-question-grid fieldset, .specimen-recovery { padding: 16px; }
   .specimen-routing-experience .primary-button { width: 100%; }
 }
+
+/* Release and reflex rule lessons. */
+.rule-controls { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; border: 1px solid var(--line); padding: 24px; margin: 24px 0; min-width: 0; }
+.rule-controls legend, .rule-approval legend { font-weight: 700; padding: 0 8px; }
+.rule-controls label, .rule-case-picker { display: grid; gap: 10px; font-weight: 650; min-width: 0; }
+.rule-controls select, .rule-case-picker select { width: 100%; min-width: 0; padding: 12px 8px; font: inherit; font-weight: 400; border: 1px solid #9caaa3; background: white; }
+.rule-controls label.rule-check { display: flex; align-items: flex-start; gap: 12px; font-weight: 500; }
+.rule-check input, .rule-approval input { flex: 0 0 auto; margin-top: 5px; }
+.rule-record { margin: 24px 0; }
+.rule-record > p { padding: 24px; }
+.rule-record dl { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); margin: 0; }
+.rule-record dl > div { padding: 20px; border-right: 1px solid var(--line); }
+.rule-record dt { font-size: .8rem; text-transform: uppercase; margin-bottom: 10px; }
+.rule-record dd { margin: 0; font-weight: 600; }
+.rule-outcome { display: grid; gap: 10px; padding: 20px; border-left: 4px solid #a26912; background: #fff3d8; }
+.rule-outcome.release { border-color: #226a5d; background: #e4efe8; }
+.rule-gates { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; list-style: none; padding: 0; }
+.rule-gates li { padding: 20px; background: #fafaf6; border-top: 4px solid #226a5d; }
+.rule-gates li.fail { border-color: #a26912; }
+.rule-gates li p { margin-bottom: 0; }
+.rule-result-list { display: grid; gap: 12px; margin: 24px 0; }
+.rule-result-list details { border: 1px solid var(--line); border-left: 4px solid #9caaa3; padding: 16px 20px; background: #fafaf6; }
+.rule-result-list details.pass { border-left-color: #226a5d; }
+.rule-result-list details.fail { border-left-color: #a33b35; }
+.rule-result-list summary { cursor: pointer; font-weight: 600; }
+.rule-result-list summary strong { display: block; margin: 8px 0 0 18px; font-size: .9rem; }
+.rule-result-list details li { margin: 12px 0; }
+.rule-approval { border: 1px solid var(--line); padding: 20px; min-width: 0; }
+.rule-approval label { display: flex; align-items: flex-start; gap: 12px; padding: 15px 0; cursor: pointer; line-height: 1.6; }
+.rule-counts { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin: 24px 0; }
+.rule-counts article { display: grid; gap: 12px; padding: 20px; background: #edf2ec; }
+.rule-counts span { font-size: .85rem; }
+.rule-lesson :focus-visible { outline: 3px solid #bb7b12; outline-offset: 3px; }
+@media (max-width: 700px) {
+  .rule-controls, .rule-gates, .rule-record dl, .rule-counts { grid-template-columns: 1fr; }
+  .rule-controls, .rule-approval { padding: 16px; }
+  .rule-record dl > div { border-right: 0; border-bottom: 1px solid var(--line); }
+  .rule-lesson .primary-button { width: 100%; }
+  .rule-result-list details { padding: 16px 12px; }
+}
+.rule-controls small { display: block; font-size: .88rem; font-weight: 400; line-height: 1.5; color: #47625b; margin-top: 6px; }
+.rule-gates li.pending { border-color: #9caaa3; }

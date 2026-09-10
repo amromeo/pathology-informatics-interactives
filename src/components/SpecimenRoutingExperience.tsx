@@ -16,7 +16,7 @@ export function SpecimenRoutingExperience({ Concepts, onAttempt }: { Concepts?: 
     <section className="lesson-section" aria-labelledby="specimen-audit-title">
       <div className="section-heading"><span className="section-number">01</span><div><p className="eyebrow">Source records</p><h2 id="specimen-audit-title">Reconstruct the container's documented journey</h2></div></div>
       <nav className="specimen-event-nav" aria-label="Specimen audit events">{auditEvents.map((item) => <button type="button" key={item.id} aria-pressed={eventId === item.id} onClick={() => setEventId(item.id)}><strong>{item.time}</strong><span>{item.title}</span></button>)}</nav>
-      <article className="artifact-card specimen-event-record" aria-live="polite"><header><span>Synthetic educational record · {event.time}</span><strong>{event.title}</strong></header><div><p><strong>{event.actor}</strong></p><p className="specimen-record-code">{event.record}</p><p>{event.detail}</p></div></article>
+      <article className="artifact-card specimen-event-record" aria-live="polite"><header><span>Source record · {event.time}</span><strong>{event.title}</strong></header><div><p><strong>{event.actor}</strong></p><p className="specimen-record-code">{event.record}</p><p>{event.detail}</p></div></article>
       <aside className="specimen-annotation"><strong>What this record establishes</strong><p>{event.meaning}</p></aside>
       <div className="specimen-question-grid">{questions.map((question) => {
         const selected = question.choices.find((choice) => choice.id === answers[question.id]);

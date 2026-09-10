@@ -67,5 +67,15 @@ Topic 4's `where-is-the-specimen` lesson now uses a dedicated audit-trail and
 routing workbench. Edit `concepts.mdx` for the LIS explanation and `interaction.ts`
 for timestamped records, procedure entries, routing cases, and feedback. The
 five-case replay computes destinations from the learner's configuration; changing
-a route clears its prior test result. The remaining Topic 4 conversion plan is
-in `content/TOPIC4-BUILDOUT.md`.
+a route clears its prior test result.
+
+The other Topic 4 lessons now also use dedicated interactions. In
+`autoverification-at-the-edge/interaction.ts`, edit the release cases, policy
+configuration, gate explanations, and review choices. In
+`reflex-rule-ripple-effect/interaction.ts`, edit the related records, accession
+set, order predicates, and expected actions. Each has `concepts.mdx` for the
+substantive teaching and `bridge.mdx` for validation and implementation review.
+All numeric counts in the interface are calculated from the case records.
+Update the MDX counts and tests together if you change those records. Stable
+lesson URLs retain their earlier slugs; the visible titles are now Checking
+Automatic Result Release and Updating a Thyroid Reflex Rule.

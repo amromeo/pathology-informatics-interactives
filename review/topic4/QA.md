@@ -30,3 +30,33 @@ and part identity, dictionary lookup, worklists, physical scans, audit evidence,
 unknown-code handling, regression checks, and the distinction between future
 routing and recovery of an existing case. Faculty notes assess the learner's
 explanation and proposed handoff, not just the selected answers.
+
+## Lessons 11 and 12 — completed browser review
+
+September 10, 2026. Same desktop and phone dimensions; production Pages build.
+
+- Automatic release: original 20/22; OR repair 22/22; AND still releases AV-01.
+  AV-04 releases with a 20 ng/L minimum but holds when that minimum is removed.
+  Missing history holds, with the delta shown as not calculated. The source
+  record includes QC and instrument flags; absent history has no displayed age.
+- Reflex: source records identify the separate display and rule revisions.
+  Original 10/13, five new orders; approved 13/13, two new orders. Inclusive
+  boundaries produce two additional orders. Disabling duplicate prevention
+  creates orders despite existing FT4s; TH-08 explicitly explains this failure.
+- Correct final recommendations pass only with matching complete replays.
+  Configuration changes clear replay and approval state. Reset restores the
+  original controls. The debrief is available without completing the exercise.
+- Phone feedback wraps beside controls. Both documents remain within the
+  390-pixel viewport. Native controls show keyboard focus. Screenshots record
+  desktop traces/replays and narrow result/duplicate views.
+- No browser warning/error logs during the reviewed interactions.
+
+61 automated tests pass, curriculum checks pass, and production/Pages builds
+succeed. The existing Vite bundle-size advisory remains.
+
+Teaching review: introductions explain the laboratory request and configuration
+history. Concepts teach arithmetic, Boolean conditions, release eligibility,
+reflex authorization, boundaries, and duplicate handling before final review.
+Debriefs refer to the actual accession decisions. Faculty guides distinguish
+case-specific approved policy from general practice and include primary sources.
+The selected replay sets are explicitly not population utilization estimates.

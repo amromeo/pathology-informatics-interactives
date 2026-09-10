@@ -1,3 +1,39 @@
-# Faculty guide: The Reflex Rule Ripple Effect
+# Faculty guide: Updating a Thyroid Reflex Rule
 
 Ask learners to list every dependent object that should enter change scope: display, reflexes, calculations, decision support, interfaces, reports, validation cases, procedures, and training.
+
+Ask learners to explain how TH-01 can have a correct displayed interval and an
+incorrect downstream order. A complete answer identifies the separate display
+definition, reflex revision 8, its 0.40 threshold, and the order created by that
+revision. The reference interval did not itself place the FT4 order.
+
+Expected configuration: lower 0.27, upper 4.20, strict outside-boundary comparison,
+adult TSH-with-reflex scope, final numeric results, and duplicate prevention for
+pending/completed FT4s on the same accession. The original rule matches 10/13
+actions and creates five orders; the correction matches 13/13 and creates two.
+An inclusive comparison fails TH-04 and TH-06. Removing duplicate prevention
+fails TH-08 and TH-09; bypassing scope fails TH-11 and TH-12; allowing preliminary
+numeric results fails TH-13. Missing TSH still requires review.
+
+Require the learner to identify both removed orders and retained orders. Ask why
+a fall in order volume would also occur if all reflexes were disabled, and why
+that would not demonstrate success. Ask for the denominator: 13 selected records,
+including nine eligible final adult reflex results, two review exceptions, and
+two outside the protocol. This is not a random sample or a full-day utilization
+study.
+
+Discuss clinical approval separately from software maintenance. Reference
+intervals do not automatically define optimal reflex thresholds. The case
+explicitly states that the director approved these order criteria for the new
+assay and adult protocol. Do not generalize this sequence to all patients,
+pregnancy, pediatric testing, or suspected pituitary disease.
+
+The final handoff should name the approved revision, every dependent object,
+expected and observed actions, affected production accessions, monitoring
+denominators, and the person responsible for follow-up. Completed FT4 results
+are not discarded solely because the order rule was incorrect.
+
+Harrison/API: Session 3, slides 7–13; Session 7, slides 17 and 27; Session 9,
+slides 7–10. Clinical context: [American Thyroid Association, Thyroid Function
+Tests](https://www.thyroid.org/thyroid-function-tests/). The exact thresholds and
+workflow here belong to the case's approved protocol, not an ATA reflex mandate.

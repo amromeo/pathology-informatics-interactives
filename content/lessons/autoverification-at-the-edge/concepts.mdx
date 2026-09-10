@@ -1,0 +1,56 @@
+### Start with the laboratory's approved policy
+
+This laboratory's troponin policy requires a final numeric result from 2 through
+10,000 ng/L, accepted **quality control (QC)** for the run, and no unresolved
+instrument flag. Results at or above 1,000 ng/L enter its critical-result review
+and communication workflow. These are the case laboratory's configured limits,
+not diagnostic cutoffs or a release policy for every troponin assay.
+
+The comparison must use the same patient's prior result from the same assay,
+obtained no more than 24 hours earlier. Missing, zero, or otherwise unusable prior
+values are sent for review in this laboratory. A blank field is not a measured
+zero. A zero denominator cannot support a percentage calculation, and results
+from different assays cannot simply be substituted as a prior comparison.
+
+### Calculate the two changes
+
+The **absolute difference** is the size of the current-minus-prior difference,
+regardless of direction. For AV-01, it is 48 minus 12 = **36 ng/L**. The
+**relative difference** divides that size by the prior value: 36 / 12 × 100 =
+**300%**. Both increases and decreases are evaluated by their size.
+
+The director approved a hold when **either** of these branches is met:
+
+1. The absolute difference is **at least 50 ng/L**.
+2. The relative difference is **at least 200%**, **and** the absolute difference
+   is **at least 20 ng/L**.
+
+The 20 ng/L requirement prevents a large percentage caused by a small denominator
+from being sufficient on its own. A change from 2 to 8 ng/L is also 300%, but its
+absolute difference is only 6 ng/L. Under this policy, that change alone does not
+require a hold. In AV-01, the 36 ng/L difference is large enough for the relative
+branch, even though it is below the separate 50 ng/L limit.
+
+### AND and OR change which results are held
+
+The two requirements **within** the relative branch use AND: both must be true.
+The absolute and relative branches are combined with OR: either branch can hold
+the result. Combining the branches with AND would let AV-01 release because its
+absolute difference is below 50 ng/L. Keeping only the absolute branch has the
+same effect for this accession, but the defects are different configurations.
+
+The controls start with the transferred rule. Change one setting at a time and
+inspect its effect below. The numeric eligibility, final-status, and critical
+gates remain in place while you edit the delta, history, QC, and flag settings.
+The trace shows every gate; release requires all gates to pass. A skipped delta
+calculation does not override a failed eligibility or history check.
+
+### A hold is a request for review
+
+An unexpected change can arise from a real clinical change, specimen problems,
+patient identification problems, or analytical issues. A hold does not determine
+which explanation is correct. Staff investigate according to the laboratory's
+procedure, preserve the original result, and communicate urgent findings promptly.
+Likewise, automatic release does not mean that a result is within the reference
+interval or that the patient is well. Reference intervals, reportable ranges,
+critical-result procedures, and automatic-release criteria serve different purposes.

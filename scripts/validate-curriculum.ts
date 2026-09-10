@@ -68,7 +68,7 @@ for (const lesson of lessons) {
   }
 
   const folder = resolve("content", "lessons", manifest.slug);
-  if (manifest.experience === "specimen-routing") {
+  if (["specimen-routing", "autoverification", "reflex-rule"].includes(manifest.experience ?? "")) {
     for (const file of ["concepts.mdx", "interaction.ts"]) {
       if (!existsSync(resolve(folder, file))) fail(`${manifest.slug} is missing ${file}`);
     }

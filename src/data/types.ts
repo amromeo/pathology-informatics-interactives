@@ -10,6 +10,8 @@ export type LessonExperience =
   | "downtime"
   | "security-review"
   | "specimen-routing"
+  | "autoverification"
+  | "reflex-rule"
   | "multimodal"
   | "ai-foundations"
   | "ai-deployment";

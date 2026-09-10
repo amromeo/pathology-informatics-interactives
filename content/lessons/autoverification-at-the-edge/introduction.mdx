@@ -1,11 +1,44 @@
-# Autoverification at the Edge
+# Checking Automatic Result Release
 
-> **Synthetic case:** A troponin result rises from 12 to 48 ng/L, passes QC and instrument checks, and autoverifies despite a clinically important delta.
+At the morning chemistry review, the supervisor finds a troponin result that was
+released automatically even though it met one of the laboratory's approved review
+criteria. You are the pathology resident working with the supervisor and the
+middleware analyst to explain the release and check a proposed correction.
+
+## What changed
+
+The laboratory moved its troponin release rules from the LIS into middleware last
+week. Middleware receives instrument results, applies the release checks, and
+sends the resulting status to the LIS. The analyst transferred the absolute-change
+check, but the review must establish whether the complete approved policy was
+implemented. The initial validation included stable results and large absolute
+changes; it did not cover all combinations of the two change criteria.
+
+### Result reviewed at 08:00
+
+| Record | Value |
+| --- | --- |
+| Accession | AV-01 |
+| Current troponin, 07:40 | 48 ng/L, final |
+| Prior troponin, 04:40 | 12 ng/L, same assay and patient |
+| Quality control | Accepted for this run |
+| Instrument flags | None unresolved |
+| Middleware action | Automatic release |
+
+The laboratory has an approved policy for reviewing certain changes before release.
+The problem is whether the configured rule follows that policy. A rising troponin
+is not, by itself, proof that a result should be delayed or that the analyzer is
+wrong. The clinical team interprets the result in the patient's clinical context.
 
 ## Your task
 
-Inspect the complete rule: analytical flags, QC, reference and critical limits, absolute and relative deltas, result status, missing history, and exception handling. Repair the category, not just the incident.
+Calculate the change, compare the configured branches with the approved policy,
+and inspect the reason each result is released or held. Correct the rule, then
+test results that should still release, boundary values, and exceptions. Explain
+what the laboratory director needs before approving production use.
 
 ## Key point
 
-Autoverification is an approved decision system. Analytical validity is necessary but does not satisfy every patient-result release criterion.
+Autoverification means releasing results through approved computer rules without
+individual manual verification. Accepted QC does not establish that every
+patient-result release criterion has been met.

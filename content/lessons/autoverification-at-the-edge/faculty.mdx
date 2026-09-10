@@ -1,3 +1,35 @@
-# Faculty guide: Autoverification at the Edge
+# Faculty guide: Checking Automatic Result Release
 
 Require learners to test boundary values, missing prior results, instrument flags, stable abnormal results, and normal cases. Replaying only the reported result is not sufficient validation.
+
+Have the learner calculate both AV-01 differences before changing a control.
+Ask why 36 ng/L misses the absolute branch but satisfies the minimum change in
+the relative branch. Then compare AV-04: the percentage is also 300%, but the
+6 ng/L difference does not satisfy the relative branch's minimum.
+
+Expected repair: OR between branches; absolute limit 50 ng/L; relative limit
+200%; minimum change 20 ng/L; same-assay history within 24 hours; unusable history
+held; QC and instrument checks enabled. The original rule matches 20/22 records,
+failing AV-01 and AV-03. The complete policy matches 22/22. AND between branches
+fails multiple holds; bypassing QC or flags introduces new failures. The tests
+include correct releases so that an indiscriminate hold strategy cannot pass.
+
+Ask the learner to explain the first action for a held result. A delta check is
+not a diagnosis and should not be described as a universal reason to delay a
+troponin report. The numbers, comparison window, and hold/critical pathways are
+the case laboratory's specified policy. Actual policy depends on assay performance,
+clinical workflow, and laboratory approval; some laboratories release critical
+results automatically while maintaining a separate notification process.
+
+Require a change-review summary naming the rule revision, omitted branch,
+affected categories, expected and observed decisions, reviewer, monitoring plan,
+and rollback method. Discuss release delays and unnecessary holds alongside
+missed holds. Ask what testing is still needed outside this rule calculation:
+instrument/middleware inputs, review worklists, manual verification, and complete
+LIS/EHR reporting.
+
+Harrison/API: Session 3, slides 7–13; Session 9, slides 7–10. The distinction among
+LIS configuration, testing, and production approval follows that source plan.
+Professional context: [Krasowski et al., autoverification in a core chemistry
+laboratory](https://pmc.ncbi.nlm.nih.gov/articles/PMC4023033/). The case thresholds
+are not taken from that institution's algorithm.

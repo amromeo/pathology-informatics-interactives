@@ -1,0 +1,20 @@
+### What the complete replay establishes
+
+The 22 records are a selected validation set, not a sample for estimating the
+laboratory's daily hold rate. They include the reported increase, exact and nearby
+boundaries, a decrease, stable results, missing or incompatible history, QC and
+instrument exceptions, and ineligible result statuses. Expand a record to inspect
+why its expected decision matters.
+
+Validation must demonstrate **correct release as well as correct holds**. Holding
+every result would make some errors less visible while delaying routine reports.
+After a change, repeat the complete set and compare expected with observed actions.
+The test record belongs with the rule revision, approver, implementation date,
+and procedure for restoring the prior version if needed.
+
+Before use, the middleware analyst verifies the rule in the test environment,
+including how held results appear on the technologist's worklist and how released
+results appear in the LIS and EHR. The laboratory director reviews the clinical
+criteria with chemistry staff. After use begins, review unexpected releases,
+reasons for holds, manual overrides, and reporting delays. A high automatic-release
+percentage alone cannot establish that the rule is correct.

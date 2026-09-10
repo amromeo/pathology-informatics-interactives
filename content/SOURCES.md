@@ -37,6 +37,18 @@ sessions and slide ranges that should shape each case and learner decision.
 
 ## Additional professional guidance
 
+- **Krasowski et al. (2014), Autoverification in a core clinical chemistry
+  laboratory at an academic medical center** — Primary institutional report,
+  CC BY. Informs Lesson 11's distinction among multiple release checks,
+  test-environment validation, and clinical approval. The original case policy,
+  thresholds, records, and branching exercises are not reproduced from the
+  reported institution. Source: <https://pmc.ncbi.nlm.nih.gov/articles/PMC4023033/>.
+- **American Thyroid Association, Thyroid Function Tests** — Clinical background
+  for Lesson 12's explanation of TSH and FT4. No text or figures reproduced;
+  the exact reflex thresholds, population, and order workflow are the case's
+  separately approved protocol, not an ATA reflex-testing recommendation.
+  Source: <https://www.thyroid.org/thyroid-function-tests/>.
+
 - **UK Government Data Quality Framework** — Used in Lesson 3 for the formal
   definitions of accuracy, completeness, consistency, timeliness, validity,
   and uniqueness. Definitions are paraphrased and followed by original

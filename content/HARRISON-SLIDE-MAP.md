@@ -91,14 +91,14 @@ Lesson slug: `where-is-the-specimen`
 - **Harrison plan:** Session 3, slides 6–10 and 16–18.
 - **Build into the lesson:** Use the specimen-oriented LIS, accessioning links, barcodes, worklists, dictionaries, and specimen tracking to separate identity, location, status, routing, and audit trail. Let the learner diagnose configuration and workflow together.
 
-### 11 — Autoverification at the Edge
+### 11 — Checking Automatic Result Release
 
 Lesson slug: `autoverification-at-the-edge`
 
 - **Harrison plan:** Session 3, slides 7–13; Session 9, slides 7–10.
 - **Build into the lesson:** Ground the rule in LIS dictionaries and test parameters, then use build/test/production environments, regression testing, monitoring, and change control. Technical entry by the LIS team should remain separate from laboratory review and signoff.
 
-### 12 — The Reflex Rule Ripple Effect
+### 12 — Updating a Thyroid Reflex Rule
 
 Lesson slug: `reflex-rule-ripple-effect`
 

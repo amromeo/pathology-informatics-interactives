@@ -1,7 +1,21 @@
 ## Debrief
 
-**Informatics principle:** High-reliability change control is dependency-aware.
+**Informatics principle:** A test change must include the separate rules that use its result.
 
-The LIS displayed the new interval correctly while the reflex engine continued using the old clinical threshold. The result was unnecessary follow-up testing and a utilization signal that appeared only after go-live.
+The report definition used 0.27–4.20 mIU/L, while the order rule retained 0.40 as
+its lower threshold. TH-01, TH-02, and TH-04 therefore received additional FT4 orders
+under the original rule. Correcting the lower threshold preserves FT4 orders at
+TH-03 and TH-07 and reuses the orders already linked to TH-08 and TH-09.
+
+The exact boundary matters: changing “below” to “at or below” adds an order at
+0.27, and changing “above” to “at or above” adds one at 4.20. Removing scope or
+final-status restrictions changes other records even when both numeric thresholds
+are correct. This is why the full action list matters more than the new-order
+count alone.
+
+The replay compares 13 selected records, including records needing review and
+those outside the rule. The fall from five new FT4 orders to two identifies this
+configuration's effect in that set. It is not a measured hospital-wide utilization
+rate. Broader monitoring requires a defined population, period, and denominator.
 
 The analyst changes configuration; the pathologist approves clinical thresholds; laboratory operations monitors consequences.

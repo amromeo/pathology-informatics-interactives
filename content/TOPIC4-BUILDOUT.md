@@ -1,7 +1,7 @@
 # Topic 4 buildout
 
 Source plan: PIER objectives in the registry and Harrison/API ranges in
-HARRISON-SLIDE-MAP.md. All cases are synthetic.
+HARRISON-SLIDE-MAP.md. All three lessons now have individual interactions.
 
 ## Where Is the Specimen?
 
@@ -19,14 +19,26 @@ all-gross-room routing also fails cytology and frozen section; targeted repair
 preserves neighboring routes. Physical recovery remains a separate requirement.
 Debrief stays available. Test desktop and narrow layouts before publication.
 
-## Subsequent conversions
+## Checking Automatic Result Release
 
-- Autoverification at the Edge: a rule editor with result-by-result release/hold
-  traces, synthetic approved thresholds, missing history, QC/instrument flags,
-  absolute/relative change, and unaffected results. Do not imply that a rising
-  troponin requires a universal hold.
-- The Reflex Rule Ripple Effect: an approved sequence before and after an assay
-  change; editable predicates and resulting orders for boundary, missing-data,
-  already-completed, and unaffected paths. Counts must identify their cohort.
+The laboratory moved its troponin policy into middleware but omitted the relative
+change branch. Learners calculate absolute and relative changes, compare OR with
+AND, and inspect all six release gates. The 22-record replay includes boundaries,
+small denominators, missing or incompatible history, QC, instrument flags, result
+status, and unaffected results. The original rule matches 20/22 decisions; the
+approved configuration matches 22/22. These are the case laboratory's limits,
+not universal clinical thresholds. A matching replay and a documented review,
+monitoring, and rollback plan are required for the final recommendation.
 
-These two remain on the shared template pending their own build and QA.
+## Updating a Thyroid Reflex Rule
+
+A separately configured order rule retains the old lower threshold after an
+assay change. Learners compare four records, revise the rule, and inspect 13
+accession actions. The original rule creates five new FT4 orders; the approved
+rule creates two. TH-01, TH-02, and TH-04 account for the difference. Inclusive
+boundaries, duplicate orders, preliminary results, and unauthorized populations
+must be checked; a lower order count alone does not establish correctness.
+
+Both lessons include MDX introductions, concepts, review guidance, debriefs, and
+faculty notes. Controls explain their effects locally, edits invalidate previous
+replays, and the debrief remains available before completing the exercise.

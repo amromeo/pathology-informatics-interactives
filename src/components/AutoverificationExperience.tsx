@@ -1,0 +1,43 @@
+import { useState, type ComponentType } from "react";
+import { evaluateRelease, originalRelease, releaseApprovalChoices, releaseCases, releaseReplay, releaseControlNotes, type ReleaseConfig } from "../../content/lessons/autoverification-at-the-edge/interaction";
+type Mdx = ComponentType<Record<string, unknown>>;
+export function AutoverificationExperience({ Concepts, Bridge, onAttempt }: { Concepts?: Mdx; Bridge?: Mdx; onAttempt?: (value: boolean) => void }) {
+  const [config, setConfig] = useState<ReleaseConfig>({ ...originalRelease });
+  const [selected, setSelected] = useState("AV-01");
+  const [tested, setTested] = useState(false);
+  const [approval, setApproval] = useState("");
+  const row = releaseCases.find((item) => item.id === selected)!;
+  const trace = evaluateRelease(row, config);
+  const notes = releaseControlNotes(config);
+  const results = releaseReplay(config);
+  const passed = results.filter((item) => item.outcome === item.expected).length;
+  const update = (change: Partial<ReleaseConfig>) => { setConfig((current) => ({ ...current, ...change })); setTested(false); setApproval(""); };
+  return <div className="experience rule-lesson">
+    <section className="lesson-section"><div className="section-heading"><span className="section-number">01</span><div><p className="eyebrow">Release policy</p><h2>Compare the approved policy with the configured rule</h2></div></div>{Concepts && <div className="mdx-content embedded-mdx"><Concepts/></div>}
+      <fieldset className="rule-controls"><legend>Autoverification configuration</legend>
+        <label>Combine the delta branches<select aria-label="Combine the delta branches" value={config.delta} onChange={(e) => update({ delta: e.target.value as ReleaseConfig["delta"] })}><option value="absolute">Absolute only</option><option value="either">Absolute OR relative</option><option value="both">Absolute AND relative</option></select><small role="status">{notes.delta}</small></label>
+        <label>Absolute-change limit (ng/L)<select aria-label="Absolute-change limit (ng/L)" value={config.absoluteLimit} onChange={(e) => update({ absoluteLimit: Number(e.target.value) })}>{[30,50,75].map((n) => <option key={n}>{n}</option>)}</select><small role="status">{notes.absoluteLimit}</small></label>
+        <label>Relative-change limit (%)<select aria-label="Relative-change limit (%)" value={config.relativeLimit} onChange={(e) => update({ relativeLimit: Number(e.target.value) })}>{[100,200,300].map((n) => <option key={n}>{n}</option>)}</select><small role="status">{notes.relativeLimit}</small></label>
+        <label>Minimum absolute change for the relative branch (ng/L)<select aria-label="Minimum absolute change for the relative branch (ng/L)" value={config.minimumChange} onChange={(e) => update({ minimumChange: Number(e.target.value) })}>{[0,20,40].map((n) => <option key={n}>{n}</option>)}</select><small role="status">{notes.minimumChange}</small></label>
+        <label>Maximum age of prior result (hours)<select aria-label="Maximum age of prior result (hours)" value={config.historyHours} onChange={(e) => update({ historyHours: Number(e.target.value) })}>{[6,24,72].map((n) => <option key={n}>{n}</option>)}</select><small role="status">{notes.historyHours}</small></label>
+        <label>When there is no usable history<select aria-label="When there is no usable history" value={config.missingHistory} onChange={(e) => update({ missingHistory: e.target.value as "hold" | "release" })}><option value="hold">Hold for review</option><option value="release">Let other gates decide</option></select><small role="status">{notes.missingHistory}</small></label>
+        <label className="rule-check"><input type="checkbox" aria-label="Require accepted QC" checked={config.checkQc} onChange={(e) => update({ checkQc: e.target.checked })}/><span>Require accepted QC<small role="status">{notes.checkQc}</small></span></label>
+        <label className="rule-check"><input type="checkbox" aria-label="Hold unresolved instrument flags" checked={config.checkFlags} onChange={(e) => update({ checkFlags: e.target.checked })}/><span>Hold unresolved instrument flags<small role="status">{notes.checkFlags}</small></span></label>
+      </fieldset>
+    </section>
+    <section className="lesson-section" aria-labelledby="release-trace-heading"><div className="section-heading"><span className="section-number">02</span><div><p className="eyebrow">Result trace</p><h2 id="release-trace-heading">Follow one result through every gate</h2></div></div>
+      <label className="rule-case-picker">Result to inspect<select value={selected} onChange={(e) => setSelected(e.target.value)}>{releaseCases.map((item) => <option key={item.id} value={item.id}>{item.id} — {item.title}</option>)}</select></label>
+      <article className="artifact-card rule-record"><header><strong>{row.id} · Troponin</strong><span>Instrument and patient record</span></header><dl><div><dt>Current</dt><dd>{row.current ?? "No numeric value"} {row.current !== null && "ng/L"}</dd></div><div><dt>Prior</dt><dd>{row.prior ?? "Missing"} {row.prior !== null && "ng/L"}</dd></div><div><dt>Prior age / assay</dt><dd>{row.prior === null ? "No prior result available" : `${row.hours} hours / ${row.sameAssay ? "same assay" : "different assay"}`}</dd></div><div><dt>Result status</dt><dd>{row.final ? "Final" : "Preliminary"}</dd></div><div><dt>QC status</dt><dd>{row.qc ? "Accepted" : "Not accepted"}</dd></div><div><dt>Instrument flags</dt><dd>{row.flag ? "Unresolved flag" : "None unresolved"}</dd></div></dl></article>
+      <div className={`rule-outcome ${trace.outcome === "Hold" ? "hold" : "release"}`} role="status"><strong>{trace.outcome}</strong><span>Approved-policy expectation: {row.expected}. {row.purpose}</span></div>
+      <ol className="rule-gates">{trace.gates.map((gate) => <li key={gate.name} className={gate.skipped ? "pending" : gate.pass ? "pass" : "fail"}><strong>{gate.name} · {gate.skipped ? "Not calculated" : gate.pass ? "Pass" : "Hold"}</strong><p>{gate.note}</p></li>)}</ol>
+    </section>
+    <section className="lesson-section" aria-labelledby="release-replay-heading"><div className="section-heading"><span className="section-number">03</span><div><p className="eyebrow">Regression testing</p><h2 id="release-replay-heading">Check results that should hold and results that should release</h2></div></div>
+      <button type="button" className="primary-button" onClick={() => { setTested(true); onAttempt?.(true); }}>Run all release checks</button><p role="status">{tested ? `${passed} of ${results.length} expected decisions match.` : "Run the complete set after changing the configuration."}</p>
+      <div className="rule-result-list">{results.map((item) => <details key={item.id} className={tested ? item.outcome === item.expected ? "pass" : "fail" : "pending"}><summary>{item.id} · {item.title}{tested && <strong>{item.outcome} · {item.outcome === item.expected ? "Matches" : "Does not match"}</strong>}</summary><p>Expected: <strong>{item.expected}</strong>. {item.purpose}</p>{tested && <ul>{item.gates.filter((gate) => !gate.pass).map((gate) => <li key={gate.name}>{gate.note}</li>)}</ul>}</details>)}</div>
+    </section>
+    <section className="lesson-section"><div className="section-heading"><span className="section-number">04</span><div><p className="eyebrow">Review before use</p><h2>Decide what is needed before production use</h2></div></div>{Bridge && <div className="mdx-content embedded-mdx"><Bridge/></div>}
+      <fieldset className="rule-approval"><legend>Approval recommendation</legend>{releaseApprovalChoices.map((choice) => <label key={choice.id}><input type="radio" name="release-approval" checked={approval === choice.id} onChange={() => { setApproval(choice.id); onAttempt?.(true); }}/><span>{choice.label}</span></label>)}</fieldset>
+      {approval && <div className={`feedback ${approval === "validated" && tested && passed === results.length ? "correct" : "incorrect"}`} role="status"><strong>{approval === "validated" && tested && passed === results.length ? "The test record supports laboratory review." : "The rule is not ready for approval."}</strong><p>{releaseApprovalChoices.find((choice) => choice.id === approval)?.feedback}</p>{(!tested || passed !== results.length) && <p>Complete a matching full replay before requesting approval.</p>}</div>}
+    </section><div className="reset-row"><button type="button" className="text-button" onClick={() => { setConfig({ ...originalRelease }); setSelected("AV-01"); setTested(false); setApproval(""); onAttempt?.(false); }}>Reset lesson interactions</button></div>
+  </div>;
+}

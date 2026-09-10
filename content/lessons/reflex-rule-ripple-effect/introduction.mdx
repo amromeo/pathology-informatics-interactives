@@ -1,11 +1,31 @@
-# The Reflex Rule Ripple Effect
+# Updating a Thyroid Reflex Rule
 
-> **Synthetic case:** A thyroid assay’s reference interval changes, but the dependent free-T4 reflex rule retains its former threshold.
+On Monday morning, the chemistry supervisor finds an FT4 order added to an
+accession whose TSH is within the interval printed on its report. You are the
+pathology resident working with the LIS analyst to investigate whether the new
+thyroid assay configuration was implemented as approved.
+
+## What changed
+
+The laboratory began using a new TSH assay at 06:00. Before the change, the
+laboratory director reviewed the adult reference interval and separately approved
+the adult TSH-with-reflex protocol. The approved lower threshold for adding FT4
+changed from 0.40 to 0.27 mIU/L; the upper threshold remained 4.20 mIU/L.
+
+The LIS analyst updated the report's reference-interval definition. The reflex
+process uses a separate rule entry to decide whether to place another order.
+Your investigation begins with accession TH-01: TSH **0.30 mIU/L**, finalized at
+07:18, displayed interval **0.27–4.20 mIU/L**, and an FT4 order created at 07:18.
+No earlier FT4 was linked to that accession.
 
 ## Your task
 
-Map the assay definition, display, reflex logic, downstream order, utilization report, and change-control record. Find which dependency escaped the go-live scope.
+Compare the report definition, approved protocol, configured rule, and order
+record. Revise the order rule and replay 13 selected accession records from the
+morning review. Account for every added order, retained order, exception, and
+case outside the rule's approved scope before recommending the change.
 
 ## Key point
 
-A test definition is a network of clinical and technical dependencies. Updating the visible interval does not update hidden rules automatically.
+A correct reference interval on the report does not establish that the separate
+rule for ordering another test is correct.
