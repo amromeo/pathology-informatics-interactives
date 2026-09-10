@@ -1,3 +1,7 @@
+import { FlagExperience } from "./components/FlagExperience";
+import { NewbornExperience } from "./components/NewbornExperience";
+import { TerminologyExperience } from "./components/TerminologyExperience";
+import { QueueExperience } from "./components/QueueExperience";
 import { useEffect, useState, type ComponentType, type ReactNode } from "react";
 import { lessonContent } from "./content";
 import { DataQualityExperience } from "./components/DataQualityExperience";
@@ -29,6 +33,10 @@ type ExperienceRenderProps = {
 };
 
 const experienceRegistry: Partial<Record<LessonExperience, (props: ExperienceRenderProps) => ReactNode>> = {
+  "flag-trace": (props) => <FlagExperience {...props}/>,
+  "newborn-exchange": (props) => <NewbornExperience {...props}/>,
+  "terminology-review": (props) => <TerminologyExperience {...props}/>,
+  "queue-analysis": (props) => <QueueExperience {...props}/>,
   autoverification: ({ Concepts, Bridge, onAttempt }) => <AutoverificationExperience Concepts={Concepts} Bridge={Bridge} onAttempt={onAttempt}/>,
   "reflex-rule": ({ Concepts, Bridge, onAttempt }) => <ReflexRuleExperience Concepts={Concepts} Bridge={Bridge} onAttempt={onAttempt}/>,
   "specimen-routing": ({ Concepts, onAttempt }) => <SpecimenRoutingExperience Concepts={Concepts} onAttempt={onAttempt}/>,
@@ -55,7 +63,7 @@ const routePath = () => {
 
 function HubPage() {
   useDocumentTitle("Pathology Informatics Interactives");
-  return <main><section className="hub-hero"><div><p className="eyebrow">23 cases · 8 PIER topics · 34 objectives</p><h1>Learn informatics by following the evidence.</h1><p className="hero-lede">An independent, case-based curriculum for pathology residents, aligned to PIER Essentials Release 5.</p><div className="hero-actions"><a className="primary-button" href={href("lessons/steward-at-morning-huddle/")}>Start lesson 1</a><a className="secondary-button" href="#topics">Browse all topics</a></div></div><aside className="hero-card"><span>Curriculum route</span><ol><li>Notice a clinical inconsistency</li><li>Trace systems and meaning</li><li>Diagnose the failure layer</li><li>Repair and regression-test</li></ol><small>All artifacts are synthetic and educational.</small></aside></section><section className="catalog-section" id="topics"><div className="section-copy"><p className="eyebrow">Curriculum catalog</p><h2>Eight connected topic areas</h2><p>Lessons progress from foundational vocabulary to applied configuration and stewardship decisions.</p></div><div className="topic-grid">{topics.map((topic) => { const count = lessons.filter((lesson) => lesson.manifest.topic === topic.id).length; return <a className="topic-card" href={href(`topics/${topic.slug}/`)} key={topic.id}><span>Topic {topic.id}</span><h3>{topic.title}</h3><p>{topic.summary}</p><footer><strong>{count} lessons</strong><small>{topic.objectives.join(" · ")}</small></footer></a>; })}</div></section><Coverage/><section className="about-section" id="about"><div><p className="eyebrow">Source and editorial model</p><h2>Aligned, attributed, and independently authored</h2></div><div><p><a href={PIER_URL}>PIER Essentials R5</a> defines the coverage contract. The <a href={API_URL}>API teaching slide sets</a> supplement foundational concepts under CC BY 4.0. Case narratives, artifacts, questions, and visuals are original.</p><p>This project is independently developed and is not an official PIER product.</p></div></section></main>;
+  return <main><section className="hub-hero"><div><p className="eyebrow">23 cases · 8 PIER topics · 34 objectives</p><h1>Learn informatics by following the evidence.</h1><p className="hero-lede">An independent, case-based curriculum for pathology residents, aligned to PIER Essentials Release 5.</p><div className="hero-actions"><a className="primary-button" href={href("lessons/steward-at-morning-huddle/")}>Start lesson 1</a><a className="secondary-button" href="#topics">Browse all topics</a></div></div><aside className="hero-card"><span>Curriculum route</span><ol><li>Notice a clinical inconsistency</li><li>Trace systems and meaning</li><li>Diagnose the failure layer</li><li>Repair and regression-test</li></ol></aside></section><section className="catalog-section" id="topics"><div className="section-copy"><p className="eyebrow">Curriculum catalog</p><h2>Eight connected topic areas</h2><p>Lessons progress from foundational vocabulary to applied configuration and stewardship decisions.</p></div><div className="topic-grid">{topics.map((topic) => { const count = lessons.filter((lesson) => lesson.manifest.topic === topic.id).length; return <a className="topic-card" href={href(`topics/${topic.slug}/`)} key={topic.id}><span>Topic {topic.id}</span><h3>{topic.title}</h3><p>{topic.summary}</p><footer><strong>{count} lessons</strong><small>{topic.objectives.join(" · ")}</small></footer></a>; })}</div></section><Coverage/><section className="about-section" id="about"><div><p className="eyebrow">Source and editorial model</p><h2>Aligned, attributed, and independently authored</h2></div><div><p><a href={PIER_URL}>PIER Essentials R5</a> defines the coverage contract. The <a href={API_URL}>API teaching slide sets</a> supplement foundational concepts under CC BY 4.0. Case narratives, artifacts, questions, and visuals are original.</p><p>This project is independently developed and is not an official PIER product.</p></div></section></main>;
 }
 
 function Coverage() {
@@ -73,7 +81,7 @@ function TopicPage({ slug }: { slug: string }) {
 
 function LessonListItem({ lesson, index }: { lesson: LessonDefinition; index: number }) {
   const m = lesson.manifest;
-  return <article className="lesson-list-item"><span className="lesson-index">{String(index + 1).padStart(2, "0")}</span><div><p>{m.difficulty} · {m.durationMinutes} minutes</p><h3><a href={href(`lessons/${m.slug}/`)}>{m.title}</a></h3><div className="tag-row">{m.pierObjectives.map((objective) => <span key={objective}>{objective}</span>)}{m.pilot && <span className="pilot-tag">Pilot pattern</span>}</div></div><a className="arrow-link" href={href(`lessons/${m.slug}/`)} aria-label={`Open ${m.title}`}>→</a></article>;
+  return <article className="lesson-list-item"><span className="lesson-index">{String(index + 1).padStart(2, "0")}</span><div><p>{m.difficulty} · {m.durationMinutes} minutes</p><h3><a href={href(`lessons/${m.slug}/`)}>{m.title}</a></h3><div className="tag-row">{m.pierObjectives.map((objective) => <span key={objective}>{objective}</span>)}</div></div><a className="arrow-link" href={href(`lessons/${m.slug}/`)} aria-label={`Open ${m.title}`}>→</a></article>;
 }
 
 function LessonPage({ slug }: { slug: string }) {
@@ -85,9 +93,9 @@ function LessonPage({ slug }: { slug: string }) {
   const topic = topics.find((item) => item.id === lesson.manifest.topic)!;
   const experience = lesson.manifest.experience ?? "generic";
   const renderSpecializedExperience = experienceRegistry[experience];
-  const allowsEarlyDebrief = ["orientation", "result-journey", "data-quality", "statistics", "privacy", "downtime", "security-review", "specimen-routing", "autoverification", "reflex-rule"].includes(experience);
+  const allowsEarlyDebrief = ["orientation", "result-journey", "data-quality", "statistics", "privacy", "downtime", "security-review", "specimen-routing", "autoverification", "reflex-rule", "flag-trace", "newborn-exchange", "terminology-review", "queue-analysis"].includes(experience);
   return (
-    <main className="lesson-main">
+    <main className={lesson.manifest.topic === 5 ? "lesson-main topic5-page" : "lesson-main"}>
       <nav className="breadcrumbs" aria-label="Breadcrumb"><a href={href()}>Curriculum</a><span>→</span><a href={href(`topics/${topic.slug}/`)}>Topic {topic.id}</a><span>→</span><span>Lesson {lesson.manifest.id}</span></nav>
       <header className="lesson-meta"><div className="tag-row">{lesson.manifest.pierObjectives.map((objective) => <span key={objective}>PIER {objective}</span>)}</div><div><span>{lesson.manifest.durationMinutes} minutes</span><span>{lesson.manifest.difficulty}</span><a href={href(`faculty/${slug}/`)}>Faculty guide</a></div></header>
       <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>

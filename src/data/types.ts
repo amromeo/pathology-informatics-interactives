@@ -12,6 +12,10 @@ export type LessonExperience =
   | "specimen-routing"
   | "autoverification"
   | "reflex-rule"
+  | "flag-trace"
+  | "newborn-exchange"
+  | "terminology-review"
+  | "queue-analysis"
   | "multimodal"
   | "ai-foundations"
   | "ai-deployment";

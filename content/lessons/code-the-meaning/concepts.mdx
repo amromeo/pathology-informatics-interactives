@@ -1,0 +1,66 @@
+### Start with the object and its use
+
+An **orderable** is something a clinician can request. A panel order may cause
+several observations to be performed and reported. An **observation** identifies
+what was measured or assessed. Its **value** is the answer, and its **unit**
+expresses the quantity when applicable. A report assembles those observations
+with interpretation and context.
+
+For example, an estrogen-receptor observation, its percentage result, the %
+unit, and the pathologist's interpretation are separate data elements. The
+breast panel order does not supply all of those meanings. A billing entry
+documents a service for administrative use; it cannot establish what a
+particular tumor's result was.
+
+### Match each standard to the actual task
+
+**LOINC** identifies observations and related clinical information. **SNOMED
+CT** represents detailed clinical concepts, including findings. **UCUM** gives
+units a machine-readable representation. These can work together in one
+record; choosing one does not eliminate the other elements.
+
+**ICD** classifications support diagnosis classification for specified
+administrative and reporting uses. **CPT** represents services in the US
+billing workflow named here. The required edition, documented service, and
+submission rules matter; this exercise does not assign a billable code.
+
+**DICOM** describes medical imaging objects and associated metadata, including
+whole-slide microscopy. **CAP cancer protocols** specify structured reporting
+elements for the relevant cancer and procedure. Neither an image format nor a
+report template is a universal clinical vocabulary. Report elements may use
+terminology codes within their structure.
+
+### Read the definition behind a similar label
+
+A LOINC observation can be compared across six dimensions: the component
+being observed, the kind of property, the time aspect, the specimen or system,
+the result scale, and the method when the term specifies one. In this case,
+glucose is the component; mass concentration and substance concentration are
+different properties; both samples are serum/plasma; both are point-in-time
+numeric observations.
+
+LOINC 2345-7 identifies serum/plasma glucose expressed as mass per volume.
+LOINC 14749-6 identifies it as moles per volume. The local display label GLU
+does not distinguish them. mg/dL and mmol/L make the property difference
+visible, but selecting a code does not convert a number. A conversion requires
+a separately specified and validated calculation, with the original value
+and unit retained in the audit record.
+
+Likewise, a short HER2 label does not establish the specimen, method, or result
+scale. An immunostain interpretation and a gene-amplification assessment cannot
+be merged solely because their labels contain HER2. If the source catalog
+lacks the needed definition, obtain it from the assay owner before accepting
+a mapping. Deferring an unsupported mapping is a completed review decision.
+
+### Document what the mapping asserts
+
+Record the local identifier and definition, target system and code, terminology
+version, relationship, reviewer, date, and intended consumer. A broader or
+narrower concept may be useful for a specified purpose, but it is not
+automatically an exact equivalent. Do not infer that two local assays are
+interchangeable merely because they share a LOINC code; analytical comparability
+requires separate evidence.
+
+Test representative values, units, interpretation categories, and missing
+fields at the destination. A valid code can still produce an invalid record
+when combined with the wrong value, specimen, or unit.

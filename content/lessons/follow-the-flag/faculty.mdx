@@ -1,3 +1,29 @@
-# Faculty guide: Follow the Flag
+# Faculty guide: Tracing a Missing Critical Flag
 
-Have learners state what each system knows. The interface acknowledgment is intentionally reassuring but incomplete evidence. The safest repair includes both critical directions and routine flags.
+Allow 30 minutes. Ask the resident first to locate the last record with the
+correct meaning. The LIS has CH; the outbound message still has CH; the EHR
+import log identifies a display-table mismatch. Neither the number nor the
+network connection needs to be changed.
+
+Have the learner explain OBX-3, 5, 6, 7, 8, and 11 in context. A strong answer
+distinguishes the observation code from its interpretation code, final status
+from normality, and reference intervals from critical limits. Ask what would
+change if the receiver rejected unknown flags instead of accepting the result.
+
+The initial replay is 4/6. Repairing only CH gives 5/6; both critical directions
+with unknown-code review give 6/6. CH → H remains wrong. Ask the learner to
+explain why a passing category replay still requires validation of actual
+reports and review of the affected production interval.
+
+Assess four things: locating the faulty transformation, preserving severity,
+testing neighboring categories, and assigning recovery responsibilities.
+Do not credit a proposal to resend all reports without checking message
+identity, correction behavior, and whether the receiver would duplicate them.
+
+PIER alignment: 5.2, 5.3, 5.4, and 8.1. Harrison/API: Session 3 slides 18–20;
+Session 4 slides 3–20. These guide the architecture and interoperability
+teaching; cases and message excerpts are original.
+
+Sources: [HL7 observation interpretations](https://terminology.hl7.org/4.0.0/CodeSystem-v3-ObservationInterpretation.html)
+for category semantics, and the lesson's explicitly stated receiver contract
+for its behavior. This excerpt is not a complete implementation guide.

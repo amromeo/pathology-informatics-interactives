@@ -1,0 +1,83 @@
+### What must arrive together
+
+A newborn-screening report links an infant, a specimen, a collection event,
+observations, interpretations, and a responsible program. A number that
+identifies an infant at one hospital may also be used at another. An
+**assigning authority** says which organization issued the identifier.
+The receiver must retain that context and reconcile missing or conflicting
+identity rather than guessing from the infant's name.
+
+The interface sends an **overall interpretation**, not an individual analyte
+measurement or a confirmed diagnosis. LOINC 57130-7 identifies that observation.
+A condition-specific interpretation such as 46746-4 has a narrower meaning and
+cannot replace the overall field just because both concern newborn screening.
+The test being reported and its answer need separate mappings.
+
+### Codes, answer sets, and units
+
+The local answer REFERRAL describes an interpretation already assigned by
+laboratory staff. The agreed receiver profile maps it to LA25817-0 in the
+LOINC answer vocabulary. IN_RANGE maps to LA12428-1 and UNSAT to LA16205-9.
+These are a selected subset for this connection. An unfamiliar answer stays
+in an exception queue; it is not coerced to an in-range answer.
+
+A **code system** defines identifiers and their meanings. A **value set**
+selects the allowed concepts for a particular field and use. Different fields
+may bind to different value sets. SNOMED CT can represent clinical findings or
+specimen concepts where a profile requires it; it is not interchangeable with
+the observation identifier or every answer vocabulary.
+
+Numerical analyte results also need a value and a compatible unit, commonly
+expressed using UCUM. This overall interpretation is categorical, so it does
+not acquire a numeric unit. A unit cannot repair a wrong observation mapping.
+A real report also includes individual results and collection information;
+the workbench focuses on the fields that control this receiver's routing.
+
+### Standards need implementation agreements
+
+A standards development organization maintains specifications that multiple
+systems can implement. HL7 International maintains HL7 v2 messaging and FHIR.
+Regenstrief maintains LOINC; SNOMED International maintains SNOMED CT. Their
+work provides shared definitions, but it does not configure this receiver.
+
+An **implementation guide** constrains a standard for a defined use: message
+types, required identifiers, terminology bindings, allowed answers, error
+handling, and workflow expectations. A local interface agreement identifies
+the versions and additional decisions used by both partners. The existence
+of a standard does not establish that two implementations made those same
+decisions.
+
+HL7 v2 sends structured messages with segments and fields. **FHIR** represents
+information in resources, such as an Observation linked to a DiagnosticReport,
+Patient, and Specimen. Changing the transport representation to FHIR would not
+supply a missing infant authority or correct a mistaken concept. Either
+approach needs profiling, terminology agreement, and testing of actual use.
+
+### Contribute to standards development
+
+Standards evolve through proposed work, stakeholder review, resolution of
+comments, publication, and maintenance. Pathologists can contribute concrete
+laboratory use cases, review whether data definitions preserve meaning, and
+report implementation problems to the relevant work group. A requested change
+is not automatically an adopted standard. In this case, if the program needs
+an answer that the agreed set cannot express, document the need with both
+partners and pursue the appropriate terminology or specification change;
+do not privately redefine an existing code.
+
+### Acceptance and follow-up are different events
+
+Here the receiving application stores a structurally accepted report before
+a separate service evaluates worklist eligibility. The acknowledgment records
+that application acceptance. The exception queue records why routing did not
+occur. Check both; absence from a referral list must not be interpreted as an
+in-range screen.
+
+An exact retransmission should retain one logical message record. A corrected
+report is a new version of an existing clinical report and must be associated
+with it. Under this program's agreed workflow, corrections receive staff review
+so that follow-up already underway is reconciled. Preliminary reports also
+remain outside the final-report routing exercised here.
+
+In the replay, F means final, C means corrected, and P means preliminary. These
+status values describe the report version and readiness; they are separate
+from its clinical interpretation.

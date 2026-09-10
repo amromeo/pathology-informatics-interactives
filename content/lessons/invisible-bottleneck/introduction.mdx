@@ -1,11 +1,16 @@
-# The Invisible Bottleneck
+# Investigating Delayed Result Release
 
-> **Synthetic case:** The LIS median looks acceptable, but middleware queue data reveal long peak delays while analyzers sit intermittently idle.
+At noon, the chemistry supervisor reports that specimens delivered around
+10:00 have taken much longer than usual to appear as final results. The
+operations dashboard still shows a median receipt-to-release time of
+**20 minutes**. A manager asks whether another analyzer is needed.
 
-## Your task
+You are the resident assisting the supervisor and analytics team. The dashboard
+was built from finalized LIS results. It opens in a web page whose clock shows
+the current time, but its data come from a scheduled extract. Middleware review
+events and unfinished accessions are stored in separate operational systems.
 
-Combine courier, analyzer, middleware, LIS, and business-intelligence data. Define a question, verify lineage and freshness, identify the bottleneck, and choose balanced clinical, operational, and financial measures.
-
-## Key point
-
-Ancillary data can reveal workflow behavior that a final-result table cannot. A metric must be timely and tied to a decision to support data-driven improvement.
+The review set contains 14 accessions received from 08:00 through 10:07 on
+the same day: six earlier routine records and eight from the 10:00 delivery.
+Inspect the source logs, update the extract, and link unfinished records.
+Then compare time before and after analysis and propose a monitored intervention.

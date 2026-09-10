@@ -1,0 +1,13 @@
+import { useState } from "react";
+import { mappingOptions, mappingRows, terminologyRoles, terminologyScore } from "../../content/lessons/code-the-meaning/interaction";
+import { Teaching, Topic5Section, Topic5Select, type Topic5Props } from "./Topic5Common";
+
+export function TerminologyExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
+  const [roles, setRoles] = useState<Record<string,string>>({});
+  const [mappings, setMappings] = useState<Record<string,string>>({});
+  const [tested, setTested] = useState(false);
+  const score = terminologyScore(roles,mappings);
+  return <div><Topic5Section title="Identify what each record represents"><Teaching Content={Concepts}/><div className="topic5-card-grid">{terminologyRoles.map(row => <article className="artifact-card topic5-record" key={row.id}><h3>{row.record}</h3><Topic5Select label={`Standard for ${row.id}`} value={roles[row.id] ?? ""} options={[["","Choose a standard"], ...row.alternatives.map(value => [value,value] as const)]} onChange={value => { setRoles({ ...roles, [row.id]: value }); setTested(false); }} note={roles[row.id] ? `${roles[row.id] === row.answer ? "Fits this use." : "Does not fit the named use."} ${row.explanation}` : undefined}/></article>)}</div></Topic5Section>
+    <Topic5Section title="Review the proposed observation mappings"><div className="topic5-card-grid">{mappingRows.map(row => <article className="artifact-card topic5-record" key={row.id}><h3>{row.id}</h3><p>{row.source}</p><Topic5Select label={`Mapping for ${row.id}`} value={mappings[row.id] ?? ""} options={mappingOptions(row.id)} onChange={value => { setMappings({ ...mappings, [row.id]: value }); setTested(false); }} note={mappings[row.id] ? `${mappings[row.id] === row.expected ? "Supported decision." : "Unsupported assignment."} ${row.reason}` : undefined}/></article>)}</div><button className="primary-button" type="button" onClick={() => { setTested(true); onAttempt?.(true); }}>Check the mapping review</button><p role="status">{tested ? `${score.roles} of 7 purpose assignments and ${score.mappings} of 4 mapping decisions match.` : "Complete both reviews; deferral is an available decision when evidence is missing."}</p>{tested && score.roles === 7 && score.mappings === 4 && <p className="topic5-note" role="status">The review preserves the supported mappings and identifies the records requiring further work.</p>}</Topic5Section>
+    <Topic5Section title="Document the mapping decisions"><Teaching Content={Bridge}/></Topic5Section><button className="text-button" type="button" onClick={() => { setRoles({}); setMappings({}); setTested(false); onAttempt?.(false); }}>Reset lesson interactions</button></div>;
+}

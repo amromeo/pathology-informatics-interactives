@@ -105,28 +105,28 @@ Lesson slug: `reflex-rule-ripple-effect`
 - **Harrison plan:** Session 3, slides 7–13; Session 7, slides 17 and 27; Session 9, slides 7–10.
 - **Build into the lesson:** Define reflex testing as an approved order sequence driven by intermediate results, then treat the assay change as configuration and change-control work. Test indicated, non-indicated, boundary, missing-data, and unaffected paths.
 
-### 13 — Follow the Flag
+### 13 — Tracing a Missing Critical Flag
 
 Lesson slug: `follow-the-flag`
 
 - **Harrison plan:** Session 3, slides 18–20; Session 4, slides 3–20.
 - **Build into the lesson:** Distinguish message transport from interpretation. Use the LIS–EHR connection, interface engine, HL7 v2 structure, local mapping, and downstream display approval to explain how a message can be received successfully while a flag is interpreted incorrectly.
 
-### 14 — Newborn Screen to Public Health
+### 14 — Sending a Newborn Screening Report
 
 Lesson slug: `newborn-screen-to-public-health`
 
 - **Harrison plan:** Session 4, slides 3–6, 10–12, 16–21, and 22–34.
 - **Build into the lesson:** Use SDOs, HL7 v2, FHIR, LOINC, SNOMED CT/value sets, and UCUM according to their actual roles. The learner should separate syntactic acceptance from a complete, correctly identified, clinically usable public-health message.
 
-### 15 — Code the Meaning, Not the Label
+### 15 — Reviewing Laboratory Terminology Mappings
 
 Lesson slug: `code-the-meaning`
 
 - **Harrison plan:** Session 4, slides 16 and 22–32.
 - **Build into the lesson:** Make the terminology purpose drive the selection: billing, diagnosis classification, observations, units, clinical concepts, images, and structured AP reporting are not interchangeable. Include LOINC limitations and explicitly reject superficial text matching as evidence of clinical equivalence.
 
-### 16 — The Invisible Bottleneck
+### 16 — Investigating Delayed Result Release
 
 Lesson slug: `invisible-bottleneck`
 

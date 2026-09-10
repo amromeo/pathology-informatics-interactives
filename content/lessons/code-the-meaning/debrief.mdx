@@ -1,7 +1,16 @@
 ## Debrief
 
-**Informatics principle:** A standard code is useful only when its purpose, context, and granularity match the data being represented.
+The breast-report objects require different representations because they carry
+different information. Coding a finding, identifying an observation, expressing
+a unit, classifying a diagnosis, billing a service, storing an image, and
+structuring a report are related tasks rather than interchangeable ones.
 
-The mapping failed because one terminology was treated as a universal dictionary. The consequence is superficially coded data that cannot be interpreted reliably by clinical, registry, analytics, and billing consumers.
+TM-01 supports 2345-7, while TM-02 supports 14749-6. Assigning one code to both
+because their display label is GLU hides a property difference. TM-03 needs
+the assay definition before a specific mapping can be approved. TM-04 retains
+its order identity while its result components are mapped separately.
 
-Terminology specialists maintain mappings. Pathologists approve clinical meaning. Each downstream owner validates use in its workflow.
+A complete review contains seven correct purpose assignments and four supported
+mapping decisions. Its purpose is not memorizing code numbers. The important
+work is stating what the source means, what the target means, and what evidence
+supports their relationship.

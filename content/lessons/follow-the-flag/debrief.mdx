@@ -1,7 +1,16 @@
 ## Debrief
 
-**Informatics principle:** Successful transmission is not the same as clinically correct display.
+FL-01 retained its value, unit, and final status, but CH reached a display table
+that did not recognize it. Translating CH to HH restores critical-high meaning.
+FL-02 tests the independent CL-to-LL mapping. Mapping CH to H makes the code
+recognizable while still losing severity.
 
-The local `CH` code retained meaning inside the analyzer and LIS but was not translated into the receiver’s `HH` convention. The EHR displayed the number while losing critical severity.
+The unchanged configuration matches four of six selected category outcomes.
+Both critical translations yield six of six, provided unknown XH still enters
+review. Converting unknown codes to normal creates a new failure even after
+the reported result is repaired.
 
-The integration team implements mappings. Laboratory and EHR clinical owners approve meaning and presentation. Validation must include every abnormality category and unaffected behavior.
+The laboratory remains responsible for the complete report and its verified
+appearance in the EHR. The analyst changes the interface; clinical and
+laboratory staff approve interpretation and assess already affected reports.
+The documented call and the electronic display are separate records of work.

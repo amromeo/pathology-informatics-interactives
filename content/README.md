@@ -79,3 +79,23 @@ All numeric counts in the interface are calculated from the case records.
 Update the MDX counts and tests together if you change those records. Stable
 lesson URLs retain their earlier slugs; the visible titles are now Checking
 Automatic Result Release and Updating a Thyroid Reflex Rule.
+
+## Topic 5 editing
+
+The four Topic 5 lessons now use individual experiences. Each folder contains
+`introduction.mdx`, `concepts.mdx`, `bridge.mdx`, `debrief.mdx`, `faculty.mdx`, and
+`interaction.ts`. Edit narrative and teaching in MDX; edit records, expected
+outcomes, and structured feedback in the lesson-local TypeScript file.
+
+- `follow-the-flag`: six flag categories, field explanations, and source trace.
+- `newborn-screen-to-public-health`: eight receiving situations and agreed
+  observation/answer mappings. Preserve the distinction between the case profile
+  and requirements of a particular public-health program.
+- `code-the-meaning`: seven purpose assignments and four mapping decisions.
+  Recheck published terminology definitions before changing real code numbers.
+- `invisible-bottleneck`: 14 accession events in minutes from 08:00. Keep the
+  times, completed/pending denominators, and MDX summary values consistent.
+
+UI headings and short action/status labels remain in the Topic 5 React
+components. Source records and longer per-control explanations live in lesson
+files. Stable URLs retain the original slugs despite the revised plain titles.

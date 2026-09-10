@@ -1,13 +1,20 @@
-# Follow the Flag
+# Tracing a Missing Critical Flag
 
-> **Synthetic case:** Potassium is 6.8 mmol/L. The analyzer and LIS call it critical high, the interface receives it successfully, and the EHR shows a generic blue flag.
+At 08:10, a chemistry supervisor opens the EHR laboratory report for accession
+FL-01. Potassium is **6.8 mmol/L**, but the report has no critical-high indicator.
+The LIS shows the same result with its local **CH** flag. The technologist has
+already documented the required critical-result call. You are the resident
+working with the LIS analyst to investigate the incomplete electronic display.
 
-## Investigate before repairing
+A new EHR connection went live yesterday. Validation included normal, high, and
+low results, but the local critical categories were not represented in the
+display checks. The interface engine copies result fields from the LIS into
+messages for the EHR. Its current transformation leaves the flag unchanged.
 
-Trace the value and abnormality code through each system. Inspect the HL7 observation fields and decide whether the failure is transport, syntax, terminology, or receiver configuration.
+## Your task
 
-Use the evidence panels to separate successful transport from correct semantic interpretation before changing the mapping.
-
-## Key point
-
-An acknowledgment confirms receipt, not correct interpretation. Syntactic interoperability moves fields; semantic interoperability preserves usable meaning.
+Compare the source result, outbound message, receiver log, and clinical report.
+Select message fields to learn what they carry. Translate both critical
+categories without changing routine categories, then test the unknown-code
+branch. Finish by distinguishing a mapping correction from the follow-up needed
+for results that were already displayed incompletely.

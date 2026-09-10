@@ -1,3 +1,35 @@
-# Faculty guide: Newborn Screen to Public Health
+# Faculty guide: Sending a Newborn Screening Report
 
-Use an original synthetic message, not the sample from the PIER toolkit. Require learners to explain both the general purpose of each inspected field and its meaning in this case.
+Allow 35 minutes. Ask the learner to explain why an accepted report is absent
+from the program worklist before changing controls. The case specifies a
+staging-and-routing architecture; do not teach that every HL7 acknowledgment
+only establishes transport.
+
+Expected replay: 5/8 initially; 8/8 after both terminology settings are repaired.
+A condition-specific code for the overall report remains wrong. Switching to
+identifier-only matching misroutes NB-04. Treating every message as new creates
+a duplicate NB-05 and fails correction review for NB-06. Ask how these defects
+could affect program follow-up even if all messages were successfully stored.
+
+Assess the distinction among observation identity, answer concept, value set,
+numeric units, and patient identity. Ask the resident to describe how the same
+information could be represented in FHIR without implying that JSON alone
+solves interoperability. Require a versioned interface agreement and an
+identified person responsible for exceptions.
+
+PIER alignment: 5.1–5.3. Harrison/API: Session 4 slides 3–6, 10–12, 16–21,
+and 22–34. Discuss standards organizations, implementation guides, vocabulary,
+and demonstrated clinical use.
+
+Sources: [LOINC newborn-screening resources](https://loinc.org/newborn-screening/),
+[57130-7 and its example answer list](https://loinc.org/57130-7),
+[46746-4](https://loinc.org/46746-4), and
+[FHIR R4 Observation](https://hl7.org/fhir/R4/observation.html).
+The routing rules and selected answer subset are this case's interface
+agreement, not a universal public-health requirement. No diagnostic cutoff
+is inferred from these codes.
+
+For standards development, use the
+[HL7 specification lifecycle](https://projectlifedashboard.hl7.org/specification-lifecycle/).
+Ask the learner how a missing clinical concept should be raised, reviewed, and
+adopted without changing the private meaning of an existing shared code.

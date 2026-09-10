@@ -115,3 +115,27 @@ the exact lesson in which it appears.
   folded region for a digital-pathology validation exercise; no labels,
   identifiers, diagnosis, interface chrome, or watermark. The deployed Lesson
   20 asset is the optimized `public/assets/synthetic-wsi-field.webp` derivative.
+
+## Topic 5 implementation sources
+
+PIER R5 Topic 5 guides objectives 5.1–5.5; original cases replace the toolkit's
+sample message. Harrison/API slide ranges are recorded in HARRISON-SLIDE-MAP.md.
+
+- HL7 specification lifecycle: https://projectlifedashboard.hl7.org/specification-lifecycle/
+- HL7 observation interpretations: https://terminology.hl7.org/4.0.0/CodeSystem-v3-ObservationInterpretation.html
+- FHIR R4 Observation: https://hl7.org/fhir/R4/observation.html
+- LOINC newborn screening: https://loinc.org/newborn-screening/
+- Overall interpretation and answer list: https://loinc.org/57130-7
+- Condition-specific counterexample: https://loinc.org/46746-4
+- LOINC dimensions: https://loinc.org/kb/users-guide/major-parts-of-a-loinc-term
+- Glucose property comparison: https://loinc.org/2345-7 and https://loinc.org/14749-6
+- SNOMED CT purpose: https://www.snomed.org/what-is-snomed-ct
+- UCUM specification: https://ucum.org/ucum
+- DICOM whole-slide microscopy: https://dicom.nema.org/medical/dicom/final/sup145_ft.pdf
+- CAP cancer protocols: https://www.cap.org/protocols-and-guidelines/cancer-protocols/current-cancer-protocols/
+
+Sources checked September 10, 2026. No production clinical threshold, universal
+receiver behavior, billing assignment, or national public-health routing rule
+is inferred. Queue records and interface contracts are original. LOINC codes
+and short definitions are attributed to Regenstrief; see https://loinc.org/license.
+Other sources are cited and paraphrased, not reproduced as teaching slides.

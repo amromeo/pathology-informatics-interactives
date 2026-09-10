@@ -1,11 +1,18 @@
-# Code the Meaning, Not the Label
+# Reviewing Laboratory Terminology Mappings
 
-> **Synthetic workbench:** A local “breast panel” label must support ordering, observations, findings, units, billing, imaging, and structured reporting.
+The laboratory is preparing a new data feed for a cancer registry and clinical
+analytics. An analyst used display names from the local test catalog to suggest
+mappings. The catalog includes a breast panel order, individual biomarker
+results, report findings, and billing entries. Several rows have similar names
+but serve different purposes.
 
-## Your task
+You are the resident reviewing the proposals with the terminology specialist.
+First identify what each breast-report object represents and which standard
+serves the named use. Then review four mapping decisions, including two
+chemistry records supplied by the same catalog-mapping process.
 
-Select fit-for-purpose roles for LOINC, SNOMED CT, UCUM, ICD, CPT, DICOM, and CAP protocol concepts. Identify why text similarity alone is unsafe.
-
-## Key point
-
-Orderables, observations, answer values, units, findings, diagnoses, procedures, images, and report structures are related—but not interchangeable—concepts.
+The analyst's draft assigns the same glucose code to both numeric result
+fields because both display as GLU. One is reported in mg/dL, the other in
+mmol/L. A HER2 entry lacks its assay definition, and BREAST_PANEL is an order
+rather than a single observation. Decide which mappings can be supported now
+and which require more information.

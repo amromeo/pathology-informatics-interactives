@@ -1,7 +1,16 @@
 ## Debrief
 
-**Informatics principle:** Interoperability is demonstrated by correct use at the receiving endpoint.
+The original observation identifier and free-text answer could be stored but
+were not usable by the agreed routing rules. The overall observation mapping
+and coded answers restore the intended actions for NB-01, NB-02, and NB-03.
 
-Local and free-text meanings prevented computable routing even though the message structure was valid. A safe repair aligns identifiers, observation and answer concepts, units, exception handling, and end-to-end tests.
+The other five tests protect different requirements: identity context, one
+record for a retry, reconciliation of a corrected report, visible handling of
+unknown answers, and preliminary-result review. The original configuration
+matches five of eight actions; the complete repair matches eight of eight.
+Removing the identity or version safeguards creates failures despite correct
+terminology.
 
-Interface analysts implement the profile. Terminology and public-health partners align meaning. Clinical program owners approve use and follow-up behavior.
+The laboratory and program agree on clinical meaning and follow-up. Interface
+staff implement and monitor the exchange. Standards support that agreement;
+they do not replace it or establish that the receiving workflow is complete.

@@ -1,11 +1,18 @@
-# Newborn Screen to Public Health
+# Sending a Newborn Screening Report
 
-> **Synthetic case:** A newborn-screening result message is accepted by the public-health receiver but cannot enter automated follow-up routing.
+At 09:00, a newborn-screening program coordinator cannot find report NB-01
+on the referral worklist. The screening laboratory finalized an overall
+interpretation requiring immediate referral at 08:40. Staff initiated the
+program's urgent communication procedure, but the electronic report remains
+in the receiver's exception queue.
 
-## Your task
+The laboratory recently connected its LIS to the public-health program. The
+interface analyst configured the message structure and patient identifiers.
+The local overall-interpretation field, NBS_SUM, and its local answer REFERRAL
+were passed through unchanged. A sample report was stored successfully during
+testing, but its entry into a follow-up worklist was not checked.
 
-Inspect the message profile, observation identifiers, answer concepts, units, facility identifiers, and receiving workflow. Compare the roles of HL7 v2, FHIR, terminology standards, implementation guides, and standards-development organizations.
-
-## Key point
-
-Transport and syntax can succeed while semantic and workflow interoperability fail. Standards must be profiled, implemented, and clinically governed for a defined use.
+You are the resident assisting the laboratory and program staff. Compare the
+received fields with their agreed profile, select observation and answer
+mappings, and replay eight message situations. Preserve identity,
+retransmissions, corrections, and exceptions while restoring usable routing.

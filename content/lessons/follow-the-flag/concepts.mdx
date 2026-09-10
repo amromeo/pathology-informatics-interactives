@@ -1,0 +1,53 @@
+### What an interface does
+
+An interface connects systems that may store the same information differently.
+Here the LIS sends a verified result to an **interface engine**, which transforms
+selected fields and routes the message to the EHR. **Middleware** commonly sits
+between instruments and the LIS and may manage instrument communication,
+quality checks, or result rules. These roles can overlap in a particular
+installation; identify which configured transformation actually handles this
+message.
+
+**HL7 v2** is a messaging standard. An observation message contains named
+segments and numbered fields. The vertical bar separates fields, including
+empty fields, and the caret separates components within a field. In the
+displayed OBX segment, the observation identifier, value, unit, reference
+interval, flag, and status occupy different positions. Moving a value into the
+wrong position is a structural error. Keeping it in the right position while
+using a code the receiver cannot interpret is a meaning or mapping error.
+
+### Follow the category, not just the number
+
+The sender uses CH and CL for critical high and critical low. The receiver
+contract uses HH and LL for those categories, H and L for noncritical
+high and low, and N for normal. This is the agreed mapping for this connection.
+The exercise preserves the laboratory's already assigned categories; it does
+not calculate new critical limits from the displayed reference interval.
+
+CH → H is an attractive but incomplete repair. The receiver recognizes H,
+but the critical distinction is lost. CH → HH addresses only one direction;
+CL still needs a corresponding mapping. Leave the routine categories unchanged
+and route an unexpected category to visible review. Treating an unknown flag as
+normal would turn missing knowledge into a clinical assertion.
+
+### What the acknowledgment establishes
+
+The receiver returned an application acknowledgment with AA and the matching
+message control ID. In this implementation, that means the observation was
+accepted and stored; an unknown flag is logged separately. Other implementations
+may reject it. Read the receiving system's contract and logs rather than
+assuming that every acknowledgment has the same operational meaning.
+
+Transport, message structure, interpretation, and clinical use therefore need
+separate evidence. Inspect the official EHR laboratory report, its status,
+units, reference information, comments, and flags. If other chart views reuse
+these elements, include those views in the agreed validation scope.
+
+### Repair and recovery
+
+The interface analyst implements a versioned mapping in a test environment.
+Laboratory and EHR staff verify the resulting report, and laboratory leadership
+approves its clinical meaning. Existing critical-result communication procedures
+continue during investigation. Correcting a future message does not prove that
+an earlier report was corrected, nor does a red indicator prove that the
+required communication occurred.
