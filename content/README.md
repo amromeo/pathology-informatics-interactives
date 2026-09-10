@@ -52,3 +52,13 @@ them.
 Do not paste patient information, proprietary screenshots, or text copied from
 the PIER PDF. All cases and artifacts must remain synthetic and independently
 written.
+
+Topic 3 lessons (`server-behind-the-analyzer`, `twelve-hours-offline`, and
+`not-anonymous-enough`) keep their simulation data and scoring in their own
+`interaction.ts` files. Their `concepts.mdx` files teach the concepts used by
+the workbenches; `debrief.mdx` and `faculty.mdx` explain the resulting choices.
+Preserve stable identifiers when editing. Downtime call-record actions depend
+on the communication decision, and security coverage includes partial
+mitigation. Run `npm test` and `npm run build:pages` after interaction edits.
+Desktop and phone review captures and the verification record are in
+`review/topic3/`.

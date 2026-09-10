@@ -74,6 +74,16 @@ test("a fully correct reconciliation scores clean", () => {
   assert.deepEqual(score.hazardsMissed, []);
 });
 
+test("a missing call record cannot be resolved by linking nonexistent documentation", () => {
+  const records = buildReconciliationRecords(applyDecision(controlledState(), "operate", "unit-call-methods"));
+  const assignments = correctAssignments(records);
+  assignments.actions["missing-critical-DT-202"] = "enter-critical-link-call";
+  assert.deepEqual(scoreReconciliation(records, assignments).hazardsMissed, ["missing-critical-DT-202"]);
+  assignments.actions["missing-critical-DT-202"] = "verify-and-escalate-call";
+  assert.deepEqual(scoreReconciliation(records, assignments).hazardsMissed, []);
+  assert.equal(buildReconciliationRecords(controlledState()).hazards.find((hazard) => hazard.id === "missing-critical-DT-202")?.correctActionId, "enter-critical-link-call");
+});
+
 test("downtime state is serializable plain data", () => {
   const state = controlledState();
   const clone = structuredClone(state);

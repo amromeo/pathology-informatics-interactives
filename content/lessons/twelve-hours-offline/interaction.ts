@@ -245,13 +245,27 @@ const duplicateChartHazard: ReconciliationHazard = {
 export const buildReconciliationRecords = (state: DowntimeState): ReconciliationRecords => {
   const uncontrolledIdentifiers = state.decisions["temporary-identifiers"] === "unit-created-identifiers";
   const uncontrolledCalls = state.decisions["critical-results"] === "unit-call-methods";
+  const hazards = baselineHazards.map((hazard): ReconciliationHazard => {
+    if (!uncontrolledCalls || hazard.id !== "missing-critical-DT-202") return { ...hazard };
+    return {
+      ...hazard,
+      evidence: "DT-202 contains potassium 6.7 mmol/L and no restored result. The unit reports a phone call, but no matching laboratory call-log entry verifies the recipient, time, or read-back.",
+      actions: [
+        { id: "verify-and-escalate-call", label: "Verify patient identity, preserve the original result and collection time, and escalate the missing call record for verification with the clinical team before closing reconciliation." },
+        ...hazard.actions,
+      ],
+      correctActionId: "verify-and-escalate-call",
+      resolvedNote: "The missing communication record has a verification and escalation plan. The exercise scores that plan; staff must complete and document verification before actual return to service.",
+    };
+  });
+  if (uncontrolledIdentifiers) hazards.push(duplicateChartHazard);
   return {
     paperRecords: baselinePaperRecords.map((record) => ({ ...record })),
     restoredCharts: uncontrolledIdentifiers
       ? [...baselineCharts.map((chart) => ({ ...chart })), { mrn: "MRN-490118", patientName: "Liam Brooks", birthDate: "1947-01-10", unit: "Emergency department", duplicateOf: "MRN-410118" }]
       : baselineCharts.map((chart) => ({ ...chart })),
     callLogEntries: uncontrolledCalls ? [] : [{ id: "CL-02", tempId: "DT-202", calledAt: "10:14", recipient: "R. Moore, RN", readBack: true }],
-    hazards: uncontrolledIdentifiers ? [...baselineHazards, duplicateChartHazard] : baselineHazards.map((hazard) => ({ ...hazard })),
+    hazards,
   };
 };
 
