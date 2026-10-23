@@ -68,7 +68,7 @@ for (const lesson of lessons) {
   }
 
   const folder = resolve("content", "lessons", manifest.slug);
-  if (["specimen-routing", "autoverification", "reflex-rule", "flag-trace", "newborn-exchange", "terminology-review", "queue-analysis", "cds-design", "alert-evaluation"].includes(manifest.experience ?? "")) {
+  if (["specimen-routing", "autoverification", "reflex-rule", "flag-trace", "newborn-exchange", "terminology-review", "queue-analysis", "cds-design", "alert-evaluation", "test-build", "lis-selection"].includes(manifest.experience ?? "")) {
     for (const file of ["concepts.mdx", "interaction.ts"]) {
       if (!existsSync(resolve(folder, file))) fail(`${manifest.slug} is missing ${file}`);
     }
@@ -135,6 +135,6 @@ for (const plannedLesson of publishedTopic2Plans) {
 if (publishedTopic2Plans.length !== 2) fail("Completed Topic 2 Lessons 3 and 4 must be published from the staged plan");
 
 const pilots = lessons.filter((lesson) => lesson.manifest.pilot);
-if (pilots.length !== 3) fail(`Expected three remaining pilot interaction patterns; found ${pilots.length}`);
+if (pilots.length !== 2) fail(`Expected two remaining pilot interaction patterns; found ${pilots.length}`);
 
 console.log(`Validated ${lessons.length} lessons, ${covered.size}/${expected.size} objectives, ${requiredTopic2Subtopics.size} staged Topic 2 subtopics, ${pilots.length} pilot patterns, all required MDX files, and 23 Harrison slide plans.`);

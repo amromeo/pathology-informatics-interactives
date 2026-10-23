@@ -1,3 +1,16 @@
-# Faculty guide: The Pixel Budget
+# Faculty guide: Choosing Image Settings for a Pathology Service
 
-Ask learners to predict which changes are reversible and which discard information. Keep diagnostic-use claims tied to local validation; the visual comparison is educational, not a substitute for a validated system.
+Allow 40 minutes. PIER 7.1 is addressed through capture, storage, retrieval, viewing, static images, live telepathology, and whole-slide use; 7.2 through sampling, formats, compression, storage, and displays. Harrison/API Session 5, slides 5–16 and 23–26, informs the concepts.
+
+Ask for visible differences before naming the process. Glands make edge changes easier to inspect. The upper-right field tests whether learners attribute all blur to the new encoder. The project's existing generated image is a visual process demonstration, not a morphology assessment or a diagnostic-equivalence experiment. Provenance and derivative settings are in SOURCES.md.
+
+Expected calculation: 15,000/0.5 × 10,000/0.5 × 3 = 1.8 billion bytes. At 0.25 µm, 7.2 billion. At 10:1, one plane, two copies, 125,000 slides/year: 180 TB. At 100 megabits/second, the 0.72 GB layer takes 57.6 seconds under the stated ideal assumptions. Ask why time to the first useful tile differs from full-layer transfer time.
+
+Mistakes include confusing zoom with acquisition, treating PNG as restoration, and assuming DICOM conversion validates the system. Require a plan linking clinical tasks to representative checks, provenance, display review, and recovery. Do not prescribe universal magnification, compression, retention, or monitor specifications.
+
+## Sources
+
+- [PIER Essentials R5](https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf), Topic 7; objectives paraphrased.
+- [DICOM PS3.3 A.32.8](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_A.32.8.html), tiles, frames, and resolution layers.
+- [DICOM PS3.3 C.8.12.4](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.8.12.4.html), image attributes and lossy history; edition checked: 2026d.
+- API/Harrison Session 5, CC BY 4.0; detailed attribution in the ledger.

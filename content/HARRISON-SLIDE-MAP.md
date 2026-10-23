@@ -147,35 +147,35 @@ Lesson slug: `alert-everyone-ignores`
 - **Harrison plan:** Session 7, slides 28–45.
 - **Build into the lesson:** Have learners diagnose alert fatigue, poor targeting, provider-role differences, automation bias, and weak evaluation. Require a redesign plus process, outcome, burden, and harm measures; do not use acceptance rate alone as the definition of success.
 
-### 19 — The Pixel Budget
+### 19 - Choosing Image Settings for a Pathology Service
 
 Lesson slug: `pixel-budget`
 
 - **Harrison plan:** Session 5, slides 5–16 and 23–26.
 - **Build into the lesson:** Connect pixel dimensions, optical resolution, color depth, compression, metadata, pyramids, PACS retrieval, bandwidth, and display calibration. The learner should choose a fit-for-purpose image path, not simply the smallest or lossless file.
 
-### 20 — Validate Before Go-Live
+### 20 - Reviewing a Whole-Slide Imaging Validation
 
 Lesson slug: `validate-before-go-live`
 
 - **Harrison plan:** Session 5, slides 20–29.
 - **Build into the lesson:** Build the validation matrix from the intended clinical application, case mix, scanners, displays, users, workflows, washout, concordance, and discordance review. Investigate clustered failures and require corrective work before approving the weak specimen category.
 
-### 21 — Human + Algorithm
+### 21 - Reviewing a Mitosis Detection Tool
 
 Lesson slug: `human-plus-algorithm`
 
 - **Harrison plan:** Session 5, slides 25–29; Session 6, slides 4–5, 17–23, 34–55.
 - **Build into the lesson:** Place detection, annotation, counting, classification, and diagnosis on a clear spectrum. Evaluate the combined reader-plus-tool system, including threshold effects, artifacts, site variation, calibration, subgroup performance, workload, automation bias, drift, and monitoring.
 
-### 22 — Build the New Test
+### 22 — Building and Validating a Laboratory Test
 
 Lesson slug: `build-the-new-test`
 
 - **Harrison plan:** Session 3, slides 7–13 and 18; Session 9, slides 7–10 and 22–29.
 - **Build into the lesson:** Use the complete LIS test definition, formal request/vetting, build/test/production separation, acceptance criteria, downstream display, interface testing, signoff, training, go-live support, monitoring, documentation, and change control. Keep LIS analyst configuration separate from laboratory clinical approval.
 
-### 23 — Choose and Govern the LIS
+### 23 — Selecting and Maintaining a Laboratory Information System
 
 Lesson slug: `choose-and-govern-lis`
 

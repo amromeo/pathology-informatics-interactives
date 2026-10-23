@@ -1,0 +1,10 @@
+{
+  "branch": "codex/topic7-digital-pathology",
+  "pushStatus": "published",
+  "pullRequestCreated": true,
+  "pullRequestUrl": "https://github.com/amromeo/pathology-informatics-interactives/pull/4",
+  "browserQa": "passed in-app at desktop and phone widths",
+  "merged": false,
+  "deployed": false,
+  "remainingWork": ["Content/integration review with Topic 8", "Combined checks before sequential merge and deployment"]
+}

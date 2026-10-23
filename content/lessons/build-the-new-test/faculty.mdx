@@ -1,3 +1,32 @@
-# Faculty guide: Build the New Test
+# Faculty guide: Building and Validating a Laboratory Test
 
-Require an explicit boundary between internal technical data and provider-facing results. Ask which documents supply each required fact, who owns it, where it is tested, and who approves it.
+## Outcomes and sequence
+
+This lesson addresses PIER 8.1, 8.2, and 8.4 through order/report responsibility, test definition, validation and information maintenance. Allow 40 minutes: 5 for the request and report, 10 for the definition, 15 for testing, and 10 for the release discussion.
+
+Ask learners to explain what “Detected copies/mL” implies before showing them the procedure. Require them to identify the missing organism identity and the unsupported concentration unit. They should distinguish the laboratory's report responsibility from the analyst's technical configuration work.
+
+## Expected behavior
+
+The initial configuration fails all eight result checks. Selecting separate components, invalid-run handling, qualitative reference information, pending status, the locally validated specimen, linked corrections, and accession/component/version matching passes all eight.
+
+Correcting the result fields and units alone fixes routine positive, negative, and multiple-detection reports but leaves invalid, pending, specimen, correction, and retry problems. Use this partial success to ask why regression testing matters.
+
+The preview is a result-section abstraction, not a complete EHR implementation. Ask learners to name fields and workflows outside its scope. Do not claim that it verifies analytical performance, terminology assignments, complete identity matching, or production interfaces.
+
+The four readiness selections are elements of a recommendation. Learners cannot approve a real clinical release by checking them. Good explanations identify evidence, responsible people, and the exact version being promoted.
+
+## Assess transfer
+
+Ask how a changed reference comment, a corrected report, an interface outage, and an old order in a favorite list would affect the plan. A strong answer connects the test dictionary to reports, procedures, training, and downstream consumers.
+
+Discuss manufacturer instructions, analytical verification, and local information-system testing as distinct sources of evidence. Do not invent a regulatory classification for the unnamed case assay. The specimen limitation is supplied by the local case procedure.
+
+## Sources
+
+- [PIER Essentials R5](https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf), Topic 8.
+- API/Harrison Session 3, slides 7–13 and 18; Session 9, slides 7–10 and 22–29, as recorded in the project slide map.
+- [42 CFR 493.1291](https://www.ecfr.gov/current/title-42/section-493.1291), test-report requirements, including destination accuracy and corrected reporting.
+- [ASTP/ONC SAFER Guides](https://healthit.gov/clinical-quality-and-safety/safer-guides/), particularly system management, test results, and contingency planning.
+
+Sources support the general framework. The assay, procedure excerpt, configuration, and eight case expectations are original. Review the current local accreditation checklist rather than reproducing proprietary checklist content.

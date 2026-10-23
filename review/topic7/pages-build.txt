@@ -1,0 +1,26 @@
+
+> pathology-informatics-interactives@0.1.0 build:pages
+> npm run data:compile && tsc --noEmit && vite build --base /pathology-informatics-interactives/ --configLoader runner && tsx scripts/export-coverage.ts && node scripts/create-pages-fallback.mjs
+
+
+> pathology-informatics-interactives@0.1.0 data:compile
+> node scripts/compile-lesson-data.mjs
+
+Compiled the editable Lesson 3 and Lesson 4 CSV files.
+vite v7.3.6 building client environment for production...
+transforming...
+Γ£ô 200 modules transformed.
+rendering chunks...
+computing gzip size...
+pages-dist/index.html                    0.78 kB Γöé gzip:   0.40 kB
+pages-dist/assets/report-DhrgJ_c3.csv   45.19 kB
+pages-dist/assets/index-Bz-yLHgQ.css    80.42 kB Γöé gzip:  14.79 kB
+pages-dist/assets/index-DgAAHcmh.js    861.05 kB Γöé gzip: 239.24 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Γ£ô built in 5.94s
+Exported pages-dist/curriculum-coverage.json
+Created 54 static route entry points and the GitHub Pages fallback.

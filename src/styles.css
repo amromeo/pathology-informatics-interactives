@@ -888,6 +888,7 @@ h3 { line-height: 1.2; }
   .debrief-content { padding: 30px 24px; }
   .faculty-content, .practicum-content, .source-panel { padding: 28px 20px; }
   .faculty-content h1, .practicum-content h1 { font-size: 2.5rem; overflow-wrap: anywhere; }
+  .faculty-content h2, .practicum-content h2 { font-size: clamp(1.75rem, 7vw, 2.4rem); overflow-wrap: anywhere; }
   .lesson-list-item { grid-template-columns: 38px 1fr 25px; gap: 12px; }
   .lesson-list-item h3 { font-size: 1.55rem; }
   .site-frame > footer, .lesson-end-nav { align-items: flex-start; flex-direction: column; }
@@ -1026,3 +1027,13 @@ h3 { line-height: 1.2; }
 .cds-trend > div { display: grid; gap: .3rem; }
 .cds-trend span { display: block; padding: .3rem .5rem; min-width: 0; max-width: 100%; background: #d2e4db; color: #183e37; font-size: .85rem; }
 .cds-trend .comparison-bar { background: #e5e0d1; color: #403b2d; }
+
+/* Topic 8 project exercises */
+.topic8-preview { margin: 1.5rem 0; padding: clamp(1rem, 3vw, 2rem); border: 1px solid #b8c8c3; border-radius: 10px; background: #fffdf6; }
+.topic8-report { padding: 1rem; background: #edf2ee; overflow-wrap: anywhere; line-height: 1.65; }
+.topic8-cost { display: flex; gap: .75rem; align-items: baseline; margin-top: 1rem; }
+.topic8-costs { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: .6rem 1rem; font-size: .95rem; }
+.topic8-costs dd { margin: 0; text-align: right; }
+.topic8-preview summary { cursor: pointer; font-weight: 700; margin-top: 1rem; }
+.topic8-page .introduction-content h1 { font-size: clamp(2.5rem, 5vw, 4.75rem); max-width: 1050px; overflow-wrap: break-word; }
+.topic8-experience .topic5-card-grid > .artifact-card { padding: 1rem; }

@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "tool": "cua_repl in-app browser",
+  "root": "http://127.0.0.1:4187/pathology-informatics-interactives/",
+  "widths": [1365, 390],
+  "height": 900,
+  "desktopPassed": true,
+  "phonePassed": true,
+  "screenshotsCaptured": 6,
+  "browserInteractionChecksRun": true,
+  "browserErrorsAndWarnings": [],
+  "alternateBrowserAttempted": false,
+  "fix": "Stable accessible labels on Topic 7 radios and monitoring checkboxes",
+  "standaloneScriptExecuted": false
+}

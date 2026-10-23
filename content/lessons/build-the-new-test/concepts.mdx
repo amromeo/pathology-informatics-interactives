@@ -1,0 +1,25 @@
+### Translate the clinical request into a test definition
+
+A **test definition** is the collection of settings that determines how a test is ordered, processed, reported, and maintained. The clinical request explains the need; the approved procedure and method documentation supply facts that a copied build may not preserve.
+
+Start with the order name and purpose, performing laboratory, specimen and container, collection instructions, method, result components, permitted values, units, reference information, comments, and turnaround expectations. Identify the order and component codes in each system and verify their mappings. A similar display name is not sufficient evidence that two codes mean the same test.
+
+For this case, one order produces three separately named qualitative results. “Detected” is an allowed categorical answer, not a concentration. The local build therefore has no numeric units, and its reference information is “Not detected.” A valid negative result differs from a pending test, an invalid run, or an unsuitable specimen.
+
+An internal control provides technical evidence about the run. It belongs in the laboratory's technical record; the approved patient-facing message explains when the run is invalid and what happens next. Hiding a control from the clinician does not mean ignoring its effect on whether results can be released.
+
+### Follow the information to its clinical destination
+
+The instrument produces target calls and technical status. The LIS applies the test definition and laboratory release procedure. The interface transmits the report to the EHR, where a clinician reads it. An acknowledgement establishes receipt at one step; it does not establish correct units, component meaning, or final display.
+
+The laboratory must identify where the complete official report is verified in the EHR. Other views may reuse selected elements. Test both the designated report and downstream uses that matter to the clinical workflow, including any decision support, worklists, or public-health interfaces affected by the change.
+
+The preview below deliberately isolates the result section. In a full validation, verify patient and accession identity, collection and report times, performing laboratory, specimen information, and interpretation as well. These fields remain unchanged in this exercise so you can examine the effect of each configuration choice.
+
+### Keep a correction distinct from another test
+
+An accession identifies the laboratory episode or specimen record; an interface message identifier identifies a transmission. A retry may have a new message identifier while carrying the same accession, component, and result version.
+
+For a correction, the latest result must be identifiable as current and corrected, with the earlier version retained in the audit history. The correction also requires the institution's communication process. A second unlinked final report or a silent replacement without history does not adequately represent what happened.
+
+Change the controls and inspect the preview. Open the expected-result explanation when needed. A setting that makes the first case look right may still fail a pending, invalid, or corrected case.

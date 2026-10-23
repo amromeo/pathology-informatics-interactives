@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "date": "2026-10-22",
+  "root": "http://127.0.0.1:4188/pathology-informatics-interactives/",
+  "browser": "Codex in-app browser",
+  "viewports": [
+    {
+      "width": 1365,
+      "height": 900
+    },
+    {
+      "width": 390,
+      "height": 900
+    }
+  ],
+  "lessons": [
+    "pixel-budget",
+    "validate-before-go-live",
+    "human-plus-algorithm",
+    "build-the-new-test",
+    "choose-and-govern-lis"
+  ],
+  "checks": [
+    "wrong and correct paths",
+    "changed-answer invalidation",
+    "reset",
+    "keyboard slider boundaries",
+    "image loading",
+    "independent reader observations",
+    "release and selection recommendation gates",
+    "early debrief access",
+    "faculty links",
+    "topic routes",
+    "horizontal overflow"
+  ],
+  "consoleErrors": [],
+  "screenshots": 11,
+  "limitations": [
+    "Responsive viewport checks; not physical-device Safari or Android testing."
+  ]
+}
