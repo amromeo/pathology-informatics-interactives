@@ -35,18 +35,17 @@ PIER R5, and the existing Harrison/API source plan.
 - `npm run build:pages`: passed, including 54 static route entry points.
 - `node --check review/topic7/check-browser.cjs`: passed syntax checking.
 - `git diff --check`: passed.
-- Source and compressed derivative visually inspected. Actual browser screenshots
-  were not captured. Test/build logs and structured results are in review/topic7.
+- Initial source and compressed derivative visually inspected. Follow-up browser screenshots
+  and completed QA are now recorded in review/topic7, alongside the test/build logs.
 - Vite retains its existing large-bundle advisory.
 
-## Remaining limitations — keep as draft until browser review
+## Browser QA completed
 
-The in-app browser security policy rejected the local preview origin and
-explicitly prohibited alternate routes. Desktop/phone rendering, horizontal
-overflow, keyboard behavior, real-browser reset, and state-invalidation checks
-therefore remain unverified. The prepared browser script has not been run.
-review/topic7/README.md contains the complete remaining checklist and expected
-results. Review at 1365 × 900 and 390 × 900 before integration.
+The in-app browser granted access to this worktree preview in the follow-up task. Desktop (1365 x 900) and phone (390 x 900) interaction, overflow, keyboard slider, state invalidation, reset, images, and faculty routes passed. Six screenshots are saved in review/topic7. Stable accessible labels were added after QA exposed feedback changing choice names. All 86 unit tests and the Pages build pass after that fix. No browser errors or warnings were captured.
+
+The standalone Playwright script remains available; equivalent checks were executed through the supported in-app browser API. Earlier access/publication blockers are resolved. Integration and final content review remain separate.
+
+## Scope limits
 
 The small generated image field demonstrates pixel operations, not diagnostic
 adequacy. The finite candidate list and reader observations do not establish a
@@ -64,4 +63,4 @@ tests/curriculum.test.ts; replacement of the old WSI accessibility check.
 Topic 7's new metadata, components, styles, assets, and tests are separate files.
 
 Do not merge or deploy this branch as part of this task. Integrate sequentially
-after the remaining QA and clinical/content review.
+after clinical/content review and combined integration checks.

@@ -12,7 +12,7 @@
   },
   "productionBuild": "passed",
   "pagesBuild": "passed",
-  "browserQA": "blocked; not completed",
+  "browserQA": "passed in-app at 1365x900 and 390x900; see browser-result.json",
   "warning": "Existing Vite bundle-size advisory",
   "sourceAndDerivativeImageInspection": "completed; no diagnostic adequacy inferred"
 }

@@ -1,64 +1,49 @@
-# Topic 7 verification
+# Topic 7 browser verification
 
-Prepared October 22, 2026. Baseline: cb29ddc7721370c57ab5b1b93cc712ec2eed5b26.
+Completed October 22, 2026 using the in-app browser through cua_repl.
+The preview for this worktree ran on port 4187. The browser tool granted access
+in this task after the user explicitly requested QA. No alternate browser or
+security bypass was used. The earlier rejected port-4174 attempt is historical;
+it did not establish which worktree was being served.
 
-## Automated checks
+## Results
 
-- Curriculum: 23 lessons, 34/34 objectives, all required MDX and 23 Harrison plans.
-- Unit tests: 86 passing, zero failures. New checks cover sampling and storage,
-  measured asset sizes, validation gaps and correct investigations, inclusive
-  threshold boundaries, all/no marks, site denominators, independent reader
-  observations, stable routes, coverage, and semantic markup.
-- Production build and Pages build passed. TypeScript checking is included.
-  Vite still reports the existing large-bundle advisory.
-- Source field visually inspected. No clinical adequacy claim was made.
+Desktop 1365×900 and phone 390×900 checks passed:
+- All three lessons and faculty pages load, with no horizontal page overflow.
+- Both image regions and all three variants load with meaningful alternatives.
+- 0.25 µm, 10:1, one plane, two copies gives 180.0 TB and 57.6 seconds.
+- Image-setting changes clear recommendations; reset restores defaults.
+- WSI plan starts at 0/7; the specified fixed-tissue plan reaches 7/7 while
+  still requiring corrective evidence and clinical approval.
+- Excluding a difficult case produces explanatory feedback; changing the plan
+  clears the prior result and recommendation. Change-review controls and reset work.
+- Algorithm baseline is TP 3, FN 2, FP 3, TN 4. Threshold 0.60 includes M03;
+  0.65 excludes it. At 1.00 predictive value is undefined. Keyboard Home/End
+  and arrows adjust the slider.
+- Site filters do not change the separate observed reader study.
+- Marks-only and automatic-report choices explain their risks.
+- Monitoring distinguishes incomplete and complete plans; edits clear decisions.
+- Faculty source sections and layout checked at both widths.
+- No captured browser errors or warnings.
 
-## Browser limitation
+Six screenshots saved: images, validation, and monitoring at both widths.
+Visual inspection found no clipping/overlap in these views. The native focus
+outline is visible on the image selector. Phone layouts stack image panels.
 
-The in-app browser inventory was available. Attempting to create a tab at
-`http://127.0.0.1:4174/pathology-informatics-interactives/lessons/pixel-budget/`
-was rejected by browser security policy. The tool reported that origin approval
-was declined and explicitly prohibited alternate browser routes or indirect
-execution to achieve the blocked action. No bypass was attempted.
+## Fix found during QA
 
-The preview-server process also reported EADDRINUSE on port 4174. That port
-was already occupied; the existing service was left untouched. No claim is
-made that the attempted browser origin was serving this worktree. For a later
-authorized run, start this worktree's preview on an unused port (the prepared
-script defaults to 4187): in PowerShell, set `$env:PORT='4187'` and run
-`npm run preview:pages`. QA_ROOT can select another authorized preview URL.
+Conditional feedback was included in radio/checkbox accessible names. Exact-name
+selection acted but then could not verify the same control after its name changed.
+Added stable aria-label values to Topic 7 choices; feedback remains adjacent and
+announced via status regions. Rebuilt and verified exact-name selection after
+feedback appeared, including all phone choice paths.
 
-**Desktop/mobile browser QA is NOT complete.** No screenshots, overflow result,
-keyboard result, browser reset result, or real-browser state-invalidation result
-is claimed. Automated semantic/logic checks do not substitute for that review.
-The accompanying browser script is prepared but was not executed. Run it only
-in an environment where access to the preview origin has been authorized.
+All 86 unit tests and the Pages build pass after the fix. Prior production build
+and curriculum checks passed. Existing Vite large-bundle advisory remains.
 
-## Remaining browser review
+check-browser.cjs is the standalone Playwright reproduction script. This task
+executed its checks through the supported in-app locator API instead of launching
+that script. Browser evidence is recorded in browser-result.json.
 
-Use the Pages build at 1365 × 900 and 390 × 900. At each width:
-
-1. Open all three stable lesson URLs and all three faculty guides. Confirm
-   titles, MDX lists, source links, images, and absence of horizontal overflow.
-2. Open the debrief before making a selection in each lesson.
-3. Image lesson: compare both regions and all variants. Select each observation,
-   inspect adjacent feedback, vary all calculator controls, and verify 180 TB
-   and 57.6 seconds at 0.25 µm, 10:1, one plane, two copies. Change a setting
-   after a recommendation and confirm it clears. Reset to original values.
-4. WSI: initial plan should address 0/7 checks. The representative fixed scope,
-   paired reads, 14 days, complete workflow, V12 rescan, and V44 interpretive
-   review should address 7/7. The message must still require corrective evidence
-   and clinical approval. Try the exclusions and rewritten-read wrong paths.
-   Change any plan input after checking and confirm results/recommendation clear.
-   Exercise all three change-review cases and reset the entire lesson.
-5. Algorithm: at 0.50 verify TP 3, FN 2, FP 3, TN 4. At 0.60 include M03; at
-   0.65 exclude it. At 1.00 predictive value must be undefined. Compare sites A
-   and B, inspect marks-only and automatic-report feedback, and confirm reader
-   study counts/times remain fixed. Test incomplete and complete monitoring
-   plans, unsafe expansion, changed-plan invalidation, and reset.
-6. Navigate controls with Tab, Shift+Tab, arrow keys, and Space. Check visible
-   focus, native labels, radio grouping, range adjustment, adjacent feedback,
-   image alternatives, and announcement of calculated/status changes. Inspect
-   screenshots of openings, image pairs, study feedback, and monitoring.
-
-Keep integration on hold until a reviewer completes these browser checks.
+Publication: draft PR #4 was created from this task after the earlier task's
+publication blockers. No merge or public deployment is included in this QA work.

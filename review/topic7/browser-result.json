@@ -1,12 +1,15 @@
 {
-  "status": "blocked",
-  "attemptedOrigin": "http://127.0.0.1:4174",
+  "status": "passed",
   "tool": "cua_repl in-app browser",
-  "previewServer": "Port 4174 already occupied (EADDRINUSE); existing service left untouched; attempted origin was not verified as this worktree",
-  "reason": "Browser security policy: origin approval declined; alternate routes prohibited.",
-  "desktopPassed": false,
-  "phonePassed": false,
-  "screenshotsCaptured": 0,
-  "browserInteractionChecksRun": false,
-  "alternateBrowserAttempted": false
+  "root": "http://127.0.0.1:4187/pathology-informatics-interactives/",
+  "widths": [1365, 390],
+  "height": 900,
+  "desktopPassed": true,
+  "phonePassed": true,
+  "screenshotsCaptured": 6,
+  "browserInteractionChecksRun": true,
+  "browserErrorsAndWarnings": [],
+  "alternateBrowserAttempted": false,
+  "fix": "Stable accessible labels on Topic 7 radios and monitoring checkboxes",
+  "standaloneScriptExecuted": false
 }
