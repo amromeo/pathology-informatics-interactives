@@ -1,0 +1,68 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+(async()=>{
+ const browser=await chromium.launch({channel:'chrome',headless:true});
+ const page=await browser.newPage();
+ const errors=[]; page.on('pageerror',e=>errors.push(e.message));
+ const root=process.env.QA_ROOT||'http://127.0.0.1:4178/pathology-informatics-interactives/';
+ const select=(label,value)=>page.getByRole('combobox',{name:label,exact:true}).selectOption(value);
+ const text=()=>page.locator('main').innerText();
+ const overflow=async()=>assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth),'horizontal overflow');
+ for(const width of [1365,390]){
+  await page.setViewportSize({width,height:900});
+  await page.goto(root+'lessons/build-the-new-test/');
+  await page.getByRole('heading',{name:'Building and Validating a Laboratory Test',exact:true}).waitFor();
+  await overflow(); await page.screenshot({path:'review/topic8/build-'+width+'-opening.png'});
+  await page.getByRole('button',{name:'Open debrief',exact:true}).click();
+  await page.locator('#lesson-debrief').waitFor();
+  await page.getByRole('button',{name:'Review release recommendation',exact:true}).click();
+  assert.match(await text(),/Do not recommend release yet/);
+  await page.getByRole('button',{name:'Run eight report checks'}).click();
+  assert.match(await text(),/0 \/ 8 report checks pass/);
+  for(const [label,value] of [['Patient-facing result fields','components'],['Internal control failure','hold'],['Units and reference information','qualitative'],['Result not yet available','status'],['Specimen acceptance','validated'],['Corrected result handling','replace'],['Retransmitted message handling','accession']]) await select(label,value);
+  await page.getByRole('button',{name:'Run eight report checks'}).click();
+  assert.match(await text(),/8 \/ 8 report checks pass/);
+  await select('Validation case','TB07');
+  assert.match(await page.locator('.topic8-preview .topic8-report').innerText(),/Corrected; prior version retained/);
+  await page.locator('.topic8-preview').scrollIntoViewIfNeeded();
+  await page.screenshot({path:'review/topic8/build-'+width+'-correction.png'});
+  for(const box of await page.getByRole('checkbox').all()) await box.check();
+  await page.getByRole('button',{name:'Review release recommendation',exact:true}).click();
+  assert.match(await text(),/All eight result checks and the four readiness items are addressed/);
+  await select('Result not yet available','negative');
+  assert.doesNotMatch(await text(),/8 \/ 8 report checks pass/);
+  assert.equal(await page.getByRole('checkbox').first().isChecked(),false);
+  await page.getByRole('button',{name:'Reset lesson interactions'}).click();
+  assert.equal(await page.getByRole('combobox',{name:'Patient-facing result fields'}).inputValue(),'summary');
+  await overflow();
+  await page.goto(root+'lessons/choose-and-govern-lis/');
+  await page.getByRole('heading',{name:'Selecting and Maintaining a Laboratory Information System',exact:true}).waitFor();
+  await overflow(); await page.screenshot({path:'review/topic8/selection-'+width+'-opening.png'});
+  await select('A-correction evidence','pass');
+  assert.match(await text(),/Reconsider this classification/);
+  const answers={'A-correction':'fail','A-restore':'pass','A-export':'unknown','B-correction':'pass','B-restore':'pass','B-export':'pass','C-correction':'unknown','C-restore':'pass','C-export':'fail'};
+  for(const [id,value] of Object.entries(answers)) await select(id+' evidence',value);
+  await page.getByRole('button',{name:'Review nine evidence decisions'}).click();
+  assert.match(await text(),/9 \/ 9 evidence decisions supported/);
+  await page.getByRole('checkbox',{name:'Include interfaces, migration, and exit amounts'}).check();
+  assert.match(await text(),/695/);assert.match(await text(),/720/);
+  for(const name of ['usability weight','analytics weight','training weight']) {await page.getByRole('slider',{name}).focus(); await page.keyboard.press('Home');}
+  assert.match(await text(),/No weights selected/);
+  await page.getByRole('slider',{name:'training weight'}).focus();await page.keyboard.press('End');
+  await page.getByRole('heading',{name:'Birch',exact:true}).scrollIntoViewIfNeeded();
+  await overflow(); await page.screenshot({path:'review/topic8/selection-'+width+'-costs.png'});
+  for(const [label,value] of [['Before installation is accepted','local'],['During routine operation','control'],['During a hosted service outage','reconcile'],['Before the old system is retired','retain']]) await select(label,value);
+  await select('Selection recommendation','alder');assert.match(await text(),/selected vendor cannot proceed/);
+  await select('Selection recommendation','birch');assert.match(await text(),/Birch can proceed to contract/);
+  await select('Selection recommendation','defer');assert.match(await text(),/Deferring selection is defensible/);
+  await select('During routine operation','install');assert.equal(await page.getByRole('combobox',{name:'Selection recommendation'}).inputValue(),'');
+  await page.getByRole('button',{name:'Reset lesson interactions'}).click();assert.equal(await page.getByRole('combobox',{name:'A-correction evidence'}).inputValue(),'');
+  await overflow();
+  console.log(width+'px: wrong/correct paths, recommendation gates, change invalidation, reset, keyboard sliders and overflow passed.');
+ }
+ for(const slug of ['build-the-new-test','choose-and-govern-lis']){await page.goto(root+'faculty/'+slug+'/');assert.match(await text(),/Local practicum/);}
+ assert.deepEqual(errors,[]);
+ fs.writeFileSync('review/topic8/browser-result.json',JSON.stringify({root,widths:[1365,390],passed:true,pageErrors:errors},null,2));
+ await browser.close();
+})().catch(e=>{console.error(e);process.exit(1);});

@@ -1,0 +1,9 @@
+{
+  "root": "http://127.0.0.1:4178/pathology-informatics-interactives/",
+  "widths": [
+    1365,
+    390
+  ],
+  "passed": true,
+  "pageErrors": []
+}

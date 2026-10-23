@@ -1,0 +1,15 @@
+### Test the version you intend to release
+
+A development environment supports configuration; a test environment supports controlled verification; production supports patient care. Document the version and dependencies promoted between them. Recreating settings manually in production can introduce differences from the configuration that passed.
+
+The eight cases include positive, negative, multiple-detection, invalid, pending, unsuitable-specimen, corrected, and retransmitted results. Each expected result comes from the case specification. Validation must compare what was produced with what was required, rather than merely show that a message arrived.
+
+Run the checks after every change. Changing a control clears the previous test result and readiness selections. This models the need to reassess evidence after the build changes; it does not mean every real change requires repeating every unrelated test.
+
+### Prepare a recommendation, not a checkbox approval
+
+The readiness items below describe work to address in your recommendation. Selecting them does not perform institutional approval. The laboratory director reviews clinical meaning with the clinical service; analysts configure and test the systems; laboratory staff establish and verify the operational procedure; IT and clinical informatics contribute to their respective infrastructure and EHR workflows.
+
+For a real assay, determine the applicable manufacturer instructions, regulatory status, and laboratory performance verification requirements before choosing the testing plan. Information-system validation is separate from analytical verification. Manufacturer authorization or a vendor's interface test does not establish that the local report is correct.
+
+The release plan should identify the deployed version, authorized approver, trained staff, support coverage, downtime process, rollback method, and first-live-report review. If a new report is wrong after release, stop or contain the affected workflow, preserve evidence, correct the problem, and assess reports already issued.

@@ -151,3 +151,18 @@ API/Harrison Session 7 informs the teaching sequence: slides 6–18 and 22–32
 for workflow and forms; slides 28–45 for limitations and evaluation, as recorded
 in the slide map. The records, rule specification, audit, pilot data, and safety
 event are original. No source is offered as a universal HbA1c repeat interval.
+
+## Topic 8 sources — checked October 22, 2026
+
+- PIER Essentials R5, Topic 8: https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf
+- 42 CFR 493.1291, report accuracy, content, availability and corrections: https://www.ecfr.gov/current/title-42/section-493.1291
+- ASTP/ONC SAFER Guides, organizational responsibility, system management and contingency planning: https://healthit.gov/clinical-quality-and-safety/safer-guides/
+- NIST SP 800-34 Rev. 1, contingency planning and lifecycle reference: https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final
+
+Harrison/API source ranges remain Session 3 (7–13, 18) and Session 9 (7–10,
+22–29) for lesson 22; Session 3 (3–13, 20–25) and Session 9 (3–29) for lesson 23.
+The assay procedure, specimen restriction, vendor evidence, ratings, costs, and
+recovery targets are original case specifications, not claims about a named
+product or universal requirements. Consult authorized current accreditation
+materials locally; no proprietary checklist is reproduced. NIST guidance is a
+planning reference, not an asserted laboratory accreditation requirement.

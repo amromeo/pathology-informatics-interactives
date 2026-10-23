@@ -168,14 +168,14 @@ Lesson slug: `human-plus-algorithm`
 - **Harrison plan:** Session 5, slides 25–29; Session 6, slides 4–5, 17–23, 34–55.
 - **Build into the lesson:** Place detection, annotation, counting, classification, and diagnosis on a clear spectrum. Evaluate the combined reader-plus-tool system, including threshold effects, artifacts, site variation, calibration, subgroup performance, workload, automation bias, drift, and monitoring.
 
-### 22 — Build the New Test
+### 22 — Building and Validating a Laboratory Test
 
 Lesson slug: `build-the-new-test`
 
 - **Harrison plan:** Session 3, slides 7–13 and 18; Session 9, slides 7–10 and 22–29.
 - **Build into the lesson:** Use the complete LIS test definition, formal request/vetting, build/test/production separation, acceptance criteria, downstream display, interface testing, signoff, training, go-live support, monitoring, documentation, and change control. Keep LIS analyst configuration separate from laboratory clinical approval.
 
-### 23 — Choose and Govern the LIS
+### 23 — Selecting and Maintaining a Laboratory Information System
 
 Lesson slug: `choose-and-govern-lis`
 

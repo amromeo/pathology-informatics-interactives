@@ -114,3 +114,10 @@ configuration must not change the observed pilot results.
 
 Short UI labels and some preview/status sentences remain in CdsDesignExperience
 and AlertEvaluationExperience. Substantial teaching text is in MDX.
+
+## Topic 8 editing
+
+See TOPIC8-BUILDOUT.md. The build-the-new-test and choose-and-govern-lis folders
+contain introduction, concepts, bridge, debrief, faculty, practicum MDX and local
+interaction.ts. Preserve explicit expected report cases, the separation of
+mandatory eligibility from weighted preferences, and documented cost scope.
