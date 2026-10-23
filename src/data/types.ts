@@ -20,6 +20,9 @@ export type LessonExperience =
   | "alert-evaluation"
   | "test-build"
   | "lis-selection"
+  | "pixel-budget"
+  | "wsi-validation"
+  | "mitosis-review"
   | "multimodal"
   | "ai-foundations"
   | "ai-deployment";

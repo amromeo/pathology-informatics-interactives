@@ -888,6 +888,7 @@ h3 { line-height: 1.2; }
   .debrief-content { padding: 30px 24px; }
   .faculty-content, .practicum-content, .source-panel { padding: 28px 20px; }
   .faculty-content h1, .practicum-content h1 { font-size: 2.5rem; overflow-wrap: anywhere; }
+  .faculty-content h2, .practicum-content h2 { font-size: clamp(1.75rem, 7vw, 2.4rem); overflow-wrap: anywhere; }
   .lesson-list-item { grid-template-columns: 38px 1fr 25px; gap: 12px; }
   .lesson-list-item h3 { font-size: 1.55rem; }
   .site-frame > footer, .lesson-end-nav { align-items: flex-start; flex-direction: column; }

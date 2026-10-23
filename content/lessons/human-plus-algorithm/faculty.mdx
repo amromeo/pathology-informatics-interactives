@@ -1,3 +1,19 @@
-# Faculty guide: Human + Algorithm
+# Faculty guide: Reviewing a Mitosis Detection Tool
 
-Ask learners to propose thresholds only after naming the clinical task and cost of each error. Require workflow measures—review time, override behavior, discordance, and subgroup effects—alongside classifier metrics.
+Allow 40 minutes. PIER 7.3 covers image processing, pattern recognition, counting and measurement, diagnosis versus prognosis, productivity, and patient-care implications. Preserve cross-topic 2.4 coverage through independent evaluation, human factors, generalization, and monitoring. Harrison/API Session 5, slides 25–29, and Session 6, slides 4–5, 17–23, 34–55, inform the sequence.
+
+At threshold 0.50: TP 3, FN 2, FP 3, TN 4. At 0.20 all five reference figures are marked, with four false marks. At 0.80 there are two true marks and one false mark. At 1.00 no marks exist: sensitivity 0/5, specificity 7/7, predictive value undefined. Verify the inclusive boundary at 0.60.
+
+Site A at 0.50: TP 3/3 reference figures, FP 1/3 nonmitotic locations. Site B: TP 0/2, FP 2/4. These tiny selected subgroups motivate review; they cannot establish stable bias or precise site performance. Ask how to design an independent audit with representative slides, reference review of unmarked areas, and adequate uncertainty reporting.
+
+The reader study uses 20 slides and 40 reference figures per condition, not the candidate-set denominator. Marks-only review misses six figures versus two with a complete assisted search. It is plausible that a reader still misses figures during full review; never promise that a human reviewer eliminates model errors. The study does not establish causal patient benefit or an optimal threshold.
+
+Monitoring: Month 1 has 2/80 failed submissions and Month 2 has 3/20. The figure audit is 18/20 and 6/10 respectively, from separately sampled successfully analyzed slides. Small numbers and changed site mix require investigation. A complete plan needs all four measure groups and review of the new staining workflow before wider use.
+
+## Sources
+
+- [PIER Essentials R5](https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf), Topics 7 and 2.
+- [FDA statistical diagnostic-test guidance](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/statistical-guidance-reporting-results-studies-evaluating-diagnostic-tests-guidance-industry-and-fda), reference standards, denominators, case mix, and reporting both sensitivity and specificity. This finite-location exercise is not a device accuracy study.
+- [IMDRF GMLP, N88 FINAL:2025](https://www.imdrf.org/documents/good-machine-learning-practice-medical-device-development-guiding-principles), representative independent evaluation and lifecycle oversight.
+- [FDA/Health Canada/MHRA transparency principles](https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/transparency-machine-learning-enabled-medical-devices-guiding-principles), human–AI performance and context of use.
+- API/Harrison sources and attribution are in SOURCES.md; all candidate, reader, and monthly records are original.

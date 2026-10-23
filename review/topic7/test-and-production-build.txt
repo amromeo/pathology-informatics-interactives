@@ -1,0 +1,138 @@
+
+> pathology-informatics-interactives@0.1.0 test
+> npm run test:curriculum && npm run test:unit && npm run build
+
+
+> pathology-informatics-interactives@0.1.0 test:curriculum
+> tsx scripts/validate-curriculum.ts
+
+Validated 23 lessons, 34/34 objectives, 21 staged Topic 2 subtopics, 2 pilot patterns, all required MDX files, and 23 Harrison slide plans.
+
+> pathology-informatics-interactives@0.1.0 test:unit
+> npm run data:compile && tsx --test tests/*.test.ts tests/*.test.tsx
+
+
+> pathology-informatics-interactives@0.1.0 data:compile
+> node scripts/compile-lesson-data.mjs
+
+Compiled the editable Lesson 3 and Lesson 4 CSV files.
+Γ£ö shared lesson controls expose semantic groups and labels (56.1086ms)
+Γ£ö the WSI review exposes labeled plans and discordance decisions (43.4733ms)
+Γ£ö the missing CBC map and decisions expose labeled controls (26.1793ms)
+Γ£ö the surgical pathology report has labeled controls and a semantic table (156.8788ms)
+Γ£ö the reagent-lot lesson exposes tables, chart alternatives, and labeled choices (115.9181ms)
+Γ£ö the privacy workbench exposes native filters, semantic tables, and live results (76.3961ms)
+Γ£ö the downtime tabletop exposes phased choices and semantic reconciliation controls (50.4961ms)
+Γ£ö the security review exposes native threat mapping and portfolio controls (39.1619ms)
+Γ£ö the controlled repair passes every lesson validation set (3.4599ms)
+Γ£ö unsafe shortcuts fail at least one validation case (0.8819ms)
+Γ£ö the two remaining pilot patterns are preserved after Topic 7 becomes bespoke (8.589ms)
+Γ£ö lesson 1 teaches the Topic 1 role and ownership boundaries (3.1469ms)
+Γ£ö lesson 2 covers PIER 1.4 through an observable result-reporting investigation (1.3985ms)
+Γ£ö lesson 3 covers each active PIER 2.1 subtopic with an observable action (0.7786ms)
+Γ£ö lesson 4 covers every PIER 2.2 statistics element with an observable action (0.986ms)
+Γ£ö lesson 3 contains the complete synthetic report (3.381ms)
+Γ£ö the two-period and three-period reports calculate the intended summaries (0.675ms)
+Γ£ö the revised report separates cutover and preserves one row per eligible case (1.2902ms)
+Γ£ö the weekly trend contains six pre-go-live weeks, cutover, and six later weeks (0.8415ms)
+Γ£ö working-day calculations skip weekends and retain fractions (0.8548ms)
+Γ£ö the lot-comparison worksheet contains the planned paired specimens (3.0724ms)
+Γ£ö the primary paired-result statistics reproduce the lesson values (0.9375ms)
+Γ£ö all three concentration-range checks support the controlled decision (0.5949ms)
+Γ£ö the common-test exercise includes the five planned statistical choices (3.2169ms)
+Γ£ö the all-controlled path yields the locked baseline reconciliation set (5.9845ms)
+Γ£ö uncontrolled temporary identifiers create exactly one duplicate-chart pair (1.054ms)
+Γ£ö unit-specific critical-result communication removes the potassium call-log entry (0.7826ms)
+Γ£ö reconciliation scoring identifies the unmatched critical result and duplicate order (1.3615ms)
+Γ£ö a fully correct reconciliation scores clean (0.7431ms)
+Γ£ö a missing call record cannot be resolved by linking nonexistent documentation (0.8805ms)
+Γ£ö downtime state is serializable plain data (0.9605ms)
+Γ£ö the synthetic privacy dataset is frozen at 18 exact outage-day rows (5.8908ms)
+Γ£ö raw quasi-identifiers are unique while the rare cohort requires a conjunction (2.7627ms)
+Γ£ö the full workbench creates groups of at least four with no unique filter conjunction (3.2594ms)
+Γ£ö each single data transformation still leaves a concrete isolating conjunction (2.02ms)
+Γ£ö key control changes governance classification without changing the table (2.9337ms)
+Γ£ö the six installation findings have the locked confidentiality, integrity, and availability map (6.2295ms)
+Γ£ö an empty portfolio leaves all five scenarios unmitigated (0.7723ms)
+Γ£ö buying every control exceeds both portfolio limits (1.04ms)
+Γ£ö the reference portfolio is affordable and covers every scenario (0.747ms)
+Γ£ö a password-only portfolio blocks only shared-credential misuse (0.6449ms)
+Γ£ö two distinct affordable portfolios provide full scenario coverage (1.1181ms)
+Γ£ö the tempting low-value controls do not mitigate a stress scenario by themselves (0.6389ms)
+Γ£ö Topic 3 contains the three planned lessons (5.0592ms)
+Γ£ö each Topic 3 lesson starts with at least three validation cases (0.7647ms)
+Γ£ö each Topic 3 lesson starts with one correct diagnosis and repair (0.865ms)
+Γ£ö Topic 3 repairs produce the intended partial-credit matrices (1.3432ms)
+Γ£ö Topic 3 failure results explain the laboratory consequence (0.9583ms)
+Γ£ö Topic 3 metadata names only the interactions currently implemented (1.1867ms)
+Γ£ö original route matrix exposes excision and unrecognized-code failures (6.9266ms)
+Γ£ö targeted correction preserves neighbors and holds unknown codes (1.0165ms)
+Γ£ö routing everything to gross breaks cytology and intraoperative work (0.6073ms)
+Γ£ö software repair and physical recovery are independent requirements (20.5863ms)
+Γ£ö absolute-only release reproduces two missed holds; approved rule preserves releases (14.1555ms)
+Γ£ö AND between delta branches misses independent absolute and relative holds (0.8139ms)
+Γ£ö small denominators, missing history, and exact history boundaries are handled separately (2.3366ms)
+Γ£ö release gates preserve QC, flag, status, range and critical exceptions (2.0102ms)
+Γ£ö reflex replay accounts for every record and three additional orders under original rule (2.2293ms)
+Γ£ö inclusive reflex boundaries and disabled duplicate protection produce distinct failures (1.1152ms)
+Γ£ö reflex scope and result status cannot be replaced by numeric threshold checks (1.4423ms)
+Γ£ö a lower order count can conceal missed indicated FT4 orders (0.6512ms)
+Γ£ö flag translation preserves both critical directions and routine categories (13.187ms)
+Γ£ö recognized flags can still lose severity and unknown must not become normal (0.7048ms)
+Γ£ö newborn exchange needs both observation and answer mappings (1.0867ms)
+Γ£ö identity, retransmission and correction checks survive terminology repair (1.2566ms)
+Γ£ö terminology review distinguishes properties, unsupported assays, and panel orders (1.6716ms)
+Γ£ö stale extract contains only earlier completed work and no peak evidence (1.2389ms)
+Γ£ö current linked view preserves pending work without zero-duration imputation (0.9271ms)
+Γ£ö peak delay occurs after analysis and all event sequences remain valid (1.0262ms)
+Γ£ö new topic experiences expose labeled controls and text equivalents (99.4065ms)
+Γ£ö original guidance preserves absent history but fails delivery and recipient checks (8.9714ms)
+Γ£ö CDS review window includes the exact boundary and excludes unusable results (1.05ms)
+Γ£ö hard stops violate discretion while an interrupting continue option preserves it (0.6941ms)
+Γ£ö each five-rights regression detects the corresponding defect (0.8945ms)
+Γ£ö targeting and deduplication retain a new decision for the same patient (0.8734ms)
+Γ£ö hard stops expose documented-exception harm even after targeting improves (0.4235ms)
+Γ£ö changing recipients and targeting have independently observable effects (0.6054ms)
+Γ£ö ward comparison uses pooled decision denominators and both period changes (1.6903ms)
+Γ£ö bespoke experiences render named controls and distinguish replay from observed outcomes (60.9714ms)
+Γ£ö sampling doubles both axes, planes and copies have separate effects (2.6455ms)
+Γ£ö comparison files match recorded byte sizes and preserve distinct operations (14.8631ms)
+Γ£ö validation distinguishes a sufficient plan from initial gaps and failed investigations (3.7691ms)
+Γ£ö threshold boundary is inclusive and zero-mark predictive value is undefined (1.0342ms)
+Γ£ö site denominators and independent reader study remain accountable (0.5224ms)
+Γ£ö Topic 7 uses bespoke stable routes with explicit coverage and open debrief registration (9.2923ms)
+Γ£ö image and algorithm controls have native labels, fieldsets, text metrics, and reset (113.7418ms)
+Γä╣ tests 86
+Γä╣ suites 0
+Γä╣ pass 86
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 2802.1728
+
+> pathology-informatics-interactives@0.1.0 build
+> npm run data:compile && tsc --noEmit && vite build --configLoader runner && tsx scripts/export-coverage.ts && node scripts/create-pages-fallback.mjs
+
+
+> pathology-informatics-interactives@0.1.0 data:compile
+> node scripts/compile-lesson-data.mjs
+
+Compiled the editable Lesson 3 and Lesson 4 CSV files.
+vite v7.3.6 building client environment for production...
+transforming...
+Γ£ô 200 modules transformed.
+rendering chunks...
+computing gzip size...
+pages-dist/index.html                    0.67 kB Γöé gzip:   0.39 kB
+pages-dist/assets/report-DhrgJ_c3.csv   45.19 kB
+pages-dist/assets/index-Bz-yLHgQ.css    80.42 kB Γöé gzip:  14.79 kB
+pages-dist/assets/index-DXa-_b71.js    860.91 kB Γöé gzip: 239.19 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Γ£ô built in 5.81s
+Exported pages-dist/curriculum-coverage.json
+Created 54 static route entry points and the GitHub Pages fallback.

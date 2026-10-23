@@ -121,3 +121,28 @@ See TOPIC8-BUILDOUT.md. The build-the-new-test and choose-and-govern-lis folders
 contain introduction, concepts, bridge, debrief, faculty, practicum MDX and local
 interaction.ts. Preserve explicit expected report cases, the separation of
 mandatory eligibility from weighted preferences, and documented cost scope.
+
+## Topic 7 editing
+
+All three existing Topic 7 routes now use dedicated experiences. Each lesson
+folder has introduction, concepts, bridge, debrief, faculty, practicum, and
+interaction.ts. Keep narrative in MDX and structured choices, feedback, and
+records in the local data file. Short UI headings and calculated status labels
+remain in React.
+
+- `pixel-budget`: run `node scripts/topic7-images.mjs` to regenerate the six
+  derivatives and images.json. Measured asset byte sizes are separate from the
+  hypothetical scanner forecast. The decoded reference is not a scanner original;
+  do not attach a physical scale or diagnostic-equivalence claim to this field.
+- `validate-before-go-live`: preserve original paired observations and their
+  denominators. Changing a plan or investigation clears its previous check and
+  recommendation. Completing the plan does not mean corrective evidence has
+  been collected or that the director has approved the scope.
+- `human-plus-algorithm`: the candidate list, reader study, and monthly report
+  are separate datasets. The threshold is inclusive. Predictive value is
+  undefined when there are no marks. Preserve location, figure, slide, and time
+  denominators; do not infer reader effects from moving the threshold.
+
+Explicit coverage and primary source links are in `src/data/topic7Plan.ts`.
+Preserve the existing 2.4 cross-topic mapping. Styles are scoped in Topic7.css.
+Run `npm test` and `npm run build:pages`. Completed desktop/phone checks and screenshots are recorded in `review/topic7/`.

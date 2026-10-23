@@ -1,0 +1,50 @@
+[
+  {
+    "region": "glands",
+    "variant": "reference",
+    "path": "glands-reference.png",
+    "bytes": 698130,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "region": "glands",
+    "variant": "reduced",
+    "path": "glands-reduced.png",
+    "bytes": 43922,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "region": "glands",
+    "variant": "compressed",
+    "path": "glands-compressed.jpg",
+    "bytes": 21270,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "region": "focus",
+    "variant": "reference",
+    "path": "focus-reference.png",
+    "bytes": 390131,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "region": "focus",
+    "variant": "reduced",
+    "path": "focus-reduced.png",
+    "bytes": 38726,
+    "width": 128,
+    "height": 128
+  },
+  {
+    "region": "focus",
+    "variant": "compressed",
+    "path": "focus-compressed.jpg",
+    "bytes": 7096,
+    "width": 512,
+    "height": 512
+  }
+]

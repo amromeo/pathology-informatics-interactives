@@ -1,0 +1,5 @@
+
+> pathology-informatics-interactives@0.1.0 test:curriculum
+> tsx scripts/validate-curriculum.ts
+
+Validated 23 lessons, 34/34 objectives, 21 staged Topic 2 subtopics, 2 pilot patterns, all required MDX files, and 23 Harrison slide plans.

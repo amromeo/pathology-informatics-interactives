@@ -1,0 +1,17 @@
+## Estimate storage before choosing a policy
+
+For a separate scanner-planning example, assume a rectangular field **15 mm wide and 10 mm high**, RGB color with three 8-bit channels, and no blank-tile savings. At 0.5 µm/pixel the grid is 30,000 × 20,000 pixels. Each pixel uses three bytes before compression. At 0.25 µm/pixel each dimension doubles, so pixel count and base-layer bytes quadruple.
+
+The calculator assumes 500 slides per working day and 250 working days per year: 125,000 slides annually. One or three focal planes contain the same number of pixels per plane. One or two copies multiply storage; a second copy alone does not establish a backup strategy. A ratio of 10:1 means encoded bytes are estimated as raw bytes divided by ten. Real compression depends on tissue, codec, and settings. These ratios are planning assumptions, not clinical recommendations or measured ratios from the image panels.
+
+Decimal GB means one billion bytes; TB means one trillion. Transfer time assumes the entire encoded base layer travels over an otherwise idle 100 megabit/second connection, eight bits per byte. It excludes protocol overhead, contention, decoding, and latency. Viewers usually fetch selected tiles rather than download the entire slide first. Pyramids, metadata, labels, indexes, rescans, and retention beyond one year add storage not included here.
+
+## Match the file and viewing system to the task
+
+A static photograph shows a selected field and may omit nearby tissue. Live telepathology sends a changing view; navigation, focus, network delay, and the person controlling the microscope matter. Whole-slide imaging captures a navigable tissue area, often at several resolution levels, but tissue detection and focus still require checking.
+
+JPEG commonly uses lossy encoding. TIFF can hold tiles and multiple resolutions; the extension alone does not state compression or viewer compatibility. DICOM, Digital Imaging and Communications in Medicine, defines image objects and associated information for exchange. Its current whole-slide object represents tiles as frames and can represent a level of a resolution pyramid. It is not a compression ratio or a guarantee of correct exchange.
+
+Verify accession, block and slide linkage, pixel spacing, acquisition settings, compression history, and complete tissue coverage after export and retrieval. DICOM records whether lossy compression occurred; conversion must not erase that history. Connect this to the interface checks in Topic 5.
+
+Display size and pixel density affect how much tissue is visible at a chosen scale. Luminance, color settings, calibration, ambient light, and viewing angle affect perception. More screen pixels alone do not establish suitability for reporting. Check the display and environment with the approved viewer and workflow.
