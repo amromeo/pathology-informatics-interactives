@@ -133,14 +133,14 @@ Lesson slug: `invisible-bottleneck`
 - **Harrison plan:** Session 0, slides 10, 15, and 18–20; Session 2, slides 12 and 24–26; Session 3, slides 20–24; Session 4, slides 13–15.
 - **Build into the lesson:** Trace data from operational systems through interfaces into analytic stores before interpreting the dashboard. Make learners check freshness, query performance, lineage, and missing workflow events, then define a measure and intervention that the laboratory can monitor.
 
-### 17 — Five Rights for the Right Test
+### 17 — Designing Repeat-Test Guidance
 
 Lesson slug: `five-rights-right-test`
 
 - **Harrison plan:** Session 7, slides 6–18 and 22–32.
 - **Build into the lesson:** Use Type I/Type II decision demands and the Five Rights to choose person, content, format, channel, and timing. Compare search/display, order sets, protocols, reflexes, noninterruptive guidance, and soft/hard stops instead of treating every intervention as an alert.
 
-### 18 — The Alert Everyone Ignores
+### 18 — Evaluating a Repeat-Test Alert
 
 Lesson slug: `alert-everyone-ignores`
 

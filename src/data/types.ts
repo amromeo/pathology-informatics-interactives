@@ -16,6 +16,8 @@ export type LessonExperience =
   | "newborn-exchange"
   | "terminology-review"
   | "queue-analysis"
+  | "cds-design"
+  | "alert-evaluation"
   | "multimodal"
   | "ai-foundations"
   | "ai-deployment";

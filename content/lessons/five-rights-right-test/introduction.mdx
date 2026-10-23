@@ -1,11 +1,9 @@
-# Five Rights for the Right Test
+# Designing Repeat-Test Guidance
 
-> **Synthetic case:** A long alert appears after a clinician signs a test order. It fires for every role and changes almost no orders.
+You are the pathology resident working with the laboratory director and the electronic health record (EHR) team. Last month, the team added guidance for repeat hemoglobin A1c (HbA1c) orders. Clinicians report that the message arrives after they have signed the order. Collection staff receive it too, even though they did not request the test.
 
-## Your task
+The laboratory director asks you to examine the ordering audit, compare it with the prior laboratory report, and redesign the guidance. The clinical question is whether available information should be reviewed before another test is ordered. The rule cannot determine the answer without the clinician's assessment.
 
-Map the decision workflow and redesign the intervention around the right person, information, channel, format, and point in workflow. Distinguish education, ordering, diagnostic, utilization, reflex, protocol, and alert-based support.
+The local specification asks for review when a usable final result was collected within 168 hours, or another order is still pending. This window is a case-specific review trigger, not a universal recommendation about how often HbA1c should be measured. A documented clinical reason must allow a repeat.
 
-## Key point
-
-Decision support should reduce cognitive work at the moment a decision is made. A correct policy delivered to the wrong person or at the wrong time is poor CDS.
+Start with the records. Identify who received the message, where it appeared, and whether the order was still editable. Then build a different design and test it against eight encounters.

@@ -1,0 +1,17 @@
+### Count the event that answers the question
+
+The monthly report counts message presentations. The linked order audit identifies 3,000 distinct decisions associated with those presentations. Dividing 12,000 by 3,000 gives four presentations per decision on average, but individual decisions may have more or fewer.
+
+The 400 acknowledgements divided by 12,000 presentations produce a 3.3% click rate. That is a measure of interaction with a message. To learn whether ordering changed, link the message to a unique order decision and inspect the separate cancellation or continuation record. To learn whether the action was appropriate, review the clinical context.
+
+Role-specific click rates also need interpretation. A nurse collecting a specimen and a resident selecting tests do different work. A difference between their rates is not evidence that one group makes better decisions.
+
+### Reduce avoidable interruptions without hiding new decisions
+
+Frequent, irrelevant, or repeated messages can make users less attentive to alerts, a problem called **alert fatigue**. In this case, targeting the ordering clinician and relevant history removes messages unrelated to the user's decision. Suppressing repeated presentations for the same decision reduces another source of burden.
+
+Suppression needs a defined boundary. Reopening the same order panel does not create a new clinical question. A later decision with changed clinical context may. The last replay event is a new decision for the first patient's encounter; it must be evaluated again.
+
+An inline suggestion can make prior information available without mandatory dismissal. A soft stop requires attention but allows continuation. A hard stop prevents continuation; this case's review criteria do not justify that restriction.
+
+Change one control at a time and inspect the event cards. The replay is a deterministic application of your configuration to these ten events. Fewer messages in this small set do not predict how many tests a hospital will avoid.

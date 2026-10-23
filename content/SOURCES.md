@@ -139,3 +139,15 @@ receiver behavior, billing assignment, or national public-health routing rule
 is inferred. Queue records and interface contracts are original. LOINC codes
 and short definitions are attributed to Regenstrief; see https://loinc.org/license.
 Other sources are cited and paraphrased, not reproduced as teaching slides.
+
+## Topic 6: clinical decision support
+
+Primary framework sources checked during the September 10 build:
+- CMS eCQI, About CDS: https://ecqi.healthit.gov/cds/about — five rights and CDS forms.
+- AHRQ PSNet, Alert Fatigue: https://psnet.ahrq.gov/primer/alert-fatigue — relevance, repetition, and attention.
+- PIER Essentials R5, Topic 6: https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf — curriculum coverage.
+
+API/Harrison Session 7 informs the teaching sequence: slides 6–18 and 22–32
+for workflow and forms; slides 28–45 for limitations and evaluation, as recorded
+in the slide map. The records, rule specification, audit, pilot data, and safety
+event are original. No source is offered as a universal HbA1c repeat interval.

@@ -99,3 +99,18 @@ outcomes, and structured feedback in the lesson-local TypeScript file.
 UI headings and short action/status labels remain in the Topic 5 React
 components. Source records and longer per-control explanations live in lesson
 files. Stable URLs retain the original slugs despite the revised plain titles.
+
+## Topic 6 editing
+
+The two Topic 6 folders now contain editable introduction, concepts, bridge,
+debrief, faculty, and practicum MDX, plus interaction.ts for the case records,
+choices, and feedback. The stable lesson URLs are unchanged.
+
+The 168-hour window is an institution-specific review trigger, not a clinical
+recommendation. Preserve clinical exceptions and distinguish acknowledgement,
+order changes, appropriateness, and patient outcomes. The ten-event alert replay
+and the four-week ward comparison are separate datasets; changing the replay
+configuration must not change the observed pilot results.
+
+Short UI labels and some preview/status sentences remain in CdsDesignExperience
+and AlertEvaluationExperience. Substantial teaching text is in MDX.

@@ -1,0 +1,27 @@
+### How clinical decision support reaches an order
+
+Clinical decision support (CDS) supplies information or actions that help someone make a care decision. In this case, the EHR retrieves the patient's prior laboratory report and pending orders, applies an approved rule, and displays guidance. The clinician reviews the information, decides whether to proceed, and leaves an order audit trail.
+
+Each step can fail separately. A correct rule can read the wrong patient's report. A correct patient match can still use an unusable or outdated result. A correct suggestion can arrive too late to help. Testing the screen alone will not establish that the underlying data and rule are correct.
+
+### Apply the five rights to this decision
+
+The **five rights of CDS** are a way to examine the information, recipient, format, channel, and timing of support. Here, they become concrete design questions:
+
+- **Information:** Does the clinician see the dated report or pending order, its status, and enough context to judge its relevance? A long policy does not answer the patient-specific question.
+- **Person:** Can the recipient act on this ordering decision? The collecting nurse has a different task from the prescribing clinician.
+- **Format:** Should the information be a suggestion beside the order, an interrupting message that permits continuation, or a hard stop? The approved policy preserves clinical discretion.
+- **Channel:** Is the guidance in the order composer where the test is selected, or in a separate inbox?
+- **Timing:** Does it arrive before the clinician signs, when changing the proposed order is straightforward?
+
+Format describes how the intervention is presented; channel describes where it is delivered. An inline suggestion and a soft stop can both be delivered within the EHR, but require different amounts of attention.
+
+### Choose support for the thinking required
+
+Recognizing a familiar pattern can be fast and largely automatic, often called Type I thinking. Deliberately comparing an earlier result, the reason for testing, and the current clinical question requires more effort, often called Type II thinking. These are descriptions of cognitive work, not two fixed types of clinician.
+
+A concise display can make the relevant facts easier to inspect. Repeated interruptions can instead train a habitual dismissal. Do not infer that a clinician ignored the science simply because a poorly timed message was closed.
+
+CDS also includes order sets, relevant reference links, result summaries, documentation prompts, and laboratory protocols. For example, an order set can make the intended initial tests easier to find, while an approved reflex protocol can add a follow-up test when defined criteria are met. An interrupting alert is one option among several.
+
+Use the controls below to compare designs. The encounter preview shows the resulting message and lets you record either cancellation after review or continuation with a reason. These actions represent different clinical decisions; neither is automatically the correct response to every repeat.

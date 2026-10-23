@@ -1,7 +1,15 @@
-## Debrief
+## Debrief: support the decision while it can still change
 
-**Informatics principle:** CDS effectiveness depends on fit with human decision-making and workflow.
+The ordering audit showed a workflow problem: an inbox message arrived after signing and also reached collection staff. Changing the clinical rule alone would not fix either problem.
 
-The intervention arrived after commitment, targeted everyone, and offered a long policy instead of an actionable choice. Low acceptance was a predictable design consequence.
+In the builder, the relevant information was the dated report or pending order, the recipient was the ordering clinician, the channel was the order composer, and the useful time was before signing. An inline suggestion preserved discretion without requiring dismissal. A soft stop also allowed continuation, but added an interruption that would need justification.
 
-CDS analysts implement logic. Ordering clinicians and laboratory experts define workflow and content. Governance approves safety, exceptions, monitoring, and retirement.
+A hard stop failed the specification because the local review rule did not authorize preventing every repeat. The encounter with a documented clinical reason makes that consequence explicit. A cancellation is not inherently a success, and continuation is not inherently a failure. The audit should retain the decision, the prior order or report used, and the reason.
+
+### What still requires clinical and technical review
+
+The laboratory director and clinical CDS committee approve the clinical criteria and exception handling. The EHR and laboratory teams verify patient and test matching, report status, collection times, pending-order status, comments, and the source of usability information. They also test corrected reports, stale data, missing fields, and changed clinical context before deployment.
+
+A screen that says “usable” is only as reliable as the source data. The next lesson examines an accepted suggestion that delayed an indicated test because important context was not represented in a structured field.
+
+A monitored pilot should link unique order decisions to messages and clinical actions, measure workload, review appropriateness, and look for delayed needed testing. Eight passing encounters are evidence about these eight checks; they are not approval to deploy.

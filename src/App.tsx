@@ -1,3 +1,5 @@
+import { CdsDesignExperience } from "./components/CdsDesignExperience";
+import { AlertEvaluationExperience } from "./components/AlertEvaluationExperience";
 import { FlagExperience } from "./components/FlagExperience";
 import { NewbornExperience } from "./components/NewbornExperience";
 import { TerminologyExperience } from "./components/TerminologyExperience";
@@ -33,6 +35,8 @@ type ExperienceRenderProps = {
 };
 
 const experienceRegistry: Partial<Record<LessonExperience, (props: ExperienceRenderProps) => ReactNode>> = {
+  "cds-design": (props) => <CdsDesignExperience {...props}/>,
+  "alert-evaluation": (props) => <AlertEvaluationExperience {...props}/>,
   "flag-trace": (props) => <FlagExperience {...props}/>,
   "newborn-exchange": (props) => <NewbornExperience {...props}/>,
   "terminology-review": (props) => <TerminologyExperience {...props}/>,
@@ -93,9 +97,9 @@ function LessonPage({ slug }: { slug: string }) {
   const topic = topics.find((item) => item.id === lesson.manifest.topic)!;
   const experience = lesson.manifest.experience ?? "generic";
   const renderSpecializedExperience = experienceRegistry[experience];
-  const allowsEarlyDebrief = ["orientation", "result-journey", "data-quality", "statistics", "privacy", "downtime", "security-review", "specimen-routing", "autoverification", "reflex-rule", "flag-trace", "newborn-exchange", "terminology-review", "queue-analysis"].includes(experience);
+  const allowsEarlyDebrief = ["orientation", "result-journey", "data-quality", "statistics", "privacy", "downtime", "security-review", "specimen-routing", "autoverification", "reflex-rule", "flag-trace", "newborn-exchange", "terminology-review", "queue-analysis", "cds-design", "alert-evaluation"].includes(experience);
   return (
-    <main className={lesson.manifest.topic === 5 ? "lesson-main topic5-page" : "lesson-main"}>
+    <main className={(lesson.manifest.topic === 5 || lesson.manifest.topic === 6) ? "lesson-main topic5-page" : "lesson-main"}>
       <nav className="breadcrumbs" aria-label="Breadcrumb"><a href={href()}>Curriculum</a><span>→</span><a href={href(`topics/${topic.slug}/`)}>Topic {topic.id}</a><span>→</span><span>Lesson {lesson.manifest.id}</span></nav>
       <header className="lesson-meta"><div className="tag-row">{lesson.manifest.pierObjectives.map((objective) => <span key={objective}>PIER {objective}</span>)}</div><div><span>{lesson.manifest.durationMinutes} minutes</span><span>{lesson.manifest.difficulty}</span><a href={href(`faculty/${slug}/`)}>Faculty guide</a></div></header>
       <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>

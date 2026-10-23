@@ -1016,3 +1016,13 @@ h3 { line-height: 1.2; }
 @media (max-width:700px) {
   .topic5-page .introduction-content h1 { font-size: clamp(2.5rem,10vw,3rem); overflow-wrap: break-word; }
 }
+
+.cds-preview { margin-top: 2rem; padding: clamp(1rem, 3vw, 2rem); background: var(--paper, #fffdf8); border: 1px solid #c9d3d0; border-radius: 12px; }
+.cds-preview blockquote { margin: 1rem 0; padding: 1rem; border-left: 4px solid #38675f; background: #edf3ef; }
+.cds-preview dd { margin-left: 0; }
+.cds-preview dt { font-weight: 700; }
+.cds-preview button:disabled { opacity: .5; cursor: not-allowed; }
+.cds-trend { display: grid; gap: 1rem; margin: 1.5rem 0; }
+.cds-trend > div { display: grid; gap: .3rem; }
+.cds-trend span { display: block; padding: .3rem .5rem; min-width: 0; max-width: 100%; background: #d2e4db; color: #183e37; font-size: .85rem; }
+.cds-trend .comparison-bar { background: #e5e0d1; color: #403b2d; }
