@@ -1,18 +1,9 @@
-# Reviewing Laboratory Terminology Mappings
+# Why Laboratory Results Need LOINC
 
-The laboratory is preparing a new data feed for a cancer registry and clinical
-analytics. An analyst used display names from the local test catalog to suggest
-mappings. The catalog includes a breast panel order, individual biomarker
-results, report findings, and billing entries. Several rows have similar names
-but serve different purposes.
+Three hospitals are connecting their laboratory results to a shared clinical record. A clinician wants to see a patient's glucose results together even when testing was performed at different hospitals. Each laboratory has its own test catalog, local identifiers, and display names.
 
-You are the resident reviewing the proposals with the terminology specialist.
-First identify what each breast-report object represents and which standard
-serves the named use. Then review four mapping decisions, including two
-chemistry records supplied by the same catalog-mapping process.
+The interface analyst's first draft groups results by display name. **GLU** from Hospital A and **GLUC** from Hospital B appear under different headings, even though both laboratories report serum/plasma glucose in mg/dL. Hospital C also uses **GLU**, but reports in mmol/L. Matching names would combine A with C and miss B.
 
-The analyst's draft assigns the same glucose code to both numeric result
-fields because both display as GLU. One is reported in mg/dL, the other in
-mmol/L. A HER2 entry lacks its assay definition, and BREAST_PANEL is an order
-rather than a single observation. Decide which mappings can be supported now
-and which require more information.
+You are the pathology resident reviewing the proposed mapping with the LIS analyst and chemistry staff. The messages arrive successfully; the unresolved question is what each result actually represents. Review the catalog extracts below before choosing how the receiving system should identify these observations.
+
+You will explain why a shared identifier is needed, look up candidate terms on the LOINC website, check their definitions against the local catalog, and investigate how an incorrect standardized code can still mislead a receiving system. You do not need to know any code numbers before starting.

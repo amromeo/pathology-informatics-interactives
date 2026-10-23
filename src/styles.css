@@ -1037,3 +1037,8 @@ h3 { line-height: 1.2; }
 .topic8-preview summary { cursor: pointer; font-weight: 700; margin-top: 1rem; }
 .topic8-page .introduction-content h1 { font-size: clamp(2.5rem, 5vw, 4.75rem); max-width: 1050px; overflow-wrap: break-word; }
 .topic8-experience .topic5-card-grid > .artifact-card { padding: 1rem; }
+
+/* Keep lookup labels and their evidence fields readable at narrow widths. */
+.loinc-lookup .topic5-control { display: grid; grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+.loinc-lookup input[type="text"] { width: 100%; min-width: 0; box-sizing: border-box; padding: .75rem; font: inherit; }
+.loinc-lookup .topic5-control select { width: 100%; min-width: 0; }

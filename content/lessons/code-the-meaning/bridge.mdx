@@ -1,13 +1,16 @@
-### Explain the decision before approving the feed
+### Mapping errors have been observed in working laboratories
 
-Complete both reviews. The seven object decisions establish purpose; the four
-mapping decisions test whether the supplied source definition supports a
-particular assignment. A wrong choice reveals its consequence beside that
-record, and you can revise it before running the review again.
+A code can exist in LOINC and still describe the wrong observation. Published studies show that this is an operational quality problem, not merely a hypothetical mistake in an exercise.
 
-For the actual feed, involve the assay owner, terminology specialist, registry
-team, and laboratory leadership. Check that a deferred mapping is visibly
-queued for resolution rather than silently omitted from a supposedly complete
-dataset. Recheck affected mappings after assay, catalog, protocol, or terminology
-version changes. Preserve provenance so a downstream user can identify which
-version produced a record.
+- **Stram and colleagues (2020):** 90 of 1,916 invited laboratories responded to a CAP survey about coagulation and cardiac-marker tests. Of 275 submitted LOINC codes, 54 (19.6%) were incorrect. Examples included the wrong component, specimen, or a panel used for an individual result. The 4.7% response rate and selected tests limit generalization. These are submitted codes, not a count of affected patient results. [Read the study abstract](https://pubmed.ncbi.nlm.nih.gov/31603714/).
+- **McDonald and colleagues (2023):** a review of 179,537,986 mapped results for 3,029 quantitative tests in two PCORnet DataMarts found errors affecting 4.6% of mapped results. About half of the mapping errors involved the property dimension. This result-weighted percentage describes that dataset; it is not the percentage of laboratories making errors. [Read the study abstract](https://pubmed.ncbi.nlm.nih.gov/36343113/).
+
+The percentages use different denominators and study designs. They should not be averaged or interpreted as a time trend. A frequently ordered test with one wrong mapping can affect many results. Neither study establishes an error rate for your own laboratory.
+
+### Audit what the code claims
+
+Compare component, specimen, property, scale, time, and relevant method with the source catalog. Code-existence checks alone miss valid-but-wrong assignments. Use unit/property checks to flag inconsistencies for investigation; a unit alone cannot establish the specimen or method. Include common tests and clinically important exceptions in local review.
+
+Keep unsupported mappings in a visible work queue. Obtain the assay definition from its owner rather than guessing a nearby code. Record the local identifier, target term, terminology version, rationale, reviewer, and date. Test representative results at the destination, including units and interpretations.
+
+If a mapping was already used, identify affected records and receiving systems, assess clinical and analytic consequences, correct the mapping through change control, and plan reprocessing or reconciliation. Changing tomorrow's messages does not correct yesterday's records. Recheck affected mappings after assay, catalog, or terminology updates.

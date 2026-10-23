@@ -227,3 +227,13 @@ The physical-scale storage calculator is a separate explicitly stated planning
 model. Clinical cases, study observations, candidate scores, and monthly reports
 are original, independently authored records; no observed reader effect is
 predicted from the adjustable candidate threshold.
+
+## Topic 5 LOINC teaching revision — October 22, 2026
+
+Official term pages 2345-7 and 14749-6 and the LOINC major-parts guide were inspected. Both terms are active and method-unspecified; they differ in MCnc versus SCnc. SearchLOINC redirected to sign-in, so the lesson includes public term-page alternatives. A lookup does not validate analytical equivalence or perform unit conversion.
+
+Primary publication abstracts retrieved through PubMed:
+- Stram M et al. Archives of Pathology & Laboratory Medicine. 2020;144:586–596. DOI 10.5858/arpa.2019-0276-OA. PMID 31603714. https://pubmed.ncbi.nlm.nih.gov/31603714/
+- McDonald CJ et al. JAMIA. 2023;30:301–307. DOI 10.1093/jamia/ocac215. PMID 36343113. https://pubmed.ncbi.nlm.nih.gov/36343113/
+
+The CAP survey's code-level 54/275 estimate and the PCORnet result-weighted 4.6% are presented with their populations and denominators, not pooled or generalized to all laboratories. The lesson does not rely on claims beyond those abstracts. All catalog records and learner tasks are independently authored.

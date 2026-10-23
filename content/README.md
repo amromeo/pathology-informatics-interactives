@@ -146,3 +146,7 @@ remain in React.
 Explicit coverage and primary source links are in `src/data/topic7Plan.ts`.
 Preserve the existing 2.4 cross-topic mapping. Styles are scoped in Topic7.css.
 Run `npm test` and `npm run build:pages`. Completed desktop/phone checks and screenshots are recorded in `review/topic7/`.
+
+## Topic 5 LOINC lookup
+
+`code-the-meaning` begins with local catalog naming problems, then a website comparison, purposes of other standards, mapping decisions, literature interpretation, and a urine transfer case. Narrative and literature are in concepts/bridge MDX; the lookup validator and structured feedback are in interaction.ts. Preserve code-level versus result-weighted study denominators, the sign-in alternative, and immediate feedback invalidation. Updating a code must not automatically convert numeric values or imply assay equivalence.

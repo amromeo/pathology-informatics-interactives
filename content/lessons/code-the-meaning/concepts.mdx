@@ -1,66 +1,30 @@
-### Start with the object and its use
+### What problem does LOINC solve?
 
-An **orderable** is something a clinician can request. A panel order may cause
-several observations to be performed and reported. An **observation** identifies
-what was measured or assessed. Its **value** is the answer, and its **unit**
-expresses the quantity when applicable. A report assembles those observations
-with interpretation and context.
+Local test identifiers work inside the laboratory that defines them. Another hospital cannot reliably infer their meaning from a number or an abbreviation. Different labels can name equivalent observations, and identical labels can hide different specimens, properties, or methods.
 
-For example, an estrogen-receptor observation, its percentage result, the %
-unit, and the pathologist's interpretation are separate data elements. The
-breast panel order does not supply all of those meanings. A billing entry
-documents a service for administrative use; it cannot establish what a
-particular tumor's result was.
+**LOINC** stands for **Logical Observation Identifiers Names and Codes**. It provides shared identifiers and definitions for observations. In this exercise, it answers “Which glucose observation is this?” The numeric result answers “What was the measured value?” and the unit supplies its quantitative meaning. These are separate fields.
 
-### Match each standard to the actual task
+A **mapping** is a reviewed association between a local catalog entry and a standard term. The analyst configures that association; laboratory staff verify what the local assay measures and reports. The local code can be retained alongside the LOINC code. A receiving system can use a verified shared identifier to find observations despite different local names.
 
-**LOINC** identifies observations and related clinical information. **SNOMED
-CT** represents detailed clinical concepts, including findings. **UCUM** gives
-units a machine-readable representation. These can work together in one
-record; choosing one does not eliminate the other elements.
+Adding a code does not rename every local test, convert a value, or prove that two assays are analytically interchangeable. A patient trend also needs compatible units, methods, specimen context, and appropriate interpretation. Never drop those checks merely because the code matches.
 
-**ICD** classifications support diagnosis classification for specified
-administrative and reporting uses. **CPT** represents services in the US
-billing workflow named here. The required edition, documented service, and
-submission rules matter; this exercise does not assign a billable code.
+### Read the term, not just the code
 
-**DICOM** describes medical imaging objects and associated metadata, including
-whole-slide microscopy. **CAP cancer protocols** specify structured reporting
-elements for the relevant cancer and procedure. Neither an image format nor a
-report template is a universal clinical vocabulary. Report elements may use
-terminology codes within their structure.
+On the LOINC website, inspect the fully specified name or Part Model. Six dimensions describe the observation:
 
-### Read the definition behind a similar label
+| Dimension | Question to ask about this glucose result |
+| --- | --- |
+| Component | Is glucose being measured? |
+| Property | Is the amount expressed as mass per volume or moles per volume? |
+| Time | Is this a point-in-time measurement (Pt), rather than a timed collection? |
+| System | Is the specimen serum/plasma (Ser/Plas), rather than urine or another material? |
+| Scale | Is the answer quantitative (Qn), rather than a category? |
+| Method | Does this term specify a method, or leave it unspecified? |
 
-A LOINC observation can be compared across six dimensions: the component
-being observed, the kind of property, the time aspect, the specimen or system,
-the result scale, and the method when the term specifies one. In this case,
-glucose is the component; mass concentration and substance concentration are
-different properties; both samples are serum/plasma; both are point-in-time
-numeric observations.
+A blank method part means that the term does not specify one; it does not mean the laboratory used no method. MCnc denotes mass concentration; SCnc denotes substance concentration. For these records, mg/dL and mmol/L reveal that property difference. A valid LOINC number can still be the wrong mapping for a particular record.
 
-LOINC 2345-7 identifies serum/plasma glucose expressed as mass per volume.
-LOINC 14749-6 identifies it as moles per volume. The local display label GLU
-does not distinguish them. mg/dL and mmol/L make the property difference
-visible, but selecting a code does not convert a number. A conversion requires
-a separately specified and validated calculation, with the original value
-and unit retained in the audit record.
+### Look up the two glucose observations
 
-Likewise, a short HER2 label does not establish the specimen, method, or result
-scale. An immunostain interpretation and a gene-amplification assessment cannot
-be merged solely because their labels contain HER2. If the source catalog
-lacks the needed definition, obtain it from the assay owner before accepting
-a mapping. Deferring an unsupported mapping is a completed review decision.
+Open <a href="https://loinc.org/search" target="_blank" rel="noopener noreferrer">SearchLOINC</a> in another tab and search for **glucose serum plasma**. Compare a mass-per-volume term with a moles-per-volume term. The search service may ask you to sign in to a free LOINC account. If that interrupts the session, inspect these public candidate pages directly: <a href="https://loinc.org/2345-7" target="_blank" rel="noopener noreferrer">candidate A</a> and <a href="https://loinc.org/14749-6" target="_blank" rel="noopener noreferrer">candidate B</a>. The task remains to read and compare their definitions, not to select the first search result.
 
-### Document what the mapping asserts
-
-Record the local identifier and definition, target system and code, terminology
-version, relationship, reviewer, date, and intended consumer. A broader or
-narrower concept may be useful for a specified purpose, but it is not
-automatically an exact equivalent. Do not infer that two local assays are
-interchangeable merely because they share a LOINC code; analytical comparability
-requires separate evidence.
-
-Test representative values, units, interpretation categories, and missing
-fields at the destination. A valid code can still produce an invalid record
-when combined with the wrong value, specimen, or unit.
+Keep the local catalog visible. Record the code for Hospitals A/B and for Hospital C, then record the properties and five shared dimensions you found on the term pages. Check term status on the website and record the terminology release and review date in a real mapping log. The lesson checks the supplied comparison; it cannot verify that you visited an external website.

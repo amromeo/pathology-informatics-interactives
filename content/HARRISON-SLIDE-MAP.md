@@ -119,7 +119,7 @@ Lesson slug: `newborn-screen-to-public-health`
 - **Harrison plan:** Session 4, slides 3–6, 10–12, 16–21, and 22–34.
 - **Build into the lesson:** Use SDOs, HL7 v2, FHIR, LOINC, SNOMED CT/value sets, and UCUM according to their actual roles. The learner should separate syntactic acceptance from a complete, correctly identified, clinically usable public-health message.
 
-### 15 — Reviewing Laboratory Terminology Mappings
+### 15 — Why Laboratory Results Need LOINC
 
 Lesson slug: `code-the-meaning`
 
