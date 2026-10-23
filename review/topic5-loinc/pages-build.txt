@@ -1,0 +1,21 @@
+
+> pathology-informatics-interactives@0.1.0 build:pages
+> npm run data:compile && tsc --noEmit && vite build --base /pathology-informatics-interactives/ --configLoader runner && tsx scripts/export-coverage.ts && node scripts/create-pages-fallback.mjs
+
+
+> pathology-informatics-interactives@0.1.0 data:compile
+> node scripts/compile-lesson-data.mjs
+
+Compiled the editable Lesson 3 and Lesson 4 CSV files.
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 210 modules transformed.
+rendering chunks...
+computing gzip size...
+pages-dist/index.html                    0.78 kB │ gzip:   0.40 kB
+pages-dist/assets/report-DhrgJ_c3.csv   45.19 kB
+pages-dist/assets/index-3ldeoKNo.css    81.45 kB │ gzip:  15.00 kB
+pages-dist/assets/index-B7w9sz82.js    934.02 kB │ gzip: 260.37 kB
+✓ built in 12.24s
+Exported pages-dist/curriculum-coverage.json
+Created 54 static route entry points and the GitHub Pages fallback.

@@ -1,0 +1,7 @@
+Learners could finish the terminology exercise without understanding why laboratories need LOINC. The revised lesson begins with different local names for the same observation and identical names for different properties, then requires an official-website comparison before reviewing mappings.
+
+Adds two code-entry fields, six-dimension comparison, study-denominator interpretation, and a urine-specimen transfer case. Correct code numbers alone do not complete the exercise. Includes primary-publication links with study populations and denominators, a public term-page fallback for SearchLOINC sign-in, updated faculty guidance, and a local practicum.
+
+Reviewed all four Topic 5 lessons and added the missing first-use LOINC explanation and transitions between message meaning, observation/answer mapping, terminology verification, and downstream data quality. Existing route and PIER coverage preserved.
+
+Validation: 96 tests pass; curriculum checks and production/Pages builds pass. Desktop 1365 px and phone 390 px browser review covered wrong/correct paths, changed-answer invalidation, reset, early debrief, all four lesson/faculty routes, and lookup links. Fixed cramped phone table and lookup labels. No browser errors or horizontal overflow in checked pages. Evidence and teaching review: review/topic5-loinc/. Responsive testing is not physical-device testing. Existing bundle-size warning remains.

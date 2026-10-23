@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-23",
+  "passed": true,
+  "widths": [
+    1365,
+    390
+  ],
+  "topicRoutes": [
+    "follow-the-flag",
+    "newborn-screen-to-public-health",
+    "code-the-meaning",
+    "invisible-bottleneck"
+  ],
+  "checks": [
+    "code-only answer rejected",
+    "all comparison dimensions required",
+    "wrong naming, study, and specimen feedback",
+    "complete review gate",
+    "changed-answer invalidation",
+    "reset",
+    "early debrief",
+    "faculty routes",
+    "no horizontal overflow",
+    "external lookup links open separately"
+  ],
+  "consoleErrors": [],
+  "limitations": "Responsive viewport testing, not physical-device testing."
+}

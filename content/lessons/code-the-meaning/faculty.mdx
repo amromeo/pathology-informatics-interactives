@@ -1,27 +1,43 @@
-# Faculty guide: Reviewing Laboratory Terminology Mappings
+# Faculty guide: Why Laboratory Results Need LOINC
 
-Allow 35 minutes. Begin with the breast-report objects before introducing
-the glucose counterexample. Ask learners to explain how an order, observation,
-answer, unit, report, and service differ. Avoid teaching a rigid one-standard-
-per-domain rule: standards overlap, and this workbench names a specific use
-for each choice.
+Allow 45–50 minutes, including website lookup. Do not begin with a list of acronyms. Ask: “How can the receiving system know which results belong together when each laboratory uses its own names?” Have learners explain both failures in the opening records: A/B have different names for the same observation definition, while A/C share a name but differ in property.
 
-Seven purpose answers: LOINC, SNOMED CT, UCUM, ICD, CPT, DICOM, and CAP protocol.
-Four mapping answers: 2345-7; 14749-6; defer pending assay definition; retain
-order identity and map components. Ask the learner to defend the last two
-without proposing a guessed code.
+### Sequence and answer key
 
-A strong explanation identifies mass versus substance concentration and
-states that code assignment does not perform unit conversion. Challenge
-the assumption that a shared LOINC code proves assay interchangeability.
-Ask what the destination should do with records awaiting mapping review.
+1. Choose comparison of catalog definitions and shared observation identifiers. Retain local identifiers, values, and units; do not claim analytical equivalence from the examples.
+2. Explain LOINC in the learner's own words before expanding its name. It identifies an observation independently of a local abbreviation. It does not itself supply the result or convert units.
+3. Open SearchLOINC and search for glucose serum plasma. Account access may be required. The linked public candidate pages provide an alternative, so access setup should not consume the session. Ask learners to point to the actual term definition; the software cannot prove an external lookup occurred.
+4. Record 2345-7 for A/B and 14749-6 for C. Shared fields: Glucose, Pt, Ser/Plas, Qn, method unspecified. Properties: MCnc for A/B; SCnc for C. A blank method does not mean no method was used. Ask about term status, release, and review date in a real mapping record.
+5. Seven purpose answers: LOINC, SNOMED CT, UCUM, ICD, CPT, DICOM, CAP protocol. These are answers for the named uses, not absolute partitions of the standards' domains.
+6. Mapping answers: 2345-7; 14749-6; obtain the HER2 assay definition; retain the panel order and map its components.
+7. Literature answer: audit locally and distinguish denominators. Urine transfer answer: reject the serum/plasma assignment and obtain a specimen-matched term with the remaining dimensions verified.
+
+### Check understanding beyond code recall
+
+Ask the learner to explain LOINC without using the word “code”: “It tells another system which observation this result represents despite our local naming.” Then ask why the same numeric result or a recognizable abbreviation is insufficient. A shared LOINC term still does not establish analytical comparability or permit unvalidated value conversion.
+
+The site checks the code pair and seven comparison fields together. Correct code numbers with the wrong specimen, scale, time, or method interpretation do not complete the lookup. Changed answers clear prior review feedback; reset clears all decisions. The debrief remains available before completion.
+
+### Interpret the literature carefully
+
+Stram et al. (2020) invited 1,916 laboratories in CAP coagulation/cardiac-marker surveys; 90 responded (4.7%). They reported 54 incorrect codes among 275 submitted codes (19.6%). Low response and selected tests limit external validity. Axis-error counts overlap: do not add them as if each were a distinct incorrect code.
+
+McDonald et al. (2023) assessed 179,537,986 mapped quantitative results, representing 3,029 tests in two PCORnet DataMarts. The 4.6% figure is result-weighted. It is not an estimate that 4.6% of laboratories or 4.6% of all unique catalog mappings were incorrect. Avoid comparing it directly with the CAP code-level percentage or claiming a temporal improvement. Neither study estimates this institution's error rate. These summaries are based on the indexed abstracts; no unsupported subgroup inference is required for the lesson.
+
+### Topic 5 continuity
+
+The critical-flag lesson distinguishes receipt from retained meaning. The newborn-screening lesson introduces a shared observation identifier separately from its answer and patient identity. This lesson explains why that identifier is needed and how to verify it. The queue lesson then asks whether downstream records are current, complete, and correctly linked. Preserve those distinct questions rather than implying that one terminology repair makes a dataset trustworthy.
 
 PIER alignment: 5.3. Harrison/API: Session 4 slides 16 and 22–32.
-Sources: [LOINC term dimensions](https://loinc.org/kb/users-guide/major-parts-of-a-loinc-term),
-[2345-7](https://loinc.org/2345-7), [14749-6](https://loinc.org/14749-6),
-[SNOMED CT](https://www.snomed.org/what-is-snomed-ct),
-[UCUM](https://ucum.org/ucum),
-[DICOM whole-slide microscopy](https://dicom.nema.org/medical/dicom/final/sup145_ft.pdf),
-and [CAP cancer protocols](https://www.cap.org/protocols-and-guidelines/cancer-protocols/current-cancer-protocols/).
-No proprietary billing descriptors are reproduced and no claim-specific
-billing advice is supplied.
+
+### Sources
+
+- [LOINC term dimensions](https://loinc.org/kb/users-guide/major-parts-of-a-loinc-term)
+- [LOINC 2345-7](https://loinc.org/2345-7) and [14749-6](https://loinc.org/14749-6)
+- [Stram et al., CAP survey, 2020](https://pubmed.ncbi.nlm.nih.gov/31603714/)
+- [McDonald et al., PCORnet mapping review, 2023](https://pubmed.ncbi.nlm.nih.gov/36343113/)
+- [SNOMED CT](https://www.snomed.org/what-is-snomed-ct), [UCUM](https://ucum.org/ucum)
+- [DICOM whole-slide microscopy](https://dicom.nema.org/medical/dicom/final/sup145_ft.pdf)
+- [CAP cancer protocols](https://www.cap.org/protocols-and-guidelines/cancer-protocols/current-cancer-protocols/)
+
+No proprietary billing descriptors are reproduced. Use applicable current guidance for actual billing decisions.

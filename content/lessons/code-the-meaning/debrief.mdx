@@ -1,16 +1,13 @@
-## Debrief
+## Debrief: a shared identifier needs a verified meaning
 
-The breast-report objects require different representations because they carry
-different information. Coding a finding, identifying an observation, expressing
-a unit, classifying a diagnosis, billing a service, storing an image, and
-structuring a report are related tasks rather than interchangeable ones.
+LOINC supplies a common way to identify an observation when local names and identifiers differ. Hospitals A and B can map their differently named serum/plasma mass-concentration glucose observations to **2345-7**. Hospital C's moles-per-volume observation maps to **14749-6**. Assigning a shared code does not convert 5.5 mmol/L to another unit or establish assay interchangeability.
 
-TM-01 supports 2345-7, while TM-02 supports 14749-6. Assigning one code to both
-because their display label is GLU hides a property difference. TM-03 needs
-the assay definition before a specific mapping can be approved. TM-04 retains
-its order identity while its result components are mapped separately.
+The website lookup required more than copying a number: glucose, property, point-in-time, serum/plasma, quantitative scale, and the unspecified method part had to fit the local records. The urine transfer case fails the specimen comparison even though glucose and mg/dL look familiar.
 
-A complete review contains seven correct purpose assignments and four supported
-mapping decisions. Its purpose is not memorizing code numbers. The important
-work is stating what the source means, what the target means, and what evidence
-supports their relationship.
+In the later review, TM-01 supports 2345-7 and TM-02 supports 14749-6. TM-03 needs its assay definition. TM-04 is an order whose component results need separate mappings. Deferral is a responsible completed decision when the evidence is missing.
+
+LOINC identifies the observation; the value and unit remain separate. SNOMED CT can represent a clinical finding, UCUM expresses units, ICD classifies diagnoses, and CPT represents services for the named administrative use. DICOM imaging objects and CAP reporting structures solve different problems. These standards can work together; none substitutes for all the others.
+
+The studies document mapping errors with different denominators. They justify checking local mappings, not assuming that a published percentage applies here. A valid code is not evidence that the local assignment is correct. Explain what the source means, what the target means, and why they match before approving the exchange.
+
+This connects the Topic 5 lessons: a message may arrive yet lose a critical flag; an observation and its answer may require separate mappings; a mapping needs source evidence; and downstream analysis still requires complete, current, correctly linked records.

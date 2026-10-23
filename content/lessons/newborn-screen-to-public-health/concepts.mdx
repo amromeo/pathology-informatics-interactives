@@ -8,7 +8,13 @@ The receiver must retain that context and reconcile missing or conflicting
 identity rather than guessing from the infant's name.
 
 The interface sends an **overall interpretation**, not an individual analyte
-measurement or a confirmed diagnosis. LOINC 57130-7 identifies that observation.
+measurement or a confirmed diagnosis. Its local label NBS_SUM has meaning inside
+this laboratory, but another organization cannot reliably infer that meaning.
+**LOINC (Logical Observation Identifiers Names and Codes)** supplies shared
+identifiers for observations. Here, LOINC 57130-7 identifies the overall
+interpretation being reported; it does not supply the answer. The later
+“Why Laboratory Results Need LOINC” lesson asks you to look up and verify a
+mapping on the LOINC website.
 A condition-specific interpretation such as 46746-4 has a narrower meaning and
 cannot replace the overall field just because both concern newborn screening.
 The test being reported and its answer need separate mappings.

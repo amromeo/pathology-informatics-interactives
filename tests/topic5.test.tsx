@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { renderToStaticMarkup } from "react-dom/server";
 import { approvedFlag, flagReplay, originalFlag } from "../content/lessons/follow-the-flag/interaction";
 import { approvedNbs, nbsReplay, originalNbs } from "../content/lessons/newborn-screen-to-public-health/interaction";
-import { mappingRows, terminologyRoles, terminologyScore } from "../content/lessons/code-the-meaning/interaction";
+import { mappingRows, terminologyRoles, terminologyScore, lookupReview, lookupFields } from "../content/lessons/code-the-meaning/interaction";
 import { originalQueue, queueReport, queueRows, timeText } from "../content/lessons/invisible-bottleneck/interaction";
 import { FlagExperience } from "../src/components/FlagExperience";
 import { NewbornExperience } from "../src/components/NewbornExperience";
@@ -82,4 +82,17 @@ test("new topic experiences expose labeled controls and text equivalents", () =>
   assert.match(terms,/aria-label="Mapping for TM-03"/);
   assert.match(queue,/<caption>/); assert.match(queue,/<th scope="row">Q-01/);
   for (const markup of [flag,nbs,terms,queue]) { assert.match(markup,/Reset lesson interactions/); assert.doesNotMatch(markup,/synthetic|fictional/i); }
+});
+
+
+test("LOINC lookup requires definitions as well as valid code numbers", () => {
+  const verified = {codeAB:"2345-7",codeC:"14749-6",...Object.fromEntries(lookupFields.map(row=>[row.id,row.answer]))};
+  assert.equal(lookupReview(verified).complete,true);
+  assert.equal(lookupReview({codeAB:"2345-7",codeC:"14749-6"}).complete,false);
+  assert.equal(lookupReview({...verified,codeC:"2345-7"}).complete,false);
+  assert.equal(lookupReview({...verified,system:"Urine"}).complete,false);
+  assert.equal(lookupReview({...verified,method:"none"}).complete,false);
+  assert.equal(lookupReview({...verified,propertyC:"MCnc"}).complete,false);
+  assert.equal(lookupReview({...verified,codeAB:" 2345-7 "}).complete,true);
+  assert.equal(lookupReview({}).complete,false);
 });
