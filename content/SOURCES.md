@@ -237,3 +237,7 @@ Primary publication abstracts retrieved through PubMed:
 - McDonald CJ et al. JAMIA. 2023;30:301–307. DOI 10.1093/jamia/ocac215. PMID 36343113. https://pubmed.ncbi.nlm.nih.gov/36343113/
 
 The CAP survey's code-level 54/275 estimate and the PCORnet result-weighted 4.6% are presented with their populations and denominators, not pooled or generalized to all laboratories. The lesson does not rely on claims beyond those abstracts. All catalog records and learner tasks are independently authored.
+
+## API reading integration — 2026-10-23
+
+The ten original PowerPoint decks were retrieved from the API course archive and their slide text inspected. Focused learner readings and faculty prompts are recorded in [the verified reading map](../review/api-teaching-slides/mapping.md). The older Harrison plan remains planning context; the new map records the narrower readings actually linked in the lessons. All links point to API originals. No deck or image is redistributed. Original slide content is CC BY 4.0; third-party assets retain their individual terms. No new clinical or standards requirements are adopted from these teaching slides.
