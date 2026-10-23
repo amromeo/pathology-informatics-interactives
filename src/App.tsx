@@ -108,7 +108,7 @@ function LessonPage({ slug }: { slug: string }) {
   const topic = topics.find((item) => item.id === lesson.manifest.topic)!;
   const experience = lesson.manifest.experience ?? "generic";
   const renderSpecializedExperience = experienceRegistry[experience];
-  const allowsEarlyDebrief = ["pixel-budget", "wsi-validation", "mitosis-review", "orientation", "result-journey", "data-quality", "statistics", "privacy", "downtime", "security-review", "specimen-routing", "autoverification", "reflex-rule", "flag-trace", "newborn-exchange", "terminology-review", "queue-analysis", "cds-design", "alert-evaluation", "test-build", "lis-selection"].includes(experience);
+  const allowsEarlyDebrief = ["pixel-budget", "wsi-validation", "mitosis-review", "orientation", "result-journey", "data-quality", "statistics", "privacy", "downtime", "security-review", "specimen-routing", "autoverification", "reflex-rule", "flag-trace", "newborn-exchange", "terminology-review", "queue-analysis", "cds-design", "alert-evaluation", "test-build", "lis-selection"].includes(experience) || ["five-vs-slide-archive", "model-under-pressure"].includes(slug);
   return (
     <main className={lesson.manifest.topic === 8 ? "lesson-main topic5-page topic8-page" : (lesson.manifest.topic === 5 || lesson.manifest.topic === 6 || lesson.manifest.topic === 7) ? "lesson-main topic5-page" : "lesson-main"}>
       <nav className="breadcrumbs" aria-label="Breadcrumb"><a href={href()}>Curriculum</a><span>→</span><a href={href(`topics/${topic.slug}/`)}>Topic {topic.id}</a><span>→</span><span>Lesson {lesson.manifest.id}</span></nav>

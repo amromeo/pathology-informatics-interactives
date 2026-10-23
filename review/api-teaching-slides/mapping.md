@@ -28,4 +28,3 @@ Slide numbers count the title slide as slide 1. Original PowerPoint slide text w
 | choose-and-govern-lis | [9 — System Implementation and Management](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%209%20Impl-Mgmt%20slides.pptx) | 16–20, 22–25 | Compare stated requirements with demonstrations, testing, training, and go-live preparation. Turn one attractive vendor claim into a laboratory workflow that can be observed and judged. |
 
 No new reading for can-we-accept-this-lot: general data-literacy coverage does not directly support its paired statistical analysis or lot-acceptance decision. Retain its NIST and CLSI sources.
-

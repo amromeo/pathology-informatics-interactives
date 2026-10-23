@@ -31,3 +31,13 @@ Desktop/mobile browser QA is NOT complete. In-app browser attempts failed first 
 Not merged or deployed.
 
 Standard production build also passed. Browser preview requires a fresh Pages build because the standard build uses the same output directory.
+
+## Follow-up browser review
+
+The earlier initialization blocker was resolved in the follow-up session. Tested ad878c4 plus the src/App.tsx early-debrief fix using the rebuilt Pages bundle index-DsCvmdvy.js in the in-app browser at http://127.0.0.1:4186/pathology-informatics-interactives/.
+
+At 1365 × 900 and 390 × 844, all 22 learner pages and 22 faculty pages loaded, each exposed exactly one added API reading, and none had document-level horizontal overflow (88 checks; browser-checks.json). Opened every learner debrief without completing its interaction. Discovered and fixed the legacy completion gate on the archive and model-transfer lessons.
+
+Inspected saved desktop and mobile screenshots for reading wrapping and navigation. Exercised archive reset, incorrect choices (1/3 validation cases passed), changed choices (3/3 passed), and navigation to the faculty guide. All eight topic routes were used to discover lesson links. Screenshots are representative, not a visual inspection of every control on every page. Physical-device testing and a full replay of all 22 interactions were not performed; existing behavior is covered by 96 passing unit tests.
+
+After the debrief fix, npm test and npm run build:pages passed. The existing large-bundle warning remains. During rebuilding, a preview connection stopped; checks were restarted after the final Pages build and server restart.
