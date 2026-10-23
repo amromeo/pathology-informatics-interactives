@@ -21,6 +21,13 @@ was rejected by browser security policy. The tool reported that origin approval
 was declined and explicitly prohibited alternate browser routes or indirect
 execution to achieve the blocked action. No bypass was attempted.
 
+The preview-server process also reported EADDRINUSE on port 4174. That port
+was already occupied; the existing service was left untouched. No claim is
+made that the attempted browser origin was serving this worktree. For a later
+authorized run, start this worktree's preview on an unused port (the prepared
+script defaults to 4187): in PowerShell, set `$env:PORT='4187'` and run
+`npm run preview:pages`. QA_ROOT can select another authorized preview URL.
+
 **Desktop/mobile browser QA is NOT complete.** No screenshots, overflow result,
 keyboard result, browser reset result, or real-browser state-invalidation result
 is claimed. Automated semantic/logic checks do not substitute for that review.

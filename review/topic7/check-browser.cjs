@@ -1,5 +1,5 @@
 // Prepared for a separately authorized QA environment; NOT RUN in this session.
-// Requires Playwright and installed Chrome, plus npm run preview:pages.
+// Requires Playwright and installed Chrome; start preview with PORT=4187.
 const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
@@ -7,7 +7,7 @@ const fs=require('node:fs');
  const browser=await chromium.launch({channel:'chrome',headless:true});
  const page=await browser.newPage();
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
- const root=process.env.QA_ROOT||'http://127.0.0.1:4174/pathology-informatics-interactives/';
+ const root=process.env.QA_ROOT||'http://127.0.0.1:4187/pathology-informatics-interactives/';
  const output='review/topic7';
  const select=(name,value)=>page.getByRole('combobox',{name,exact:true}).selectOption(value);
  const text=()=>page.locator('main').innerText();

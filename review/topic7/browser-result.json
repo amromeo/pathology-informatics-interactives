@@ -2,6 +2,7 @@
   "status": "blocked",
   "attemptedOrigin": "http://127.0.0.1:4174",
   "tool": "cua_repl in-app browser",
+  "previewServer": "Port 4174 already occupied (EADDRINUSE); existing service left untouched; attempted origin was not verified as this worktree",
   "reason": "Browser security policy: origin approval declined; alternate routes prohibited.",
   "desktopPassed": false,
   "phonePassed": false,
