@@ -1,3 +1,7 @@
+import "./components/Topic7.css";
+import { PixelBudgetExperience } from "./components/PixelBudgetExperience";
+import { WsiValidationExperience } from "./components/WsiValidationExperience";
+import { MitosisReviewExperience } from "./components/MitosisReviewExperience";
 import { CdsDesignExperience } from "./components/CdsDesignExperience";
 import { AlertEvaluationExperience } from "./components/AlertEvaluationExperience";
 import { FlagExperience } from "./components/FlagExperience";
@@ -35,6 +39,9 @@ type ExperienceRenderProps = {
 };
 
 const experienceRegistry: Partial<Record<LessonExperience, (props: ExperienceRenderProps) => ReactNode>> = {
+  "pixel-budget": (props) => <PixelBudgetExperience {...props}/>,
+  "wsi-validation": (props) => <WsiValidationExperience {...props}/>,
+  "mitosis-review": (props) => <MitosisReviewExperience {...props}/>,
   "cds-design": (props) => <CdsDesignExperience {...props}/>,
   "alert-evaluation": (props) => <AlertEvaluationExperience {...props}/>,
   "flag-trace": (props) => <FlagExperience {...props}/>,
@@ -97,9 +104,9 @@ function LessonPage({ slug }: { slug: string }) {
   const topic = topics.find((item) => item.id === lesson.manifest.topic)!;
   const experience = lesson.manifest.experience ?? "generic";
   const renderSpecializedExperience = experienceRegistry[experience];
-  const allowsEarlyDebrief = ["orientation", "result-journey", "data-quality", "statistics", "privacy", "downtime", "security-review", "specimen-routing", "autoverification", "reflex-rule", "flag-trace", "newborn-exchange", "terminology-review", "queue-analysis", "cds-design", "alert-evaluation"].includes(experience);
+  const allowsEarlyDebrief = ["pixel-budget", "wsi-validation", "mitosis-review", "orientation", "result-journey", "data-quality", "statistics", "privacy", "downtime", "security-review", "specimen-routing", "autoverification", "reflex-rule", "flag-trace", "newborn-exchange", "terminology-review", "queue-analysis", "cds-design", "alert-evaluation"].includes(experience);
   return (
-    <main className={(lesson.manifest.topic === 5 || lesson.manifest.topic === 6) ? "lesson-main topic5-page" : "lesson-main"}>
+    <main className={(lesson.manifest.topic === 5 || lesson.manifest.topic === 6 || lesson.manifest.topic === 7) ? "lesson-main topic5-page" : "lesson-main"}>
       <nav className="breadcrumbs" aria-label="Breadcrumb"><a href={href()}>Curriculum</a><span>→</span><a href={href(`topics/${topic.slug}/`)}>Topic {topic.id}</a><span>→</span><span>Lesson {lesson.manifest.id}</span></nav>
       <header className="lesson-meta"><div className="tag-row">{lesson.manifest.pierObjectives.map((objective) => <span key={objective}>PIER {objective}</span>)}</div><div><span>{lesson.manifest.durationMinutes} minutes</span><span>{lesson.manifest.difficulty}</span><a href={href(`faculty/${slug}/`)}>Faculty guide</a></div></header>
       <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>

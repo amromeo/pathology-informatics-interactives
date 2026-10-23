@@ -1,11 +1,7 @@
-# Human + Algorithm
+# Reviewing a Mitosis Detection Tool
 
-> **Synthetic case:** A mitosis-assist tool has high sensitivity, but produces many false marks, increases review time, and appears to make negative overlays unusually reassuring.
+Dr. Rao is evaluating a tool that marks possible mitotic figures in a defined tumor area. The pathologist must review those locations, search the rest of the area, and record the final count. The tool does not assign a diagnosis, grade, or prognosis.
 
-## Your task
+The vendor's sensitivity figure does not tell Dr. Rao how many false marks require review or what happens when a reader sees an empty overlay. You will inspect candidate locations, change the marking threshold, compare site-specific errors, and review a separate reader study and monitoring report.
 
-Distinguish image processing, pattern recognition, diagnosis, and prognosis. Adjust the operating threshold and design human oversight and monitoring that measure the deployed human-plus-model system.
-
-## Key point
-
-Changing a model threshold changes both statistical performance and human workload. Clinical performance emerges from the interaction between data, model, interface, user, and workflow.
+The candidate list contains 12 selected locations from a development review: five reference mitotic figures and seven nonmitotic locations. Two pathologists established the reference labels by consensus. All 12 locations remain in the exercise. This deliberately small selected set supports arithmetic and error inspection; it is not an estimate of slide-level clinical accuracy.

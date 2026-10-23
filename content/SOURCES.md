@@ -151,3 +151,64 @@ API/Harrison Session 7 informs the teaching sequence: slides 6–18 and 22–32
 for workflow and forms; slides 28–45 for limitations and evaluation, as recorded
 in the slide map. The records, rule specification, audit, pilot data, and safety
 event are original. No source is offered as a universal HbA1c repeat interval.
+
+## Topic 7: digital pathology systems
+
+Primary sources checked October 22, 2026. PIER R5 page 16, objectives 7.1–7.4,
+was inspected directly. Coverage includes capture/storage/retrieval/viewing,
+static/live/whole-slide applications, formats/resolution/compression/displays,
+image analysis and productivity, and validation/regulatory requirements. Existing
+cross-topic 2.4 coverage is retained. `src/data/topic7Plan.ts` records observable
+learner actions. Harrison/API slide ranges remain those in the planning map;
+concepts are adapted under CC BY 4.0, with original cases and interactions.
+
+- DICOM PS3.3 **2026d**, A.32.8:
+  https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_A.32.8.html
+  — whole-slide tiles, frames, and resolution layers.
+- DICOM PS3.3 C.8.12.4:
+  https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.8.12.4.html
+  — samples, bit allocation, acquisition information, and lossy-compression
+  history. This replaces reliance on the historical Supplement 145 alone for
+  current Topic 7 teaching. DICOM exchange is not clinical validation.
+- CAP WSI validation guideline, online 2021 / print 2022, active when checked:
+  https://www.cap.org/cap-guidelines/validating-whole-slide-imaging-for-diagnostic-purposes-in-pathology/
+  and the formal summary:
+  https://www.cap.org/wp-content/uploads/documents/wsi-summary-recommendations.pdf
+  — representative application-specific cases, same-reader comparisons,
+  discordance investigation, and read interval. The formal recommendation
+  calls for investigation and attempted remedy below 95%; it is not an automatic
+  approval rule above 95%. The case's corrective-evidence and signoff conditions
+  are local decisions. No CAP table, figure, or checklist is reproduced.
+- FDA DEN160056 decision summary:
+  https://www.accessdata.fda.gov/cdrh_docs/reviews/DEN160056.pdf
+  — historical example of a system with defined components and specimen scope;
+  not current labeling for every product. Local validation and device authorization
+  answer different questions. Actual product labeling and jurisdiction must be checked.
+- FDA statistical diagnostic-test guidance (2007, final):
+  https://www.fda.gov/regulatory-information/search-fda-guidance-documents/statistical-guidance-reporting-results-studies-evaluating-diagnostic-tests-guidance-industry-and-fda
+  — reference standards, sensitivity/specificity denominators, and case mix.
+- IMDRF **N88 FINAL:2025**, GMLP:
+  https://www.imdrf.org/documents/good-machine-learning-practice-medical-device-development-guiding-principles
+  — independent representative evaluation, human–AI use, and lifecycle monitoring.
+- FDA/Health Canada/MHRA transparency principles:
+  https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/transparency-machine-learning-enabled-medical-devices-guiding-principles
+  — context of use, human–AI performance, and useful information for reviewers.
+
+### Topic 7 asset provenance and limits
+
+The existing project-generated `public/assets/synthetic-wsi-field.webp` was
+visually inspected and reused. No external clinical image or proprietary display
+was copied. `scripts/topic7-images.mjs` extracts 512 × 512 pixel fields at
+(100,300) and (700,0), measured from the source's upper-left corner. Each field
+is saved as a decoded-reference PNG, resized to 128 × 128 PNG, and encoded at
+JPEG quality 12 with 4:2:0 chroma subsampling. Sharp performs the transformations;
+`images.json` records actual dimensions and encoded byte counts.
+
+The source already has WebP encoding and a blurred region. Lossless PNG preserves
+decoded source pixels, not a never-compressed scanner original. The displayed
+comparison demonstrates sampling and encoding effects only; it cannot support
+diagnostic equivalence, morphology assessment, or a clinical compression limit.
+The physical-scale storage calculator is a separate explicitly stated planning
+model. Clinical cases, study observations, candidate scores, and monthly reports
+are original, independently authored records; no observed reader effect is
+predicted from the adjustable candidate threshold.

@@ -19,10 +19,10 @@ test("unsafe shortcuts fail at least one validation case", () => {
   }
 });
 
-test("the three remaining pilot interaction patterns are present", () => {
+test("the two remaining pilot patterns are preserved after Topic 7 becomes bespoke", () => {
   assert.deepEqual(
     lessons.map((lesson) => lesson.manifest.pilot).filter(Boolean).sort(),
-    ["data-quality", "digital-pathology", "interoperability"],
+    ["data-quality", "interoperability"],
   );
 });
 

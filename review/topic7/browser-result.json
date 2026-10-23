@@ -1,0 +1,11 @@
+{
+  "status": "blocked",
+  "attemptedOrigin": "http://127.0.0.1:4174",
+  "tool": "cua_repl in-app browser",
+  "reason": "Browser security policy: origin approval declined; alternate routes prohibited.",
+  "desktopPassed": false,
+  "phonePassed": false,
+  "screenshotsCaptured": 0,
+  "browserInteractionChecksRun": false,
+  "alternateBrowserAttempted": false
+}

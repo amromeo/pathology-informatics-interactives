@@ -18,6 +18,9 @@ export type LessonExperience =
   | "queue-analysis"
   | "cds-design"
   | "alert-evaluation"
+  | "pixel-budget"
+  | "wsi-validation"
+  | "mitosis-review"
   | "multimodal"
   | "ai-foundations"
   | "ai-deployment";

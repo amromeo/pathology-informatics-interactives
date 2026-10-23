@@ -1,0 +1,13 @@
+## Ask what the software output means
+
+Image processing changes or measures pixel information, such as stain separation or focus assessment. Pattern recognition proposes a category or location. A cell counter must also distinguish which cells belong in the denominator. Morphometry measures shapes and dimensions; mitosis detection proposes locations for review. A diagnostic classifier and a prognostic model answer different questions: what condition is present versus what outcome may occur. Each needs its own reference, population, endpoint, and validation.
+
+Here the score ranks possible mitoses. It is not a calibrated probability of cancer, prognosis, or even a guaranteed probability of a mitosis. A **threshold** marks locations whose scores are at least the selected value; a score exactly equal to the threshold is included.
+
+A true positive is a reference mitosis that is marked. A false negative is a reference mitosis left unmarked. A false positive is a nonmitotic location that is marked. A true negative is a nonmitotic location left unmarked. Read the individual locations alongside the totals.
+
+Sensitivity divides marked reference mitoses by all reference mitoses. Specificity divides unmarked nonmitotic locations by all reference nonmitotic locations. Positive predictive value divides true marks by all marks. If there are no marks, that last fraction has a zero denominator and is undefined, not 100%.
+
+These quantities describe the selected candidate list. Real detection evaluation also needs a prespecified area and a way to find missed figures outside the model's candidate proposals. Specificity depends on how nonmitotic locations are sampled; do not generalize this seven-location denominator to every cell on a slide.
+
+Site A and B each contribute six selected locations, with three and two reference mitoses respectively. Compare their errors, then ask about staining, preparation, scanner, and case mix. Small subgroup differences are clues to investigate, not precise estimates. A threshold chosen on this set needs independent testing; repeatedly tuning on a final test set would compromise that evaluation.

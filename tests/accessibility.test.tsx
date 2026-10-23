@@ -3,7 +3,7 @@ import test from "node:test";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { GenericExperience } from "../src/components/GenericExperience";
-import { WsiValidationLab } from "../src/components/PilotLabs";
+import { WsiValidationExperience } from "../src/components/WsiValidationExperience";
 import { ResultJourneyExperience } from "../src/components/ResultJourneyExperience";
 import { DataQualityExperience } from "../src/components/DataQualityExperience";
 import { StatisticsExperience } from "../src/components/StatisticsExperience";
@@ -23,12 +23,14 @@ test("shared lesson controls expose semantic groups and labels", () => {
   assert.doesNotMatch(html, /Evidence-supported|Incomplete correction|Unsafe shortcut/);
 });
 
-test("the WSI viewer has text alternatives and labeled controls", () => {
-  const html = renderToStaticMarkup(<WsiValidationLab />);
-  assert.match(html, /alt="Synthetic H&amp;E-style tissue field/);
-  assert.match(html, /aria-label="Image navigation"/);
-  assert.match(html, /<legend>Evidence required for the intended scope<\/legend>/);
-  assert.match(html, /type="checkbox"/);
+test("the WSI review exposes labeled plans and discordance decisions", () => {
+  const html = renderToStaticMarkup(<WsiValidationExperience />);
+  assert.match(html, /aria-label="Intended use for this review"/);
+  assert.match(html, /Next action for V12/);
+  assert.match(html, /Next action for V44/);
+  assert.match(html, /type="radio"/);
+  assert.match(html, /Check the validation plan/);
+  assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
 });
 
 test("the missing CBC map and decisions expose labeled controls", () => {

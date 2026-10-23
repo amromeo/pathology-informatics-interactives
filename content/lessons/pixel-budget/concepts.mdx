@@ -1,0 +1,9 @@
+## Separate acquisition from enlargement
+
+A scanner samples light from a slide on a grid. **Pixel spacing** is the physical distance represented by adjacent pixels. Smaller spacing gives more samples across the same tissue area. Optical resolution also depends on optics, focus, preparation, and sensor; spacing alone does not establish the smallest resolvable structure.
+
+A scanner's “20×” or “40×” label describes an acquisition setting. Viewer zoom describes enlargement on a screen. They are not interchangeable measurements. Enlarging an image does not acquire new detail. Additional focal planes may help with thick material but add acquisition time and data; they do not make every preparation suitable for digital diagnosis.
+
+**Downsampling** replaces a larger grid with a smaller one. **Lossy compression** discards information to encode fewer bytes. **Lossless compression** permits exact recovery of the pixels supplied to that encoder. Saving an already blurred or lossy image losslessly does not restore earlier information.
+
+Both panels show the same selected field. Inspect nuclear edges and tissue boundaries in the glands field, then inspect the blurred upper-right field. The reference PNG preserves pixels decoded from the existing WebP asset; it is not an uncompressed scanner original. The reduced PNG has one quarter as many pixels in each direction, or one sixteenth as many total pixels. The JPEG keeps the grid size but uses strong compression. Browser resizing and your display affect what you can see.

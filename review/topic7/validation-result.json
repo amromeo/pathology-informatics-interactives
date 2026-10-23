@@ -1,0 +1,18 @@
+{
+  "baseline": "cb29ddc7721370c57ab5b1b93cc712ec2eed5b26",
+  "curriculum": {
+    "lessons": 23,
+    "objectivesCovered": 34,
+    "objectivesTotal": 34,
+    "passed": true
+  },
+  "unitTests": {
+    "passed": 86,
+    "failed": 0
+  },
+  "productionBuild": "passed",
+  "pagesBuild": "passed",
+  "browserQA": "blocked; not completed",
+  "warning": "Existing Vite bundle-size advisory",
+  "sourceAndDerivativeImageInspection": "completed; no diagnostic adequacy inferred"
+}
