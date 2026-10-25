@@ -131,7 +131,7 @@ test("image and algorithm controls have native labels, fieldsets, text metrics, 
   assert.match(model, /How should the pathologist review the area/);
   for (const html of [image, model]) {
     assert.match(html, /aria-live="polite"/);
-    assert.match(html, /Reset lesson interactions/);
+    assert.match(html, /Clear my answers and start this lesson over/);
     assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
   }
 });

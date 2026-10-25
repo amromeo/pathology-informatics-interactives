@@ -167,13 +167,13 @@ export const selectionSources = [
   {
     title: "Approved requirements",
     record:
-      "Mandatory before selection recommendation:\nC-2: corrected report current in EHR; prior version retained\nR-1: recovery within 4 hours; at most 15 minutes to reconcile\nE-1: export identifiers, reports and versions for retrieval\nPreferences: usability, analytics, training\nClinical approval: laboratory leadership\nProcurement and IT review: required before contract",
+      "Mandatory before selection recommendation:\nC-2: corrected report current in EHR; prior version retained\nR-1: recovery time objective (RTO): 4 hours; recovery point objective (RPO): at most 15 minutes of data to recover and reconcile\nE-1: export identifiers, reports and versions for retrieval\nPreferences: usability, analytics, training\nClinical approval: laboratory leadership\nProcurement and IT review: required before contract",
     note: "The recovery targets and evidence rules are local requirements. Mandatory failures cannot be traded away by increasing a preference score.",
   },
   {
     title: "Five-year planning assumptions",
     record:
-      "Currency: USD thousands, constant planning prices\nPeriod: implementation plus five annual service charges\nInclude: upfront, service, interfaces, migration, exit\nNo discounting, tax, inflation, or internal staffing included\nAlder interface amount: planning allowance, not a quote\nAll other line items: proposal amounts; not signed contracts",
+      "Scope: this single-site module replacement\nCurrency: USD thousands, constant planning prices\nPeriod: implementation plus five annual service charges\nInclude: upfront, service, interfaces, migration, exit\nNo discounting, tax, inflation, or internal staffing included\nAlder interface amount: planning allowance, not a quote\nAll other line items: proposal amounts; not signed contracts",
     note: "This is a scoped comparison, not a complete budget. Obtain staffing estimates, binding interface responsibilities, and sensitivity analysis before approval.",
   },
 ];
@@ -214,18 +214,18 @@ export const lifecycleCases = [
   },
   {
     id: "outage",
-    title: "During a hosted service outage",
+    title: "Before signing the hosted-service contract",
     record:
-      "The vendor is restoring the service. The laboratory has paper orders and results that accumulated during the outage.",
+      "The proposal lists annual hosting charges but leaves support hours, change notices, export at termination and downtime reconciliation responsibilities unspecified.",
     options: [
-      ["wait", "Wait for restoration, then resume without reconciliation"],
-      ["reconcile", "Use the contingency procedure and reconcile accumulated work"],
+      ["wait", "Accept standard hosting terms without clarification"],
+      ["reconcile", "Specify support, changes, export and reconciliation"],
     ],
     answer: "reconcile",
     notes: {
-      wait: "Restoring the server does not reconcile patient identity, pending orders, or results produced during downtime.",
+      wait: "A hosting fee does not define service obligations. Leaving support hours, changes and exit assistance unspecified creates gaps the laboratory may discover only during a disruption.",
       reconcile:
-        "Assign laboratory and IT responsibilities, communicate urgent results, reconcile paper work, and verify recovery before ending downtime procedures.",
+        "Document support hours and escalation, notice and testing of changes, usable export of reports and versions at termination, and who reconciles interrupted work. Connect the recovery responsibilities to the downtime process in Twelve Hours Offline.",
     },
   },
   {
@@ -257,3 +257,16 @@ export const selectionCopy = {
   blocked:
     "The selected vendor cannot proceed on this evidence. Resolve and retest failed requirements or obtain missing evidence before reconsideration.",
 };
+
+export const sectionPurposes = [
+  "Separate mandatory laboratory requirements from the panel’s preferences.",
+  "Classify each vendor claim using the demonstrated result or missing evidence.",
+  "Explore how weights and omitted charges affect the recommendation.",
+  "Choose what must be tested, documented and retained throughout the system’s use.",
+];
+
+export function evidenceLabel(row: { vendor: string; requirement: string }) {
+  const vendor = vendors.find((v) => v.id === row.vendor);
+  if (!vendor) throw Error("Unknown vendor: " + row.vendor);
+  return vendor.name + ": " + row.requirement.toLowerCase() + " evidence";
+}

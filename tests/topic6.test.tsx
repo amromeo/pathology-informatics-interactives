@@ -81,7 +81,7 @@ test("changing recipients and targeting have independently observable effects", 
 test("ward comparison uses pooled decision denominators and both period changes", () => {
   assert.equal(
     pilotWeeks.reduce((n, row) => n + row.denominator, 0),
-    4000,
+    400,
   );
   assert.deepEqual(pilotComparison(true), {
     before: 80,

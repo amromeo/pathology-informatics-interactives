@@ -57,7 +57,7 @@ export const auditEvents = [
     id: "handoff",
     time: "08:40",
     title: "Gross-room review",
-    actor: "M. Chen, pathologists’ assistant",
+    actor: "T. Nguyen, pathologists’ assistant",
     record: "S26-1042 absent from gross worklist / no receiving scan",
     detail:
       "The assistant compares the operating-room delivery list with the gross-room worklist and asks accessioning to locate C-1042-A. Its current physical location has not yet been confirmed.",
@@ -177,8 +177,7 @@ export const recoveryChoices = [
   },
   {
     id: "locate-handoff",
-    label:
-      "Locate and verify the container, correct its worklist with a documented reason, and record the actual handoff while preserving the original audit trail.",
+    label: "Verify the container, correct the worklist and document its handoff.",
     correct: true,
     feedback:
       "The recovery plan addresses the existing container separately from future routing. Staff must carry out and document the handoff; the simulation does not create physical evidence.",
@@ -194,3 +193,120 @@ export const recoveryChoices = [
 ] as const;
 export const readyForReview = (config: RoutingConfig, recoveryId: string) =>
   runRoutingCases(config).every((test) => test.passed) && recoveryId === "locate-handoff";
+
+export const additionalExercises = {
+  title: "From the order to the worklist",
+  purpose:
+    "Identify which laboratory records support ordering and tracking in anatomic and clinical pathology.",
+  questions: [
+    {
+      id: "LIS1",
+      prompt:
+        "A case contains separately labeled parts, blocks and slides. Which workflow is illustrated?",
+      answer: "ap",
+      choices: [
+        {
+          id: "ap",
+          label: "Anatomic pathology",
+        },
+        {
+          id: "cp",
+          label: "Clinical pathology",
+        },
+        {
+          id: "both",
+          label: "Both",
+        },
+      ],
+      feedback:
+        "Anatomic pathology records the case, parts, blocks and slides. Their relationships must survive routing and image linkage.",
+    },
+    {
+      id: "LIS2",
+      prompt:
+        "An order creates individual chemistry tests and numerical results. Which workflow is illustrated?",
+      answer: "cp",
+      choices: [
+        {
+          id: "ap",
+          label: "Anatomic pathology",
+        },
+        {
+          id: "cp",
+          label: "Clinical pathology",
+        },
+        {
+          id: "both",
+          label: "Both",
+        },
+      ],
+      feedback:
+        "Clinical pathology commonly links an order, specimen, test and result. Specialized systems may handle blood bank, microbiology and molecular testing.",
+    },
+    {
+      id: "LIS3",
+      prompt: "The catalog states specimen requirements before collection. Where is this useful?",
+      answer: "both",
+      choices: [
+        {
+          id: "ap",
+          label: "Anatomic pathology",
+        },
+        {
+          id: "cp",
+          label: "Clinical pathology",
+        },
+        {
+          id: "both",
+          label: "Both",
+        },
+      ],
+      feedback:
+        "Both workflows need clear names and specimen requirements. The catalog helps clinicians choose an appropriate order and helps staff collect the right material.",
+    },
+    {
+      id: "LIS4",
+      prompt:
+        "An order-time question asks the collection site or clinical context. Where is this useful?",
+      answer: "both",
+      choices: [
+        {
+          id: "ap",
+          label: "Anatomic pathology",
+        },
+        {
+          id: "cp",
+          label: "Clinical pathology",
+        },
+        {
+          id: "both",
+          label: "Both",
+        },
+      ],
+      feedback:
+        "Both workflows use order-time questions to obtain information needed for processing and interpretation. Validate the question and its destination field.",
+    },
+    {
+      id: "LIS5",
+      prompt:
+        "A duplicate check asks the clinician to review an existing order before adding another. Where is this useful?",
+      answer: "both",
+      choices: [
+        {
+          id: "ap",
+          label: "Anatomic pathology",
+        },
+        {
+          id: "cp",
+          label: "Clinical pathology",
+        },
+        {
+          id: "both",
+          label: "Both",
+        },
+      ],
+      feedback:
+        "Duplicate checks, reflex orderables and test information can support appropriate ordering across laboratory sections. Preserve clinically justified exceptions.",
+    },
+  ],
+};

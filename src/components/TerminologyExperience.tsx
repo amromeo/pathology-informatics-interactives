@@ -1,3 +1,5 @@
+import { sectionPurposes } from "../../content/lessons/code-the-meaning/interaction";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState, type ComponentType } from "react";
 import {
   mappingOptions,
@@ -28,8 +30,8 @@ export function TerminologyExperience({
   const found = lookupReview(lookup);
   const complete =
     found.complete &&
-    score.roles === 7 &&
-    score.mappings === 4 &&
+    score.roles === terminologyRoles.length &&
+    score.mappings === mappingRows.length &&
     Object.entries(terminologyDecisions).every(([id, row]) => decisions[id] === row.answer);
   const changed = () => {
     setTested(false);
@@ -52,8 +54,13 @@ export function TerminologyExperience({
   }
   return (
     <div>
-      <Topic5Section title="Why do the local names fail?">
-        <div className="topic5-table-wrap">
+      <Topic5Section number={1} purpose={sectionPurposes[0]} title="Why do the local names fail?">
+        <div
+          className="topic5-table-wrap"
+          tabIndex={0}
+          role="region"
+          aria-label="Scrollable records 1"
+        >
           <table>
             <caption>{terminologyCopy.catalogCaption}</caption>
             <thead>
@@ -85,7 +92,11 @@ export function TerminologyExperience({
         <p>{terminologyCopy.catalogNote}</p>
         {decision("problem")}
       </Topic5Section>
-      <Topic5Section title="Use LOINC to identify the observation">
+      <Topic5Section
+        number={2}
+        purpose={sectionPurposes[1]}
+        title="Use LOINC to identify the observation"
+      >
         <Teaching Content={Concepts} />
         <fieldset className="topic5-plan loinc-lookup">
           <legend>Your LOINC website comparison</legend>
@@ -140,16 +151,22 @@ export function TerminologyExperience({
           >
             Check the website comparison
           </button>
-          {lookupTested && (
-            <p className="topic5-note" role="status">
-              {found.complete ? terminologyCopy.lookupReady : terminologyCopy.lookupIncomplete}{" "}
-              {found.codes ? "Both code assignments match." : "Check both code assignments."}{" "}
-              {found.dimensions} / 7 comparison fields match.
-            </p>
-          )}
+          <div role="status" aria-live="polite" aria-atomic="true">
+            {lookupTested && (
+              <p className="topic5-note">
+                {found.complete ? terminologyCopy.lookupReady : terminologyCopy.lookupIncomplete}{" "}
+                {found.codes ? "Both code assignments match." : "Check both code assignments."}{" "}
+                {found.dimensions} / 7 comparison fields match.
+              </p>
+            )}
+          </div>
         </fieldset>
       </Topic5Section>
-      <Topic5Section title="Distinguish the observation, finding, unit, and service">
+      <Topic5Section
+        number={3}
+        purpose={sectionPurposes[2]}
+        title="Distinguish the observation, finding, unit, and service"
+      >
         <Teaching Content={Investigation} />
         <div className="topic5-card-grid">
           {terminologyRoles.map((row) => (
@@ -176,7 +193,11 @@ export function TerminologyExperience({
           ))}
         </div>
       </Topic5Section>
-      <Topic5Section title="Review the proposed observation mappings">
+      <Topic5Section
+        number={4}
+        purpose={sectionPurposes[3]}
+        title="Review the proposed observation mappings"
+      >
         <div className="topic5-card-grid">
           {mappingRows.map((row) => (
             <article className="artifact-card topic5-record" key={row.id}>
@@ -200,11 +221,19 @@ export function TerminologyExperience({
           ))}
         </div>
       </Topic5Section>
-      <Topic5Section title="Check what the mapping-error studies actually measured">
+      <Topic5Section
+        number={5}
+        purpose={sectionPurposes[4]}
+        title="Check what the mapping-error studies actually measured"
+      >
         <Teaching Content={Bridge} />
         {decision("evidence")}
       </Topic5Section>
-      <Topic5Section title="Apply the comparison to a different specimen">
+      <Topic5Section
+        number={6}
+        purpose={sectionPurposes[5]}
+        title="Apply the comparison to a different specimen"
+      >
         {decision("transfer")}
         <button
           className="primary-button"
@@ -216,18 +245,18 @@ export function TerminologyExperience({
         >
           Check the mapping review
         </button>
-        {tested && (
-          <p className="topic5-note" role="status">
-            {complete ? terminologyCopy.reviewReady : terminologyCopy.reviewIncomplete}{" "}
-            {score.roles} of 7 purpose assignments and {score.mappings} of 4 mapping decisions
-            match.
-          </p>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {tested && (
+            <p className="topic5-note">
+              {complete ? terminologyCopy.reviewReady : terminologyCopy.reviewIncomplete}{" "}
+              {score.roles} of {terminologyRoles.length} purpose assignments and {score.mappings} of{" "}
+              {mappingRows.length} mapping decisions match.
+            </p>
+          )}
+        </div>
       </Topic5Section>
-      <button
-        className="text-button"
-        type="button"
-        onClick={() => {
+      <ResetLessonButton
+        fallback={() => {
           setRoles({});
           setMappings({});
           setDecisions({});
@@ -236,9 +265,7 @@ export function TerminologyExperience({
           setTested(false);
           onAttempt?.(false);
         }}
-      >
-        Reset lesson interactions
-      </button>
+      />
     </div>
   );
 }

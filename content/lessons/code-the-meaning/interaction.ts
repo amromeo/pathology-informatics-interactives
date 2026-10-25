@@ -73,10 +73,10 @@ export const mappingRows = [
   },
   {
     id: "TM-03",
-    source: "HER2 · specimen not documented · method not documented · result 2+",
+    source: "HER2 · specimen not documented · method not documented · result: Positive",
     expected: "review",
     reason:
-      "Obtain the assay definition, specimen, method, and scale. Do not infer immunohistochemistry versus another assay from a short label and number alone.",
+      "Obtain the assay definition, specimen, method, and scale. Positive can describe an immunohistochemistry score of 3+ or an amplified in situ hybridization result, and the specimen is not stated. Obtain the assay definition, specimen, method and scale before choosing a term.",
   },
   {
     id: "TM-04",
@@ -134,7 +134,7 @@ export const localGlucoseRecords = [
     unit: "mg/dL",
   },
   {
-    site: "Hospital C",
+    site: "Hospital C, a partner hospital in Canada",
     code: "BIO8",
     name: "GLU",
     specimen: "Serum/plasma",
@@ -216,7 +216,7 @@ export const lookupFields = [
   },
   {
     id: "propertyC",
-    label: "Property for Hospital C",
+    label: "Property for Hospital C, a partner hospital in Canada",
     answer: "SCnc",
     options: [
       ["MCnc", "MCnc · mass concentration"],
@@ -281,3 +281,12 @@ export const terminologyCopy = {
   reviewIncomplete:
     "Some decisions still need review. Check the lookup record and the feedback beside each selection; a matching code number alone is insufficient.",
 };
+
+export const sectionPurposes = [
+  "Compare local reports to identify which differences a test name hides.",
+  "Match each part of the assay definition before choosing an observation code.",
+  "Assign each terminology to the question it is designed to answer.",
+  "Accept supported mappings and request missing assay details for ambiguous ones.",
+  "Inspect each study’s denominator before comparing its error rate.",
+  "Use the same definition checks when the specimen and local test name change.",
+];

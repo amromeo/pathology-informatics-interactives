@@ -1,4 +1,7 @@
-## Debrief: build the clinical meaning, then verify it
+## Debrief: validate the complete report before releasing a build
+
+### What happened in this case
+
 
 The starting report combined three targets into one answer and attached copied quantitative units. Successful transmission did not make that report clinically useful.
 
@@ -6,7 +9,7 @@ The repaired definition preserves three named qualitative components, withholds 
 
 The local specimen rule is part of this case's approved procedure. It is not a statement about every respiratory assay. Similarly, selecting “no units” is correct for this qualitative result, not a general rule for laboratory tests.
 
-Eight passing checks establish the expected behavior of eight cases. They do not cover every patient identifier, timestamp, permission, interface, interruption, or downstream use. The readiness review adds clinical approval, destination verification, procedures/training, and controlled promotion with monitoring.
+Eight passing checks confirm the expected behavior of eight cases. They do not cover every patient identifier, timestamp, permission, interface, interruption, or downstream use. The readiness review adds clinical approval, destination verification, procedures/training, and controlled promotion with monitoring.
 
 ### Maintain the definition after go-live
 
@@ -16,6 +19,10 @@ A laboratory IT procedure manual should explain routine operation and exception 
 
 U.S. CLIA reporting requirements include reliable delivery to the final destination and appropriate report content and correction handling. Consult the current requirements and the laboratory's applicable accreditation checklist; this exercise is not a checklist compliance determination.
 
-## Further study with API teaching slides
+### Who does what
 
-In [Association for Pathology Informatics teaching slides: Laboratory Information Systems and Health Information Systems (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%203%20LIS-HIS%20slides.pptx), review slides 8–13. Follow the request, configuration, and testing of a new test through separate environments. Identify which copied parameters require clinical review before the qualitative organism results can be approved.
+Work with a section director and LIS build analyst. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
+
+### Connection to PIER 8.1, 8.2, 8.4, 4.2
+
+The case asks you to validate the complete report before releasing a build using laboratory records and explain the consequence of your choice.

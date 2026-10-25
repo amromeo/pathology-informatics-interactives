@@ -141,7 +141,7 @@ test("new topic experiences expose labeled controls and text equivalents", () =>
   assert.match(queue, /<caption>/);
   assert.match(queue, /<th scope="row">Q-01/);
   for (const markup of [flag, nbs, terms, queue]) {
-    assert.match(markup, /Reset lesson interactions/);
+    assert.match(markup, /Clear my answers and start this lesson over/);
     assert.doesNotMatch(markup, /synthetic|fictional/i);
   }
 });

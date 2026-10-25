@@ -1,3 +1,6 @@
+import { mustFind } from "./lesson-ui/mustFind";
+import { orderedChoices } from "./lesson-ui";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState, type ComponentType } from "react";
 import {
   evaluateRelease,
@@ -22,7 +25,11 @@ export function AutoverificationExperience({
   const [selected, setSelected] = useState("AV-01");
   const [tested, setTested] = useState(false);
   const [approval, setApproval] = useState("");
-  const row = releaseCases.find((item) => item.id === selected)!;
+  const row = mustFind(
+    releaseCases,
+    (item) => item.id === selected,
+    "AutoverificationExperience.tsx releaseCases",
+  );
   const trace = evaluateRelease(row, config);
   const notes = releaseControlNotes(config);
   const results = releaseReplay(config);
@@ -60,7 +67,7 @@ export function AutoverificationExperience({
               <option value="either">Absolute OR relative</option>
               <option value="both">Absolute AND relative</option>
             </select>
-            <small role="status">{notes.delta}</small>
+            <small>{tested ? notes.delta : ""}</small>
           </label>
           <label>
             Absolute-change limit (ng/L)
@@ -73,7 +80,7 @@ export function AutoverificationExperience({
                 <option key={n}>{n}</option>
               ))}
             </select>
-            <small role="status">{notes.absoluteLimit}</small>
+            <small>{tested ? notes.absoluteLimit : ""}</small>
           </label>
           <label>
             Relative-change limit (%)
@@ -86,7 +93,7 @@ export function AutoverificationExperience({
                 <option key={n}>{n}</option>
               ))}
             </select>
-            <small role="status">{notes.relativeLimit}</small>
+            <small>{tested ? notes.relativeLimit : ""}</small>
           </label>
           <label>
             Minimum absolute change for the relative branch (ng/L)
@@ -99,7 +106,7 @@ export function AutoverificationExperience({
                 <option key={n}>{n}</option>
               ))}
             </select>
-            <small role="status">{notes.minimumChange}</small>
+            <small>{tested ? notes.minimumChange : ""}</small>
           </label>
           <label>
             Maximum age of prior result (hours)
@@ -112,7 +119,7 @@ export function AutoverificationExperience({
                 <option key={n}>{n}</option>
               ))}
             </select>
-            <small role="status">{notes.historyHours}</small>
+            <small>{tested ? notes.historyHours : ""}</small>
           </label>
           <label>
             When there is no usable history
@@ -122,9 +129,9 @@ export function AutoverificationExperience({
               onChange={(e) => update({ missingHistory: e.target.value as "hold" | "release" })}
             >
               <option value="hold">Hold for review</option>
-              <option value="release">Let other gates decide</option>
+              <option value="release">Let other checks decide</option>
             </select>
-            <small role="status">{notes.missingHistory}</small>
+            <small>{tested ? notes.missingHistory : ""}</small>
           </label>
           <label className="rule-check">
             <input
@@ -134,7 +141,7 @@ export function AutoverificationExperience({
               onChange={(e) => update({ checkQc: e.target.checked })}
             />
             <span>
-              Require accepted QC<small role="status">{notes.checkQc}</small>
+              Require accepted QC<small>{tested ? notes.checkQc : ""}</small>
             </span>
           </label>
           <label className="rule-check">
@@ -145,7 +152,7 @@ export function AutoverificationExperience({
               onChange={(e) => update({ checkFlags: e.target.checked })}
             />
             <span>
-              Hold unresolved instrument flags<small role="status">{notes.checkFlags}</small>
+              Hold unresolved instrument flags<small>{tested ? notes.checkFlags : ""}</small>
             </span>
           </label>
         </fieldset>
@@ -155,7 +162,7 @@ export function AutoverificationExperience({
           <span className="section-number">02</span>
           <div>
             <p className="eyebrow">Result trace</p>
-            <h2 id="release-trace-heading">Follow one result through every gate</h2>
+            <h2 id="release-trace-heading">Follow one result through every check</h2>
           </div>
         </div>
         <label className="rule-case-picker">
@@ -298,52 +305,51 @@ export function AutoverificationExperience({
         )}
         <fieldset className="rule-approval">
           <legend>Approval recommendation</legend>
-          {releaseApprovalChoices.map((choice) => (
-            <label key={choice.id}>
-              <input
-                type="radio"
-                name="release-approval"
-                checked={approval === choice.id}
-                onChange={() => {
-                  setApproval(choice.id);
-                  onAttempt?.(true);
-                }}
-              />
-              <span>{choice.label}</span>
-            </label>
-          ))}
+          {orderedChoices("AutoverificationExperience.tsx", releaseApprovalChoices).map(
+            (choice) => (
+              <label key={choice.id}>
+                <input
+                  type="radio"
+                  name="release-approval"
+                  checked={approval === choice.id}
+                  onChange={() => {
+                    setApproval(choice.id);
+                    onAttempt?.(true);
+                  }}
+                />
+                <span>{choice.label}</span>
+              </label>
+            ),
+          )}
         </fieldset>
-        {approval && (
-          <div
-            className={`feedback ${approval === "validated" && tested && passed === results.length ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {approval === "validated" && tested && passed === results.length
-                ? "The test record supports laboratory review."
-                : "The rule is not ready for approval."}
-            </strong>
-            <p>{releaseApprovalChoices.find((choice) => choice.id === approval)?.feedback}</p>
-            {(!tested || passed !== results.length) && (
-              <p>Complete a matching full replay before requesting approval.</p>
-            )}
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {approval && (
+            <div
+              className={`feedback ${approval === "validated" && tested && passed === results.length ? "correct" : "incorrect"}`}
+            >
+              <strong>
+                {approval === "validated" && tested && passed === results.length
+                  ? "The test record supports laboratory review."
+                  : "The rule is not ready for approval."}
+              </strong>
+              <p>{releaseApprovalChoices.find((choice) => choice.id === approval)?.feedback}</p>
+              {(!tested || passed !== results.length) && (
+                <p>Complete a matching full replay before requesting approval.</p>
+              )}
+            </div>
+          )}
+        </div>
       </section>
       <div className="reset-row">
-        <button
-          type="button"
-          className="text-button"
-          onClick={() => {
+        <ResetLessonButton
+          fallback={() => {
             setConfig({ ...originalRelease });
             setSelected("AV-01");
             setTested(false);
             setApproval("");
             onAttempt?.(false);
           }}
-        >
-          Reset lesson interactions
-        </button>
+        />
       </div>
     </div>
   );

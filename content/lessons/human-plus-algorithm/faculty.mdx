@@ -1,5 +1,22 @@
 # Faculty guide: Reviewing a Mitosis Detection Tool
 
+## At a glance
+
+Allow 40 minutes. Use individually or in a small group. Project the case records and the exercise controls; keep the answer key out of view until learners commit to a decision.
+
+Learning objectives: evaluate the pathologist and algorithm working together; review the complete reader-study design; justify the first local check. PIER: 7.3, 2.4.
+
+## Run of show
+
+| Minutes | Activity | Ask the group |
+| --- | --- | --- |
+| 0–8 | Read the case and records | What decision has the laboratory been asked to make? |
+| 8–28 | Make, test and revise a choice | Which record supports your decision? What could fail? |
+| 28–40 | Debrief and retrieval questions | How would you verify this in your own laboratory? |
+
+## Expected answers
+
+
 Allow 40 minutes. PIER 7.3 covers image processing, pattern recognition, counting and measurement, diagnosis versus prognosis, productivity, and patient-care implications. Preserve cross-topic 2.4 coverage through independent evaluation, human factors, generalization, and monitoring. Harrison/API Session 5, slides 25–29, and Session 6, slides 4–5, 17–23, 34–55, inform the sequence.
 
 At threshold 0.50: TP 3, FN 2, FP 3, TN 4. At 0.20 all five reference figures are marked, with four false marks. At 0.80 there are two true marks and one false mark. At 1.00 no marks exist: sensitivity 0/5, specificity 7/7, predictive value undefined. Verify the inclusive boundary at 0.60.
@@ -23,3 +40,38 @@ Monitoring: Month 1 has 2/80 failed submissions and Month 2 has 3/20. The figure
 Use [Association for Pathology Informatics teaching slides: Artificial Intelligence in Pathology (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%206%20AI%20slides.pptx) by James H. Harrison, Jr., slides 35–36, 48, 53–55, to prepare the discussion after residents have explained their case decision. Ask: Compare site variation, classification performance, and ongoing monitoring. Explain why the candidate-location exercise cannot establish the performance of a pathologist using the tool in routine work. Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
 
 These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
+
+The study includes 20 distinct slides (five per reader) and 40 reference figures per condition. Each reader revisits their own five slides in three sessions; the slider does not alter this independent observed study.
+
+
+## Common misconceptions
+
+- “The time spent checking marked candidates.” Ask: what does the record actually establish? Candidate-only review cannot measure a complete search. Assess the human-plus-tool workflow against an independent reference, including unmarked areas.
+- “The number of false marks displayed.” Ask: which conclusion would still need evidence? Candidate-only review cannot measure a complete search. Assess the human-plus-tool workflow against an independent reference, including unmarked areas.
+- “Use candidate precision as clinical sensitivity.” Ask: what must be checked before making the change? Identify distinct slides, reference figures, review conditions and washout before interpreting pooled performance.
+
+## Discussion prompts
+
+1. What supports the case decision? A strong answer includes a specific record and the distinction: evaluate the pathologist and algorithm working together.
+2. What would you check locally? A strong answer includes: review the complete reader-study design, because identify distinct slides, reference figures, review conditions and washout before interpreting pooled performance.
+3. Who needs to participate? A strong answer includes a pathologist using image-analysis tools and separates technical work from clinical approval.
+
+## Group variant
+
+Assign laboratory director, LIS analyst, laboratory operations and clinical service roles. Add clinical informatics and a patient advocate when considering ordering or chart use. Ask each person to state one requirement, one risk and the evidence needed before approval. The director then summarizes what can proceed and what must be resolved.
+
+## Assess transfer
+
+Design an audit of marked and unmarked areas with a reference review and workload measures. A strong response names the record, responsible person, first check and an unresolved risk. Use the three learner retrieval questions to distinguish an unsupported shortcut from a reasoned decision.
+
+## PIER coverage
+
+- 7.3: Change an inclusive threshold, inspect false marks and misses, compare final reader performance, and build monitoring.
+- 2.4: Separate candidate metrics from final reader outcomes and investigate site-specific monitoring findings.
+
+
+## Additional source discussion
+
+### Further study with API teaching slides
+
+In [Association for Pathology Informatics teaching slides: Artificial Intelligence in Pathology (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%206%20AI%20slides.pptx), review slides 35–36, 48, 53–55. Compare site variation, classification performance, and ongoing monitoring. Explain why the candidate-location exercise cannot establish the performance of a pathologist using the tool in routine work.

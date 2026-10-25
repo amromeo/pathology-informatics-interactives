@@ -1,0 +1,13 @@
+### Why size is only one question
+
+The service expects about 1.2 million slides at about 1.6 gigabytes (GB) each, rounded to 1.9 petabytes (PB) per year. Here one PB means one million GB. This is the **volume** before additional copies and retention are considered.
+
+**Velocity** is the rate at which records arrive or must be delivered. Eighteen scanners can write 0.5 GB each second during the overnight batch. The retrieval target is under two seconds to the first displayed field of view, not to download an entire slide.
+
+**Variety** describes the different kinds of data: image pixels, a protein staining score, gene variants and narrative staging. **Veracity** asks whether records and links are trustworthy. Last quarter, 2,160 of 120,000 scanned slides (1.8%) had no confirmed case, part or block link. **Value** asks whether the combined information answers the clinical question. The five Vs are separate questions that interact; each needs its own design check.
+
+### What each identifier identifies
+
+A patient identifier links encounters for one person. The case identifies an accession. A part identifies a submitted specimen within that case; a block identifies material prepared from that part. An image identifier identifies a digital file. None can substitute for all the others. A staging encounter can also refer to a different tumor or an earlier episode.
+
+PD-L1 is a protein measured by immunohistochemistry. In this case the report gives a tumor proportion score: the percentage of evaluated tumor cells with the specified staining. Keep the assay, specimen and block attached to that score. A shared patient number is not enough to combine it with an unrelated genomic specimen.

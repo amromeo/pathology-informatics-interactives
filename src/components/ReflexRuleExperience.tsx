@@ -1,3 +1,6 @@
+import { mustFind } from "./lesson-ui/mustFind";
+import { orderedChoices } from "./lesson-ui";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState, type ComponentType } from "react";
 import {
   dependencyRecords,
@@ -22,7 +25,11 @@ export function ReflexRuleExperience({
   const [config, setConfig] = useState<ReflexConfig>({ ...originalReflex });
   const [tested, setTested] = useState(false);
   const [approval, setApproval] = useState("");
-  const record = dependencyRecords.find((item) => item.id === recordId)!;
+  const record = mustFind(
+    dependencyRecords,
+    (item) => item.id === recordId,
+    "ReflexRuleExperience.tsx dependencyRecords",
+  );
   const summary = reflexSummary(config);
   const baseline = reflexSummary(originalReflex);
   const rows = reflexReplay(config);
@@ -173,24 +180,26 @@ export function ReflexRuleExperience({
             ? `${summary.correct} of ${summary.total} expected actions match.`
             : "Run the records after changing the configuration."}
         </p>
-        {tested && (
-          <div className="rule-counts" role="status">
-            <article>
-              <span>Original rule</span>
-              <strong>{baseline.orders} new FT4 orders</strong>
-            </article>
-            <article>
-              <span>Your rule</span>
-              <strong>{summary.orders} new FT4 orders</strong>
-            </article>
-            <article>
-              <span>Compared with approved actions</span>
-              <strong>
-                {summary.extraOrders} additional / {summary.missedOrders} missed
-              </strong>
-            </article>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {tested && (
+            <div className="rule-counts">
+              <article>
+                <span>Original rule</span>
+                <strong>{baseline.orders} new FT4 orders</strong>
+              </article>
+              <article>
+                <span>Your rule</span>
+                <strong>{summary.orders} new FT4 orders</strong>
+              </article>
+              <article>
+                <span>Compared with approved actions</span>
+                <strong>
+                  {summary.extraOrders} additional / {summary.missedOrders} missed
+                </strong>
+              </article>
+            </div>
+          )}
+        </div>
         <div className="rule-result-list">
           {rows.map((row) => (
             <details
@@ -238,7 +247,7 @@ export function ReflexRuleExperience({
         )}
         <fieldset className="rule-approval">
           <legend>Recommendation to the laboratory director</legend>
-          {reflexApprovalChoices.map((choice) => (
+          {orderedChoices("ReflexRuleExperience.tsx", reflexApprovalChoices).map((choice) => (
             <label key={choice.id}>
               <input
                 type="radio"
@@ -253,37 +262,34 @@ export function ReflexRuleExperience({
             </label>
           ))}
         </fieldset>
-        {approval && (
-          <div
-            className={`feedback ${approval === "complete" && tested && summary.correct === summary.total ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {approval === "complete" && tested && summary.correct === summary.total
-                ? "The rule and test record are ready for clinical review."
-                : "The change is not ready for approval."}
-            </strong>
-            <p>{reflexApprovalChoices.find((choice) => choice.id === approval)?.feedback}</p>
-            {(!tested || summary.correct !== summary.total) && (
-              <p>Resolve the failed or untested actions before approval.</p>
-            )}
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {approval && (
+            <div
+              className={`feedback ${approval === "complete" && tested && summary.correct === summary.total ? "correct" : "incorrect"}`}
+            >
+              <strong>
+                {approval === "complete" && tested && summary.correct === summary.total
+                  ? "The rule and test record are ready for clinical review."
+                  : "The change is not ready for approval."}
+              </strong>
+              <p>{reflexApprovalChoices.find((choice) => choice.id === approval)?.feedback}</p>
+              {(!tested || summary.correct !== summary.total) && (
+                <p>Resolve the failed or untested actions before approval.</p>
+              )}
+            </div>
+          )}
+        </div>
       </section>
       <div className="reset-row">
-        <button
-          type="button"
-          className="text-button"
-          onClick={() => {
+        <ResetLessonButton
+          fallback={() => {
             setRecordId("display");
             setConfig({ ...originalReflex });
             setTested(false);
             setApproval("");
             onAttempt?.(false);
           }}
-        >
-          Reset lesson interactions
-        </button>
+        />
       </div>
     </div>
   );

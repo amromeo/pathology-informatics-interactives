@@ -267,3 +267,52 @@ export const reflexApprovalChoices = [
       "The analyst documents the build and test results. Laboratory leadership approves clinical criteria and recovery of affected cases. Monitoring includes missed indicated orders, duplicate orders, and exceptions as well as total volume.",
   },
 ];
+
+export const additionalExercises = {
+  title: "Choose a quality indicator after the change",
+  purpose: "Define a denominator that can detect unnecessary additions and missed indicated tests.",
+  questions: [
+    {
+      id: "QI1",
+      prompt: "Which denominator supports review of the updated thyroid reflex rule?",
+      answer: "eligible",
+      choices: [
+        {
+          id: "eligible",
+          label: "All eligible thyroid orders in the period",
+        },
+        {
+          id: "added",
+          label: "Only orders with a follow-up test added",
+        },
+        {
+          id: "released",
+          label: "Only orders released without a hold",
+        },
+      ],
+      feedback:
+        "Review all eligible orders and compare expected with observed follow-up actions. Selecting only added tests hides missed additions; selecting only released orders hides holds.",
+    },
+    {
+      id: "QI2",
+      prompt: "What should the team monitor as well as the number of follow-up assays?",
+      answer: "both",
+      choices: [
+        {
+          id: "both",
+          label: "Missed indicated tests and unnecessary additions",
+        },
+        {
+          id: "fewer",
+          label: "Only whether fewer assays were performed",
+        },
+        {
+          id: "revenue",
+          label: "Only the change in billing totals",
+        },
+      ],
+      feedback:
+        "Fewer tests is not sufficient evidence of improvement. Include erroneous omissions, unnecessary additions, turnaround time and clinical review of exceptions.",
+    },
+  ],
+};

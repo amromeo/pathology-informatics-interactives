@@ -1,3 +1,6 @@
+import { lessonCopy } from "../../content/lessons/can-we-accept-this-lot/interaction";
+import { orderedChoices } from "./lesson-ui";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useMemo, useState, type ComponentType } from "react";
 import {
   confidenceChoices,
@@ -79,7 +82,12 @@ function LotWorksheet() {
           </select>
         </label>
       </div>
-      <div className="report-table-wrap lot-table-wrap">
+      <div
+        className="report-table-wrap lot-table-wrap"
+        tabIndex={0}
+        role="region"
+        aria-label="Scrollable records 1"
+      >
         <table>
           <caption>Paired current- and new-lot troponin results</caption>
           <thead>
@@ -150,7 +158,7 @@ function DifferenceDotPlot({ showSummaries = false }: { showSummaries?: boolean 
           </>
         )}
       </div>
-      <div className="chart-scroll">
+      <div className="chart-scroll" tabIndex={0} role="region" aria-label="Scrollable records 2">
         <svg
           viewBox={`0 0 ${width} ${height}`}
           role="img"
@@ -159,10 +167,7 @@ function DifferenceDotPlot({ showSummaries = false }: { showSummaries?: boolean 
           <title id="difference-chart-title">
             Paired differences near the clinical decision concentration
           </title>
-          <desc id="difference-chart-description">
-            Most new-lot results are slightly higher. Several larger positive differences create a
-            modest right-sided tail without one isolated extreme result.
-          </desc>
+          <desc id="difference-chart-description">{lessonCopy.text01}</desc>
           {[-1, 0, 1, 2, 3, 4].map((tick) => (
             <g key={tick}>
               <line
@@ -223,13 +228,15 @@ function DifferenceDotPlot({ showSummaries = false }: { showSummaries?: boolean 
           </text>
         </svg>
       </div>
-      <figcaption id="difference-chart-caption">
-        Each dot is one of the 18 specimens near the clinical decision concentration. Values above
-        zero are higher with the new lot.
-      </figcaption>
+      <figcaption id="difference-chart-caption">{lessonCopy.text02}</figcaption>
       <details className="chart-data-table">
         <summary>View the plotted differences in a table</summary>
-        <div className="report-table-wrap">
+        <div
+          className="report-table-wrap"
+          tabIndex={0}
+          role="region"
+          aria-label="Scrollable records 3"
+        >
           <table>
             <caption>Values shown in the paired-difference plot</caption>
             <thead>
@@ -288,7 +295,7 @@ function ConfidenceIntervalPlot() {
   const x = (value: number) => 70 + ((value - min) / (max - min)) * (width - 110);
   return (
     <figure className="confidence-figure">
-      <div className="chart-scroll">
+      <div className="chart-scroll" tabIndex={0} role="region" aria-label="Scrollable records 4">
         <svg
           viewBox={`0 0 ${width} ${height}`}
           role="img"
@@ -297,10 +304,7 @@ function ConfidenceIntervalPlot() {
           <title id="ci-chart-title">
             Confidence interval compared with the laboratory's acceptable average shift
           </title>
-          <desc id="ci-chart-description">
-            The 95 percent confidence interval runs from positive 0.6 to positive 1.8 nanograms per
-            liter and remains within the laboratory's acceptable range of negative 2 to positive 2.
-          </desc>
+          <desc id="ci-chart-description">{lessonCopy.text03}</desc>
           <rect x={x(-2)} y="42" width={x(2) - x(-2)} height="55" className="acceptable-band" />
           <text x={(x(-2) + x(2)) / 2} y="31" textAnchor="middle" className="chart-period-label">
             Laboratory's acceptable average shift
@@ -441,7 +445,7 @@ export function StatisticsExperience({
             role="radiogroup"
             aria-label="Paired-difference pattern choices"
           >
-            {patternChoices.map((choice) => (
+            {orderedChoices("StatisticsExperience.tsx", patternChoices).map((choice) => (
               <label className={pattern === choice.id ? "selected" : ""} key={choice.id}>
                 <input
                   type="radio"
@@ -454,19 +458,18 @@ export function StatisticsExperience({
             ))}
           </div>
         </fieldset>
-        {selectedPattern && (
-          <div
-            className={`feedback ${selectedPattern.correct ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {selectedPattern.correct
-                ? "The new lot usually reads slightly higher."
-                : "Look again at the position of the dots."}
-            </strong>
-            <p>{selectedPattern.feedback}</p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {selectedPattern && (
+            <div className={`feedback ${selectedPattern.correct ? "correct" : "incorrect"}`}>
+              <strong>
+                {selectedPattern.correct
+                  ? "The new lot usually reads slightly higher."
+                  : "Look again at the position of the dots."}
+              </strong>
+              <p>{selectedPattern.feedback}</p>
+            </div>
+          )}
+        </div>
       </section>
 
       <section className="lesson-section" aria-labelledby="descriptive-title">
@@ -510,15 +513,22 @@ export function StatisticsExperience({
                     ))}
                   </select>
                 </label>
-                {answer && (
-                  <p
-                    className={correct ? "answer-note correct-note" : "answer-note incorrect-note"}
-                    role="status"
-                  >
-                    <strong>{correct ? "Correct." : "Try another statistic."}</strong>{" "}
-                    {item.explanation}
-                  </p>
-                )}
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {answer && (
+                    <p
+                      className={
+                        correct ? "answer-note correct-note" : "answer-note incorrect-note"
+                      }
+                    >
+                      <strong>
+                        {correct
+                          ? "This statistic answers the question."
+                          : "This statistic answers a different question."}
+                      </strong>{" "}
+                      {item.explanation}
+                    </p>
+                  )}
+                </div>
               </article>
             );
           })}
@@ -566,7 +576,7 @@ export function StatisticsExperience({
             role="radiogroup"
             aria-label="P-value interpretation choices"
           >
-            {pValueChoices.map((choice) => (
+            {orderedChoices("StatisticsExperience.tsx", pValueChoices).map((choice) => (
               <label className={pValueAnswer === choice.id ? "selected" : ""} key={choice.id}>
                 <input
                   type="radio"
@@ -579,19 +589,18 @@ export function StatisticsExperience({
             ))}
           </div>
         </fieldset>
-        {selectedPValue && (
-          <div
-            className={`feedback ${selectedPValue.correct ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {selectedPValue.correct
-                ? "The lots have a measurable average difference."
-                : "The p-value answers a narrower question."}
-            </strong>
-            <p>{selectedPValue.feedback}</p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {selectedPValue && (
+            <div className={`feedback ${selectedPValue.correct ? "correct" : "incorrect"}`}>
+              <strong>
+                {selectedPValue.correct
+                  ? "The lots have a measurable average difference."
+                  : "The p-value answers a narrower question."}
+              </strong>
+              <p>{selectedPValue.feedback}</p>
+            </div>
+          )}
+        </div>
         <fieldset className="opening-decision">
           <legend>What does the 95% confidence interval tell the laboratory?</legend>
           <div
@@ -599,7 +608,7 @@ export function StatisticsExperience({
             role="radiogroup"
             aria-label="Confidence-interval interpretation choices"
           >
-            {confidenceChoices.map((choice) => (
+            {orderedChoices("StatisticsExperience.tsx", confidenceChoices).map((choice) => (
               <label className={confidenceAnswer === choice.id ? "selected" : ""} key={choice.id}>
                 <input
                   type="radio"
@@ -612,19 +621,18 @@ export function StatisticsExperience({
             ))}
           </div>
         </fieldset>
-        {selectedConfidence && (
-          <div
-            className={`feedback ${selectedConfidence.correct ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {selectedConfidence.correct
-                ? "The estimated average shift remains within the laboratory's limit."
-                : "This interval describes uncertainty around the mean."}
-            </strong>
-            <p>{selectedConfidence.feedback}</p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {selectedConfidence && (
+            <div className={`feedback ${selectedConfidence.correct ? "correct" : "incorrect"}`}>
+              <strong>
+                {selectedConfidence.correct
+                  ? "The estimated average shift remains within the laboratory's limit."
+                  : "This interval describes uncertainty around the mean."}
+              </strong>
+              <p>{selectedConfidence.feedback}</p>
+            </div>
+          )}
+        </div>
       </section>
 
       <section className="lesson-section" aria-labelledby="range-title">
@@ -635,15 +643,16 @@ export function StatisticsExperience({
             <h2 id="range-title">Check the very low and elevated specimens</h2>
           </div>
         </div>
-        <p className="section-guidance">
-          The main statistics describe the 18 specimens near the clinical decision concentration.
-          The laboratory also checks whether the two lots agree at the low and high ends of the
-          comparison.
-        </p>
+        <p className="section-guidance">{lessonCopy.text04}</p>
         <RangeChecks />
         <details className="range-details">
           <summary>View the 12 results used for these checks</summary>
-          <div className="report-table-wrap">
+          <div
+            className="report-table-wrap"
+            tabIndex={0}
+            role="region"
+            aria-label="Scrollable records 5"
+          >
             <table>
               <caption>Very low and markedly elevated lot-comparison results</caption>
               <thead>
@@ -717,15 +726,22 @@ export function StatisticsExperience({
                     ))}
                   </select>
                 </label>
-                {answer && (
-                  <p
-                    className={correct ? "answer-note correct-note" : "answer-note incorrect-note"}
-                    role="status"
-                  >
-                    <strong>{correct ? "Correct." : "Choose another test."}</strong>{" "}
-                    {item.explanation}
-                  </p>
-                )}
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {answer && (
+                    <p
+                      className={
+                        correct ? "answer-note correct-note" : "answer-note incorrect-note"
+                      }
+                    >
+                      <strong>
+                        {correct
+                          ? "This test fits the design."
+                          : "This test does not match the observations."}
+                      </strong>{" "}
+                      {item.explanation}
+                    </p>
+                  )}
+                </div>
               </article>
             );
           })}
@@ -743,60 +759,80 @@ export function StatisticsExperience({
             <h2 id="decision-title">Can the laboratory use the new lot?</h2>
           </div>
         </div>
-        <p className="section-guidance">
-          The average shift is measurable, but its confidence interval remains within the range the
-          laboratory accepted before testing. The low- and high-concentration checks also pass.
-          Choose the next step.
-        </p>
+        <p className="section-guidance">{lessonCopy.text05}</p>
         <div
           className="repair-choice-grid"
           role="radiogroup"
           aria-label="Reagent-lot decision choices"
         >
-          {finalChoices.map((choice) => (
-            <button
-              type="button"
-              role="radio"
-              aria-checked={finalChoice === choice.id}
-              className={finalChoice === choice.id ? "selected" : ""}
-              key={choice.id}
-              onClick={() => {
-                setFinalChoice(choice.id);
-                setChecksRun(false);
-              }}
-            >
-              <span className="choice-marker" />
-              <strong>{choice.label}</strong>
-              <small>{choice.detail}</small>
-            </button>
+          {orderedChoices("StatisticsExperience.tsx", finalChoices).map((choice) => (
+            <label key={choice.id} className={finalChoice === choice.id ? "selected" : ""}>
+              <input
+                type="radio"
+                name="StatisticsExperience.tsx-1"
+                checked={finalChoice === choice.id}
+                onChange={() => {
+                  setFinalChoice(choice.id);
+                  setChecksRun(false);
+                }}
+              />
+              <span>
+                <span className="choice-marker" />
+                <strong>{choice.label}</strong>
+                <small>{choice.detail}</small>
+              </span>
+            </label>
           ))}
         </div>
-        {selectedFinal && (
-          <div
-            className={`feedback ${selectedFinal.correct ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {selectedFinal.correct
-                ? "The new lot can be accepted with documentation and monitoring."
-                : "This does not use all of the available evidence."}
-            </strong>
-            <p>{selectedFinal.feedback}</p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {selectedFinal && (
+            <div className={`feedback ${selectedFinal.correct ? "correct" : "incorrect"}`}>
+              <strong>
+                {selectedFinal.correct
+                  ? "The new lot can be accepted with documentation and monitoring."
+                  : "This does not use all of the available evidence."}
+              </strong>
+              <p>{selectedFinal.feedback}</p>
+            </div>
+          )}
+        </div>
         <div className="validation-console">
           <header>
             <span>Lot-review checks</span>
-            <strong>{checksRun ? (finalPasses ? "7 passed" : "Checks failed") : "Not run"}</strong>
+            <strong>
+              {checksRun
+                ? validationChecks.filter((item) => item.passingRepairs.includes(finalChoice ?? ""))
+                    .length +
+                  " of " +
+                  validationChecks.length +
+                  " passed"
+                : "Not run"}
+            </strong>
           </header>
           {validationChecks.map((item) => (
             <div className="validation-row" key={item.label}>
               <div>
                 <strong>{item.label}</strong>
-                <small>{item.detail}</small>
+                <small>
+                  {checksRun && !item.passingRepairs.includes(finalChoice ?? "")
+                    ? item.failNote
+                    : item.detail}
+                </small>
               </div>
-              <b className={!checksRun ? "pending" : finalPasses ? "pass" : "fail"}>
-                {!checksRun ? "Pending" : finalPasses ? "Pass" : "Fail"}
+              <b
+                className={
+                  !checksRun
+                    ? "pending"
+                    : item.passingRepairs.includes(finalChoice ?? "")
+                      ? "pass"
+                      : "fail"
+                }
+              >
+                {!checksRun
+                  ? "Pending"
+                  : item.passingRepairs.includes(finalChoice ?? "")
+                    ? "Pass"
+                    : "Fail"}
               </b>
             </div>
           ))}
@@ -812,22 +848,18 @@ export function StatisticsExperience({
             Run the lot-review checks
           </button>
         </div>
-        {checksRun && finalPasses && (
-          <div className="feedback correct" role="status">
-            <strong>The comparison supports use of the new lot.</strong>
-            <p>
-              The paired result pattern, summary statistics, confidence interval, predetermined
-              medical limit, and checks at the low and high ends of the range all support acceptance
-              after laboratory-director review.
-            </p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {checksRun && finalPasses && (
+            <div className="feedback correct">
+              <strong>The comparison supports use of the new lot.</strong>
+              <p>{lessonCopy.text06}</p>
+            </div>
+          )}
+        </div>
       </section>
 
       <div className="reset-row">
-        <button type="button" className="text-button" onClick={reset}>
-          Reset lesson interactions
-        </button>
+        <ResetLessonButton fallback={reset} />
       </div>
     </div>
   );

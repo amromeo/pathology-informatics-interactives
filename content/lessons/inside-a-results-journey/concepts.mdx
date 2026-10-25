@@ -19,14 +19,4 @@ Several things must work before one system can send a result to another:
 
 In a **client-server** arrangement, one application requests or sends information and another provides or receives the service. The names describe how the applications communicate; they do not tell you whether either system is physically inside the hospital.
 
-## Where the software runs
-
-| Term | Practical meaning |
-| --- | --- |
-| On-premises | The system runs in the hospital or in a data center operated by the health system. |
-| Vendor-hosted | The system runs in an environment operated by the vendor. This may or may not be a cloud service. |
-| Cloud | Computing resources are provided through shared, scalable infrastructure rather than a single server assigned only to that institution. |
-| Software as a service (SaaS) | The vendor operates and updates the application, which is generally purchased by subscription. The health system still configures, validates, and uses it. |
-| Hybrid | Some parts run in the health system and other parts run in an outside environment. |
-
-These labels do not tell you whether a system is reliable. To answer that question, you need to know how it is connected, monitored, backed up, and supported.
+The receiving system replies with an acknowledgment (ACK). Until an ACK arrives, the interface engine keeps the result in its message queue and retries according to the interface agreement. An ACK confirms message handling; the laboratory must still verify the report in the electronic health record.

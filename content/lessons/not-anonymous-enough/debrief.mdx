@@ -1,13 +1,20 @@
-## Debrief
+## Debrief: distinguish removing names from satisfying a disclosure method
 
-**Informatics principle:** Deidentification is a governed risk-management process, not a synonym for removing names.
+### What happened in this case
 
-The original dataset remains coded and reidentifiable because a rare diagnosis combined with a five-digit ZIP isolates one synthetic record and the linkage key is inadequately protected. If you used the workbench, you also saw that transforming one field at a time leaves other distinguishing combinations. Uncontrolled release risks unauthorized disclosure of protected health information.
+
+The export still identifies small groups through combinations of ZIP code, diagnosis and dates. Removing names alone does not resolve this risk.
+
+The original dataset remains coded and reidentifiable because a diagnosis combined with a five-digit ZIP isolates one record and the linkage key is inadequately protected. If you used the exercise, you also saw that transforming one field at a time leaves other distinguishing combinations. Uncontrolled release risks unauthorized disclosure of protected health information.
 
 Increasing the smallest displayed group size reduced uniqueness in this teaching table, but the counter did not approve a release. Safe Harbor or Expert Determination review, or a properly governed limited-data-set pathway, still requires documented institutional review.
 
 The data steward and privacy or research offices define safeguards and agreements. The clinical data owner approves the permitted use and minimum necessary release.
 
-## Further study with API teaching slides
+### Who does what
 
-In [Association for Pathology Informatics teaching slides: Cybersecurity (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%208%20Cybersecurity%20slides.pptx), review slides 11–12, 14. Examine the discussion of reidentification and data-use agreements. Identify which combinations of fields in the proposed export require review by the privacy officer.
+Work with the privacy office or research data steward. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
+
+### Connection to PIER 3.2, 3.4
+
+The case asks you to distinguish removing names from satisfying a disclosure method using laboratory records and explain the consequence of your choice.

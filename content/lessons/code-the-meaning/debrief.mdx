@@ -1,6 +1,9 @@
-## Debrief: a shared identifier needs a verified meaning
+## Debrief: map a laboratory observation using its full definition
 
-LOINC supplies a common way to identify an observation when local names and identifiers differ. Hospitals A and B can map their differently named serum/plasma mass-concentration glucose observations to **2345-7**. Hospital C's moles-per-volume observation maps to **14749-6**. Assigning a shared code does not convert 5.5 mmol/L to another unit or establish assay interchangeability.
+### What happened in this case
+
+
+LOINC supplies a common way to identify an observation when local names and identifiers differ. Hospitals A and B can map their differently named serum/plasma mass-concentration glucose observations to **2345-7**. Hospital C, a partner hospital in Canada's moles-per-volume observation maps to **14749-6**. Assigning a shared code does not convert 5.5 mmol/L to another unit or confirm assay interchangeability.
 
 The website lookup required more than copying a number: glucose, property, point-in-time, serum/plasma, quantitative scale, and the unspecified method part had to fit the local records. The urine transfer case fails the specimen comparison even though glucose and mg/dL look familiar.
 
@@ -12,6 +15,10 @@ The studies document mapping errors with different denominators. They justify ch
 
 This connects the Topic 5 lessons: a message may arrive yet lose a critical flag; an observation and its answer may require separate mappings; a mapping needs source evidence; and downstream analysis still requires complete, current, correctly linked records.
 
-## Further study with API teaching slides
+### Who does what
 
-In [Association for Pathology Informatics teaching slides: Interfaces and Interoperability (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%204%20Interoperability%20slides.pptx), review slides 28–32. Compare observation identifiers, units, and clinical comparability. Explain why choosing a shared code does not by itself justify combining two laboratories' results on one trend.
+Work with a terminology steward and section director. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
+
+### Connection to PIER 5.3
+
+The case asks you to map a laboratory observation using its full definition using laboratory records and explain the consequence of your choice.

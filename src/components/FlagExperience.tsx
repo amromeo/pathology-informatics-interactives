@@ -1,5 +1,9 @@
+import { ReplayResultList } from "./lesson-ui";
+import { sectionPurposes } from "../../content/lessons/follow-the-flag/interaction";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState } from "react";
 import {
+  outboundMessage,
   flagFields,
   flagReplay,
   flagTrace,
@@ -27,12 +31,18 @@ export function FlagExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
   }
   return (
     <div>
-      <Topic5Section title="Compare the four system records">
+      <Topic5Section
+        number={1}
+        purpose={sectionPurposes[0]}
+        title="Compare the four system records"
+      >
         <SourceInspector records={flagTrace} />
       </Topic5Section>
-      <Topic5Section title="Inspect the observation fields">
+      <Topic5Section number={2} purpose={sectionPurposes[1]} title="Inspect the observation fields">
         <Teaching Content={Concepts} />
-        <pre className="message-code">OBX|1|NM|K^Potassium^L||6.8|mmol/L|3.5-5.0|CH|||F</pre>
+        <pre className="message-code" role="region" aria-label="HL7 result message" tabIndex={0}>
+          {outboundMessage}
+        </pre>
         <nav className="topic5-tabs" aria-label="Observation fields">
           {flagFields.map((row, index) => (
             <button
@@ -50,7 +60,11 @@ export function FlagExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
           <p>{flagFields[field].meaning}</p>
         </aside>
       </Topic5Section>
-      <Topic5Section title="Translate the flags and inspect the resulting display">
+      <Topic5Section
+        number={3}
+        purpose={sectionPurposes[2]}
+        title="Translate the flags and inspect the resulting display"
+      >
         <div className="topic5-controls">
           <Topic5Select
             label="Critical-high mapping"
@@ -113,12 +127,15 @@ export function FlagExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
         </button>
         <p role="status">
           {tested
-            ? `${passed} of 6 category outcomes match.`
+            ? `${passed} of ${results.length} category outcomes match.`
             : "Run the complete category set after each change."}
         </p>
-        <div className="rule-result-list">
-          {results.map((row) => (
-            <article key={row.id} className={tested ? (row.pass ? "pass" : "fail") : "pending"}>
+        <ReplayResultList
+          items={results}
+          tested={tested}
+          disclosure={false}
+          render={(row) => (
+            <>
               <h3>
                 {row.id} · Potassium {row.value} mmol/L
               </h3>
@@ -128,16 +145,22 @@ export function FlagExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
               <p>
                 <strong>EHR: {row.display}</strong>
               </p>
-              {tested && (
-                <p role="status">
-                  {row.pass ? "Matches" : "Does not match"} · Expected: {row.expected}
-                </p>
-              )}
-            </article>
-          ))}
-        </div>
+              <div role="status" aria-live="polite" aria-atomic="true">
+                {tested && (
+                  <p>
+                    {row.pass ? "Matches" : "Does not match"} · Expected: {row.expected}
+                  </p>
+                )}
+              </div>
+            </>
+          )}
+        />
       </Topic5Section>
-      <Topic5Section title="Review the report and affected results">
+      <Topic5Section
+        number={4}
+        purpose={sectionPurposes[3]}
+        title="Review the report and affected results"
+      >
         <Teaching Content={Bridge} />
         <label className="topic5-check">
           <input
@@ -147,27 +170,25 @@ export function FlagExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
           />
           Verify actual EHR reports and reconcile already affected results.
         </label>
-        {review && (
-          <p className="topic5-note" role="status">
-            {tested && passed === 6
-              ? "The category replay supports report validation and review of affected results."
-              : "Complete the matching six-category replay before recommending this mapping."}
-          </p>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {review && (
+            <p className="topic5-note">
+              {tested && passed === results.length
+                ? "The category replay supports report validation and review of affected results."
+                : "Complete the matching six-category replay before recommending this mapping."}
+            </p>
+          )}
+        </div>
       </Topic5Section>
-      <button
-        className="text-button"
-        type="button"
-        onClick={() => {
+      <ResetLessonButton
+        fallback={() => {
           setConfig({ ...originalFlag });
           setField(0);
           setTested(false);
           setReview(false);
           onAttempt?.(false);
         }}
-      >
-        Reset lesson interactions
-      </button>
+      />
     </div>
   );
 }

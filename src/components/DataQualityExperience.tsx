@@ -1,3 +1,6 @@
+import { lessonCopy } from "../../content/lessons/can-we-trust-this-report/interaction";
+import { orderedChoices } from "./lesson-ui";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useMemo, useState, type ComponentType } from "react";
 import {
   dataPath,
@@ -60,7 +63,12 @@ function ReportSummary({ mode }: { mode: SummaryMode }) {
         <span aria-current="page">Summary</span>
         <a href="#rows-title">Data · 455 rows</a>
       </div>
-      <div className="report-summary-table-wrap">
+      <div
+        className="report-summary-table-wrap"
+        tabIndex={0}
+        role="region"
+        aria-label="Scrollable records 1"
+      >
         <table className="report-summary-table">
           <caption>
             {separated
@@ -121,10 +129,7 @@ function ReportSummary({ mode }: { mode: SummaryMode }) {
       {separated && (
         <div className="spreadsheet-note qualified">
           <strong>All 455 cases remain in the report</strong>
-          <span>
-            The 35 cutover cases are shown in their own group rather than mixed with the later
-            post-go-live cases
-          </span>
+          <span>{lessonCopy.text01}</span>
         </div>
       )}
       <footer>
@@ -135,6 +140,7 @@ function ReportSummary({ mode }: { mode: SummaryMode }) {
 }
 
 function ReportTable() {
+  const [allColumns, setAllColumns] = useState(false);
   const [search, setSearch] = useState("");
   const [period, setPeriod] = useState<"all" | ReportPeriod>("all");
   const [specimen, setSpecimen] = useState<"all" | "Biopsy" | "Resection">("all");
@@ -152,7 +158,8 @@ function ReportTable() {
       .filter((row) => specimen === "all" || row.specimenGroup === specimen)
       .filter(
         (row) =>
-          view === "all" || (view === "original" ? row.currentPostIncluded : row.fairPostIncluded),
+          view === "all" ||
+          (view === "original" ? row.originalTwoPeriodGroup : row.revisedThreePeriodGroup),
       )
       .sort((a, b) => {
         const direction = descending ? -1 : 1;
@@ -182,6 +189,14 @@ function ReportTable() {
 
   return (
     <div className="report-browser">
+      <label>
+        <input
+          type="checkbox"
+          checked={allColumns}
+          onChange={(e) => setAllColumns(e.target.checked)}
+        />{" "}
+        Show all columns
+      </label>
       <div className="report-toolbar">
         <label>
           <span>Search accession</span>
@@ -257,7 +272,12 @@ function ReportTable() {
           Download editable CSV
         </a>
       </div>
-      <div className="report-table-wrap">
+      <div
+        className="report-table-wrap"
+        tabIndex={0}
+        role="region"
+        aria-label="Scrollable records 2"
+      >
         <table>
           <caption>All surgical pathology cases used to prepare the turnaround-time report</caption>
           <thead>
@@ -265,19 +285,19 @@ function ReportTable() {
               <th scope="col">Accession</th>
               <th scope="col">Period</th>
               <th scope="col">Specimen</th>
-              <th scope="col">Structured LIS accession time</th>
+              {allColumns && <th scope="col">Structured LIS accession time</th>}
               <th scope="col">Accession time used for TAT</th>
-              <th scope="col">Source used</th>
+              {allColumns && <th scope="col">Source used</th>}
               <th scope="col">Initial final</th>
               <th scope="col">TAT</th>
-              <th scope="col">Amended</th>
-              <th scope="col">Original two-period group</th>
-              <th scope="col">Revised three-period group</th>
+              {allColumns && <th scope="col">Amended</th>}
+              {allColumns && <th scope="col">Original two-period group</th>}
+              {allColumns && <th scope="col">Revised three-period group</th>}
             </tr>
           </thead>
           <tbody>
             {shownRows.map((row) => (
-              <ReportRowView row={row} key={row.accessionId} />
+              <ReportRowView allColumns={allColumns} row={row} key={row.accessionId} />
             ))}
           </tbody>
         </table>
@@ -286,7 +306,7 @@ function ReportTable() {
         <button
           type="button"
           className="secondary-button"
-          disabled={safePage === 1}
+          aria-disabled={safePage === 1}
           onClick={() => setPage((current) => Math.max(1, current - 1))}
         >
           Previous
@@ -297,7 +317,7 @@ function ReportTable() {
         <button
           type="button"
           className="secondary-button"
-          disabled={safePage === pageCount}
+          aria-disabled={safePage === pageCount}
           onClick={() => setPage((current) => Math.min(pageCount, current + 1))}
         >
           Next
@@ -307,20 +327,24 @@ function ReportTable() {
   );
 }
 
-function ReportRowView({ row }: { row: ReportRow }) {
+function ReportRowView({ row, allColumns }: { row: ReportRow; allColumns: boolean }) {
   return (
     <tr>
       <th scope="row">{row.accessionId}</th>
       <td>{reportLabel(row.period)}</td>
       <td>{row.specimenGroup}</td>
-      <td>{row.structuredAccessionAt || <strong className="missing-value">Blank</strong>}</td>
+      {allColumns && (
+        <td>{row.structuredAccessionAt || <strong className="missing-value">Blank</strong>}</td>
+      )}
       <td>{row.structuredAccessionAt || row.sourceDocumentTime}</td>
-      <td>{row.structuredAccessionAt ? "LIS field" : "Requisition and cutover log"}</td>
+      {allColumns && (
+        <td>{row.structuredAccessionAt ? "LIS field" : "Requisition and cutover log"}</td>
+      )}
       <td>{row.finalizedAt}</td>
       <td>{oneDecimal(row.tatWorkingDays)} days</td>
-      <td>{row.amended ? "Yes — one accession row" : "No"}</td>
-      <td>{row.period === "baseline" ? "Pre-go-live" : "Post-go-live"}</td>
-      <td>{reportLabel(row.period)}</td>
+      {allColumns && <td>{row.amended ? "Yes — one accession row" : "No"}</td>}
+      {allColumns && <td>{row.period === "baseline" ? "Pre-go-live" : "Post-go-live"}</td>}
+      {allColumns && <td>{reportLabel(row.period)}</td>}
     </tr>
   );
 }
@@ -353,7 +377,12 @@ function TatTrendChart() {
         <span className="median-line">Median TAT</span>
         <span className="cutover-key">Cutover week</span>
       </div>
-      <div className="tat-chart-scroll">
+      <div
+        className="tat-chart-scroll"
+        tabIndex={0}
+        role="region"
+        aria-label="Scrollable records 3"
+      >
         <svg
           className="tat-trend-chart"
           viewBox={`0 0 ${width} ${height}`}
@@ -363,10 +392,7 @@ function TatTrendChart() {
           <title id="tat-chart-title">
             Weekly surgical pathology turnaround time before, during, and after LIS go-live
           </title>
-          <desc id="tat-chart-description">
-            Mean and median turnaround time are stable before go-live, rise sharply during cutover
-            week, and then return slightly below the pre-go-live values.
-          </desc>
+          <desc id="tat-chart-description">{lessonCopy.text02}</desc>
           <rect
             x={cutoverLeft}
             y={margin.top}
@@ -455,13 +481,15 @@ function TatTrendChart() {
           ))}
         </svg>
       </div>
-      <figcaption>
-        Each point summarizes the cases accessioned during one week. The solid line shows the mean;
-        the dashed line shows the median. Cutover week is shaded.
-      </figcaption>
+      <figcaption>{lessonCopy.text03}</figcaption>
       <details className="chart-data-table">
         <summary>View the weekly values in a table</summary>
-        <div className="report-table-wrap">
+        <div
+          className="report-table-wrap"
+          tabIndex={0}
+          role="region"
+          aria-label="Scrollable records 4"
+        >
           <table>
             <caption>Weekly mean and median TAT</caption>
             <thead>
@@ -505,6 +533,7 @@ export function DataQualityExperience({
   onAttempt?: (attempted: boolean) => void;
 }) {
   const [openingChoice, setOpeningChoice] = useState<string | null>(null);
+  const [week, setWeek] = useState("");
   const [sourceOpen, setSourceOpen] = useState(false);
   const [flowChoice, setFlowChoice] = useState<string | null>(null);
   const [qualityAnswers, setQualityAnswers] = useState<Record<string, string>>({});
@@ -522,6 +551,7 @@ export function DataQualityExperience({
   const reset = () => {
     setOpeningChoice(null);
     setSourceOpen(false);
+    setWeek("");
     setFlowChoice(null);
     setQualityAnswers({});
     setRepair(null);
@@ -539,10 +569,7 @@ export function DataQualityExperience({
             <h2 id="spreadsheet-title">Is this ready for the quality meeting?</h2>
           </div>
         </div>
-        <p className="section-guidance">
-          Start with the original comparison. Look at the pre- and post-go-live mean and median. Do
-          they point to the same conclusion?
-        </p>
+        <p className="section-guidance">{lessonCopy.text04}</p>
         <ReportSummary mode="two-period" />
         {Comparison && (
           <div className="mdx-content embedded-mdx comparison-explanation">
@@ -552,7 +579,7 @@ export function DataQualityExperience({
         <fieldset className="opening-decision">
           <legend>What should you do next?</legend>
           <div className="choice-stack" role="radiogroup" aria-label="Report readiness choices">
-            {openingChoices.map((choice) => (
+            {orderedChoices("DataQualityExperience.tsx", openingChoices).map((choice) => (
               <label className={openingChoice === choice.id ? "selected" : ""} key={choice.id}>
                 <input
                   type="radio"
@@ -565,22 +592,71 @@ export function DataQualityExperience({
             ))}
           </div>
         </fieldset>
-        {selectedOpening && (
-          <div
-            className={`feedback ${selectedOpening.correct ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {selectedOpening.correct
-                ? "Look at when the long cases occurred."
-                : "One summary statistic is not enough."}
-            </strong>
-            <p>{selectedOpening.feedback}</p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {selectedOpening && (
+            <div className={`feedback ${selectedOpening.correct ? "correct" : "incorrect"}`}>
+              <strong>
+                {selectedOpening.correct
+                  ? "Look at when the long cases occurred."
+                  : "One summary statistic is not enough."}
+              </strong>
+              <p>{selectedOpening.feedback}</p>
+            </div>
+          )}
+        </div>
       </section>
 
-      {Investigation && (
+      {openingChoice && (
+        <section className="lesson-section">
+          <h2>Which week needs investigation?</h2>
+          <div
+            className="table-scroll"
+            tabIndex={0}
+            role="region"
+            aria-label="Weekly turnaround before investigation"
+          >
+            <table>
+              <caption>Cases grouped by accession week</caption>
+              <thead>
+                <tr>
+                  <th>Week beginning</th>
+                  <th>Cases</th>
+                  <th>Mean working days</th>
+                  <th>Median working days</th>
+                </tr>
+              </thead>
+              <tbody>
+                {weeklyTat.map((w) => (
+                  <tr key={w.key}>
+                    <th scope="row">{w.label}</th>
+                    <td>{w.cases}</td>
+                    <td>{oneDecimal(w.mean)}</td>
+                    <td>{oneDecimal(w.median)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <label>
+            Week to investigate first
+            <select value={week} onChange={(e) => setWeek(e.target.value)}>
+              <option value="">Choose a week</option>
+              {weeklyTat.map((w) => (
+                <option key={w.key} value={w.key}>
+                  {w.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <div role="status">
+            {week &&
+              (weeklyTat.find((w) => w.key === week)?.period === "cutover"
+                ? "This week has the largest delay. Read what happened during that period below."
+                : "Compare the mean and median across all weeks. Which week has the largest change in both?")}
+          </div>
+        </section>
+      )}
+      {week && Investigation && (
         <section
           className="lesson-section mdx-content embedded-mdx cutover-discovery"
           aria-label="Cutover investigation"
@@ -597,12 +673,7 @@ export function DataQualityExperience({
             <h2 id="source-title">Compare the LIS with the scanned requisition</h2>
           </div>
         </div>
-        <p className="section-guidance">
-          This is one of the 27 cutover cases whose accession time was not entered into the
-          structured LIS field. The quality coordinator still calculated its TAT using the time
-          documented during cutover. Compare the LIS record with the scanned requisition and confirm
-          where the time was recorded.
-        </p>
+        <p className="section-guidance">{lessonCopy.text05}</p>
         <div className="source-comparison">
           <article className="lis-source-card">
             <header>
@@ -625,6 +696,14 @@ export function DataQualityExperience({
               <span>Scanned requisition</span>
               <strong>{exampleMissingSource.accessionId}</strong>
             </header>
+            <button
+              type="button"
+              className="secondary-button"
+              aria-expanded={sourceOpen}
+              onClick={() => setSourceOpen(!sourceOpen)}
+            >
+              {sourceOpen ? "Close scanned requisition" : "Open scanned requisition"}
+            </button>
             {sourceOpen ? (
               <div
                 className="requisition-paper"
@@ -692,36 +771,26 @@ export function DataQualityExperience({
                   <strong>LR</strong>
                 </div>
               </div>
-            ) : (
-              <button
-                type="button"
-                className="secondary-button"
-                onClick={() => setSourceOpen(true)}
-              >
-                Open scanned requisition
-              </button>
-            )}
+            ) : null}
           </article>
         </div>
-        {sourceOpen && (
-          <div className="feedback incorrect" role="status">
-            <strong>
-              The accession time is on the requisition but missing from the LIS field.
-            </strong>
-            <p>
-              The quality coordinator used the time on the requisition and paper cutover log to
-              calculate TAT for this case in the spreadsheet. The case remained in the post-go-live
-              report, but its accession time came from a different source than usual.
-            </p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {sourceOpen && (
+            <div className="feedback incorrect">
+              <strong>
+                The accession time is on the requisition but missing from the LIS field.
+              </strong>
+              <p>{lessonCopy.text06}</p>
+            </div>
+          )}
+        </div>
       </section>
 
       <section className="lesson-section" aria-labelledby="quality-title">
         <div className="section-heading">
           <span className="section-number">03</span>
           <div>
-            <p className="eyebrow">PIER 2.1</p>
+            <p className="eyebrow">Check the source records</p>
             <h2 id="quality-title">Audit the data</h2>
           </div>
         </div>
@@ -760,21 +829,28 @@ export function DataQualityExperience({
                     ))}
                   </select>
                 </label>
-                {answer && (
-                  <p
-                    className={correct ? "answer-note correct-note" : "answer-note incorrect-note"}
-                    role="status"
-                  >
-                    <strong>{correct ? "Correct." : "Try another term."}</strong>{" "}
-                    {check.explanation}
-                  </p>
-                )}
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {answer && (
+                    <p
+                      className={
+                        correct ? "answer-note correct-note" : "answer-note incorrect-note"
+                      }
+                    >
+                      <strong>
+                        {correct
+                          ? "This quality dimension fits the record."
+                          : "This dimension does not describe the record."}
+                      </strong>{" "}
+                      {check.explanation}
+                    </p>
+                  )}
+                </div>
               </article>
             );
           })}
         </div>
         <p className="audit-score" role="status">
-          {correctlyNamed} of 7 checks correctly named.
+          {correctlyNamed} of {qualityChecks.length} checks correctly named.
         </p>
       </section>
 
@@ -809,7 +885,7 @@ export function DataQualityExperience({
             role="radiogroup"
             aria-label="Source used for the cutover TAT calculation"
           >
-            {dataPathChoices.map((choice) => (
+            {orderedChoices("DataQualityExperience.tsx", dataPathChoices).map((choice) => (
               <label className={flowChoice === choice.id ? "selected" : ""} key={choice.id}>
                 <input
                   type="radio"
@@ -822,42 +898,17 @@ export function DataQualityExperience({
             ))}
           </div>
         </fieldset>
-        {selectedFlowChoice && (
-          <div
-            className={`feedback ${selectedFlowChoice.correct ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {selectedFlowChoice.correct
-                ? "The documented cutover time was used."
-                : "Look again at the requisition and LIS record."}
-            </strong>
-            <p>{selectedFlowChoice.feedback}</p>
-          </div>
-        )}
-      </section>
-
-      <section className="lesson-section" aria-labelledby="separated-title">
-        <div className="section-heading">
-          <span className="section-number">05</span>
-          <div>
-            <p className="eyebrow">Three time periods</p>
-            <h2 id="separated-title">Show cutover week separately</h2>
-          </div>
-        </div>
-        <p className="section-guidance">
-          The quality coordinator has now placed the 35 cutover cases in their own group. No cases
-          were removed. Compare the three rows and decide whether they explain why the original
-          post-go-live mean and median disagreed.
-        </p>
-        <ReportSummary mode="three-period" />
-        <div className="feedback correct">
-          <strong>The cutover week explains the disagreement.</strong>
-          <p>
-            Cutover cases had a mean TAT of 8.4 working days and a median of 9.5. After cutover, the
-            mean was 3.0 and the median was 2.5. Mixing those periods produced a post-go-live mean
-            of 3.8 even though the median was 2.5.
-          </p>
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {selectedFlowChoice && (
+            <div className={`feedback ${selectedFlowChoice.correct ? "correct" : "incorrect"}`}>
+              <strong>
+                {selectedFlowChoice.correct
+                  ? "The documented cutover time was used."
+                  : "Look again at the requisition and LIS record."}
+              </strong>
+              <p>{selectedFlowChoice.feedback}</p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -870,9 +921,7 @@ export function DataQualityExperience({
           </div>
         </div>
         <p className="section-guidance">
-          <strong>This is the Data tab of the spreadsheet.</strong> Use it to confirm that all 35
-          cutover cases were included in the original post-go-live group and that they remain
-          visible after cutover week is shown separately.
+          <strong>This is the Data tab of the spreadsheet.</strong> {lessonCopy.text07}
         </p>
         <ol className="report-instructions">
           {reportTableInstructions.map((instruction) => (
@@ -890,65 +939,102 @@ export function DataQualityExperience({
             <h2 id="repair-title">How should the laboratory report these cases?</h2>
           </div>
         </div>
-        <p className="section-guidance">
-          The original two-period comparison mixes a difficult cutover week with six later weeks of
-          routine operation. Choose a report structure that shows what happened without hiding any
-          cases.
-        </p>
+        <p className="section-guidance">{lessonCopy.text08}</p>
         <div
           className="repair-choice-grid"
           role="radiogroup"
           aria-label="Report correction choices"
         >
-          {repairChoices.map((choice) => (
-            <button
-              type="button"
-              role="radio"
-              aria-checked={repair === choice.id}
-              className={repair === choice.id ? "selected" : ""}
-              key={choice.id}
-              onClick={() => {
-                setRepair(choice.id);
-                setTestsRun(false);
-              }}
-            >
-              <span className="choice-marker" />
-              <strong>{choice.label}</strong>
-              <small>{choice.detail}</small>
-            </button>
+          {orderedChoices("DataQualityExperience.tsx", repairChoices).map((choice) => (
+            <label key={choice.id} className={repair === choice.id ? "selected" : ""}>
+              <input
+                type="radio"
+                name="DataQualityExperience.tsx-1"
+                checked={repair === choice.id}
+                onChange={() => {
+                  setRepair(choice.id);
+                  setTestsRun(false);
+                }}
+              />
+              <span>
+                <span className="choice-marker" />
+                <strong>{choice.label}</strong>
+                <small>{choice.detail}</small>
+              </span>
+            </label>
           ))}
         </div>
-        {selectedRepair && (
-          <div
-            className={`feedback ${selectedRepair.correct ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {selectedRepair.correct
-                ? "Show cutover week as its own period."
-                : "This still hides part of what happened."}
-            </strong>
-            <p>{selectedRepair.feedback}</p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {selectedRepair && (
+            <div className={`feedback ${selectedRepair.correct ? "correct" : "incorrect"}`}>
+              <strong>
+                {selectedRepair.correct
+                  ? "Show cutover week as its own period."
+                  : "This still hides part of what happened."}
+              </strong>
+              <p>{selectedRepair.feedback}</p>
+            </div>
+          )}
+        </div>
         {selectedRepair && (
           <div className="corrected-report">
             <ReportSummary mode={passed ? "three-period" : "two-period"} />
           </div>
         )}
+        {repair && (
+          <section className="lesson-section" aria-labelledby="separated-title">
+            <div className="section-heading">
+              <span className="section-number">05</span>
+              <div>
+                <p className="eyebrow">Three time periods</p>
+                <h2 id="separated-title">Show cutover week separately</h2>
+              </div>
+            </div>
+            <p className="section-guidance">{lessonCopy.text09}</p>
+            <ReportSummary mode="three-period" />
+            <div className="feedback correct">
+              <strong>The cutover week explains the disagreement.</strong>
+              <p>{lessonCopy.text10}</p>
+            </div>
+          </section>
+        )}
         <div className="validation-console">
           <header>
             <span>Report checks</span>
-            <strong>{testsRun ? (passed ? "7 passed" : "Checks failed") : "Not run"}</strong>
+            <strong>
+              {testsRun
+                ? validationCases.filter((item) => item.passingRepairs.includes(repair ?? ""))
+                    .length +
+                  " of " +
+                  validationCases.length +
+                  " passed"
+                : "Not run"}
+            </strong>
           </header>
           {validationCases.map((item) => (
             <div className="validation-row" key={item.label}>
               <div>
                 <strong>{item.label}</strong>
-                <small>{item.result}</small>
+                <small>
+                  {testsRun && !item.passingRepairs.includes(repair ?? "")
+                    ? item.failNote
+                    : item.result}
+                </small>
               </div>
-              <b className={!testsRun ? "pending" : passed ? "pass" : "fail"}>
-                {!testsRun ? "Pending" : passed ? "Pass" : "Fail"}
+              <b
+                className={
+                  !testsRun
+                    ? "pending"
+                    : item.passingRepairs.includes(repair ?? "")
+                      ? "pass"
+                      : "fail"
+                }
+              >
+                {!testsRun
+                  ? "Pending"
+                  : item.passingRepairs.includes(repair ?? "")
+                    ? "Pass"
+                    : "Fail"}
               </b>
             </div>
           ))}
@@ -961,19 +1047,17 @@ export function DataQualityExperience({
               onAttempt?.(true);
             }}
           >
-            Rerun the report checks
+            Run the report checks
           </button>
         </div>
-        {testsRun && passed && (
-          <div className="feedback correct" role="status">
-            <strong>The revised report is ready for review.</strong>
-            <p>
-              It shows a severe, temporary delay during cutover and a modest improvement afterward.
-              All 455 cases remain visible, and the report states that 27 cutover accession times
-              were recovered from requisitions and the paper cutover log.
-            </p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {testsRun && passed && (
+            <div className="feedback correct">
+              <strong>The revised report is ready for review.</strong>
+              <p>{lessonCopy.text11}</p>
+            </div>
+          )}
+        </div>
       </section>
 
       <section className="lesson-section" aria-labelledby="trend-title">
@@ -984,10 +1068,7 @@ export function DataQualityExperience({
             <h2 id="trend-title">Before, during, and after go-live</h2>
           </div>
         </div>
-        <p className="section-guidance">
-          The weekly view shows why one pre/post summary was misleading. Follow both lines across
-          the six pre-go-live weeks, cutover week, and the six weeks after cutover.
-        </p>
+        <p className="section-guidance">{lessonCopy.text12}</p>
         <TatTrendChart />
       </section>
 
@@ -997,9 +1078,7 @@ export function DataQualityExperience({
         </section>
       )}
       <div className="reset-row">
-        <button type="button" className="text-button" onClick={reset}>
-          Reset lesson interactions
-        </button>
+        <ResetLessonButton fallback={reset} />
       </div>
     </div>
   );

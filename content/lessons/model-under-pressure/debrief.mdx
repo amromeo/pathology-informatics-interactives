@@ -1,11 +1,17 @@
-## Debrief
+## Debrief: verify the model in its intended setting
 
-**Informatics principle:** Vendor performance does not establish local clinical performance.
+### What happened in this case
 
-The local scanner, stain characteristics, and small-lesion subgroup were inadequately represented. The immediate problem is a generalizability failure with subgroup brittleness; later workflow changes could add drift.
+The four proposals are a programmed rule, supervised image detector, unsupervised clustering and generative summary. Their first reviews differ: boundaries and exceptions, independent local performance, clinical meaning of clusters, and agreement with source records.
 
-The AI implementation and digital pathology teams conduct verification and monitoring. Pathology governance approves intended use, thresholds, human review, and deployment.
+The detector's initial local gap is a generalizability failure. Scanner A detects 23/25 positive slides; scanner B detects 19/25. Across scanners, micrometastasis detection is 17/25 while macrometastasis detection is 25/25. The latter result does not justify unreviewed restriction to a new intended use. September's decline from 17/25 to 12/25 micrometastases requires investigation and the agreed response to a safety threshold.
 
-## Further study with API teaching slides
+The prevalence slider changes positive predictive value because false positives come from the much larger negative population when disease is uncommon. In this model sensitivity stays fixed when only prevalence changes. Increasing separation improves both sensitivity and specificity. Those modeled changes do not rewrite the study data.
 
-In [Association for Pathology Informatics teaching slides: Artificial Intelligence in Pathology (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%206%20AI%20slides.pptx), review slides 33–36, 43, 53. Compare verification at a new site with monitoring after implementation. Identify which local scanner or staining differences need investigation before relying on the vendor's performance estimate.
+### Who does what
+
+The laboratory director defines the intended use and acceptance criteria. Pathologists confirm independent reference diagnoses and the human review workflow. Analysts retain model, scanner and preparation versions. The regulatory team checks device status and scope. Clinical staff agree on reporting, escalation, pause criteria and patient follow-up after a detected failure.
+
+### Connection to PIER 2.4
+
+The learner distinguishes model categories, interprets local and longitudinal performance, and assigns the clinical and organizational reviews needed before use.

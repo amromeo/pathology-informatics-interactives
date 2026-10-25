@@ -89,24 +89,40 @@ export const reviewChoices = [
 ];
 export const monitorItems = [
   {
+    correct: true,
     id: "misses",
     label: "Audit marked and unmarked areas against expert review.",
     note: "Reviewing only positive marks cannot estimate false negatives. Record selection and reference-review methods.",
   },
   {
+    correct: true,
     id: "mix",
     label: "Track case mix, site, stain, scanner, and image-quality failures.",
     note: "Changes in inputs can alter errors; stratify performance and include unreadable or failed analyses in an accountable workflow.",
   },
   {
+    correct: true,
     id: "human",
     label: "Measure final reader errors, review time, and changes after seeing the overlay.",
     note: "The clinically used system includes the reader. Faster work alone is insufficient if misses increase.",
   },
   {
+    correct: true,
     id: "change",
     label: "Assign review responsibility and a pause and revalidation process.",
     note: "Record version and threshold. Investigate failures and assess changes before changing the approved configuration.",
+  },
+  {
+    id: "marks-only",
+    label: "Use marked candidates as the only reference audit",
+    note: "Reviewing marked areas alone omits false negatives. Include unmarked areas in an independent reference review.",
+    correct: false,
+  },
+  {
+    id: "speed-only",
+    label: "Approve a new threshold if reading time falls",
+    note: "Faster work cannot establish safety. Review reader errors, input changes and the approved validation process.",
+    correct: false,
   },
 ] as const;
 export const monitoringRecords = [
@@ -137,3 +153,8 @@ export const monitoringFeedback = {
   unsafe:
     "Faster work does not establish safe performance. An untested threshold change or expansion can worsen errors; investigate the new site and staining workflow first.",
 };
+
+export const sectionPurposes = [
+  "Change the threshold and compare missed figures with false marks.",
+  "Judge the complete assisted workflow and choose evidence for ongoing review.",
+];

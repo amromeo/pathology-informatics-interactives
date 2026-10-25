@@ -1,3 +1,6 @@
+import { sectionPurposes } from "../../content/lessons/human-plus-algorithm/interaction";
+import { orderedChoices } from "./lesson-ui";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState } from "react";
 import {
   monitorItems,
@@ -23,7 +26,11 @@ export function MitosisReviewExperience({ Concepts, Bridge, onAttempt }: Topic5P
   const p = performance(threshold, site);
   return (
     <div className="topic7">
-      <Section title="Inspect the consequences of marking locations">
+      <Section
+        number={1}
+        purpose={sectionPurposes[0]}
+        title="Inspect the consequences of marking locations"
+      >
         <Teaching Content={Concepts} />
         <div className="topic5-controls">
           <label className="topic5-control">
@@ -38,7 +45,6 @@ export function MitosisReviewExperience({ Concepts, Bridge, onAttempt }: Topic5P
               onChange={(e) => {
                 setThreshold(Number(e.target.value));
                 setReview("");
-                onAttempt?.(true);
               }}
             />
           </label>
@@ -120,7 +126,7 @@ export function MitosisReviewExperience({ Concepts, Bridge, onAttempt }: Topic5P
         </div>
         <fieldset className="t7-choices">
           <legend>How should the pathologist review the area?</legend>
-          {reviewChoices.map((r) => (
+          {orderedChoices("MitosisReviewExperience.tsx", reviewChoices).map((r) => (
             <label key={r.id}>
               <input
                 aria-label={r.label}
@@ -134,13 +140,19 @@ export function MitosisReviewExperience({ Concepts, Bridge, onAttempt }: Topic5P
               />
               <span>
                 {r.label}
-                {review === r.id && <small role="status">{r.note}</small>}
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {review === r.id && <small>{r.note}</small>}
+                </div>
               </span>
             </label>
           ))}
         </fieldset>
       </Section>
-      <Section title="Compare the reader study and monthly report">
+      <Section
+        number={2}
+        purpose={sectionPurposes[1]}
+        title="Compare the reader study and monthly report"
+      >
         <Teaching Content={Bridge} />
         <div className="topic5-card-grid">
           {readerStudy.map((r) => (
@@ -195,7 +207,9 @@ export function MitosisReviewExperience({ Concepts, Bridge, onAttempt }: Topic5P
               />
               <span>
                 {r.label}
-                {monitor.includes(r.id) && <small role="status">{r.note}</small>}
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {monitor.includes(r.id) && <small>{r.note}</small>}
+                </div>
               </span>
             </label>
           ))}
@@ -217,20 +231,20 @@ export function MitosisReviewExperience({ Concepts, Bridge, onAttempt }: Topic5P
             onAttempt?.(true);
           }}
         />
-        {action && (
-          <p role="status" className="topic5-note">
-            {action === "review"
-              ? monitor.length === 4
-                ? monitoringFeedback.complete
-                : monitoringFeedback.incomplete
-              : monitoringFeedback.unsafe}
-          </p>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {action && (
+            <p className="topic5-note">
+              {action === "review"
+                ? monitorItems.every((row) => monitor.includes(row.id) === row.correct)
+                  ? monitoringFeedback.complete
+                  : monitoringFeedback.incomplete
+                : monitoringFeedback.unsafe}
+            </p>
+          )}
+        </div>
       </Section>
-      <button
-        type="button"
-        className="text-button"
-        onClick={() => {
+      <ResetLessonButton
+        fallback={() => {
           setThreshold(0.5);
           setSite("all");
           setReview("");
@@ -238,9 +252,7 @@ export function MitosisReviewExperience({ Concepts, Bridge, onAttempt }: Topic5P
           setAction("");
           onAttempt?.(false);
         }}
-      >
-        Reset lesson interactions
-      </button>
+      />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import type { LessonDefinition } from "../../../src/data/types";
 export type DowntimePhaseId = "activate" | "operate" | "recover";
 
 export type DowntimeDecisionId =
@@ -506,7 +507,7 @@ export const buildReconciliationRecords = (state: DowntimeState): Reconciliation
           {
             id: "CL-02",
             tempId: "DT-202",
-            calledAt: "10:14",
+            calledAt: "10:52",
             recipient: "R. Moore, RN",
             readBack: true,
           },
@@ -545,7 +546,10 @@ export const scoreReconciliation = (
     if (assignments.actions[hazard.id] === hazard.correctActionId) notes.push(hazard.resolvedNote);
     else {
       hazardsMissed.push(hazard.id);
-      notes.push(`${hazard.title} remains unresolved.`);
+      notes.push(
+        reconciliationActionNotes[assignments.actions[hazard.id]] ??
+          `Choose an action for ${hazard.title}.`,
+      );
     }
   }
   const total = records.paperRecords.length + records.hazards.length;
@@ -578,3 +582,181 @@ export const resumptionChoices: readonly DowntimeChoice[] = [
       "An apparently current worklist can still contain unmatched patients and duplicate orders. A shared reconciliation checkpoint is required.",
   },
 ];
+
+export const caseOverview: Omit<LessonDefinition, "manifest"> = {
+  artifactTitle: "Trauma-center downtime board",
+  evidence: [
+    {
+      label: "Network",
+      value: "Unavailable",
+      tone: "critical",
+    },
+    {
+      label: "Estimate",
+      value: "12 hours",
+      tone: "warning",
+    },
+    {
+      label: "Active trauma patients",
+      value: "17",
+      tone: "neutral",
+    },
+    {
+      label: "Pending critical tests",
+      value: "9",
+      tone: "critical",
+    },
+  ],
+  trace: [
+    {
+      system: "Registration",
+      role: "ED registrar",
+      sees: "Identifiers do not flow.",
+      implication: "Temporary identity control is essential.",
+    },
+    {
+      system: "Laboratory",
+      role: "Technologist",
+      sees: "Orders and results are manual.",
+      implication: "Priority and accession rules must be explicit.",
+    },
+    {
+      system: "Clinical units",
+      role: "Care teams",
+      sees: "Phones carry results.",
+      implication: "Read-back and documentation matter.",
+    },
+    {
+      system: "Recovery",
+      role: "IT + LIS",
+      sees: "Records overlap after restoration.",
+      implication: "Reconciliation is a high-risk phase.",
+    },
+  ],
+  decisionPrompt: "What should the laboratory do in the first hour?",
+  decisionChoices: [
+    {
+      id: "correct",
+      label:
+        "Declare downtime and activate coordinated procedures with controlled temporary identifiers and a defined command structure.",
+      correct: true,
+      feedback:
+        "A declared, coordinated response gives registration, the laboratory, clinical units, and IT one identity method, communication plan, priority scheme, and incident lead while systems are unavailable.",
+    },
+    {
+      id: "narrow",
+      label:
+        "Hold all non-STAT testing until the network returns and run STAT work on paper in the meantime.",
+      feedback:
+        "Restricting work may reduce volume, but STAT testing still needs controlled registration, temporary identifiers, result communication, and one coordinated incident plan.",
+    },
+    {
+      id: "unsafe",
+      label:
+        "Have each unit start its own downtime forms now and consolidate the paperwork after restoration.",
+      feedback:
+        "Separate local methods create incompatible identifiers and call records. Those differences become patient-matching and result-reconciliation hazards after restoration.",
+    },
+  ],
+  repairPrompt: "Which recovery plan should medical leadership approve?",
+  repairChoices: [
+    {
+      id: "validated",
+      label:
+        "Freeze transitions, restore in stages, and reconcile temporary identities, orders, results, critical calls, and repeats before normal operation.",
+      correct: true,
+      feedback:
+        "This plan controls the high-risk transition back to electronic work and accounts for each temporary record. It requires added staffing, an operational pause, and medical review before normal workflows resume.",
+    },
+    {
+      id: "narrow",
+      label:
+        "Begin back-entering all paper results, including documented critical calls, immediately and in collection order.",
+      feedback:
+        "This captures all result categories and preserves documented critical calls, but entry before identity reconciliation can place a correct result on the wrong chart or create duplicate work.",
+    },
+    {
+      id: "unsafe",
+      label:
+        "Back-enter only the results that were phoned as critical and retain the rest on paper for the record.",
+      feedback:
+        "This preserves the most urgent communicated results, but it leaves routine and abnormal results outside the longitudinal chart and does not resolve temporary identities or duplicate orders.",
+    },
+  ],
+  validationCases: [
+    {
+      name: "Controlled transition",
+      note: "New electronic work pauses while active paper records are identified and assigned for reconciliation.",
+      passingRepairs: ["validated"],
+      failNotes: {
+        narrow:
+          "Immediate back-entry starts before staff know which temporary records belong to which restored charts.",
+        unsafe:
+          "Entering only critical results still begins without a controlled transition or assigned reconciliation work.",
+      },
+    },
+    {
+      name: "Temporary identities",
+      note: "Every temporary identifier maps to one verified medical record number before result entry.",
+      passingRepairs: ["validated"],
+      failNotes: {
+        narrow:
+          "Collection order does not establish which restored chart belongs to each temporary identifier.",
+        unsafe:
+          "The critical-only plan does not reconcile temporary identifiers before placing results in the chart.",
+      },
+    },
+    {
+      name: "Critical-result documentation",
+      note: "Phoned critical results, read-backs, and restored chart entries agree.",
+      passingRepairs: ["validated", "narrow", "unsafe"],
+      failNotes: {},
+    },
+    {
+      name: "Duplicate and repeat review",
+      note: "Duplicate orders and tests repeated during downtime are resolved before recollection or billing.",
+      passingRepairs: ["validated"],
+      failNotes: {
+        narrow:
+          "Back-entry in collection order does not compare restored orders with paper orders and repeat tests.",
+        unsafe:
+          "A critical-only entry process leaves duplicate routine orders and repeat testing unreconciled.",
+      },
+    },
+    {
+      name: "Complete result inclusion",
+      note: "Routine, abnormal, and critical downtime results are represented in the longitudinal chart.",
+      passingRepairs: ["validated", "narrow"],
+      failNotes: {
+        unsafe:
+          "Retaining noncritical results only on paper leaves part of the downtime episode absent from the electronic chart.",
+      },
+    },
+  ],
+};
+
+export const lessonCopy = {
+  text01:
+    "Match every temporary identifier to a restored chart. Then choose how to resolve the duplicate order, missing critical result, timestamp conflict, and any duplicate chart created by your tabletop path.",
+  text02:
+    "The unit reports that the potassium was phoned, but the laboratory call log contains no entry for DT-202.",
+};
+
+export const reconciliationActionNotes: Record<string, string> = {
+  "recollect-restored-order":
+    "Recollection repeats testing that is already complete. Reconcile the pending order with the verified paper result before requesting another specimen.",
+  "enter-both-orders":
+    "Leaving the duplicate active can trigger recollection and duplicate billing. Preserve the completed result and resolve the redundant order.",
+  "no-entry-result-called":
+    "A phone call does not add the result to the longitudinal chart. Enter the verified downtime result and link the communication record.",
+  "repeat-critical-only":
+    "A later potassium does not replace the earlier critical episode. Preserve both collection times and document the earlier result and call.",
+  "use-back-entry-time":
+    "Back-entry time describes documentation, not collection. Substituting it changes the clinical sequence and turnaround calculation.",
+  "use-restoration-time":
+    "A single restoration time erases individual specimen collection times. Preserve the paper collection time and separately record entry time.",
+  "use-newest-chart":
+    "The newest chart may be the duplicate. Confirm the established medical record number through registration before entering results.",
+  "split-results-between-charts":
+    "Splitting results fragments the patient history and can conceal a critical episode. Use controlled identity reconciliation.",
+};

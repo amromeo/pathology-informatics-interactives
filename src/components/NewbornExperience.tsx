@@ -1,6 +1,11 @@
+import { ReplayResultList } from "./lesson-ui";
+import { sectionPurposes } from "../../content/lessons/newborn-screen-to-public-health/interaction";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState } from "react";
 import {
   nbsFields,
+  answerDisplay,
+  statusDisplay,
   nbsReplay,
   originalNbs,
   type NbsConfig,
@@ -15,7 +20,11 @@ export function NewbornExperience({ Concepts, Bridge, onAttempt }: Topic5Props) 
   const passed = results.filter((row) => row.pass).length;
   return (
     <div>
-      <Topic5Section title="Compare the received report with the interface agreement">
+      <Topic5Section
+        number={1}
+        purpose={sectionPurposes[0]}
+        title="Compare the received report with the interface agreement"
+      >
         <article className="artifact-card topic5-record">
           <h3>Receiver record · NB-01 · 08:41</h3>
           <dl>
@@ -37,7 +46,7 @@ export function NewbornExperience({ Concepts, Bridge, onAttempt }: Topic5Props) 
         </article>
         <Teaching Content={Concepts} />
       </Topic5Section>
-      <Topic5Section title="Configure the receiver profile">
+      <Topic5Section number={2} purpose={sectionPurposes[1]} title="Configure the receiver profile">
         <div className="topic5-controls">
           {nbsFields.map((field) => (
             <Topic5Select
@@ -86,14 +95,18 @@ export function NewbornExperience({ Concepts, Bridge, onAttempt }: Topic5Props) 
         </button>
         <p role="status">
           {tested
-            ? `${passed} of 8 receiving actions match.`
+            ? `${passed} of ${results.length} receiving actions match.`
             : "Run the original configuration, then compare the complete repair."}
         </p>
-        <div className="rule-result-list">
-          {results.map((row) => (
-            <details key={row.id} className={tested ? (row.pass ? "pass" : "fail") : "pending"}>
+        <ReplayResultList
+          items={results}
+          tested={tested}
+          disclosure={true}
+          render={(row) => (
+            <>
               <summary>
-                {row.id} · {row.answer} · {row.status}
+                {row.id} · {answerDisplay[row.answer] ?? row.answer} ·{" "}
+                {statusDisplay[row.status] ?? row.status}
                 {tested && (
                   <strong>
                     {row.action} · {row.pass ? "Matches" : "Does not match"}
@@ -107,11 +120,11 @@ export function NewbornExperience({ Concepts, Bridge, onAttempt }: Topic5Props) 
               <p>
                 Expected: <strong>{row.expected}</strong>. {row.note}
               </p>
-            </details>
-          ))}
-        </div>
+            </>
+          )}
+        />
       </Topic5Section>
-      <Topic5Section title="Confirm program follow-up">
+      <Topic5Section number={3} purpose={sectionPurposes[2]} title="Confirm program follow-up">
         <Teaching Content={Bridge} />
         <label className="topic5-check">
           <input
@@ -122,26 +135,24 @@ export function NewbornExperience({ Concepts, Bridge, onAttempt }: Topic5Props) 
           Include worklists, exception ownership, and correction reconciliation in acceptance
           testing.
         </label>
-        {review && (
-          <p className="topic5-note" role="status">
-            {tested && passed === 8
-              ? "The replay supports joint laboratory and program acceptance review."
-              : "The receiving actions must match before this configuration is ready for acceptance review."}
-          </p>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {review && (
+            <p className="topic5-note">
+              {tested && passed === results.length
+                ? "The replay supports joint laboratory and program acceptance review."
+                : "The receiving actions must match before this configuration is ready for acceptance review."}
+            </p>
+          )}
+        </div>
       </Topic5Section>
-      <button
-        className="text-button"
-        type="button"
-        onClick={() => {
+      <ResetLessonButton
+        fallback={() => {
           setConfig({ ...originalNbs });
           setTested(false);
           setReview(false);
           onAttempt?.(false);
         }}
-      >
-        Reset lesson interactions
-      </button>
+      />
     </div>
   );
 }

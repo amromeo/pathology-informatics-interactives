@@ -1,3 +1,6 @@
+import { mustFind } from "./lesson-ui/mustFind";
+import { sectionPurposes } from "../../content/lessons/build-the-new-test/interaction";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState } from "react";
 import {
   initialBuild,
@@ -25,12 +28,16 @@ export function TestBuildExperience({ Concepts, Bridge, onAttempt }: Topic5Props
   const [changed, setChanged] = useState(false);
   const [checks, setChecks] = useState<string[]>([]);
   const [decision, setDecision] = useState(false);
-  const current = buildCases.find((row) => row.id === selected)!;
+  const current = mustFind(
+    buildCases,
+    (row) => row.id === selected,
+    "TestBuildExperience.tsx buildCases",
+  );
   const results = replayBuild(config);
   const ready =
     tested &&
     results.every((row) => row.pass) &&
-    releaseRequirements.every((row) => checks.includes(row.id));
+    releaseRequirements.every((row) => checks.includes(row.id) === row.correct);
   function update(key: string, value: string) {
     setConfig({ ...config, [key]: value });
     setChanged(tested || changed);
@@ -40,10 +47,14 @@ export function TestBuildExperience({ Concepts, Bridge, onAttempt }: Topic5Props
   }
   return (
     <div className="topic8-experience">
-      <Section title="Compare the request, procedure, and report">
+      <Section
+        number={1}
+        purpose={sectionPurposes[0]}
+        title="Compare the request, procedure, and report"
+      >
         <SourceInspector records={buildSources} />
       </Section>
-      <Section title="Configure the test definition">
+      <Section number={2} purpose={sectionPurposes[1]} title="Configure the test definition">
         <Teaching Content={Concepts} />
         <div className="topic5-controls">
           {buildControls.map((row) => (
@@ -52,7 +63,7 @@ export function TestBuildExperience({ Concepts, Bridge, onAttempt }: Topic5Props
               label={row.label}
               value={config[row.key]}
               options={row.options}
-              note={(row.notes as Record<string, string>)[config[row.key]]}
+              note={tested ? (row.notes as Record<string, string>)[config[row.key]] : undefined}
               onChange={(value) => update(row.key, value)}
             />
           ))}
@@ -78,7 +89,11 @@ export function TestBuildExperience({ Concepts, Bridge, onAttempt }: Topic5Props
           </details>
         </article>
       </Section>
-      <Section title="Validate the build and review release readiness">
+      <Section
+        number={3}
+        purpose={sectionPurposes[2]}
+        title="Validate the build and review release readiness"
+      >
         <Teaching Content={Bridge} />
         <button
           type="button"
@@ -92,35 +107,35 @@ export function TestBuildExperience({ Concepts, Bridge, onAttempt }: Topic5Props
         >
           Run eight report checks
         </button>
-        {changed && (
-          <p role="status" className="topic5-note">
-            {buildCopy.changed}
-          </p>
-        )}
-        {tested && (
-          <div aria-live="polite">
-            <p>
-              <strong>{results.filter((row) => row.pass).length} / 8 report checks pass.</strong>
-            </p>
-            <div className="topic5-card-grid">
-              {results.map((row) => (
-                <article className="artifact-card" key={row.id}>
-                  <h3>
-                    {row.id} · {row.pass ? "Pass" : "Needs revision"}
-                  </h3>
-                  <p>{row.label}</p>
-                  <p>
-                    <strong>Produced:</strong> {row.actual}
-                  </p>
-                  <p>
-                    <strong>Required:</strong> {row.expected}
-                  </p>
-                  <p>{row.why}</p>
-                </article>
-              ))}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {changed && <p className="topic5-note">{buildCopy.changed}</p>}
+        </div>
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {tested && (
+            <div>
+              <p>
+                <strong>{results.filter((row) => row.pass).length} / 8 report checks pass.</strong>
+              </p>
+              <div className="topic5-card-grid">
+                {results.map((row) => (
+                  <article className="artifact-card" key={row.id}>
+                    <h3>
+                      {row.id} · {row.pass ? "Pass" : "Needs revision"}
+                    </h3>
+                    <p>{row.label}</p>
+                    <p>
+                      <strong>Produced:</strong> {row.actual}
+                    </p>
+                    <p>
+                      <strong>Required:</strong> {row.expected}
+                    </p>
+                    <p>{row.why}</p>
+                  </article>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
         <fieldset className="topic5-plan">
           <legend>Items addressed in the release recommendation</legend>
           {releaseRequirements.map((row) => (
@@ -155,16 +170,14 @@ export function TestBuildExperience({ Concepts, Bridge, onAttempt }: Topic5Props
         >
           Review release recommendation
         </button>
-        {decision && (
-          <p className="topic5-note" role="status">
-            {ready ? buildCopy.ready : buildCopy.notReady}
-          </p>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {decision && (
+            <p className="topic5-note">{ready ? buildCopy.ready : buildCopy.notReady}</p>
+          )}
+        </div>
       </Section>
-      <button
-        type="button"
-        className="text-button"
-        onClick={() => {
+      <ResetLessonButton
+        fallback={() => {
           setConfig({ ...initialBuild });
           setSelected("TB01");
           setTested(false);
@@ -173,9 +186,7 @@ export function TestBuildExperience({ Concepts, Bridge, onAttempt }: Topic5Props
           setDecision(false);
           onAttempt?.(false);
         }}
-      >
-        Reset lesson interactions
-      </button>
+      />
     </div>
   );
 }

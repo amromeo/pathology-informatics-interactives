@@ -1,0 +1,11 @@
+### Separate transfer performance from change over time
+
+Sensitivity is the proportion of reference-positive slides detected: detected positives divided by all reference positives. The local study has 50 positive slides and cannot estimate specificity or positive predictive value by itself. Positive predictive value is the proportion of positive model calls that are truly positive; it needs both true and false positive calls in the intended population.
+
+A failure present on first transfer is a **generalizability** problem. The table separates scanner and lesion size so a pooled 84% cannot conceal the micrometastasis misses. **Drift** is a subsequent change in inputs or performance. The September monitor follows a stain change, but that timing is a reason to investigate, not proof of causation. **Brittleness** describes marked sensitivity to a small input change, such as a slight color shift; poor performance in a clinical subgroup alone is not the definition.
+
+### What the sliders calculate
+
+The sliders use a deliberately simple mathematical model with a fixed threshold. Sensitivity and specificity both equal 1 / (1 + exp(-separation)). Increasing class separation makes positive and negative cases easier to distinguish in this model. Prevalence changes the proportion of positive cases among 10,000 classifications. It changes predictive value without changing sensitivity or specificity. Expected counts may be fractional because these are model expectations, not counted study observations.
+
+The observed verification and monitoring tables never change with the sliders. This calculation cannot predict the actual detector's performance or approve its clinical use.

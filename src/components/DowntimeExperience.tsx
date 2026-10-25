@@ -1,3 +1,8 @@
+import { reconciliationActionNotes } from "../../content/lessons/twelve-hours-offline/interaction";
+import { lessonCopy } from "../../content/lessons/twelve-hours-offline/interaction";
+import { orderedChoices } from "./lesson-ui";
+import { tabKeys } from "./lesson-ui/tabKeys";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useMemo, useState, type ComponentType } from "react";
 import {
   applyDecision,
@@ -95,7 +100,7 @@ export function DowntimeExperience({
         </div>
         <article className="artifact-card">
           <header>
-            <span>Synthetic educational artifact</span>
+            <span>System record</span>
             <strong>{lesson.artifactTitle}</strong>
           </header>
           <dl className="evidence-grid">
@@ -128,6 +133,10 @@ export function DowntimeExperience({
               type="button"
               role="tab"
               aria-selected={activeTrace === index}
+              tabIndex={activeTrace === index ? 0 : -1}
+              id={"downtime-trace-tab-" + index}
+              aria-controls="downtime-trace-panel"
+              onKeyDown={tabKeys}
               className={activeTrace === index ? "active" : ""}
               onClick={() => setActiveTrace(index)}
             >
@@ -136,7 +145,12 @@ export function DowntimeExperience({
             </button>
           ))}
         </div>
-        <article className="trace-panel" role="tabpanel">
+        <article
+          className="trace-panel"
+          role="tabpanel"
+          id="downtime-trace-panel"
+          aria-labelledby={"downtime-trace-tab-" + activeTrace}
+        >
           <div>
             <p className="eyebrow">{lesson.trace[activeTrace].role}</p>
             <h3>{lesson.trace[activeTrace].system}</h3>
@@ -170,6 +184,10 @@ export function DowntimeExperience({
                 type="button"
                 role="tab"
                 aria-selected={activePhase === index}
+                tabIndex={activePhase === index ? 0 : -1}
+                id={"downtime-phase-tab-" + index}
+                aria-controls="downtime-phase-panel"
+                onKeyDown={tabKeys}
                 disabled={!available}
                 className={
                   activePhase === index ? "active" : phaseComplete[index] ? "complete" : ""
@@ -188,7 +206,8 @@ export function DowntimeExperience({
         <article
           className="downtime-phase-panel"
           role="tabpanel"
-          aria-labelledby={`phase-${currentPhase.id}-title`}
+          id="downtime-phase-panel"
+          aria-labelledby={"downtime-phase-tab-" + activePhase}
         >
           <header>
             <div>
@@ -205,7 +224,7 @@ export function DowntimeExperience({
                 <fieldset key={decision.id}>
                   <legend>{decision.prompt}</legend>
                   <div className="downtime-choice-stack">
-                    {decision.choices.map((choice) => (
+                    {orderedChoices("DowntimeExperience.tsx", decision.choices).map((choice) => (
                       <label className={selectedId === choice.id ? "selected" : ""} key={choice.id}>
                         <input
                           type="radio"
@@ -217,19 +236,18 @@ export function DowntimeExperience({
                       </label>
                     ))}
                   </div>
-                  {selected && (
-                    <div
-                      className={`feedback ${selected.preferred ? "correct" : "incorrect"}`}
-                      role="status"
-                    >
-                      <strong>
-                        {selected.preferred
-                          ? "This creates a controlled handoff."
-                          : "This creates additional recovery work."}
-                      </strong>
-                      <p>{selected.feedback}</p>
-                    </div>
-                  )}
+                  <div role="status" aria-live="polite" aria-atomic="true">
+                    {selected && (
+                      <div className={`feedback ${selected.preferred ? "correct" : "incorrect"}`}>
+                        <strong>
+                          {selected.preferred
+                            ? "This creates a controlled handoff."
+                            : "This creates additional recovery work."}
+                        </strong>
+                        <p>{selected.feedback}</p>
+                      </div>
+                    )}
+                  </div>
                 </fieldset>
               );
             })}
@@ -248,9 +266,13 @@ export function DowntimeExperience({
                 type="button"
                 className="primary-button"
                 disabled={!phaseComplete[activePhase]}
-                onClick={() =>
-                  setActivePhase((index) => Math.min(tabletopPhases.length - 1, index + 1))
-                }
+                onClick={() => {
+                  const next = Math.min(tabletopPhases.length - 1, activePhase + 1);
+                  setActivePhase(next);
+                  requestAnimationFrame(() =>
+                    document.getElementById("downtime-phase-tab-" + next)?.focus(),
+                  );
+                }}
               >
                 Continue to {tabletopPhases[activePhase + 1].title}
               </button>
@@ -310,19 +332,18 @@ export function DowntimeExperience({
             </h2>
           </div>
         </div>
-        <p className="section-guidance">
-          Match every temporary identifier to a restored chart. Then choose how to resolve the
-          duplicate order, missing critical result, timestamp conflict, and any duplicate chart
-          created by your tabletop path.
-        </p>
-        {!allPhasesComplete && (
-          <div className="downtime-lock-note" role="status">
-            <strong>Complete Activate, Operate, and Recover to unlock scoring.</strong>
-            <p>
-              The records remain visible so you can see what the recovery team will need to compare.
-            </p>
-          </div>
-        )}
+        <p className="section-guidance">{lessonCopy.text01}</p>
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {!allPhasesComplete && (
+            <div className="downtime-lock-note">
+              <strong>Complete Activate, Operate, and Recover to unlock scoring.</strong>
+              <p>
+                The records remain visible so you can see what the recovery team will need to
+                compare.
+              </p>
+            </div>
+          )}
+        </div>
         <div className="downtime-reference-grid">
           <article>
             <h3>Restored patient charts</h3>
@@ -359,15 +380,12 @@ export function DowntimeExperience({
             ) : (
               <div className="call-log-entry">
                 <strong>No matching laboratory entry</strong>
-                <span>
-                  The unit reports that the potassium was phoned, but the laboratory call log
-                  contains no entry for DT-202.
-                </span>
+                <span>{lessonCopy.text02}</span>
               </div>
             )}
           </article>
         </div>
-        <fieldset className="downtime-reconciliation-fieldset" disabled={!allPhasesComplete}>
+        <fieldset className="downtime-reconciliation-fieldset" aria-disabled={!allPhasesComplete}>
           <legend>Temporary identifier matches</legend>
           <div
             className="downtime-table-wrap"
@@ -377,7 +395,7 @@ export function DowntimeExperience({
           >
             <table>
               <caption>
-                Synthetic paper records compared with the restored laboratory information system
+                Paper records compared with the restored laboratory information system
               </caption>
               <thead>
                 <tr>
@@ -416,6 +434,7 @@ export function DowntimeExperience({
                     <td>
                       <label>
                         <select
+                          disabled={!allPhasesComplete}
                           aria-label={`Medical record number for ${record.tempId}`}
                           value={assignments.matches[record.tempId] ?? ""}
                           onChange={(event) => {
@@ -470,14 +489,16 @@ export function DowntimeExperience({
                     ))}
                   </select>
                 </label>
-                {assignments.actions[hazard.id] && (
-                  <p className="downtime-selected-action" role="status">
-                    {
-                      hazard.actions.find((action) => action.id === assignments.actions[hazard.id])
-                        ?.label
-                    }
-                  </p>
-                )}
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {reconciliationRun && (
+                    <p className="downtime-selected-action">
+                      {assignments.actions[hazard.id] === hazard.correctActionId
+                        ? hazard.resolvedNote
+                        : (reconciliationActionNotes[assignments.actions[hazard.id]] ??
+                          "Choose a reconciliation action.")}
+                    </p>
+                  )}
+                </div>
               </article>
             ))}
           </div>
@@ -509,23 +530,22 @@ export function DowntimeExperience({
             </span>
           </div>
         </div>
-        {reconciliationRun && (
-          <div
-            className={`feedback ${reconciliationClean ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {reconciliationClean
-                ? "The downtime episode reconciles cleanly."
-                : "Normal operation is not ready to resume."}
-            </strong>
-            <ul>
-              {reconciliationNotes.map((note) => (
-                <li key={note}>{note}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {reconciliationRun && (
+            <div className={`feedback ${reconciliationClean ? "correct" : "incorrect"}`}>
+              <strong>
+                {reconciliationClean
+                  ? "The downtime episode reconciles cleanly."
+                  : "Normal operation is not ready to resume."}
+              </strong>
+              <ul>
+                {reconciliationNotes.map((note) => (
+                  <li key={note}>{note}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </section>
 
       <section className="lesson-section" aria-labelledby="resumption-title">
@@ -544,7 +564,7 @@ export function DowntimeExperience({
         >
           <legend>Choose the approval condition</legend>
           <div className="downtime-choice-stack">
-            {resumptionChoices.map((choice) => (
+            {orderedChoices("DowntimeExperience.tsx", resumptionChoices).map((choice) => (
               <label className={resumptionChoice === choice.id ? "selected" : ""} key={choice.id}>
                 <input
                   type="radio"
@@ -560,33 +580,33 @@ export function DowntimeExperience({
             ))}
           </div>
         </fieldset>
-        {selectedResumption && (
-          <div className={`feedback ${readyToResume ? "correct" : "incorrect"}`} role="status">
-            <strong>
-              {readyToResume
-                ? "The laboratory is ready for medical review and approval."
-                : "Do not approve normal operation yet."}
-            </strong>
-            <p>{selectedResumption.feedback}</p>
-            <p>
-              {controlledIdentifiers
-                ? "Because registration used a controlled identifier block, the six paper records can be matched to established charts."
-                : "Because units assigned separate identifiers, recovery includes a duplicate patient chart that must be held and reconciled."}{" "}
-              {controlledCalls
-                ? "The numbered call log provides the communication record for the critical potassium."
-                : "The phoned potassium has no laboratory call-log entry, so communication must be verified from other source records."}{" "}
-              {reconciliationRun
-                ? `${score.resolved} of ${score.total} reconciliation items are resolved.`
-                : "The reconciliation selections have not been checked."}
-            </p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {selectedResumption && (
+            <div className={`feedback ${readyToResume ? "correct" : "incorrect"}`}>
+              <strong>
+                {readyToResume
+                  ? "The laboratory is ready for medical review and approval."
+                  : "Do not approve normal operation yet."}
+              </strong>
+              <p>{selectedResumption.feedback}</p>
+              <p>
+                {controlledIdentifiers
+                  ? "Because registration used a controlled identifier block, the six paper records can be matched to established charts."
+                  : "Because units assigned separate identifiers, recovery includes a duplicate patient chart that must be held and reconciled."}{" "}
+                {controlledCalls
+                  ? "The numbered call log provides the communication record for the critical potassium."
+                  : "The phoned potassium has no laboratory call-log entry, so communication must be verified from other source records."}{" "}
+                {reconciliationRun
+                  ? `${score.resolved} of ${score.total} reconciliation items are resolved.`
+                  : "The reconciliation selections have not been checked."}
+              </p>
+            </div>
+          )}
+        </div>
       </section>
 
       <div className="reset-row">
-        <button type="button" className="text-button" onClick={reset}>
-          Reset lesson interactions
-        </button>
+        <ResetLessonButton fallback={reset} />
       </div>
     </div>
   );

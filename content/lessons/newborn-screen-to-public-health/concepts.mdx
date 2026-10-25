@@ -37,7 +37,7 @@ Numerical analyte results also need a value and a compatible unit, commonly
 expressed using UCUM. This overall interpretation is categorical, so it does
 not acquire a numeric unit. A unit cannot repair a wrong observation mapping.
 A real report also includes individual results and collection information;
-the workbench focuses on the fields that control this receiver's routing.
+the exercise focuses on the fields that control this receiver's routing.
 
 ### Standards need implementation agreements
 
@@ -50,7 +50,7 @@ An **implementation guide** constrains a standard for a defined use: message
 types, required identifiers, terminology bindings, allowed answers, error
 handling, and workflow expectations. A local interface agreement identifies
 the versions and additional decisions used by both partners. The existence
-of a standard does not establish that two implementations made those same
+of a standard does not show that two implementations made those same
 decisions.
 
 HL7 v2 sends structured messages with segments and fields. **FHIR** represents
@@ -87,3 +87,13 @@ remain outside the final-report routing exercised here.
 In the replay, F means final, C means corrected, and P means preliminary. These
 status values describe the report version and readiness; they are separate
 from its clinical interpretation.
+
+NB-08 requires immediate referral even though its report is preliminary. The program's urgent communication procedure still applies, and staff must monitor the preliminary-review queue with the same urgency.
+
+### Who changes a standard?
+
+HL7 International develops messages and resources. Regenstrief maintains LOINC observation identifiers. SNOMED International maintains SNOMED CT clinical concepts. Integrating the Healthcare Enterprise (IHE) combines standards into workflow profiles. The International Organization for Standardization (ISO) publishes standards including ISO 15189 for laboratory quality. The US Assistant Secretary for Technology Policy/Office of the National Coordinator for Health Information Technology (ASTP/ONC) names standards in certification policy; it is not a terminology developer.
+
+Before requesting a change, define the unmet need and search existing terms or specifications. Gather the specimen, method, scale, examples and expected recipient behavior. Submit through the maintainer's process, participate in review, then test the approved implementation with the recipient. Do not present an unapproved local code as a standard term.
+
+A value set is the permitted collection of answers for a field. Here the three newborn answer codes define the receiving program's permitted categories; a valid observation code with an unsupported answer still needs review.

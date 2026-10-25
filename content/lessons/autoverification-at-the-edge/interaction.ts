@@ -194,7 +194,7 @@ export const releaseCases: readonly ReleaseCase[] = [
   {
     ...base,
     id: "AV-17",
-    title: "Outside the numeric release range",
+    title: "Above the measuring range",
     current: 10001,
     prior: 9999,
     expected: "Hold",
@@ -287,7 +287,7 @@ export function evaluateRelease(row: ReleaseCase, config: ReleaseConfig) {
       name: "Quality control",
       pass: !config.checkQc || row.qc,
       note: !config.checkQc
-        ? "QC gate is bypassed by this configuration."
+        ? "QC check is bypassed by this configuration."
         : row.qc
           ? "QC is accepted for the run."
           : "QC is not accepted; staff must resolve the run before release.",
@@ -296,7 +296,7 @@ export function evaluateRelease(row: ReleaseCase, config: ReleaseConfig) {
       name: "Instrument flags",
       pass: !config.checkFlags || !row.flag,
       note: !config.checkFlags
-        ? "Instrument-flag gate is bypassed by this configuration."
+        ? "Instrument-flag check is bypassed by this configuration."
         : row.flag
           ? "An unresolved instrument flag is present."
           : "No unresolved instrument flag.",
@@ -323,7 +323,7 @@ export function evaluateRelease(row: ReleaseCase, config: ReleaseConfig) {
       skipped: difference === null,
       note:
         difference === null
-          ? "Delta not calculated without eligible numbers and usable history; the other gates still apply."
+          ? "Delta not calculated without eligible numbers and usable history; the other checks still apply."
           : `Absolute difference ${difference} ng/L; relative difference ${percentage!.toFixed(1)}%. Absolute branch ${absHit ? "met" : "not met"}; relative branch ${relHit ? "met" : "not met"}. Combination: ${config.delta === "either" ? "absolute OR relative" : config.delta === "both" ? "absolute AND relative" : "absolute only"}.`,
     },
   ];
@@ -354,7 +354,7 @@ export const releaseControlNotes = (
   historyHours: `History up to and including ${config.historyHours} hours is accepted. The approved window is 24 hours.`,
   missingHistory:
     config.missingHistory === "hold"
-      ? "Unusable history causes review even if the other gates pass."
+      ? "Unusable history causes review even if the other checks pass."
       : "Unusable history no longer causes a hold. A skipped delta calculation may therefore allow release.",
   checkQc: config.checkQc
     ? "Unaccepted QC blocks automatic release."
@@ -384,3 +384,55 @@ export const releaseApprovalChoices = [
       "Holding everything avoids some releases but defeats the intended workflow and can delay reporting. Validation must also demonstrate correct automatic release.",
   },
 ];
+
+export const additionalExercises = {
+  title: "Review a calculated result and the middleware",
+  purpose:
+    "Check that automatic release includes required calculation inputs and the systems that apply the rules.",
+  questions: [
+    {
+      id: "CALC1",
+      prompt:
+        "Creatinine passed the assay checks, but age is missing for the configured eGFR calculation. What happens to the calculated result?",
+      answer: "hold",
+      choices: [
+        {
+          id: "hold",
+          label: "Hold eGFR and resolve the missing input",
+        },
+        {
+          id: "zero",
+          label: "Calculate eGFR using age zero",
+        },
+        {
+          id: "release",
+          label: "Copy the previous eGFR into the report",
+        },
+      ],
+      feedback:
+        "Hold the calculated result. A valid creatinine result does not supply every input required by the configured estimated glomerular filtration rate calculation. Resolve missing data and test the report behavior.",
+    },
+    {
+      id: "MID1",
+      prompt:
+        "An application between analyzers and the LIS applies quality-control, delta and release checks. What is its role?",
+      answer: "middleware",
+      choices: [
+        {
+          id: "middleware",
+          label: "Instrument middleware",
+        },
+        {
+          id: "registration",
+          label: "Patient registration feed",
+        },
+        {
+          id: "billing",
+          label: "Billing interface",
+        },
+      ],
+      feedback:
+        "Instrument middleware can consolidate instruments and apply result rules before release to the LIS. Validate both its configuration and the final report after an analyzer or assay change.",
+    },
+  ],
+};

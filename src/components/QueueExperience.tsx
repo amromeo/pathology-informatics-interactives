@@ -1,3 +1,6 @@
+import { sectionPurposes } from "../../content/lessons/invisible-bottleneck/interaction";
+import { lessonCopy } from "../../content/lessons/invisible-bottleneck/interaction";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState } from "react";
 import {
   originalQueue,
@@ -22,7 +25,6 @@ export function QueueExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
   function update(key: keyof QueueConfig, value: string) {
     setConfig({ ...config, [key]: value });
     setPlan("");
-    onAttempt?.(true);
   }
   const ready =
     config.freshness === "current" &&
@@ -31,10 +33,18 @@ export function QueueExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
     plan === "coverage";
   return (
     <div>
-      <Topic5Section title="Inspect the source and refresh records">
+      <Topic5Section
+        number={1}
+        purpose={sectionPurposes[0]}
+        title="Inspect the source and refresh records"
+      >
         <SourceInspector records={queueSources} />
       </Topic5Section>
-      <Topic5Section title="Rebuild the dashboard comparison">
+      <Topic5Section
+        number={2}
+        purpose={sectionPurposes[1]}
+        title="Rebuild the dashboard comparison"
+      >
         <Teaching Content={Concepts} />
         <div className="topic5-controls">
           <Topic5Select
@@ -128,12 +138,14 @@ export function QueueExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
             </div>
           ))}
         </div>
-        <div className="topic5-table-wrap">
+        <div
+          className="topic5-table-wrap"
+          tabIndex={0}
+          role="region"
+          aria-label="Scrollable records 1"
+        >
           <table>
-            <caption>
-              Selected records · times on the review day. Minutes show the completed interval, or
-              age since receipt for pending results.
-            </caption>
+            <caption>{lessonCopy.text01}</caption>
             <thead>
               <tr>
                 <th>ID</th>
@@ -164,7 +176,11 @@ export function QueueExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
           <p>No completed records from this group are available in the selected snapshot.</p>
         )}
       </Topic5Section>
-      <Topic5Section title="Choose an intervention and its measures">
+      <Topic5Section
+        number={3}
+        purpose={sectionPurposes[2]}
+        title="Choose an intervention and its measures"
+      >
         <Teaching Content={Bridge} />
         <fieldset className="topic5-plan">
           <legend>Operational recommendation</legend>
@@ -182,30 +198,30 @@ export function QueueExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
               />
               <span>
                 {row.label}
-                {plan === row.id && <small role="status">{row.note}</small>}
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {plan === row.id && <small>{row.note}</small>}
+                </div>
               </span>
             </label>
           ))}
         </fieldset>
-        {plan && (
-          <p className="topic5-note" role="status">
-            {ready
-              ? "The current linked records support a monitored review-coverage pilot."
-              : "Before recommending a change, use current linked records and inspect the post-analysis interval; preserve required review controls."}
-          </p>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {plan && (
+            <p className="topic5-note">
+              {ready
+                ? "The current linked records support a monitored review-coverage pilot."
+                : "Before recommending a change, use current linked records and inspect the post-analysis interval; preserve required review controls."}
+            </p>
+          )}
+        </div>
       </Topic5Section>
-      <button
-        className="text-button"
-        type="button"
-        onClick={() => {
+      <ResetLessonButton
+        fallback={() => {
           setConfig({ ...originalQueue });
           setPlan("");
           onAttempt?.(false);
         }}
-      >
-        Reset lesson interactions
-      </button>
+      />
     </div>
   );
 }

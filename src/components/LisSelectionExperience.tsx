@@ -1,7 +1,11 @@
+import { mustFind } from "./lesson-ui/mustFind";
+import { sectionPurposes } from "../../content/lessons/choose-and-govern-lis/interaction";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState } from "react";
 import {
   vendors,
   evidenceRows,
+  evidenceLabel,
   initialWeights,
   vendorSummary,
   selectionSources,
@@ -41,20 +45,35 @@ export function LisSelectionExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
             : selectionCopy.blocked;
   return (
     <div className="topic8-experience">
-      <Section title="Read the procurement summary and requirements">
+      <Section
+        number={1}
+        purpose={sectionPurposes[0]}
+        title="Read the procurement summary and requirements"
+      >
         <SourceInspector records={selectionSources} />
       </Section>
-      <Section title="Check the evidence for mandatory requirements">
+      <Section
+        number={2}
+        purpose={sectionPurposes[1]}
+        title="Check the evidence for mandatory requirements"
+      >
         <Teaching Content={Concepts} />
         <div className="topic5-card-grid">
           {evidenceRows.map((row) => (
             <article key={row.id} className="artifact-card">
               <h3>
-                {vendors.find((v) => v.id === row.vendor)!.name} · {row.requirement}
+                {
+                  mustFind(
+                    vendors,
+                    (v) => v.id === row.vendor,
+                    "LisSelectionExperience.tsx vendors",
+                  ).name
+                }{" "}
+                · {row.requirement}
               </h3>
               <p className="topic8-report">{row.record}</p>
               <Select
-                label={row.id + " evidence"}
+                label={evidenceLabel(row)}
                 value={answers[row.id] ?? ""}
                 options={[
                   ["", "Classify the evidence"],
@@ -88,14 +107,20 @@ export function LisSelectionExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
         >
           Review nine evidence decisions
         </button>
-        {reviewed && (
-          <p role="status">
-            {evidenceRows.filter((row) => answers[row.id] === row.answer).length} / 9 evidence
-            decisions supported.
-          </p>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {reviewed && (
+            <p>
+              {evidenceRows.filter((row) => answers[row.id] === row.answer).length} / 9 evidence
+              decisions supported.
+            </p>
+          )}
+        </div>
       </Section>
-      <Section title="Compare preferences and five-year costs">
+      <Section
+        number={3}
+        purpose={sectionPurposes[2]}
+        title="Compare preferences and five-year costs"
+      >
         <Teaching Content={Bridge} />
         <div className="topic5-controls">
           {(["usability", "analytics", "training"] as const).map((key) => (
@@ -175,7 +200,11 @@ export function LisSelectionExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
         </div>
         <p>{selectionCopy.eligibility}</p>
       </Section>
-      <Section title="Plan installation, maintenance, and retirement">
+      <Section
+        number={4}
+        purpose={sectionPurposes[3]}
+        title="Plan installation, maintenance, and retirement"
+      >
         {lifecycleCases.map((row) => (
           <article className="topic8-preview" key={row.id}>
             <h3>{row.title}</h3>
@@ -210,16 +239,12 @@ export function LisSelectionExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
             onAttempt?.(true);
           }}
         />
-        {recommendation && (
-          <p className="topic5-note" role="status">
-            {feedback}
-          </p>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {recommendation && <p className="topic5-note">{feedback}</p>}
+        </div>
       </Section>
-      <button
-        type="button"
-        className="text-button"
-        onClick={() => {
+      <ResetLessonButton
+        fallback={() => {
           setAnswers({});
           setWeights({ ...initialWeights });
           setExtras(false);
@@ -228,9 +253,7 @@ export function LisSelectionExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
           setRecommendation("");
           onAttempt?.(false);
         }}
-      >
-        Reset lesson interactions
-      </button>
+      />
     </div>
   );
 }

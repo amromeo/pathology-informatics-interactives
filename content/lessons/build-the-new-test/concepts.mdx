@@ -10,7 +10,7 @@ An internal control provides technical evidence about the run. It belongs in the
 
 ### Follow the information to its clinical destination
 
-The instrument produces target calls and technical status. The LIS applies the test definition and laboratory release procedure. The interface transmits the report to the EHR, where a clinician reads it. An acknowledgement establishes receipt at one step; it does not establish correct units, component meaning, or final display.
+The instrument produces target calls and technical status. The LIS applies the test definition and laboratory release procedure. The interface transmits the report to the EHR, where a clinician reads it. An acknowledgment shows receipt at one step; it does not show correct units, component meaning, or final display.
 
 The laboratory must identify where the complete official report is verified in the EHR. Other views may reuse selected elements. Test both the designated report and downstream uses that matter to the clinical workflow, including any decision support, worklists, or public-health interfaces affected by the change.
 
@@ -23,3 +23,5 @@ An accession identifies the laboratory episode or specimen record; an interface 
 For a correction, the latest result must be identifiable as current and corrected, with the earlier version retained in the audit history. The correction also requires the institution's communication process. A second unlinked final report or a silent replacement without history does not adequately represent what happened.
 
 Change the controls and inspect the preview. Open the expected-result explanation when needed. A setting that makes the first case look right may still fail a pending, invalid, or corrected case.
+
+If the interface engine resends the identical message, it normally keeps the original message control ID. If the result is resent from the LIS after an outage, the message may have a new control ID with the same accession, component and result version. Matching those report identifiers handles both kinds of resend.

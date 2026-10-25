@@ -1,3 +1,6 @@
+import { sectionPurposes } from "../../content/lessons/alert-everyone-ignores/interaction";
+import { lessonCopy } from "../../content/lessons/alert-everyone-ignores/interaction";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState } from "react";
 import {
   alertControls,
@@ -33,14 +36,22 @@ export function AlertEvaluationExperience({ Concepts, Bridge, onAttempt }: Topic
   const complete =
     suitable &&
     comparison === "yes" &&
-    measures.every((row) => selected.includes(row.id)) &&
+    measures.every((row) => selected.includes(row.id) === row.correct) &&
     plan === "review";
   return (
     <div>
-      <Section title="Read the message report and linked records">
+      <Section
+        number={1}
+        purpose={sectionPurposes[0]}
+        title="Read the message report and linked records"
+      >
         <SourceInspector records={alertSources} />
       </Section>
-      <Section title="Retarget the alert and replay the audit">
+      <Section
+        number={2}
+        purpose={sectionPurposes[1]}
+        title="Retarget the alert and replay the audit"
+      >
         <Teaching Content={Concepts} />
         <div className="topic5-controls">
           {alertControls.map((control) => (
@@ -61,12 +72,9 @@ export function AlertEvaluationExperience({ Concepts, Bridge, onAttempt }: Topic
           <p>
             <strong>{events.filter((row) => row.shown).length} presentations</strong> ·{" "}
             {events.filter((row) => row.interrupt).length} mandatory interruptions ·{" "}
-            {events.filter((row) => row.blocked).length} unsafe blocks
+            {events.filter((row) => row.blocked).length} documented-reason blocks
           </p>
-          <p>
-            Counts apply only to these 10 audit events across 7 order decisions. They are not
-            estimated monthly effects or clinical outcomes.
-          </p>
+          <p>{lessonCopy.text01}</p>
         </div>
         <div className="topic5-card-grid">
           {events.map((row) => (
@@ -81,7 +89,7 @@ export function AlertEvaluationExperience({ Concepts, Bridge, onAttempt }: Topic
           ))}
         </div>
       </Section>
-      <Section title="Interpret the ward pilot">
+      <Section number={3} purpose={sectionPurposes[2]} title="Interpret the ward pilot">
         <Teaching Content={Bridge} />
         <Select
           label="Comparison included"
@@ -100,12 +108,14 @@ export function AlertEvaluationExperience({ Concepts, Bridge, onAttempt }: Topic
               : "The pilot-only view cannot distinguish the intervention from changes affecting both wards."
           }
         />
-        <div className="topic5-table-wrap">
+        <div
+          className="topic5-table-wrap"
+          tabIndex={0}
+          role="region"
+          aria-label="Scrollable records 1"
+        >
           <table>
-            <caption>
-              Clinically reviewed avoidable repeat orders per 1,000 eligible order decisions each
-              week in each ward. Weeks 1–2 precede the change; weeks 3–4 follow it.
-            </caption>
+            <caption>{lessonCopy.text02}</caption>
             <thead>
               <tr>
                 <th>Week</th>
@@ -119,8 +129,15 @@ export function AlertEvaluationExperience({ Concepts, Bridge, onAttempt }: Topic
                 <tr key={row.week}>
                   <th scope="row">{row.week}</th>
                   <td>{row.period}</td>
-                  <td>{row.pilot}</td>
-                  {comparison === "yes" && <td>{row.comparison}</td>}
+                  <td>
+                    {row.pilot}/{row.denominator} [{(row.pilot / row.denominator) * 1000} per 1,000]
+                  </td>
+                  {comparison === "yes" && (
+                    <td>
+                      {row.comparison}/{row.denominator} [
+                      {(row.comparison / row.denominator) * 1000} per 1,000]
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>
@@ -133,10 +150,15 @@ export function AlertEvaluationExperience({ Concepts, Bridge, onAttempt }: Topic
           {pilotWeeks.map((row) => (
             <div key={row.week}>
               <strong>Week {row.week}</strong>
-              <span style={{ width: row.pilot + "%" }}>Pilot {row.pilot}</span>
+              <span style={{ width: (row.pilot / row.denominator) * 1000 + "%" }}>
+                Pilot {(row.pilot / row.denominator) * 1000}
+              </span>
               {comparison === "yes" && (
-                <span className="comparison-bar" style={{ width: row.comparison + "%" }}>
-                  Comparison {row.comparison}
+                <span
+                  className="comparison-bar"
+                  style={{ width: (row.comparison / row.denominator) * 1000 + "%" }}
+                >
+                  Comparison {(row.comparison / row.denominator) * 1000}
                 </span>
               )}
             </div>
@@ -170,7 +192,9 @@ export function AlertEvaluationExperience({ Concepts, Bridge, onAttempt }: Topic
               />
               <span>
                 {row.label}
-                {selected.includes(row.id) && <small role="status">{row.note}</small>}
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {selected.includes(row.id) && <small>{row.note}</small>}
+                </div>
               </span>
             </label>
           ))}
@@ -190,32 +214,32 @@ export function AlertEvaluationExperience({ Concepts, Bridge, onAttempt }: Topic
               />
               <span>
                 {row.label}
-                {plan === row.id && <small role="status">{row.note}</small>}
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {plan === row.id && <small>{row.note}</small>}
+                </div>
               </span>
             </label>
           ))}
         </fieldset>
-        {plan && (
-          <p className="topic5-note" role="status">
-            {complete
-              ? "The review plan includes targeting, comparison data, benefit, burden, and safety. This supports investigating and revising the limited pilot, not immediate expansion."
-              : "Before completing the review, target the relevant ordering decisions, suppress repeated presentations, preserve the ability to proceed, include the comparison ward and all four measure categories, and address the delayed test."}
-          </p>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {plan && (
+            <p className="topic5-note">
+              {complete
+                ? "The review plan includes targeting, comparison data, benefit, burden, and safety. This supports investigating and revising the limited pilot, not immediate expansion."
+                : "Before completing the review, target the relevant ordering decisions, suppress repeated presentations, preserve the ability to proceed, include the comparison ward and all four measure categories, and address the delayed test."}
+            </p>
+          )}
+        </div>
       </Section>
-      <button
-        type="button"
-        className="text-button"
-        onClick={() => {
+      <ResetLessonButton
+        fallback={() => {
           setConfig({ ...originalAlert });
           setComparison("yes");
           setSelected([]);
           setPlan("");
           onAttempt?.(false);
         }}
-      >
-        Reset lesson interactions
-      </button>
+      />
     </div>
   );
 }

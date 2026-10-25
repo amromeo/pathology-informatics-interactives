@@ -1,11 +1,16 @@
 # Model Under Pressure
 
-> **Synthetic case:** A vendor-validated metastasis detector loses sensitivity after transfer to a laboratory using a different scanner and staining workflow.
+You are the pathology resident assisting Dr. Rao with a proposed metastasis second-review tool. The vendor reports detection of 192 of 200 metastasis-positive slides (96%) on its supported scanner. Your laboratory uses two scanners and a different staining workflow. Local review finds 42 of 50 positive slides (84%), including 17 of 25 micrometastases (68%) and 25 of 25 macrometastases (100%).
+
+Before discussing release, the committee also wants to distinguish this tool from three other proposals: an explicit laboratory rule, gene-expression clustering and a generated tumor-board summary. Your task is to identify what each does and what evidence it needs.
+
+## What you will be able to do
+
+- Classify four proposals and choose the first review each needs.
+- Inspect performance by scanner and lesion size.
+- Distinguish initial generalizability failure from a later performance change.
+- Explain how prevalence affects predictive value and assign oversight questions.
 
 ## Your task
 
-Distinguish supervised learning, convolutional image models, and generative AI. Diagnose generalizability, bias, brittleness, and drift precisely, then define local verification and monitoring with human oversight.
-
-## Key point
-
-AI performance belongs to a model **in a defined population and workflow**. Aggregate metrics may conceal failure in clinically important subgroups.
+Complete the three parts, then check the review. The sliders explore a mathematical example; the observed vendor, local and monthly results remain fixed.

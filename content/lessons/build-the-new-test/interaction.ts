@@ -262,7 +262,7 @@ export const buildSources = [
   {
     title: "Approved procedure excerpt",
     record:
-      "Procedure MB-42 · version 3\nSpecimen: nasopharyngeal (NP) swab in medium V\nMethod: qualitative nucleic acid amplification\nTargets: influenza A, influenza B, RSV\nReference information: Not detected\nNumeric concentration and units: not reported\nFailed internal control: invalid; follow repeat procedure\nTechnical control values: retained in laboratory record",
+      "Procedure MB-42 · version 3\nSpecimen: nasopharyngeal (NP) swab in medium V\nMethod: qualitative nucleic acid amplification\nTargets: influenza A, influenza B, RSV\nReference information: Not detected\nNumeric concentration and units: not reported\nFailed internal control: invalid under this procedure; follow repeat procedure\nTechnical control values: retained in laboratory record",
     note: "These are the case's locally approved specifications. Confirm the actual manufacturer's instructions and laboratory verification dossier when building a real assay.",
   },
   {
@@ -274,24 +274,40 @@ export const buildSources = [
 ];
 export const releaseRequirements = [
   {
+    correct: true,
     id: "clinical",
     label: "Laboratory director approves the complete order and report",
     note: "Names, component meaning, interpretation, specimen restrictions, and clinical communication are reviewed with the clinical service.",
   },
   {
+    correct: true,
     id: "destination",
     label: "Verify the final report in the designated EHR view",
-    note: "Compare source and destination content, patient/accession identity, status, corrections, and downstream uses; an interface acknowledgement alone is insufficient.",
+    note: "Compare source and destination content, patient/accession identity, status, corrections, and downstream uses; an interface acknowledgment alone is insufficient.",
   },
   {
+    correct: true,
     id: "operations",
     label: "Complete procedures, staff training, and downtime arrangements",
     note: "Include order entry, specimen rejection, invalid runs, unresolved messages, manual reports, and reconciliation after downtime.",
   },
   {
+    correct: true,
     id: "release",
-    label: "Promote the tested version with rollback and monitoring",
-    note: "Record build version, approvals, deployment owner and time, recovery steps, and review of the first live reports. A later edit requires reassessment.",
+    label: "Move the tested version into the live system with rollback and monitoring",
+    note: "Record build version, approvals, person responsible for the release and time, recovery steps, and review of the first live reports. A later edit requires reassessment.",
+  },
+  {
+    id: "ack-only",
+    label: "Substitute message acknowledgment for chart review",
+    note: "An acknowledgment does not verify the complete displayed report. Compare source and destination content.",
+    correct: false,
+  },
+  {
+    id: "training-later",
+    label: "Release now and train staff after the first incident",
+    note: "Staff need the procedure, exception handling and downtime process before clinical use.",
+    correct: false,
   },
 ];
 export const buildCopy = {
@@ -305,3 +321,59 @@ export const buildCopy = {
   changed:
     "The configuration changed. Rerun validation before using the previous results to support release.",
 };
+
+export const additionalExercises = {
+  title: "Maintain the change record",
+  purpose: "Choose which records and procedures must accompany this result-definition change.",
+  questions: [
+    {
+      id: "CHANGE1",
+      prompt: "Which change record permits later reconstruction of this release?",
+      answer: "complete",
+      choices: [
+        {
+          id: "complete",
+          label: "Version, reason, tests, approver and release date",
+        },
+        {
+          id: "email",
+          label: "Approval email without a configuration version",
+        },
+        {
+          id: "ticket",
+          label: "Closed ticket with no expected report evidence",
+        },
+      ],
+      feedback:
+        "Keep the reason, configuration versions, expected and observed reports, approvals, release time and rollback instructions together. This connects the live definition to the evidence reviewed.",
+    },
+    {
+      id: "CHANGE2",
+      prompt:
+        "Which procedure sections need review after changing result fields and correction behavior?",
+      answer: "reporting",
+      choices: [
+        {
+          id: "reporting",
+          label: "Reporting, corrections, downtime and training",
+        },
+        {
+          id: "storage",
+          label: "Only specimen storage temperatures",
+        },
+        {
+          id: "billing",
+          label: "Only the billing code appendix",
+        },
+      ],
+      feedback:
+        "Review reporting and correction instructions, downtime reconciliation, staff training and related system procedures. Accreditation requires verification that patient results are accurately transmitted to the EHR; preserve evidence of the complete report.",
+    },
+  ],
+};
+
+export const sectionPurposes = [
+  "Compare the requested assay with the procedure and copied report definition.",
+  "Change result fields and exception handling to match the approved specification.",
+  "Test every report and distinguish required release work from insufficient shortcuts.",
+];

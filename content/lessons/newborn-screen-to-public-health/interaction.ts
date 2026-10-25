@@ -166,3 +166,258 @@ export const nbsFields = [
     },
   },
 ] as const;
+
+export const additionalExercises = {
+  order: [
+    { id: "need", label: "Define the laboratory need and search existing terms", rank: 1 },
+    { id: "evidence", label: "Document the missing definition and intended use", rank: 2 },
+    {
+      id: "submit",
+      label: "Submit the request to the responsible standards organization",
+      rank: 3,
+    },
+    { id: "review", label: "Review the published decision and approved definition", rank: 4 },
+    { id: "test", label: "Test the implemented mapping with the receiving program", rank: 5 },
+  ],
+  title: "Request a standards change",
+  purpose:
+    "Match the laboratory need to the organization that maintains or applies the relevant standard.",
+  questions: [
+    {
+      id: "HL7",
+      prompt: "A result-message field needs a clearer implementation rule.",
+      answer: "HL7",
+      choices: [
+        {
+          id: "HL7",
+          label: "HL7 International",
+        },
+        {
+          id: "LOINC",
+          label: "Regenstrief / LOINC",
+        },
+        {
+          id: "SNOMED",
+          label: "SNOMED International",
+        },
+        {
+          id: "IHE",
+          label: "IHE",
+        },
+        {
+          id: "ISO",
+          label: "ISO",
+        },
+        {
+          id: "ONC",
+          label: "ASTP/ONC",
+        },
+      ],
+      feedback:
+        "HL7 develops message and resource specifications; use its documented proposal and review process.",
+    },
+    {
+      id: "LOINC",
+      prompt: "A new observation needs an appropriate standardized test identifier.",
+      answer: "LOINC",
+      choices: [
+        {
+          id: "HL7",
+          label: "HL7 International",
+        },
+        {
+          id: "LOINC",
+          label: "Regenstrief / LOINC",
+        },
+        {
+          id: "SNOMED",
+          label: "SNOMED International",
+        },
+        {
+          id: "IHE",
+          label: "IHE",
+        },
+        {
+          id: "ISO",
+          label: "ISO",
+        },
+        {
+          id: "ONC",
+          label: "ASTP/ONC",
+        },
+      ],
+      feedback:
+        "Search existing LOINC terms, gather the assay attributes, then submit a documented request if no suitable term exists.",
+    },
+    {
+      id: "SNOMED",
+      prompt: "A clinical concept needs terminology review.",
+      answer: "SNOMED",
+      choices: [
+        {
+          id: "HL7",
+          label: "HL7 International",
+        },
+        {
+          id: "LOINC",
+          label: "Regenstrief / LOINC",
+        },
+        {
+          id: "SNOMED",
+          label: "SNOMED International",
+        },
+        {
+          id: "IHE",
+          label: "IHE",
+        },
+        {
+          id: "ISO",
+          label: "ISO",
+        },
+        {
+          id: "ONC",
+          label: "ASTP/ONC",
+        },
+      ],
+      feedback:
+        "SNOMED CT represents clinical concepts. Provide the definition and use case through the appropriate terminology request process.",
+    },
+    {
+      id: "IHE",
+      prompt: "Several existing standards must be combined into a tested workflow.",
+      answer: "IHE",
+      choices: [
+        {
+          id: "HL7",
+          label: "HL7 International",
+        },
+        {
+          id: "LOINC",
+          label: "Regenstrief / LOINC",
+        },
+        {
+          id: "SNOMED",
+          label: "SNOMED International",
+        },
+        {
+          id: "IHE",
+          label: "IHE",
+        },
+        {
+          id: "ISO",
+          label: "ISO",
+        },
+        {
+          id: "ONC",
+          label: "ASTP/ONC",
+        },
+      ],
+      feedback:
+        "Integrating the Healthcare Enterprise publishes integration profiles that combine standards for a workflow.",
+    },
+    {
+      id: "ISO",
+      prompt: "The laboratory needs an international quality standard.",
+      answer: "ISO",
+      choices: [
+        {
+          id: "HL7",
+          label: "HL7 International",
+        },
+        {
+          id: "LOINC",
+          label: "Regenstrief / LOINC",
+        },
+        {
+          id: "SNOMED",
+          label: "SNOMED International",
+        },
+        {
+          id: "IHE",
+          label: "IHE",
+        },
+        {
+          id: "ISO",
+          label: "ISO",
+        },
+        {
+          id: "ONC",
+          label: "ASTP/ONC",
+        },
+      ],
+      feedback:
+        "The International Organization for Standardization publishes standards including ISO 15189 for medical laboratory quality.",
+    },
+    {
+      id: "ONC",
+      prompt: "The team needs the standards named in US EHR certification requirements.",
+      answer: "ONC",
+      choices: [
+        {
+          id: "HL7",
+          label: "HL7 International",
+        },
+        {
+          id: "LOINC",
+          label: "Regenstrief / LOINC",
+        },
+        {
+          id: "SNOMED",
+          label: "SNOMED International",
+        },
+        {
+          id: "IHE",
+          label: "IHE",
+        },
+        {
+          id: "ISO",
+          label: "ISO",
+        },
+        {
+          id: "ONC",
+          label: "ASTP/ONC",
+        },
+      ],
+      feedback:
+        "ASTP/ONC is a US federal office that names standards in certification policy; it is not a terminology developer.",
+    },
+    {
+      id: "REQUEST",
+      prompt: "What should the laboratory do before requesting a new term?",
+      answer: "existing",
+      choices: [
+        {
+          id: "existing",
+          label: "Check existing terms and document the gap",
+        },
+        {
+          id: "local",
+          label: "Assign a standard-looking local code",
+        },
+        {
+          id: "send",
+          label: "Send an unlabeled report to the recipient",
+        },
+      ],
+      feedback:
+        "Define the need, search existing terms, document specimen/method/scale and expected use, submit to the maintainer, then test the approved implementation with the receiving organization.",
+    },
+  ],
+};
+
+export const sectionPurposes = [
+  "Identify what the receiving program must understand beyond a valid message structure.",
+  "Repair observation and answer mappings while preserving identity, corrections and retries.",
+  "Choose the communication and reconciliation needed after repairing the exchange.",
+];
+
+export const answerDisplay: Record<string, string> = {
+  referral: "Immediate referral",
+  range: "In range",
+  unsatisfactory: "Unsatisfactory specimen",
+};
+export const statusDisplay: Record<string, string> = {
+  F: "Final",
+  C: "Corrected",
+  P: "Preliminary",
+};

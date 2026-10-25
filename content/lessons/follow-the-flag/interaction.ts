@@ -1,3 +1,5 @@
+export const outboundMessage =
+  "MSH|^~\\&|LIS|CORE_LAB|EHR|HOSP|20261022080400||ORU^R01^ORU_R01|F001|P|2.5.1\nPID|1||MRN0041872^^^HOSP^MR||RIVERA^ANA||19580314|F\nOBR|1|ORD55120^EHR|FL-01^LIS|K^Potassium^L|||20261022071500|||||||||||||||20261022080300|||F\nOBX|1|NM|K^Potassium^L||6.8|mmol/L|3.5-5.0|CH|||F";
 export const flagRecords = [
   { id: "FL-01", value: "6.8", local: "CH", expected: "Critical high" },
   { id: "FL-02", value: "2.4", local: "CL", expected: "Critical low" },
@@ -26,6 +28,31 @@ export function flagReplay(config: FlagConfig) {
 }
 export const flagFields = [
   {
+    id: "MSH-9",
+    value: "ORU^R01^ORU_R01",
+    meaning: "Message type, trigger event and structure: an unsolicited observation result.",
+  },
+  {
+    id: "MSH-10",
+    value: "F001",
+    meaning:
+      "Message control ID. The acknowledgment echoes it in MSA-2 so the sender can match the response.",
+  },
+  { id: "MSH-12", value: "2.5.1", meaning: "HL7 version used by this interface agreement." },
+  {
+    id: "PID-3",
+    value: "MRN0041872^^^HOSP^MR",
+    meaning:
+      "Patient identifier with its assigning authority. The same number at another hospital may identify a different patient.",
+  },
+  { id: "OBR-3", value: "FL-01^LIS", meaning: "Filler order number assigned by the laboratory." },
+  {
+    id: "OBR-25",
+    value: "F",
+    meaning: "Result status for the order: final. This is separate from a critical flag.",
+  },
+
+  {
     id: "OBX-3",
     value: "K^Potassium^L",
     meaning:
@@ -53,7 +80,7 @@ export const flagFields = [
     id: "OBX-8",
     value: "CH",
     meaning:
-      "Carries the interpretation flag. The sender uses CH for critical high; this receiver's agreed table uses HH. The interface must preserve the category when translating it.",
+      "Abnormal Flags in version 2.5.1, called Interpretation Codes from version 2.7. CH, CL and XH are this sender's local codes. The sender uses CH for critical high; this receiver's agreed table uses HH. The interface must preserve the category when translating it.",
   },
   {
     id: "OBX-11",
@@ -71,8 +98,7 @@ export const flagTrace = [
   },
   {
     title: "Interface outbound record",
-    record:
-      "08:04 · message F001 · transformation revision 12\nOBX|1|NM|K^Potassium^L||6.8|mmol/L|3.5-5.0|CH|||F",
+    record: outboundMessage,
     note: "The outbound flag is still CH. The numeric value and status arrived in their expected fields.",
   },
   {
@@ -87,4 +113,121 @@ export const flagTrace = [
       "FL-01 · Potassium 6.8 mmol/L\nReference 3.5–5.0 · Final · severity indicator unavailable",
     note: "The report is incomplete even though the number is correct. Verify the official laboratory report and any reused result views after the change.",
   },
+];
+
+export const additionalExercises = {
+  title: "Identify the laboratory interface",
+  purpose:
+    "Distinguish message routing from the work performed between analyzers and the laboratory system.",
+  questions: [
+    {
+      id: "IF1",
+      prompt:
+        "The analyzer sends results but cannot receive orders. What kind of interface is this?",
+      answer: "one",
+      choices: [
+        {
+          id: "one",
+          label: "Unidirectional instrument interface",
+        },
+        {
+          id: "query",
+          label: "Bidirectional host query",
+        },
+        {
+          id: "download",
+          label: "Bidirectional order download",
+        },
+        {
+          id: "engine",
+          label: "Interface engine routing",
+        },
+      ],
+      feedback:
+        "A unidirectional interface sends results in one direction. A valid result feed does not show that order download is supported.",
+    },
+    {
+      id: "IF2",
+      prompt:
+        "After a barcode scan, the analyzer asks which tests are ordered. What mechanism is used?",
+      answer: "query",
+      choices: [
+        {
+          id: "one",
+          label: "Unidirectional instrument interface",
+        },
+        {
+          id: "query",
+          label: "Bidirectional host query",
+        },
+        {
+          id: "download",
+          label: "Bidirectional order download",
+        },
+        {
+          id: "engine",
+          label: "Interface engine routing",
+        },
+      ],
+      feedback:
+        "Host query retrieves orders for the scanned identifier. Verify the specimen association and the returned tests.",
+    },
+    {
+      id: "IF3",
+      prompt: "The LIS sends the next worklist to the analyzer in advance. What mechanism is used?",
+      answer: "download",
+      choices: [
+        {
+          id: "one",
+          label: "Unidirectional instrument interface",
+        },
+        {
+          id: "query",
+          label: "Bidirectional host query",
+        },
+        {
+          id: "download",
+          label: "Bidirectional order download",
+        },
+        {
+          id: "engine",
+          label: "Interface engine routing",
+        },
+      ],
+      feedback:
+        "Order download sends work ahead of testing. Test additions, cancellations and duplicates as well as the initial list.",
+    },
+    {
+      id: "IF4",
+      prompt: "An application translates a result message for the EHR. What role is illustrated?",
+      answer: "engine",
+      choices: [
+        {
+          id: "one",
+          label: "Unidirectional instrument interface",
+        },
+        {
+          id: "query",
+          label: "Bidirectional host query",
+        },
+        {
+          id: "download",
+          label: "Bidirectional order download",
+        },
+        {
+          id: "engine",
+          label: "Interface engine routing",
+        },
+      ],
+      feedback:
+        "An interface engine routes and translates messages. Instrument middleware may also perform release, delta and reflex checks before the LIS receives a result.",
+    },
+  ],
+};
+
+export const sectionPurposes = [
+  "Follow the same potassium result from the analyzer to the chart.",
+  "Locate the message fields that identify the patient, order, result and critical flag.",
+  "Repair the flag mapping while preserving high, low, normal and unrecognized values.",
+  "Check whether the complete report and previously affected results need correction.",
 ];

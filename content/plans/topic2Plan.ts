@@ -1,4 +1,5 @@
-import type { PierCoverageClaim } from "./types";
+// Historical planning record. Published lesson manifests are authoritative.
+import type { PierCoverageClaim } from "../../src/data/types";
 
 export type PlannedTopic2Lesson = {
   proposedId: 3 | 4 | 5 | 6 | 7;

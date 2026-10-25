@@ -30,7 +30,7 @@ CL still needs a corresponding mapping. Leave the routine categories unchanged
 and route an unexpected category to visible review. Treating an unknown flag as
 normal would turn missing knowledge into a clinical assertion.
 
-### What the acknowledgment establishes
+### What the acknowledgment shows
 
 The receiver returned an application acknowledgment with AA and the matching
 message control ID. In this implementation, that means the observation was
@@ -51,3 +51,21 @@ approves its clinical meaning. Existing critical-result communication procedures
 continue during investigation. Correcting a future message does not prove that
 an earlier report was corrected, nor does a red indicator prove that the
 required communication occurred.
+
+### Which HL7 standard is this?
+
+Health Level Seven (HL7) version 2 messages carry laboratory orders and results. OML^O21 and the older ORM^O01 carry orders; ORU^R01 carries results; ADT messages carry registration changes; ACK messages acknowledge handling. Many US laboratory and public-health guides use version 2.5.1. Local fields and codes still require a written interface agreement and testing.
+
+HL7 version 3 Clinical Document Architecture (CDA) describes clinical documents. Fast Healthcare Interoperability Resources (FHIR) exposes resources such as Observation and DiagnosticReport through web interfaces. It also needs profiles, terminology bindings and testing. Parsing the message structure is syntactic interoperability; preserving the clinical meaning is semantic interoperability.
+
+### Interfaces in the laboratory
+
+| Interface | What it carries |
+| --- | --- |
+| Registration (ADT) | Patient identifiers and location updates |
+| EHR orders and results | Requested examinations and complete reports |
+| Billing | Charges associated with completed services |
+| Reference laboratory | Referred orders, identifiers and returned reports |
+| Instruments and middleware | Test requests, results and instrument flags |
+
+A unidirectional instrument connection only sends results. A bidirectional connection also receives orders by host query (the analyzer asks after scanning a barcode) or download (the LIS sends a worklist in advance). Instrument protocols may use ASTM/CLSI LIS2-A2 or HL7. The interface agreement must state identifiers, status handling, local codes, retries and expected clinical reports.

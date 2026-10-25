@@ -20,7 +20,7 @@ export const alertEvents: (OrderCase & { decision: string; time: string })[] = [
     label: "Recent final result; order opened",
     role: "ordering",
     prior: "final",
-    hours: 72,
+    hours: 720,
     exception: false,
   },
   {
@@ -30,7 +30,7 @@ export const alertEvents: (OrderCase & { decision: string; time: string })[] = [
     label: "Same decision; order panel reopened",
     role: "ordering",
     prior: "final",
-    hours: 72,
+    hours: 720,
     exception: false,
   },
   {
@@ -40,7 +40,7 @@ export const alertEvents: (OrderCase & { decision: string; time: string })[] = [
     label: "Collecting nurse opens chart",
     role: "collecting",
     prior: "final",
-    hours: 72,
+    hours: 720,
     exception: false,
   },
   {
@@ -57,10 +57,10 @@ export const alertEvents: (OrderCase & { decision: string; time: string })[] = [
     id: "E05",
     decision: "D103",
     time: "09:04",
-    label: "Prior final result 169 hours ago",
+    label: "Prior final result 90 days and 1 hour ago",
     role: "ordering",
     prior: "final",
-    hours: 169,
+    hours: 2161,
     exception: false,
   },
   {
@@ -70,7 +70,7 @@ export const alertEvents: (OrderCase & { decision: string; time: string })[] = [
     label: "Previous result unusable",
     role: "ordering",
     prior: "unusable",
-    hours: 72,
+    hours: 720,
     exception: false,
   },
   {
@@ -90,7 +90,7 @@ export const alertEvents: (OrderCase & { decision: string; time: string })[] = [
     label: "Recent final; documented reason to repeat",
     role: "ordering",
     prior: "final",
-    hours: 72,
+    hours: 720,
     exception: true,
   },
   {
@@ -100,7 +100,7 @@ export const alertEvents: (OrderCase & { decision: string; time: string })[] = [
     label: "Same decision reopened after reason entered",
     role: "ordering",
     prior: "final",
-    hours: 72,
+    hours: 720,
     exception: true,
   },
   {
@@ -110,7 +110,7 @@ export const alertEvents: (OrderCase & { decision: string; time: string })[] = [
     label: "New decision for D101's patient; context changed",
     role: "ordering",
     prior: "final",
-    hours: 73,
+    hours: 721,
     exception: true,
   },
 ];
@@ -139,7 +139,7 @@ export function alertReplay(config: AlertConfig) {
               ? "Interrupting message"
               : "Inline suggestion",
       note: blocked
-        ? "A needed or unsupported-to-block order is prevented."
+        ? "An order with a documented reason, or without evidence supporting a block, is prevented."
         : suppressed
           ? "The same order decision has already received guidance."
           : row.id === "E10" && shown
@@ -165,7 +165,7 @@ export const alertControls = [
     notes: {
       all: "Orders without relevant prior information also receive messages.",
       recent:
-        "The case uses a 168-hour inclusive review window and pending orders; unusable results are excluded.",
+        "The case uses a 90-day inclusive review window and pending orders; unusable results are excluded.",
     },
   },
   {
@@ -228,10 +228,10 @@ export const alertSources = [
   },
 ];
 export const pilotWeeks = [
-  { week: 1, period: "Before", pilot: 80, comparison: 60, denominator: 1000 },
-  { week: 2, period: "Before", pilot: 80, comparison: 60, denominator: 1000 },
-  { week: 3, period: "Pilot", pilot: 40, comparison: 50, denominator: 1000 },
-  { week: 4, period: "Pilot", pilot: 40, comparison: 50, denominator: 1000 },
+  { week: 1, period: "Before", pilot: 8, comparison: 6, denominator: 100 },
+  { week: 2, period: "Before", pilot: 8, comparison: 6, denominator: 100 },
+  { week: 3, period: "Pilot", pilot: 4, comparison: 5, denominator: 100 },
+  { week: 4, period: "Pilot", pilot: 4, comparison: 5, denominator: 100 },
 ];
 export function pilotComparison(includeComparison: boolean) {
   const rate = (group: "pilot" | "comparison", period: string) => {
@@ -254,24 +254,40 @@ export function pilotComparison(includeComparison: boolean) {
 }
 export const measures = [
   {
+    correct: true,
     id: "process",
     label: "Order changes linked to unique decisions",
-    note: "Count cancellations and retained orders with reasons. Message acknowledgement is a different event.",
+    note: "Count cancellations and retained orders with reasons. Message acknowledgment is a different event.",
   },
   {
+    correct: true,
     id: "outcome",
     label: "Clinically reviewed avoidable repeats per 1,000 decisions",
     note: "Use the same review criteria in both wards and periods. This measures test use, not patient health.",
   },
   {
+    correct: true,
     id: "burden",
     label: "Presentations and time spent, by role",
     note: "Look for repeat messages and work displaced to other staff; a lower total can hide unequal burden.",
   },
   {
+    correct: true,
     id: "harm",
     label: "Delayed indicated tests and missed testing",
     note: "Review safety events and sampled cancellations. No reported event does not establish that no harm occurred.",
+  },
+  {
+    id: "dismissals",
+    label: "Count every dismissal as an avoided repeat",
+    note: "Dismissal is a user-interface event; the order may still be placed. Link the event to the clinical decision.",
+    correct: false,
+  },
+  {
+    id: "volume-only",
+    label: "Use total test volume without eligible decisions",
+    note: "Volume can fall when patient mix or workload changes. Use a defined denominator and assess needed testing.",
+    correct: false,
   },
 ];
 export const rolloutPlans = [
@@ -290,4 +306,17 @@ export const rolloutPlans = [
     label: "Keep only acceptance rate as the success measure",
     note: "Acknowledgement does not establish a correct clinical action. It can rise even when needed tests are cancelled.",
   },
+];
+
+export const lessonCopy = {
+  text01:
+    "Counts apply only to these 10 audit events across 7 order decisions. They are not estimated monthly effects or clinical outcomes.",
+  text02:
+    "Clinically reviewed avoidable repeat orders per 1,000 eligible order decisions each week in each ward. Weeks 1–2 precede the change; weeks 3–4 follow it.",
+};
+
+export const sectionPurposes = [
+  "Link each message count to an actual ordering decision before interpreting alert use.",
+  "Test whether the revised rule reaches the right decisions without blocking documented exceptions.",
+  "Compare rates in both services and choose benefit, burden and safety measures.",
 ];

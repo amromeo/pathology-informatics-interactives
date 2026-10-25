@@ -71,7 +71,7 @@ export const studyRows = [
     total: 60,
     agree: 58,
     days: 14,
-    note: "Two discordances: V12 and V44. Hospital scanner S1, viewer 3.2, workstation D1; trained readers Rao and Chen each completed paired reads on their assigned cases.",
+    note: "Rao 29/30; Chen 29/30. Two discordances: V12 (Rao) and V44 (Chen). Hospital scanner S1, viewer 3.2, workstation D1; trained readers Rao and Chen each completed paired reads on their assigned cases.",
   },
   {
     category: "Frozen sections",
@@ -85,11 +85,11 @@ export const discordances = [
   {
     id: "V12",
     record:
-      "Gastric biopsy · fixed H&E\nGlass: rare organisms suspected; special stain requested\nDigital: no organisms seen\nScan QC: locally blurred mucosal surface\nAdjudication: focal blur affected the search; rescan requested",
+      "Reader: Rao\nGastric biopsy · fixed H&E\nGlass: rare organisms suspected; special stain requested\nDigital: no organisms seen\nScan QC: locally blurred mucosal surface\nAdjudication: focal blur affected the search; rescan requested",
     choices: [
       {
         id: "rescan",
-        label: "Review scan quality, rescan, and repeat affected workflow checks.",
+        label: "Rescan and repeat the affected checks.",
         note: "A rescan may correct acquisition, but the original discordance stays in the study. Add targeted difficult cases and document the effect before clinical approval.",
         correct: true,
       },
@@ -114,8 +114,7 @@ export const discordances = [
     choices: [
       {
         id: "review",
-        label:
-          "Keep the disagreement, review clinical significance, and assess reader variability.",
+        label: "Retain and investigate the disagreement.",
         note: "Not every disagreement is caused by the scanner. Document both reads and adjudication, distinguish major from minor clinical effects, and compare with glass-reader variability as appropriate.",
         correct: true,
       },
@@ -148,7 +147,7 @@ export const decisions = [
   },
   {
     id: "reject",
-    label: "Abandon digital pathology permanently.",
+    label: "Repeat the whole study before investigating the scan.",
     note: "These findings identify gaps and a potentially correctable acquisition issue. A targeted hold and further evidence are more proportionate than a permanent conclusion about all digital pathology.",
   },
 ] as const;
@@ -211,3 +210,10 @@ export const changes = [
     note: "Document and verify the administrative edit. Risk-based change review should explain why image-performance revalidation is unnecessary for this edit.",
   },
 ] as const;
+
+export const sectionPurposes = [
+  "Identify the readers, case mix and applications represented in the supplied evidence.",
+  "Choose a comparison design appropriate to the intended clinical use.",
+  "Keep both disagreements in the study and choose how to investigate their causes.",
+  "Distinguish administrative changes from changes that need targeted checks or new validation.",
+];

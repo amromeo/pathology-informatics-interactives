@@ -1,4 +1,5 @@
-import type { PierCoverageClaim, SourceReference } from "./types";
+// Historical planning record. Published lesson manifests are authoritative.
+import type { PierCoverageClaim, SourceReference } from "../../src/data/types";
 const source = (label: string, url: string, use: string): SourceReference => ({
   label,
   url,

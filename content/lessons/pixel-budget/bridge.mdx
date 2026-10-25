@@ -2,7 +2,7 @@
 
 For a separate scanner-planning example, assume a rectangular field **15 mm wide and 10 mm high**, RGB color with three 8-bit channels, and no blank-tile savings. At 0.5 µm/pixel the grid is 30,000 × 20,000 pixels. Each pixel uses three bytes before compression. At 0.25 µm/pixel each dimension doubles, so pixel count and base-layer bytes quadruple.
 
-The calculator assumes 500 slides per working day and 250 working days per year: 125,000 slides annually. One or three focal planes contain the same number of pixels per plane. One or two copies multiply storage; a second copy alone does not establish a backup strategy. A ratio of 10:1 means encoded bytes are estimated as raw bytes divided by ten. Real compression depends on tissue, codec, and settings. These ratios are planning assumptions, not clinical recommendations or measured ratios from the image panels.
+The calculator assumes 500 slides per working day and 250 working days per year: 125,000 slides annually. One or three focal planes contain the same number of pixels per plane. One or two copies multiply storage; a second copy alone does not show a backup strategy. A ratio of 10:1 means encoded bytes are estimated as raw bytes divided by ten. Real compression depends on tissue, codec, and settings. These ratios are planning assumptions, not clinical recommendations or measured ratios from the image panels.
 
 Decimal GB means one billion bytes; TB means one trillion. Transfer time assumes the entire encoded base layer travels over an otherwise idle 100 megabit/second connection, eight bits per byte. It excludes protocol overhead, contention, decoding, and latency. Viewers usually fetch selected tiles rather than download the entire slide first. Pyramids, metadata, labels, indexes, rescans, and retention beyond one year add storage not included here.
 
@@ -14,4 +14,4 @@ JPEG commonly uses lossy encoding. TIFF can hold tiles and multiple resolutions;
 
 Verify accession, block and slide linkage, pixel spacing, acquisition settings, compression history, and complete tissue coverage after export and retrieval. DICOM records whether lossy compression occurred; conversion must not erase that history. Connect this to the interface checks in Topic 5.
 
-Display size and pixel density affect how much tissue is visible at a chosen scale. Luminance, color settings, calibration, ambient light, and viewing angle affect perception. More screen pixels alone do not establish suitability for reporting. Check the display and environment with the approved viewer and workflow.
+Display size and pixel density affect how much tissue is visible at a chosen scale. Luminance, color settings, calibration, ambient light, and viewing angle affect perception. More screen pixels alone do not show suitability for reporting. Check the display and environment with the approved viewer and workflow.

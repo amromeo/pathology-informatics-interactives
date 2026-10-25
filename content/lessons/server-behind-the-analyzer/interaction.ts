@@ -1,3 +1,4 @@
+import type { LessonDefinition } from "../../../src/data/types";
 export type SecurityProperty = "confidentiality" | "integrity" | "availability";
 
 export const securityPropertyLabels: Record<SecurityProperty, string> = {
@@ -20,7 +21,7 @@ export const securityFindings: readonly SecurityFinding[] = [
     title: "Server beside an instrument heat vent",
     observation:
       "The proposed floor location has warm exhaust, no protected power, and no environmental monitoring.",
-    properties: ["availability"],
+    properties: ["integrity", "availability"],
     feedback:
       "Heat or local power loss can stop result routing even when the instruments continue testing.",
   },
@@ -373,3 +374,321 @@ export const alternatePortfolio: readonly ControlId[] = [
   "controlled-vendor",
   "restore-drill",
 ];
+
+export const additionalExercises = {
+  title: "Match the finding to the obligation",
+  purpose:
+    "Choose the review required for each server finding before the installation is approved.",
+  questions: [
+    {
+      id: "REG1",
+      prompt: "A shared login prevents attribution of changes. Which obligation addresses this?",
+      answer: "security",
+      choices: [
+        {
+          id: "security",
+          label: "Security safeguards and risk analysis",
+        },
+        {
+          id: "agreement",
+          label: "Business associate agreement",
+        },
+        {
+          id: "breach",
+          label: "Breach assessment and notification",
+        },
+        {
+          id: "special",
+          label: "Additional record protections",
+        },
+        {
+          id: "accreditation",
+          label: "Accreditation and access review",
+        },
+      ],
+      feedback:
+        "Unique user identification and access and audit controls support HIPAA Security Rule safeguards. Document risks and corrective actions; a shared password cannot identify who changed a rule.",
+    },
+    {
+      id: "REG2",
+      prompt: "The vendor can access patient information during support. What agreement is needed?",
+      answer: "agreement",
+      choices: [
+        {
+          id: "security",
+          label: "Security safeguards and risk analysis",
+        },
+        {
+          id: "agreement",
+          label: "Business associate agreement",
+        },
+        {
+          id: "breach",
+          label: "Breach assessment and notification",
+        },
+        {
+          id: "special",
+          label: "Additional record protections",
+        },
+        {
+          id: "accreditation",
+          label: "Accreditation and access review",
+        },
+      ],
+      feedback:
+        "The vendor acts as a business associate when providing this service with access to protected information. A business associate agreement addresses safeguards and responsibilities; a research data use agreement serves a different purpose.",
+    },
+    {
+      id: "REG3",
+      prompt:
+        "Ransomware may have exposed unencrypted patient information. What review starts now?",
+      answer: "breach",
+      choices: [
+        {
+          id: "security",
+          label: "Security safeguards and risk analysis",
+        },
+        {
+          id: "agreement",
+          label: "Business associate agreement",
+        },
+        {
+          id: "breach",
+          label: "Breach assessment and notification",
+        },
+        {
+          id: "special",
+          label: "Additional record protections",
+        },
+        {
+          id: "accreditation",
+          label: "Accreditation and access review",
+        },
+      ],
+      feedback:
+        "Involve the privacy office for a documented breach risk assessment and required notifications. Restoring service does not resolve disclosure obligations.",
+    },
+    {
+      id: "REG4",
+      prompt:
+        "The server contains records from a substance-use treatment program. What else needs review?",
+      answer: "special",
+      choices: [
+        {
+          id: "security",
+          label: "Security safeguards and risk analysis",
+        },
+        {
+          id: "agreement",
+          label: "Business associate agreement",
+        },
+        {
+          id: "breach",
+          label: "Breach assessment and notification",
+        },
+        {
+          id: "special",
+          label: "Additional record protections",
+        },
+        {
+          id: "accreditation",
+          label: "Accreditation and access review",
+        },
+      ],
+      feedback:
+        "Some records have additional protections under 42 CFR Part 2 or state law. Determine which requirements apply to the records and proposed disclosure with the privacy office.",
+    },
+    {
+      id: "REG5",
+      prompt:
+        "The laboratory must show who can change result rules and how access is reviewed. Which review uses this record?",
+      answer: "accreditation",
+      choices: [
+        {
+          id: "security",
+          label: "Security safeguards and risk analysis",
+        },
+        {
+          id: "agreement",
+          label: "Business associate agreement",
+        },
+        {
+          id: "breach",
+          label: "Breach assessment and notification",
+        },
+        {
+          id: "special",
+          label: "Additional record protections",
+        },
+        {
+          id: "accreditation",
+          label: "Accreditation and access review",
+        },
+      ],
+      feedback:
+        "Accreditation review includes information-system access and security practices. Retain approval and review evidence alongside the technical configuration.",
+    },
+  ],
+};
+
+export const caseOverview: Omit<LessonDefinition, "manifest"> = {
+  artifactTitle: "Middleware installation review",
+  evidence: [
+    {
+      label: "Location",
+      value: "Beside heat vent",
+      tone: "critical",
+    },
+    {
+      label: "Login",
+      value: "Shared / no password",
+      tone: "critical",
+    },
+    {
+      label: "Vendor access",
+      value: "Always on",
+      tone: "warning",
+    },
+    {
+      label: "Data",
+      value: "Orders + results + PHI",
+      tone: "neutral",
+    },
+  ],
+  trace: [
+    {
+      system: "Room",
+      role: "Facilities",
+      sees: "Heat and walkway exposure.",
+      implication: "Availability is weak.",
+    },
+    {
+      system: "Host",
+      role: "Laboratory",
+      sees: "Access is shared.",
+      implication: "Accountability is weak.",
+    },
+    {
+      system: "Network",
+      role: "Security",
+      sees: "Instrument segment is flat.",
+      implication: "Compromise can spread.",
+    },
+    {
+      system: "Vendor",
+      role: "Support",
+      sees: "Remote channel is persistent.",
+      implication: "Access and contracts require control.",
+    },
+  ],
+  decisionPrompt: "What is the governance finding?",
+  decisionChoices: [
+    {
+      id: "correct",
+      label:
+        "Layered confidentiality, integrity, and availability risks must be addressed together.",
+      correct: true,
+      feedback:
+        "The room, shared account, flat network, persistent vendor channel, and untested recovery threaten different parts of laboratory service. Approval requires a coordinated control plan rather than one isolated correction.",
+    },
+    {
+      id: "narrow",
+      label:
+        "The only material finding is the shared login; require individual passwords and approve the installation.",
+      feedback:
+        "Named accounts would improve accountability, but they would not correct the heat and power exposure, flat instrument network, persistent vendor channel, or untested recovery.",
+    },
+    {
+      id: "unsafe",
+      label:
+        "Server placement and network configuration are IT infrastructure decisions outside the laboratory director's review.",
+      feedback:
+        "Facilities and IT perform much of the technical work, but the laboratory director must review how the installation protects patient data, result integrity, and continuity of testing.",
+    },
+  ],
+  repairPrompt: "Which installation plan should be approved?",
+  repairChoices: [
+    {
+      id: "validated",
+      label:
+        "Place the server in a controlled room; use named least-privilege accounts, segmented networking, controlled vendor sessions, and tested recovery.",
+      correct: true,
+      feedback:
+        "This plan addresses the physical, identity, network, vendor, and recovery findings together. It requires facilities work, security configuration, vendor-contract changes, staff access review, and time for a documented restore test before approval.",
+    },
+    {
+      id: "narrow",
+      label:
+        "Move the server to protected data-center power and cooling but keep the shared login and always-on vendor channel.",
+      feedback:
+        "Protected power and cooling reduce the environmental risk, but staff actions remain unattributed, vendor access remains persistent, the network remains flat, and backup restoration has not been demonstrated.",
+    },
+    {
+      id: "unsafe",
+      label:
+        "Require the vendor to request each remote session, but leave local access shared and the network flat.",
+      feedback:
+        "Session approval improves vendor accountability, but shared local access, network spread, environmental exposure, and untested recovery still prevent approval.",
+    },
+  ],
+  validationCases: [
+    {
+      name: "Environmental resilience",
+      note: "The result-routing server remains available through a local heat or power event.",
+      passingRepairs: ["validated", "narrow"],
+      failNotes: {
+        unsafe:
+          "Controlling vendor sessions does not move the server away from the heat vent or provide protected power.",
+      },
+    },
+    {
+      name: "Named laboratory access",
+      note: "Each technologist uses a named account with only the access required for the job.",
+      passingRepairs: ["validated"],
+      failNotes: {
+        narrow:
+          "The data-center move leaves the shared local login unchanged, so laboratory actions still cannot be attributed to one person.",
+        unsafe:
+          "Vendor approval does not replace the shared local login with named least-privilege accounts.",
+      },
+    },
+    {
+      name: "Network containment",
+      note: "A compromised device cannot move freely from the instrument segment to the middleware server.",
+      passingRepairs: ["validated"],
+      failNotes: {
+        narrow: "Protected hosting does not segment the flat instrument network.",
+        unsafe: "The proposed vendor-session change leaves the instrument network flat.",
+      },
+    },
+    {
+      name: "Vendor access",
+      note: "Each support session is approved, time-limited, and logged.",
+      passingRepairs: ["validated", "unsafe"],
+      failNotes: {
+        narrow:
+          "The always-on vendor channel remains available without approval or a session-specific audit record.",
+      },
+    },
+    {
+      name: "Tested recovery",
+      note: "The laboratory restores the middleware service and verifies queued orders and results from backup.",
+      passingRepairs: ["validated"],
+      failNotes: {
+        narrow:
+          "Protected power reduces one outage risk but does not show that the backup can restore the service and its queued messages.",
+        unsafe:
+          "Vendor-session control does not test whether the laboratory can restore middleware data after a failure.",
+      },
+    },
+  ],
+};
+
+export const lessonCopy = {
+  text01:
+    "Select each area. Notice which team performs the technical work and why the laboratory still needs to review the clinical service risk.",
+  text02:
+    "Select controls that address different failure paths. The limits do not permit buying everything, and a low-cost administrative step may not change the technical risk.",
+  text03:
+    "A blocked event is prevented by the selected controls. Partial mitigation reduces harm but leaves a path open. Not mitigated means the proposed installation still has no selected control for that event.",
+};

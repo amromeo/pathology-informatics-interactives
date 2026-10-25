@@ -7,7 +7,7 @@ for (const [id, left, top] of [
   ["glands", 100, 300],
   ["focus", 700, 0],
 ]) {
-  const crop = await sharp("public/assets/synthetic-wsi-field.webp")
+  const crop = await sharp("content/source-assets/synthetic-wsi-field.webp")
     .extract({ left, top, width: 512, height: 512 })
     .png()
     .toBuffer();

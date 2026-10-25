@@ -94,7 +94,7 @@ test("experiences expose labeled controls, expected results, and lifecycle choic
   assert.match(build, /Expected result and reason/);
   assert.match(build, /Run eight report checks/);
   const selection = renderToStaticMarkup(<LisSelectionExperience />);
-  assert.match(selection, /A-correction evidence/);
+  assert.match(selection, /Alder: corrected reports evidence/);
   assert.match(selection, /Before the old system is retired/);
   assert.match(selection, /Selection recommendation/);
 });

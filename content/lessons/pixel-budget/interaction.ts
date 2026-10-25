@@ -66,3 +66,8 @@ export const storageChoices = [
     note: "DICOM can carry standardized image and specimen information. A successful conversion does not prove correct identity, pixel fidelity, viewer support, or clinical performance.",
   },
 ];
+
+export const sectionPurposes = [
+  "Compare discarded image samples with compression artifacts before changing acquisition.",
+  "Change the workload assumptions and inspect their separate storage and transfer effects.",
+];

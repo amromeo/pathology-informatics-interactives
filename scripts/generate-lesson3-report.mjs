@@ -75,6 +75,7 @@ const addWorkingDays = (start, days) => {
     if (result.getDay() !== 0 && result.getDay() !== 6) added += 1;
   }
   result.setMinutes(result.getMinutes() + Math.round(fraction * 24 * 60));
+  while (result.getDay() === 0 || result.getDay() === 6) result.setDate(result.getDate() + 1);
   return result;
 };
 
@@ -99,8 +100,8 @@ const addPeriod = ({ period, prefix, start, tats, missingStructured = 0 }) => {
       specimen_group: index % 3 === 0 ? "Resection" : "Biopsy",
       eligible: "yes",
       amended: index % 41 === 0 ? "yes" : "no",
-      current_post_included: currentIncluded ? "yes" : "no",
-      fair_post_included: period === "stabilized" ? "yes" : "no",
+      original_two_period_group: currentIncluded ? "yes" : "no",
+      revised_three_period_group: period === "stabilized" ? "yes" : "no",
     });
   });
 };

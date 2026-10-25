@@ -1,10 +1,13 @@
-## Debrief
+## Debrief: connect an order to its specimen and worklist
 
-**Informatics principle:** Correct identification does not prove correct routing.
+### What happened in this case
+
+
+The barcode scan identified the right patient and case, but the SP-EX procedure entry sent the case to the cytology worklist.
 
 The barcode resolved to the right case, but a procedure-to-work-area mapping sent it to the wrong queue. The missing gross-room handoff delayed processing while the audit trail preserved enough evidence to diagnose the defect.
 
-The 08:11 accessioning scan documents physical receipt. The 08:12 cytology assignment records what the LIS did with SP-EX; it cannot establish where the container moved. If you selected cytology as the last physical location, compare the actor and event type in those two records.
+The 08:11 accessioning scan documents physical receipt. The 08:12 cytology assignment records what the LIS did with SP-EX; it cannot confirm where the container moved. If you selected cytology as the last physical location, compare the actor and event type in those two records.
 
 Changing SP-EX to the gross room fixes the reported route. Holding unrecognized procedure codes for accessioning review addresses the separate exception path. The five-case replay also checks that biopsy, cytology, and intraoperative workflows remain correct. Sending every case to the gross room solves one example while disrupting the others.
 
@@ -12,6 +15,10 @@ The existing container still needs to be located, verified, and handed off. Choo
 
 LIS and operations teams repair and test routing. The pathologist approves clinical workflow meaning and the safe recovery of affected specimens.
 
-## Further study with API teaching slides
+### Who does what
 
-In [Association for Pathology Informatics teaching slides: Laboratory Information Systems and Health Information Systems (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%203%20LIS-HIS%20slides.pptx), review slides 16–18. Compare the order, specimen, and result records. Explain why finding an accession does not establish the container's physical location or the correctness of its worklist assignment.
+Work with an accessioning supervisor and LIS analyst. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
+
+### Connection to PIER 4.1, 4.2, 4.4
+
+The case asks you to connect an order to its specimen and worklist using laboratory records and explain the consequence of your choice.

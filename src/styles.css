@@ -4817,7 +4817,7 @@ h3 {
   }
 }
 @media (max-width: 700px) {
-  .topic5-page .introduction-content h1 {
+  .wide-lesson .introduction-content h1 {
     font-size: clamp(2.5rem, 10vw, 3rem);
     overflow-wrap: break-word;
   }
@@ -4904,7 +4904,7 @@ h3 {
   font-weight: 700;
   margin-top: 1rem;
 }
-.topic8-page .introduction-content h1 {
+.system-lesson .introduction-content h1 {
   font-size: clamp(2.5rem, 5vw, 4.75rem);
   max-width: 1050px;
   overflow-wrap: break-word;

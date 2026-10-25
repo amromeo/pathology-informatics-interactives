@@ -77,7 +77,7 @@ export const lotComparisonCsvUrl = new URL("./lot-comparison.csv", import.meta.u
 export const patternChoices = [
   {
     id: "small-positive-tail",
-    label: "The new lot usually reads slightly higher, with several larger positive differences",
+    label: "Mostly higher results, with a positive tail",
     correct: true,
     feedback:
       "Most points are above zero. Several larger positive differences form a modest right-sided tail, but no single specimen is markedly separated from the rest.",
@@ -101,23 +101,26 @@ export const patternChoices = [
 export const descriptiveChecks = [
   {
     id: "mean",
-    prompt: "Which statistic gives the average paired difference?",
+    prompt:
+      "Several large positive differences pull one summary above the median of +0.8 ng/L. Which summary is +1.2 ng/L?",
     answer: "mean",
     explanation: "The mean is the sum of the 18 paired differences divided by 18.",
   },
   {
     id: "median",
-    prompt: "Which statistic is the middle paired difference after sorting from lowest to highest?",
+    prompt:
+      "If a few large positive differences increased further, which center would change less?",
     answer: "median",
     explanation:
       "The median is the middle of the ordered differences and is less affected by the larger positive values in the tail.",
   },
   {
     id: "standard-deviation",
-    prompt: "Which statistic describes how widely the paired differences vary around their mean?",
+    prompt:
+      "Which summary, if increased to 4.0 ng/L with the same sample size, would widen the confidence interval?",
     answer: "standard-deviation",
     explanation:
-      "The standard deviation describes the specimen-to-specimen spread of the paired differences.",
+      "Larger standard deviation increases the standard error at the same sample size. The interval would widen, so the laboratory would reassess whether it lies within the approved medical limit.",
   },
 ] as const;
 
@@ -228,8 +231,7 @@ export const testScenarios = [
 export const finalChoices = [
   {
     id: "accept-monitor",
-    label:
-      "Accept the new lot after laboratory-director review and monitor the small positive shift",
+    label: "Accept after director review; document and monitor",
     detail:
       "The confidence interval is inside the predetermined limit, and the very low and elevated checks pass.",
     correct: true,
@@ -256,33 +258,62 @@ export const finalChoices = [
 
 export const validationChecks = [
   {
+    passingRepairs: ["accept-monitor", "reject-p", "ignore-shift"] as string[],
+    failNote: "The specimens must remain paired.",
     label: "Paired design",
     detail: "The same patient specimens were tested with both reagent lots.",
   },
   {
+    passingRepairs: ["accept-monitor", "reject-p", "ignore-shift"] as string[],
+    failNote: "The primary analysis must use the predefined concentration group.",
     label: "Primary range",
     detail:
       "The main statistics use 18 specimens near the laboratory's clinical decision concentration.",
   },
   {
+    passingRepairs: ["accept-monitor", "ignore-shift"] as string[],
+    failNote: "A p-value alone does not describe the size or spread of the shift.",
     label: "Estimated shift",
     detail: "Mean, median, standard deviation, and the distribution are reviewed together.",
   },
   {
+    passingRepairs: ["accept-monitor"] as string[],
+    failNote: "Compare the confidence interval with the predefined clinical limit.",
     label: "Uncertainty",
     detail: "The confidence interval is compared with the limit established before testing.",
   },
   {
+    passingRepairs: ["accept-monitor", "ignore-shift"] as string[],
+    failNote: "Review both low and elevated specimens.",
     label: "Other concentrations",
     detail: "Very low and markedly elevated specimens pass their separate checks.",
   },
   {
+    passingRepairs: ["accept-monitor"] as string[],
+    failNote: "The complete comparison needs director approval.",
     label: "Medical approval",
     detail:
       "The laboratory director reviews the complete comparison before the lot is placed in service.",
   },
   {
+    passingRepairs: ["accept-monitor"] as string[],
+    failNote: "Acceptance without documenting the shift leaves follow-up incomplete.",
     label: "After the change",
     detail: "The small positive shift is documented and monitored after implementation.",
   },
 ] as const;
+
+export const lessonCopy = {
+  text01:
+    "Most new-lot results are slightly higher. Several larger positive differences create a modest right-sided tail without one isolated extreme result.",
+  text02:
+    "Each dot is one of the 18 specimens near the clinical decision concentration. Values above zero are higher with the new lot.",
+  text03:
+    "The 95 percent confidence interval runs from positive 0.6 to positive 1.8 nanograms per liter and remains within the laboratory's acceptable range of negative 2 to positive 2.",
+  text04:
+    "The main statistics describe the 18 specimens near the clinical decision concentration. The laboratory also checks whether the two lots agree at the low and high ends of the comparison.",
+  text05:
+    "The average shift is measurable, but its confidence interval remains within the range the laboratory accepted before testing. The low- and high-concentration checks also pass. Choose the next step.",
+  text06:
+    "The paired result pattern, summary statistics, confidence interval, predetermined medical limit, and checks at the low and high ends of the range all support acceptance after laboratory-director review.",
+};

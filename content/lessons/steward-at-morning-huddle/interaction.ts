@@ -30,7 +30,7 @@ export const orientationTasks: {
     task: "Keep the network and shared systems available so the LIS and instrument connections can operate.",
     owner: "it",
     explanation:
-      "Hospital IT keeps the network and shared systems running. The LIS team supports the laboratory applications, and the laboratory still tests that orders and results work correctly.",
+      "hospital IT keeps the network and shared systems running. The LIS team supports the laboratory applications, and the laboratory still tests that orders and results work correctly.",
   },
   {
     id: "lis-build",
@@ -81,7 +81,7 @@ export const orientationTickets: {
       "The laboratory issued a corrected troponin result report, but the report displayed in the EHR is still wrong.",
     answer: "laboratory",
     explanation:
-      "The laboratory should lead. It is responsible for the complete result report and must verify that the corrected report appears properly in the EHR.",
+      "Pathologist or laboratory director should lead. It is responsible for the complete result report and must verify that the corrected report appears properly in the EHR.",
   },
   {
     id: "wrong-trend",
@@ -89,7 +89,7 @@ export const orientationTickets: {
       "The troponin report is correct. In the EHR trend graph, however, the result is plotted with results from a different assay.",
     answer: "pathology-informatics",
     explanation:
-      "Although the error appears in the EHR, pathology informatics should lead because the problem is how two laboratory tests are represented in the patient's chart. Test identity, method changes, and whether results are sufficiently comparable to be trended together are laboratory questions. An EHR analyst may be needed to make the configuration change.",
+      "Pathology informatics should lead because the problem is how two laboratory tests are represented in the patient's chart. Test identity, method changes, and whether results are sufficiently comparable to be trended together are laboratory questions. An EHR analyst may be needed to make the configuration change.",
   },
   {
     id: "repeat-alert",
@@ -97,7 +97,7 @@ export const orientationTickets: {
       "A corrected troponin result causes the same EHR alert to fire again for the treating clinician.",
     answer: "clinical-informatics",
     explanation:
-      "The alert firing is an EHR and CDS workflow problem, so clinical informatics should lead. Pathology contributes the laboratory information needed to set the rule correctly.",
+      "Clinical informatics should coordinate because the alert logic and its firing behavior are EHR decision support configuration. Pathology informatics and the LIS team must first confirm how the correction was sent: a corrected result should replace the original (in HL7 v2, result status C on the same observation), not arrive as a new result. If it arrived as a new result, the fix is on the laboratory side.",
   },
 ];
 

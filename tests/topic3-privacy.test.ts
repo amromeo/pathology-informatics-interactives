@@ -21,7 +21,7 @@ const expectedRows: PrivacyRow[] = [
     sex: "F",
     zip5: "02108",
     admissionDate: "2026-04-18",
-    diagnosis: "Ewing sarcoma",
+    diagnosis: "Breast carcinoma",
     linkageCode: "LK-4A17",
   },
   {
@@ -30,7 +30,7 @@ const expectedRows: PrivacyRow[] = [
     sex: "F",
     zip5: "02109",
     admissionDate: "2026-04-18",
-    diagnosis: "Ewing sarcoma",
+    diagnosis: "Breast carcinoma",
     linkageCode: "LK-7C22",
   },
   {
@@ -39,7 +39,7 @@ const expectedRows: PrivacyRow[] = [
     sex: "F",
     zip5: "02110",
     admissionDate: "2026-04-18",
-    diagnosis: "Ewing sarcoma",
+    diagnosis: "Breast carcinoma",
     linkageCode: "LK-9D08",
   },
   {
@@ -48,7 +48,7 @@ const expectedRows: PrivacyRow[] = [
     sex: "F",
     zip5: "02111",
     admissionDate: "2026-04-18",
-    diagnosis: "Bone and soft tissue neoplasm",
+    diagnosis: "Malignant neoplasm",
     linkageCode: "LK-2B64",
   },
   {
@@ -57,7 +57,7 @@ const expectedRows: PrivacyRow[] = [
     sex: "M",
     zip5: "02108",
     admissionDate: "2026-04-18",
-    diagnosis: "Bone and soft tissue neoplasm",
+    diagnosis: "Malignant neoplasm",
     linkageCode: "LK-5F31",
   },
   {
@@ -66,7 +66,7 @@ const expectedRows: PrivacyRow[] = [
     sex: "M",
     zip5: "02109",
     admissionDate: "2026-04-18",
-    diagnosis: "Bone and soft tissue neoplasm",
+    diagnosis: "Malignant neoplasm",
     linkageCode: "LK-8E45",
   },
   {
@@ -75,7 +75,7 @@ const expectedRows: PrivacyRow[] = [
     sex: "M",
     zip5: "02110",
     admissionDate: "2026-04-18",
-    diagnosis: "Bone and soft tissue neoplasm",
+    diagnosis: "Malignant neoplasm",
     linkageCode: "LK-1A93",
   },
   {
@@ -84,7 +84,7 @@ const expectedRows: PrivacyRow[] = [
     sex: "M",
     zip5: "02111",
     admissionDate: "2026-04-18",
-    diagnosis: "Bone and soft tissue neoplasm",
+    diagnosis: "Malignant neoplasm",
     linkageCode: "LK-6C70",
   },
   {

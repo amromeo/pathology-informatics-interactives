@@ -1,3 +1,6 @@
+import { mustFind } from "./lesson-ui/mustFind";
+import { sectionPurposes } from "../../content/lessons/five-rights-right-test/interaction";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState } from "react";
 import {
   cdsControls,
@@ -24,7 +27,7 @@ export function CdsDesignExperience({ Concepts, Bridge, onAttempt }: Topic5Props
   const [response, setResponse] = useState<keyof typeof responseNotes | "">("");
   const current = cdsOutcome(
     config,
-    orderCases.find((row) => row.id === selected)!,
+    mustFind(orderCases, (row) => row.id === selected, "CdsDesignExperience.tsx orderCases"),
   );
   const results = cdsReplay(config);
   const update = (key: string, value: string) => {
@@ -34,10 +37,14 @@ export function CdsDesignExperience({ Concepts, Bridge, onAttempt }: Topic5Props
   };
   return (
     <div>
-      <Section title="Inspect when the guidance was delivered">
+      <Section
+        number={1}
+        purpose={sectionPurposes[0]}
+        title="Inspect when the guidance was delivered"
+      >
         <SourceInspector records={cdsSources} />
       </Section>
-      <Section title="Design the ordering guidance">
+      <Section number={2} purpose={sectionPurposes[1]} title="Design the ordering guidance">
         <Teaching Content={Concepts} />
         <div className="topic5-controls">
           {cdsControls.map((control) => (
@@ -46,7 +53,9 @@ export function CdsDesignExperience({ Concepts, Bridge, onAttempt }: Topic5Props
               label={control.label}
               value={config[control.key]}
               options={control.options}
-              note={(control.notes as Record<string, string>)[config[control.key]]}
+              note={
+                tested ? (control.notes as Record<string, string>)[config[control.key]] : undefined
+              }
               onChange={(value) => update(control.key, value)}
             />
           ))}
@@ -82,8 +91,11 @@ export function CdsDesignExperience({ Concepts, Bridge, onAttempt }: Topic5Props
                 : current.prior === "pending"
                   ? "A previous HbA1c order is pending. Review that order before requesting another. Continue if a repeat is clinically needed."
                   : "A usable final HbA1c report is available from " +
-                    current.hours +
-                    " hours ago. Review the report and clinical context before deciding whether to repeat."}
+                    (Math.floor(current.hours / 24) +
+                      (current.hours % 24
+                        ? " days and " + (current.hours % 24) + " hours"
+                        : " days")) +
+                    " ago. Review the report and clinical context before deciding whether to repeat."}
             </blockquote>
           )}
           <p className="topic5-note" role="status">
@@ -107,16 +119,22 @@ export function CdsDesignExperience({ Concepts, Bridge, onAttempt }: Topic5Props
               </button>
             </div>
           )}
-          {response && (
-            <p role="status">
-              {responseNotes[response]}{" "}
-              {config.timing === "after" &&
-                "Because the order was already signed, this action requires a separate order change."}
-            </p>
-          )}
+          <div role="status" aria-live="polite" aria-atomic="true">
+            {response && (
+              <p>
+                {responseNotes[response]}{" "}
+                {config.timing === "after" &&
+                  "Because the order was already signed, this action requires a separate order change."}
+              </p>
+            )}
+          </div>
         </div>
       </Section>
-      <Section title="Test the guidance against other encounters">
+      <Section
+        number={3}
+        purpose={sectionPurposes[2]}
+        title="Test the guidance against other encounters"
+      >
         <Teaching Content={Bridge} />
         <button
           type="button"
@@ -128,46 +146,45 @@ export function CdsDesignExperience({ Concepts, Bridge, onAttempt }: Topic5Props
         >
           Run eight encounter checks
         </button>
-        {tested && (
-          <div aria-live="polite">
-            <p className="topic5-note">
-              <strong>
-                {results.filter((row) => row.pass).length} / 8 checks meet the review specification.
-              </strong>{" "}
-              {results.every((row) => row.pass)
-                ? config.format === "soft"
-                  ? "Clinical discretion is preserved, but every suggestion still interrupts work. Compare an inline design before approving this burden."
-                  : "The design preserves clinical discretion and avoids mandatory interruptions. Clinical review and a monitored pilot are still needed."
-                : "Read the failed encounters and revise the delivery. A repaired opening case must also preserve the exceptions."}
-            </p>
-            <div className="topic5-card-grid">
-              {results.map((row) => (
-                <article className="artifact-card" key={row.id}>
-                  <h3>
-                    {row.id} · {row.pass ? "Meets specification" : "Needs revision"}
-                  </h3>
-                  <p>{row.label}</p>
-                  <strong>{row.action}</strong>
-                  <p>{row.note}</p>
-                </article>
-              ))}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {tested && (
+            <div>
+              <p className="topic5-note">
+                <strong>
+                  {results.filter((row) => row.pass).length} / 8 checks meet the review
+                  specification.
+                </strong>{" "}
+                {results.every((row) => row.pass)
+                  ? config.format === "soft"
+                    ? "Clinical discretion is preserved, but every suggestion still interrupts work. Compare an inline design before approving this burden."
+                    : "The design preserves clinical discretion and avoids mandatory interruptions. Clinical review and a monitored pilot are still needed."
+                  : "Read the failed encounters and revise the delivery. A repaired opening case must also preserve the exceptions."}
+              </p>
+              <div className="topic5-card-grid">
+                {results.map((row) => (
+                  <article className="artifact-card" key={row.id}>
+                    <h3>
+                      {row.id} · {row.pass ? "Meets specification" : "Needs revision"}
+                    </h3>
+                    <p>{row.label}</p>
+                    <strong>{row.action}</strong>
+                    <p>{row.note}</p>
+                  </article>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </Section>
-      <button
-        type="button"
-        className="text-button"
-        onClick={() => {
+      <ResetLessonButton
+        fallback={() => {
           setConfig({ ...originalCds });
           setSelected("CD-01");
           setTested(false);
           setResponse("");
           onAttempt?.(false);
         }}
-      >
-        Reset lesson interactions
-      </button>
+      />
     </div>
   );
 }

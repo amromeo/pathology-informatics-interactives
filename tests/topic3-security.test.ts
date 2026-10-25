@@ -18,7 +18,7 @@ test("the six installation findings have the locked confidentiality, integrity, 
   assert.deepEqual(
     securityFindings.map((finding) => [finding.id, finding.properties]),
     [
-      ["heat-vent", ["availability"]],
+      ["heat-vent", ["integrity", "availability"]],
       ["shared-login", ["confidentiality", "integrity"]],
       ["flat-network", ["confidentiality", "integrity", "availability"]],
       ["persistent-vendor", ["confidentiality", "integrity"]],

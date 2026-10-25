@@ -114,7 +114,7 @@ the exact lesson in which it appears.
   original synthetic H&E-style field with focused tissue and a subtly blurred
   folded region for a digital-pathology validation exercise; no labels,
   identifiers, diagnosis, interface chrome, or watermark. The deployed Lesson
-  20 asset is the optimized `public/assets/synthetic-wsi-field.webp` derivative.
+  20 asset is an archived optimized `content/source-assets/synthetic-wsi-field.webp` derivative.
 
 ## Topic 5 implementation sources
 
@@ -173,7 +173,7 @@ Primary sources checked October 22, 2026. PIER R5 page 16, objectives 7.1–7.4,
 was inspected directly. Coverage includes capture/storage/retrieval/viewing,
 static/live/whole-slide applications, formats/resolution/compression/displays,
 image analysis and productivity, and validation/regulatory requirements. Existing
-cross-topic 2.4 coverage is retained. `src/data/topic7Plan.ts` records observable
+cross-topic 2.4 coverage is retained. the Topic 7 `lesson.ts` manifests records observable
 learner actions. Harrison/API slide ranges remain those in the planning map;
 concepts are adapted under CC BY 4.0, with original cases and interactions.
 
@@ -211,7 +211,7 @@ concepts are adapted under CC BY 4.0, with original cases and interactions.
 
 ### Topic 7 asset provenance and limits
 
-The existing project-generated `public/assets/synthetic-wsi-field.webp` was
+The existing project-generated `content/source-assets/synthetic-wsi-field.webp` was
 visually inspected and reused. No external clinical image or proprietary display
 was copied. `scripts/topic7-images.mjs` extracts 512 × 512 pixel fields at
 (100,300) and (700,0), measured from the source's upper-left corner. Each field
@@ -241,3 +241,15 @@ The CAP survey's code-level 54/275 estimate and the PCORnet result-weighted 4.6%
 ## API reading integration — 2026-10-23
 
 The ten original PowerPoint decks were retrieved from the API course archive and their slide text inspected. Focused learner readings and faculty prompts are recorded in [the verified reading map](../review/api-teaching-slides/mapping.md). The older Harrison plan remains planning context; the new map records the narrower readings actually linked in the lessons. All links point to API originals. No deck or image is redistributed. Original slide content is CC BY 4.0; third-party assets retain their individual terms. No new clinical or standards requirements are adopted from these teaching slides.
+
+## October 24, 2026 review additions
+
+- [HHS Security Rule summary](https://www.hhs.gov/hipaa/for-professionals/security/laws-regulations/index.html): safeguards, risk analysis and business associate responsibilities; paraphrased.
+- [HHS breach notification guidance](https://www.hhs.gov/hipaa/for-professionals/breach-notification/index.html): assessment and notification; paraphrased.
+- [HHS Part 2 guidance](https://www.hhs.gov/hipaa/part-2/index.html): additional record protections; compliance date February 16, 2026.
+- [CMS QSO-23-15-CLIA, October 14, 2026](https://www.cms.gov/files/document/qso-23-15-clia-revised-2026-10-14.pdf): remote digital review conditions and cytology exception. Supersedes the review's September 2025 reference.
+- [42 CFR 493.1253](https://www.ecfr.gov/current/title-42/section-493.1253): verification versus establishment of performance specifications.
+- [FDA good machine learning practice](https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/good-machine-learning-practice-medical-device-development-guiding-principles): representative evaluation and monitoring.
+- [HL7 v2.5.1, chapter 7](https://www.hl7.eu/HL7v2x/v251/std251/ch07.html): result-message fields.
+
+All new clinical and regulatory teaching remains subject to author review before merge. No source text or figures have been reproduced.

@@ -5,3 +5,8 @@ pages-dist/
 .vite/
 *.log
 tmp/
+
+test-results/
+playwright-report/
+
+src/generated/lessonManifests.ts

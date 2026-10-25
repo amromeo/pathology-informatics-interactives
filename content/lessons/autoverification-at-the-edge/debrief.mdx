@@ -1,6 +1,9 @@
-## Debrief
+## Debrief: test a release rule with both held and releasable results
 
-**Informatics principle:** Automated release rules require explicit boundaries and regression testing.
+### What happened in this case
+
+
+The serial troponin rule must hold unusable history and release eligible results at the stated boundaries.
 
 AV-01 had a 36 ng/L absolute difference and a 300% relative difference. The
 absolute-only configuration released it because 36 is below 50. The approved
@@ -22,6 +25,10 @@ clinically normal.
 
 The LIS or middleware analyst implements the rule. Technical and medical leadership approve criteria, validation, monitoring, and change control.
 
-## Further study with API teaching slides
+### Who does what
 
-In [Association for Pathology Informatics teaching slides: System Implementation and Management (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%209%20Impl-Mgmt%20slides.pptx), review slides 8–10. Compare repeated testing of existing behavior with testing a specific change. Name an unaffected release case that belongs in the test set and explain why it matters.
+Work with a chemistry supervisor and middleware analyst. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
+
+### Connection to PIER 4.3, 4.5, 5.4, 8.2
+
+The case asks you to test a release rule with both held and releasable results using laboratory records and explain the consequence of your choice.

@@ -1,211 +1,130 @@
-import { existsSync, readFileSync } from "node:fs";
+import { suggestedPath } from "../src/data/lessonSummaries";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { lessons, topics } from "../src/data/curriculum";
-import { topic2CurriculumPlan } from "../src/data/topic2Plan";
-
+import { pierObjectives } from "../src/data/pierObjectives";
 const fail = (message: string): never => {
-  throw new Error(message);
+  throw Error(message);
 };
-if (lessons.length !== 23) fail(`Expected 23 lessons; found ${lessons.length}`);
+const folders = readdirSync("content/lessons", { withFileTypes: true })
+  .filter(
+    (d) => d.isDirectory() && existsSync(resolve("content/lessons", d.name, "introduction.mdx")),
+  )
+  .map((d) => d.name);
+if (lessons.length !== folders.length) fail("Lesson registry and content folders differ.");
+const objectiveIds = new Set(pierObjectives.map((o) => o.id)),
+  ids = new Set<string>(),
+  slugs = new Set<string>();
+for (const topic of topics) {
+  const expected = pierObjectives
+    .filter((o) => o.topic === topic.id)
+    .map((o) => o.id)
+    .sort();
+  if (JSON.stringify(expected) !== JSON.stringify([...topic.objectives].sort()))
+    fail("Topic " + topic.id + " disagrees with the objective registry.");
+}
+for (const o of pierObjectives)
+  if (o.summary.trim().split(/\s+/).length > 12) fail(o.id + " summary exceeds 12 words.");
+for (const { manifest: m } of lessons) {
+  if (ids.has(m.id) || slugs.has(m.slug)) fail("Duplicate lesson identity: " + m.slug);
+  ids.add(m.id);
+  slugs.add(m.slug);
+  if (!folders.includes(m.slug)) fail("Missing lesson folder: " + m.slug);
+  if (!m.experience || (m.status !== "draft" && m.experience === "generic"))
+    fail(m.slug + " lacks a dedicated published experience.");
+  const folder = resolve("content/lessons", m.slug);
+  for (const file of [
+    "introduction.mdx",
+    "debrief.mdx",
+    "faculty.mdx",
+    "interaction.ts",
+    "lesson.ts",
+    "check.ts",
+  ]) {
+    if (!existsSync(resolve(folder, file))) fail(m.slug + " missing " + file);
+  }
+  if (m.hasLocalPracticum && !existsSync(resolve(folder, "practicum.mdx")))
+    fail(m.slug + " missing practicum.");
+  const intro = readFileSync(resolve(folder, "introduction.mdx"), "utf8");
+  if (intro.split(/\r?\n/)[0] !== "# " + m.title)
+    fail(m.slug + " title differs from introduction.");
+  if (!intro.includes("## What you will be able to do"))
+    fail(m.slug + " lacks observable outcomes");
 
-const expected = new Set(topics.flatMap((topic) => topic.objectives));
-const covered = new Set(lessons.flatMap((lesson) => lesson.manifest.pierObjectives));
-if (expected.size !== 34) fail(`Expected 34 objective identifiers; found ${expected.size}`);
-for (const objective of expected)
-  if (!covered.has(objective)) fail(`Objective ${objective} has no primary lesson`);
-for (const objective of covered)
-  if (!expected.has(objective)) fail(`Unknown objective ${objective}`);
-
-const ids = new Set<string>();
-const slugs = new Set<string>();
-const topic3Slugs = new Set([
-  "server-behind-the-analyzer",
-  "twelve-hours-offline",
-  "not-anonymous-enough",
-]);
-const topic3InstitutionName = "North River University Hospital";
-const harrisonPlan = readFileSync(resolve("content", "HARRISON-SLIDE-MAP.md"), "utf8");
-const plannedSlugs = [...harrisonPlan.matchAll(/Lesson slug: `([^`]+)`/g)].map((match) => match[1]);
-if (new Set(plannedSlugs).size !== 23)
-  fail(
-    `Expected 23 unique lesson entries in the Harrison slide plan; found ${new Set(plannedSlugs).size}`,
-  );
-for (const lesson of lessons) {
-  const { manifest } = lesson;
-  if (ids.has(manifest.id)) fail(`Duplicate lesson id ${manifest.id}`);
-  if (slugs.has(manifest.slug)) fail(`Duplicate lesson slug ${manifest.slug}`);
-  ids.add(manifest.id);
-  slugs.add(manifest.slug);
-  if (!lesson.evidence.length || !lesson.trace.length)
-    fail(`${manifest.slug} lacks evidence or trace data`);
-  if (lesson.decisionChoices.filter((choice) => choice.correct).length !== 1)
-    fail(`${manifest.slug} must have one correct diagnosis`);
-  if (lesson.repairChoices.filter((choice) => choice.correct).length !== 1)
-    fail(`${manifest.slug} must have one controlled repair`);
-  if (lesson.validationCases.length < 3)
-    fail(`${manifest.slug} needs at least three validation cases`);
-  if (topic3Slugs.has(manifest.slug)) {
-    if (!manifest.hasLocalPracticum)
-      fail(`${manifest.slug} must enable its Topic 3 local practicum`);
-
-    for (const [choiceKind, choices] of [
-      ["diagnosis", lesson.decisionChoices],
-      ["repair", lesson.repairChoices],
-    ] as const) {
-      const correctChoice = choices.find((choice) => choice.correct);
-      const distractors = choices.filter((choice) => !choice.correct);
-      if (!correctChoice || !distractors.length)
-        fail(`${manifest.slug} lacks a complete ${choiceKind} choice set`);
-      const meanDistractorLength =
-        distractors.reduce((sum, choice) => sum + choice.label.length, 0) / distractors.length;
-      if (correctChoice!.label.length > meanDistractorLength * 1.5) {
-        fail(
-          `${manifest.slug} ${choiceKind} answer is more than 1.5 times the mean distractor length`,
-        );
-      }
-    }
-
-    const correctRepair = lesson.repairChoices.find((choice) => choice.correct)!;
+  // Titles retain the author's wording; expand common terms at first use in the case.
+  const caseText = intro.split("\n").slice(1).join("\n").replaceAll("**", "");
+  for (const [acronym, expanded] of Object.entries({
+    LIS: "laboratory information system",
+    EHR: "electronic health record",
+    IT: "information technology",
+    CDS: "clinical decision support",
+    HL7: "Health Level Seven",
+    LOINC: "Logical Observation Identifiers Names and Codes",
+    HIPAA: "Health Insurance Portability and Accountability Act",
+    CLIA: "Clinical Laboratory Improvement Amendments",
+    CAP: "College of American Pathologists",
+    WSI: "whole-slide imaging",
+    RTO: "recovery time objective",
+    RPO: "recovery point objective",
+    ACK: "acknowledgment",
+    QC: "quality control",
+    AI: "artificial intelligence",
+  })) {
+    const first = new RegExp("\\b" + acronym + "\\b").exec(caseText);
+    if (first && !caseText.slice(0, first.index).toLowerCase().includes(expanded.toLowerCase()))
+      fail(m.slug + ": explain " + acronym + " before its first use in the introduction.");
+  }
+  const faculty = readFileSync(resolve(folder, "faculty.mdx"), "utf8");
+  for (const heading of ["Run of show", "Common misconceptions"])
+    if (!faculty.includes("## " + heading)) fail(m.slug + " lacks faculty " + heading);
+  const allowance = faculty.match(/Allow (\d+) minutes/);
+  if (!allowance || Math.abs(Number(allowance[1]) - m.durationMinutes) > 10)
+    fail(m.slug + " faculty time differs from manifest");
+  for (const prior of m.prerequisites ?? [])
+    if (!lessons.some((l) => l.manifest.slug === prior))
+      fail(m.slug + " unknown prerequisite " + prior);
+  for (const prior of m.prerequisites ?? []) {
+    const priorLesson = lessons.find((l) => l.manifest.slug === prior)!;
     if (
-      lesson.validationCases.some((testCase) => !testCase.passingRepairs.includes(correctRepair.id))
-    ) {
-      fail(`${manifest.slug} controlled repair must pass every validation case`);
-    }
-    for (const repair of lesson.repairChoices.filter((choice) => !choice.correct)) {
-      if (!lesson.validationCases.some((testCase) => testCase.passingRepairs.includes(repair.id))) {
-        fail(`${manifest.slug} repair ${repair.id} must pass at least one validation case`);
-      }
-      for (const testCase of lesson.validationCases.filter(
-        (item) => !item.passingRepairs.includes(repair.id),
-      )) {
-        if (!testCase.failNotes?.[repair.id]?.trim()) {
-          fail(`${manifest.slug} repair ${repair.id} lacks a failure note for ${testCase.name}`);
-        }
-      }
+      suggestedPath.indexOf(Number(priorLesson.manifest.id)) >= suggestedPath.indexOf(Number(m.id))
+    )
+      fail(m.slug + ": suggested path places a prerequisite later: " + prior);
+  }
+  const claims = m.pierCoverage ?? [];
+  for (const objective of m.pierObjectives) {
+    if (!objectiveIds.has(objective)) fail("Unknown objective " + objective);
+    if (!claims.some((c) => c.objective === objective))
+      fail(m.slug + " lacks a claim for " + objective);
+  }
+  for (const c of claims) {
+    if (!m.pierObjectives.includes(c.objective))
+      fail(m.slug + " has an unmapped claim " + c.objective);
+    if (!c.learnerAction.trim() || !c.taughtIn?.length || !c.evidence?.length)
+      fail(m.slug + " lacks teaching evidence for " + c.id);
+    for (const evidence of c.evidence ?? []) {
+      const path = resolve(evidence.file);
+      if (!path.startsWith(resolve("content") + "/") && !path.startsWith(resolve("content") + "\\"))
+        fail("Evidence must be a content file.");
+      if (!existsSync(path) || !readFileSync(path, "utf8").includes(evidence.contains))
+        fail(m.slug + " evidence missing: " + evidence.file + " must contain " + evidence.contains);
     }
   }
-  if (manifest.pierCoverage) {
-    const claimIds = new Set<string>();
-    for (const claim of manifest.pierCoverage) {
-      if (claimIds.has(claim.id)) fail(`${manifest.slug} has duplicate coverage claim ${claim.id}`);
-      claimIds.add(claim.id);
-      if (!manifest.pierObjectives.includes(claim.objective))
-        fail(`${manifest.slug} claim ${claim.id} does not agree with pierObjectives`);
-      if (!claim.learnerAction.trim())
-        fail(`${manifest.slug} claim ${claim.id} lacks an observable learner action`);
-    }
-  }
-
-  const folder = resolve("content", "lessons", manifest.slug);
+}
+for (const objective of objectiveIds)
   if (
-    [
-      "specimen-routing",
-      "autoverification",
-      "reflex-rule",
-      "flag-trace",
-      "newborn-exchange",
-      "terminology-review",
-      "queue-analysis",
-      "cds-design",
-      "alert-evaluation",
-      "test-build",
-      "lis-selection",
-    ].includes(manifest.experience ?? "")
-  ) {
-    for (const file of ["concepts.mdx", "interaction.ts"]) {
-      if (!existsSync(resolve(folder, file))) fail(`${manifest.slug} is missing ${file}`);
-    }
-  }
-  for (const file of ["introduction.mdx", "debrief.mdx", "faculty.mdx"]) {
-    if (!existsSync(resolve(folder, file))) fail(`${manifest.slug} is missing ${file}`);
-  }
-  if (topic3Slugs.has(manifest.slug)) {
-    const introduction = readFileSync(resolve(folder, "introduction.mdx"), "utf8");
-    if (!introduction.includes(topic3InstitutionName)) {
-      fail(
-        `${manifest.slug} introduction must name the shared Topic 3 institution: ${topic3InstitutionName}`,
-      );
-    }
-  }
-  if (manifest.hasLocalPracticum && !existsSync(resolve(folder, "practicum.mdx")))
-    fail(`${manifest.slug} is missing practicum.mdx`);
-  if (manifest.experience === "data-quality") {
-    for (const file of ["concepts.mdx", "bridge.mdx", "interaction.ts", "report.csv"]) {
-      if (!existsSync(resolve(folder, file))) fail(`${manifest.slug} is missing ${file}`);
-    }
-  }
-  if (manifest.experience === "statistics") {
-    for (const file of [
-      "concepts.mdx",
-      "bridge.mdx",
-      "comparison.mdx",
-      "investigation.mdx",
-      "interaction.ts",
-      "lot-comparison.csv",
-    ]) {
-      if (!existsSync(resolve(folder, file))) fail(`${manifest.slug} is missing ${file}`);
-    }
-  }
-  if (manifest.experience === "privacy" && !existsSync(resolve(folder, "interaction.ts"))) {
-    fail(`${manifest.slug} is missing interaction.ts`);
-  }
-  if (manifest.experience === "downtime" && !existsSync(resolve(folder, "interaction.ts"))) {
-    fail(`${manifest.slug} is missing interaction.ts`);
-  }
-  if (manifest.experience === "security-review" && !existsSync(resolve(folder, "interaction.ts"))) {
-    fail(`${manifest.slug} is missing interaction.ts`);
-  }
-
-  const marker = `Lesson slug: \`${manifest.slug}\``;
-  const sectionStart = harrisonPlan.indexOf(marker);
-  if (sectionStart < 0) fail(`${manifest.slug} is missing from the Harrison slide plan`);
-  const sectionEnd = harrisonPlan.indexOf("Lesson slug: `", sectionStart + marker.length);
-  const section = harrisonPlan.slice(sectionStart, sectionEnd < 0 ? undefined : sectionEnd);
-  const plannedSessions = new Set(
-    [...section.matchAll(/Session (\d+)/g)].map((match) => Number(match[1])),
-  );
-  for (const session of manifest.apiSessions) {
-    if (!plannedSessions.has(session))
-      fail(`${manifest.slug} is missing API Session ${session} in the Harrison slide plan`);
-  }
-}
-
-const requiredTopic2Subtopics = new Set(
-  topic2CurriculumPlan.flatMap((lesson) => lesson.claims.map((claim) => claim.id)),
-);
-const primaryTopic2Claims = new Map(
-  topic2CurriculumPlan.flatMap((lesson) =>
-    lesson.claims.filter((claim) => claim.primary).map((claim) => [claim.id, claim] as const),
-  ),
-);
-for (const subtopic of requiredTopic2Subtopics) {
-  const claim = primaryTopic2Claims.get(subtopic);
-  if (!claim) {
-    fail(`Topic 2 subtopic ${subtopic} lacks a primary lesson`);
-    continue;
-  }
-  if (!claim.learnerAction.trim())
-    fail(`Topic 2 subtopic ${subtopic} lacks an observable learner action`);
-}
-const publishedTopic2Plans = topic2CurriculumPlan.filter((lesson) => lesson.published);
-for (const plannedLesson of publishedTopic2Plans) {
-  const manifest = lessons.find((lesson) => lesson.manifest.slug === plannedLesson.slug)?.manifest;
-  if (!manifest)
-    fail(`Published Topic 2 lesson ${plannedLesson.slug} is missing from the registry`);
-  if (
-    JSON.stringify(plannedLesson.claims.map((claim) => claim.id)) !==
-    JSON.stringify((manifest!.pierCoverage ?? []).map((claim) => claim.id))
-  ) {
-    fail(`${plannedLesson.slug} manifest does not agree with the staged Topic 2 plan`);
-  }
-}
-if (publishedTopic2Plans.length !== 2)
-  fail("Completed Topic 2 Lessons 3 and 4 must be published from the staged plan");
-
-const pilots = lessons.filter((lesson) => lesson.manifest.pilot);
-if (pilots.length !== 2)
-  fail(`Expected two remaining pilot interaction patterns; found ${pilots.length}`);
-
+    !lessons.some(
+      (l) =>
+        l.manifest.status !== "draft" &&
+        l.manifest.pierCoverage?.some(
+          (c) => c.objective === objective && c.primary && c.taughtIn?.includes("interaction"),
+        ),
+    )
+  )
+    fail(objective + " has no published primary interactive lesson.");
 console.log(
-  `Validated ${lessons.length} lessons, ${covered.size}/${expected.size} objectives, ${requiredTopic2Subtopics.size} staged Topic 2 subtopics, ${pilots.length} pilot patterns, all required MDX files, and 23 Harrison slide plans.`,
+  "Validated " +
+    lessons.length +
+    " lessons and " +
+    objectiveIds.size +
+    " objectives with published primary interaction evidence.",
 );

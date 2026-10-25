@@ -1,5 +1,22 @@
 # Faculty guide: Who Does What in Laboratory Informatics?
 
+## At a glance
+
+Allow 22 minutes. Use individually or in a small group. Project the case records and the exercise controls; keep the answer key out of view until learners commit to a decision.
+
+Learning objectives: assign clinical approval and technical work separately; compare the lis report with its verified chart view; justify the first local check. PIER: 1.1, 1.2, 1.3, 8.1.
+
+## Run of show
+
+| Minutes | Activity | Ask the group |
+| --- | --- | --- |
+| 0–4 | Read the case and records | What decision has the laboratory been asked to make? |
+| 4–15 | Make, test and revise a choice | Which record supports your decision? What could fail? |
+| 15–22 | Debrief and retrieval questions | How would you verify this in your own laboratory? |
+
+## Expected answers
+
+
 ## PIER R5 coverage
 
 - **1.1:** Learners distinguish hospital IT, the LIS team, pathology informatics, clinical informatics, and laboratory operations by assigning work for a new assay.
@@ -10,7 +27,7 @@
 
 The expected assignments are:
 
-1. **Network and shared systems — Hospital IT.** Hospital IT keeps the network, servers, accounts, security services, and other shared systems available.
+1. **Network and shared systems — hospital IT.** hospital IT keeps the network, servers, accounts, security services, and other shared systems available.
 2. **LIS and interface build — LIS team.** The LIS team builds the approved test in the LIS, changes the interface, and performs technical testing before laboratory review. In some hospitals the LIS team is part of IT; in others it sits in the pathology department. The work is the same even when the reporting structure differs.
 3. **Order and complete result report — pathologist or laboratory director.** The laboratory approves the order and the complete result report, including how the report appears in the EHR.
 4. **Consistent laboratory build practices — pathology informatics.** Pathology informatics helps the section fit the assay into the practices used across the laboratory for naming, reporting, corrections, and EHR display.
@@ -21,7 +38,7 @@ The expected support-ticket answers are:
 
 1. **The complete result report is wrong — pathologist or laboratory director.** The laboratory leads because it owns the complete result report and its appearance in the EHR. The LIS team and hospital IT may help make the correction.
 2. **Two assays are grouped incorrectly in an EHR trend — pathology informatics.** This is laboratory data presented with the wrong meaning. Pathology informatics should coordinate the review with the section and the EHR team.
-3. **An EHR alert fires again after a corrected result — clinical informatics.** This is primarily a broader EHR and CDS workflow problem. Clinical informatics should coordinate with pathology informatics, the laboratory, and the affected clinical service.
+3. **An EHR alert fires again after a corrected result — clinical informatics.** Clinical informatics coordinates with pathology informatics, the LIS team and the clinical service. First establish whether the laboratory correction replaced the original observation; sending it as a new result requires a laboratory-side repair.
 
 Learners should hold the go-live. Transmission passed, but the complete result report is clipped in the EHR, the proposed use in CDS has not had pathology review, and procedures and training are incomplete.
 
@@ -46,3 +63,53 @@ The cited CAP member resource identifies **GEN.48500, Interface Result Integrity
 Use [Association for Pathology Informatics teaching slides: Pathology Informatics and Data (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%200%20Orientation%20slides.pptx) by James H. Harrison, Jr., slides 12–13, to prepare the discussion after residents have explained their case decision. Ask: Trace the pathologist's responsibility for laboratory information beyond the laboratory information system. Which person should approve the complete report in the receiving chart? Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
 
 These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
+
+### A repeated alert after correction
+
+Clinical informatics should coordinate because the alert logic and its firing behavior are EHR decision support configuration. Pathology informatics and the LIS team must first confirm how the correction was sent: a corrected result should replace the original (in HL7 v2, result status C on the same observation), not arrive as a new result. If it arrived as a new result, the fix is on the laboratory side.
+
+
+## Common misconceptions
+
+- “The interface analyst alone.” Ask: what does the record actually establish? The laboratory owns the complete report, including how it appears in the chart. The LIS and EHR teams make and test the technical change.
+- “The software vendor alone.” Ask: which conclusion would still need evidence? The laboratory owns the complete report, including how it appears in the chart. The LIS and EHR teams make and test the technical change.
+- “Change the display before reviewing the source.” Ask: what must be checked before making the change? Following one result through both systems identifies the field and handoff that need repair.
+
+## Discussion prompts
+
+1. What supports the case decision? A strong answer includes a specific record and the distinction: assign clinical approval and technical work separately.
+2. What would you check locally? A strong answer includes: compare the lis report with its verified chart view, because following one result through both systems identifies the field and handoff that need repair.
+3. Who needs to participate? A strong answer includes a laboratory director and LIS analyst and separates technical work from clinical approval.
+
+## Group variant
+
+Assign laboratory director, LIS analyst, laboratory operations and clinical service roles. Add clinical informatics and a patient advocate when considering ordering or chart use. Ask each person to state one requirement, one risk and the evidence needed before approval. The director then summarizes what can proceed and what must be resolved.
+
+## Assess transfer
+
+Trace one report through specimen, result and patient records, naming each responsible team. A strong response names the record, responsible person, first check and an unresolved risk. Use the three learner retrieval questions to distinguish an unsupported shortcut from a reasoned decision.
+
+## PIER coverage
+
+- 1.1: Assign technical work and clinical report approval, then decide whether the service is ready.
+- 1.2: Assign technical work and clinical report approval, then decide whether the service is ready.
+- 1.3: Assign technical work and clinical report approval, then decide whether the service is ready.
+- 8.1: Assign technical work and clinical report approval, then decide whether the service is ready.
+
+
+## Additional source discussion
+
+### Sources used for this lesson
+
+- API *Pathology Informatics and Data*, Session 0, especially slides 5, 8, and 11–13: the distinction between IT and informatics, laboratory information stewardship, and informatics work for pathologists.
+- API *Laboratory Information Systems and Health Information Systems*, Session 3, especially slides 7–13 and 18: LIS content, test build and testing, laboratory signoff, and review of the EHR result report.
+- API *System Implementation and Management*, Session 9, especially slides 4–7: the scope, makeup, governance, and routine work of the pathology IT application-management group, often locally called the LIS team.
+- Henricks WH, Wilkerson ML, Castellani WJ, Whitsitt MS, Sinard JH. [Pathologists as stewards of laboratory information](https://pubmed.ncbi.nlm.nih.gov/25724030/). *Arch Pathol Lab Med.* 2015;139(3):332–337.
+- College of American Pathologists. [Don't Forget Your Rules When Harmonizing Laboratory Testing Across Multiple Sites](https://www.cap.org/member-resources/clinical-informatics-resources/dont-forget-your-rules-when-harmonizing-laboratory-testing-across-multiple-sites).
+
+The case, role assignments, and support calls are original educational material. The source concepts are summarized rather than reproduced.
+
+
+### Further study with API teaching slides
+
+In [Association for Pathology Informatics teaching slides: Pathology Informatics and Data (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%200%20Orientation%20slides.pptx), review slides 12–13. Trace the pathologist's responsibility for laboratory information beyond the laboratory information system. Which person should approve the complete report in the receiving chart?

@@ -1,6 +1,48 @@
 # Faculty guide: Five Vs in the Slide Archive
 
-Ask learners to connect every proposed component to a specific workload. Challenge solutions that merely add storage or compression without addressing peak flow, linkage, retrieval targets, and governance.
+## At a glance
+
+Allow 30 minutes, alone or in a small group. PIER 2.3: apply the five Vs, connect pathology data sources and review use of a combined dataset. Project the five records before displaying feedback.
+
+## Run of show
+
+| Minutes | Activity | Ask |
+| --- | --- | --- |
+| 0–5 | Establish the tumor-board question | Which tumor and clinical episode are being discussed? |
+| 5–12 | Match the five archive observations | Which problem would more storage actually solve? |
+| 12–23 | Review record links | What independent source supports each correction? |
+| 23–30 | Choose a workload test and debrief | What must remain correct while the scanners are busy? |
+
+## Expected answers
+
+Archive observations map to volume, velocity, variety, veracity and value in order. Record actions: TB-01 block; TB-02 keep; TB-03 patient; TB-04 specimen; TB-05 case/encounter. Choose the peak-traffic test with concurrent clinical retrieval. A blanket hold does not repair the valid TB-02 link or establish a working service.
+
+The rounded annual rate is 1.9 × 10^15 bytes / (365 × 24 × 3600 seconds), about 60 MB/s. The overnight peak is about 500 MB/s. Neither figure includes all storage copies. The missing-link proportion is 2,160 / 120,000 = 1.8%.
+
+## Common misconceptions
+
+- A patient match proves the specimen match. Ask which cancer and collection the finding belongs to.
+- An image identifier names the block. Ask where the file-to-block association was recorded.
+- Enough disk guarantees responsive retrieval. Ask what happens during simultaneous scanning.
+- Every mismatch should be fixed by changing the source label. Ask what evidence authorizes the correction.
+
+## Discussion prompts
+
+1. When should the view show a missing finding? A strong answer includes keeping unresolved records separate and naming who will resolve them.
+2. Which performance measure matters to a pathologist opening a slide? A strong answer includes the first field of view and concurrent clinical work.
+3. What must accompany a research copy? A strong answer includes access controls, provenance, versions and selection criteria.
+
+## Group variant
+
+Assign a pathologist, LIS analyst, archive administrator and tumor-board clinician. Each explains the evidence their system can supply before the group agrees on corrections.
+
+## Assess transfer
+
+Ask the resident to identify a different example where the right patient's record contains evidence from the wrong specimen or episode.
+
+## Sources
+
+Use the API data science and digital pathology sessions listed in the source panel. The five-V framework supports the questions; the case values and acceptance target are local exercise assumptions.
 
 ## Preparing discussion with API slides
 

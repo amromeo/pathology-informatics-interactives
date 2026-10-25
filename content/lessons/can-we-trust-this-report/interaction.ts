@@ -14,8 +14,8 @@ export type ReportRow = {
   specimenGroup: SpecimenGroup;
   eligible: boolean;
   amended: boolean;
-  currentPostIncluded: boolean;
-  fairPostIncluded: boolean;
+  originalTwoPeriodGroup: boolean;
+  revisedThreePeriodGroup: boolean;
 };
 
 const parseBoolean = (value: string) => value === "yes";
@@ -36,8 +36,8 @@ export const reportRows: ReportRow[] = reportCsv
       specimenGroup,
       eligible,
       amended,
-      currentPostIncluded,
-      fairPostIncluded,
+      originalTwoPeriodGroup,
+      revisedThreePeriodGroup,
     ] = line.trim().split(",");
     return {
       accessionId,
@@ -50,8 +50,8 @@ export const reportRows: ReportRow[] = reportCsv
       specimenGroup: specimenGroup as SpecimenGroup,
       eligible: parseBoolean(eligible),
       amended: parseBoolean(amended),
-      currentPostIncluded: parseBoolean(currentPostIncluded),
-      fairPostIncluded: parseBoolean(fairPostIncluded),
+      originalTwoPeriodGroup: parseBoolean(originalTwoPeriodGroup),
+      revisedThreePeriodGroup: parseBoolean(revisedThreePeriodGroup),
     };
   });
 
@@ -77,8 +77,8 @@ export const summarize = (rows: ReportRow[]) => ({
 export const baselineRows = reportRows.filter((row) => row.period === "baseline");
 export const cutoverRows = reportRows.filter((row) => row.period === "cutover");
 export const stabilizedRows = reportRows.filter((row) => row.period === "stabilized");
-export const originalPostRows = reportRows.filter((row) => row.currentPostIncluded);
-export const fairPostRows = reportRows.filter((row) => row.fairPostIncluded);
+export const originalPostRows = reportRows.filter((row) => row.originalTwoPeriodGroup);
+export const fairPostRows = reportRows.filter((row) => row.revisedThreePeriodGroup);
 
 export const reportSummaries = {
   baseline: summarize(baselineRows),
@@ -196,8 +196,7 @@ export const dataPathChoices = [
   },
   {
     id: "blank-lis",
-    label:
-      "The quality coordinator used the time documented on the requisition and in the cutover log",
+    label: "The coordinator used the requisition and cutover log",
     correct: true,
     feedback:
       "The structured LIS field is blank, but the same accession event was documented during cutover. The coordinator entered that documented time in a separate spreadsheet column, calculated TAT, and kept the case in the report.",
@@ -224,7 +223,7 @@ export const qualityChecks = [
     prompt: "Does the accession time in the LIS match the time on the requisition?",
     answer: "accuracy",
     explanation:
-      "This checks accuracy. For the example case, the requisition shows a time but the structured LIS field is blank.",
+      "This checks accuracy: a recorded LIS accession time should agree with the requisition. For the 428 cases with a structured time, the two can be compared. For the 27 blank fields, accuracy cannot be judged until a value exists; that gap is a completeness problem.",
   },
   {
     id: "missing-time",
@@ -286,8 +285,7 @@ export const qualityTerms = [
 export const repairChoices = [
   {
     id: "defined-cutover",
-    label:
-      "Report pre-go-live, cutover week, and post-go-live after cutover as three separate groups",
+    label: "Report all cases in three defined periods",
     detail: "Keep all 455 cases in the report and state which dates belong to each group.",
     correct: true,
     feedback:
@@ -313,30 +311,47 @@ export const repairChoices = [
 
 export const validationCases = [
   {
+    passingRepairs: ["defined-cutover"] as string[],
+    failNote: "The chosen grouping still mixes the transition with routine operation.",
     label: "Three periods",
     result:
       "The report shows 210 pre-go-live cases, 35 cutover cases, and 210 post-go-live cases after cutover.",
   },
   {
+    passingRepairs: ["defined-cutover", "creation-time"] as string[],
+    failNote: "Removing the 27 cases loses known prolonged cases.",
     label: "All cases retained",
     result: "Each of the 455 cases appears once; the cutover cases are separated, not deleted.",
   },
   {
+    passingRepairs: ["defined-cutover", "missing-only", "creation-time"] as string[],
+    failNote: "Use one accession-to-initial-final definition for every group.",
     label: "TAT definition",
     result:
       "All three periods use accession to the initial final report, measured in working days.",
   },
   {
+    passingRepairs: ["defined-cutover", "creation-time"] as string[],
+    failNote: "The proposed report omits recovered accession-time provenance.",
     label: "Accession-time source",
     result:
       "The report identifies the 27 cutover times recovered from requisitions and the paper cutover log.",
   },
-  { label: "Amendments", result: "Amended reports remain linked to one accession row." },
   {
+    passingRepairs: ["defined-cutover", "missing-only", "creation-time"] as string[],
+    failNote: "Keep amendments attached to the original accession.",
+    label: "Amendments",
+    result: "Amended reports remain linked to one accession row.",
+  },
+  {
+    passingRepairs: ["defined-cutover"] as string[],
+    failNote: "The report needs both center and spread for each period.",
     label: "Summary statistics",
     result: "Mean, median, and biopsy/resection counts remain available for each period.",
   },
   {
+    passingRepairs: ["defined-cutover"] as string[],
+    failNote: "The recommendation must also prevent future missing accession times.",
     label: "Future workflow",
     result: "The structured accession-time field is required after cutover.",
   },
@@ -353,4 +368,31 @@ export const workingDaysBetween = (start: Date, end: Date): number => {
   const startMinutes = start.getHours() * 60 + start.getMinutes();
   const endMinutes = end.getHours() * 60 + end.getMinutes();
   return weekdays + (endMinutes - startMinutes) / (24 * 60);
+};
+
+export const lessonCopy = {
+  text01:
+    "The 35 cutover cases are shown in their own group rather than mixed with the later post-go-live cases",
+  text02:
+    "Mean and median turnaround time are stable before go-live, rise sharply during cutover week, and then return slightly below the pre-go-live values.",
+  text03:
+    "Each point summarizes the cases accessioned during one week. The solid line shows the mean; the dashed line shows the median. Cutover week is shaded.",
+  text04:
+    "Start with the original comparison. Look at the pre- and post-go-live mean and median. Do they point to the same conclusion?",
+  text05:
+    "This is one of the 27 cutover cases whose accession time was not entered into the structured LIS field. The quality coordinator still calculated its TAT using the time documented during cutover. Compare the LIS record with the scanned requisition and confirm where the time was recorded.",
+  text06:
+    "The quality coordinator used the time on the requisition and paper cutover log to calculate TAT for this case in the spreadsheet. The case remained in the post-go-live report, but its accession time came from a different source than usual.",
+  text07:
+    "Use it to confirm that all 35 cutover cases were included in the original post-go-live group and that they remain visible after cutover week is shown separately.",
+  text08:
+    "The original two-period comparison mixes a difficult cutover week with six later weeks of routine operation. Choose a report structure that shows what happened without hiding any cases.",
+  text09:
+    "The quality coordinator has now placed the 35 cutover cases in their own group. No cases were removed. Compare the three rows and decide whether they explain why the original post-go-live mean and median disagreed.",
+  text10:
+    "Cutover cases had a mean TAT of 8.4 working days and a median of 9.5. After cutover, the mean was 3.0 and the median was 2.5. Mixing those periods produced a post-go-live mean of 3.8 even though the median was 2.5.",
+  text11:
+    "It shows a severe, temporary delay during cutover and a modest improvement afterward. All 455 cases remain visible, and the report states that 27 cutover accession times were recovered from requisitions and the paper cutover log.",
+  text12:
+    "The weekly view shows why one pre/post summary was misleading. Follow both lines across the six pre-go-live weeks, cutover week, and the six weeks after cutover.",
 };

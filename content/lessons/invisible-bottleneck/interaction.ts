@@ -106,3 +106,14 @@ export const queuePlans = [
     note: "Preserve clinical rules, assign trained review coverage, resolve the two open accessions, and compare post-analysis delays and balancing measures during the pilot.",
   },
 ];
+
+export const lessonCopy = {
+  text01:
+    "Selected records · times on the review day. Minutes show the completed interval, or age since receipt for pending results.",
+};
+
+export const sectionPurposes = [
+  "Check when data were copied and whether unfinished specimens are included.",
+  "Link the timestamps and choose a population that can answer the manager’s question.",
+  "Match the proposed intervention to the observed delay and specify how to assess it.",
+];

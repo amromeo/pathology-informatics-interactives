@@ -1,3 +1,6 @@
+import { mustFind } from "./lesson-ui/mustFind";
+import { orderedChoices } from "./lesson-ui";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState, type ComponentType } from "react";
 import {
   auditEvents,
@@ -24,7 +27,11 @@ export function SpecimenRoutingExperience({
   const [config, setConfig] = useState<RoutingConfig>(() => structuredClone(initialRouting));
   const [tested, setTested] = useState(false);
   const [recovery, setRecovery] = useState("");
-  const event = auditEvents.find((item) => item.id === eventId)!;
+  const event = mustFind(
+    auditEvents,
+    (item) => item.id === eventId,
+    "SpecimenRoutingExperience.tsx auditEvents",
+  );
   const results = runRoutingCases(config);
   const selectedRecovery = recoveryChoices.find((item) => item.id === recovery);
   const updateConfig = (next: RoutingConfig) => {
@@ -85,7 +92,7 @@ export function SpecimenRoutingExperience({
             return (
               <fieldset key={question.id}>
                 <legend>{question.prompt}</legend>
-                {question.choices.map((choice) => (
+                {orderedChoices("SpecimenRoutingExperience.tsx", question.choices).map((choice) => (
                   <label key={choice.id}>
                     <input
                       type="radio"
@@ -98,14 +105,13 @@ export function SpecimenRoutingExperience({
                     <span>{choice.label}</span>
                   </label>
                 ))}
-                {selected && (
-                  <div
-                    className={`feedback ${selected.correct ? "correct" : "incorrect"}`}
-                    role="status"
-                  >
-                    <p>{selected.feedback}</p>
-                  </div>
-                )}
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {selected && (
+                    <div className={`feedback ${selected.correct ? "correct" : "incorrect"}`}>
+                      <p>{selected.feedback}</p>
+                    </div>
+                  )}
+                </div>
               </fieldset>
             );
           })}
@@ -152,20 +158,21 @@ export function SpecimenRoutingExperience({
                   ))}
                 </select>
               </label>
-              {tested && (
-                <p
-                  className={
-                    config.routes[procedure.code] === procedure.approved
-                      ? "specimen-pass"
-                      : "specimen-fail"
-                  }
-                  role="status"
-                >
-                  {config.routes[procedure.code] === procedure.approved
-                    ? "Matches the approved route."
-                    : "This entry assigns the procedure to a different work area."}
-                </p>
-              )}
+              <div role="status" aria-live="polite" aria-atomic="true">
+                {tested && (
+                  <p
+                    className={
+                      config.routes[procedure.code] === procedure.approved
+                        ? "specimen-pass"
+                        : "specimen-fail"
+                    }
+                  >
+                    {config.routes[procedure.code] === procedure.approved
+                      ? "Matches the approved route."
+                      : "This entry assigns the procedure to a different work area."}
+                  </p>
+                )}
+              </div>
             </article>
           ))}
         </div>
@@ -207,18 +214,20 @@ export function SpecimenRoutingExperience({
               <p>
                 <code>{result.code}</code> · Expected: {destinations[result.expected]}
               </p>
-              {tested && (
-                <div role="status">
-                  <strong>
-                    {result.passed ? "Pass" : "Revise"} · {destinations[result.actual]}
-                  </strong>
-                  <p>
-                    {result.passed
-                      ? "The configured destination matches the approved route for this case."
-                      : result.consequence}
-                  </p>
-                </div>
-              )}
+              <div role="status" aria-live="polite" aria-atomic="true">
+                {tested && (
+                  <div>
+                    <strong>
+                      {result.passed ? "Pass" : "Revise"} · {destinations[result.actual]}
+                    </strong>
+                    <p>
+                      {result.passed
+                        ? "The configured destination matches the approved route for this case."
+                        : result.consequence}
+                    </p>
+                  </div>
+                )}
+              </div>
             </article>
           ))}
         </div>
@@ -233,7 +242,7 @@ export function SpecimenRoutingExperience({
         </div>
         <fieldset className="specimen-recovery">
           <legend>What must staff do about container C-1042-A?</legend>
-          {recoveryChoices.map((choice) => (
+          {orderedChoices("SpecimenRoutingExperience.tsx", recoveryChoices).map((choice) => (
             <label key={choice.id}>
               <input
                 type="radio"
@@ -248,36 +257,34 @@ export function SpecimenRoutingExperience({
             </label>
           ))}
         </fieldset>
-        {selectedRecovery && (
-          <div
-            className={`feedback ${selectedRecovery.correct ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <p>{selectedRecovery.feedback}</p>
-          </div>
-        )}
-        {tested && selectedRecovery && (
-          <div
-            className={`feedback ${readyForReview(config, recovery) ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {readyForReview(config, recovery)
-                ? "Routing checks and the recovery plan are ready for laboratory review."
-                : "The correction still needs work before laboratory review."}
-            </strong>
-            <p>
-              {readyForReview(config, recovery)
-                ? "The LIS analyst can document the tested configuration for clinical approval. The receiving team still must verify the container and record its actual handoff."
-                : "Both the complete routing matrix and a documented physical recovery plan are required. A passing routing test cannot create evidence of specimen receipt."}
-            </p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {selectedRecovery && (
+            <div className={`feedback ${selectedRecovery.correct ? "correct" : "incorrect"}`}>
+              <p>{selectedRecovery.feedback}</p>
+            </div>
+          )}
+        </div>
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {tested && selectedRecovery && (
+            <div
+              className={`feedback ${readyForReview(config, recovery) ? "correct" : "incorrect"}`}
+            >
+              <strong>
+                {readyForReview(config, recovery)
+                  ? "Routing checks and the recovery plan are ready for laboratory review."
+                  : "The correction still needs work before laboratory review."}
+              </strong>
+              <p>
+                {readyForReview(config, recovery)
+                  ? "The LIS analyst can document the tested configuration for clinical approval. The receiving team still must verify the container and record its actual handoff."
+                  : "Both the complete routing matrix and a documented physical recovery plan are required. A passing routing test cannot create evidence of specimen receipt."}
+              </p>
+            </div>
+          )}
+        </div>
       </section>
       <div className="reset-row">
-        <button type="button" className="text-button" onClick={reset}>
-          Reset lesson interactions
-        </button>
+        <ResetLessonButton fallback={reset} />
       </div>
     </div>
   );

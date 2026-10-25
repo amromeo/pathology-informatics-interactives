@@ -11,7 +11,7 @@ Completed October 22, 2026. Existing lesson URLs are preserved.
 
 Each lesson has introduction, concepts, bridge, debrief, faculty, and practicum
 MDX. Case records and structured feedback are lesson-local TypeScript. The
-168-hour review window is explicitly local; cancellations and acknowledgements
+90-day review window is explicitly local; cancellations and acknowledgements
 are not treated as evidence of clinical benefit. The observed pilot dataset is
 independent of the configurable replay.
 

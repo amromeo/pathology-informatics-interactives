@@ -30,10 +30,10 @@ export type OrderCase = {
 export const orderCases: OrderCase[] = [
   {
     id: "CD-01",
-    label: "Usable final result 72 hours ago",
+    label: "Usable final result 30 days ago",
     role: "ordering",
     prior: "final",
-    hours: 72,
+    hours: 720,
     exception: false,
   },
   {
@@ -41,7 +41,7 @@ export const orderCases: OrderCase[] = [
     label: "Collecting nurse opens the same chart",
     role: "collecting",
     prior: "final",
-    hours: 72,
+    hours: 720,
     exception: false,
   },
   {
@@ -54,10 +54,10 @@ export const orderCases: OrderCase[] = [
   },
   {
     id: "CD-04",
-    label: "Final result 169 hours ago",
+    label: "Final result 90 days and 1 hour ago",
     role: "ordering",
     prior: "final",
-    hours: 169,
+    hours: 2161,
     exception: false,
   },
   {
@@ -65,7 +65,7 @@ export const orderCases: OrderCase[] = [
     label: "Recent result; clinical reason to repeat documented",
     role: "ordering",
     prior: "final",
-    hours: 72,
+    hours: 720,
     exception: true,
   },
   {
@@ -73,7 +73,7 @@ export const orderCases: OrderCase[] = [
     label: "Previous result marked unusable",
     role: "ordering",
     prior: "unusable",
-    hours: 72,
+    hours: 720,
     exception: false,
   },
   {
@@ -86,15 +86,15 @@ export const orderCases: OrderCase[] = [
   },
   {
     id: "CD-08",
-    label: "Final result exactly 168 hours ago",
+    label: "Final result exactly 90 days ago",
     role: "ordering",
     prior: "final",
-    hours: 168,
+    hours: 2160,
     exception: false,
   },
 ];
 export const candidate = (row: OrderCase) =>
-  row.prior === "pending" || (row.prior === "final" && row.hours <= 168);
+  row.prior === "pending" || (row.prior === "final" && row.hours <= 2160);
 export function cdsOutcome(config: CdsConfig, row: OrderCase) {
   const eligible = candidate(row);
   const shown = eligible && (config.person === "all" || row.role === "ordering");
@@ -223,14 +223,14 @@ export const cdsSources = [
   {
     title: "Prior laboratory report",
     record:
-      "Patient 62018 · Accession A26090718\nCollected: 07 Sep 2026 09:14\nHbA1c: 6.8 %\nStatus: Final\nReport quality: Usable\nCurrent order time: 10 Sep 2026 09:14",
-    note: "The prior report was collected 72 hours before the current order. Confirm patient identity, collection time, report status, and usability before using it.",
+      "Patient 62018 · Accession A26090718\nCollected: 11 Aug 2026 09:14\nHbA1c: 6.8 %\nStatus: Final\nReport quality: Usable\nCurrent order time: 10 Sep 2026 09:14",
+    note: "The prior report was collected 30 days before the current order. Confirm patient identity, collection time, report status, and usability before using it.",
   },
   {
     title: "Approved review specification",
     record:
-      "Repeat-test guidance · version 2\nScope: HbA1c order review\nShow a usable final result collected within 168 hours,\nor an existing pending order for the same patient/test.\nRetain the option to proceed with a clinical reason.\nDo not interrupt collection staff.\nClinical approval: laboratory director and CDS committee",
-    note: "The 168-hour window belongs to this institution's case specification. It is a trigger to review available information, not a universal testing interval or a determination that every repeat is unnecessary.",
+      "Repeat-test guidance · version 2\nScope: HbA1c order review\nShow a usable final result collected within 90 days,\nor an existing pending order for the same patient/test.\nRetain the option to proceed with a clinical reason.\nDo not interrupt collection staff.\nClinical approval: laboratory director and CDS committee",
+    note: "The 90-day window belongs to this institution's case specification. It is a trigger to review available information, not a universal testing interval or a determination that every repeat is unnecessary.",
   },
 ];
 export const responseNotes = {
@@ -239,3 +239,215 @@ export const responseNotes = {
   continue:
     "The order is retained with a documented clinical reason. An override can represent appropriate care; audit the reason and review selected cases.",
 };
+
+export const additionalExercises = {
+  title: "Compare decision support categories",
+  purpose:
+    "Choose the workflow category for each laboratory example and consider whether it interrupts work.",
+  questions: [
+    {
+      id: "CDS1",
+      prompt: "A sepsis order set offers a coordinated group of tests.",
+      answer: "order",
+      choices: [
+        {
+          id: "order",
+          label: "Order set",
+        },
+        {
+          id: "duplicate",
+          label: "Duplicate-order guidance",
+        },
+        {
+          id: "interpret",
+          label: "Interpretive comment",
+        },
+        {
+          id: "notify",
+          label: "Critical-result notification",
+        },
+        {
+          id: "information",
+          label: "Test information",
+        },
+        {
+          id: "reflex",
+          label: "Reflex protocol",
+        },
+      ],
+      feedback:
+        "An order set organizes selections; it can guide ordering without a mandatory interruption.",
+    },
+    {
+      id: "CDS2",
+      prompt: "An inline message shows the prior HbA1c beside the proposed order.",
+      answer: "duplicate",
+      choices: [
+        {
+          id: "order",
+          label: "Order set",
+        },
+        {
+          id: "duplicate",
+          label: "Duplicate-order guidance",
+        },
+        {
+          id: "interpret",
+          label: "Interpretive comment",
+        },
+        {
+          id: "notify",
+          label: "Critical-result notification",
+        },
+        {
+          id: "information",
+          label: "Test information",
+        },
+        {
+          id: "reflex",
+          label: "Reflex protocol",
+        },
+      ],
+      feedback:
+        "This noninterrupting suggestion supports a decision using prior results and preserves an exception.",
+    },
+    {
+      id: "CDS3",
+      prompt: "A hemoglobin electrophoresis report includes an interpretation.",
+      answer: "interpret",
+      choices: [
+        {
+          id: "order",
+          label: "Order set",
+        },
+        {
+          id: "duplicate",
+          label: "Duplicate-order guidance",
+        },
+        {
+          id: "interpret",
+          label: "Interpretive comment",
+        },
+        {
+          id: "notify",
+          label: "Critical-result notification",
+        },
+        {
+          id: "information",
+          label: "Test information",
+        },
+        {
+          id: "reflex",
+          label: "Reflex protocol",
+        },
+      ],
+      feedback:
+        "A report comment guides interpretation after testing; it is not an order-entry pop-up.",
+    },
+    {
+      id: "CDS4",
+      prompt: "A critical potassium result requires a documented call.",
+      answer: "notify",
+      choices: [
+        {
+          id: "order",
+          label: "Order set",
+        },
+        {
+          id: "duplicate",
+          label: "Duplicate-order guidance",
+        },
+        {
+          id: "interpret",
+          label: "Interpretive comment",
+        },
+        {
+          id: "notify",
+          label: "Critical-result notification",
+        },
+        {
+          id: "information",
+          label: "Test information",
+        },
+        {
+          id: "reflex",
+          label: "Reflex protocol",
+        },
+      ],
+      feedback:
+        "This communication deliberately interrupts work because the result needs timely review and an accountable recipient.",
+    },
+    {
+      id: "CDS5",
+      prompt: "The order screen shows the required tube and collection instructions.",
+      answer: "information",
+      choices: [
+        {
+          id: "order",
+          label: "Order set",
+        },
+        {
+          id: "duplicate",
+          label: "Duplicate-order guidance",
+        },
+        {
+          id: "interpret",
+          label: "Interpretive comment",
+        },
+        {
+          id: "notify",
+          label: "Critical-result notification",
+        },
+        {
+          id: "information",
+          label: "Test information",
+        },
+        {
+          id: "reflex",
+          label: "Reflex protocol",
+        },
+      ],
+      feedback:
+        "Information at order entry can prevent collection errors without requiring a modal alert.",
+    },
+    {
+      id: "CDS6",
+      prompt: "A defined thyroid result adds the indicated follow-up assay.",
+      answer: "reflex",
+      choices: [
+        {
+          id: "order",
+          label: "Order set",
+        },
+        {
+          id: "duplicate",
+          label: "Duplicate-order guidance",
+        },
+        {
+          id: "interpret",
+          label: "Interpretive comment",
+        },
+        {
+          id: "notify",
+          label: "Critical-result notification",
+        },
+        {
+          id: "information",
+          label: "Test information",
+        },
+        {
+          id: "reflex",
+          label: "Reflex protocol",
+        },
+      ],
+      feedback:
+        "A reflex rule acts on a prior result. Its approved conditions and exceptions need validation even when no message is shown.",
+    },
+  ],
+};
+
+export const sectionPurposes = [
+  "Find who received the guidance and whether it arrived before the ordering decision.",
+  "Choose the recipient, timing, display and exception handling for a repeat-test review.",
+  "Check intended interruptions and justified orders across the full encounter set.",
+];

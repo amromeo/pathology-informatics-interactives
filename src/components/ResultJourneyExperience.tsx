@@ -1,5 +1,16 @@
+import { ChoiceGroup, Feedback } from "./lesson-ui";
+import {
+  pathwayExplanations,
+  classExplanations,
+  evidenceQuestions,
+} from "../../content/lessons/inside-a-results-journey/interaction";
+import { lessonCopy } from "../../content/lessons/inside-a-results-journey/interaction";
+import { orderedChoices } from "./lesson-ui";
+import { tabKeys } from "./lesson-ui/tabKeys";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState, type ComponentType } from "react";
 import {
+  firstChecks,
   classLabels,
   componentClasses,
   connectionChoices,
@@ -12,30 +23,6 @@ import {
 
 type MdxComponent = ComponentType<Record<string, unknown>>;
 
-const firstChecks = [
-  {
-    id: "lis",
-    label: "Check the CBC in the LIS.",
-    correct: true,
-    feedback:
-      "Yes. The ED can only see that the CBC is still pending in the EHR. The hematology lab checks the LIS and finds that the result is already final.",
-  },
-  {
-    id: "repeat",
-    label: "Repeat the CBC now.",
-    correct: false,
-    feedback:
-      "First determine whether testing is actually delayed. Repeating a completed CBC would not explain why the report is missing from the EHR.",
-  },
-  {
-    id: "refresh",
-    label: "Ask the ED to refresh the patient chart.",
-    correct: false,
-    feedback:
-      "A screen refresh is reasonable only after the laboratory checks whether the CBC was completed and released.",
-  },
-] as const;
-
 const expectedPath = [...pathwayOrder];
 
 export function ResultJourneyExperience({
@@ -47,6 +34,7 @@ export function ResultJourneyExperience({
   Downtime?: MdxComponent;
   onAttempt?: (attempted: boolean) => void;
 }) {
+  const [evidenceAnswers, setEvidenceAnswers] = useState<Record<string, string>>({});
   const [firstCheck, setFirstCheck] = useState<string | null>(null);
   const [path, setPath] = useState<string[]>([]);
   const [pathFeedback, setPathFeedback] = useState(
@@ -84,8 +72,8 @@ export function ResultJourneyExperience({
     setPath(nextPath);
     setPathFeedback(
       nextPath.length === expectedPath.length
-        ? "The reporting path is complete."
-        : "Good. Select the next component.",
+        ? "The reporting path is complete. " + pathwayExplanations[id]
+        : pathwayExplanations[id] + " Select the next component.",
     );
   };
 
@@ -95,6 +83,7 @@ export function ResultJourneyExperience({
   };
 
   const reset = () => {
+    setEvidenceAnswers({});
     setFirstCheck(null);
     setPath([]);
     setPathFeedback("Select the first component in the reporting path.");
@@ -120,7 +109,7 @@ export function ResultJourneyExperience({
         <div className="journey-call-grid">
           <article className="ehr-pending-card">
             <header>
-              <span>Synthetic educational artifact</span>
+              <span>System record</span>
               <strong>Emergency department chart</strong>
             </header>
             <div>
@@ -142,33 +131,33 @@ export function ResultJourneyExperience({
               aria-label="First laboratory check"
             >
               {firstChecks.map((choice) => (
-                <button
-                  type="button"
-                  role="radio"
-                  aria-checked={firstCheck === choice.id}
-                  className={firstCheck === choice.id ? "selected" : ""}
-                  key={choice.id}
-                  onClick={() => setFirstCheck(choice.id)}
-                >
-                  <strong>{choice.label}</strong>
-                </button>
+                <label key={choice.id} className={firstCheck === choice.id ? "selected" : ""}>
+                  <input
+                    type="radio"
+                    name="ResultJourneyExperience.tsx-1"
+                    checked={firstCheck === choice.id}
+                    onChange={() => setFirstCheck(choice.id)}
+                  />
+                  <span>
+                    <strong>{choice.label}</strong>
+                  </span>
+                </label>
               ))}
             </div>
           </div>
         </div>
-        {selectedFirstCheck && (
-          <div
-            className={`feedback ${selectedFirstCheck.correct ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {selectedFirstCheck.correct
-                ? "Start in the LIS."
-                : "Check the laboratory record first."}
-            </strong>
-            <p>{selectedFirstCheck.feedback}</p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {selectedFirstCheck && (
+            <div className={`feedback ${selectedFirstCheck.correct ? "correct" : "incorrect"}`}>
+              <strong>
+                {selectedFirstCheck.correct
+                  ? "Start in the LIS."
+                  : "Check the laboratory record first."}
+              </strong>
+              <p>{selectedFirstCheck.feedback}</p>
+            </div>
+          )}
+        </div>
         {firstCheck === "lis" && (
           <article className="lis-result-card" aria-label="LIS result record">
             <header>
@@ -182,7 +171,7 @@ export function ResultJourneyExperience({
               </div>
               <div>
                 <dt>Verified by</dt>
-                <dd>M. Chen, MLS</dd>
+                <dd>M. Okafor, MLS</dd>
               </div>
               <div>
                 <dt>Verified</dt>
@@ -239,19 +228,21 @@ export function ResultJourneyExperience({
             <button
               type="button"
               key={node.id}
-              disabled={path.includes(node.id)}
-              onClick={() => placeNode(node.id)}
+              aria-disabled={path.includes(node.id)}
+              onClick={() => {
+                if (!path.includes(node.id)) placeNode(node.id);
+              }}
             >
               <strong>{node.label}</strong>
               <small>{node.location}</small>
             </button>
           ))}
         </div>
-        <div className="pathway-status" role="status">
+        <div className="pathway-status">
           <span>
             {path.length} of {expectedPath.length} placed
           </span>
-          <p>{pathFeedback}</p>
+          <p role="status">{pathFeedback}</p>
           {path.length > 0 && (
             <button
               type="button"
@@ -274,10 +265,7 @@ export function ResultJourneyExperience({
               </div>
             )}
             <h3>Classify the components</h3>
-            <p>
-              Choose the best category for each item. Some systems include more than one kind of
-              component; classify the item named in each row.
-            </p>
+            <p>{lessonCopy.text01}</p>
             <div className="classification-list">
               {componentClasses.map((item) => (
                 <fieldset key={item.id}>
@@ -298,20 +286,21 @@ export function ResultJourneyExperience({
                       </label>
                     ))}
                   </div>
-                  {classifications[item.id] && (
-                    <p
-                      className={
-                        classifications[item.id] === item.answer
-                          ? "class-correct"
-                          : "class-incorrect"
-                      }
-                      role="status"
-                    >
-                      {classifications[item.id] === item.answer
-                        ? `Yes — ${classLabels[item.answer]}.`
-                        : `Try again. This item is ${classLabels[item.answer].toLowerCase()}.`}
-                    </p>
-                  )}
+                  <div role="status" aria-live="polite" aria-atomic="true">
+                    {classifications[item.id] && (
+                      <p
+                        className={
+                          classifications[item.id] === item.answer
+                            ? "class-correct"
+                            : "class-incorrect"
+                        }
+                      >
+                        {classifications[item.id] === item.answer
+                          ? classExplanations[item.id]
+                          : `Reconsider the function of this item. ${classExplanations[item.id]}`}
+                      </p>
+                    )}
+                  </div>
                 </fieldset>
               ))}
             </div>
@@ -330,16 +319,17 @@ export function ResultJourneyExperience({
             <h2 id="evidence-title">See what each system recorded</h2>
           </div>
         </div>
-        <p className="section-guidance">
-          The LIS team starts with the laboratory systems, then follows the result toward the EHR.
-          Open each check and decide what it rules in or out.
-        </p>
+        <p className="section-guidance">{lessonCopy.text02}</p>
         <div className="evidence-tabs" role="tablist" aria-label="Available system checks">
           {evidenceViews.map((view, index) => (
             <button
               type="button"
               role="tab"
               aria-selected={activeEvidence === view.id}
+              tabIndex={activeEvidence === view.id ? 0 : -1}
+              id={"system-evidence-tab-" + view.id}
+              aria-controls="system-evidence-panel"
+              onKeyDown={tabKeys}
               className={activeEvidence === view.id ? "active" : ""}
               key={view.id}
               onClick={() => chooseEvidence(view.id)}
@@ -350,9 +340,14 @@ export function ResultJourneyExperience({
             </button>
           ))}
         </div>
-        <article className="system-evidence" role="tabpanel">
+        <article
+          className="system-evidence"
+          role="tabpanel"
+          id="system-evidence-panel"
+          aria-labelledby={"system-evidence-tab-" + activeEvidence}
+        >
           <header>
-            <span>Synthetic educational artifact</span>
+            <span>System record</span>
             <strong>{selectedEvidence.tab} check</strong>
           </header>
           <div className="system-evidence-heading">
@@ -373,6 +368,21 @@ export function ResultJourneyExperience({
             </pre>
           )}
         </article>
+        <ChoiceGroup
+          question="What does this check rule out?"
+          value={evidenceAnswers[activeEvidence] ?? ""}
+          choices={evidenceQuestions[activeEvidence].choices}
+          onChange={(value) => setEvidenceAnswers({ ...evidenceAnswers, [activeEvidence]: value })}
+        />
+        <Feedback
+          tone={
+            evidenceAnswers[activeEvidence] === evidenceQuestions[activeEvidence].answer
+              ? "correct"
+              : "incorrect"
+          }
+        >
+          {evidenceAnswers[activeEvidence] && evidenceQuestions[activeEvidence].feedback}
+        </Feedback>
       </section>
 
       <section className="lesson-section decision-section" aria-labelledby="diagnosis-title">
@@ -390,53 +400,58 @@ export function ResultJourneyExperience({
           aria-label="Connections in the result reporting path"
         >
           <div className="diagnosis-node">Analyzer</div>
-          <button
-            type="button"
-            role="radio"
-            aria-checked={diagnosis === "analyzer-lis"}
-            className={diagnosis === "analyzer-lis" ? "selected" : ""}
-            onClick={() => setDiagnosis("analyzer-lis")}
-          >
-            <span>→</span>
-            <strong>Analyzer to LIS</strong>
-          </button>
+          <label className={diagnosis === "analyzer-lis" ? "selected" : ""}>
+            <input
+              type="radio"
+              name="ResultJourneyExperience.tsx-2"
+              checked={diagnosis === "analyzer-lis"}
+              onChange={() => setDiagnosis("analyzer-lis")}
+            />
+            <span>
+              <span>→</span>
+              <strong>Analyzer to LIS</strong>
+            </span>
+          </label>
           <div className="diagnosis-node">LIS</div>
-          <button
-            type="button"
-            role="radio"
-            aria-checked={diagnosis === "lis-interface"}
-            className={diagnosis === "lis-interface" ? "selected" : ""}
-            onClick={() => setDiagnosis("lis-interface")}
-          >
-            <span>→</span>
-            <strong>LIS to interface</strong>
-          </button>
+          <label className={diagnosis === "lis-interface" ? "selected" : ""}>
+            <input
+              type="radio"
+              name="ResultJourneyExperience.tsx-2"
+              checked={diagnosis === "lis-interface"}
+              onChange={() => setDiagnosis("lis-interface")}
+            />
+            <span>
+              <span>→</span>
+              <strong>LIS to interface</strong>
+            </span>
+          </label>
           <div className="diagnosis-node">Interface engine</div>
-          <button
-            type="button"
-            role="radio"
-            aria-checked={diagnosis === "interface-ehr"}
-            className={diagnosis === "interface-ehr" ? "selected" : ""}
-            onClick={() => setDiagnosis("interface-ehr")}
-          >
-            <span>→</span>
-            <strong>Interface to EHR</strong>
-          </button>
+          <label className={diagnosis === "interface-ehr" ? "selected" : ""}>
+            <input
+              type="radio"
+              name="ResultJourneyExperience.tsx-2"
+              checked={diagnosis === "interface-ehr"}
+              onChange={() => setDiagnosis("interface-ehr")}
+            />
+            <span>
+              <span>→</span>
+              <strong>Interface to EHR</strong>
+            </span>
+          </label>
           <div className="diagnosis-node">EHR</div>
         </div>
-        {selectedDiagnosis && (
-          <div
-            className={`feedback ${selectedDiagnosis.correct ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {selectedDiagnosis.correct
-                ? "You found the failed connection."
-                : "That part of the path carried the result."}
-            </strong>
-            <p>{selectedDiagnosis.feedback}</p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {selectedDiagnosis && (
+            <div className={`feedback ${selectedDiagnosis.correct ? "correct" : "incorrect"}`}>
+              <strong>
+                {selectedDiagnosis.correct
+                  ? "You found the failed connection."
+                  : "That part of the path carried the result."}
+              </strong>
+              <p>{selectedDiagnosis.feedback}</p>
+            </div>
+          )}
+        </div>
       </section>
 
       <section className="lesson-section repair-section" aria-labelledby="repair-title">
@@ -448,35 +463,35 @@ export function ResultJourneyExperience({
           </div>
         </div>
         <div className="choice-stack" role="radiogroup" aria-label="Corrective action choices">
-          {repairChoices.map((choice) => (
-            <button
-              type="button"
-              role="radio"
-              aria-checked={repair === choice.id}
-              className={repair === choice.id ? "selected" : ""}
-              key={choice.id}
-              onClick={() => {
-                setRepair(choice.id);
-                setTestsRun(false);
-              }}
-            >
-              <strong>{choice.label}</strong>
-            </button>
+          {orderedChoices("ResultJourneyExperience.tsx", repairChoices).map((choice) => (
+            <label key={choice.id} className={repair === choice.id ? "selected" : ""}>
+              <input
+                type="radio"
+                name="ResultJourneyExperience.tsx-3"
+                checked={repair === choice.id}
+                onChange={() => {
+                  setRepair(choice.id);
+                  setTestsRun(false);
+                }}
+              />
+              <span>
+                <strong>{choice.label}</strong>
+              </span>
+            </label>
           ))}
         </div>
-        {selectedRepair && (
-          <div
-            className={`feedback ${selectedRepair.correct ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {selectedRepair.correct
-                ? "This addresses the demonstrated failure."
-                : "This does not restore the reporting path."}
-            </strong>
-            <p>{selectedRepair.feedback}</p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {selectedRepair && (
+            <div className={`feedback ${selectedRepair.correct ? "correct" : "incorrect"}`}>
+              <strong>
+                {selectedRepair.correct
+                  ? "This addresses the demonstrated failure."
+                  : "This does not restore the reporting path."}
+              </strong>
+              <p>{selectedRepair.feedback}</p>
+            </div>
+          )}
+        </div>
         {Downtime && (
           <div className="mdx-content embedded-mdx downtime-note">
             <Downtime />
@@ -492,25 +507,44 @@ export function ResultJourneyExperience({
             <h2 id="validation-title">Check the restored connection</h2>
           </div>
         </div>
-        <p className="section-guidance">
-          A single result appearing in the EHR is not enough. Check the delayed reports, a new
-          report, and the downtime record.
-        </p>
-        <article className="test-console journey-validation" aria-live="polite">
+        <p className="section-guidance">{lessonCopy.text03}</p>
+        <article className="test-console journey-validation">
           <header>
             <span>Post-restoration checks</span>
             <strong>
-              {testsRun ? (validationPassed ? "5 of 5 passed" : "0 of 5 passed") : "Not run"}
+              {testsRun
+                ? validationCases.filter((item) => item.passingRepairs.includes(repair ?? ""))
+                    .length +
+                  " of " +
+                  validationCases.length +
+                  " passed"
+                : "Not run"}
             </strong>
           </header>
           {validationCases.map((item) => (
             <div className="test-row" key={item.id}>
               <span>
                 <strong>{item.name}</strong>
-                <small>{item.note}</small>
+                <small>
+                  {testsRun && !item.passingRepairs.includes(repair ?? "")
+                    ? item.failNote
+                    : item.note}
+                </small>
               </span>
-              <b className={!testsRun ? "pending" : validationPassed ? "pass" : "fail"}>
-                {!testsRun ? "Pending" : validationPassed ? "Pass" : "Fail"}
+              <b
+                className={
+                  !testsRun
+                    ? "pending"
+                    : item.passingRepairs.includes(repair ?? "")
+                      ? "pass"
+                      : "fail"
+                }
+              >
+                {!testsRun
+                  ? "Pending"
+                  : item.passingRepairs.includes(repair ?? "")
+                    ? "Pass"
+                    : "Fail"}
               </b>
             </div>
           ))}
@@ -526,26 +560,26 @@ export function ResultJourneyExperience({
             Run the checks
           </button>
         </article>
-        {testsRun && (
-          <div className={`feedback ${validationPassed ? "correct" : "incorrect"}`} role="status">
-            <strong>
-              {validationPassed
-                ? "The incident can be closed."
-                : "The connection has not been restored."}
-            </strong>
-            <p>
-              {validationPassed
-                ? "Hospital IT confirms the firewall correction. The LIS team confirms that the queue cleared and new results are moving. The laboratory confirms that reports reached the correct patient charts and completes downtime reconciliation."
-                : "The selected action did not remove the firewall block. The queued and new reports still cannot reach the EHR."}
-            </p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {testsRun && (
+            <div className={`feedback ${validationPassed ? "correct" : "incorrect"}`}>
+              <strong>
+                {validationPassed
+                  ? "The incident can be closed."
+                  : "The connection has not been restored."}
+              </strong>
+              <p>
+                {validationPassed
+                  ? "hospital IT confirms the firewall correction. The LIS team confirms that the queue cleared and new results are moving. The laboratory confirms that reports reached the correct patient charts and completes downtime reconciliation."
+                  : "The selected action did not remove the firewall block. The queued and new reports still cannot reach the EHR."}
+              </p>
+            </div>
+          )}
+        </div>
       </section>
 
       <div className="reset-row">
-        <button type="button" className="text-button" onClick={reset}>
-          Reset lesson interactions
-        </button>
+        <ResetLessonButton fallback={reset} />
       </div>
     </div>
   );

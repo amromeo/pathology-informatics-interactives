@@ -1,3 +1,7 @@
+import { mustFind } from "./lesson-ui/mustFind";
+import { sectionPurposes } from "../../content/lessons/pixel-budget/interaction";
+import { orderedChoices } from "./lesson-ui";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState } from "react";
 import {
   imageRegions,
@@ -24,7 +28,12 @@ export function PixelBudgetExperience({ Concepts, Bridge, onAttempt }: Topic5Pro
     [planes, setPlanes] = useState(1),
     [copies, setCopies] = useState(2);
   const result = storage(spacing, ratio, planes, copies);
-  const asset = (v: string) => images.find((r) => r.region === region && r.variant === v)!;
+  const asset = (v: string) =>
+    mustFind(
+      images,
+      (r) => r.region === region && r.variant === v,
+      "PixelBudgetExperience.tsx images",
+    );
   const reset = () => {
     setRegion("glands");
     setVariant("reduced");
@@ -38,7 +47,7 @@ export function PixelBudgetExperience({ Concepts, Bridge, onAttempt }: Topic5Pro
   };
   return (
     <div className="topic7">
-      <Section title="Compare the same tissue field">
+      <Section number={1} purpose={sectionPurposes[0]} title="Compare the same tissue field">
         <Teaching Content={Concepts} />
         <div className="topic5-controls">
           <Select
@@ -66,13 +75,23 @@ export function PixelBudgetExperience({ Concepts, Bridge, onAttempt }: Topic5Pro
             return (
               <figure key={i}>
                 <img
+                  width={a.width}
+                  height={a.height}
+                  loading="lazy"
+                  decoding="async"
                   src={`${import.meta.env?.BASE_URL ?? "/"}assets/topic7/${a.path}`}
                   alt={`${region === "glands" ? "Glands and stroma" : "Blurred upper-right tissue"}; ${v === "reference" ? "decoded reference" : v === "reduced" ? "reduced pixel grid" : "strong JPEG compression"}`}
                   style={{ imageRendering: v === "reduced" ? "pixelated" : "auto" }}
                 />
                 <figcaption>
-                  {i === 0 ? "Reference" : imageVariants.find((r) => r[0] === v)![1]} · {a.width} ×{" "}
-                  {a.height} pixels · {a.bytes.toLocaleString()} bytes
+                  {i === 0
+                    ? "Reference"
+                    : mustFind(
+                        imageVariants,
+                        (r) => r[0] === v,
+                        "PixelBudgetExperience.tsx imageVariants",
+                      )[1]}{" "}
+                  · {a.width} × {a.height} pixels · {a.bytes.toLocaleString()} bytes
                 </figcaption>
               </figure>
             );
@@ -94,13 +113,15 @@ export function PixelBudgetExperience({ Concepts, Bridge, onAttempt }: Topic5Pro
               />
               <span>
                 {r.label}
-                {observation === r.id && <small role="status">{r.note}</small>}
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {observation === r.id && <small>{r.note}</small>}
+                </div>
               </span>
             </label>
           ))}
         </fieldset>
       </Section>
-      <Section title="Calculate the archive estimate">
+      <Section number={2} purpose={sectionPurposes[1]} title="Calculate the archive estimate">
         <Teaching Content={Bridge} />
         <div className="topic5-controls">
           <Select
@@ -179,7 +200,7 @@ export function PixelBudgetExperience({ Concepts, Bridge, onAttempt }: Topic5Pro
         </dl>
         <fieldset className="t7-choices">
           <legend>Recommendation to Dr. Rao and Malik</legend>
-          {storageChoices.map((r) => (
+          {orderedChoices("PixelBudgetExperience.tsx", storageChoices).map((r) => (
             <label key={r.id}>
               <input
                 aria-label={r.label}
@@ -193,15 +214,15 @@ export function PixelBudgetExperience({ Concepts, Bridge, onAttempt }: Topic5Pro
               />
               <span>
                 {r.label}
-                {choice === r.id && <small role="status">{r.note}</small>}
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {choice === r.id && <small>{r.note}</small>}
+                </div>
               </span>
             </label>
           ))}
         </fieldset>
       </Section>
-      <button type="button" className="text-button" onClick={reset}>
-        Reset lesson interactions
-      </button>
+      <ResetLessonButton fallback={reset} />
     </div>
   );
 }

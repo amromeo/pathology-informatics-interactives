@@ -1,10 +1,10 @@
 # Twelve Hours Offline
 
-> **Story so far:** North River University Hospital installed its laboratory middleware server after Dr. Maya Chen and Jordan Ellis, a laboratory information system analyst, identified several open controls; the redundant network path and a full recovery drill were not completed before go-live.
+> **Story so far:** North River University Hospital installed its laboratory middleware server after Dr. Maya Chen and Jordan Ellis, a laboratory information system analyst, identified several open controls; network segmentation and the backup-restoration drill were not completed before go-live, and the middleware server had a single network connection.
 
 ## Case setup
 
-North River University Hospital is a fictional Level I trauma center. On April 18, 2026, construction severs the hospital's primary network at 06:20. Orders, registration messages, results, and patient identifiers no longer move between the laboratory and other hospital systems for twelve hours. The middleware server loses its only usable network path, and the laboratory has not rehearsed its recovery procedure. Those two unfinished controls do not cause the construction damage, but they make the laboratory interruption harder to contain and recovery harder to verify.
+North River University Hospital is a Level I trauma center. On April 18, 2026, construction severs the hospital's primary network at 06:20. Orders, registration messages, results, and patient identifiers no longer move between the laboratory and other hospital systems for twelve hours. The middleware server loses its only usable network path, and the laboratory has never restored the middleware from backup or rehearsed its downtime recovery procedure. Those two unfinished controls do not cause the construction damage, but they make the laboratory interruption harder to contain and recovery harder to verify.
 
 Dr. Chen is working with Jordan, the core laboratory, nursing units, and Dr. Elena Ruiz, the laboratory medical director. The team must maintain testing on paper, communicate critical results, preserve patient identity, and reconcile every order and result after connectivity returns at 18:20.
 
@@ -12,6 +12,11 @@ Dr. Chen is working with Jordan, the core laboratory, nursing units, and Dr. Ele
 
 Choose actions for activation, sustained operations, and recovery. Then inspect the identity, critical-result, duplicate-order, and complete-result checks that medical leadership needs before normal operation resumes. The aim is not merely to keep testing—it is to preserve identity and a trustworthy longitudinal record.
 
-## Key point
 
-Downtime has at least three phases: controlled activation, safe degraded operation, and high-risk recovery. Restoration of connectivity does not complete reconciliation.
+## What you will be able to do
+
+- Reconcile downtime work before routine release resumes.
+- Locate the downtime reconciliation procedure.
+- Explain why “use the latest backup time as proof of recovery” is an incomplete approach.
+
+Start by reading the case records. Make a choice before checking the explanation; you can revise it and test again.

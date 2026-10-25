@@ -1,11 +1,15 @@
-## Debrief
+## Debrief: keep each finding attached to the right tumor
 
-**Informatics principle:** The five Vs are independent design constraints.
+### What happened in this case
 
-The initial architecture modeled storage capacity but not burst ingestion, metadata variation, linkage quality, or workload separation. Scanner backlogs and slow clinical retrieval were therefore predictable even though total disk capacity appeared sufficient.
+TB-01 needs a block-link correction: the image label identifies A2, while the view says A1. TB-02 is already linked to the current lung specimen and should remain unchanged. TB-03 contains a documented transposition of the patient identifier. TB-04 belongs to a prior colon specimen, and TB-05 contains a stage from that earlier episode. Keep those historical records separate while obtaining current findings.
 
-Infrastructure and digital pathology teams own implementation. Pathology leadership approves diagnostic service levels, image fidelity, and intended analytic use.
+The record repairs address veracity. They do not increase storage or throughput. The workload test addresses volume and velocity; it must run peak scanning alongside clinical retrieval. Variety requires preserving the meaning and provenance of each data type. Value depends on answering the board's current clinical question.
 
-## Further study with API teaching slides
+### Who does what
 
-In [Association for Pathology Informatics teaching slides: Digital Imaging in Pathology (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%205%20Digital%20Imaging%20slides.pptx), review slides 13–16, 23. Follow how an image pyramid supplies only the part of an image being viewed. Explain why archive capacity alone does not establish that clinical retrieval will remain usable during scanning.
+The LIS analyst and archive team investigate the import and image links. The pathologist confirms specimen relationships and report meaning. The clinical team confirms the current staging encounter. Research staff use approved copies and document selection criteria. Record every correction rather than silently changing source identifiers.
+
+### Connection to PIER 2.3
+
+The learner uses the five big-data questions to inspect a combined pathology dataset and choose a suitable test of its clinical use.

@@ -1,5 +1,22 @@
 # Faculty guide: Choosing Image Settings for a Pathology Service
 
+## At a glance
+
+Allow 40 minutes. Use individually or in a small group. Project the case records and the exercise controls; keep the answer key out of view until learners commit to a decision.
+
+Learning objectives: relate image detail to storage and delivery; check the intended viewing task; justify the first local check. PIER: 7.1, 7.2.
+
+## Run of show
+
+| Minutes | Activity | Ask the group |
+| --- | --- | --- |
+| 0–8 | Read the case and records | What decision has the laboratory been asked to make? |
+| 8–28 | Make, test and revise a choice | Which record supports your decision? What could fail? |
+| 28–40 | Debrief and retrieval questions | How would you verify this in your own laboratory? |
+
+## Expected answers
+
+
 Allow 40 minutes. PIER 7.1 is addressed through capture, storage, retrieval, viewing, static images, live telepathology, and whole-slide use; 7.2 through sampling, formats, compression, storage, and displays. Harrison/API Session 5, slides 5–16 and 23–26, informs the concepts.
 
 Ask for visible differences before naming the process. Glands make edge changes easier to inspect. The upper-right field tests whether learners attribute all blur to the new encoder. The project's existing generated image is a visual process demonstration, not a morphology assessment or a diagnostic-equivalence experiment. Provenance and derivative settings are in SOURCES.md.
@@ -20,3 +37,36 @@ Mistakes include confusing zoom with acquisition, treating PNG as restoration, a
 Use [Association for Pathology Informatics teaching slides: Digital Imaging in Pathology (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%205%20Digital%20Imaging%20slides.pptx) by James H. Harrison, Jr., slides 7–13, to prepare the discussion after residents have explained their case decision. Ask: Compare image sampling, compression, and the image pyramid. Explain which changes reduce stored data and which might remove detail needed for the intended task. Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
 
 These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
+
+
+## Common misconceptions
+
+- “Doubles the count.” Ask: what does the record actually establish? Width and height both double, so their product quadruples. Compression, pyramid levels and file overhead affect stored size separately.
+- “Leaves the count unchanged.” Ask: which conclusion would still need evidence? Width and height both double, so their product quadruples. Compression, pyramid levels and file overhead affect stored size separately.
+- “Choose the smallest file regardless of detail.” Ask: what must be checked before making the change? Determine the diagnostic detail and retrieval requirements before choosing image acquisition and storage settings.
+
+## Discussion prompts
+
+1. What supports the case decision? A strong answer includes a specific record and the distinction: relate image detail to storage and delivery.
+2. What would you check locally? A strong answer includes: check the intended viewing task, because determine the diagnostic detail and retrieval requirements before choosing image acquisition and storage settings.
+3. Who needs to participate? A strong answer includes a digital pathology technologist and separates technical work from clinical approval.
+
+## Group variant
+
+Assign laboratory director, LIS analyst, laboratory operations and clinical service roles. Add clinical informatics and a patient advocate when considering ordering or chart use. Ask each person to state one requirement, one risk and the evidence needed before approval. The director then summarizes what can proceed and what must be resolved.
+
+## Assess transfer
+
+Estimate a scan workload from dimensions, channels and bit depth, then compare measured file sizes. A strong response names the record, responsible person, first check and an unresolved risk. Use the three learner retrieval questions to distinguish an unsupported shortcut from a reasoned decision.
+
+## PIER coverage
+
+- 7.1: Compare fields, trace image identity and retrieval, and recommend checks for the reporting workflow.
+- 7.2: Inspect identical regions after downsampling and encoding, calculate storage tradeoffs, and reject approval based on extension or size alone.
+
+
+## Additional source discussion
+
+### Further study with API teaching slides
+
+In [Association for Pathology Informatics teaching slides: Digital Imaging in Pathology (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%205%20Digital%20Imaging%20slides.pptx), review slides 7–13. Compare image sampling, compression, and the image pyramid. Explain which changes reduce stored data and which might remove detail needed for the intended task.

@@ -1,3 +1,7 @@
+import { lessonCopy } from "../../content/lessons/not-anonymous-enough/interaction";
+import { orderedChoices } from "./lesson-ui";
+import { tabKeys } from "./lesson-ui/tabKeys";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useMemo, useState, type ComponentType } from "react";
 import {
   applyTransforms,
@@ -41,7 +45,7 @@ const transformOptions: { id: TransformId; label: string; note: string }[] = [
   {
     id: "zip-to-three",
     label: "Truncate five-digit ZIP to three digits",
-    note: "02108 becomes 021**.",
+    note: "02108 becomes 021**. Safe Harbor permits this only because the 021 area has more than 20,000 residents.",
   },
   {
     id: "rare-diagnosis-to-category",
@@ -154,7 +158,7 @@ export function PrivacyExperience({
     "Minimum necessary fields": {
       passed: fullTransformSet.every((item) => transforms.includes(item)),
       failNote:
-        "The workbench still retains at least one detailed field that the release plan says should be generalized.",
+        "The exercise still retains at least one detailed field that the release plan says should be generalized.",
     },
     "Linkage key control": {
       passed: keySequestered,
@@ -167,7 +171,7 @@ export function PrivacyExperience({
     "Approved recipient and purpose": {
       passed: releaseContext.eligiblePurpose && releaseContext.namedRecipient,
       failNote:
-        "The workbench does not yet document both an eligible purpose and a named recipient.",
+        "The exercise does not yet document both an eligible purpose and a named recipient.",
     },
     "Recipient confidentiality commitment": {
       passed: releaseContext.dataUseAgreement,
@@ -229,7 +233,7 @@ export function PrivacyExperience({
         </div>
         <article className="artifact-card">
           <header>
-            <span>Synthetic educational artifact</span>
+            <span>System record</span>
             <strong>{lesson.artifactTitle}</strong>
           </header>
           <dl className="evidence-grid">
@@ -262,6 +266,10 @@ export function PrivacyExperience({
               type="button"
               role="tab"
               aria-selected={activeTrace === index}
+              tabIndex={activeTrace === index ? 0 : -1}
+              id={"privacy-trace-tab-" + index}
+              aria-controls="privacy-trace-panel"
+              onKeyDown={tabKeys}
               className={activeTrace === index ? "active" : ""}
               onClick={() => setActiveTrace(index)}
             >
@@ -270,7 +278,12 @@ export function PrivacyExperience({
             </button>
           ))}
         </div>
-        <article className="trace-panel" role="tabpanel">
+        <article
+          className="trace-panel"
+          role="tabpanel"
+          id="privacy-trace-panel"
+          aria-labelledby={"privacy-trace-tab-" + activeTrace}
+        >
           <div>
             <p className="eyebrow">{lesson.trace[activeTrace].role}</p>
             <h3>{lesson.trace[activeTrace].system}</h3>
@@ -291,10 +304,7 @@ export function PrivacyExperience({
             <h2 id="reidentification-title">Can retained details isolate one record?</h2>
           </div>
         </div>
-        <p className="section-guidance">
-          Start with the rare diagnosis. Then add another fact that an outside person might know.
-          Confirm the result only when at least two filters leave one record.
-        </p>
+        <p className="section-guidance">{lessonCopy.text01}</p>
         <div className="privacy-filter-grid">
           {filterFields.map((field) => {
             const options = [...new Set(privacyRows.map((row) => String(row[field])))].sort(
@@ -329,13 +339,11 @@ export function PrivacyExperience({
           </span>
         </div>
         <p className="privacy-table-summary" id="raw-privacy-summary">
-          The table contains 18 synthetic records from the April 18 outage period. It displays five
-          potential quasi-identifiers and a coded linkage value; names and medical record numbers
-          are not present.
+          {lessonCopy.text02}
         </p>
         <PrivacyTable
           rows={filteredRows}
-          caption="Synthetic educational research export — matching records"
+          caption="Proposed research export — matching records"
           summaryId="raw-privacy-summary"
         />
         <div className="privacy-confirm-row">
@@ -358,24 +366,26 @@ export function PrivacyExperience({
             Clear filters
           </button>
         </div>
-        {attackConfirmed && (
-          <div className="feedback incorrect" role="status">
-            <strong>One record is isolated without a name or medical record number.</strong>
-            <p>
-              The combination of{" "}
-              {activeFilters.map((field) => filterFeedbackLabels[field]).join(" and ")} returns{" "}
-              {filteredRows[0].recordId}. Outside information containing those same facts could
-              connect this record to a person.
-            </p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {attackConfirmed && (
+            <div className="feedback incorrect">
+              <strong>One record is isolated without a name or medical record number.</strong>
+              <p>
+                The combination of{" "}
+                {activeFilters.map((field) => filterFeedbackLabels[field]).join(" and ")} returns{" "}
+                {filteredRows[0].recordId}. Outside information containing those same facts could
+                connect this record to a person.
+              </p>
+            </div>
+          )}
+        </div>
       </section>
 
       <section className="lesson-section" aria-labelledby="workbench-title">
         <div className="section-heading">
           <span className="section-number">04</span>
           <div>
-            <p className="eyebrow">Redaction workbench</p>
+            <p className="eyebrow">Redaction exercise</p>
             <h2 id="workbench-title">Reduce distinguishable combinations and control the key</h2>
           </div>
         </div>
@@ -414,10 +424,7 @@ export function PrivacyExperience({
               />
               <span>
                 <strong>Sequester the linkage key</strong>
-                <small>
-                  Move the key out of the shared folder and limit access to approved stewards. This
-                  does not change the table or its group size.
-                </small>
+                <small>{lessonCopy.text03}</small>
               </span>
             </label>
             {releaseContextOptions.map((option) => (
@@ -451,9 +458,9 @@ export function PrivacyExperience({
             </small>
           </article>
           <article className={uniqueVisibleMatch ? "warning" : "ready"}>
-            <span>Single-record conjunction</span>
+            <span>Single-record filter combination</span>
             <strong>{uniqueVisibleMatch ? "Still possible" : "Not found"}</strong>
-            <small>All filter combinations permitted by this workbench are checked.</small>
+            <small>All filter combinations permitted by this exercise are checked.</small>
           </article>
           <article>
             <span>Linkage key</span>
@@ -473,12 +480,11 @@ export function PrivacyExperience({
         <details className="privacy-preview">
           <summary>View all 18 transformed records</summary>
           <p className="privacy-table-summary" id="transformed-privacy-summary">
-            The values below reflect the selected field transformations. The linkage code is
-            unchanged because key sequestration is an access control, not a data transformation.
+            {lessonCopy.text04}
           </p>
           <PrivacyTable
             rows={transformedRows}
-            caption="Transformation workbench preview"
+            caption="Transformation exercise preview"
             summaryId="transformed-privacy-summary"
           />
         </details>
@@ -500,7 +506,7 @@ export function PrivacyExperience({
         <fieldset className="privacy-choice-fieldset">
           <legend>{lesson.decisionPrompt}</legend>
           <div className="choice-stack">
-            {lesson.decisionChoices.map((choice) => (
+            {orderedChoices("PrivacyExperience.tsx", lesson.decisionChoices).map((choice) => (
               <label className={decision === choice.id ? "selected" : ""} key={choice.id}>
                 <input
                   type="radio"
@@ -513,24 +519,23 @@ export function PrivacyExperience({
             ))}
           </div>
         </fieldset>
-        {selectedDecision && (
-          <div
-            className={`feedback ${selectedDecision.correct ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {selectedDecision.correct
-                ? "The original export remains identifiable."
-                : "That classification does not match the retained fields."}
-            </strong>
-            <p>{selectedDecision.feedback}</p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {selectedDecision && (
+            <div className={`feedback ${selectedDecision.correct ? "correct" : "incorrect"}`}>
+              <strong>
+                {selectedDecision.correct
+                  ? "The original export remains identifiable."
+                  : "That classification does not match the retained fields."}
+              </strong>
+              <p>{selectedDecision.feedback}</p>
+            </div>
+          )}
+        </div>
         <div className="privacy-release-layout">
           <fieldset className="privacy-choice-fieldset">
             <legend>{lesson.repairPrompt}</legend>
             <div className="choice-stack">
-              {lesson.repairChoices.map((choice) => (
+              {orderedChoices("PrivacyExperience.tsx", lesson.repairChoices).map((choice) => (
                 <label className={repair === choice.id ? "selected" : ""} key={choice.id}>
                   <input
                     type="radio"
@@ -580,31 +585,30 @@ export function PrivacyExperience({
             </button>
           </article>
         </div>
-        {testsRun && selectedRepair && (
-          <div
-            className={`feedback ${releasePassed === releaseChecks.length ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {releasePassed === releaseChecks.length
-                ? "The proposal is ready for documented privacy review."
-                : "The proposal is not ready for release."}
-            </strong>
-            <p>{selectedRepair.feedback}</p>
-            <p>
-              Your workbench applies {transforms.length} of 3 field transformations, leaves the key{" "}
-              {keySequestered ? "sequestered" : "shared"}, and routes the file as:{" "}
-              {classificationLabels[classification]}. The privacy office must make the release
-              determination.
-            </p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {testsRun && selectedRepair && (
+            <div
+              className={`feedback ${releasePassed === releaseChecks.length ? "correct" : "incorrect"}`}
+            >
+              <strong>
+                {releasePassed === releaseChecks.length
+                  ? "The proposal is ready for documented privacy review."
+                  : "The proposal is not ready for release."}
+              </strong>
+              <p>{selectedRepair.feedback}</p>
+              <p>
+                Your exercise applies {transforms.length} of {transformOptions.length} field
+                transformations, leaves the key {keySequestered ? "sequestered" : "shared"}, and
+                routes the file as: {classificationLabels[classification]}. The privacy office must
+                make the release determination.
+              </p>
+            </div>
+          )}
+        </div>
       </section>
 
       <div className="reset-row">
-        <button type="button" className="text-button" onClick={reset}>
-          Reset lesson interactions
-        </button>
+        <ResetLessonButton fallback={reset} />
       </div>
     </div>
   );

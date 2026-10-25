@@ -1,3 +1,6 @@
+import { lessonCopy } from "../../content/lessons/server-behind-the-analyzer/interaction";
+import { tabKeys } from "./lesson-ui/tabKeys";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useMemo, useState, type ComponentType } from "react";
 import {
   evaluateFinding,
@@ -99,7 +102,7 @@ export function SecurityReviewExperience({
         </div>
         <article className="artifact-card">
           <header>
-            <span>Synthetic educational artifact</span>
+            <span>System record</span>
             <strong>{lesson.artifactTitle}</strong>
           </header>
           <dl className="evidence-grid">
@@ -123,10 +126,7 @@ export function SecurityReviewExperience({
             </h2>
           </div>
         </div>
-        <p className="section-guidance">
-          Select each area. Notice which team performs the technical work and why the laboratory
-          still needs to review the clinical service risk.
-        </p>
+        <p className="section-guidance">{lessonCopy.text01}</p>
         <div className="trace-tabs" role="tablist" aria-label="Security review areas">
           {lesson.trace.map((step, index) => (
             <button
@@ -134,6 +134,10 @@ export function SecurityReviewExperience({
               type="button"
               role="tab"
               aria-selected={activeTrace === index}
+              tabIndex={activeTrace === index ? 0 : -1}
+              id={"security-trace-tab-" + index}
+              aria-controls="security-trace-panel"
+              onKeyDown={tabKeys}
               className={activeTrace === index ? "active" : ""}
               onClick={() => setActiveTrace(index)}
             >
@@ -142,7 +146,12 @@ export function SecurityReviewExperience({
             </button>
           ))}
         </div>
-        <article className="trace-panel" role="tabpanel">
+        <article
+          className="trace-panel"
+          role="tabpanel"
+          id="security-trace-panel"
+          aria-labelledby={"security-trace-tab-" + activeTrace}
+        >
           <div>
             <p className="eyebrow">{lesson.trace[activeTrace].role}</p>
             <h3>{lesson.trace[activeTrace].system}</h3>
@@ -188,7 +197,7 @@ export function SecurityReviewExperience({
             return (
               <article key={finding.id}>
                 <header>
-                  <span>{finding.id.replaceAll("-", " ")}</span>
+                  <span>Finding</span>
                   <h3>{finding.title}</h3>
                 </header>
                 <p>{finding.observation}</p>
@@ -217,26 +226,27 @@ export function SecurityReviewExperience({
                 >
                   Check this mapping
                 </button>
-                {reviewed && (
-                  <div
-                    className={`security-map-feedback ${evaluation.correct ? "correct" : "incorrect"}`}
-                    role="status"
-                  >
-                    <strong>
-                      {evaluation.correct
-                        ? "This mapping fits the finding."
-                        : "Revise this mapping."}
-                    </strong>
-                    {!evaluation.correct && (
-                      <p>
-                        {missing && `Add: ${missing}.`}
-                        {missing && extra ? " " : ""}
-                        {extra && `Remove: ${extra}.`}
-                      </p>
-                    )}
-                    <p>{finding.feedback}</p>
-                  </div>
-                )}
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {reviewed && (
+                    <div
+                      className={`security-map-feedback ${evaluation.correct ? "correct" : "incorrect"}`}
+                    >
+                      <strong>
+                        {evaluation.correct
+                          ? "This mapping fits the finding."
+                          : "Revise this mapping."}
+                      </strong>
+                      {!evaluation.correct && (
+                        <p>
+                          {missing && `Add: ${missing}.`}
+                          {missing && extra ? " " : ""}
+                          {extra && `Remove: ${extra}.`}
+                        </p>
+                      )}
+                      <p>{finding.feedback}</p>
+                    </div>
+                  )}
+                </div>
               </article>
             );
           })}
@@ -247,14 +257,11 @@ export function SecurityReviewExperience({
         <div className="section-heading">
           <span className="section-number">04</span>
           <div>
-            <p className="eyebrow">Control portfolio</p>
+            <p className="eyebrow">Control plan</p>
             <h2 id="portfolio-title">Build a plan within the available budget and staff effort</h2>
           </div>
         </div>
-        <p className="section-guidance">
-          Select controls that address different failure paths. The limits do not permit buying
-          everything, and a low-cost administrative step may not change the technical risk.
-        </p>
+        <p className="section-guidance">{lessonCopy.text02}</p>
         <div
           className={`security-budget-summary ${affordable ? "within" : "over"}`}
           aria-live="polite"
@@ -286,8 +293,8 @@ export function SecurityReviewExperience({
           <div>
             <strong>
               {affordable
-                ? "Portfolio is within both limits."
-                : "Portfolio exceeds at least one limit."}
+                ? "control plan is within both limits."
+                : "control plan exceeds at least one limit."}
             </strong>
             <span>
               {selectedControls.length} of {securityControls.length} controls selected
@@ -325,15 +332,11 @@ export function SecurityReviewExperience({
         <div className="section-heading">
           <span className="section-number">05</span>
           <div>
-            <p className="eyebrow">Stress test</p>
-            <h2 id="stress-test-title">Run the portfolio against five laboratory events</h2>
+            <p className="eyebrow">test the control plan</p>
+            <h2 id="stress-test-title">Run the control plan against five laboratory events</h2>
           </div>
         </div>
-        <p className="section-guidance">
-          A blocked event is prevented by the selected controls. Partial mitigation reduces harm but
-          leaves a path open. Not mitigated means the proposed installation still has no selected
-          control for that event.
-        </p>
+        <p className="section-guidance">{lessonCopy.text03}</p>
         <div className="security-stress-summary">
           <button
             type="button"
@@ -344,7 +347,7 @@ export function SecurityReviewExperience({
               onAttempt?.(true);
             }}
           >
-            Run stress test
+            Test the control plan
           </button>
           <div aria-live="polite">
             <strong>
@@ -354,12 +357,12 @@ export function SecurityReviewExperience({
             </strong>
             <span>
               {!affordable
-                ? "Revise the portfolio to meet both limits."
+                ? "Revise the control plan to meet both limits."
                 : testsRun
                   ? covered === securityScenarios.length
                     ? "No scenario is left unmitigated; review any partial result before approval."
                     : `${securityScenarios.length - covered} scenario${securityScenarios.length - covered === 1 ? " is" : "s are"} still unmitigated.`
-                  : "Select an affordable portfolio, then run the scenarios."}
+                  : "Select an affordable control plan, then run the scenarios."}
             </span>
           </div>
         </div>
@@ -370,7 +373,7 @@ export function SecurityReviewExperience({
               key={result.id}
             >
               <header>
-                <span>{result.id.replaceAll("-", " ")}</span>
+                <span>Event</span>
                 {testsRun && <strong>{statusLabels[result.status]}</strong>}
               </header>
               <h3>{result.title}</h3>
@@ -381,34 +384,33 @@ export function SecurityReviewExperience({
                   <p>{result.note}</p>
                 </div>
               ) : (
-                <small>Run the stress test to evaluate the selected controls.</small>
+                <small>Run the control-plan checks to evaluate the selected controls.</small>
               )}
             </article>
           ))}
         </div>
-        {testsRun && (
-          <div
-            className={`feedback ${covered === securityScenarios.length ? "correct" : "incorrect"}`}
-            role="status"
-          >
-            <strong>
-              {covered === securityScenarios.length
-                ? "The portfolio provides coverage for all five scenarios."
-                : "The installation plan still leaves one or more scenarios unmitigated."}
-            </strong>
-            <p>
-              {covered === securityScenarios.length
-                ? "Partial mitigation is not the same as prevention. The laboratory director, LIS team, security team, facilities team, and vendor-management team must review the remaining risk and the work required before approval."
-                : "Revise the portfolio and rerun the same five scenarios. Do not approve the installation while a result-routing failure path has no control."}
-            </p>
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {testsRun && (
+            <div
+              className={`feedback ${covered === securityScenarios.length ? "correct" : "incorrect"}`}
+            >
+              <strong>
+                {covered === securityScenarios.length
+                  ? "The control plan provides coverage for all five scenarios."
+                  : "The installation plan still leaves one or more scenarios unmitigated."}
+              </strong>
+              <p>
+                {covered === securityScenarios.length
+                  ? "Partial mitigation is not the same as prevention. The laboratory director, LIS team, security team, facilities team, and vendor-management team must review the remaining risk and the work required before approval."
+                  : "Revise the control plan and rerun the same five scenarios. Do not approve the installation while a result-routing failure path has no control."}
+              </p>
+            </div>
+          )}
+        </div>
       </section>
 
       <div className="reset-row">
-        <button type="button" className="text-button" onClick={reset}>
-          Reset lesson interactions
-        </button>
+        <ResetLessonButton fallback={reset} />
       </div>
     </div>
   );

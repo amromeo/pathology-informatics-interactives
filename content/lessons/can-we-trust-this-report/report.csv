@@ -1,4 +1,4 @@
-accession_id,period,accessioned_at,structured_accession_at,source_document_time,finalized_at,tat_working_days,specimen_group,eligible,amended,current_post_included,fair_post_included
+accession_id,period,accessioned_at,structured_accession_at,source_document_time,finalized_at,tat_working_days,specimen_group,eligible,amended,original_two_period_group,revised_three_period_group
 SP26-B001,baseline,2026-01-05 07:00,2026-01-05 07:00,,2026-01-06 07:00,1.0,Resection,yes,yes,no,no
 SP26-B002,baseline,2026-01-05 08:07,2026-01-05 08:07,,2026-01-06 08:07,1.0,Biopsy,yes,no,no,no
 SP26-B003,baseline,2026-01-05 09:14,2026-01-05 09:14,,2026-01-06 09:14,1.0,Biopsy,yes,no,no,no
@@ -86,7 +86,7 @@ SP26-B084,baseline,2026-01-20 13:41,2026-01-20 13:41,,2026-01-23 01:41,2.5,Biops
 SP26-B085,baseline,2026-01-21 07:48,2026-01-21 07:48,,2026-01-23 19:48,2.5,Resection,yes,no,no,no
 SP26-B086,baseline,2026-01-21 08:55,2026-01-21 08:55,,2026-01-23 20:55,2.5,Biopsy,yes,no,no,no
 SP26-B087,baseline,2026-01-21 09:02,2026-01-21 09:02,,2026-01-23 21:02,2.5,Biopsy,yes,no,no,no
-SP26-B088,baseline,2026-01-21 10:09,2026-01-21 10:09,,2026-01-24 02:57,2.7,Resection,yes,no,no,no
+SP26-B088,baseline,2026-01-21 10:09,2026-01-21 10:09,,2026-01-26 02:57,2.7,Resection,yes,no,no,no
 SP26-B089,baseline,2026-01-21 11:16,2026-01-21 11:16,,2026-01-26 23:16,3.5,Biopsy,yes,no,no,no
 SP26-B090,baseline,2026-01-21 12:23,2026-01-21 12:23,,2026-01-27 00:23,3.5,Biopsy,yes,no,no,no
 SP26-B091,baseline,2026-01-21 13:30,2026-01-21 13:30,,2026-01-27 01:30,3.5,Resection,yes,no,no,no
@@ -121,7 +121,7 @@ SP26-B119,baseline,2026-01-27 13:46,2026-01-27 13:46,,2026-01-30 01:46,2.5,Biops
 SP26-B120,baseline,2026-01-28 07:53,2026-01-28 07:53,,2026-01-30 19:53,2.5,Biopsy,yes,no,no,no
 SP26-B121,baseline,2026-01-28 08:00,2026-01-28 08:00,,2026-01-30 20:00,2.5,Resection,yes,no,no,no
 SP26-B122,baseline,2026-01-28 09:07,2026-01-28 09:07,,2026-01-30 21:07,2.5,Biopsy,yes,no,no,no
-SP26-B123,baseline,2026-01-28 10:14,2026-01-28 10:14,,2026-01-31 03:02,2.7,Biopsy,yes,no,no,no
+SP26-B123,baseline,2026-01-28 10:14,2026-01-28 10:14,,2026-02-02 03:02,2.7,Biopsy,yes,no,no,no
 SP26-B124,baseline,2026-01-28 11:21,2026-01-28 11:21,,2026-02-02 23:21,3.5,Resection,yes,yes,no,no
 SP26-B125,baseline,2026-01-28 12:28,2026-01-28 12:28,,2026-02-03 00:28,3.5,Biopsy,yes,no,no,no
 SP26-B126,baseline,2026-01-28 13:35,2026-01-28 13:35,,2026-02-03 01:35,3.5,Biopsy,yes,no,no,no
@@ -243,7 +243,7 @@ SP26-C031,cutover,2026-02-20 09:30,,2026-02-20 09:30,2026-03-10 09:30,12.0,Resec
 SP26-C032,cutover,2026-02-20 10:37,,2026-02-20 10:37,2026-03-10 22:37,12.5,Biopsy,yes,no,yes,no
 SP26-C033,cutover,2026-02-20 11:44,,2026-02-20 11:44,2026-03-11 11:44,13.0,Biopsy,yes,no,yes,no
 SP26-C034,cutover,2026-02-20 12:51,,2026-02-20 12:51,2026-03-12 00:51,13.5,Resection,yes,no,yes,no
-SP26-C035,cutover,2026-02-20 13:58,,2026-02-20 13:58,2026-03-07 01:58,10.5,Biopsy,yes,no,yes,no
+SP26-C035,cutover,2026-02-20 13:58,,2026-02-20 13:58,2026-03-09 01:58,10.5,Biopsy,yes,no,yes,no
 SP26-P001,stabilized,2026-02-23 07:00,2026-02-23 07:00,,2026-02-24 07:00,1.0,Resection,yes,yes,yes,yes
 SP26-P002,stabilized,2026-02-23 08:07,2026-02-23 08:07,,2026-02-24 08:07,1.0,Biopsy,yes,no,yes,yes
 SP26-P003,stabilized,2026-02-23 09:14,2026-02-23 09:14,,2026-02-24 09:14,1.0,Biopsy,yes,no,yes,yes
@@ -263,8 +263,8 @@ SP26-P016,stabilized,2026-02-25 08:45,2026-02-25 08:45,,2026-02-27 15:57,2.3,Res
 SP26-P017,stabilized,2026-02-25 09:52,2026-02-25 09:52,,2026-02-27 17:04,2.3,Biopsy,yes,no,yes,yes
 SP26-P018,stabilized,2026-02-25 10:59,2026-02-25 10:59,,2026-02-27 22:59,2.5,Biopsy,yes,no,yes,yes
 SP26-P019,stabilized,2026-02-25 11:06,2026-02-25 11:06,,2026-02-27 23:06,2.5,Resection,yes,no,yes,yes
-SP26-P020,stabilized,2026-02-25 12:13,2026-02-25 12:13,,2026-02-28 00:13,2.5,Biopsy,yes,no,yes,yes
-SP26-P021,stabilized,2026-02-25 13:20,2026-02-25 13:20,,2026-02-28 01:20,2.5,Biopsy,yes,no,yes,yes
+SP26-P020,stabilized,2026-02-25 12:13,2026-02-25 12:13,,2026-03-02 00:13,2.5,Biopsy,yes,no,yes,yes
+SP26-P021,stabilized,2026-02-25 13:20,2026-02-25 13:20,,2026-03-02 01:20,2.5,Biopsy,yes,no,yes,yes
 SP26-P022,stabilized,2026-02-26 07:27,2026-02-26 07:27,,2026-03-02 19:27,2.5,Resection,yes,no,yes,yes
 SP26-P023,stabilized,2026-02-26 08:34,2026-02-26 08:34,,2026-03-03 13:22,3.2,Biopsy,yes,no,yes,yes
 SP26-P024,stabilized,2026-02-26 09:41,2026-02-26 09:41,,2026-03-03 14:29,3.2,Biopsy,yes,no,yes,yes
@@ -298,8 +298,8 @@ SP26-P051,stabilized,2026-03-04 08:50,2026-03-04 08:50,,2026-03-06 16:02,2.3,Bio
 SP26-P052,stabilized,2026-03-04 09:57,2026-03-04 09:57,,2026-03-06 17:09,2.3,Resection,yes,no,yes,yes
 SP26-P053,stabilized,2026-03-04 10:04,2026-03-04 10:04,,2026-03-06 22:04,2.5,Biopsy,yes,no,yes,yes
 SP26-P054,stabilized,2026-03-04 11:11,2026-03-04 11:11,,2026-03-06 23:11,2.5,Biopsy,yes,no,yes,yes
-SP26-P055,stabilized,2026-03-04 12:18,2026-03-04 12:18,,2026-03-07 00:18,2.5,Resection,yes,no,yes,yes
-SP26-P056,stabilized,2026-03-04 13:25,2026-03-04 13:25,,2026-03-07 01:25,2.5,Biopsy,yes,no,yes,yes
+SP26-P055,stabilized,2026-03-04 12:18,2026-03-04 12:18,,2026-03-09 00:18,2.5,Resection,yes,no,yes,yes
+SP26-P056,stabilized,2026-03-04 13:25,2026-03-04 13:25,,2026-03-09 01:25,2.5,Biopsy,yes,no,yes,yes
 SP26-P057,stabilized,2026-03-05 07:32,2026-03-05 07:32,,2026-03-09 19:32,2.5,Biopsy,yes,no,yes,yes
 SP26-P058,stabilized,2026-03-05 08:39,2026-03-05 08:39,,2026-03-10 13:27,3.2,Resection,yes,no,yes,yes
 SP26-P059,stabilized,2026-03-05 09:46,2026-03-05 09:46,,2026-03-10 14:34,3.2,Biopsy,yes,no,yes,yes
@@ -333,8 +333,8 @@ SP26-P086,stabilized,2026-03-11 08:55,2026-03-11 08:55,,2026-03-13 16:07,2.3,Bio
 SP26-P087,stabilized,2026-03-11 09:02,2026-03-11 09:02,,2026-03-13 16:14,2.3,Biopsy,yes,no,yes,yes
 SP26-P088,stabilized,2026-03-11 10:09,2026-03-11 10:09,,2026-03-13 22:09,2.5,Resection,yes,no,yes,yes
 SP26-P089,stabilized,2026-03-11 11:16,2026-03-11 11:16,,2026-03-13 23:16,2.5,Biopsy,yes,no,yes,yes
-SP26-P090,stabilized,2026-03-11 12:23,2026-03-11 12:23,,2026-03-14 00:23,2.5,Biopsy,yes,no,yes,yes
-SP26-P091,stabilized,2026-03-11 13:30,2026-03-11 13:30,,2026-03-14 01:30,2.5,Resection,yes,no,yes,yes
+SP26-P090,stabilized,2026-03-11 12:23,2026-03-11 12:23,,2026-03-16 00:23,2.5,Biopsy,yes,no,yes,yes
+SP26-P091,stabilized,2026-03-11 13:30,2026-03-11 13:30,,2026-03-16 01:30,2.5,Resection,yes,no,yes,yes
 SP26-P092,stabilized,2026-03-12 07:37,2026-03-12 07:37,,2026-03-16 19:37,2.5,Biopsy,yes,no,yes,yes
 SP26-P093,stabilized,2026-03-12 08:44,2026-03-12 08:44,,2026-03-17 13:32,3.2,Biopsy,yes,no,yes,yes
 SP26-P094,stabilized,2026-03-12 09:51,2026-03-12 09:51,,2026-03-17 14:39,3.2,Resection,yes,no,yes,yes
@@ -368,8 +368,8 @@ SP26-P121,stabilized,2026-03-18 08:00,2026-03-18 08:00,,2026-03-20 15:12,2.3,Res
 SP26-P122,stabilized,2026-03-18 09:07,2026-03-18 09:07,,2026-03-20 16:19,2.3,Biopsy,yes,no,yes,yes
 SP26-P123,stabilized,2026-03-18 10:14,2026-03-18 10:14,,2026-03-20 22:14,2.5,Biopsy,yes,no,yes,yes
 SP26-P124,stabilized,2026-03-18 11:21,2026-03-18 11:21,,2026-03-20 23:21,2.5,Resection,yes,yes,yes,yes
-SP26-P125,stabilized,2026-03-18 12:28,2026-03-18 12:28,,2026-03-21 00:28,2.5,Biopsy,yes,no,yes,yes
-SP26-P126,stabilized,2026-03-18 13:35,2026-03-18 13:35,,2026-03-21 01:35,2.5,Biopsy,yes,no,yes,yes
+SP26-P125,stabilized,2026-03-18 12:28,2026-03-18 12:28,,2026-03-23 00:28,2.5,Biopsy,yes,no,yes,yes
+SP26-P126,stabilized,2026-03-18 13:35,2026-03-18 13:35,,2026-03-23 01:35,2.5,Biopsy,yes,no,yes,yes
 SP26-P127,stabilized,2026-03-19 07:42,2026-03-19 07:42,,2026-03-23 19:42,2.5,Resection,yes,no,yes,yes
 SP26-P128,stabilized,2026-03-19 08:49,2026-03-19 08:49,,2026-03-24 13:37,3.2,Biopsy,yes,no,yes,yes
 SP26-P129,stabilized,2026-03-19 09:56,2026-03-19 09:56,,2026-03-24 14:44,3.2,Biopsy,yes,no,yes,yes
@@ -403,8 +403,8 @@ SP26-P156,stabilized,2026-03-25 08:05,2026-03-25 08:05,,2026-03-27 15:17,2.3,Bio
 SP26-P157,stabilized,2026-03-25 09:12,2026-03-25 09:12,,2026-03-27 16:24,2.3,Resection,yes,no,yes,yes
 SP26-P158,stabilized,2026-03-25 10:19,2026-03-25 10:19,,2026-03-27 22:19,2.5,Biopsy,yes,no,yes,yes
 SP26-P159,stabilized,2026-03-25 11:26,2026-03-25 11:26,,2026-03-27 23:26,2.5,Biopsy,yes,no,yes,yes
-SP26-P160,stabilized,2026-03-25 12:33,2026-03-25 12:33,,2026-03-28 00:33,2.5,Resection,yes,no,yes,yes
-SP26-P161,stabilized,2026-03-25 13:40,2026-03-25 13:40,,2026-03-28 01:40,2.5,Biopsy,yes,no,yes,yes
+SP26-P160,stabilized,2026-03-25 12:33,2026-03-25 12:33,,2026-03-30 00:33,2.5,Resection,yes,no,yes,yes
+SP26-P161,stabilized,2026-03-25 13:40,2026-03-25 13:40,,2026-03-30 01:40,2.5,Biopsy,yes,no,yes,yes
 SP26-P162,stabilized,2026-03-26 07:47,2026-03-26 07:47,,2026-03-31 12:35,3.2,Biopsy,yes,no,yes,yes
 SP26-P163,stabilized,2026-03-26 08:54,2026-03-26 08:54,,2026-03-31 13:42,3.2,Resection,yes,no,yes,yes
 SP26-P164,stabilized,2026-03-26 09:01,2026-03-26 09:01,,2026-03-31 13:49,3.2,Biopsy,yes,no,yes,yes
@@ -438,8 +438,8 @@ SP26-P191,stabilized,2026-04-01 08:10,2026-04-01 08:10,,2026-04-03 15:22,2.3,Bio
 SP26-P192,stabilized,2026-04-01 09:17,2026-04-01 09:17,,2026-04-03 16:29,2.3,Biopsy,yes,no,yes,yes
 SP26-P193,stabilized,2026-04-01 10:24,2026-04-01 10:24,,2026-04-03 22:24,2.5,Resection,yes,no,yes,yes
 SP26-P194,stabilized,2026-04-01 11:31,2026-04-01 11:31,,2026-04-03 23:31,2.5,Biopsy,yes,no,yes,yes
-SP26-P195,stabilized,2026-04-01 12:38,2026-04-01 12:38,,2026-04-04 00:38,2.5,Biopsy,yes,no,yes,yes
-SP26-P196,stabilized,2026-04-01 13:45,2026-04-01 13:45,,2026-04-04 01:45,2.5,Resection,yes,no,yes,yes
+SP26-P195,stabilized,2026-04-01 12:38,2026-04-01 12:38,,2026-04-06 00:38,2.5,Biopsy,yes,no,yes,yes
+SP26-P196,stabilized,2026-04-01 13:45,2026-04-01 13:45,,2026-04-06 01:45,2.5,Resection,yes,no,yes,yes
 SP26-P197,stabilized,2026-04-02 07:52,2026-04-02 07:52,,2026-04-07 12:40,3.2,Biopsy,yes,no,yes,yes
 SP26-P198,stabilized,2026-04-02 08:59,2026-04-02 08:59,,2026-04-07 13:47,3.2,Biopsy,yes,no,yes,yes
 SP26-P199,stabilized,2026-04-02 09:06,2026-04-02 09:06,,2026-04-07 13:54,3.2,Resection,yes,no,yes,yes

@@ -40,7 +40,7 @@ test("the all-controlled path yields the locked baseline reconciliation set", ()
     ["duplicate-order-DT-204", "missing-critical-DT-202", "timestamp-conflict-DT-205"],
   );
   assert.deepEqual(records.callLogEntries, [
-    { id: "CL-02", tempId: "DT-202", calledAt: "10:14", recipient: "R. Moore, RN", readBack: true },
+    { id: "CL-02", tempId: "DT-202", calledAt: "10:52", recipient: "R. Moore, RN", readBack: true },
   ]);
 });
 

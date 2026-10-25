@@ -188,4 +188,4 @@ When a lesson is revised, record any additional slide or external source in `con
 
 ## Implemented reading selections, October 2026
 
-See [the verified reading map](../review/api-teaching-slides/mapping.md) for the focused readings now linked after each relevant debrief and in faculty preparation. These selections refine the broader plans above. The reagent-lot lesson has no added API reading because its statistical decision is better supported by its existing primary references.
+See [the verified reading map](../review/api-teaching-slides/mapping.md) for the focused readings now linked in faculty preparation and source discussion. These selections refine the broader plans above. The reagent-lot lesson has no added API reading because its statistical decision is better supported by its existing primary references.

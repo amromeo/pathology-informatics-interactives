@@ -1,3 +1,6 @@
+import { sectionPurposes } from "../../content/lessons/validate-before-go-live/interaction";
+import { orderedChoices } from "./lesson-ui";
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState } from "react";
 import {
   changes,
@@ -30,7 +33,8 @@ export function WsiValidationExperience({ Concepts, Bridge, onAttempt }: Topic5P
   };
   return (
     <div className="topic7">
-      <Section title="Inspect the study packet">
+      <Section number={1} purpose={sectionPurposes[0]} title="Inspect the study packet">
+        <Teaching Content={Concepts} />
         <div className="topic5-card-grid">
           {studyRows.map((r) => (
             <article className="artifact-card" key={r.category}>
@@ -45,8 +49,7 @@ export function WsiValidationExperience({ Concepts, Bridge, onAttempt }: Topic5P
         </div>
         <Teaching Content={Bridge} />
       </Section>
-      <Section title="Build the validation plan">
-        <Teaching Content={Concepts} />
+      <Section number={2} purpose={sectionPurposes[1]} title="Build the validation plan">
         <div className="topic5-controls">
           {validationControls.map((r, i) => (
             <Select
@@ -54,7 +57,11 @@ export function WsiValidationExperience({ Concepts, Bridge, onAttempt }: Topic5P
               label={r.label}
               options={r.options}
               value={config[r.key]}
-              note={(results[i].pass ? "Addressed. " : "Needs review. ") + results[i].note}
+              note={
+                tested
+                  ? (results[i].pass ? "Addressed. " : "Needs review. ") + results[i].note
+                  : undefined
+              }
               onChange={(v) => {
                 setConfig({ ...config, [r.key]: v });
                 invalidate();
@@ -63,14 +70,18 @@ export function WsiValidationExperience({ Concepts, Bridge, onAttempt }: Topic5P
           ))}
         </div>
       </Section>
-      <Section title="Investigate the two fixed-tissue disagreements">
+      <Section
+        number={3}
+        purpose={sectionPurposes[2]}
+        title="Investigate the two fixed-tissue disagreements"
+      >
         {discordances.map((r) => (
           <article className="t7-discordance" key={r.id}>
             <h3>{r.id}</h3>
             <pre>{r.record}</pre>
             <fieldset className="t7-choices">
               <legend>Next action for {r.id}</legend>
-              {r.choices.map((c) => (
+              {orderedChoices("WsiValidationExperience.tsx", r.choices).map((c) => (
                 <label key={c.id}>
                   <input
                     aria-label={c.label}
@@ -84,7 +95,9 @@ export function WsiValidationExperience({ Concepts, Bridge, onAttempt }: Topic5P
                   />
                   <span>
                     {c.label}
-                    {answers[r.id] === c.id && <small role="status">{c.note}</small>}
+                    <div role="status" aria-live="polite" aria-atomic="true">
+                      {answers[r.id] === c.id && <small>{c.note}</small>}
+                    </div>
                   </span>
                 </label>
               ))}
@@ -101,24 +114,26 @@ export function WsiValidationExperience({ Concepts, Bridge, onAttempt }: Topic5P
         >
           Check the validation plan
         </button>
-        {tested && (
-          <div aria-live="polite">
-            <p className="topic5-note">
-              {results.filter((r) => r.pass).length}/7 plan checks addressed.{" "}
-              {complete
-                ? "The plan is ready for faculty review; corrective work and clinical approval remain outstanding."
-                : "Revise the gaps before recommending a scope."}
-            </p>
-            {results.map((r) => (
-              <article className="t7-result" key={r.label}>
-                <strong>
-                  {r.pass ? "Addressed" : "Needs review"} · {r.label}
-                </strong>
-                <p>{r.note}</p>
-              </article>
-            ))}
-          </div>
-        )}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {tested && (
+            <div>
+              <p className="topic5-note">
+                {results.filter((r) => r.pass).length}/7 plan checks addressed.{" "}
+                {complete
+                  ? "The plan is ready for faculty review; corrective work and clinical approval remain outstanding."
+                  : "Revise the gaps before recommending a scope."}
+              </p>
+              {results.map((r) => (
+                <article className="t7-result" key={r.label}>
+                  <strong>
+                    {r.pass ? "Addressed" : "Needs review"} · {r.label}
+                  </strong>
+                  <p>{r.note}</p>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
         <fieldset className="t7-choices">
           <legend>Recommendation to the director</legend>
           {decisions.map((r) => (
@@ -135,20 +150,22 @@ export function WsiValidationExperience({ Concepts, Bridge, onAttempt }: Topic5P
               />
               <span>
                 {r.label}
-                {decision === r.id && (
-                  <small role="status">
-                    {r.note}
-                    {r.id === "limited" &&
-                      !complete &&
-                      " Your plan still has gaps; complete the comparison design and both investigations."}
-                  </small>
-                )}
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {decision === r.id && (
+                    <small>
+                      {r.note}
+                      {r.id === "limited" &&
+                        !complete &&
+                        " Your plan still has gaps; complete the comparison design and both investigations."}
+                    </small>
+                  )}
+                </div>
               </span>
             </label>
           ))}
         </fieldset>
       </Section>
-      <Section title="Review changes after approval">
+      <Section number={4} purpose={sectionPurposes[3]} title="Review changes after approval">
         {changes.map((r) => (
           <div className="t7-change" key={r.id}>
             <Select
@@ -162,21 +179,21 @@ export function WsiValidationExperience({ Concepts, Bridge, onAttempt }: Topic5P
               ]}
               onChange={(v) => setChangeAnswers({ ...changeAnswers, [r.id]: v })}
             />
-            {changeAnswers[r.id] && (
-              <p role="status" className="topic5-note">
-                {changeAnswers[r.id] === r.answer
-                  ? "Appropriate review scope. "
-                  : "Reconsider the effect of this change. "}
-                {r.note}
-              </p>
-            )}
+            <div role="status" aria-live="polite" aria-atomic="true">
+              {changeAnswers[r.id] && (
+                <p className="topic5-note">
+                  {changeAnswers[r.id] === r.answer
+                    ? "Appropriate review scope. "
+                    : "Reconsider the effect of this change. "}
+                  {r.note}
+                </p>
+              )}
+            </div>
           </div>
         ))}
       </Section>
-      <button
-        type="button"
-        className="text-button"
-        onClick={() => {
+      <ResetLessonButton
+        fallback={() => {
           setConfig({ ...initialValidation });
           setAnswers({});
           setChangeAnswers({});
@@ -184,9 +201,7 @@ export function WsiValidationExperience({ Concepts, Bridge, onAttempt }: Topic5P
           setTested(false);
           onAttempt?.(false);
         }}
-      >
-        Reset lesson interactions
-      </button>
+      />
     </div>
   );
 }
