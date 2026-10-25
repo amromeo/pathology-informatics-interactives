@@ -108,7 +108,6 @@ function LessonPage({ slug }: { slug: string }) {
   const topic = topics.find((item) => item.id === lesson.manifest.topic)!;
   const experience = lesson.manifest.experience ?? "generic";
   const renderSpecializedExperience = experienceRegistry[experience];
-  const allowsEarlyDebrief = ["pixel-budget", "wsi-validation", "mitosis-review", "orientation", "result-journey", "data-quality", "statistics", "privacy", "downtime", "security-review", "specimen-routing", "autoverification", "reflex-rule", "flag-trace", "newborn-exchange", "terminology-review", "queue-analysis", "cds-design", "alert-evaluation", "test-build", "lis-selection"].includes(experience) || ["five-vs-slide-archive", "model-under-pressure"].includes(slug);
   return (
     <main className={lesson.manifest.topic === 8 ? "lesson-main topic5-page topic8-page" : (lesson.manifest.topic === 5 || lesson.manifest.topic === 6 || lesson.manifest.topic === 7) ? "lesson-main topic5-page" : "lesson-main"}>
       <nav className="breadcrumbs" aria-label="Breadcrumb"><a href={href()}>Curriculum</a><span>→</span><a href={href(`topics/${topic.slug}/`)}>Topic {topic.id}</a><span>→</span><span>Lesson {lesson.manifest.id}</span></nav>
@@ -120,13 +119,11 @@ function LessonPage({ slug }: { slug: string }) {
         : <GenericExperience lesson={lesson} onAttempt={setAttempted}/>}
       {attempted ? (
         <section className="mdx-content debrief-content" id="lesson-debrief">{Debrief ? <Debrief/> : <p>Debrief content is missing.</p>}</section>
-      ) : allowsEarlyDebrief ? (
+      ) : (
         <section className="debrief-ready" aria-label="Debrief available">
           <span aria-hidden="true">Review</span>
           <div><strong>Open the debrief when you are ready</strong><p>You do not need to answer every question first.</p><button type="button" className="secondary-button" onClick={() => setAttempted(true)}>Open debrief</button></div>
         </section>
-      ) : (
-        <section className="debrief-locked" aria-label="Debrief locked"><span aria-hidden="true">04 → 05</span><div><strong>Complete the case to continue</strong><p>Choose a change and run the validation cases to open the debrief.</p></div></section>
       )}
       <nav className="lesson-end-nav"><a href={href(`topics/${topic.slug}/`)}>← Back to Topic {topic.id}</a><a href={href(`faculty/${slug}/`)}>Open faculty guide →</a></nav>
     </main>
