@@ -71,7 +71,8 @@ export const evidenceViews = [
     id: "lis",
     tab: "LIS",
     heading: "The result is final in the LIS",
-    summary: "The hematology lab can see that the CBC was reviewed and released. The ED cannot see this screen.",
+    summary:
+      "The hematology lab can see that the CBC was reviewed and released. The ED cannot see this screen.",
     fields: [
       { label: "Status", value: "Final" },
       { label: "Verified by", value: "M. Chen, MLS" },
@@ -85,7 +86,8 @@ export const evidenceViews = [
     id: "interface",
     tab: "Interface server",
     heading: "The interface application is running, but its queue is growing",
-    summary: "The server itself is not overloaded. Results are waiting because repeated delivery attempts fail.",
+    summary:
+      "The server itself is not overloaded. Results are waiting because repeated delivery attempts fail.",
     fields: [
       { label: "Processor", value: "18%" },
       { label: "Memory", value: "46%" },
@@ -105,7 +107,8 @@ export const evidenceViews = [
     id: "firewall",
     tab: "Firewall",
     heading: "The hospital firewall is blocking the EHR connection",
-    summary: "The interface server can reach the hospital network, but the approved connection to the vendor-hosted EHR is being denied.",
+    summary:
+      "The interface server can reach the hospital network, but the approved connection to the vendor-hosted EHR is being denied.",
     fields: [
       { label: "Recent change", value: "Firewall rules updated at 09:35" },
       { label: "Affected route", value: "Interface server → EHR service" },
@@ -123,46 +126,54 @@ export const connectionChoices = [
     id: "analyzer-lis",
     label: "Analyzer to LIS",
     correct: false,
-    feedback: "The LIS received the CBC and shows it as final, so this connection carried the result.",
+    feedback:
+      "The LIS received the CBC and shows it as final, so this connection carried the result.",
   },
   {
     id: "lis-interface",
     label: "LIS to interface engine",
     correct: false,
-    feedback: "The result is in the interface queue, so it made it from the LIS to the interface engine.",
+    feedback:
+      "The result is in the interface queue, so it made it from the LIS to the interface engine.",
   },
   {
     id: "interface-ehr",
     label: "Interface engine to EHR",
     correct: true,
-    feedback: "The analyzer completed the CBC, and the LIS released the result. The result is waiting in the interface queue because the connection between the interface engine and EHR is blocked.",
+    feedback:
+      "The analyzer completed the CBC, and the LIS released the result. The result is waiting in the interface queue because the connection between the interface engine and EHR is blocked.",
   },
 ] as const;
 
 export const repairChoices = [
   {
     id: "restore-firewall",
-    label: "Have Hospital IT remove the firewall block. Then have the LIS team check the interface queue and confirm that results are moving again.",
+    label:
+      "Have Hospital IT remove the firewall block. Then have the LIS team check the interface queue and confirm that results are moving again.",
     correct: true,
-    feedback: "This corrects the demonstrated failure. The queued results still need to be transmitted and reconciled before the incident is closed.",
+    feedback:
+      "This corrects the demonstrated failure. The queued results still need to be transmitted and reconciled before the incident is closed.",
   },
   {
     id: "repeat-cbc",
     label: "Repeat the CBC.",
     correct: false,
-    feedback: "The CBC is already complete. Repeating it does not restore electronic reporting and may create an unnecessary recollection and another delayed result.",
+    feedback:
+      "The CBC is already complete. Repeating it does not restore electronic reporting and may create an unnecessary recollection and another delayed result.",
   },
   {
     id: "restart-interface",
     label: "Restart the interface engine.",
     correct: false,
-    feedback: "The interface application is running. Restarting it does not remove the firewall block, and the queued results still cannot reach the EHR.",
+    feedback:
+      "The interface application is running. Restarting it does not remove the firewall block, and the queued results still cannot reach the EHR.",
   },
   {
     id: "manual-entry",
     label: "Ask the EHR vendor to enter the CBC manually.",
     correct: false,
-    feedback: "Manual entry would not restore the reporting path or address the other queued results. The laboratory should use its approved downtime procedure until the connection is restored.",
+    feedback:
+      "Manual entry would not restore the reporting path or address the other queued results. The laboratory should use its approved downtime procedure until the connection is restored.",
   },
 ] as const;
 

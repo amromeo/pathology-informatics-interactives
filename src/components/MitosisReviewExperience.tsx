@@ -1,21 +1,246 @@
-import { useState } from 'react';
-import { monitorItems, monitoringRecords, monitoringFeedback, performance, readerStudy, reviewChoices } from '../../content/lessons/human-plus-algorithm/interaction';
-import { Teaching, Topic5Section as Section, Topic5Select as Select, type Topic5Props } from './Topic5Common';
-const percent=(v:number|null)=>v===null?'Undefined':(v*100).toFixed(1)+'%';
-export function MitosisReviewExperience({Concepts,Bridge,onAttempt}:Topic5Props) {
- const [threshold,setThreshold]=useState(.5),[site,setSite]=useState('all'),[review,setReview]=useState('');
- const [monitor,setMonitor]=useState<string[]>([]),[action,setAction]=useState('');
- const p=performance(threshold,site);
- return <div className="topic7">
- <Section title="Inspect the consequences of marking locations"><Teaching Content={Concepts}/>
- <div className="topic5-controls"><label className="topic5-control"><span>Marking threshold: {threshold.toFixed(2)}</span><input aria-label="Marking threshold" type="range" min="0" max="1" step="0.05" value={threshold} onChange={e=>{setThreshold(Number(e.target.value));setReview('');onAttempt?.(true);}}/></label><Select label="Locations included" value={site} options={[["all","Both sites · 12 locations"],["A","Site A · 6 locations"],["B","Site B · 6 locations"]]} onChange={v=>{setSite(v);setReview('');}}/></div>
- <dl className="t7-metrics" aria-live="polite"><div><dt>True positives / false negatives</dt><dd>{p.tp} / {p.fn}</dd></div><div><dt>False positives / true negatives</dt><dd>{p.fp} / {p.tn}</dd></div><div><dt>Sensitivity</dt><dd>{p.tp}/{p.tp+p.fn} = {percent(p.sensitivity)}</dd></div><div><dt>Specificity</dt><dd>{p.tn}/{p.tn+p.fp} = {percent(p.specificity)}</dd></div><div><dt>True mitoses among marks</dt><dd>{p.tp}/{p.tp+p.fp} = {percent(p.ppv)}</dd></div><div><dt>Marks requiring review</dt><dd>{p.tp+p.fp} of {p.rows.length} locations</dd></div></dl>
- <div className="t7-candidates">{p.rows.map(r=><article key={r.id} className="artifact-card"><h3>{r.id} · Site {r.site}</h3><p>Score {r.score.toFixed(2)} · {r.marked?'Marked':'Unmarked'}</p><p>{r.truth?'Reference mitosis':'Reference nonmitotic location'} · {r.description}</p><strong>{r.truth?(r.marked?'True positive':'False negative'):(r.marked?'False positive':'True negative')}</strong></article>)}</div>
- <fieldset className="t7-choices"><legend>How should the pathologist review the area?</legend>{reviewChoices.map(r=><label key={r.id}><input aria-label={r.label} type="radio" name="mitosis-review" checked={review===r.id} onChange={()=>{setReview(r.id);onAttempt?.(true);}}/><span>{r.label}{review===r.id&&<small role="status">{r.note}</small>}</span></label>)}</fieldset></Section>
- <Section title="Compare the reader study and monthly report"><Teaching Content={Bridge}/><div className="topic5-card-grid">{readerStudy.map(r=><article className="artifact-card" key={r.mode}><h3>{r.mode}</h3><dl><dt>Reference figures found</dt><dd>{r.found}/40</dd><dt>Reference figures missed</dt><dd>{r.missed}/40</dd><dt>Mean review time</dt><dd>{r.minutes.toFixed(1)} minutes/slide</dd></dl><p>{r.note}</p></article>)}</div>
- <div className="topic5-card-grid">{monitoringRecords.map(r=><article className="artifact-card" key={r.period}><h3>{r.period} · Site {r.site}</h3><p>{r.failed}/{r.slides} submitted slides failed analysis ({(100*r.failed/r.slides).toFixed(1)}%).</p><p>Reference audit: {r.found}/{r.reference} figures marked ({(100*r.found/r.reference).toFixed(1)}%).</p><p>{r.note}</p></article>)}</div>
- <fieldset className="t7-choices"><legend>Include evidence in the monitoring plan</legend>{monitorItems.map(r=><label key={r.id}><input aria-label={r.label} type="checkbox" checked={monitor.includes(r.id)} onChange={()=>{setMonitor(monitor.includes(r.id)?monitor.filter(id=>id!==r.id):[...monitor,r.id]);setAction('');}}/><span>{r.label}{monitor.includes(r.id)&&<small role="status">{r.note}</small>}</span></label>)}</fieldset>
- <Select label="Response to the Month 2 findings" value={action} options={[["","Choose a response"],["expand","Expand because the overall workflow is faster"],["review","Investigate the new staining workflow and limit affected use pending review"],["threshold","Lower the threshold in production immediately"]]} onChange={v=>{setAction(v);onAttempt?.(true);}}/>
- {action&&<p role="status" className="topic5-note">{action==='review'?(monitor.length===4?monitoringFeedback.complete:monitoringFeedback.incomplete):monitoringFeedback.unsafe}</p>}
- </Section><button type="button" className="text-button" onClick={()=>{setThreshold(.5);setSite('all');setReview('');setMonitor([]);setAction('');onAttempt?.(false);}}>Reset lesson interactions</button></div>;
+import { useState } from "react";
+import {
+  monitorItems,
+  monitoringRecords,
+  monitoringFeedback,
+  performance,
+  readerStudy,
+  reviewChoices,
+} from "../../content/lessons/human-plus-algorithm/interaction";
+import {
+  Teaching,
+  Topic5Section as Section,
+  Topic5Select as Select,
+  type Topic5Props,
+} from "./Topic5Common";
+const percent = (v: number | null) => (v === null ? "Undefined" : (v * 100).toFixed(1) + "%");
+export function MitosisReviewExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
+  const [threshold, setThreshold] = useState(0.5),
+    [site, setSite] = useState("all"),
+    [review, setReview] = useState("");
+  const [monitor, setMonitor] = useState<string[]>([]),
+    [action, setAction] = useState("");
+  const p = performance(threshold, site);
+  return (
+    <div className="topic7">
+      <Section title="Inspect the consequences of marking locations">
+        <Teaching Content={Concepts} />
+        <div className="topic5-controls">
+          <label className="topic5-control">
+            <span>Marking threshold: {threshold.toFixed(2)}</span>
+            <input
+              aria-label="Marking threshold"
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              value={threshold}
+              onChange={(e) => {
+                setThreshold(Number(e.target.value));
+                setReview("");
+                onAttempt?.(true);
+              }}
+            />
+          </label>
+          <Select
+            label="Locations included"
+            value={site}
+            options={[
+              ["all", "Both sites · 12 locations"],
+              ["A", "Site A · 6 locations"],
+              ["B", "Site B · 6 locations"],
+            ]}
+            onChange={(v) => {
+              setSite(v);
+              setReview("");
+            }}
+          />
+        </div>
+        <dl className="t7-metrics" aria-live="polite">
+          <div>
+            <dt>True positives / false negatives</dt>
+            <dd>
+              {p.tp} / {p.fn}
+            </dd>
+          </div>
+          <div>
+            <dt>False positives / true negatives</dt>
+            <dd>
+              {p.fp} / {p.tn}
+            </dd>
+          </div>
+          <div>
+            <dt>Sensitivity</dt>
+            <dd>
+              {p.tp}/{p.tp + p.fn} = {percent(p.sensitivity)}
+            </dd>
+          </div>
+          <div>
+            <dt>Specificity</dt>
+            <dd>
+              {p.tn}/{p.tn + p.fp} = {percent(p.specificity)}
+            </dd>
+          </div>
+          <div>
+            <dt>True mitoses among marks</dt>
+            <dd>
+              {p.tp}/{p.tp + p.fp} = {percent(p.ppv)}
+            </dd>
+          </div>
+          <div>
+            <dt>Marks requiring review</dt>
+            <dd>
+              {p.tp + p.fp} of {p.rows.length} locations
+            </dd>
+          </div>
+        </dl>
+        <div className="t7-candidates">
+          {p.rows.map((r) => (
+            <article key={r.id} className="artifact-card">
+              <h3>
+                {r.id} · Site {r.site}
+              </h3>
+              <p>
+                Score {r.score.toFixed(2)} · {r.marked ? "Marked" : "Unmarked"}
+              </p>
+              <p>
+                {r.truth ? "Reference mitosis" : "Reference nonmitotic location"} · {r.description}
+              </p>
+              <strong>
+                {r.truth
+                  ? r.marked
+                    ? "True positive"
+                    : "False negative"
+                  : r.marked
+                    ? "False positive"
+                    : "True negative"}
+              </strong>
+            </article>
+          ))}
+        </div>
+        <fieldset className="t7-choices">
+          <legend>How should the pathologist review the area?</legend>
+          {reviewChoices.map((r) => (
+            <label key={r.id}>
+              <input
+                aria-label={r.label}
+                type="radio"
+                name="mitosis-review"
+                checked={review === r.id}
+                onChange={() => {
+                  setReview(r.id);
+                  onAttempt?.(true);
+                }}
+              />
+              <span>
+                {r.label}
+                {review === r.id && <small role="status">{r.note}</small>}
+              </span>
+            </label>
+          ))}
+        </fieldset>
+      </Section>
+      <Section title="Compare the reader study and monthly report">
+        <Teaching Content={Bridge} />
+        <div className="topic5-card-grid">
+          {readerStudy.map((r) => (
+            <article className="artifact-card" key={r.mode}>
+              <h3>{r.mode}</h3>
+              <dl>
+                <dt>Reference figures found</dt>
+                <dd>{r.found}/40</dd>
+                <dt>Reference figures missed</dt>
+                <dd>{r.missed}/40</dd>
+                <dt>Mean review time</dt>
+                <dd>{r.minutes.toFixed(1)} minutes/slide</dd>
+              </dl>
+              <p>{r.note}</p>
+            </article>
+          ))}
+        </div>
+        <div className="topic5-card-grid">
+          {monitoringRecords.map((r) => (
+            <article className="artifact-card" key={r.period}>
+              <h3>
+                {r.period} · Site {r.site}
+              </h3>
+              <p>
+                {r.failed}/{r.slides} submitted slides failed analysis (
+                {((100 * r.failed) / r.slides).toFixed(1)}%).
+              </p>
+              <p>
+                Reference audit: {r.found}/{r.reference} figures marked (
+                {((100 * r.found) / r.reference).toFixed(1)}%).
+              </p>
+              <p>{r.note}</p>
+            </article>
+          ))}
+        </div>
+        <fieldset className="t7-choices">
+          <legend>Include evidence in the monitoring plan</legend>
+          {monitorItems.map((r) => (
+            <label key={r.id}>
+              <input
+                aria-label={r.label}
+                type="checkbox"
+                checked={monitor.includes(r.id)}
+                onChange={() => {
+                  setMonitor(
+                    monitor.includes(r.id)
+                      ? monitor.filter((id) => id !== r.id)
+                      : [...monitor, r.id],
+                  );
+                  setAction("");
+                }}
+              />
+              <span>
+                {r.label}
+                {monitor.includes(r.id) && <small role="status">{r.note}</small>}
+              </span>
+            </label>
+          ))}
+        </fieldset>
+        <Select
+          label="Response to the Month 2 findings"
+          value={action}
+          options={[
+            ["", "Choose a response"],
+            ["expand", "Expand because the overall workflow is faster"],
+            [
+              "review",
+              "Investigate the new staining workflow and limit affected use pending review",
+            ],
+            ["threshold", "Lower the threshold in production immediately"],
+          ]}
+          onChange={(v) => {
+            setAction(v);
+            onAttempt?.(true);
+          }}
+        />
+        {action && (
+          <p role="status" className="topic5-note">
+            {action === "review"
+              ? monitor.length === 4
+                ? monitoringFeedback.complete
+                : monitoringFeedback.incomplete
+              : monitoringFeedback.unsafe}
+          </p>
+        )}
+      </Section>
+      <button
+        type="button"
+        className="text-button"
+        onClick={() => {
+          setThreshold(0.5);
+          setSite("all");
+          setReview("");
+          setMonitor([]);
+          setAction("");
+          onAttempt?.(false);
+        }}
+      >
+        Reset lesson interactions
+      </button>
+    </div>
+  );
 }

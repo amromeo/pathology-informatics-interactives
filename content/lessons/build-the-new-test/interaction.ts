@@ -1,54 +1,307 @@
-export type BuildConfig = { fields:string; validity:string; units:string; pending:string; specimen:string; correction:string; identity:string };
-export const initialBuild:BuildConfig={fields:"summary",validity:"ignore",units:"numeric",pending:"negative",specimen:"any",correction:"append",identity:"message"};
-export const approvedBuild:BuildConfig={fields:"components",validity:"hold",units:"qualitative",pending:"status",specimen:"validated",correction:"replace",identity:"accession"};
-export const buildControls=[
- {key:"fields",label:"Patient-facing result fields",options:[["summary","One panel-level detected/not detected result"],["components","Separate influenza A, influenza B, and RSV results"]],notes:{summary:"A panel-level answer cannot identify which organism was detected.",components:"Each named component retains its own result; no analyte is inferred from another."}},
- {key:"validity",label:"Internal control failure",options:[["ignore","Release organism calls despite control failure"],["hold","Hold organism calls and report an invalid run"]],notes:{ignore:"A failed internal control makes the instrument's raw negative calls unsuitable for release under this procedure.",hold:"Keep control details in the technical record; show an invalid result and follow the approved repeat procedure."}},
- {key:"units",label:"Units and reference information",options:[["numeric","Copy copies/mL and a numeric reference interval"],["qualitative","No numeric units; reference: Not detected"]],notes:{numeric:"The source assay is qualitative. The copied numeric units imply a concentration that was not measured.",qualitative:"Detected/not detected is a categorical result, with reference information approved for this assay."}},
- {key:"pending",label:"Result not yet available",options:[["negative","Convert empty values to Not detected"],["status","Keep Pending and withhold final component values"]],notes:{negative:"An empty value does not establish a negative test.",status:"Pending remains a workflow status, distinct from a completed negative result."}},
- {key:"specimen",label:"Specimen acceptance",options:[["any","Allow every respiratory specimen"],["validated","Accept only the procedure's NP swab in medium V"]],notes:{any:"The local procedure has not established this assay for every respiratory specimen.",validated:"This case's approved specimen is a nasopharyngeal swab in medium V. Route other specimens for review; this is not a universal assay restriction."}},
- {key:"correction",label:"Corrected result handling",options:[["append","Add a second final report without linking it"],["replace","Update the current report and retain the earlier version"]],notes:{append:"Two unlinked final reports leave the clinician uncertain which interpretation is current.",replace:"The latest report is labeled corrected; the earlier version remains in the audit history and the communication workflow is followed."}},
- {key:"identity",label:"Retransmitted message handling",options:[["message","Create a new report for each message identifier"],["accession","Match accession, component, and result version"]],notes:{message:"A retry receives a new message identifier but does not represent another specimen or result.",accession:"The same result version updates the same report; different accessions remain separate."}},
+export type BuildConfig = {
+  fields: string;
+  validity: string;
+  units: string;
+  pending: string;
+  specimen: string;
+  correction: string;
+  identity: string;
+};
+export const initialBuild: BuildConfig = {
+  fields: "summary",
+  validity: "ignore",
+  units: "numeric",
+  pending: "negative",
+  specimen: "any",
+  correction: "append",
+  identity: "message",
+};
+export const approvedBuild: BuildConfig = {
+  fields: "components",
+  validity: "hold",
+  units: "qualitative",
+  pending: "status",
+  specimen: "validated",
+  correction: "replace",
+  identity: "accession",
+};
+export const buildControls = [
+  {
+    key: "fields",
+    label: "Patient-facing result fields",
+    options: [
+      ["summary", "One panel-level detected/not detected result"],
+      ["components", "Separate influenza A, influenza B, and RSV results"],
+    ],
+    notes: {
+      summary: "A panel-level answer cannot identify which organism was detected.",
+      components:
+        "Each named component retains its own result; no analyte is inferred from another.",
+    },
+  },
+  {
+    key: "validity",
+    label: "Internal control failure",
+    options: [
+      ["ignore", "Release organism calls despite control failure"],
+      ["hold", "Hold organism calls and report an invalid run"],
+    ],
+    notes: {
+      ignore:
+        "A failed internal control makes the instrument's raw negative calls unsuitable for release under this procedure.",
+      hold: "Keep control details in the technical record; show an invalid result and follow the approved repeat procedure.",
+    },
+  },
+  {
+    key: "units",
+    label: "Units and reference information",
+    options: [
+      ["numeric", "Copy copies/mL and a numeric reference interval"],
+      ["qualitative", "No numeric units; reference: Not detected"],
+    ],
+    notes: {
+      numeric:
+        "The source assay is qualitative. The copied numeric units imply a concentration that was not measured.",
+      qualitative:
+        "Detected/not detected is a categorical result, with reference information approved for this assay.",
+    },
+  },
+  {
+    key: "pending",
+    label: "Result not yet available",
+    options: [
+      ["negative", "Convert empty values to Not detected"],
+      ["status", "Keep Pending and withhold final component values"],
+    ],
+    notes: {
+      negative: "An empty value does not establish a negative test.",
+      status: "Pending remains a workflow status, distinct from a completed negative result.",
+    },
+  },
+  {
+    key: "specimen",
+    label: "Specimen acceptance",
+    options: [
+      ["any", "Allow every respiratory specimen"],
+      ["validated", "Accept only the procedure's NP swab in medium V"],
+    ],
+    notes: {
+      any: "The local procedure has not established this assay for every respiratory specimen.",
+      validated:
+        "This case's approved specimen is a nasopharyngeal swab in medium V. Route other specimens for review; this is not a universal assay restriction.",
+    },
+  },
+  {
+    key: "correction",
+    label: "Corrected result handling",
+    options: [
+      ["append", "Add a second final report without linking it"],
+      ["replace", "Update the current report and retain the earlier version"],
+    ],
+    notes: {
+      append:
+        "Two unlinked final reports leave the clinician uncertain which interpretation is current.",
+      replace:
+        "The latest report is labeled corrected; the earlier version remains in the audit history and the communication workflow is followed.",
+    },
+  },
+  {
+    key: "identity",
+    label: "Retransmitted message handling",
+    options: [
+      ["message", "Create a new report for each message identifier"],
+      ["accession", "Match accession, component, and result version"],
+    ],
+    notes: {
+      message:
+        "A retry receives a new message identifier but does not represent another specimen or result.",
+      accession:
+        "The same result version updates the same report; different accessions remain separate.",
+    },
+  },
 ] as const;
-export type BuildCase={id:string;label:string;specimen:string;state:"final"|"pending"|"invalid"|"corrected"|"retry";values:string[];expected:string;why:string};
-export const buildCases:BuildCase[]=[
- {id:"TB01",label:"Influenza A detected",specimen:"NP-V",state:"final",values:["Detected","Not detected","Not detected"],expected:"Influenza A: Detected; Influenza B: Not detected; RSV: Not detected | Reference: Not detected; units: none | Final | 1 current report",why:"A component result must identify the detected organism and retain the negative components."},
- {id:"TB02",label:"All three targets not detected",specimen:"NP-V",state:"final",values:["Not detected","Not detected","Not detected"],expected:"Influenza A: Not detected; Influenza B: Not detected; RSV: Not detected | Reference: Not detected; units: none | Final | 1 current report",why:"A valid all-negative run remains reportable after the build is repaired."},
- {id:"TB03",label:"Influenza A and RSV detected",specimen:"NP-V",state:"final",values:["Detected","Not detected","Detected"],expected:"Influenza A: Detected; Influenza B: Not detected; RSV: Detected | Reference: Not detected; units: none | Final | 1 current report",why:"More than one detection must survive the interface and display."},
- {id:"TB04",label:"Internal control failed; raw calls negative",specimen:"NP-V",state:"invalid",values:["Not detected","Not detected","Not detected"],expected:"Invalid run; component values withheld; repeat procedure required",why:"Failed control results must not be mistaken for valid negative patient results."},
- {id:"TB05",label:"Order received; analysis not complete",specimen:"NP-V",state:"pending",values:[],expected:"Pending; no final component results",why:"Absence of a result is not a negative result."},
- {id:"TB06",label:"Sputum received under the new order",specimen:"Sputum",state:"final",values:["Not detected","Not detected","Not detected"],expected:"Specimen review; no patient results released",why:"The source procedure covers NP-V only. Resolve suitability or recollection before release."},
- {id:"TB07",label:"Influenza A corrected from Detected to Not detected",specimen:"NP-V",state:"corrected",values:["Not detected","Not detected","Not detected"],expected:"Influenza A: Not detected; Influenza B: Not detected; RSV: Not detected | Reference: Not detected; units: none | Corrected; prior version retained; notification required | 1 current report",why:"The current display must show the correction while retaining the previous version and initiating communication."},
- {id:"TB08",label:"Same accession and result version resent",specimen:"NP-V",state:"retry",values:["Detected","Not detected","Not detected"],expected:"Influenza A: Detected; Influenza B: Not detected; RSV: Not detected | Reference: Not detected; units: none | Final | 1 current report",why:"A transport retry must not create a second clinical report."},
+export type BuildCase = {
+  id: string;
+  label: string;
+  specimen: string;
+  state: "final" | "pending" | "invalid" | "corrected" | "retry";
+  values: string[];
+  expected: string;
+  why: string;
+};
+export const buildCases: BuildCase[] = [
+  {
+    id: "TB01",
+    label: "Influenza A detected",
+    specimen: "NP-V",
+    state: "final",
+    values: ["Detected", "Not detected", "Not detected"],
+    expected:
+      "Influenza A: Detected; Influenza B: Not detected; RSV: Not detected | Reference: Not detected; units: none | Final | 1 current report",
+    why: "A component result must identify the detected organism and retain the negative components.",
+  },
+  {
+    id: "TB02",
+    label: "All three targets not detected",
+    specimen: "NP-V",
+    state: "final",
+    values: ["Not detected", "Not detected", "Not detected"],
+    expected:
+      "Influenza A: Not detected; Influenza B: Not detected; RSV: Not detected | Reference: Not detected; units: none | Final | 1 current report",
+    why: "A valid all-negative run remains reportable after the build is repaired.",
+  },
+  {
+    id: "TB03",
+    label: "Influenza A and RSV detected",
+    specimen: "NP-V",
+    state: "final",
+    values: ["Detected", "Not detected", "Detected"],
+    expected:
+      "Influenza A: Detected; Influenza B: Not detected; RSV: Detected | Reference: Not detected; units: none | Final | 1 current report",
+    why: "More than one detection must survive the interface and display.",
+  },
+  {
+    id: "TB04",
+    label: "Internal control failed; raw calls negative",
+    specimen: "NP-V",
+    state: "invalid",
+    values: ["Not detected", "Not detected", "Not detected"],
+    expected: "Invalid run; component values withheld; repeat procedure required",
+    why: "Failed control results must not be mistaken for valid negative patient results.",
+  },
+  {
+    id: "TB05",
+    label: "Order received; analysis not complete",
+    specimen: "NP-V",
+    state: "pending",
+    values: [],
+    expected: "Pending; no final component results",
+    why: "Absence of a result is not a negative result.",
+  },
+  {
+    id: "TB06",
+    label: "Sputum received under the new order",
+    specimen: "Sputum",
+    state: "final",
+    values: ["Not detected", "Not detected", "Not detected"],
+    expected: "Specimen review; no patient results released",
+    why: "The source procedure covers NP-V only. Resolve suitability or recollection before release.",
+  },
+  {
+    id: "TB07",
+    label: "Influenza A corrected from Detected to Not detected",
+    specimen: "NP-V",
+    state: "corrected",
+    values: ["Not detected", "Not detected", "Not detected"],
+    expected:
+      "Influenza A: Not detected; Influenza B: Not detected; RSV: Not detected | Reference: Not detected; units: none | Corrected; prior version retained; notification required | 1 current report",
+    why: "The current display must show the correction while retaining the previous version and initiating communication.",
+  },
+  {
+    id: "TB08",
+    label: "Same accession and result version resent",
+    specimen: "NP-V",
+    state: "retry",
+    values: ["Detected", "Not detected", "Not detected"],
+    expected:
+      "Influenza A: Detected; Influenza B: Not detected; RSV: Not detected | Reference: Not detected; units: none | Final | 1 current report",
+    why: "A transport retry must not create a second clinical report.",
+  },
 ];
-export function buildReport(config:BuildConfig,row:BuildCase){
- if(config.specimen==="validated" && row.specimen!=="NP-V") return "Specimen review; no patient results released";
- if(config.validity==="hold" && row.state==="invalid") return "Invalid run; component values withheld; repeat procedure required";
- if(config.pending==="status" && row.state==="pending") return "Pending; no final component results";
- const values=row.values.length?row.values:["Not detected","Not detected","Not detected"];
- const result=config.fields==="components"?values.map((v,i)=>["Influenza A","Influenza B","RSV"][i]+": "+v).join("; "):"Respiratory panel: "+(values.includes("Detected")?"Detected":"Not detected");
- const units=config.units==="qualitative"?"Reference: Not detected; units: none":"Reference: 0–10; units: copies/mL";
- const corrected=row.state==="corrected";
- const status=corrected && config.correction==="replace"?"Corrected; prior version retained; notification required":"Final";
- const count=(corrected&&config.correction==="append")||(row.state==="retry"&&config.identity==="message")?2:1;
- return result+" | "+units+" | "+status+" | "+count+" current report"+(count===1?"":"s");
+export function buildReport(config: BuildConfig, row: BuildCase) {
+  if (config.specimen === "validated" && row.specimen !== "NP-V")
+    return "Specimen review; no patient results released";
+  if (config.validity === "hold" && row.state === "invalid")
+    return "Invalid run; component values withheld; repeat procedure required";
+  if (config.pending === "status" && row.state === "pending")
+    return "Pending; no final component results";
+  const values = row.values.length ? row.values : ["Not detected", "Not detected", "Not detected"];
+  const result =
+    config.fields === "components"
+      ? values.map((v, i) => ["Influenza A", "Influenza B", "RSV"][i] + ": " + v).join("; ")
+      : "Respiratory panel: " + (values.includes("Detected") ? "Detected" : "Not detected");
+  const units =
+    config.units === "qualitative"
+      ? "Reference: Not detected; units: none"
+      : "Reference: 0–10; units: copies/mL";
+  const corrected = row.state === "corrected";
+  const status =
+    corrected && config.correction === "replace"
+      ? "Corrected; prior version retained; notification required"
+      : "Final";
+  const count =
+    (corrected && config.correction === "append") ||
+    (row.state === "retry" && config.identity === "message")
+      ? 2
+      : 1;
+  return (
+    result +
+    " | " +
+    units +
+    " | " +
+    status +
+    " | " +
+    count +
+    " current report" +
+    (count === 1 ? "" : "s")
+  );
 }
-export const replayBuild=(config:BuildConfig)=>buildCases.map(row=>({...row,actual:buildReport(config,row),pass:buildReport(config,row)===row.expected}));
-export const buildSources=[
- {title:"Clinical request",record:"Request LAB-42 · Respiratory testing\nRequestor: emergency department and microbiology\nOrder: Influenza A/B and RSV by nucleic acid amplification\nNeed: identify each detected target in the EHR report\nScope: local assay replacing the referral workflow\nSponsor: microbiology director",note:"The clinical request defines the order and the decisions supported. It does not supply all specimen, method, or report requirements."},
- {title:"Approved procedure excerpt",record:"Procedure MB-42 · version 3\nSpecimen: nasopharyngeal (NP) swab in medium V\nMethod: qualitative nucleic acid amplification\nTargets: influenza A, influenza B, RSV\nReference information: Not detected\nNumeric concentration and units: not reported\nFailed internal control: invalid; follow repeat procedure\nTechnical control values: retained in laboratory record",note:"These are the case's locally approved specifications. Confirm the actual manufacturer's instructions and laboratory verification dossier when building a real assay."},
- {title:"Test environment report",record:"Encounter 46120 · Accession MB26042218\nOrder: Resp panel extended\nSpecimen: NP swab in medium V\nCollected: 22 Apr 2026 08:10\nReported: 22 Apr 2026 09:05\nCentral Microbiology Lab · 100 Hospital Way\nRespiratory panel: Detected copies/mL\nReference: 0–10\nStatus: Final\nInterface receipt: acknowledged",note:"The interface accepted the message, but the copied report suggests a quantitative measurement and does not name the detected target. Compare it with the procedure before approving the display."},
+export const replayBuild = (config: BuildConfig) =>
+  buildCases.map((row) => ({
+    ...row,
+    actual: buildReport(config, row),
+    pass: buildReport(config, row) === row.expected,
+  }));
+export const buildSources = [
+  {
+    title: "Clinical request",
+    record:
+      "Request LAB-42 · Respiratory testing\nRequestor: emergency department and microbiology\nOrder: Influenza A/B and RSV by nucleic acid amplification\nNeed: identify each detected target in the EHR report\nScope: local assay replacing the referral workflow\nSponsor: microbiology director",
+    note: "The clinical request defines the order and the decisions supported. It does not supply all specimen, method, or report requirements.",
+  },
+  {
+    title: "Approved procedure excerpt",
+    record:
+      "Procedure MB-42 · version 3\nSpecimen: nasopharyngeal (NP) swab in medium V\nMethod: qualitative nucleic acid amplification\nTargets: influenza A, influenza B, RSV\nReference information: Not detected\nNumeric concentration and units: not reported\nFailed internal control: invalid; follow repeat procedure\nTechnical control values: retained in laboratory record",
+    note: "These are the case's locally approved specifications. Confirm the actual manufacturer's instructions and laboratory verification dossier when building a real assay.",
+  },
+  {
+    title: "Test environment report",
+    record:
+      "Encounter 46120 · Accession MB26042218\nOrder: Resp panel extended\nSpecimen: NP swab in medium V\nCollected: 22 Apr 2026 08:10\nReported: 22 Apr 2026 09:05\nCentral Microbiology Lab · 100 Hospital Way\nRespiratory panel: Detected copies/mL\nReference: 0–10\nStatus: Final\nInterface receipt: acknowledged",
+    note: "The interface accepted the message, but the copied report suggests a quantitative measurement and does not name the detected target. Compare it with the procedure before approving the display.",
+  },
 ];
-export const releaseRequirements=[
- {id:"clinical",label:"Laboratory director approves the complete order and report",note:"Names, component meaning, interpretation, specimen restrictions, and clinical communication are reviewed with the clinical service."},
- {id:"destination",label:"Verify the final report in the designated EHR view",note:"Compare source and destination content, patient/accession identity, status, corrections, and downstream uses; an interface acknowledgement alone is insufficient."},
- {id:"operations",label:"Complete procedures, staff training, and downtime arrangements",note:"Include order entry, specimen rejection, invalid runs, unresolved messages, manual reports, and reconciliation after downtime."},
- {id:"release",label:"Promote the tested version with rollback and monitoring",note:"Record build version, approvals, deployment owner and time, recovery steps, and review of the first live reports. A later edit requires reassessment."},
+export const releaseRequirements = [
+  {
+    id: "clinical",
+    label: "Laboratory director approves the complete order and report",
+    note: "Names, component meaning, interpretation, specimen restrictions, and clinical communication are reviewed with the clinical service.",
+  },
+  {
+    id: "destination",
+    label: "Verify the final report in the designated EHR view",
+    note: "Compare source and destination content, patient/accession identity, status, corrections, and downstream uses; an interface acknowledgement alone is insufficient.",
+  },
+  {
+    id: "operations",
+    label: "Complete procedures, staff training, and downtime arrangements",
+    note: "Include order entry, specimen rejection, invalid runs, unresolved messages, manual reports, and reconciliation after downtime.",
+  },
+  {
+    id: "release",
+    label: "Promote the tested version with rollback and monitoring",
+    note: "Record build version, approvals, deployment owner and time, recovery steps, and review of the first live reports. A later edit requires reassessment.",
+  },
 ];
-export const buildCopy={
- previewTitle:"Compare the generated report with the expected report",
- previewHelp:"The preview shows the result section produced by your settings. Patient identifiers, collection time, performing laboratory, and accession remain unchanged in this exercise.",
- ready:"All eight result checks and the four readiness items are addressed. Recommend a controlled release review; assay verification and institution-specific approvals remain separate requirements.",
- notReady:"Do not recommend release yet. Repair failed report checks and address each readiness item; a passing technical replay does not complete clinical and operational approval.",
- changed:"The configuration changed. Rerun validation before using the previous results to support release.",
+export const buildCopy = {
+  previewTitle: "Compare the generated report with the expected report",
+  previewHelp:
+    "The preview shows the result section produced by your settings. Patient identifiers, collection time, performing laboratory, and accession remain unchanged in this exercise.",
+  ready:
+    "All eight result checks and the four readiness items are addressed. Recommend a controlled release review; assay verification and institution-specific approvals remain separate requirements.",
+  notReady:
+    "Do not recommend release yet. Repair failed report checks and address each readiness item; a passing technical replay does not complete clinical and operational approval.",
+  changed:
+    "The configuration changed. Rerun validation before using the previous results to support release.",
 };

@@ -1,40 +1,49 @@
 import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
-const output = fileURLToPath(new URL("../content/lessons/can-we-trust-this-report/report.csv", import.meta.url));
+const output = fileURLToPath(
+  new URL("../content/lessons/can-we-trust-this-report/report.csv", import.meta.url),
+);
 
 const balanceAcrossWeeks = (values, weekCount) => {
   const buckets = Array.from({ length: weekCount }, () => []);
-  [...values].sort((a, b) => a - b).forEach((value, index) => buckets[index % weekCount].push(value));
+  [...values]
+    .sort((a, b) => a - b)
+    .forEach((value, index) => buckets[index % weekCount].push(value));
   return buckets.flat();
 };
 
-const baselineTats = balanceAcrossWeeks([
-  ...Array(20).fill(1.0),
-  ...Array(30).fill(1.8),
-  ...Array(54).fill(2.5),
-  ...Array(2).fill(2.7),
-  ...Array(60).fill(3.5),
-  ...Array(30).fill(5.0),
-  8.1,
-  ...Array(13).fill(8.5),
-], 6);
+const baselineTats = balanceAcrossWeeks(
+  [
+    ...Array(20).fill(1.0),
+    ...Array(30).fill(1.8),
+    ...Array(54).fill(2.5),
+    ...Array(2).fill(2.7),
+    ...Array(60).fill(3.5),
+    ...Array(30).fill(5.0),
+    8.1,
+    ...Array(13).fill(8.5),
+  ],
+  6,
+);
 
-const stabilizedTats = balanceAcrossWeeks([
-  ...Array(30).fill(1.0),
-  ...Array(40).fill(1.8),
-  ...Array(32).fill(2.3),
-  ...Array(28).fill(2.5),
-  ...Array(36).fill(3.2),
-  ...Array(30).fill(4.8),
-  7.0,
-  ...Array(13).fill(9.1),
-], 6);
+const stabilizedTats = balanceAcrossWeeks(
+  [
+    ...Array(30).fill(1.0),
+    ...Array(40).fill(1.8),
+    ...Array(32).fill(2.3),
+    ...Array(28).fill(2.5),
+    ...Array(36).fill(3.2),
+    ...Array(30).fill(4.8),
+    7.0,
+    ...Array(13).fill(9.1),
+  ],
+  6,
+);
 
 const cutoverTats = [
-  1.5, 0.8, 1.0, 1.8, 1.0, 1.2, 2.0, 0.8,
-  7.5, 8.0, 8.5, 9.0, 9.5, 10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.5,
-  7.5, 8.0, 8.5, 9.0, 9.5, 10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.5, 10.5,
+  1.5, 0.8, 1.0, 1.8, 1.0, 1.2, 2.0, 0.8, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0, 10.5, 11.0, 11.5, 12.0,
+  12.5, 13.0, 13.5, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.5, 10.5,
 ];
 
 if (baselineTats.length !== 210 || stabilizedTats.length !== 210 || cutoverTats.length !== 35) {
@@ -42,7 +51,8 @@ if (baselineTats.length !== 210 || stabilizedTats.length !== 210 || cutoverTats.
 }
 
 const pad = (value) => String(value).padStart(2, "0");
-const isoLocal = (date) => `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+const isoLocal = (date) =>
+  `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
 
 const businessDates = (start, count) => {
   const result = [];
@@ -96,10 +106,19 @@ const addPeriod = ({ period, prefix, start, tats, missingStructured = 0 }) => {
 };
 
 addPeriod({ period: "baseline", prefix: "B", start: "2026-01-05", tats: baselineTats });
-addPeriod({ period: "cutover", prefix: "C", start: "2026-02-16", tats: cutoverTats, missingStructured: 27 });
+addPeriod({
+  period: "cutover",
+  prefix: "C",
+  start: "2026-02-16",
+  tats: cutoverTats,
+  missingStructured: 27,
+});
 addPeriod({ period: "stabilized", prefix: "P", start: "2026-02-23", tats: stabilizedTats });
 
 const headers = Object.keys(rows[0]);
-const csv = [headers.join(","), ...rows.map((row) => headers.map((header) => row[header]).join(","))].join("\n") + "\n";
+const csv =
+  [headers.join(","), ...rows.map((row) => headers.map((header) => row[header]).join(","))].join(
+    "\n",
+  ) + "\n";
 writeFileSync(output, csv, "utf8");
 console.log(`Wrote ${rows.length} rows to ${output}`);

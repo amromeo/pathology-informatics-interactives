@@ -12,14 +12,20 @@ const output = {
     slug: topic.slug,
     title: topic.title,
     objectives: topic.objectives,
-    lessons: lessons.filter((lesson) => lesson.manifest.topic === topic.id).map((lesson) => ({
-      id: lesson.manifest.id,
-      slug: lesson.manifest.slug,
-      title: lesson.manifest.title,
-      objectives: lesson.manifest.pierObjectives,
-    })),
+    lessons: lessons
+      .filter((lesson) => lesson.manifest.topic === topic.id)
+      .map((lesson) => ({
+        id: lesson.manifest.id,
+        slug: lesson.manifest.slug,
+        title: lesson.manifest.title,
+        objectives: lesson.manifest.pierObjectives,
+      })),
   })),
 };
 
-await writeFile(resolve("pages-dist", "curriculum-coverage.json"), JSON.stringify(output, null, 2) + "\n", "utf8");
+await writeFile(
+  resolve("pages-dist", "curriculum-coverage.json"),
+  JSON.stringify(output, null, 2) + "\n",
+  "utf8",
+);
 console.log("Exported pages-dist/curriculum-coverage.json");

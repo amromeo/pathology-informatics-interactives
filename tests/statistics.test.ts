@@ -19,7 +19,8 @@ test("the lot-comparison worksheet contains the planned paired specimens", () =>
   assert.equal(veryLowResults.length, 6);
   assert.equal(decisionResults.length, 18);
   assert.equal(elevatedResults.length, 6);
-  for (const row of lotResults) assert.equal(row.difference, Number((row.newLot - row.currentLot).toFixed(1)));
+  for (const row of lotResults)
+    assert.equal(row.difference, Number((row.newLot - row.currentLot).toFixed(1)));
 });
 
 test("the primary paired-result statistics reproduce the lesson values", () => {
@@ -37,15 +38,18 @@ test("all three concentration-range checks support the controlled decision", () 
   assert.equal(lowRangePasses, true);
   assert.equal(elevatedRangePasses, true);
   assert.equal(confidenceIntervalPasses, true);
-  assert.equal(finalChoices.filter((choice) => choice.correct).map((choice) => choice.id).join(), "accept-monitor");
+  assert.equal(
+    finalChoices
+      .filter((choice) => choice.correct)
+      .map((choice) => choice.id)
+      .join(),
+    "accept-monitor",
+  );
 });
 
 test("the common-test exercise includes the five planned statistical choices", () => {
-  assert.deepEqual(testScenarios.map((scenario) => scenario.answer), [
-    "paired-t",
-    "wilcoxon",
-    "independent-t",
-    "anova",
-    "fisher",
-  ]);
+  assert.deepEqual(
+    testScenarios.map((scenario) => scenario.answer),
+    ["paired-t", "wilcoxon", "independent-t", "anova", "fisher"],
+  );
 });

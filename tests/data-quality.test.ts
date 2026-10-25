@@ -38,7 +38,10 @@ test("the two-period and three-period reports calculate the intended summaries",
 test("the revised report separates cutover and preserves one row per eligible case", () => {
   assert.ok(fairPostRows.every((row) => row.period === "stabilized"));
   assert.ok(reportRows.every((row) => row.eligible));
-  assert.equal(fairPostRows.filter((row) => row.amended).length, new Set(fairPostRows.filter((row) => row.amended).map((row) => row.accessionId)).size);
+  assert.equal(
+    fairPostRows.filter((row) => row.amended).length,
+    new Set(fairPostRows.filter((row) => row.amended).map((row) => row.accessionId)).size,
+  );
   assert.ok(fairPostRows.some((row) => row.specimenGroup === "Biopsy"));
   assert.ok(fairPostRows.some((row) => row.specimenGroup === "Resection"));
 });
@@ -54,7 +57,16 @@ test("the weekly trend contains six pre-go-live weeks, cutover, and six later we
 });
 
 test("working-day calculations skip weekends and retain fractions", () => {
-  assert.equal(workingDaysBetween(new Date("2026-02-13T07:00:00"), new Date("2026-02-16T07:00:00")), 1);
-  assert.equal(workingDaysBetween(new Date("2026-02-16T07:00:00"), new Date("2026-02-17T19:00:00")), 1.5);
-  assert.equal(workingDaysBetween(new Date("2026-02-17T19:00:00"), new Date("2026-02-16T07:00:00")), -1.5);
+  assert.equal(
+    workingDaysBetween(new Date("2026-02-13T07:00:00"), new Date("2026-02-16T07:00:00")),
+    1,
+  );
+  assert.equal(
+    workingDaysBetween(new Date("2026-02-16T07:00:00"), new Date("2026-02-17T19:00:00")),
+    1.5,
+  );
+  assert.equal(
+    workingDaysBetween(new Date("2026-02-17T19:00:00"), new Date("2026-02-16T07:00:00")),
+    -1.5,
+  );
 });

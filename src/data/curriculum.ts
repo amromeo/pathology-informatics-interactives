@@ -1,5 +1,12 @@
 import { topic7Plan, topic7Sources } from "./topic7Plan";
-import type { Choice, LessonDefinition, LessonManifest, SourceReference, TopicDefinition, ValidationCase } from "./types";
+import type {
+  Choice,
+  LessonDefinition,
+  LessonManifest,
+  SourceReference,
+  TopicDefinition,
+  ValidationCase,
+} from "./types";
 
 export const PIER_URL = "https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf";
 export const API_URL = "https://www.pathologyinformatics.org/teaching-slide-sets";
@@ -54,7 +61,8 @@ const nistStatisticsSource: SourceReference = {
 };
 
 const hhsDeidentificationSource: SourceReference = {
-  label: "HHS Office for Civil Rights — Guidance Regarding Methods for De-identification of Protected Health Information",
+  label:
+    "HHS Office for Civil Rights — Guidance Regarding Methods for De-identification of Protected Health Information",
   url: "https://www.hhs.gov/hipaa/for-professionals/special-topics/de-identification/index.html",
   license: "United States government guidance; cited and paraphrased",
   use: "Supports the distinction between the HIPAA Safe Harbor and Expert Determination methods and the treatment of a reidentification mechanism.",
@@ -68,14 +76,62 @@ const hhsLimitedDataSetSource: SourceReference = {
 };
 
 export const topics: TopicDefinition[] = [
-  { id: 1, slug: "informatics-practice", title: "Informatics in Pathology Practice", objectives: ["1.1", "1.2", "1.3", "1.4"], summary: "Roles, stewardship, data literacy, and technical foundations." },
-  { id: 2, slug: "data-science", title: "Data Science", objectives: ["2.1", "2.2", "2.3", "2.4"], summary: "Data quality, statistics, scale, and responsible AI." },
-  { id: 3, slug: "availability-security", title: "Data Availability and Security", objectives: ["3.1", "3.2", "3.3", "3.4"], summary: "Confidentiality, integrity, availability, resilience, and responsible data use." },
-  { id: 4, slug: "lis-functions", title: "LIS Components and Functions", objectives: ["4.1", "4.2", "4.3", "4.4", "4.5"], summary: "Identity, rules, routing, tracking, and quality monitoring." },
-  { id: 5, slug: "interoperability", title: "Messaging, Interoperability, and Interfaces", objectives: ["5.1", "5.2", "5.3", "5.4", "5.5"], summary: "Standards, terminology, middleware, and operational data use." },
-  { id: 6, slug: "clinical-decision-support", title: "Clinical Decision Support", objectives: ["6.1", "6.2", "6.3", "6.4"], summary: "Designing and evaluating support that fits clinical work." },
-  { id: 7, slug: "digital-pathology", title: "Digital Pathology Systems", objectives: ["7.1", "7.2", "7.3", "7.4"], summary: "Images, displays, analysis, validation, and oversight." },
-  { id: 8, slug: "lis-ehr-projects", title: "Pathologist Role in LIS and EHR Projects", objectives: ["8.1", "8.2", "8.3", "8.4"], summary: "Test builds, selection, change control, and lifecycle governance." },
+  {
+    id: 1,
+    slug: "informatics-practice",
+    title: "Informatics in Pathology Practice",
+    objectives: ["1.1", "1.2", "1.3", "1.4"],
+    summary: "Roles, stewardship, data literacy, and technical foundations.",
+  },
+  {
+    id: 2,
+    slug: "data-science",
+    title: "Data Science",
+    objectives: ["2.1", "2.2", "2.3", "2.4"],
+    summary: "Data quality, statistics, scale, and responsible AI.",
+  },
+  {
+    id: 3,
+    slug: "availability-security",
+    title: "Data Availability and Security",
+    objectives: ["3.1", "3.2", "3.3", "3.4"],
+    summary: "Confidentiality, integrity, availability, resilience, and responsible data use.",
+  },
+  {
+    id: 4,
+    slug: "lis-functions",
+    title: "LIS Components and Functions",
+    objectives: ["4.1", "4.2", "4.3", "4.4", "4.5"],
+    summary: "Identity, rules, routing, tracking, and quality monitoring.",
+  },
+  {
+    id: 5,
+    slug: "interoperability",
+    title: "Messaging, Interoperability, and Interfaces",
+    objectives: ["5.1", "5.2", "5.3", "5.4", "5.5"],
+    summary: "Standards, terminology, middleware, and operational data use.",
+  },
+  {
+    id: 6,
+    slug: "clinical-decision-support",
+    title: "Clinical Decision Support",
+    objectives: ["6.1", "6.2", "6.3", "6.4"],
+    summary: "Designing and evaluating support that fits clinical work.",
+  },
+  {
+    id: 7,
+    slug: "digital-pathology",
+    title: "Digital Pathology Systems",
+    objectives: ["7.1", "7.2", "7.3", "7.4"],
+    summary: "Images, displays, analysis, validation, and oversight.",
+  },
+  {
+    id: 8,
+    slug: "lis-ehr-projects",
+    title: "Pathologist Role in LIS and EHR Projects",
+    objectives: ["8.1", "8.2", "8.3", "8.4"],
+    summary: "Test builds, selection, change control, and lifecycle governance.",
+  },
 ];
 
 type ManifestSeed = Omit<LessonManifest, "id" | "sources">;
@@ -99,8 +155,36 @@ type StructuredCaseSeed = CaseSeedBase & {
 type CaseSeed = LegacyCaseSeed | StructuredCaseSeed;
 
 const manifests: ManifestSeed[] = [
-  { slug: "steward-at-morning-huddle", title: "Who Does What in Laboratory Informatics?", topic: 1, pierObjectives: ["1.1", "1.2", "1.3"], durationMinutes: 22, difficulty: "foundational", interactionKinds: ["field-map", "role-assignment", "support-ticket-triage", "go-live-decision"], apiSessions: [0, 3, 9], hasLocalPracticum: true, experience: "orientation" },
-  { slug: "inside-a-results-journey", title: "The Missing CBC", topic: 1, pierObjectives: ["1.4"], durationMinutes: 22, difficulty: "foundational", interactionKinds: ["system-map", "component-classification", "log-review", "fault-localization", "reconciliation"], apiSessions: [1, 3], hasLocalPracticum: true, experience: "result-journey" },
+  {
+    slug: "steward-at-morning-huddle",
+    title: "Who Does What in Laboratory Informatics?",
+    topic: 1,
+    pierObjectives: ["1.1", "1.2", "1.3"],
+    durationMinutes: 22,
+    difficulty: "foundational",
+    interactionKinds: ["field-map", "role-assignment", "support-ticket-triage", "go-live-decision"],
+    apiSessions: [0, 3, 9],
+    hasLocalPracticum: true,
+    experience: "orientation",
+  },
+  {
+    slug: "inside-a-results-journey",
+    title: "The Missing CBC",
+    topic: 1,
+    pierObjectives: ["1.4"],
+    durationMinutes: 22,
+    difficulty: "foundational",
+    interactionKinds: [
+      "system-map",
+      "component-classification",
+      "log-review",
+      "fault-localization",
+      "reconciliation",
+    ],
+    apiSessions: [1, 3],
+    hasLocalPracticum: true,
+    experience: "result-journey",
+  },
   {
     slug: "can-we-trust-this-report",
     title: "Can We Trust This Report?",
@@ -108,16 +192,52 @@ const manifests: ManifestSeed[] = [
     pierObjectives: ["2.1"],
     durationMinutes: 32,
     difficulty: "foundational",
-    interactionKinds: ["source-comparison", "data-flow", "data-quality-audit", "report-table", "metric-repair", "regression"],
+    interactionKinds: [
+      "source-comparison",
+      "data-flow",
+      "data-quality-audit",
+      "report-table",
+      "metric-repair",
+      "regression",
+    ],
     apiSessions: [0, 2],
     hasLocalPracticum: true,
     experience: "data-quality",
     pilot: "data-quality",
     pierCoverage: [
-      { id: "2.1-data-representation", objective: "2.1", summary: "Structured and unstructured laboratory data", learnerAction: "Compare a blank structured LIS field with an accession time visible on a scanned requisition.", primary: true },
-      { id: "2.1-data-quality", objective: "2.1", summary: "Accuracy, completeness, validity, consistency, uniqueness, timeliness, and fitness for purpose", learnerAction: "Match seven checks on the surgical pathology dataset to the appropriate data-quality dimensions.", primary: true },
-      { id: "2.1-data-flow", objective: "2.1", summary: "Data flow from creation to use", learnerAction: "Trace the case from accessioning through the LIS export and spreadsheet to the quality meeting.", primary: true },
-      { id: "2.1-pathology-data-science", objective: "2.1", summary: "Examples of data science in pathology", learnerAction: "Relate the TAT case to statistical analysis, linked clinical data, image analysis, and AI/ML.", primary: true },
+      {
+        id: "2.1-data-representation",
+        objective: "2.1",
+        summary: "Structured and unstructured laboratory data",
+        learnerAction:
+          "Compare a blank structured LIS field with an accession time visible on a scanned requisition.",
+        primary: true,
+      },
+      {
+        id: "2.1-data-quality",
+        objective: "2.1",
+        summary:
+          "Accuracy, completeness, validity, consistency, uniqueness, timeliness, and fitness for purpose",
+        learnerAction:
+          "Match seven checks on the surgical pathology dataset to the appropriate data-quality dimensions.",
+        primary: true,
+      },
+      {
+        id: "2.1-data-flow",
+        objective: "2.1",
+        summary: "Data flow from creation to use",
+        learnerAction:
+          "Trace the case from accessioning through the LIS export and spreadsheet to the quality meeting.",
+        primary: true,
+      },
+      {
+        id: "2.1-pathology-data-science",
+        objective: "2.1",
+        summary: "Examples of data science in pathology",
+        learnerAction:
+          "Relate the TAT case to statistical analysis, linked clinical data, image analysis, and AI/ML.",
+        primary: true,
+      },
     ],
   },
   {
@@ -127,169 +247,1650 @@ const manifests: ManifestSeed[] = [
     pierObjectives: ["2.2"],
     durationMinutes: 32,
     difficulty: "applied",
-    interactionKinds: ["paired-results", "distribution", "descriptive-statistics", "confidence-interval", "hypothesis-test", "test-selection", "lot-decision"],
+    interactionKinds: [
+      "paired-results",
+      "distribution",
+      "descriptive-statistics",
+      "confidence-interval",
+      "hypothesis-test",
+      "test-selection",
+      "lot-decision",
+    ],
     apiSessions: [0, 2],
     hasLocalPracticum: false,
     experience: "statistics",
     pierCoverage: [
-      { id: "2.2-central-tendency", objective: "2.2", summary: "Mean and median", learnerAction: "Compare the mean and median of paired troponin lot differences and explain what each shows.", primary: true },
-      { id: "2.2-dispersion", objective: "2.2", summary: "Standard deviation and distributions", learnerAction: "Inspect the spread, shape, and outliers in a paired reagent-lot comparison.", primary: true },
-      { id: "2.2-confidence-intervals", objective: "2.2", summary: "Confidence intervals", learnerAction: "Interpret the confidence interval for the observed lot difference against a medical acceptance limit.", primary: true },
-      { id: "2.2-hypothesis-testing", objective: "2.2", summary: "Hypothesis testing and p-values", learnerAction: "Explain what the p-value answers and why it does not by itself determine lot acceptance.", primary: true },
-      { id: "2.2-test-selection", objective: "2.2", summary: "Common statistical tests", learnerAction: "Choose a suitable test for five common pathology research questions.", primary: true },
+      {
+        id: "2.2-central-tendency",
+        objective: "2.2",
+        summary: "Mean and median",
+        learnerAction:
+          "Compare the mean and median of paired troponin lot differences and explain what each shows.",
+        primary: true,
+      },
+      {
+        id: "2.2-dispersion",
+        objective: "2.2",
+        summary: "Standard deviation and distributions",
+        learnerAction:
+          "Inspect the spread, shape, and outliers in a paired reagent-lot comparison.",
+        primary: true,
+      },
+      {
+        id: "2.2-confidence-intervals",
+        objective: "2.2",
+        summary: "Confidence intervals",
+        learnerAction:
+          "Interpret the confidence interval for the observed lot difference against a medical acceptance limit.",
+        primary: true,
+      },
+      {
+        id: "2.2-hypothesis-testing",
+        objective: "2.2",
+        summary: "Hypothesis testing and p-values",
+        learnerAction:
+          "Explain what the p-value answers and why it does not by itself determine lot acceptance.",
+        primary: true,
+      },
+      {
+        id: "2.2-test-selection",
+        objective: "2.2",
+        summary: "Common statistical tests",
+        learnerAction: "Choose a suitable test for five common pathology research questions.",
+        primary: true,
+      },
     ],
   },
-  { slug: "five-vs-slide-archive", title: "Five Vs in the Slide Archive", topic: 2, pierObjectives: ["2.3"], durationMinutes: 20, difficulty: "applied", interactionKinds: ["capacity-planning", "data-flow"], apiSessions: [2, 5], hasLocalPracticum: false },
-  { slug: "model-under-pressure", title: "Model Under Pressure", topic: 2, pierObjectives: ["2.4"], durationMinutes: 26, difficulty: "applied", interactionKinds: ["model-verification", "monitoring"], apiSessions: [6], hasLocalPracticum: false },
-  { slug: "server-behind-the-analyzer", title: "The Server Behind the Analyzer", topic: 3, pierObjectives: ["3.1", "3.2"], durationMinutes: 25, difficulty: "applied", interactionKinds: ["threat-model", "control-builder", "stress-test"], apiSessions: [8], hasLocalPracticum: true, experience: "security-review" },
-  { slug: "twelve-hours-offline", title: "Twelve Hours Offline", topic: 3, pierObjectives: ["3.1", "3.3"], durationMinutes: 30, difficulty: "applied", interactionKinds: ["tabletop", "timeline", "reconciliation"], apiSessions: [8, 9], hasLocalPracticum: true, experience: "downtime" },
-  { slug: "not-anonymous-enough", title: "Not Anonymous Enough", topic: 3, pierObjectives: ["3.2", "3.4"], durationMinutes: 25, difficulty: "applied", interactionKinds: ["reidentification-attempt", "redaction-workbench", "release-decision"], apiSessions: [8], hasLocalPracticum: true, experience: "privacy" },
-  { slug: "where-is-the-specimen", title: "Where Is the Specimen?", topic: 4, pierObjectives: ["4.1", "4.2", "4.4"], durationMinutes: 25, difficulty: "applied", interactionKinds: ["audit-trail", "routing-repair", "regression", "recovery-decision"], apiSessions: [3], hasLocalPracticum: true, experience: "specimen-routing" },
-  { slug: "autoverification-at-the-edge", title: "Checking Automatic Result Release", topic: 4, pierObjectives: ["4.3", "4.5"], durationMinutes: 35, difficulty: "applied", interactionKinds: ["rule-builder", "result-trace", "regression", "change-review"], apiSessions: [3, 9], hasLocalPracticum: true, experience: "autoverification" },
-  { slug: "reflex-rule-ripple-effect", title: "Updating a Thyroid Reflex Rule", topic: 4, pierObjectives: ["4.3", "4.5"], durationMinutes: 30, difficulty: "applied", interactionKinds: ["rule-map", "order-replay", "utilization", "change-review"], apiSessions: [3, 7, 9], hasLocalPracticum: false, experience: "reflex-rule" },
-  { slug: "follow-the-flag", title: "Tracing a Missing Critical Flag", topic: 5, pierObjectives: ["5.2", "5.3", "5.4", "8.1"], durationMinutes: 30, difficulty: "foundational", interactionKinds: ["system-trace", "field-inspector", "mapping", "regression"], apiSessions: [3, 4], hasLocalPracticum: false, pilot: "interoperability", experience: "flag-trace" },
-  { slug: "newborn-screen-to-public-health", title: "Sending a Newborn Screening Report", topic: 5, pierObjectives: ["5.1", "5.2", "5.3"], durationMinutes: 35, difficulty: "applied", interactionKinds: ["message-inspector", "terminology-map"], apiSessions: [4], hasLocalPracticum: true, experience: "newborn-exchange" },
-  { slug: "code-the-meaning", title: "Why Laboratory Results Need LOINC", topic: 5, pierObjectives: ["5.3"], durationMinutes: 50, difficulty: "applied", interactionKinds: ["terminology-browser", "mapping-review", "website-lookup", "evidence-review"], apiSessions: [4], hasLocalPracticum: true, experience: "terminology-review" },
-  { slug: "invisible-bottleneck", title: "Investigating Delayed Result Release", topic: 5, pierObjectives: ["5.5", "2.1"], durationMinutes: 35, difficulty: "applied", interactionKinds: ["dashboard", "metric-design"], apiSessions: [0, 2, 3, 4], hasLocalPracticum: false, experience: "queue-analysis" },
-  { slug: "five-rights-right-test", title: "Designing Repeat-Test Guidance", topic: 6, pierObjectives: ["6.1", "6.2"], durationMinutes: 35, difficulty: "applied", interactionKinds: ["workflow-map", "cds-builder"], apiSessions: [7], hasLocalPracticum: true, experience: "cds-design" },
-  { slug: "alert-everyone-ignores", title: "Evaluating a Repeat-Test Alert", topic: 6, pierObjectives: ["6.3", "6.4"], durationMinutes: 40, difficulty: "applied", interactionKinds: ["alert-redesign", "evaluation"], apiSessions: [7], hasLocalPracticum: true, experience: "alert-evaluation" },
-  { slug: "pixel-budget", title: "Choosing Image Settings for a Pathology Service", topic: 7, pierObjectives: ["7.1", "7.2"], durationMinutes: 40, difficulty: "foundational", interactionKinds: ["image-compare", "compression", "storage-calculator"], apiSessions: [5], hasLocalPracticum: true, experience: "pixel-budget" },
-  { slug: "validate-before-go-live", title: "Reviewing a Whole-Slide Imaging Validation", topic: 7, pierObjectives: ["7.1", "7.4"], durationMinutes: 45, difficulty: "stewardship", interactionKinds: ["study-review", "discordance-investigation", "validation-plan", "change-review"], apiSessions: [5], hasLocalPracticum: true, experience: "wsi-validation" },
-  { slug: "human-plus-algorithm", title: "Reviewing a Mitosis Detection Tool", topic: 7, pierObjectives: ["7.3", "2.4"], durationMinutes: 40, difficulty: "stewardship", interactionKinds: ["threshold", "human-factors", "monitoring"], apiSessions: [5, 6], hasLocalPracticum: true, experience: "mitosis-review" },
-  { slug: "build-the-new-test", title: "Building and Validating a Laboratory Test", topic: 8, pierObjectives: ["8.1", "8.2", "8.4"], durationMinutes: 40, difficulty: "stewardship", interactionKinds: ["test-build", "approval", "regression"], apiSessions: [3, 9], hasLocalPracticum: true, experience: "test-build" },
-  { slug: "choose-and-govern-lis", title: "Selecting and Maintaining a Laboratory Information System", topic: 8, pierObjectives: ["8.3", "8.4"], durationMinutes: 40, difficulty: "stewardship", interactionKinds: ["requirements", "selection-matrix", "lifecycle"], apiSessions: [3, 9], hasLocalPracticum: true, experience: "lis-selection" },
+  {
+    slug: "five-vs-slide-archive",
+    title: "Five Vs in the Slide Archive",
+    topic: 2,
+    pierObjectives: ["2.3"],
+    durationMinutes: 20,
+    difficulty: "applied",
+    interactionKinds: ["capacity-planning", "data-flow"],
+    apiSessions: [2, 5],
+    hasLocalPracticum: false,
+  },
+  {
+    slug: "model-under-pressure",
+    title: "Model Under Pressure",
+    topic: 2,
+    pierObjectives: ["2.4"],
+    durationMinutes: 26,
+    difficulty: "applied",
+    interactionKinds: ["model-verification", "monitoring"],
+    apiSessions: [6],
+    hasLocalPracticum: false,
+  },
+  {
+    slug: "server-behind-the-analyzer",
+    title: "The Server Behind the Analyzer",
+    topic: 3,
+    pierObjectives: ["3.1", "3.2"],
+    durationMinutes: 25,
+    difficulty: "applied",
+    interactionKinds: ["threat-model", "control-builder", "stress-test"],
+    apiSessions: [8],
+    hasLocalPracticum: true,
+    experience: "security-review",
+  },
+  {
+    slug: "twelve-hours-offline",
+    title: "Twelve Hours Offline",
+    topic: 3,
+    pierObjectives: ["3.1", "3.3"],
+    durationMinutes: 30,
+    difficulty: "applied",
+    interactionKinds: ["tabletop", "timeline", "reconciliation"],
+    apiSessions: [8, 9],
+    hasLocalPracticum: true,
+    experience: "downtime",
+  },
+  {
+    slug: "not-anonymous-enough",
+    title: "Not Anonymous Enough",
+    topic: 3,
+    pierObjectives: ["3.2", "3.4"],
+    durationMinutes: 25,
+    difficulty: "applied",
+    interactionKinds: ["reidentification-attempt", "redaction-workbench", "release-decision"],
+    apiSessions: [8],
+    hasLocalPracticum: true,
+    experience: "privacy",
+  },
+  {
+    slug: "where-is-the-specimen",
+    title: "Where Is the Specimen?",
+    topic: 4,
+    pierObjectives: ["4.1", "4.2", "4.4"],
+    durationMinutes: 25,
+    difficulty: "applied",
+    interactionKinds: ["audit-trail", "routing-repair", "regression", "recovery-decision"],
+    apiSessions: [3],
+    hasLocalPracticum: true,
+    experience: "specimen-routing",
+  },
+  {
+    slug: "autoverification-at-the-edge",
+    title: "Checking Automatic Result Release",
+    topic: 4,
+    pierObjectives: ["4.3", "4.5"],
+    durationMinutes: 35,
+    difficulty: "applied",
+    interactionKinds: ["rule-builder", "result-trace", "regression", "change-review"],
+    apiSessions: [3, 9],
+    hasLocalPracticum: true,
+    experience: "autoverification",
+  },
+  {
+    slug: "reflex-rule-ripple-effect",
+    title: "Updating a Thyroid Reflex Rule",
+    topic: 4,
+    pierObjectives: ["4.3", "4.5"],
+    durationMinutes: 30,
+    difficulty: "applied",
+    interactionKinds: ["rule-map", "order-replay", "utilization", "change-review"],
+    apiSessions: [3, 7, 9],
+    hasLocalPracticum: false,
+    experience: "reflex-rule",
+  },
+  {
+    slug: "follow-the-flag",
+    title: "Tracing a Missing Critical Flag",
+    topic: 5,
+    pierObjectives: ["5.2", "5.3", "5.4", "8.1"],
+    durationMinutes: 30,
+    difficulty: "foundational",
+    interactionKinds: ["system-trace", "field-inspector", "mapping", "regression"],
+    apiSessions: [3, 4],
+    hasLocalPracticum: false,
+    pilot: "interoperability",
+    experience: "flag-trace",
+  },
+  {
+    slug: "newborn-screen-to-public-health",
+    title: "Sending a Newborn Screening Report",
+    topic: 5,
+    pierObjectives: ["5.1", "5.2", "5.3"],
+    durationMinutes: 35,
+    difficulty: "applied",
+    interactionKinds: ["message-inspector", "terminology-map"],
+    apiSessions: [4],
+    hasLocalPracticum: true,
+    experience: "newborn-exchange",
+  },
+  {
+    slug: "code-the-meaning",
+    title: "Why Laboratory Results Need LOINC",
+    topic: 5,
+    pierObjectives: ["5.3"],
+    durationMinutes: 50,
+    difficulty: "applied",
+    interactionKinds: [
+      "terminology-browser",
+      "mapping-review",
+      "website-lookup",
+      "evidence-review",
+    ],
+    apiSessions: [4],
+    hasLocalPracticum: true,
+    experience: "terminology-review",
+  },
+  {
+    slug: "invisible-bottleneck",
+    title: "Investigating Delayed Result Release",
+    topic: 5,
+    pierObjectives: ["5.5", "2.1"],
+    durationMinutes: 35,
+    difficulty: "applied",
+    interactionKinds: ["dashboard", "metric-design"],
+    apiSessions: [0, 2, 3, 4],
+    hasLocalPracticum: false,
+    experience: "queue-analysis",
+  },
+  {
+    slug: "five-rights-right-test",
+    title: "Designing Repeat-Test Guidance",
+    topic: 6,
+    pierObjectives: ["6.1", "6.2"],
+    durationMinutes: 35,
+    difficulty: "applied",
+    interactionKinds: ["workflow-map", "cds-builder"],
+    apiSessions: [7],
+    hasLocalPracticum: true,
+    experience: "cds-design",
+  },
+  {
+    slug: "alert-everyone-ignores",
+    title: "Evaluating a Repeat-Test Alert",
+    topic: 6,
+    pierObjectives: ["6.3", "6.4"],
+    durationMinutes: 40,
+    difficulty: "applied",
+    interactionKinds: ["alert-redesign", "evaluation"],
+    apiSessions: [7],
+    hasLocalPracticum: true,
+    experience: "alert-evaluation",
+  },
+  {
+    slug: "pixel-budget",
+    title: "Choosing Image Settings for a Pathology Service",
+    topic: 7,
+    pierObjectives: ["7.1", "7.2"],
+    durationMinutes: 40,
+    difficulty: "foundational",
+    interactionKinds: ["image-compare", "compression", "storage-calculator"],
+    apiSessions: [5],
+    hasLocalPracticum: true,
+    experience: "pixel-budget",
+  },
+  {
+    slug: "validate-before-go-live",
+    title: "Reviewing a Whole-Slide Imaging Validation",
+    topic: 7,
+    pierObjectives: ["7.1", "7.4"],
+    durationMinutes: 45,
+    difficulty: "stewardship",
+    interactionKinds: [
+      "study-review",
+      "discordance-investigation",
+      "validation-plan",
+      "change-review",
+    ],
+    apiSessions: [5],
+    hasLocalPracticum: true,
+    experience: "wsi-validation",
+  },
+  {
+    slug: "human-plus-algorithm",
+    title: "Reviewing a Mitosis Detection Tool",
+    topic: 7,
+    pierObjectives: ["7.3", "2.4"],
+    durationMinutes: 40,
+    difficulty: "stewardship",
+    interactionKinds: ["threshold", "human-factors", "monitoring"],
+    apiSessions: [5, 6],
+    hasLocalPracticum: true,
+    experience: "mitosis-review",
+  },
+  {
+    slug: "build-the-new-test",
+    title: "Building and Validating a Laboratory Test",
+    topic: 8,
+    pierObjectives: ["8.1", "8.2", "8.4"],
+    durationMinutes: 40,
+    difficulty: "stewardship",
+    interactionKinds: ["test-build", "approval", "regression"],
+    apiSessions: [3, 9],
+    hasLocalPracticum: true,
+    experience: "test-build",
+  },
+  {
+    slug: "choose-and-govern-lis",
+    title: "Selecting and Maintaining a Laboratory Information System",
+    topic: 8,
+    pierObjectives: ["8.3", "8.4"],
+    durationMinutes: 40,
+    difficulty: "stewardship",
+    interactionKinds: ["requirements", "selection-matrix", "lifecycle"],
+    apiSessions: [3, 9],
+    hasLocalPracticum: true,
+    experience: "lis-selection",
+  },
 ];
 
 const cases: Record<string, CaseSeed> = {
-  "steward-at-morning-huddle": { artifact: "High-sensitivity troponin go-live review", evidence: [["Analyzer to EHR", "Transmission tests passed", "positive"], ["Complete result report", "Interpretive comment is clipped in the EHR", "critical"], ["Proposed EHR alert", "Use of the result has not been reviewed by pathology", "warning"], ["Procedures and training", "Not complete", "critical"]], trace: [["Hospital IT", "IT analyst", "The network and shared systems are working.", "Hospital IT keeps the connection available but does not approve the result report."], ["LIS", "LIS analyst", "The new test and interface changes have passed technical testing.", "The LIS team performs the build; the laboratory reviews the complete result report."], ["Pathology informatics", "Pathology informaticist", "The order and result report are checked against practices used across the laboratory.", "Pathology informatics helps laboratory sections implement orders and result reports consistently."], ["Clinical informatics", "Clinical informaticist", "The result may be used with diagnoses and medications in an EHR alert.", "Clinical informatics helps make sure the EHR supports patient care and works with pathology on laboratory-related CDS."], ["Laboratory", "Pathologist and laboratory operations", "The report appearance, procedures, training, and go-live coverage are not all approved.", "The laboratory owns the complete result report and decides when the service is ready."]], diagnosis: ["Would you approve Monday's go-live?", "No; the report and laboratory operation are not ready", "Yes; the interface test passed", "Yes; clinical informatics can approve the report"], repair: ["What must be completed before go-live?", "Fix and validate the result report with laboratory approval, review the proposed CDS, and finish procedures and training", "Ask hospital IT to approve every item", "Let the EHR team take ownership of the result report"], tests: [["Complete result report", "Content and EHR appearance are approved by the laboratory", false], ["Interface", "Result transmission remains accurate"], ["CDS", "Laboratory meaning and clinical workflow are reviewed", false], ["Laboratory operation", "Procedures, training, staffing, and support are ready", false]] },
-  "inside-a-results-journey": { artifact: "Missing CBC investigation", evidence: [["EHR status", "Pending", "critical"], ["LIS status", "Final at 09:42", "positive"], ["Interface queue", "214 results", "warning"], ["Firewall", "Connection denied", "critical"]], trace: [["Analyzer", "Technologist", "The CBC completed and was accepted by the LIS.", "Testing is complete."], ["LIS", "LIS team", "The result is final and was sent onward.", "The laboratory record is complete."], ["Interface engine", "LIS team", "The application is running, but results are waiting in the outbound queue.", "The reporting path is interrupted after the LIS."], ["Hospital network", "Hospital IT", "A firewall rule blocks the connection to the EHR service.", "Hospital IT must correct the network setting."], ["EHR", "Clinical team", "The CBC remains pending.", "The report is not available for patient care."]], diagnosis: ["Where did reporting stop?", "Between the interface engine and EHR", "Between the analyzer and LIS", "Inside the analyzer"], repair: ["What needs to happen before results can flow again?", "Remove the firewall block, check the queue, and confirm reporting", "Repeat the CBC", "Restart the interface engine"], tests: [["Original CBC", "Appears once on the correct patient", false], ["Queued reports", "Reach the correct patients without duplicates", false], ["New CBC", "Transmits without delay"], ["Downtime results", "Are reconciled", false]] },
-  "can-we-trust-this-report": { artifact: "Surgical pathology turnaround-time report", evidence: [["Pre-go-live", "Mean 3.3 · median 2.7 working days"], ["Post-go-live including cutover", "Mean 3.8 · median 2.5 working days", "warning"], ["Cutover week", "Mean 8.4 · median 9.5 working days", "critical"], ["Post-go-live after cutover", "Mean 3.0 · median 2.5 working days", "positive"]], trace: [["Accessioning", "Accessioning staff", "Twenty-seven cutover accession times are documented on requisitions and in the paper log.", "The structured LIS field remains blank."], ["LIS report", "LIS analyst", "All 455 cases are listed in the spreadsheet.", "The cutover cases can be reviewed without deleting them."], ["Spreadsheet", "Quality coordinator", "Documented cutover times are used to calculate TAT for the 27 affected cases.", "All 35 cutover cases remain in the post-go-live summary."], ["Weekly review", "Resident", "The long cases are concentrated during cutover week.", "One overall post-go-live group hides the temporary delay."], ["Quality meeting", "Surgical pathology director", "The report shows cutover separately from later routine performance.", "The laboratory can describe both findings accurately."]], diagnosis: ["What should be reviewed before deciding whether TAT improved?", "Look at TAT by week and determine when the long cases occurred", "Report the lower median only", "Report the higher mean only"], repair: ["How should the laboratory report the comparison?", "Show pre-go-live, cutover week, and post-go-live after cutover as three groups", "Remove the 27 delayed cutover cases", "Keep one post-go-live group and report only the median"], tests: [["Three periods", "Pre-go-live, cutover, and post-go-live after cutover are shown", false], ["All cases", "Every accession appears once"], ["TAT definition", "All periods use accession to initial final report", false], ["Source", "Requisition and cutover-log times are disclosed", false], ["Statistics", "Mean and median remain visible"], ["Future reports", "Structured accession time is required", false]] },
-  "can-we-accept-this-lot": { artifact: "High-sensitivity troponin reagent-lot comparison", evidence: [["Paired specimens", "30 patient specimens"], ["Near decision concentration", "18 specimens"], ["Mean paired difference", "+1.2 ng/L", "warning"], ["95% confidence interval", "+0.6 to +1.8 ng/L", "positive"], ["Laboratory limit", "−2.0 to +2.0 ng/L", "positive"]], trace: [["Patient specimens", "Chemistry technologist", "Each specimen is tested with both lots.", "The two results form a pair."], ["Worksheet", "Pathology resident", "The new-lot result minus the current-lot result is calculated for each specimen.", "Direction, spread, and unusual results can be inspected."], ["Statistical review", "Chemistry director", "The distribution, mean, median, standard deviation, confidence interval, and p-value are reviewed together.", "A measurable difference is not automatically a medically important difference."], ["Lot decision", "Laboratory director", "The confidence interval and low- and high-concentration checks meet limits set before testing.", "The lot can be accepted with documentation and monitoring."]], diagnosis: ["What does the comparison show?", "A small positive average shift that remains within the laboratory's predetermined limit", "No difference at all", "An unacceptable lot because p is below 0.001"], repair: ["What should the laboratory do?", "Accept after laboratory-director review and monitor the small positive shift", "Reject solely because of the p-value", "Accept without documenting the shift"], tests: [["Paired design", "The same specimens are tested with both lots", false], ["Statistical summary", "Mean, median, standard deviation, confidence interval, and p-value are reviewed", false], ["Medical limit", "The confidence interval remains inside the limit set before testing", false], ["Measuring range", "Very low and markedly elevated specimens pass separate checks"], ["After implementation", "The small positive shift is monitored", false]] },
-  "five-vs-slide-archive": { artifact: "Digital slide capacity review", evidence: [["Annual volume", "1.9 PB"], ["Peak ingest", "8.4 GB/s", "warning"], ["Unlinked slides", "1.8%", "critical"], ["Retrieval target", "< 2 s"]], trace: [["Scanner", "Histotechnologist", "Image production arrives in bursts.", "Velocity starts at capture."], ["Clinical archive", "Pathologist", "Active cases need fast retrieval.", "Clinical work needs predictable latency."], ["Analytic store", "Data scientist", "Cohorts join to outcomes.", "Analytics needs flexible integration."], ["Governance", "Medical director", "Cost and utility must be balanced.", "Volume is not value without veracity."]], diagnosis: ["Which architecture fits?", "Tiered clinical and analytic services with governed linkage", "Buy more disk", "Use one research database"], repair: ["Choose the safeguard.", "Validate peak ingest, linkage, retrieval, and analytic copies", "Test average volume only", "Compress until it fits"], tests: [["Peak ingest", "Meets target", false], ["Clinical retrieval", "Remains responsive"], ["Analytic copy", "Preserves linkage", false]] },
-  "model-under-pressure": { artifact: "Local AI verification", evidence: [["Vendor sensitivity", "96%"], ["Local sensitivity", "84%", "critical"], ["Small lesions", "68%", "critical"], ["Scanner profile", "Absent from training", "warning"]], trace: [["Training", "Vendor", "Supported profiles are curated.", "Performance is conditional."], ["Preparation", "Histology", "Stain and scanner differ.", "The domain changed."], ["Verification", "Pathologist", "Subgroup sensitivity falls.", "Aggregate results conceal risk."], ["Workflow", "End user", "Negative overlays look confident.", "Automation bias can amplify failure."]], diagnosis: ["What best explains the failure?", "Generalizability failure with subgroup brittleness", "Longitudinal drift", "Generative hallucination"], repair: ["Choose the response.", "Hold use; expand verification, oversight, and monitoring", "Use only macro cases without governance", "Average vendor and local results"], tests: [["Small lesions", "Meet threshold", false], ["Scanner strata", "Represented"], ["Human review", "Catches discordance", false]] },
+  "steward-at-morning-huddle": {
+    artifact: "High-sensitivity troponin go-live review",
+    evidence: [
+      ["Analyzer to EHR", "Transmission tests passed", "positive"],
+      ["Complete result report", "Interpretive comment is clipped in the EHR", "critical"],
+      ["Proposed EHR alert", "Use of the result has not been reviewed by pathology", "warning"],
+      ["Procedures and training", "Not complete", "critical"],
+    ],
+    trace: [
+      [
+        "Hospital IT",
+        "IT analyst",
+        "The network and shared systems are working.",
+        "Hospital IT keeps the connection available but does not approve the result report.",
+      ],
+      [
+        "LIS",
+        "LIS analyst",
+        "The new test and interface changes have passed technical testing.",
+        "The LIS team performs the build; the laboratory reviews the complete result report.",
+      ],
+      [
+        "Pathology informatics",
+        "Pathology informaticist",
+        "The order and result report are checked against practices used across the laboratory.",
+        "Pathology informatics helps laboratory sections implement orders and result reports consistently.",
+      ],
+      [
+        "Clinical informatics",
+        "Clinical informaticist",
+        "The result may be used with diagnoses and medications in an EHR alert.",
+        "Clinical informatics helps make sure the EHR supports patient care and works with pathology on laboratory-related CDS.",
+      ],
+      [
+        "Laboratory",
+        "Pathologist and laboratory operations",
+        "The report appearance, procedures, training, and go-live coverage are not all approved.",
+        "The laboratory owns the complete result report and decides when the service is ready.",
+      ],
+    ],
+    diagnosis: [
+      "Would you approve Monday's go-live?",
+      "No; the report and laboratory operation are not ready",
+      "Yes; the interface test passed",
+      "Yes; clinical informatics can approve the report",
+    ],
+    repair: [
+      "What must be completed before go-live?",
+      "Fix and validate the result report with laboratory approval, review the proposed CDS, and finish procedures and training",
+      "Ask hospital IT to approve every item",
+      "Let the EHR team take ownership of the result report",
+    ],
+    tests: [
+      [
+        "Complete result report",
+        "Content and EHR appearance are approved by the laboratory",
+        false,
+      ],
+      ["Interface", "Result transmission remains accurate"],
+      ["CDS", "Laboratory meaning and clinical workflow are reviewed", false],
+      ["Laboratory operation", "Procedures, training, staffing, and support are ready", false],
+    ],
+  },
+  "inside-a-results-journey": {
+    artifact: "Missing CBC investigation",
+    evidence: [
+      ["EHR status", "Pending", "critical"],
+      ["LIS status", "Final at 09:42", "positive"],
+      ["Interface queue", "214 results", "warning"],
+      ["Firewall", "Connection denied", "critical"],
+    ],
+    trace: [
+      [
+        "Analyzer",
+        "Technologist",
+        "The CBC completed and was accepted by the LIS.",
+        "Testing is complete.",
+      ],
+      [
+        "LIS",
+        "LIS team",
+        "The result is final and was sent onward.",
+        "The laboratory record is complete.",
+      ],
+      [
+        "Interface engine",
+        "LIS team",
+        "The application is running, but results are waiting in the outbound queue.",
+        "The reporting path is interrupted after the LIS.",
+      ],
+      [
+        "Hospital network",
+        "Hospital IT",
+        "A firewall rule blocks the connection to the EHR service.",
+        "Hospital IT must correct the network setting.",
+      ],
+      [
+        "EHR",
+        "Clinical team",
+        "The CBC remains pending.",
+        "The report is not available for patient care.",
+      ],
+    ],
+    diagnosis: [
+      "Where did reporting stop?",
+      "Between the interface engine and EHR",
+      "Between the analyzer and LIS",
+      "Inside the analyzer",
+    ],
+    repair: [
+      "What needs to happen before results can flow again?",
+      "Remove the firewall block, check the queue, and confirm reporting",
+      "Repeat the CBC",
+      "Restart the interface engine",
+    ],
+    tests: [
+      ["Original CBC", "Appears once on the correct patient", false],
+      ["Queued reports", "Reach the correct patients without duplicates", false],
+      ["New CBC", "Transmits without delay"],
+      ["Downtime results", "Are reconciled", false],
+    ],
+  },
+  "can-we-trust-this-report": {
+    artifact: "Surgical pathology turnaround-time report",
+    evidence: [
+      ["Pre-go-live", "Mean 3.3 · median 2.7 working days"],
+      ["Post-go-live including cutover", "Mean 3.8 · median 2.5 working days", "warning"],
+      ["Cutover week", "Mean 8.4 · median 9.5 working days", "critical"],
+      ["Post-go-live after cutover", "Mean 3.0 · median 2.5 working days", "positive"],
+    ],
+    trace: [
+      [
+        "Accessioning",
+        "Accessioning staff",
+        "Twenty-seven cutover accession times are documented on requisitions and in the paper log.",
+        "The structured LIS field remains blank.",
+      ],
+      [
+        "LIS report",
+        "LIS analyst",
+        "All 455 cases are listed in the spreadsheet.",
+        "The cutover cases can be reviewed without deleting them.",
+      ],
+      [
+        "Spreadsheet",
+        "Quality coordinator",
+        "Documented cutover times are used to calculate TAT for the 27 affected cases.",
+        "All 35 cutover cases remain in the post-go-live summary.",
+      ],
+      [
+        "Weekly review",
+        "Resident",
+        "The long cases are concentrated during cutover week.",
+        "One overall post-go-live group hides the temporary delay.",
+      ],
+      [
+        "Quality meeting",
+        "Surgical pathology director",
+        "The report shows cutover separately from later routine performance.",
+        "The laboratory can describe both findings accurately.",
+      ],
+    ],
+    diagnosis: [
+      "What should be reviewed before deciding whether TAT improved?",
+      "Look at TAT by week and determine when the long cases occurred",
+      "Report the lower median only",
+      "Report the higher mean only",
+    ],
+    repair: [
+      "How should the laboratory report the comparison?",
+      "Show pre-go-live, cutover week, and post-go-live after cutover as three groups",
+      "Remove the 27 delayed cutover cases",
+      "Keep one post-go-live group and report only the median",
+    ],
+    tests: [
+      ["Three periods", "Pre-go-live, cutover, and post-go-live after cutover are shown", false],
+      ["All cases", "Every accession appears once"],
+      ["TAT definition", "All periods use accession to initial final report", false],
+      ["Source", "Requisition and cutover-log times are disclosed", false],
+      ["Statistics", "Mean and median remain visible"],
+      ["Future reports", "Structured accession time is required", false],
+    ],
+  },
+  "can-we-accept-this-lot": {
+    artifact: "High-sensitivity troponin reagent-lot comparison",
+    evidence: [
+      ["Paired specimens", "30 patient specimens"],
+      ["Near decision concentration", "18 specimens"],
+      ["Mean paired difference", "+1.2 ng/L", "warning"],
+      ["95% confidence interval", "+0.6 to +1.8 ng/L", "positive"],
+      ["Laboratory limit", "−2.0 to +2.0 ng/L", "positive"],
+    ],
+    trace: [
+      [
+        "Patient specimens",
+        "Chemistry technologist",
+        "Each specimen is tested with both lots.",
+        "The two results form a pair.",
+      ],
+      [
+        "Worksheet",
+        "Pathology resident",
+        "The new-lot result minus the current-lot result is calculated for each specimen.",
+        "Direction, spread, and unusual results can be inspected.",
+      ],
+      [
+        "Statistical review",
+        "Chemistry director",
+        "The distribution, mean, median, standard deviation, confidence interval, and p-value are reviewed together.",
+        "A measurable difference is not automatically a medically important difference.",
+      ],
+      [
+        "Lot decision",
+        "Laboratory director",
+        "The confidence interval and low- and high-concentration checks meet limits set before testing.",
+        "The lot can be accepted with documentation and monitoring.",
+      ],
+    ],
+    diagnosis: [
+      "What does the comparison show?",
+      "A small positive average shift that remains within the laboratory's predetermined limit",
+      "No difference at all",
+      "An unacceptable lot because p is below 0.001",
+    ],
+    repair: [
+      "What should the laboratory do?",
+      "Accept after laboratory-director review and monitor the small positive shift",
+      "Reject solely because of the p-value",
+      "Accept without documenting the shift",
+    ],
+    tests: [
+      ["Paired design", "The same specimens are tested with both lots", false],
+      [
+        "Statistical summary",
+        "Mean, median, standard deviation, confidence interval, and p-value are reviewed",
+        false,
+      ],
+      [
+        "Medical limit",
+        "The confidence interval remains inside the limit set before testing",
+        false,
+      ],
+      ["Measuring range", "Very low and markedly elevated specimens pass separate checks"],
+      ["After implementation", "The small positive shift is monitored", false],
+    ],
+  },
+  "five-vs-slide-archive": {
+    artifact: "Digital slide capacity review",
+    evidence: [
+      ["Annual volume", "1.9 PB"],
+      ["Peak ingest", "8.4 GB/s", "warning"],
+      ["Unlinked slides", "1.8%", "critical"],
+      ["Retrieval target", "< 2 s"],
+    ],
+    trace: [
+      [
+        "Scanner",
+        "Histotechnologist",
+        "Image production arrives in bursts.",
+        "Velocity starts at capture.",
+      ],
+      [
+        "Clinical archive",
+        "Pathologist",
+        "Active cases need fast retrieval.",
+        "Clinical work needs predictable latency.",
+      ],
+      [
+        "Analytic store",
+        "Data scientist",
+        "Cohorts join to outcomes.",
+        "Analytics needs flexible integration.",
+      ],
+      [
+        "Governance",
+        "Medical director",
+        "Cost and utility must be balanced.",
+        "Volume is not value without veracity.",
+      ],
+    ],
+    diagnosis: [
+      "Which architecture fits?",
+      "Tiered clinical and analytic services with governed linkage",
+      "Buy more disk",
+      "Use one research database",
+    ],
+    repair: [
+      "Choose the safeguard.",
+      "Validate peak ingest, linkage, retrieval, and analytic copies",
+      "Test average volume only",
+      "Compress until it fits",
+    ],
+    tests: [
+      ["Peak ingest", "Meets target", false],
+      ["Clinical retrieval", "Remains responsive"],
+      ["Analytic copy", "Preserves linkage", false],
+    ],
+  },
+  "model-under-pressure": {
+    artifact: "Local AI verification",
+    evidence: [
+      ["Vendor sensitivity", "96%"],
+      ["Local sensitivity", "84%", "critical"],
+      ["Small lesions", "68%", "critical"],
+      ["Scanner profile", "Absent from training", "warning"],
+    ],
+    trace: [
+      ["Training", "Vendor", "Supported profiles are curated.", "Performance is conditional."],
+      ["Preparation", "Histology", "Stain and scanner differ.", "The domain changed."],
+      [
+        "Verification",
+        "Pathologist",
+        "Subgroup sensitivity falls.",
+        "Aggregate results conceal risk.",
+      ],
+      [
+        "Workflow",
+        "End user",
+        "Negative overlays look confident.",
+        "Automation bias can amplify failure.",
+      ],
+    ],
+    diagnosis: [
+      "What best explains the failure?",
+      "Generalizability failure with subgroup brittleness",
+      "Longitudinal drift",
+      "Generative hallucination",
+    ],
+    repair: [
+      "Choose the response.",
+      "Hold use; expand verification, oversight, and monitoring",
+      "Use only macro cases without governance",
+      "Average vendor and local results",
+    ],
+    tests: [
+      ["Small lesions", "Meet threshold", false],
+      ["Scanner strata", "Represented"],
+      ["Human review", "Catches discordance", false],
+    ],
+  },
   "server-behind-the-analyzer": {
     artifact: "Middleware installation review",
-    evidence: [["Location", "Beside heat vent", "critical"], ["Login", "Shared / no password", "critical"], ["Vendor access", "Always on", "warning"], ["Data", "Orders + results + PHI"]],
-    trace: [["Room", "Facilities", "Heat and walkway exposure.", "Availability is weak."], ["Host", "Laboratory", "Access is shared.", "Accountability is weak."], ["Network", "Security", "Instrument segment is flat.", "Compromise can spread."], ["Vendor", "Support", "Remote channel is persistent.", "Access and contracts require control."]],
+    evidence: [
+      ["Location", "Beside heat vent", "critical"],
+      ["Login", "Shared / no password", "critical"],
+      ["Vendor access", "Always on", "warning"],
+      ["Data", "Orders + results + PHI"],
+    ],
+    trace: [
+      ["Room", "Facilities", "Heat and walkway exposure.", "Availability is weak."],
+      ["Host", "Laboratory", "Access is shared.", "Accountability is weak."],
+      ["Network", "Security", "Instrument segment is flat.", "Compromise can spread."],
+      [
+        "Vendor",
+        "Support",
+        "Remote channel is persistent.",
+        "Access and contracts require control.",
+      ],
+    ],
     decisionPrompt: "What is the governance finding?",
     decisionChoices: [
-      { id: "correct", label: "Layered confidentiality, integrity, and availability risks must be addressed together.", correct: true, feedback: "The room, shared account, flat network, persistent vendor channel, and untested recovery threaten different parts of laboratory service. Approval requires a coordinated control plan rather than one isolated correction." },
-      { id: "narrow", label: "The only material finding is the shared login; require individual passwords and approve the installation.", feedback: "Named accounts would improve accountability, but they would not correct the heat and power exposure, flat instrument network, persistent vendor channel, or untested recovery." },
-      { id: "unsafe", label: "Server placement and network configuration are IT infrastructure decisions outside the laboratory director's review.", feedback: "Facilities and IT perform much of the technical work, but the laboratory director must review how the installation protects patient data, result integrity, and continuity of testing." },
+      {
+        id: "correct",
+        label:
+          "Layered confidentiality, integrity, and availability risks must be addressed together.",
+        correct: true,
+        feedback:
+          "The room, shared account, flat network, persistent vendor channel, and untested recovery threaten different parts of laboratory service. Approval requires a coordinated control plan rather than one isolated correction.",
+      },
+      {
+        id: "narrow",
+        label:
+          "The only material finding is the shared login; require individual passwords and approve the installation.",
+        feedback:
+          "Named accounts would improve accountability, but they would not correct the heat and power exposure, flat instrument network, persistent vendor channel, or untested recovery.",
+      },
+      {
+        id: "unsafe",
+        label:
+          "Server placement and network configuration are IT infrastructure decisions outside the laboratory director's review.",
+        feedback:
+          "Facilities and IT perform much of the technical work, but the laboratory director must review how the installation protects patient data, result integrity, and continuity of testing.",
+      },
     ],
     repairPrompt: "Which installation plan should be approved?",
     repairChoices: [
-      { id: "validated", label: "Place the server in a controlled room; use named least-privilege accounts, segmented networking, controlled vendor sessions, and tested recovery.", correct: true, feedback: "This plan addresses the physical, identity, network, vendor, and recovery findings together. It requires facilities work, security configuration, vendor-contract changes, staff access review, and time for a documented restore test before approval." },
-      { id: "narrow", label: "Move the server to protected data-center power and cooling but keep the shared login and always-on vendor channel.", feedback: "Protected power and cooling reduce the environmental risk, but staff actions remain unattributed, vendor access remains persistent, the network remains flat, and backup restoration has not been demonstrated." },
-      { id: "unsafe", label: "Require the vendor to request each remote session, but leave local access shared and the network flat.", feedback: "Session approval improves vendor accountability, but shared local access, network spread, environmental exposure, and untested recovery still prevent approval." },
+      {
+        id: "validated",
+        label:
+          "Place the server in a controlled room; use named least-privilege accounts, segmented networking, controlled vendor sessions, and tested recovery.",
+        correct: true,
+        feedback:
+          "This plan addresses the physical, identity, network, vendor, and recovery findings together. It requires facilities work, security configuration, vendor-contract changes, staff access review, and time for a documented restore test before approval.",
+      },
+      {
+        id: "narrow",
+        label:
+          "Move the server to protected data-center power and cooling but keep the shared login and always-on vendor channel.",
+        feedback:
+          "Protected power and cooling reduce the environmental risk, but staff actions remain unattributed, vendor access remains persistent, the network remains flat, and backup restoration has not been demonstrated.",
+      },
+      {
+        id: "unsafe",
+        label:
+          "Require the vendor to request each remote session, but leave local access shared and the network flat.",
+        feedback:
+          "Session approval improves vendor accountability, but shared local access, network spread, environmental exposure, and untested recovery still prevent approval.",
+      },
     ],
     validationCases: [
-      { name: "Environmental resilience", note: "The result-routing server remains available through a local heat or power event.", passingRepairs: ["validated", "narrow"], failNotes: { unsafe: "Controlling vendor sessions does not move the server away from the heat vent or provide protected power." } },
-      { name: "Named laboratory access", note: "Each technologist uses a named account with only the access required for the job.", passingRepairs: ["validated"], failNotes: { narrow: "The data-center move leaves the shared local login unchanged, so laboratory actions still cannot be attributed to one person.", unsafe: "Vendor approval does not replace the shared local login with named least-privilege accounts." } },
-      { name: "Network containment", note: "A compromised device cannot move freely from the instrument segment to the middleware server.", passingRepairs: ["validated"], failNotes: { narrow: "Protected hosting does not segment the flat instrument network.", unsafe: "The proposed vendor-session change leaves the instrument network flat." } },
-      { name: "Vendor access", note: "Each support session is approved, time-limited, and logged.", passingRepairs: ["validated", "unsafe"], failNotes: { narrow: "The always-on vendor channel remains available without approval or a session-specific audit record." } },
-      { name: "Tested recovery", note: "The laboratory restores the middleware service and verifies queued orders and results from backup.", passingRepairs: ["validated"], failNotes: { narrow: "Protected power reduces one outage risk but does not show that the backup can restore the service and its queued messages.", unsafe: "Vendor-session control does not test whether the laboratory can restore middleware data after a failure." } },
+      {
+        name: "Environmental resilience",
+        note: "The result-routing server remains available through a local heat or power event.",
+        passingRepairs: ["validated", "narrow"],
+        failNotes: {
+          unsafe:
+            "Controlling vendor sessions does not move the server away from the heat vent or provide protected power.",
+        },
+      },
+      {
+        name: "Named laboratory access",
+        note: "Each technologist uses a named account with only the access required for the job.",
+        passingRepairs: ["validated"],
+        failNotes: {
+          narrow:
+            "The data-center move leaves the shared local login unchanged, so laboratory actions still cannot be attributed to one person.",
+          unsafe:
+            "Vendor approval does not replace the shared local login with named least-privilege accounts.",
+        },
+      },
+      {
+        name: "Network containment",
+        note: "A compromised device cannot move freely from the instrument segment to the middleware server.",
+        passingRepairs: ["validated"],
+        failNotes: {
+          narrow: "Protected hosting does not segment the flat instrument network.",
+          unsafe: "The proposed vendor-session change leaves the instrument network flat.",
+        },
+      },
+      {
+        name: "Vendor access",
+        note: "Each support session is approved, time-limited, and logged.",
+        passingRepairs: ["validated", "unsafe"],
+        failNotes: {
+          narrow:
+            "The always-on vendor channel remains available without approval or a session-specific audit record.",
+        },
+      },
+      {
+        name: "Tested recovery",
+        note: "The laboratory restores the middleware service and verifies queued orders and results from backup.",
+        passingRepairs: ["validated"],
+        failNotes: {
+          narrow:
+            "Protected power reduces one outage risk but does not show that the backup can restore the service and its queued messages.",
+          unsafe:
+            "Vendor-session control does not test whether the laboratory can restore middleware data after a failure.",
+        },
+      },
     ],
   },
   "twelve-hours-offline": {
     artifact: "Trauma-center downtime board",
-    evidence: [["Network", "Unavailable", "critical"], ["Estimate", "12 hours", "warning"], ["Active trauma patients", "17"], ["Pending critical tests", "9", "critical"]],
-    trace: [["Registration", "ED registrar", "Identifiers do not flow.", "Temporary identity control is essential."], ["Laboratory", "Technologist", "Orders and results are manual.", "Priority and accession rules must be explicit."], ["Clinical units", "Care teams", "Phones carry results.", "Read-back and documentation matter."], ["Recovery", "IT + LIS", "Records overlap after restoration.", "Reconciliation is a high-risk phase."]],
+    evidence: [
+      ["Network", "Unavailable", "critical"],
+      ["Estimate", "12 hours", "warning"],
+      ["Active trauma patients", "17"],
+      ["Pending critical tests", "9", "critical"],
+    ],
+    trace: [
+      [
+        "Registration",
+        "ED registrar",
+        "Identifiers do not flow.",
+        "Temporary identity control is essential.",
+      ],
+      [
+        "Laboratory",
+        "Technologist",
+        "Orders and results are manual.",
+        "Priority and accession rules must be explicit.",
+      ],
+      [
+        "Clinical units",
+        "Care teams",
+        "Phones carry results.",
+        "Read-back and documentation matter.",
+      ],
+      [
+        "Recovery",
+        "IT + LIS",
+        "Records overlap after restoration.",
+        "Reconciliation is a high-risk phase.",
+      ],
+    ],
     decisionPrompt: "What should the laboratory do in the first hour?",
     decisionChoices: [
-      { id: "correct", label: "Declare downtime and activate coordinated procedures with controlled temporary identifiers and a defined command structure.", correct: true, feedback: "A declared, coordinated response gives registration, the laboratory, clinical units, and IT one identity method, communication plan, priority scheme, and incident lead while systems are unavailable." },
-      { id: "narrow", label: "Hold all non-STAT testing until the network returns and run STAT work on paper in the meantime.", feedback: "Restricting work may reduce volume, but STAT testing still needs controlled registration, temporary identifiers, result communication, and one coordinated incident plan." },
-      { id: "unsafe", label: "Have each unit start its own downtime forms now and consolidate the paperwork after restoration.", feedback: "Separate local methods create incompatible identifiers and call records. Those differences become patient-matching and result-reconciliation hazards after restoration." },
+      {
+        id: "correct",
+        label:
+          "Declare downtime and activate coordinated procedures with controlled temporary identifiers and a defined command structure.",
+        correct: true,
+        feedback:
+          "A declared, coordinated response gives registration, the laboratory, clinical units, and IT one identity method, communication plan, priority scheme, and incident lead while systems are unavailable.",
+      },
+      {
+        id: "narrow",
+        label:
+          "Hold all non-STAT testing until the network returns and run STAT work on paper in the meantime.",
+        feedback:
+          "Restricting work may reduce volume, but STAT testing still needs controlled registration, temporary identifiers, result communication, and one coordinated incident plan.",
+      },
+      {
+        id: "unsafe",
+        label:
+          "Have each unit start its own downtime forms now and consolidate the paperwork after restoration.",
+        feedback:
+          "Separate local methods create incompatible identifiers and call records. Those differences become patient-matching and result-reconciliation hazards after restoration.",
+      },
     ],
     repairPrompt: "Which recovery plan should medical leadership approve?",
     repairChoices: [
-      { id: "validated", label: "Freeze transitions, restore in stages, and reconcile temporary identities, orders, results, critical calls, and repeats before normal operation.", correct: true, feedback: "This plan controls the high-risk transition back to electronic work and accounts for each temporary record. It requires added staffing, an operational pause, and medical review before normal workflows resume." },
-      { id: "narrow", label: "Begin back-entering all paper results, including documented critical calls, immediately and in collection order.", feedback: "This captures all result categories and preserves documented critical calls, but entry before identity reconciliation can place a correct result on the wrong chart or create duplicate work." },
-      { id: "unsafe", label: "Back-enter only the results that were phoned as critical and retain the rest on paper for the record.", feedback: "This preserves the most urgent communicated results, but it leaves routine and abnormal results outside the longitudinal chart and does not resolve temporary identities or duplicate orders." },
+      {
+        id: "validated",
+        label:
+          "Freeze transitions, restore in stages, and reconcile temporary identities, orders, results, critical calls, and repeats before normal operation.",
+        correct: true,
+        feedback:
+          "This plan controls the high-risk transition back to electronic work and accounts for each temporary record. It requires added staffing, an operational pause, and medical review before normal workflows resume.",
+      },
+      {
+        id: "narrow",
+        label:
+          "Begin back-entering all paper results, including documented critical calls, immediately and in collection order.",
+        feedback:
+          "This captures all result categories and preserves documented critical calls, but entry before identity reconciliation can place a correct result on the wrong chart or create duplicate work.",
+      },
+      {
+        id: "unsafe",
+        label:
+          "Back-enter only the results that were phoned as critical and retain the rest on paper for the record.",
+        feedback:
+          "This preserves the most urgent communicated results, but it leaves routine and abnormal results outside the longitudinal chart and does not resolve temporary identities or duplicate orders.",
+      },
     ],
     validationCases: [
-      { name: "Controlled transition", note: "New electronic work pauses while active paper records are identified and assigned for reconciliation.", passingRepairs: ["validated"], failNotes: { narrow: "Immediate back-entry starts before staff know which temporary records belong to which restored charts.", unsafe: "Entering only critical results still begins without a controlled transition or assigned reconciliation work." } },
-      { name: "Temporary identities", note: "Every temporary identifier maps to one verified medical record number before result entry.", passingRepairs: ["validated"], failNotes: { narrow: "Collection order does not establish which restored chart belongs to each temporary identifier.", unsafe: "The critical-only plan does not reconcile temporary identifiers before placing results in the chart." } },
-      { name: "Critical-result documentation", note: "Phoned critical results, read-backs, and restored chart entries agree.", passingRepairs: ["validated", "narrow", "unsafe"], failNotes: {} },
-      { name: "Duplicate and repeat review", note: "Duplicate orders and tests repeated during downtime are resolved before recollection or billing.", passingRepairs: ["validated"], failNotes: { narrow: "Back-entry in collection order does not compare restored orders with paper orders and repeat tests.", unsafe: "A critical-only entry process leaves duplicate routine orders and repeat testing unreconciled." } },
-      { name: "Complete result inclusion", note: "Routine, abnormal, and critical downtime results are represented in the longitudinal chart.", passingRepairs: ["validated", "narrow"], failNotes: { unsafe: "Retaining noncritical results only on paper leaves part of the downtime episode absent from the electronic chart." } },
+      {
+        name: "Controlled transition",
+        note: "New electronic work pauses while active paper records are identified and assigned for reconciliation.",
+        passingRepairs: ["validated"],
+        failNotes: {
+          narrow:
+            "Immediate back-entry starts before staff know which temporary records belong to which restored charts.",
+          unsafe:
+            "Entering only critical results still begins without a controlled transition or assigned reconciliation work.",
+        },
+      },
+      {
+        name: "Temporary identities",
+        note: "Every temporary identifier maps to one verified medical record number before result entry.",
+        passingRepairs: ["validated"],
+        failNotes: {
+          narrow:
+            "Collection order does not establish which restored chart belongs to each temporary identifier.",
+          unsafe:
+            "The critical-only plan does not reconcile temporary identifiers before placing results in the chart.",
+        },
+      },
+      {
+        name: "Critical-result documentation",
+        note: "Phoned critical results, read-backs, and restored chart entries agree.",
+        passingRepairs: ["validated", "narrow", "unsafe"],
+        failNotes: {},
+      },
+      {
+        name: "Duplicate and repeat review",
+        note: "Duplicate orders and tests repeated during downtime are resolved before recollection or billing.",
+        passingRepairs: ["validated"],
+        failNotes: {
+          narrow:
+            "Back-entry in collection order does not compare restored orders with paper orders and repeat tests.",
+          unsafe:
+            "A critical-only entry process leaves duplicate routine orders and repeat testing unreconciled.",
+        },
+      },
+      {
+        name: "Complete result inclusion",
+        note: "Routine, abnormal, and critical downtime results are represented in the longitudinal chart.",
+        passingRepairs: ["validated", "narrow"],
+        failNotes: {
+          unsafe:
+            "Retaining noncritical results only on paper leaves part of the downtime episode absent from the electronic chart.",
+        },
+      },
     ],
   },
   "not-anonymous-enough": {
     artifact: "Research dataset release",
-    evidence: [["Names", "Removed", "positive"], ["Exact dates", "Retained", "warning"], ["Full ZIP", "Retained", "warning"], ["Rare cohort", "3 people", "critical"], ["Linkage key", "Shared folder", "critical"]],
-    trace: [["Extract", "Analyst", "Dates and geography remain.", "Removing names is insufficient."], ["Workspace", "Investigator", "Rare cases can be singled out.", "Context changes risk."], ["Linkage", "Data steward", "The key is broadly accessible.", "Coded data remain identifiable."], ["Release", "Privacy office", "Recipient is undefined.", "Controls depend on intended use."]],
+    evidence: [
+      ["Names", "Removed", "positive"],
+      ["Exact dates", "Retained", "warning"],
+      ["Full ZIP", "Retained", "warning"],
+      ["Rare cohort", "3 people", "critical"],
+      ["Linkage key", "Shared folder", "critical"],
+    ],
+    trace: [
+      ["Extract", "Analyst", "Dates and geography remain.", "Removing names is insufficient."],
+      ["Workspace", "Investigator", "Rare cases can be singled out.", "Context changes risk."],
+      [
+        "Linkage",
+        "Data steward",
+        "The key is broadly accessible.",
+        "Coded data remain identifiable.",
+      ],
+      ["Release", "Privacy office", "Recipient is undefined.", "Controls depend on intended use."],
+    ],
     decisionPrompt: "How should the privacy office classify this export as presented?",
     decisionChoices: [
-      { id: "correct", label: "Coded and reidentifiable protected health information because the key and quasi-identifiers remain available.", correct: true, feedback: "Exact dates, five-digit ZIP codes, and a rare diagnosis can distinguish records, while the accessible key provides a direct route back to identity. Removing names did not make this export deidentified." },
-      { id: "narrow", label: "Deidentified under the HIPAA Safe Harbor method because names and medical record numbers were removed.", feedback: "Safe Harbor requires more than removing names and record numbers. Exact admission dates and most five-digit ZIP codes are among the identifiers that must be removed or generalized, and the reidentification mechanism cannot be disclosed." },
-      { id: "unsafe", label: "A limited data set that may be shared with the investigator under a data use agreement exactly as it is.", feedback: "A limited data set may retain dates and some geography, but it remains protected health information. The institution must first confirm the permitted purpose and recipient, remove prohibited direct identifiers, protect the linkage mechanism, and execute the required data use agreement." },
+      {
+        id: "correct",
+        label:
+          "Coded and reidentifiable protected health information because the key and quasi-identifiers remain available.",
+        correct: true,
+        feedback:
+          "Exact dates, five-digit ZIP codes, and a rare diagnosis can distinguish records, while the accessible key provides a direct route back to identity. Removing names did not make this export deidentified.",
+      },
+      {
+        id: "narrow",
+        label:
+          "Deidentified under the HIPAA Safe Harbor method because names and medical record numbers were removed.",
+        feedback:
+          "Safe Harbor requires more than removing names and record numbers. Exact admission dates and most five-digit ZIP codes are among the identifiers that must be removed or generalized, and the reidentification mechanism cannot be disclosed.",
+      },
+      {
+        id: "unsafe",
+        label:
+          "A limited data set that may be shared with the investigator under a data use agreement exactly as it is.",
+        feedback:
+          "A limited data set may retain dates and some geography, but it remains protected health information. The institution must first confirm the permitted purpose and recipient, remove prohibited direct identifiers, protect the linkage mechanism, and execute the required data use agreement.",
+      },
     ],
     repairPrompt: "Which release path should be approved?",
     repairChoices: [
-      { id: "validated", label: "Minimize fields, generalize dates and geography, protect the key, address rare cases, and require privacy-office approval.", correct: true, feedback: "This path matches the disclosed fields and safeguards to the research question and intended recipient. It preserves less detail and requires privacy review, data-steward work, and an appropriate agreement before release." },
-      { id: "narrow", label: "Remove the linkage key but retain exact dates and five-digit ZIP codes, then release the file publicly because it has no names.", feedback: "Separating the key removes one direct route to identity, but the detailed dates, geography, and rare cohort still create a distinguishable dataset. Public release also removes the recipient controls needed for protected health information." },
-      { id: "unsafe", label: "Keep the fields but require the investigator to sign a confidentiality agreement before receiving the file.", feedback: "A confidentiality commitment is useful, but it does not minimize unnecessary fields, protect a broadly accessible linkage key, resolve the rare cohort, or substitute for privacy-office review and the agreement required for the approved release path." },
+      {
+        id: "validated",
+        label:
+          "Minimize fields, generalize dates and geography, protect the key, address rare cases, and require privacy-office approval.",
+        correct: true,
+        feedback:
+          "This path matches the disclosed fields and safeguards to the research question and intended recipient. It preserves less detail and requires privacy review, data-steward work, and an appropriate agreement before release.",
+      },
+      {
+        id: "narrow",
+        label:
+          "Remove the linkage key but retain exact dates and five-digit ZIP codes, then release the file publicly because it has no names.",
+        feedback:
+          "Separating the key removes one direct route to identity, but the detailed dates, geography, and rare cohort still create a distinguishable dataset. Public release also removes the recipient controls needed for protected health information.",
+      },
+      {
+        id: "unsafe",
+        label:
+          "Keep the fields but require the investigator to sign a confidentiality agreement before receiving the file.",
+        feedback:
+          "A confidentiality commitment is useful, but it does not minimize unnecessary fields, protect a broadly accessible linkage key, resolve the rare cohort, or substitute for privacy-office review and the agreement required for the approved release path.",
+      },
     ],
     validationCases: [
-      { name: "Minimum necessary fields", note: "The release contains only the detail needed to answer the approved research question.", passingRepairs: ["validated"], failNotes: { narrow: "Removing the key does not explain why exact dates and five-digit ZIP codes are necessary for the research question.", unsafe: "A confidentiality agreement does not remove fields that the investigator does not need." } },
-      { name: "Linkage key control", note: "The reidentification key is separated from the released data and limited to approved stewards.", passingRepairs: ["validated", "narrow"], failNotes: { unsafe: "The proposal leaves the linkage key in the broadly accessible shared folder." } },
-      { name: "Uniqueness-risk review", note: "Detailed dates, geography, and the three-person rare cohort are reviewed and reduced as required.", passingRepairs: ["validated"], failNotes: { narrow: "The public file still contains exact dates, five-digit ZIP codes, and the rare cohort even though the linkage key was removed.", unsafe: "The confidentiality agreement does not reduce the combinations that distinguish rare records." } },
-      { name: "Approved recipient and purpose", note: "The privacy office documents who will receive the data, for which permitted purpose, and under which release path.", passingRepairs: ["validated"], failNotes: { narrow: "A public release has no named recipient, bounded purpose, or institutional approval.", unsafe: "The investigator's signature alone does not document privacy-office approval or the permitted disclosure pathway." } },
-      { name: "Recipient confidentiality commitment", note: "The recipient accepts enforceable limits on use, disclosure, and attempts to identify individuals.", passingRepairs: ["validated", "unsafe"], failNotes: { narrow: "Public release provides no enforceable recipient commitment or restriction on reidentification." } },
+      {
+        name: "Minimum necessary fields",
+        note: "The release contains only the detail needed to answer the approved research question.",
+        passingRepairs: ["validated"],
+        failNotes: {
+          narrow:
+            "Removing the key does not explain why exact dates and five-digit ZIP codes are necessary for the research question.",
+          unsafe:
+            "A confidentiality agreement does not remove fields that the investigator does not need.",
+        },
+      },
+      {
+        name: "Linkage key control",
+        note: "The reidentification key is separated from the released data and limited to approved stewards.",
+        passingRepairs: ["validated", "narrow"],
+        failNotes: {
+          unsafe: "The proposal leaves the linkage key in the broadly accessible shared folder.",
+        },
+      },
+      {
+        name: "Uniqueness-risk review",
+        note: "Detailed dates, geography, and the three-person rare cohort are reviewed and reduced as required.",
+        passingRepairs: ["validated"],
+        failNotes: {
+          narrow:
+            "The public file still contains exact dates, five-digit ZIP codes, and the rare cohort even though the linkage key was removed.",
+          unsafe:
+            "The confidentiality agreement does not reduce the combinations that distinguish rare records.",
+        },
+      },
+      {
+        name: "Approved recipient and purpose",
+        note: "The privacy office documents who will receive the data, for which permitted purpose, and under which release path.",
+        passingRepairs: ["validated"],
+        failNotes: {
+          narrow:
+            "A public release has no named recipient, bounded purpose, or institutional approval.",
+          unsafe:
+            "The investigator's signature alone does not document privacy-office approval or the permitted disclosure pathway.",
+        },
+      },
+      {
+        name: "Recipient confidentiality commitment",
+        note: "The recipient accepts enforceable limits on use, disclosure, and attempts to identify individuals.",
+        passingRepairs: ["validated", "unsafe"],
+        failNotes: {
+          narrow:
+            "Public release provides no enforceable recipient commitment or restriction on reidentification.",
+        },
+      },
     ],
   },
-  "where-is-the-specimen": { artifact: "Specimen audit trail", evidence: [["Patient match", "Confirmed", "positive"], ["Container scan", "08:11"], ["Gross arrival", "Missing", "critical"], ["Queue", "Cytology", "warning"]], trace: [["Collection", "Clinician", "Patient and container match.", "Identification begins correctly."], ["Accession", "Processor", "Barcode resolves correctly.", "Identity is intact."], ["Routing", "LIS", "Procedure maps to cytology.", "A valid code drives a wrong route."], ["Gross room", "PA", "Expected specimen is absent.", "Tracking reveals the handoff gap."]], diagnosis: ["What failed?", "Routing configuration", "Barcode symbology", "Patient identification"], repair: ["Choose the correction.", "Correct the rule, recover the specimen, and test the route matrix", "Move this specimen only", "Disable all routing"], tests: [["Reported procedure", "Routes to gross room", false], ["Cytology", "Still routes correctly"], ["Manual exception", "Retains audit trail", false]] },
-  "autoverification-at-the-edge": { artifact: "Autoverification trace", evidence: [["Troponin", "48 ng/L", "warning"], ["Prior", "12 ng/L"], ["Delta", "+300%", "critical"], ["QC", "Acceptable", "positive"], ["Release", "Automatic", "critical"]], trace: [["Analyzer", "Technologist", "No instrument flag.", "Instrument validity is insufficient."], ["Middleware", "Rule owner", "Only absolute delta is checked.", "Relative change escapes."], ["LIS", "Analyst", "Rule returns pass.", "The result releases."], ["Clinical service", "Physician", "A marked rise has no review.", "A safety checkpoint is lost."]], diagnosis: ["Why did it release?", "Delta logic was incomplete", "QC was acceptable", "It was below a critical limit"], repair: ["Choose the rule change.", "Add approved absolute/relative delta logic and full regression", "Hold this exact value", "Disable review"], tests: [["Relative delta", "Held for review", false], ["Stable elevation", "Uses approved criteria"], ["Missing history", "Has a safe branch", false], ["Routine normal", "Still autoverifies"]] },
-  "reflex-rule-ripple-effect": { artifact: "Thyroid reflex rule", evidence: [["Old lower limit", "0.40"], ["New lower limit", "0.27"], ["Rule threshold", "< 0.40", "warning"], ["Free T4 orders", "+31%", "critical"]], trace: [["Assay", "Chemistry", "Reference interval changed.", "A clinical input changed."], ["LIS", "Analyst", "Display was updated.", "Visible maintenance succeeded."], ["Reflex engine", "Rule owner", "Old threshold remains.", "A hidden dependency was missed."], ["Utilization", "Medical director", "Extra testing appears.", "Monitoring reveals impact."]], diagnosis: ["What is the diagnosis?", "Incomplete dependency-aware change control", "Analyzer calibration failure", "Appropriate utilization growth"], repair: ["Choose the repair.", "Update approved logic, test boundaries, document, and monitor", "Change the displayed interval only", "Stop all reflex testing"], tests: [["New low TSH", "Triggers approved reflex", false], ["Boundary", "Follows new policy", false], ["Normal TSH", "Does not reflex"], ["Utilization", "Returns to expected range", false]] },
-  "follow-the-flag": { artifact: "Critical potassium display", evidence: [["Potassium", "6.8 mmol/L", "critical"], ["LIS flag", "CH", "critical"], ["Interface ACK", "AA", "positive"], ["EHR flag", "Unrecognized", "warning"]], trace: [["Analyzer", "Technologist", "Critical high is CH.", "The local code is meaningful."], ["LIS", "Laboratory", "Value and CH are stored.", "Meaning remains intact."], ["Interface", "Integration analyst", "Message is accepted unchanged.", "Receipt is not interpretation."], ["EHR", "Clinician", "A generic flag appears.", "The receiver lacks the local semantics."]], diagnosis: ["What is the root cause?", "Untranslated abnormal-flag semantics", "Lost numeric result", "Failed message transport"], repair: ["Choose the mapping.", "Map CH to HH and CL to LL, then regress every category", "Map CH to H", "Remove OBX-8"], tests: [["Critical high", "CH renders HH", false], ["Critical low", "CL renders LL", false], ["Routine high", "H remains H"], ["Normal", "N remains N"]] },
-  "newborn-screen-to-public-health": { artifact: "Public-health message", evidence: [["Transport ACK", "Accepted", "positive"], ["Infant ID", "Present"], ["Facility", "Local code", "warning"], ["Interpretation", "Free text", "critical"], ["Units", "Local syntax", "warning"]], trace: [["Screening lab", "Scientist", "Local meaning is clear.", "The sender can act."], ["HL7 message", "Interface", "Segments are valid.", "Syntax alone is insufficient."], ["Terminology", "Informatician", "Interpretation code is absent.", "Semantics are incomplete."], ["Public health", "Reviewer", "Automatic routing fails.", "Manual resolution is required."]], diagnosis: ["Why did accepted data fail?", "Required semantics were local or unstructured", "HL7 cannot carry screening", "FHIR must replace every v2 message"], repair: ["Choose the correction.", "Align profile, identifiers, standard codes, units, and receiver tests", "Add longer free text", "Change the ACK"], tests: [["Positive", "Routes to follow-up", false], ["Borderline", "Uses agreed answer", false], ["Normal", "Machine processable"], ["Unknown facility", "Safe exception queue", false]] },
-  "code-the-meaning": { artifact: "Terminology workbench", evidence: [["Local label", "Breast panel"], ["LOINC", "Observation panel"], ["SNOMED CT", "Finding"], ["CPT", "Billing procedure"], ["Unit", "cells/100 cells", "warning"]], trace: [["Order catalog", "Clinician", "A local label supports selection.", "Display language has a purpose."], ["Dictionary", "Pathologist", "Orders and results differ.", "Concepts need distinct identifiers."], ["Interface", "Terminologist", "Local codes need maps.", "One system cannot represent everything."], ["Downstream", "Billing/registry", "Consumers use different frames.", "Code follows purpose."]], diagnosis: ["What is the mapping error?", "Using one code system for unlike purposes", "The label is too short", "Every local term must be deleted"], repair: ["Choose the workflow.", "Define concept, purpose, context, and clinical owner before lookup", "Select the closest text match", "Use CPT for every exchange"], tests: [["Quantitative result", "Observation and unit align", false], ["AP diagnosis", "Finding preserves meaning"], ["Billing", "Remains separate"], ["Local alias", "Maps correctly"]] },
-  "invisible-bottleneck": { artifact: "Operations dashboard", evidence: [["LIS median", "44 min"], ["Middleware queue", "1,840 peak", "critical"], ["Analyzer idle", "18%", "warning"], ["Dashboard age", "36 hours", "warning"]], trace: [["Courier", "Operations", "Arrivals cluster.", "Demand is uneven."], ["Analyzer", "Technologist", "Capacity is sometimes idle.", "Raw capacity is not the main limit."], ["Middleware", "Engineer", "Rules queue grows.", "Ancillary data reveals delay."], ["BI", "Manager", "Summary is stale.", "Timeliness affects actionability."]], diagnosis: ["Where is the bottleneck?", "Post-analysis middleware queue", "Buy another analyzer", "Trust the LIS median"], repair: ["Choose the intervention.", "Tune queue capacity and arrival flow; monitor freshness, tails, errors, and clinical TAT", "Optimize median only", "Refresh less often"], tests: [["Peak period", "Queue clears", false], ["Routine period", "No new latency"], ["Critical results", "Remain prioritized", false], ["Dashboard", "Freshness visible"]] },
-  "five-rights-right-test": { artifact: "Test-order CDS review", evidence: [["Timing", "After signing", "critical"], ["Target", "All clinicians", "warning"], ["Message", "Long policy text", "warning"], ["Acceptance", "6%", "critical"]], trace: [["Search", "Clinician", "Two similar tests appear.", "Support is needed early."], ["Order entry", "EHR", "Indication is known.", "Guidance can be specific."], ["Sign", "Clinician", "Work seems complete.", "Late interruption meets resistance."], ["Review", "Stewardship", "Acceptance is low.", "Monitoring should drive redesign."]], diagnosis: ["What is violated?", "Right information and format at the wrong time", "Every alert needs a hard stop", "Education never works"], repair: ["Choose the redesign.", "Guide the right clinician during search/order entry with a concise exception path", "Make the alert red", "Send monthly email only"], tests: [["Target order", "Selection improves", false], ["Valid exception", "Can proceed with reason"], ["Emergency", "Not delayed", false], ["Other orders", "No irrelevant alert"]] },
-  "alert-everyone-ignores": { artifact: "CDS performance review", evidence: [["Interruptions", "12,480/month", "critical"], ["Acceptance", "4.8%", "critical"], ["Resident", "9.2%"], ["Attending", "1.7%"], ["Outcome", "Not measured", "warning"]], trace: [["Rule", "CDS analyst", "Criteria are broad.", "Specificity is poor."], ["Alert", "Clinician", "Warnings repeat.", "Fatigue develops."], ["Override", "EHR", "Reasons are generic.", "Behavior is unexplained."], ["Governance", "Committee", "Only firing count is reviewed.", "Effectiveness is unknown."]], diagnosis: ["What is the main limitation?", "Poor targeting plus inadequate evaluation", "Acceptance should be 100%", "The alert needs more text"], repair: ["Choose redesign and study.", "Narrow the cohort; measure burden, appropriateness, outcomes, and harm", "Use acceptance alone", "Make every firing a hard stop"], tests: [["Inappropriate target", "No alert", false], ["High-risk target", "Actionable guidance"], ["Valid override", "Meaningfully captured"], ["Outcome review", "Includes benefit and harm", false]] },
-  "pixel-budget": {"artifact": "Image comparison and archive estimate", "evidence": [["Field", "15 by 10 mm planning example"], ["Sampling", "0.5 or 0.25 micrometers per pixel"], ["Volume", "125,000 slides per year"]], "trace": [["Acquisition", "Technologist", "Spacing, focus, and coverage", "Inspect the captured information."], ["Archive", "Infrastructure", "Encoding, copies, and recovery", "Calculate storage without assuming clinical equivalence."], ["Viewing", "Pathologist", "Viewer and display conditions", "Review the complete intended system."]], "diagnosis": ["What supports a storage decision?", "Task-specific image and workflow evidence", "File extension alone", "The smallest encoded file"], "repair": ["Choose the review approach.", "Preserve sources, compare candidate settings, validate, and document approval", "Replace sources immediately", "Approve a DICOM conversion without review"], "tests": [["Image quality", "Check retained detail", false], ["Identity", "Verify slide linkage", false], ["Storage", "Account for copies and retention"]]},
-  "validate-before-go-live": {"artifact": "Paired WSI study and discordance packet", "evidence": [["Fixed H&E", "58 agreements / 60 paired cases"], ["Frozen exploration", "14 agreements / 17 paired cases"], ["Read intervals", "14 days fixed; 8 days frozen"], ["Home pathway", "Not tested"]], "trace": [["Study", "Pathologists", "Original paired reads", "Keep original observations."], ["Investigation", "Digital pathology team", "V12 blur and V44 interpretation", "Investigate each mechanism."], ["Approval", "Director", "Defined scope and corrective evidence", "A plan is not completed evidence."]], "diagnosis": ["What supports approval?", "Representative application and system evidence with discordance review", "Pooled agreement alone", "Device authorization alone"], "repair": ["Choose the next step.", "Complete corrective review before considering the tested fixed scope", "Delete discordances", "Approve all requested uses"], "tests": [["V12", "Retain and investigate acquisition", false], ["V44", "Retain interpretive disagreement", false], ["Scope", "Keep unsupported uses on hold", false]]},
-  "human-plus-algorithm": {"artifact": "Candidate marks, reader study, and monitoring", "evidence": [["Candidate set", "5 reference mitoses and 7 nonmitotic locations"], ["Threshold 0.50", "3 true marks; 3 false marks; 2 misses"], ["Reader study", "20 slides and 40 reference figures per condition"]], "trace": [["Detection", "Model", "Scores propose locations", "A score is not a diagnosis."], ["Review", "Pathologist", "Marked and unmarked areas", "Assess final reader performance."], ["Monitoring", "Clinical and technical team", "Failures, input changes, and reference audits", "Investigate changed performance."]], "diagnosis": ["What must be evaluated?", "The complete reader and tool workflow", "Model sensitivity alone", "Review time alone"], "repair": ["Choose the review plan.", "Test independently and monitor reference errors, readers, case mix, and changes", "Review only positive marks", "Change production thresholds without testing"], "tests": [["False negatives", "Audit unmarked areas", false], ["Human review", "Measure final errors and time", false], ["Changes", "Assess before release", false]]},
-  "build-the-new-test": { artifact: "Multiplex assay dossier", evidence: [["Order name", "Resp panel extended", "warning"], ["Results", "Concatenated text", "critical"], ["Internal controls", "Clinician visible", "warning"], ["Environment", "Partial build"], ["Approval", "Technical only", "critical"]], trace: [["Request", "Clinical service", "Needs actionable organisms.", "Purpose defines the build."], ["Laboratory", "Pathologist", "Fields and interpretation are chosen.", "Meaning needs medical ownership."], ["LIS/interface", "Analyst", "Codes and fields are configured.", "Build must preserve the model."], ["EHR", "Clinician", "Long text obscures results.", "Display validation is required."]], diagnosis: ["What is highest risk?", "Clinical result model lacks end-to-end approval", "The name is abbreviated", "The assay is FDA authorized"], repair: ["Choose the process.", "Request, vet, build outside production, test, approve, train, deploy, and monitor", "Edit production directly", "Report one concatenated string"], tests: [["Positive organism", "Displays correctly", false], ["Multiple organisms", "Remain distinct", false], ["Internal control", "Follows visibility policy"], ["Negative", "Uses approved interpretation"], ["Downtime", "Has reconciliation", false]] },
-  "choose-and-govern-lis": { artifact: "LIS selection matrix", evidence: [["Required workflows", "38"], ["Demo score", "92%", "positive"], ["Verified requirements", "61%", "warning"], ["Interface cost", "Excluded", "critical"], ["Exit plan", "None", "critical"]], trace: [["Requirements", "Laboratory", "Workflows become measurable needs.", "Selection starts before demos."], ["RFI", "Project team", "Market capability is screened.", "Candidates are narrowed."], ["RFP", "Vendors", "Responses map to requirements.", "Specificity enables comparison."], ["Lifecycle", "Governance", "Operation and retirement are planned.", "Purchase is one phase."]], diagnosis: ["Why is ranking unreliable?", "Demo enthusiasm replaced verified requirements", "The top score is below 100%", "An RFI was used"], repair: ["Choose the process.", "Use weighted requirements through selection, testing, operation, and retirement", "Choose the best demo", "Defer backup and exit planning"], tests: [["Workflow", "Scripted demonstration", false], ["Interface", "Cost and owner explicit", false], ["Go-live", "Testing and rollback", false], ["Operation", "Change control"], ["Retirement", "Records preserved", false]] },
+  "where-is-the-specimen": {
+    artifact: "Specimen audit trail",
+    evidence: [
+      ["Patient match", "Confirmed", "positive"],
+      ["Container scan", "08:11"],
+      ["Gross arrival", "Missing", "critical"],
+      ["Queue", "Cytology", "warning"],
+    ],
+    trace: [
+      [
+        "Collection",
+        "Clinician",
+        "Patient and container match.",
+        "Identification begins correctly.",
+      ],
+      ["Accession", "Processor", "Barcode resolves correctly.", "Identity is intact."],
+      ["Routing", "LIS", "Procedure maps to cytology.", "A valid code drives a wrong route."],
+      ["Gross room", "PA", "Expected specimen is absent.", "Tracking reveals the handoff gap."],
+    ],
+    diagnosis: [
+      "What failed?",
+      "Routing configuration",
+      "Barcode symbology",
+      "Patient identification",
+    ],
+    repair: [
+      "Choose the correction.",
+      "Correct the rule, recover the specimen, and test the route matrix",
+      "Move this specimen only",
+      "Disable all routing",
+    ],
+    tests: [
+      ["Reported procedure", "Routes to gross room", false],
+      ["Cytology", "Still routes correctly"],
+      ["Manual exception", "Retains audit trail", false],
+    ],
+  },
+  "autoverification-at-the-edge": {
+    artifact: "Autoverification trace",
+    evidence: [
+      ["Troponin", "48 ng/L", "warning"],
+      ["Prior", "12 ng/L"],
+      ["Delta", "+300%", "critical"],
+      ["QC", "Acceptable", "positive"],
+      ["Release", "Automatic", "critical"],
+    ],
+    trace: [
+      ["Analyzer", "Technologist", "No instrument flag.", "Instrument validity is insufficient."],
+      ["Middleware", "Rule owner", "Only absolute delta is checked.", "Relative change escapes."],
+      ["LIS", "Analyst", "Rule returns pass.", "The result releases."],
+      [
+        "Clinical service",
+        "Physician",
+        "A marked rise has no review.",
+        "A safety checkpoint is lost.",
+      ],
+    ],
+    diagnosis: [
+      "Why did it release?",
+      "Delta logic was incomplete",
+      "QC was acceptable",
+      "It was below a critical limit",
+    ],
+    repair: [
+      "Choose the rule change.",
+      "Add approved absolute/relative delta logic and full regression",
+      "Hold this exact value",
+      "Disable review",
+    ],
+    tests: [
+      ["Relative delta", "Held for review", false],
+      ["Stable elevation", "Uses approved criteria"],
+      ["Missing history", "Has a safe branch", false],
+      ["Routine normal", "Still autoverifies"],
+    ],
+  },
+  "reflex-rule-ripple-effect": {
+    artifact: "Thyroid reflex rule",
+    evidence: [
+      ["Old lower limit", "0.40"],
+      ["New lower limit", "0.27"],
+      ["Rule threshold", "< 0.40", "warning"],
+      ["Free T4 orders", "+31%", "critical"],
+    ],
+    trace: [
+      ["Assay", "Chemistry", "Reference interval changed.", "A clinical input changed."],
+      ["LIS", "Analyst", "Display was updated.", "Visible maintenance succeeded."],
+      ["Reflex engine", "Rule owner", "Old threshold remains.", "A hidden dependency was missed."],
+      ["Utilization", "Medical director", "Extra testing appears.", "Monitoring reveals impact."],
+    ],
+    diagnosis: [
+      "What is the diagnosis?",
+      "Incomplete dependency-aware change control",
+      "Analyzer calibration failure",
+      "Appropriate utilization growth",
+    ],
+    repair: [
+      "Choose the repair.",
+      "Update approved logic, test boundaries, document, and monitor",
+      "Change the displayed interval only",
+      "Stop all reflex testing",
+    ],
+    tests: [
+      ["New low TSH", "Triggers approved reflex", false],
+      ["Boundary", "Follows new policy", false],
+      ["Normal TSH", "Does not reflex"],
+      ["Utilization", "Returns to expected range", false],
+    ],
+  },
+  "follow-the-flag": {
+    artifact: "Critical potassium display",
+    evidence: [
+      ["Potassium", "6.8 mmol/L", "critical"],
+      ["LIS flag", "CH", "critical"],
+      ["Interface ACK", "AA", "positive"],
+      ["EHR flag", "Unrecognized", "warning"],
+    ],
+    trace: [
+      ["Analyzer", "Technologist", "Critical high is CH.", "The local code is meaningful."],
+      ["LIS", "Laboratory", "Value and CH are stored.", "Meaning remains intact."],
+      [
+        "Interface",
+        "Integration analyst",
+        "Message is accepted unchanged.",
+        "Receipt is not interpretation.",
+      ],
+      ["EHR", "Clinician", "A generic flag appears.", "The receiver lacks the local semantics."],
+    ],
+    diagnosis: [
+      "What is the root cause?",
+      "Untranslated abnormal-flag semantics",
+      "Lost numeric result",
+      "Failed message transport",
+    ],
+    repair: [
+      "Choose the mapping.",
+      "Map CH to HH and CL to LL, then regress every category",
+      "Map CH to H",
+      "Remove OBX-8",
+    ],
+    tests: [
+      ["Critical high", "CH renders HH", false],
+      ["Critical low", "CL renders LL", false],
+      ["Routine high", "H remains H"],
+      ["Normal", "N remains N"],
+    ],
+  },
+  "newborn-screen-to-public-health": {
+    artifact: "Public-health message",
+    evidence: [
+      ["Transport ACK", "Accepted", "positive"],
+      ["Infant ID", "Present"],
+      ["Facility", "Local code", "warning"],
+      ["Interpretation", "Free text", "critical"],
+      ["Units", "Local syntax", "warning"],
+    ],
+    trace: [
+      ["Screening lab", "Scientist", "Local meaning is clear.", "The sender can act."],
+      ["HL7 message", "Interface", "Segments are valid.", "Syntax alone is insufficient."],
+      [
+        "Terminology",
+        "Informatician",
+        "Interpretation code is absent.",
+        "Semantics are incomplete.",
+      ],
+      ["Public health", "Reviewer", "Automatic routing fails.", "Manual resolution is required."],
+    ],
+    diagnosis: [
+      "Why did accepted data fail?",
+      "Required semantics were local or unstructured",
+      "HL7 cannot carry screening",
+      "FHIR must replace every v2 message",
+    ],
+    repair: [
+      "Choose the correction.",
+      "Align profile, identifiers, standard codes, units, and receiver tests",
+      "Add longer free text",
+      "Change the ACK",
+    ],
+    tests: [
+      ["Positive", "Routes to follow-up", false],
+      ["Borderline", "Uses agreed answer", false],
+      ["Normal", "Machine processable"],
+      ["Unknown facility", "Safe exception queue", false],
+    ],
+  },
+  "code-the-meaning": {
+    artifact: "Terminology workbench",
+    evidence: [
+      ["Local label", "Breast panel"],
+      ["LOINC", "Observation panel"],
+      ["SNOMED CT", "Finding"],
+      ["CPT", "Billing procedure"],
+      ["Unit", "cells/100 cells", "warning"],
+    ],
+    trace: [
+      [
+        "Order catalog",
+        "Clinician",
+        "A local label supports selection.",
+        "Display language has a purpose.",
+      ],
+      [
+        "Dictionary",
+        "Pathologist",
+        "Orders and results differ.",
+        "Concepts need distinct identifiers.",
+      ],
+      [
+        "Interface",
+        "Terminologist",
+        "Local codes need maps.",
+        "One system cannot represent everything.",
+      ],
+      [
+        "Downstream",
+        "Billing/registry",
+        "Consumers use different frames.",
+        "Code follows purpose.",
+      ],
+    ],
+    diagnosis: [
+      "What is the mapping error?",
+      "Using one code system for unlike purposes",
+      "The label is too short",
+      "Every local term must be deleted",
+    ],
+    repair: [
+      "Choose the workflow.",
+      "Define concept, purpose, context, and clinical owner before lookup",
+      "Select the closest text match",
+      "Use CPT for every exchange",
+    ],
+    tests: [
+      ["Quantitative result", "Observation and unit align", false],
+      ["AP diagnosis", "Finding preserves meaning"],
+      ["Billing", "Remains separate"],
+      ["Local alias", "Maps correctly"],
+    ],
+  },
+  "invisible-bottleneck": {
+    artifact: "Operations dashboard",
+    evidence: [
+      ["LIS median", "44 min"],
+      ["Middleware queue", "1,840 peak", "critical"],
+      ["Analyzer idle", "18%", "warning"],
+      ["Dashboard age", "36 hours", "warning"],
+    ],
+    trace: [
+      ["Courier", "Operations", "Arrivals cluster.", "Demand is uneven."],
+      [
+        "Analyzer",
+        "Technologist",
+        "Capacity is sometimes idle.",
+        "Raw capacity is not the main limit.",
+      ],
+      ["Middleware", "Engineer", "Rules queue grows.", "Ancillary data reveals delay."],
+      ["BI", "Manager", "Summary is stale.", "Timeliness affects actionability."],
+    ],
+    diagnosis: [
+      "Where is the bottleneck?",
+      "Post-analysis middleware queue",
+      "Buy another analyzer",
+      "Trust the LIS median",
+    ],
+    repair: [
+      "Choose the intervention.",
+      "Tune queue capacity and arrival flow; monitor freshness, tails, errors, and clinical TAT",
+      "Optimize median only",
+      "Refresh less often",
+    ],
+    tests: [
+      ["Peak period", "Queue clears", false],
+      ["Routine period", "No new latency"],
+      ["Critical results", "Remain prioritized", false],
+      ["Dashboard", "Freshness visible"],
+    ],
+  },
+  "five-rights-right-test": {
+    artifact: "Test-order CDS review",
+    evidence: [
+      ["Timing", "After signing", "critical"],
+      ["Target", "All clinicians", "warning"],
+      ["Message", "Long policy text", "warning"],
+      ["Acceptance", "6%", "critical"],
+    ],
+    trace: [
+      ["Search", "Clinician", "Two similar tests appear.", "Support is needed early."],
+      ["Order entry", "EHR", "Indication is known.", "Guidance can be specific."],
+      ["Sign", "Clinician", "Work seems complete.", "Late interruption meets resistance."],
+      ["Review", "Stewardship", "Acceptance is low.", "Monitoring should drive redesign."],
+    ],
+    diagnosis: [
+      "What is violated?",
+      "Right information and format at the wrong time",
+      "Every alert needs a hard stop",
+      "Education never works",
+    ],
+    repair: [
+      "Choose the redesign.",
+      "Guide the right clinician during search/order entry with a concise exception path",
+      "Make the alert red",
+      "Send monthly email only",
+    ],
+    tests: [
+      ["Target order", "Selection improves", false],
+      ["Valid exception", "Can proceed with reason"],
+      ["Emergency", "Not delayed", false],
+      ["Other orders", "No irrelevant alert"],
+    ],
+  },
+  "alert-everyone-ignores": {
+    artifact: "CDS performance review",
+    evidence: [
+      ["Interruptions", "12,480/month", "critical"],
+      ["Acceptance", "4.8%", "critical"],
+      ["Resident", "9.2%"],
+      ["Attending", "1.7%"],
+      ["Outcome", "Not measured", "warning"],
+    ],
+    trace: [
+      ["Rule", "CDS analyst", "Criteria are broad.", "Specificity is poor."],
+      ["Alert", "Clinician", "Warnings repeat.", "Fatigue develops."],
+      ["Override", "EHR", "Reasons are generic.", "Behavior is unexplained."],
+      ["Governance", "Committee", "Only firing count is reviewed.", "Effectiveness is unknown."],
+    ],
+    diagnosis: [
+      "What is the main limitation?",
+      "Poor targeting plus inadequate evaluation",
+      "Acceptance should be 100%",
+      "The alert needs more text",
+    ],
+    repair: [
+      "Choose redesign and study.",
+      "Narrow the cohort; measure burden, appropriateness, outcomes, and harm",
+      "Use acceptance alone",
+      "Make every firing a hard stop",
+    ],
+    tests: [
+      ["Inappropriate target", "No alert", false],
+      ["High-risk target", "Actionable guidance"],
+      ["Valid override", "Meaningfully captured"],
+      ["Outcome review", "Includes benefit and harm", false],
+    ],
+  },
+  "pixel-budget": {
+    artifact: "Image comparison and archive estimate",
+    evidence: [
+      ["Field", "15 by 10 mm planning example"],
+      ["Sampling", "0.5 or 0.25 micrometers per pixel"],
+      ["Volume", "125,000 slides per year"],
+    ],
+    trace: [
+      [
+        "Acquisition",
+        "Technologist",
+        "Spacing, focus, and coverage",
+        "Inspect the captured information.",
+      ],
+      [
+        "Archive",
+        "Infrastructure",
+        "Encoding, copies, and recovery",
+        "Calculate storage without assuming clinical equivalence.",
+      ],
+      [
+        "Viewing",
+        "Pathologist",
+        "Viewer and display conditions",
+        "Review the complete intended system.",
+      ],
+    ],
+    diagnosis: [
+      "What supports a storage decision?",
+      "Task-specific image and workflow evidence",
+      "File extension alone",
+      "The smallest encoded file",
+    ],
+    repair: [
+      "Choose the review approach.",
+      "Preserve sources, compare candidate settings, validate, and document approval",
+      "Replace sources immediately",
+      "Approve a DICOM conversion without review",
+    ],
+    tests: [
+      ["Image quality", "Check retained detail", false],
+      ["Identity", "Verify slide linkage", false],
+      ["Storage", "Account for copies and retention"],
+    ],
+  },
+  "validate-before-go-live": {
+    artifact: "Paired WSI study and discordance packet",
+    evidence: [
+      ["Fixed H&E", "58 agreements / 60 paired cases"],
+      ["Frozen exploration", "14 agreements / 17 paired cases"],
+      ["Read intervals", "14 days fixed; 8 days frozen"],
+      ["Home pathway", "Not tested"],
+    ],
+    trace: [
+      ["Study", "Pathologists", "Original paired reads", "Keep original observations."],
+      [
+        "Investigation",
+        "Digital pathology team",
+        "V12 blur and V44 interpretation",
+        "Investigate each mechanism.",
+      ],
+      [
+        "Approval",
+        "Director",
+        "Defined scope and corrective evidence",
+        "A plan is not completed evidence.",
+      ],
+    ],
+    diagnosis: [
+      "What supports approval?",
+      "Representative application and system evidence with discordance review",
+      "Pooled agreement alone",
+      "Device authorization alone",
+    ],
+    repair: [
+      "Choose the next step.",
+      "Complete corrective review before considering the tested fixed scope",
+      "Delete discordances",
+      "Approve all requested uses",
+    ],
+    tests: [
+      ["V12", "Retain and investigate acquisition", false],
+      ["V44", "Retain interpretive disagreement", false],
+      ["Scope", "Keep unsupported uses on hold", false],
+    ],
+  },
+  "human-plus-algorithm": {
+    artifact: "Candidate marks, reader study, and monitoring",
+    evidence: [
+      ["Candidate set", "5 reference mitoses and 7 nonmitotic locations"],
+      ["Threshold 0.50", "3 true marks; 3 false marks; 2 misses"],
+      ["Reader study", "20 slides and 40 reference figures per condition"],
+    ],
+    trace: [
+      ["Detection", "Model", "Scores propose locations", "A score is not a diagnosis."],
+      ["Review", "Pathologist", "Marked and unmarked areas", "Assess final reader performance."],
+      [
+        "Monitoring",
+        "Clinical and technical team",
+        "Failures, input changes, and reference audits",
+        "Investigate changed performance.",
+      ],
+    ],
+    diagnosis: [
+      "What must be evaluated?",
+      "The complete reader and tool workflow",
+      "Model sensitivity alone",
+      "Review time alone",
+    ],
+    repair: [
+      "Choose the review plan.",
+      "Test independently and monitor reference errors, readers, case mix, and changes",
+      "Review only positive marks",
+      "Change production thresholds without testing",
+    ],
+    tests: [
+      ["False negatives", "Audit unmarked areas", false],
+      ["Human review", "Measure final errors and time", false],
+      ["Changes", "Assess before release", false],
+    ],
+  },
+  "build-the-new-test": {
+    artifact: "Multiplex assay dossier",
+    evidence: [
+      ["Order name", "Resp panel extended", "warning"],
+      ["Results", "Concatenated text", "critical"],
+      ["Internal controls", "Clinician visible", "warning"],
+      ["Environment", "Partial build"],
+      ["Approval", "Technical only", "critical"],
+    ],
+    trace: [
+      ["Request", "Clinical service", "Needs actionable organisms.", "Purpose defines the build."],
+      [
+        "Laboratory",
+        "Pathologist",
+        "Fields and interpretation are chosen.",
+        "Meaning needs medical ownership.",
+      ],
+      [
+        "LIS/interface",
+        "Analyst",
+        "Codes and fields are configured.",
+        "Build must preserve the model.",
+      ],
+      ["EHR", "Clinician", "Long text obscures results.", "Display validation is required."],
+    ],
+    diagnosis: [
+      "What is highest risk?",
+      "Clinical result model lacks end-to-end approval",
+      "The name is abbreviated",
+      "The assay is FDA authorized",
+    ],
+    repair: [
+      "Choose the process.",
+      "Request, vet, build outside production, test, approve, train, deploy, and monitor",
+      "Edit production directly",
+      "Report one concatenated string",
+    ],
+    tests: [
+      ["Positive organism", "Displays correctly", false],
+      ["Multiple organisms", "Remain distinct", false],
+      ["Internal control", "Follows visibility policy"],
+      ["Negative", "Uses approved interpretation"],
+      ["Downtime", "Has reconciliation", false],
+    ],
+  },
+  "choose-and-govern-lis": {
+    artifact: "LIS selection matrix",
+    evidence: [
+      ["Required workflows", "38"],
+      ["Demo score", "92%", "positive"],
+      ["Verified requirements", "61%", "warning"],
+      ["Interface cost", "Excluded", "critical"],
+      ["Exit plan", "None", "critical"],
+    ],
+    trace: [
+      [
+        "Requirements",
+        "Laboratory",
+        "Workflows become measurable needs.",
+        "Selection starts before demos.",
+      ],
+      ["RFI", "Project team", "Market capability is screened.", "Candidates are narrowed."],
+      ["RFP", "Vendors", "Responses map to requirements.", "Specificity enables comparison."],
+      [
+        "Lifecycle",
+        "Governance",
+        "Operation and retirement are planned.",
+        "Purchase is one phase.",
+      ],
+    ],
+    diagnosis: [
+      "Why is ranking unreliable?",
+      "Demo enthusiasm replaced verified requirements",
+      "The top score is below 100%",
+      "An RFI was used",
+    ],
+    repair: [
+      "Choose the process.",
+      "Use weighted requirements through selection, testing, operation, and retirement",
+      "Choose the best demo",
+      "Defer backup and exit planning",
+    ],
+    tests: [
+      ["Workflow", "Scripted demonstration", false],
+      ["Interface", "Cost and owner explicit", false],
+      ["Go-live", "Testing and rollback", false],
+      ["Operation", "Change control"],
+      ["Retirement", "Records preserved", false],
+    ],
+  },
 };
 
 const feedbackFor = (_label: string, correct: boolean, repair = false) =>
   correct
-    ? repair ? "This fixes the problem and includes the checks needed before approval." : "This explains the findings at each step."
-    : repair ? "This does not fix the source of the problem or include enough validation." : "This does not explain all of the findings.";
+    ? repair
+      ? "This fixes the problem and includes the checks needed before approval."
+      : "This explains the findings at each step."
+    : repair
+      ? "This does not fix the source of the problem or include enough validation."
+      : "This does not explain all of the findings.";
 
-const toChoices = (labels: [string, string, string], repair = false): Choice[] => labels.map((label, index) => ({
-  id: index === 0 ? repair ? "validated" : "correct" : index === 1 ? "narrow" : "unsafe",
-  label,
-  correct: index === 0,
-  feedback: feedbackFor(label, index === 0, repair),
-}));
+const toChoices = (labels: [string, string, string], repair = false): Choice[] =>
+  labels.map((label, index) => ({
+    id: index === 0 ? (repair ? "validated" : "correct") : index === 1 ? "narrow" : "unsafe",
+    label,
+    correct: index === 0,
+    feedback: feedbackFor(label, index === 0, repair),
+  }));
 
 export const lessons: LessonDefinition[] = manifests.map((manifest, index) => {
   const item = cases[manifest.slug];
   if (!item) throw new Error(`Missing case data for ${manifest.slug}`);
-  const interaction = "decisionChoices" in item
-    ? {
-        decisionPrompt: item.decisionPrompt,
-        decisionChoices: item.decisionChoices,
-        repairPrompt: item.repairPrompt,
-        repairChoices: item.repairChoices,
-        validationCases: item.validationCases,
-      }
-    : {
-        decisionPrompt: item.diagnosis[0],
-        decisionChoices: toChoices(item.diagnosis.slice(1) as [string, string, string]),
-        repairPrompt: item.repair[0],
-        repairChoices: toChoices(item.repair.slice(1) as [string, string, string], true),
-        validationCases: item.tests.map(([name, note, strict]) => ({ name, note, passingRepairs: strict === false ? ["validated"] : ["validated", "narrow"] })),
-      };
+  const interaction =
+    "decisionChoices" in item
+      ? {
+          decisionPrompt: item.decisionPrompt,
+          decisionChoices: item.decisionChoices,
+          repairPrompt: item.repairPrompt,
+          repairChoices: item.repairChoices,
+          validationCases: item.validationCases,
+        }
+      : {
+          decisionPrompt: item.diagnosis[0],
+          decisionChoices: toChoices(item.diagnosis.slice(1) as [string, string, string]),
+          repairPrompt: item.repair[0],
+          repairChoices: toChoices(item.repair.slice(1) as [string, string, string], true),
+          validationCases: item.tests.map(([name, note, strict]) => ({
+            name,
+            note,
+            passingRepairs: strict === false ? ["validated"] : ["validated", "narrow"],
+          })),
+        };
   return {
-    manifest: { ...manifest, ...(topic7Plan[manifest.slug] ?? {}), id: String(index + 1).padStart(2, "0"), sources: [pierSource, apiSource(manifest.apiSessions), ...(topic7Sources[manifest.slug] ?? []), ...(manifest.slug === "steward-at-morning-huddle" ? [stewardshipSource, capInterfaceSource] : []), ...(manifest.slug === "can-we-trust-this-report" ? [governmentDataQualitySource] : []), ...(manifest.slug === "can-we-accept-this-lot" ? [clsiEp26Source, nistStatisticsSource] : []), ...(manifest.slug === "not-anonymous-enough" ? [hhsDeidentificationSource, hhsLimitedDataSetSource] : [])] },
+    manifest: {
+      ...manifest,
+      ...(topic7Plan[manifest.slug] ?? {}),
+      id: String(index + 1).padStart(2, "0"),
+      sources: [
+        pierSource,
+        apiSource(manifest.apiSessions),
+        ...(topic7Sources[manifest.slug] ?? []),
+        ...(manifest.slug === "steward-at-morning-huddle"
+          ? [stewardshipSource, capInterfaceSource]
+          : []),
+        ...(manifest.slug === "can-we-trust-this-report" ? [governmentDataQualitySource] : []),
+        ...(manifest.slug === "can-we-accept-this-lot"
+          ? [clsiEp26Source, nistStatisticsSource]
+          : []),
+        ...(manifest.slug === "not-anonymous-enough"
+          ? [hhsDeidentificationSource, hhsLimitedDataSetSource]
+          : []),
+      ],
+    },
     artifactTitle: item.artifact,
-    evidence: item.evidence.map(([label, value, tone]) => ({ label, value, tone: tone ?? "neutral" })),
-    trace: item.trace.map(([system, role, sees, implication]) => ({ system, role, sees, implication })),
+    evidence: item.evidence.map(([label, value, tone]) => ({
+      label,
+      value,
+      tone: tone ?? "neutral",
+    })),
+    trace: item.trace.map(([system, role, sees, implication]) => ({
+      system,
+      role,
+      sees,
+      implication,
+    })),
     ...interaction,
   };
 });

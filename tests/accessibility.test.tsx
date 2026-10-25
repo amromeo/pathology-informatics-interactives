@@ -44,11 +44,14 @@ test("the missing CBC map and decisions expose labeled controls", () => {
 });
 
 test("the surgical pathology report has labeled controls and a semantic table", () => {
-  const html = renderToStaticMarkup(<DataQualityExperience/>);
+  const html = renderToStaticMarkup(<DataQualityExperience />);
   assert.match(html, /aria-label="Report readiness choices"/);
   assert.match(html, /<ol class="case-data-flow">/);
   assert.match(html, /aria-label="Source used for the cutover TAT calculation"/);
-  assert.match(html, /<caption>All surgical pathology cases used to prepare the turnaround-time report/);
+  assert.match(
+    html,
+    /<caption>All surgical pathology cases used to prepare the turnaround-time report/,
+  );
   assert.match(html, /<th scope="col">Accession<\/th>/);
   assert.match(html, /Download editable CSV/);
   assert.match(html, /role="img" aria-labelledby="tat-chart-title tat-chart-description"/);
@@ -58,10 +61,13 @@ test("the surgical pathology report has labeled controls and a semantic table", 
 });
 
 test("the reagent-lot lesson exposes tables, chart alternatives, and labeled choices", () => {
-  const html = renderToStaticMarkup(<StatisticsExperience/>);
+  const html = renderToStaticMarkup(<StatisticsExperience />);
   assert.match(html, /<caption>Paired current- and new-lot troponin results<\/caption>/);
   assert.match(html, /Download editable CSV/);
-  assert.match(html, /role="img" aria-labelledby="difference-chart-title difference-chart-description"/);
+  assert.match(
+    html,
+    /role="img" aria-labelledby="difference-chart-title difference-chart-description"/,
+  );
   assert.match(html, /<caption>Values shown in the paired-difference plot<\/caption>/);
   assert.match(html, /role="img" aria-labelledby="ci-chart-title ci-chart-description"/);
   assert.match(html, /aria-label="Paired-difference pattern choices"/);
@@ -74,8 +80,11 @@ test("the reagent-lot lesson exposes tables, chart alternatives, and labeled cho
 
 test("the privacy workbench exposes native filters, semantic tables, and live results", () => {
   const lesson = lessons.find((item) => item.manifest.slug === "not-anonymous-enough")!;
-  const html = renderToStaticMarkup(<PrivacyExperience lesson={lesson}/>);
-  assert.match(html, /<caption>Synthetic educational research export — matching records<\/caption>/);
+  const html = renderToStaticMarkup(<PrivacyExperience lesson={lesson} />);
+  assert.match(
+    html,
+    /<caption>Synthetic educational research export — matching records<\/caption>/,
+  );
   assert.match(html, /<th scope="col">Record<\/th>/);
   assert.match(html, /<th scope="row">NR-001<\/th>/);
   assert.match(html, /<select>/);
@@ -90,11 +99,14 @@ test("the privacy workbench exposes native filters, semantic tables, and live re
 
 test("the downtime tabletop exposes phased choices and semantic reconciliation controls", () => {
   const lesson = lessons.find((item) => item.manifest.slug === "twelve-hours-offline")!;
-  const html = renderToStaticMarkup(<DowntimeExperience lesson={lesson}/>);
+  const html = renderToStaticMarkup(<DowntimeExperience lesson={lesson} />);
   assert.match(html, /aria-label="Downtime phases"/);
   assert.match(html, /<legend>How will staff assign temporary patient identifiers\?<\/legend>/);
   assert.match(html, /type="radio"/);
-  assert.match(html, /<caption>Synthetic paper records compared with the restored laboratory information system<\/caption>/);
+  assert.match(
+    html,
+    /<caption>Synthetic paper records compared with the restored laboratory information system<\/caption>/,
+  );
   assert.match(html, /<th scope="col">Temporary ID<\/th>/);
   assert.match(html, /<th scope="row">DT-201<\/th>/);
   assert.match(html, /aria-label="Medical record number for DT-201"/);
@@ -107,7 +119,7 @@ test("the downtime tabletop exposes phased choices and semantic reconciliation c
 
 test("the security review exposes native threat mapping and portfolio controls", () => {
   const lesson = lessons.find((item) => item.manifest.slug === "server-behind-the-analyzer")!;
-  const html = renderToStaticMarkup(<SecurityReviewExperience lesson={lesson}/>);
+  const html = renderToStaticMarkup(<SecurityReviewExperience lesson={lesson} />);
   assert.match(html, /aria-label="Security review areas"/);
   assert.match(html, /<legend>Properties threatened<\/legend>/);
   assert.match(html, /type="checkbox"/);

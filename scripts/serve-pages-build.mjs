@@ -17,7 +17,9 @@ const mimeTypes = {
 };
 
 createServer((request, response) => {
-  const pathname = decodeURIComponent(new URL(request.url ?? "/", `http://${request.headers.host}`).pathname);
+  const pathname = decodeURIComponent(
+    new URL(request.url ?? "/", `http://${request.headers.host}`).pathname,
+  );
   if (pathname !== base && !pathname.startsWith(`${base}/`)) {
     response.writeHead(404).end("Not found");
     return;

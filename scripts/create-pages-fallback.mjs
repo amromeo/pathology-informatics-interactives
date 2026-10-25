@@ -9,10 +9,7 @@ const coverage = JSON.parse(
 
 const routes = coverage.topics.flatMap((topic) => [
   `topics/${topic.slug}`,
-  ...topic.lessons.flatMap((lesson) => [
-    `lessons/${lesson.slug}`,
-    `faculty/${lesson.slug}`,
-  ]),
+  ...topic.lessons.flatMap((lesson) => [`lessons/${lesson.slug}`, `faculty/${lesson.slug}`]),
 ]);
 
 for (const route of routes) {
@@ -26,6 +23,4 @@ for (const route of routes) {
 }
 
 await copyFile(shellPath, resolve(outputDirectory, "404.html"));
-console.log(
-  `Created ${routes.length} static route entry points and the GitHub Pages fallback.`,
-);
+console.log(`Created ${routes.length} static route entry points and the GitHub Pages fallback.`);
