@@ -386,7 +386,7 @@ export function PrivacyExperience({
           <span className="section-number">04</span>
           <div>
             <p className="eyebrow">Redaction exercise</p>
-            <h2 id="workbench-title">Reduce distinguishable combinations and control the key</h2>
+            <h2 id="workbench-title">{lessonCopy.redactionHeading}</h2>
           </div>
         </div>
         {Concepts && (

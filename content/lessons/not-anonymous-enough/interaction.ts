@@ -425,6 +425,7 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
 };
 
 export const lessonCopy = {
+  redactionHeading: "Remove identifying details and protect the key",
   text01:
     "Start with the rare diagnosis. Then add another fact that an outside person might know. Confirm the result only when at least two filters leave one record.",
   text02:
