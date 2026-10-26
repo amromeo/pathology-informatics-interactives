@@ -38,7 +38,7 @@ export const manifest: LessonManifest = {
     {
       label:
         "CAP — Don't Forget Your Rules When Harmonizing Laboratory Testing Across Multiple Sites",
-      url: "https://www.cap.org/member-resources/clinical-informatics-resources/dont-forget-your-rules-when-harmonizing-laboratory-testing-across-multiple-sites",
+      url: "https://www.cap.org/education/pathology-subspecialties/clinical-informatics/clinical-informatics-resources/dont-forget-your-rules-when-harmonizing-laboratory-testing-across-multiple-sites/",
       license: "Copyright © College of American Pathologists; cited and summarized",
       use: "Identifies GEN.48500 and supports the laboratory's responsibility to verify accurate transmission of patient results into the EHR. No CAP text is reproduced.",
     },
