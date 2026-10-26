@@ -100,7 +100,7 @@ sessions and slide ranges that should shape each case and learner decision.
 - Source: <https://pubmed.ncbi.nlm.nih.gov/25724030/>
 
 - **College of American Pathologists — “Don't Forget Your Rules When Harmonizing Laboratory Testing Across Multiple Sites.”** Used in Lesson 1 to support the laboratory's responsibility to verify accurate transmission of patient results into the EHR. The article discusses CAP checklist requirement GEN.48500 and validation in the downstream system clinicians use. The lesson cites and summarizes the principle; CAP wording is not reproduced.
-- Source: <https://www.cap.org/member-resources/clinical-informatics-resources/dont-forget-your-rules-when-harmonizing-laboratory-testing-across-multiple-sites>
+- Source: <https://www.cap.org/education/pathology-subspecialties/clinical-informatics/clinical-informatics-resources/dont-forget-your-rules-when-harmonizing-laboratory-testing-across-multiple-sites/>
 
 ## Asset policy
 
@@ -124,7 +124,7 @@ sample message. Harrison/API slide ranges are recorded in HARRISON-SLIDE-MAP.md.
 - HL7 specification lifecycle: https://projectlifedashboard.hl7.org/specification-lifecycle/
 - HL7 observation interpretations: https://terminology.hl7.org/4.0.0/CodeSystem-v3-ObservationInterpretation.html
 - FHIR R4 Observation: https://hl7.org/fhir/R4/observation.html
-- LOINC newborn screening: https://loinc.org/newborn-screening/
+- LOINC newborn-screening panel (54089-8): https://loinc.org/54089-8
 - Overall interpretation and answer list: https://loinc.org/57130-7
 - Condition-specific counterexample: https://loinc.org/46746-4
 - LOINC dimensions: https://loinc.org/kb/users-guide/major-parts-of-a-loinc-term
