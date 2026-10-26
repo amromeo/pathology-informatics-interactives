@@ -1,13 +1,38 @@
-### How was the tool made?
+### A written rule and a model trained on examples
 
-A programmer can write a rule that holds a result when quality control fails. The programmer supplies the conditions directly. Test the limits and exceptions to find out whether the rule does what the laboratory asked.
+A computer follows instructions. Sometimes a person can write the necessary instructions directly: **if a quality-control result is outside the laboratory's allowed range, hold the affected patient results for review**. The computer applies a condition that the person supplied.
 
-Other programs learn patterns from examples. This is **machine learning**, one group of methods within **artificial intelligence (AI)**. AI includes computer methods for tasks such as recognizing images and generating language.
+Quality control is a check on the testing process. Staff test material whose result should fall within a known range. If it falls outside that range, something may be wrong with the instrument, chemicals or testing procedure. A **run** is a period or batch of testing assessed together under the laboratory's procedure. Holding results means keeping them from being sent automatically to the patient's chart while staff investigate.
 
-The examples used for training make a difference:
+Recognizing cancer in an image is harder to describe as a complete list of if/then rules. Cells vary in shape, color and arrangement. In **machine learning**, developers provide examples and use a training procedure to adjust a **model**: a set of calculations that turns an input, such as an image, into an answer. The trained model then calculates a prediction for an example it has not seen before. Machine learning is one group of methods within **artificial intelligence (AI)**, a broad term for computer methods that perform tasks such as recognizing images or producing language.
 
-- **Supervised learning:** pathologists label the training slides, and the model learns patterns associated with those labels. The metastasis detector uses a **convolutional neural network**, which learns patterns in neighboring parts of an image. Test it on local slides with diagnoses made independently of its marks.
-- **Unsupervised learning:** the program groups similar measurements without being given diagnoses. Tumors with similar gene-expression patterns may cluster together. Someone still has to find out what those groups mean and whether staining, preparation or other differences explain them.
-- **Generative models:** the program produces text or images. A tumor-board summary may read well while leaving out a qualification or adding a finding that is absent from the reports. Compare its statements with the reports before using it.
+### What changes when a model learns?
 
-The name of the method helps you understand how it works. The first check still depends on the job: holding a result, finding a lesion, grouping tumors or summarizing a record.
+An image is stored as numbers describing the colors of its tiny picture elements, or pixels. The model combines those numbers in calculations. Its **parameters** are adjustable numbers within those calculations. Changing a parameter changes how strongly an image pattern affects the result. Many parameters work together; there is usually no single setting for “recognize a cancer cell.”
+
+For the slide detector, training follows a repeated sequence:
+
+1. Pathologists identify cancer in training images. Their answers are the **labels** supplied with the examples.
+2. The model calculates its own prediction from an image.
+3. The training procedure compares that prediction with the label and adjusts the parameters to reduce the errors across the training examples.
+
+Once training is finished, the team tests the model on separate cases. Success on the examples used to adjust its parameters would not tell us how well it handles new cases. Running the trained detector on a new slide also does not necessarily change its parameters; training and use are separate activities.
+
+<details>
+<summary>Read more about models, training and parameters</summary>
+
+Google's [introduction to machine learning](https://developers.google.com/machine-learning/intro-to-ml/what-is-ml) gives examples of prediction and generation. Its [linear-regression lesson](https://developers.google.com/machine-learning/crash-course/linear-regression) shows a simpler model in which each adjustable number has a visible role in an equation. You can complete this lesson without using those equations.
+
+</details>
+
+### Four descriptions you will use below
+
+**A programmed rule** applies conditions a person has written. To check the quality-control rule, try results inside and outside the allowed range, as well as exactly at a limit. Also try an exception, such as a missing control result. Observe whether each affected patient result is held or released as the laboratory intended.
+
+**Supervised learning** uses examples with supplied answers. “Supervised” describes how the training data are labeled. It does not mean a pathologist watches every calculation. Our detector uses a **convolutional neural network**: layers of calculations examine neighboring pixels, then combine the image patterns they find. The team must check its marks against diagnoses made independently by pathologists on new slides.
+
+**Unsupervised clustering** groups examples by similarity without being supplied with diagnostic categories. For example, measurements of gene activity can be similar in several tumors. The program may put those tumors in the same group, called a **cluster**. Investigators then ask why they resemble one another. A cluster could reflect a biological difference, or it could reflect how the samples were prepared or measured.
+
+**A generative model** produces content, such as a paragraph. A language model learns patterns in text and uses them to generate a sequence of words. A readable summary can still add a finding that was never in the reports or leave out an important qualification. Someone must compare the summary with the original reports.
+
+These descriptions are not four mutually exclusive kinds of technology: a generative model can also use supervised training. For each proposal, choose the description that best matches the work described. Then choose the most relevant first check. That first check is a starting point for review; it is not the whole process of approving a tool for patient care.

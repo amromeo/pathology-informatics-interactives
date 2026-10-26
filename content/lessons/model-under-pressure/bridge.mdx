@@ -1,19 +1,24 @@
-### What did the detector miss?
+### Begin with the pathologists' answers
 
-Here, **sensitivity** is the fraction of slides with metastases that the detector found. Divide detected positive slides by all slides known to be positive. These 50 local slides are all positive. They cannot tell you how often the detector marks a negative slide.
+Before the local test, pathologists examine the slides independently of the detector and agree on which contain metastases. Their diagnoses are the **reference diagnoses** used to judge the program's answers. “Reference” tells us which comparison we are using; disagreements still need review.
 
-The detector did poorly as soon as it was tested locally. That is a **generalizability** problem: it did not work as well when moved to another setting. Compare the scanners and lesion sizes separately to see where the misses occurred.
+All 50 slides in this first table contain metastases according to that review. We can therefore ask how many the detector finds and how many it misses.
 
-A later change in the images or the detector's performance is called **drift**. The September results follow a stain change. That gives the laboratory something to investigate, but the timing alone does not tell you what caused the decline.
+- A **true positive** is a slide that really contains metastasis and that the detector correctly calls positive.
+- A **false negative** is a slide that contains metastasis but that the detector misses.
 
-A model is **brittle** when a small change to an input, such as a slight color shift, causes a large change in its output. Missing more lesions in one patient group is a reason to investigate; it does not by itself show this kind of sensitivity to small changes.
+A known-positive slide can become either of those outcomes when we test the detector. Calling all 50 slides “true positives” would assume that it found every one.
 
-### Why disease prevalence matters
+### Read one row before comparing the groups
 
-**Positive predictive value** asks: among the slides the detector calls positive, how many are truly positive? False positive calls matter to that calculation. When disease is uncommon, the many negative slides can supply enough false positives to make a positive call less reliable.
+The first row in **Table 1** concerns 12 slides with small deposits, scanned on scanner A. The detector found 10 and missed two. Its detection rate for that group is 10 divided by 12, or 83.3%.
 
-The sliders let you try this calculation with 10,000 classifications. The prevalence slider changes the proportion that are truly positive. The separation slider changes how easily the model distinguishes the positive and negative groups.
+This detection rate is called **sensitivity**: of all the slides that contain metastases, what fraction does the detector find? For the complete local set, the calculation is 42 divided by 50, or 84%. The other eight slides are misses. An 84% sensitivity does not mean that 84% of the detector's positive calls are correct; that is a different question, which we will examine with the sliders.
 
-For this calculation, sensitivity and specificity both equal 1 / (1 + exp(-separation)), with a fixed cutoff. Specificity is the fraction of truly negative slides called negative. Moving prevalence alone leaves both rates unchanged; increasing separation improves both.
+### Why test in this laboratory?
 
-The counts may have decimal places because they are calculated averages. This calculation is separate from the observed slide counts above; it cannot predict how the laboratory's detector will perform.
+The vendor reported 96% detection on its positive slides. Local detection was lower from the first test. A model's ability to work on new cases or in a different laboratory is called **generalizability**. The lower local result is a reason to investigate how well this model carries over to your laboratory.
+
+Images can differ because of scanners, stains, tissue preparation and the kinds of cases tested. The table alone cannot tell us which difference caused a miss. Read each row of Table 1, keeping small and large deposits separate. Ask where the detector missed the largest fraction of positive slides and which cases Dr. Rao should review first.
+
+There are no cancer-free slides in this table. We cannot use it to count false alarms on negative slides or to calculate how often a positive call is correct. Those questions require negative slides too.

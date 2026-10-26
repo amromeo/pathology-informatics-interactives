@@ -1,0 +1,32 @@
+### What happens when most slides do not contain cancer?
+
+The local test above included only positive slides. Now consider a larger group containing both slides with metastases and slides without them. The program can make two kinds of mistakes: miss cancer or mark a cancer-free slide as positive. The second mistake is a **false positive**, or false alarm. A cancer-free slide correctly called negative is a **true negative**.
+
+The table beneath the sliders shows all four possible outcomes. To judge detection, start with the slides that contain cancer. To judge false alarms, start with the slides that do not contain cancer. Keeping those two starting groups separate makes the percentages easier to interpret.
+
+**Sensitivity** asks how many positive slides the program finds. **Specificity** asks how many negative slides it correctly leaves negative. **Positive predictive value (PPV)** asks a third question: of the slides the program calls positive, how many actually contain cancer? For PPV, divide the true positives by all positive calls: true positives plus false positives.
+
+### Change one thing at a time
+
+The sliders calculate expected results for **10,000 slides**. This calculation uses an example model; it is separate from the detector's observed local results.
+
+1. Leave model separation at **2.0**. Begin with **10% prevalence**, meaning 1,000 of the 10,000 slides contain metastases. The remaining 9,000 do not. Compare the true-positive and false-positive counts below.
+2. Lower prevalence to **1%**. Now only 100 slides contain metastases, and 9,900 do not. The same detection rate finds fewer positive slides because there are fewer to find. False alarms still come from the much larger negative group. Watch the positive predictive value fall even though sensitivity and specificity stay the same.
+3. Return prevalence to **10%**, then increase **model separation**. This control represents how readily the example model distinguishes the positive and negative groups. Better separation produces more correct answers in both groups. Compare the number of misses and false alarms with the starting values.
+
+The separation scale runs from 0 to 4 and has no clinical unit. It changes the performance assumed by this calculation. It does not train the detector, alter its operating settings or repair its missed slides. The two observed-data tables stay fixed while you move either slider.
+
+<details>
+<summary>How the calculator gets these numbers</summary>
+
+For this calculator, sensitivity and specificity are set equal to one another. Both increase with separation according to `1 / (1 + exp(-separation))`. Here `exp(x)` means the exponential function, which raises the mathematical constant e to the power x. At separation 0, both rates are 50%; at 2, both are about 88.1%. A real detector need not have equal sensitivity and specificity.
+
+The calculation holds the positive-call cutoff fixed. That cutoff, also called a threshold, is the level of the model's score at which it calls a slide positive. Changing a real model's cutoff can trade fewer misses for more false alarms. This exercise changes the assumed separation between groups instead.
+
+Multiply the number of slides with cancer by sensitivity to obtain the expected true positives. The remaining cancer-containing slides are false negatives. Multiply the number without cancer by specificity to obtain true negatives. The remaining cancer-free slides are false positives.
+
+The displayed counts are rounded to whole slides. The percentages use the unrounded calculations. These are expected counts, rather than observations from an additional slide study.
+
+</details>
+
+For another explanation of the denominators, see Google's [guide to recall and precision](https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall). In this setting, recall is sensitivity and precision is positive predictive value.

@@ -6,6 +6,7 @@ Apply these instructions whenever planning, writing, revising, or testing this c
 
 - Write for pathology residents and laboratorians. Prefer the words people use in the laboratory over corporate, software-development, or AI-generated language.
 - Prefer clarity over brevity. Use enough words to explain an unfamiliar process completely; do not compress an explanation into a clever label or slogan.
+- Explain new concepts for a college or high-school student encountering the subject for the first time. Define the laboratory task as well as the computing terms, walk through a concrete example, and explain what the learner should notice before asking a question. Short sentences should build a full explanation, not replace it.
 - Use concrete language. Avoid vague phrases such as “evidence aligned,” “metric lineage,” “fair inclusion rule,” “end-to-end build,” “canonical report,” or “operational owner” unless the term is necessary, defined, and natural in context.
 - Name the actual object or action: the report, accession, specimen, result field, worklist, interface, spreadsheet, rule, or person responsible.
 - Do not describe software or data as if they were people. Avoid phrases such as “the export sees,” “the interface expects,” or “the cases disappeared.” State which field is read, copied, left blank, excluded, or used in a calculation.

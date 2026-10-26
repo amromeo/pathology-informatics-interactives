@@ -4,7 +4,7 @@ export const checks: RetrievalItem[] = [
     id: "principle",
     kind: "principle",
     prompt:
-      "A cytology image model misses abnormal cells from the first local test on a new scanner. What does this suggest?",
+      "A program trained to find abnormal cells in slide images misses them from the first local test on a new scanner. What does this suggest?",
     choices: [
       {
         id: "supported",
@@ -59,7 +59,7 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "5",
     prompt:
-      "A tumor-board image has the right patient but the wrong block. How should you repair the link?",
+      "A slide image for the cancer discussion belongs to the right patient but comes from the wrong tissue block. A block is a piece of tissue embedded in wax so that thin slices can be cut from it. How should you repair the image's link to the case record?",
     choices: [
       {
         id: "supported",

@@ -1,33 +1,48 @@
-## Debrief: look at the slides the detector missed
+## Debrief: explain what the program found and missed
 
-The local detector found 42 of 50 positive slides. That overall result hides a much larger difference between small and large metastases:
+Begin with two separate answers: what the pathologists found on the slide, and what the detector called. A slide containing metastasis is a true positive only if the detector finds it. If the detector misses it, that outcome is a false negative.
 
-- Micrometastases: 17/25 detected.
-- Macrometastases: 25/25 detected.
-- Scanner A, both lesion sizes: 23/25 detected.
-- Scanner B, both lesion sizes: 19/25 detected.
+The local detector found 42 of 50 positive slides and missed eight. Its sensitivity was therefore 42/50, or 84%. Separating the slides into smaller groups shows why the overall number needs a closer look:
 
-Dr. Rao needs to review the missed slides with the local pathologists. The laboratory also needs to compare scanner images and slide preparation. The good macrometastasis result does not give the laboratory permission to start using the tool for a different, narrower task.
+| Group | Found | Missed | Slides with metastases |
+| --- | ---: | ---: | ---: |
+| Small deposits (micrometastases) | 17 | 8 | 25 |
+| Large deposits (macrometastases) | 25 | 0 | 25 |
+| Scanner A, both deposit sizes | 23 | 2 | 25 |
+| Scanner B, both deposit sizes | 19 | 6 | 25 |
 
-### First local testing and September ask different questions
+The first two rows group the slides by deposit size. The last two regroup the same slides by scanner; they are not additional slides. All eight misses were small deposits. Six were in the small-deposit group scanned on B. Dr. Rao should begin by reviewing those missed slides with pathologists and comparing image quality, preparation and case differences.
 
-The gap between the vendor and local results was present at the start. It tells you the detector did not carry over well to this laboratory.
+### A poorer local result and a later decline
 
-By September, micrometastasis detection fell from 17/25 to 12/25. Staff had changed the stain protocol at the start of that month. Compare the missed slides, stain quality and pathologists' reference diagnoses before deciding what caused the decline. If performance crosses the laboratory's agreed stopping limit, pause use while the team investigates.
+The vendor found 96% of its positive slides, while the first local test found 84%. That difference was present when the model was first brought into this laboratory. It raises a generalizability question: how well does performance carry over to new cases and a new setting?
 
-### Each proposal needs its own check
+September asks a different question. Local detection of small deposits fell from 17/25 to 12/25. The program missed 13 small deposits that month. Staff had changed the staining procedure. That is one possible cause to investigate alongside scanner use, case mix, slide quality and the pathologists' diagnoses.
 
-The programmed rule needs tests at its limits and for exceptions. The image detector needs testing on local material with independent diagnoses. The gene-expression clusters need an explanation of what the groups mean. The generated summary needs comparison with the source reports, including anything important it left out.
+A change over time is called drift. The laboratory needs regular reviews to detect it. If a result crosses the stopping limit agreed before use, staff should pause use while the team investigates. These monthly counts do not show whether a small change to the same image would produce a large change in the model's answer; that would require a separate test for brittleness.
 
-### Before the tool is used for patient care
+### Sensitivity and positive predictive value start with different groups
 
-The laboratory director decides what the tool will be used for and what performance is acceptable. Pathologists decide how they will check its marks and review areas it leaves unmarked. Analysts keep a record of the model version and the scanner and stain settings.
+For sensitivity, start with all the slides that contain cancer and count how many the program finds.
 
-The hospital's regulatory team checks whether the proposed use fits the product's current device status. The laboratory and treating clinicians also need to agree on:
+For positive predictive value, start with all the slides the program calls positive. Some are correct calls; others are false alarms on slides without cancer. Divide the correct positive calls by the total number of positive calls.
 
-- What will appear in the report.
-- Whom staff call when the tool appears to be wrong.
-- When use must stop and who can stop it.
-- How to review affected patients if a problem is found.
+In the slider exercise, reducing prevalence from 10% to 1% changes a group of 10,000 slides from 1,000 cancer-containing slides to only 100. The model still finds the same proportion of those positive slides when separation stays fixed. But the much larger negative group continues to produce false alarms. Those false alarms make up a larger share of all positive calls, so positive predictive value falls.
 
-When you lowered prevalence with the slider, positive predictive value fell even though sensitivity stayed fixed. More of the positive calls came from negative cases. That is why the laboratory needs to know both what the detector misses and what it marks incorrectly.
+The 50 observed positive slides cannot answer that question by themselves. We would also need results from negative slides. The calculator shows the reasoning using assumed performance; it does not supply those missing local observations.
+
+### Different programs make different kinds of mistakes
+
+The written quality-control rule can mishandle a boundary or an exception. Test whether it holds or releases results under those conditions.
+
+The image detector can miss cancer on new slides. Compare its marks with independently reviewed local diagnoses, including the small deposits and each scanner.
+
+The clustering program can put similar measurements together without identifying a useful disease category. Find out what the tumors in each group share and whether preparation differences explain the grouping.
+
+The text generator can produce a readable summary with an invented finding or an important omission. Compare it with the original reports before using it in a cancer discussion.
+
+### Who checks the work?
+
+Before patient use, the laboratory director and reviewing pathologists agree on what the tool will do, acceptable performance, human review and stopping rules. Analysts keep the model version and scanner and stain settings so later problems can be traced. The hospital's regulatory team checks whether the product's authorization covers the proposed use.
+
+Good detection of large deposits in this small test does not automatically approve a narrower use. The team would still need to define that use, test it appropriately and decide how the pathologist will check the program's output.

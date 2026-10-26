@@ -1,0 +1,19 @@
+### Has detection changed since the first local test?
+
+**Table 2** shows a monthly review of 50 slides known to contain metastases: 25 with small deposits and 25 with large deposits. Each month's result comes from that month's review set. These are detection checks, not a count of how common metastases are among all patients.
+
+In July and August, the detector found 17 of 25 small deposits. In September, it found 12 of 25. It therefore missed 13 small deposits in September, compared with eight in each of the earlier months. Detection of the large deposits stayed at 25 of 25.
+
+Staff changed the staining procedure at the beginning of September. Stains help make structures in tissue visible, and a different procedure can change the colors in a scanned image. A model trained on one range of colors may perform differently on another.
+
+The timing makes the stain change worth investigating. It does not prove that staining caused the decline. Dr. Rao should also compare the types of cases, scanner use and slide quality, and have pathologists review the missed slides.
+
+### Three different questions about poor performance
+
+**Generalizability:** does the model work on new cases or in a new setting? Here the local result was poorer than the vendor's result from the beginning.
+
+**Drift:** have the data or performance changed over time? September adds a later decline to the earlier local problem. Reviewing the monthly results helps the laboratory notice such a change.
+
+**Brittleness:** does a small change in an input cause a large change in the model's answer? Imagine making a slight color change to an image while leaving the cells and their arrangement unchanged. If the model's answer changes greatly, that would be a reason to test its sensitivity to small image changes. We have not performed that paired-image test here, so these monthly counts alone cannot show that the detector is brittle.
+
+Use Table 2 to choose what the laboratory should do about September. Consider which slides need review and whether the result crosses a stopping limit agreed by the laboratory before use.

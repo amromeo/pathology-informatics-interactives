@@ -102,6 +102,14 @@ sessions and slide ranges that should shape each case and learner decision.
 - **College of American Pathologists — “Don't Forget Your Rules When Harmonizing Laboratory Testing Across Multiple Sites.”** Used in Lesson 1 to support the laboratory's responsibility to verify accurate transmission of patient results into the EHR. The article discusses CAP checklist requirement GEN.48500 and validation in the downstream system clinicians use. The lesson cites and summarizes the principle; CAP wording is not reproduced.
 - Source: <https://www.cap.org/member-resources/clinical-informatics-resources/dont-forget-your-rules-when-harmonizing-laboratory-testing-across-multiple-sites>
 
+## Lesson 6: introductory explanations of machine learning
+
+- NCI, Pathology Reports: https://www.cancer.gov/about-cancer/diagnosis-staging/diagnosis/pathology-reports-fact-sheet — tissue preparation, stains, the pathologist's role and how a diagnosis informs care.
+- NCI cancer dictionary: https://www.cancer.gov/publications/dictionaries/cancer-terms/def/metastasis and https://www.cancer.gov/publications/dictionaries/cancer-terms/def/lymph-node — introductory definitions, paraphrased in the case setup.
+- Google, Introduction to Machine Learning: https://developers.google.com/machine-learning/intro-to-ml/what-is-ml — models, labeled examples, clustering and generation. Linked as optional further reading; laboratory examples are original.
+- Google, Linear Regression: https://developers.google.com/machine-learning/crash-course/linear-regression — adjustable parameters and the distinction between inputs and learned numbers. Linked for learners who want a simple equation-based example.
+- Google, Classification Metrics: https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall — true/false positives and negatives, sensitivity/recall and positive predictive value/precision. The lesson's slide counts and calculator examples are original.
+
 ## Asset policy
 
 All interface displays, logs, tables, messages, and image artifacts in this

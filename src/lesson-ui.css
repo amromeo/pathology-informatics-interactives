@@ -173,6 +173,32 @@ body .choice-card.selected {
   vertical-align: top;
   border-bottom: 1px solid var(--control-border);
 }
+.ai-calculator-controls {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+.ai-calculator-controls label {
+  display: grid;
+  gap: 0.5rem;
+}
+.ai-calculator-controls input {
+  width: 100%;
+  max-width: 30rem;
+}
+.ai-experience .table-scroll caption {
+  padding: 0.75rem 0;
+  text-align: left;
+}
+.ai-table-help {
+  display: none;
+}
+@media (max-width: 600px) {
+  .ai-table-help {
+    display: block;
+    font-size: 0.9rem;
+  }
+}
 .skip-link {
   position: absolute;
   top: -100px;
