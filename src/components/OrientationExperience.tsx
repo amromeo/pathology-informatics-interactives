@@ -6,6 +6,7 @@ import {
   orientationTasks,
   orientationTickets,
   ticketOwnerOptions,
+  orientationCopy,
   type OrientationRoleId,
   type TicketOwnerId,
 } from "../../content/lessons/steward-at-morning-huddle/interaction";
@@ -62,7 +63,7 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
           <legend>Make an initial recommendation</legend>
           {[
             ["yes", "Approve Monday’s start"],
-            ["no", "Resolve the open items first"],
+            ["no", "Finish the report checks and bench preparation first"],
           ].map(([id, label]) => (
             <label key={id}>
               <input
@@ -83,12 +84,12 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
         <div className="section-heading">
           <span className="section-number">01</span>
           <div>
-            <p className="eyebrow">People and responsibilities</p>
+            <p className="eyebrow">Before Monday</p>
             <h2 id="role-title">Assign the work</h2>
           </div>
         </div>
         <p className="section-guidance">
-          Choose the group primarily responsible for each part of the work.
+          Choose who should lead each job. Other people may need to help.
         </p>
         <div className="role-assignment-list">
           {orientationTasks.map((task, index) => {
@@ -106,22 +107,18 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
                           correct ? "answer-note correct-note" : "answer-note incorrect-note"
                         }
                       >
-                        <strong>
-                          {correct
-                            ? "This responsibility fits."
-                            : "Reconsider the responsible team."}
-                        </strong>{" "}
+                        {correct && <strong>{roleLabel(task.owner)}: </strong>}
                         {correct
                           ? task.explanation
                           : (misses[task.id] ?? 0) < 2
-                            ? "Reconsider who performs the work and who approves it."
+                            ? orientationCopy.hints[task.id]
                             : `${roleLabel(task.owner)} should lead this work. ${task.explanation}`}
                       </p>
                     )}
                   </div>
                 </div>
                 <label>
-                  <span>Responsible role or group</span>
+                  <span>Who should lead this job?</span>
                   <select
                     value={answer ?? ""}
                     onChange={(event) => {
@@ -195,9 +192,7 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
                         correct ? "answer-note correct-note" : "answer-note incorrect-note"
                       }
                     >
-                      <strong>
-                        {correct ? "This responsibility fits." : "Reconsider the responsible team."}
-                      </strong>{" "}
+                      {correct && <strong>{roleLabel(ticket.answer)}: </strong>}
                       {ticket.explanation}
                     </p>
                   )}
@@ -219,7 +214,7 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
         <article className="artifact-card go-live-brief">
           <header>
             <span>System record</span>
-            <strong>Go-live readiness review</strong>
+            <strong>Friday meeting notes</strong>
           </header>
           <dl className="evidence-grid">
             {goLiveEvidence.map((item) => (
@@ -256,7 +251,7 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
                 setReviewed(false);
               }}
             />
-            No — the interface works, but the report and laboratory operation are not ready
+            No — finish the report checks and bench preparation first
           </label>
         </fieldset>
         <div role="status" aria-live="polite" aria-atomic="true">
@@ -267,18 +262,14 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
                   ? "The assay is not ready."
                   : "Passing the interface test is not enough."}
               </strong>
-              <p>
-                {goLiveAnswer === "no"
-                  ? "Successful result transmission is only one part of go-live. The report, CDS, procedures, training, and staffing must also be ready."
-                  : "The interpretive comment is cut off in the verified EHR report location. Pathology has not reviewed the troponin alert logic, and procedures, training and staffing are incomplete."}
-              </p>
+              <p>{goLiveAnswer === "no" ? orientationCopy.hold : orientationCopy.premature}</p>
             </div>
           )}
         </div>
         {prediction && goLiveAnswer && (
           <p>
             Your initial recommendation {prediction === goLiveAnswer ? "is unchanged" : "changed"}.
-            Name the record and responsible team that justify your final decision.
+            Which unfinished job matters most to your recommendation, and who will finish it?
           </p>
         )}
         <div className="orientation-review">
@@ -305,13 +296,13 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
             <div className={`feedback ${passed ? "correct" : "incorrect"}`}>
               <strong>
                 {passed
-                  ? "The responsibilities are clear. Open the debrief below."
-                  : "Some responsibilities are still assigned to the wrong group."}
+                  ? "Your assignments are ready to discuss."
+                  : "Review the jobs and calls marked above."}
               </strong>
               <p>
                 {passed
-                  ? "The laboratory can now see who builds, who advises, who runs the operation, and who owns the report."
-                  : `You have ${roleScore} of ${orientationTasks.length} responsibility assignments and ${ticketScore} of ${orientationTickets.length} support tickets correct. Review the marked items and try again.`}
+                  ? orientationCopy.complete
+                  : `You have ${roleScore} of ${orientationTasks.length} jobs and ${ticketScore} of ${orientationTickets.length} calls correct. Review the marked items and try again.`}
               </p>
             </div>
           )}

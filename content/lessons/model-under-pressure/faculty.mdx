@@ -2,53 +2,62 @@
 
 ## At a glance
 
-Allow 40 minutes. PIER 2.4: model types, verification, generalizability, drift, brittleness, implementation and oversight. Use individual prediction followed by small-group discussion. Project the verification and monitoring tables.
+Allow 40 minutes. Begin with the four proposals, then spend most of the discussion on what the detector missed locally. The lesson covers PIER 2.4, including model types, local testing, changes over time and review before patient use.
 
 ## Run of show
 
-| Minutes | Activity | Ask |
+| Minutes | Activity | Ask the group |
 | --- | --- | --- |
-| 0–10 | Classify proposals and reviews | What was programmed, and what was learned? |
-| 10–22 | Inspect local and monthly results | Which denominator answers this question? |
-| 22–30 | Change prevalence and separation | Which quantity stays unchanged? |
-| 30–40 | Assign oversight questions | Who can pause use, and on what evidence? |
+| 0–10 | Classify the four proposals and choose a first check | Which conditions did a programmer write? Which patterns did a model learn? |
+| 10–22 | Compare scanner, lesion-size and monthly counts | Which missed slides would you pull first? |
+| 22–30 | Move prevalence and separation | Why did positive predictive value change? |
+| 30–40 | Sort the questions about patient use and discuss the checks | Who could stop use if next month's results were worse? |
 
 ## Expected answers
 
-P1 rule/boundaries; P2 supervised/local; P3 unsupervised/meaning; P4 generative/sources. The initial gap is generalizability failure. September requires investigation of a change over time. G1 equity, G2 accountability, G3 documentation, G4 device status.
+**Proposals:** P1 is a programmed rule; test its limits and exceptions. P2 is supervised image detection; test it locally against independent diagnoses. P3 is unsupervised clustering; find out what the groups mean. P4 generates text; compare the summary with its source reports.
 
-Vendor detection: 192/200 = 96%. Local: (10+13+7+12)/50 = 84%; micro: (10+7)/25 = 68%; macro: 25/25 = 100%. Scanner A: 23/25 = 92%; B: 19/25 = 76%. September: (12+25)/50 = 74%. These small selected positive sets do not estimate specificity, predictive value or patient outcomes.
+**Slide counts:**
 
-The slider model uses sensitivity = specificity = logistic(separation), with a fixed threshold. Expected true positives equal 10,000 × prevalence × sensitivity. False positives equal 10,000 × (1-prevalence) × (1-specificity). Predictive value is TP/(TP+FP). Prevalence alone does not change sensitivity in this model.
+- Vendor: 192/200 = 96%.
+- Local total: (10 + 13 + 7 + 12)/50 = 84%.
+- Micrometastases: (10 + 7)/25 = 68%.
+- Macrometastases: 25/25 = 100%.
+- Scanner A: 23/25 = 92%; scanner B: 19/25 = 76%.
+- September: (12 + 25)/50 = 74%.
+
+The poor local result from the start is a generalizability problem. September adds a later decline that needs investigation. The stain change is a possible explanation to test.
+
+**Questions before patient use:** G1 concerns whether the tool works equally well for the groups of patients served. G2 concerns who reviews its work and can stop use. G3 concerns records of versions and settings. G4 concerns the product's device status and whether it covers the proposed use.
+
+**Sliders:** sensitivity and specificity both equal 1 / (1 + exp(-separation)). Expected true positives are 10,000 × prevalence × sensitivity. Expected false positives are 10,000 × (1 − prevalence) × (1 − specificity). Positive predictive value is true positives / (true positives + false positives). Changing prevalence alone leaves sensitivity fixed.
 
 ## Common misconceptions
 
-- Vendor performance transfers automatically. Ask which scanner, stain and cases were tested.
-- A pooled rate is sufficient. Ask which lesions are missed.
-- Every performance gap is drift. Ask whether it was present at first use.
-- Fluent generated text is reliable. Ask where each statement appears in the source.
-- A high macrometastasis rate permits a new use. Ask who approved the scope and workflow.
+- **“The vendor found 96%, so we should too.”** Ask: which scanner, stain and slides did the vendor test?
+- **“An overall 84% tells us enough.”** Ask: how many of the micrometastases were missed?
+- **“Any poor result is drift.”** Ask: was detection ever better in this laboratory?
+- **“Finding every macrometastasis means we can use it for those.”** Ask: who has reviewed and approved that narrower task and how the pathologist will use the output?
+- **“The summary reads well, so it must be right.”** Ask: where is each finding stated in the source reports?
 
 ## Discussion prompts
 
-1. What must happen before a restricted pilot? A strong answer includes intended use, independent local evidence, human review and stop criteria.
-2. Why can predictive value fall when sensitivity stays fixed? A strong answer includes the increasing number of negative cases supplying false positives.
-3. Does September prove the stain change caused the decline? A strong answer includes case mix, reference review and a controlled investigation.
+1. What would Dr. Rao need before trying the detector with pathologists? *A strong answer:* a defined task, independent local diagnoses, results for the relevant slide groups, and a plan for human review and stopping use.
+2. Why can positive predictive value fall while sensitivity stays fixed? *A strong answer:* when disease is less common, negative cases make up a larger share of the population. False positives from that group account for more of the model's positive calls.
+3. Does September prove that the stain change caused the decline? *A strong answer:* no. Review the case mix, slide quality and reference diagnoses, then compare the changed stain under conditions that help separate those explanations.
 
 ## Group variant
 
-Assign laboratory director, pathologist, analyst, clinical service and patient advocate. Review the same packet from each role, then agree on an unresolved question and an accountable person.
+Give residents the roles of laboratory director, reviewing pathologist, analyst and treating clinician. Each names one question they need answered before using the tool. Ask a fifth resident to explain what a patient would want to know about a missed lesion.
 
 ## Assess transfer
 
-Ask how the verification plan would change for a different scanner or a generated pathology summary.
+Ask the resident how they would change the local test for a new scanner, then for a generated pathology summary. Look for a change in what they would check, rather than the same checklist with a different title.
 
 ## Sources
 
-[FDA good machine learning practice](https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/good-machine-learning-practice-medical-device-development-guiding-principles) supports representative local evaluation and monitoring. The API machine-learning session supplies additional teaching background. [Practical Machine Learning in the Clinical Laboratory](https://nspies13.github.io/) informed the use of prevalence exploration and stakeholder discussion; all case data and code here are original.
+The [FDA's good machine learning practice principles](https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/good-machine-learning-practice-medical-device-development-guiding-principles) provide background on testing and monitoring medical devices that use machine learning. [Practical Machine Learning in the Clinical Laboratory](https://nspies13.github.io/) informed the prevalence exercise and the discussion of who should participate.
 
-## Preparing discussion with API slides
+## Using the API teaching slides
 
-Use [Association for Pathology Informatics teaching slides: Artificial Intelligence in Pathology (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%206%20AI%20slides.pptx) by James H. Harrison, Jr., slides 33–36, 43, 53, to prepare the discussion after residents have explained their case decision. Ask: Compare verification at a new site with monitoring after implementation. Identify which local scanner or staining differences need investigation before relying on the vendor's performance estimate. Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
-
-These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
+Use James H. Harrison, Jr.'s [Artificial Intelligence in Pathology](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%206%20AI%20slides.pptx), slides 33–36, 43 and 53, after residents explain the local results. Ask what they would check on a new scanner and what they would check again next month. Use current local policies and the product's current device status when discussing patient use. If the link moves, find the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets).

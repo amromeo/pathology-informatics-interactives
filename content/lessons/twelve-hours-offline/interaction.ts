@@ -42,7 +42,7 @@ export const tabletopPhases: readonly DowntimePhase[] = [
     title: "Activate",
     time: "06:20–07:00",
     situation:
-      "Registration messages and electronic orders stop. The emergency department and laboratory must begin one coordinated paper workflow.",
+      "Registration messages and electronic orders stop. The emergency department and laboratory need to use the same paper records and patient identifiers.",
     decisions: [
       {
         id: "temporary-identifiers",
@@ -62,7 +62,7 @@ export const tabletopPhases: readonly DowntimePhase[] = [
               "Each clinical unit uses its own prefix and sequence so testing can begin without waiting for central registration.",
             preferred: false,
             feedback:
-              "Local sequences are fast, but two units can create separate records for the same patient. Recovery then includes a duplicate-chart investigation.",
+              "Two units can assign different identifiers to the same patient. Registration will have to check the resulting charts and correct the duplicate during recovery.",
           },
         ],
       },
@@ -73,10 +73,10 @@ export const tabletopPhases: readonly DowntimePhase[] = [
           {
             id: "defined-command",
             label:
-              "Dr. Ruiz declares downtime, names one laboratory incident lead, and sets scheduled updates with registration, nursing, the LIS team, and hospital IT.",
+              "Dr. Ruiz declares downtime and names one laboratory incident lead. That person gives scheduled updates to registration, nursing, the LIS team and hospital IT.",
             preferred: true,
             feedback:
-              "A named lead and scheduled updates give every area the same priorities, identity method, and recovery plan.",
+              "The incident lead tells all areas which work comes first and how to identify patients. Staff receive the same instructions about returning to electronic work.",
           },
           {
             id: "section-led-response",
@@ -84,7 +84,7 @@ export const tabletopPhases: readonly DowntimePhase[] = [
               "Each laboratory section manages its own workload and calls hospital IT when it needs an update.",
             preferred: false,
             feedback:
-              "Section leaders understand their benches, but separate plans can change priorities and recovery steps without a shared decision.",
+              "One section may restart electronic work while another is still using paper. The incident lead needs to coordinate those steps and keep all sections informed.",
           },
         ],
       },
@@ -115,7 +115,7 @@ export const tabletopPhases: readonly DowntimePhase[] = [
               "Each clinical unit records phoned results in its usual local notes and confirms any questions with the laboratory later.",
             preferred: false,
             feedback:
-              "The call may support immediate care, but the recovery team has no complete laboratory call log to compare with the chart.",
+              "The clinician may receive the result, but the laboratory has no complete call log. During recovery, staff will have to ask the units who received each call.",
           },
         ],
       },
@@ -129,7 +129,7 @@ export const tabletopPhases: readonly DowntimePhase[] = [
               "Accessioning records every paper order in sequence, labels the specimen from that record, and notes repeats on the original entry.",
             preferred: true,
             feedback:
-              "One accession record connects the requisition, specimen, repeat testing, and later electronic entry.",
+              "Staff can use the accession record to match the specimen to its requisition. It also shows repeats when results are entered into the electronic chart.",
           },
           {
             id: "bench-accession-lists",
@@ -137,7 +137,7 @@ export const tabletopPhases: readonly DowntimePhase[] = [
               "Each bench keeps its own order list and sends completed pages to accessioning at the end of the shift.",
             preferred: false,
             feedback:
-              "Bench lists preserve local work, but they make it harder to recognize a repeat or duplicate order while the patient is still waiting.",
+              "The accessioning staff cannot see another bench's orders until the pages arrive. They may assign a second accession to work already recorded elsewhere.",
           },
         ],
       },
@@ -157,10 +157,10 @@ export const tabletopPhases: readonly DowntimePhase[] = [
           {
             id: "freeze-and-stage",
             label:
-              "Freeze new transitions, assign reconciliation work, restore in stages, and release each area only after its active paper records are accounted for.",
+              "Pause the switch to electronic work while staff compare the records. Restart each area after its active paper tests have been matched to patients and orders.",
             preferred: true,
             feedback:
-              "A brief controlled pause prevents staff from entering, recollecting, and reporting the same work through two workflows at once.",
+              "A brief pause gives staff time to compare paper and electronic orders. Otherwise, one team may request a specimen for testing another team has already completed.",
           },
           {
             id: "immediate-back-entry",
@@ -168,7 +168,7 @@ export const tabletopPhases: readonly DowntimePhase[] = [
               "Begin entering completed paper results in collection order as soon as each electronic application becomes available.",
             preferred: false,
             feedback:
-              "Collection order is orderly, but entry begins before temporary identities, restored orders, and repeat tests have been compared.",
+              "Entering results in collection order does not identify the right chart. Staff first need to match temporary identifiers and check for orders or repeats already recorded.",
           },
         ],
       },
@@ -180,7 +180,7 @@ export const tabletopPhases: readonly DowntimePhase[] = [
           {
             id: "compare-before-recollection",
             label:
-              "Compare the patient, test, specimen, and collection record; link the paper result and cancel the duplicate order before recollection.",
+              "Compare the paper and electronic records for the same patient and specimen. Link the completed result and cancel the duplicate order before asking for another collection.",
             preferred: true,
             feedback:
               "The comparison preserves the completed result and prevents an unnecessary second collection.",
@@ -191,7 +191,7 @@ export const tabletopPhases: readonly DowntimePhase[] = [
               "Recollect any order that still appears pending in the restored electronic worklist, then resolve duplicates after result entry.",
             preferred: false,
             feedback:
-              "A pending electronic status does not prove that testing was missed during downtime. Recollection can create duplicate results and avoidable phlebotomy.",
+              "The laboratory may already have tested the specimen on paper. Check that record before sending someone to draw the patient's blood again.",
           },
         ],
       },
@@ -407,7 +407,7 @@ const baselineHazards: readonly ReconciliationHazard[] = [
     ],
     correctActionId: "enter-critical-link-call",
     resolvedNote:
-      "The critical result is added to the longitudinal chart and reconciled with the communication record.",
+      "The patient's chart now includes the critical result and its matching call record.",
   },
   {
     id: "timestamp-conflict-DT-205",
@@ -447,7 +447,7 @@ const duplicateChartHazard: ReconciliationHazard = {
     {
       id: "hold-and-reconcile-charts",
       label:
-        "Hold result entry, verify the established MRN, and send the duplicate chart for controlled reconciliation.",
+        "Hold result entry until registration confirms the existing medical record number and arranges correction of the duplicate chart.",
     },
     {
       id: "use-newest-chart",
@@ -460,7 +460,7 @@ const duplicateChartHazard: ReconciliationHazard = {
   ],
   correctActionId: "hold-and-reconcile-charts",
   resolvedNote:
-    "Result entry waits until registration confirms the established chart and begins the approved duplicate-record correction process.",
+    "Registration confirms which chart belongs to the patient and starts correcting the duplicate before the laboratory enters results.",
 };
 
 export const buildReconciliationRecords = (state: DowntimeState): ReconciliationRecords => {
@@ -477,13 +477,13 @@ export const buildReconciliationRecords = (state: DowntimeState): Reconciliation
         {
           id: "verify-and-escalate-call",
           label:
-            "Verify patient identity, preserve the original result and collection time, and escalate the missing call record for verification with the clinical team before closing reconciliation.",
+            "Verify the patient and keep the original result and collection time. Ask the clinical team to help verify the missing call record before closing this check.",
         },
         ...hazard.actions,
       ],
       correctActionId: "verify-and-escalate-call",
       resolvedNote:
-        "The missing communication record has a verification and escalation plan. The exercise scores that plan; staff must complete and document verification before actual return to service.",
+        "The clinical team must help check who received the call and whether read-back occurred. Staff need to finish and record that check before closing reconciliation.",
     };
   });
   if (uncontrolledIdentifiers) hazards.push(duplicateChartHazard);
@@ -560,10 +560,10 @@ export const resumptionChoices: readonly DowntimeChoice[] = [
   {
     id: "verified-medical-approval",
     label:
-      "Resume normal operation only after identities, orders, results, critical calls, repeats, and timestamps reconcile and Dr. Ruiz approves the controlled handoff.",
+      "Resume after staff finish checking the paper records against the chart and Dr. Ruiz approves restarting. Include patient matches, orders and results, calls, repeats and timestamps.",
     preferred: true,
     feedback:
-      "Connectivity is necessary, but a verified patient record and medical approval are the conditions for returning to normal laboratory operation.",
+      "Dr. Ruiz needs the completed patient matches and record checks before approving routine work. A working network alone cannot tell her whether the charts are complete.",
   },
   {
     id: "network-and-criticals-ready",
@@ -579,7 +579,7 @@ export const resumptionChoices: readonly DowntimeChoice[] = [
       "Allow each section to resume when its electronic worklist looks current and retain paper records for later audit.",
     preferred: false,
     feedback:
-      "An apparently current worklist can still contain unmatched patients and duplicate orders. A shared reconciliation checkpoint is required.",
+      "A current-looking worklist can still have duplicate orders or results waiting for a patient match. The sections need to compare their paper and electronic records together.",
   },
 ];
 
@@ -611,26 +611,27 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
     {
       system: "Registration",
       role: "ED registrar",
-      sees: "Identifiers do not flow.",
-      implication: "Temporary identity control is essential.",
+      sees: "Registration cannot send patient identifiers electronically.",
+      implication:
+        "Use one assignment index so each specimen can later be matched to its patient's chart.",
     },
     {
       system: "Laboratory",
       role: "Technologist",
-      sees: "Orders and results are manual.",
-      implication: "Priority and accession rules must be explicit.",
+      sees: "Staff record orders and results on paper.",
+      implication: "Staff need to know which tests come first and where to record each accession.",
     },
     {
       system: "Clinical units",
       role: "Care teams",
-      sees: "Phones carry results.",
-      implication: "Read-back and documentation matter.",
+      sees: "Staff receive results by telephone.",
+      implication: "Record who received each critical result and the recipient's read-back.",
     },
     {
       system: "Recovery",
       role: "IT + LIS",
-      sees: "Records overlap after restoration.",
-      implication: "Reconciliation is a high-risk phase.",
+      sees: "Electronic orders return for tests that may already have been completed on paper.",
+      implication: "Compare both records before entering results or requesting another specimen.",
     },
   ],
   decisionPrompt: "What should the laboratory do in the first hour?",
@@ -638,49 +639,49 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
     {
       id: "correct",
       label:
-        "Declare downtime and activate coordinated procedures with controlled temporary identifiers and a defined command structure.",
+        "Declare downtime, name the laboratory incident lead and use one method for assigning temporary patient identifiers.",
       correct: true,
       feedback:
-        "A declared, coordinated response gives registration, the laboratory, clinical units, and IT one identity method, communication plan, priority scheme, and incident lead while systems are unavailable.",
+        "Registration and laboratory staff use the same patient identifiers. The incident lead coordinates which tests come first and how the laboratory communicates results during the outage.",
     },
     {
       id: "narrow",
       label:
         "Hold all non-STAT testing until the network returns and run STAT work on paper in the meantime.",
       feedback:
-        "Restricting work may reduce volume, but STAT testing still needs controlled registration, temporary identifiers, result communication, and one coordinated incident plan.",
+        "Even urgent testing needs a patient identifier that can be matched later. Staff also need to know how to record the order and call the result.",
     },
     {
       id: "unsafe",
       label:
         "Have each unit start its own downtime forms now and consolidate the paperwork after restoration.",
       feedback:
-        "Separate local methods create incompatible identifiers and call records. Those differences become patient-matching and result-reconciliation hazards after restoration.",
+        "Different unit forms can give the same patient several identifiers and leave calls off the laboratory log. Staff will have to resolve those differences when the chart returns.",
     },
   ],
-  repairPrompt: "Which recovery plan should medical leadership approve?",
+  repairPrompt: "Which recovery plan should Dr. Ruiz approve?",
   repairChoices: [
     {
       id: "validated",
       label:
-        "Freeze transitions, restore in stages, and reconcile temporary identities, orders, results, critical calls, and repeats before normal operation.",
+        "Return to electronic work in stages after matching paper records to patients and orders. Check results, calls and repeats before each section resumes routine work.",
       correct: true,
       feedback:
-        "This plan controls the high-risk transition back to electronic work and accounts for each temporary record. It requires added staffing, an operational pause, and medical review before normal workflows resume.",
+        "Staff pause the switch while they match the paper work to the electronic records. The laboratory needs people assigned to these checks and Dr. Ruiz's approval before restarting.",
     },
     {
       id: "narrow",
       label:
         "Begin back-entering all paper results, including documented critical calls, immediately and in collection order.",
       feedback:
-        "This captures all result categories and preserves documented critical calls, but entry before identity reconciliation can place a correct result on the wrong chart or create duplicate work.",
+        "Entering every result preserves more of the day's testing, but the patient matches come first. Otherwise, staff can put a correct result in the wrong chart.",
     },
     {
       id: "unsafe",
       label:
         "Back-enter only the results that were phoned as critical and retain the rest on paper for the record.",
       feedback:
-        "This preserves the most urgent communicated results, but it leaves routine and abnormal results outside the longitudinal chart and does not resolve temporary identities or duplicate orders.",
+        "Routine and other abnormal results would still be missing from the chart. Patient matches and duplicate orders also need checking before staff resume normal work.",
     },
   ],
   validationCases: [
@@ -701,7 +702,7 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
       passingRepairs: ["validated"],
       failNotes: {
         narrow:
-          "Collection order does not establish which restored chart belongs to each temporary identifier.",
+          "The order in which specimens were collected does not tell staff which chart belongs to each temporary identifier.",
         unsafe:
           "The critical-only plan does not reconcile temporary identifiers before placing results in the chart.",
       },
@@ -748,15 +749,15 @@ export const reconciliationActionNotes: Record<string, string> = {
   "enter-both-orders":
     "Leaving the duplicate active can trigger recollection and duplicate billing. Preserve the completed result and resolve the redundant order.",
   "no-entry-result-called":
-    "A phone call does not add the result to the longitudinal chart. Enter the verified downtime result and link the communication record.",
+    "The clinician heard the result, but it is still missing from the chart. Enter the verified paper result and link the call record.",
   "repeat-critical-only":
     "A later potassium does not replace the earlier critical episode. Preserve both collection times and document the earlier result and call.",
   "use-back-entry-time":
-    "Back-entry time describes documentation, not collection. Substituting it changes the clinical sequence and turnaround calculation.",
+    "The specimen was collected earlier than the result was entered. Using the entry time would move it to the wrong point in the patient's history and change the turnaround calculation.",
   "use-restoration-time":
     "A single restoration time erases individual specimen collection times. Preserve the paper collection time and separately record entry time.",
   "use-newest-chart":
     "The newest chart may be the duplicate. Confirm the established medical record number through registration before entering results.",
   "split-results-between-charts":
-    "Splitting results fragments the patient history and can conceal a critical episode. Use controlled identity reconciliation.",
+    "A clinician opening one chart could miss results stored in the other. Registration must confirm the correct chart and arrange correction of the duplicate.",
 };

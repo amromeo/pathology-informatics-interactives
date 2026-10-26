@@ -69,8 +69,8 @@ export function AiDeploymentExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
       </Section>
       <Section
         number={2}
-        title="Review local verification and later monitoring"
-        purpose="Separate a failure on transfer from a subsequent change in performance."
+        title="Compare the local slides and the monthly results"
+        purpose="Find where the detector missed lesions at first testing, then compare the later months."
       >
         <MdxBlock Content={Bridge} />
         <DataTable
@@ -164,16 +164,16 @@ export function AiDeploymentExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
           </label>
           <p role="status">
             Modeled sensitivity {(p.sensitivity * 100).toFixed(1)}%; positive predictive value{" "}
-            {(p.ppv * 100).toFixed(1)}%. Among 10,000 hypothetical classifications:{" "}
-            {p.tp.toFixed(1)} true positives, {p.fn.toFixed(1)} false negatives, {p.fp.toFixed(1)}{" "}
-            false positives and {p.tn.toFixed(1)} true negatives.
+            {(p.ppv * 100).toFixed(1)}%. Among 10,000 calculated classifications: {p.tp.toFixed(1)}{" "}
+            true positives, {p.fn.toFixed(1)} false negatives, {p.fp.toFixed(1)} false positives and{" "}
+            {p.tn.toFixed(1)} true negatives.
           </p>
         </fieldset>
       </Section>
       <Section
         number={3}
-        title="Assign the review questions"
-        purpose="Distinguish equity, responsibility, records and device-status checks before a pilot."
+        title="What needs checking before patient use?"
+        purpose="Sort the questions about patients, the people reviewing the tool, its records and its device status."
       >
         {governance.map((row) => (
           <div key={row.id}>

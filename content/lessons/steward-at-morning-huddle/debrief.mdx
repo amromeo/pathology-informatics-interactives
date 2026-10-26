@@ -1,52 +1,23 @@
-## Debrief: assign clinical approval and technical work separately
+## Debrief: what still needs to happen before Monday?
 
-### What happened in this case
+The assay should wait. The result reached the EHR, but part of the interpretive comment was cut off. Pathology has not reviewed the troponin alert. The section also needs to finish its procedures, training and staffing arrangements.
 
+### Who finishes the work?
 
-### Three different questions
+The LIS team builds the test and checks the interface. Hospital IT keeps the network and shared systems running. Pathology informatics helps chemistry check how the new assay fits the laboratory's ordering and reporting practices. The laboratory director approves the order and complete report.
 
-Can the message cross the interface? Is the result report correct? Can the laboratory safely offer the test? The interface test answers only the first question.
+The bench supervisor and laboratory operations staff prepare the section to run the test on every shift. Pathology and clinical informatics review the alert with the clinicians who will receive it. Sending a result successfully leaves all of those jobs to be checked.
 
-The result reaches the EHR, but the result report, CDS review, procedures, training, and staffing are not ready. The assay should not be used for patient testing until that work is complete and approved.
+### Follow the problem through the chart
 
-### Different groups, different responsibilities
+The three calls ask different questions:
 
-- **hospital IT** keeps the network and shared systems available so the LIS and instrument connections can operate.
-- **The LIS team** builds the new test in the LIS, makes the required interface changes, and completes technical testing before laboratory review.
-- **Pathology informatics** works with the laboratory and the technical teams to make sure the systems support the test from ordering through reporting.
-- **Clinical informatics** focuses on how the EHR and other clinical information systems are configured and used to support patient care.
-- **Laboratory operations** makes sure the procedures, staffing, training, supplies, and support plan are ready before patient testing begins.
-- **The pathologist or laboratory director** approves the order and complete result report, including how the report appears in the EHR.
+- **The corrected report is still wrong in the EHR.** The laboratory director should lead the review. The LIS and EHR teams can trace the correction and repair the display. The laboratory then checks the complete corrected report where clinicians read it.
+- **Two troponin assays appear on one trend graph.** Pathology informatics should lead with chemistry and the EHR analyst. The laboratory has to decide whether the assays are comparable before their results are plotted together.
+- **The alert fires again after a correction.** Clinical informatics should coordinate the alert review. Pathology informatics and the LIS team first check whether the correction replaced the original result or arrived as another result.
 
-The technical teams configure the systems. The laboratory director decides what should be reported and whether the test is ready for patient use.
+That last distinction matters. In a Health Level Seven version 2 (HL7 v2) message, status C identifies a corrected result on the same observation. If the laboratory sent a new result instead, the laboratory team needs to fix that first. If the correction arrived properly, the team can then examine why the EHR alert fired again.
 
-Institutions organize their LIS teams differently. Some are part of pathology, while others are part of hospital IT; the latter arrangement is becoming more common. How these groups are organized varies by institution, and one person may serve more than one role.
+### Check the report clinicians will use
 
-### The complete result report
-
-The laboratory's product is the complete result report, not just the result value. The laboratory is responsible for the report and for how the report appears in the EHR.
-
-The EHR may show pieces of a result report in flowsheets, summaries, alerts, and other parts of the chart. The laboratory therefore identifies a specific report location where clinicians can find the complete result report exactly as the laboratory approved it.
-
-### Who should lead when the problem appears in the EHR?
-
-Where the problem appears does not necessarily tell you who should lead. The important question is whether the problem concerns the laboratory test and report or the broader EHR workflow.
-
-- **The result report is wrong in the EHR:** The laboratory should lead. It is responsible for the complete result report and must verify that the corrected report appears properly in the EHR.
-- **Results from different troponin assays are combined in a trend graph:** Although the error appears in the EHR, pathology informatics should lead because the problem is how two laboratory tests are represented in the patient's chart. Test identity, method changes, and whether results are sufficiently comparable to be trended together are laboratory questions. An EHR analyst may be needed to make the configuration change.
-- **An EHR alert fires again after a corrected result:** Clinical informatics coordinates the alert review. First, pathology informatics and the LIS team verify whether the correction replaced the original observation or was incorrectly sent as a new result; that distinction determines which system needs repair.
-
-Responsibility for CDS is not cleanly divided between pathology informatics and clinical informatics. Laboratory-related CDS may be led by pathology informatics, but its design and review often involve clinical informatics, the laboratory, and the clinical services affected by it.
-
-### A repeated alert after correction
-
-Clinical informatics should coordinate because the alert logic and its firing behavior are EHR decision support configuration. Pathology informatics and the LIS team must first confirm how the correction was sent: a corrected result should replace the original (in HL7 v2, result status C on the same observation), not arrive as a new result. If it arrived as a new result, the fix is on the laboratory side.
-
-
-### Who does what
-
-Work with a laboratory director and LIS analyst. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
-
-### Connection to PIER 1.1, 1.2, 1.3, 8.1
-
-The case asks you to assign clinical approval and technical work separately using laboratory records and explain the consequence of your choice.
+The laboratory must check the complete report in its agreed location in the chart. A correct number in a flowsheet would not reveal the missing interpretive comment in this case. Ask the person reviewing the report to show the comment on screen before the director signs off.

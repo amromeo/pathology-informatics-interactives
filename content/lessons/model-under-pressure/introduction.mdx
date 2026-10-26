@@ -1,16 +1,24 @@
 # Model Under Pressure
 
-You are the pathology resident assisting Dr. Rao with a proposed metastasis second-review tool. The vendor reports detection of 192 of 200 metastasis-positive slides (96%) on its supported scanner. Your laboratory uses two scanners and a different staining workflow. Local review finds 42 of 50 positive slides (84%), including 17 of 25 micrometastases (68%) and 25 of 25 macrometastases (100%).
+You are the pathology resident helping Dr. Rao review a tool that marks possible metastases for a pathologist to examine. The vendor reports that it found 192 of 200 slides with metastases (96%) on its supported scanner.
 
-Before discussing release, the committee also wants to distinguish this tool from three other proposals: an explicit laboratory rule, gene-expression clustering and a generated tumor-board summary. Your task is to identify what each does and what evidence it needs.
+Your laboratory uses two scanners and prepares its stains differently. In the local review, the tool found metastases on 42 of 50 positive slides (84%). It found 17 of 25 micrometastases (68%) and 25 of 25 macrometastases (100%). Dr. Rao wants to know what it missed and whether the laboratory can rely on it.
+
+The committee has also received three other proposals:
+
+- A programmed laboratory rule.
+- A program that groups tumors by gene-expression pattern.
+- A tool that writes a tumor-board summary.
+
+Before discussing any of them, the committee asks you to explain how each works and what needs checking.
 
 ## What you will be able to do
 
-- Classify four proposals and choose the first review each needs.
-- Inspect performance by scanner and lesion size.
-- Distinguish initial generalizability failure from a later performance change.
-- Explain how prevalence affects predictive value and assign oversight questions.
+- Match each proposal to the way it was programmed or trained, then choose what to check first.
+- Compare detection on the two scanners and in small and large metastases.
+- Tell poor performance at first local testing from a decline after the tool has been in use.
+- Explain why a positive model call is less reliable when disease is uncommon, and name who should review the tool before use.
 
 ## Your task
 
-Complete the three parts, then check the review. The sliders explore a mathematical example; the observed vendor, local and monthly results remain fixed.
+Work through the proposals, the slide counts and the questions about using the tool in patient care. In the middle section, try changing disease prevalence and see what happens to positive predictive value.

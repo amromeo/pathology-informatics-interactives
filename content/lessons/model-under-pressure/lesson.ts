@@ -15,7 +15,8 @@ export const manifest: LessonManifest = {
   id: "06",
   layout: "standard",
 
-  summary: "A metastasis detector performs differently on local scanners and small lesions.",
+  summary:
+    "A metastasis detector misses more small lesions on local slides. Review the scanners, stains and monthly results.",
   sources: [
     {
       label: "PIER Essentials Release 5",
@@ -34,8 +35,9 @@ export const manifest: LessonManifest = {
     {
       id: "2.4-ai-ml-definitions",
       objective: "2.4",
-      summary: "Artificial intelligence and machine learning definitions",
-      learnerAction: "Distinguish an AI/ML system from a conventional programmed laboratory rule.",
+      summary: "How programmed rules and learned models differ",
+      learnerAction:
+        "Explain how a model trained on examples differs from a rule written by an analyst.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -50,7 +52,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Supervised and unsupervised learning",
       learnerAction:
-        "Classify supervised image detection and unsupervised molecular clustering proposals correctly.",
+        "Identify which proposal learned from labeled slides and which grouped tumors without diagnostic labels.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -65,7 +67,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Convolutional neural networks and generative AI",
       learnerAction:
-        "Identify the model type and principal review need in a CNN proposal and a generative tumor-board summary proposal.",
+        "Identify how the image detector and generated summary work, then choose what to check first.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -80,7 +82,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Pathology AI/ML applications",
       learnerAction:
-        "Recommend proceed, revise, or decline for four proposed pathology uses and explain the laboratory problem each tool is meant to address.",
+        "Decide whether each proposed tool is ready to try, needs more work or should be declined. Explain the laboratory job it is meant to do.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -95,7 +97,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Local verification",
       learnerAction:
-        "Test a metastasis second-review model on local slides, scanners, and clinically important subgroups.",
+        "Check the metastasis detector on local slides, separating scanners and small and large lesions.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -110,7 +112,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Generalizability and bias",
       learnerAction:
-        "Identify a subgroup failure after transfer to a laboratory with a different scanner and case mix.",
+        "Find which lesions the detector misses when used in a laboratory with different scanners and cases.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -125,7 +127,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Drift and brittleness",
       learnerAction:
-        "Distinguish an initial generalizability failure from a later change in performance and identify brittle behavior.",
+        "Tell a poor result at first local testing from a later decline. Explain how a small image change can affect a brittle model.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -138,9 +140,9 @@ export const manifest: LessonManifest = {
     {
       id: "2.4-implementation-monitoring",
       objective: "2.4",
-      summary: "Implementation and monitoring",
+      summary: "Starting use and checking later results",
       learnerAction:
-        "Define intended use, human review, acceptance criteria, change review, and post-deployment performance checks.",
+        "State what the tool will do and how pathologists will check it. Set the limits for starting or stopping use and plan later reviews.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -155,7 +157,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Ethical and regulatory considerations",
       learnerAction:
-        "Identify patient-safety, equity, accountability, documentation, and regulatory questions before deployment.",
+        "Identify questions about missed lesions and patient groups. Name who reviews the tool and check its version records and device status.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [

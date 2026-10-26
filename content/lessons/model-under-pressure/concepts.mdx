@@ -1,7 +1,13 @@
-### Start with the task and the training data
+### How was the tool made?
 
-Artificial intelligence describes computer methods used for tasks such as recognizing images or generating language. Machine learning fits parameters from examples. An explicit if/then laboratory rule is programmed directly; its behavior still needs validation, but it does not learn from cases.
+A programmer can write a rule that holds a result when quality control fails. The programmer supplies the conditions directly. Test the limits and exceptions to find out whether the rule does what the laboratory asked.
 
-In **supervised learning**, training examples have labels, such as a pathologist's annotation of a metastasis. A convolutional neural network learns spatial patterns in image neighborhoods. **Unsupervised learning** groups or represents observations without supplied outcome labels; a molecular cluster still needs biological and clinical interpretation. A **generative model** produces new text or images. A fluent summary can contain unsupported statements and must be checked against the source reports.
+Other programs learn patterns from examples. This is **machine learning**, one group of methods within **artificial intelligence (AI)**. AI includes computer methods for tasks such as recognizing images and generating language.
 
-Choose the review according to the actual proposal. Test programmed boundaries and exceptions. Verify a detector on representative local material with independent reference labels. Investigate what clusters mean. Check generated assertions and omissions against the underlying record.
+The examples used for training make a difference:
+
+- **Supervised learning:** pathologists label the training slides, and the model learns patterns associated with those labels. The metastasis detector uses a **convolutional neural network**, which learns patterns in neighboring parts of an image. Test it on local slides with diagnoses made independently of its marks.
+- **Unsupervised learning:** the program groups similar measurements without being given diagnoses. Tumors with similar gene-expression patterns may cluster together. Someone still has to find out what those groups mean and whether staining, preparation or other differences explain them.
+- **Generative models:** the program produces text or images. A tumor-board summary may read well while leaving out a qualification or adding a finding that is absent from the reports. Compare its statements with the reports before using it.
+
+The name of the method helps you understand how it works. The first check still depends on the job: holding a result, finding a lesion, grouping tumors or summarizing a record.

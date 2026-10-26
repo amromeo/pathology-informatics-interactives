@@ -4,52 +4,53 @@ export const checks: RetrievalItem[] = [
     id: "principle",
     kind: "principle",
     prompt:
-      "The LIS is restored after an outage. What establishes readiness to resume routine work?",
+      "The blood bank's electronic worklist is back after an outage. Staff still have paper test records. What should they do before routine work resumes?",
     choices: [
       {
         id: "supported",
-        label: "Reconcile pending orders and results",
+        label: "Reconcile the paper tests with the electronic orders and results",
         correct: true,
         feedback:
-          "Restored connectivity does not resolve paper orders, duplicate identities or results already communicated. Reconcile them using the approved recovery process.",
+          "Match each paper record to the correct patient and order. Check which results are already entered so completed tests are neither missed nor ordered again.",
       },
       {
         id: "shortcut",
         label: "Confirm that the login screen appears",
         feedback:
-          "This leaves the central problem unresolved. Restored connectivity does not resolve paper orders, duplicate identities or results already communicated. Reconcile them using the approved recovery process.",
+          "Logging in shows that staff can reach the system. It does not show whether the paper tests and their results are in the right patient charts.",
       },
       {
         id: "incomplete",
-        label: "Enter all paper results as new orders",
+        label: "Enter every paper result as a new order",
         feedback:
-          "This does not establish the needed conclusion. Restored connectivity does not resolve paper orders, duplicate identities or results already communicated. Reconcile them using the approved recovery process.",
+          "Some orders may already be on the restored worklist. Entering each paper record as a new order can duplicate testing that has already been completed.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt:
+      "Your supervisor asks you to help plan the next downtime drill. Where would you look to learn who checks paper results when the LIS returns?",
     choices: [
       {
         id: "supported",
-        label: "Locate the downtime reconciliation procedure",
+        label: "The laboratory's downtime reconciliation procedure",
         correct: true,
         feedback:
-          "Identify how the team tracks unresolved work, verifies entries and prevents duplicate orders or reports.",
+          "Walk through the procedure with the bench supervisor and LIS analyst. Find who matches patients, checks results and closes duplicate orders before the section resumes routine work.",
       },
       {
         id: "shortcut",
-        label: "Use the latest backup time as proof of recovery",
+        label: "The timestamp on the latest backup",
         feedback:
-          "This leaves the central problem unresolved. Identify how the team tracks unresolved work, verifies entries and prevents duplicate orders or reports.",
+          "The backup time tells you when data were copied. It does not tell you who will match the paper records or check work completed after that copy.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "This lesson's job assignments, copied into the local drill",
         feedback:
-          "This does not establish the needed conclusion. Identify how the team tracks unresolved work, verifies entries and prevents duplicate orders or reports.",
+          "Your hospital may assign these jobs differently. Find the local procedure and ask the people named in it to show how they check the records.",
       },
     ],
   },
@@ -62,22 +63,22 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "Review authorized access and safeguards",
+        label: "Check who is authorized to connect and how access is limited",
         correct: true,
         feedback:
-          "The access arrangement needs individual authorization, appropriate safeguards and review of the business-associate relationship where applicable. Convenience does not remove these obligations.",
+          "Have the hospital team check the vendor's account, the access needed for the repair and the protections in place. They also check whether a business-associate agreement is needed.",
       },
       {
         id: "shortcut",
         label: "Share the supervisor login temporarily",
         feedback:
-          "This leaves the central problem unresolved. The access arrangement needs individual authorization, appropriate safeguards and review of the business-associate relationship where applicable. Convenience does not remove these obligations.",
+          "A shared login makes the vendor's actions look like the supervisor's. Arrange access for the named service person so the hospital can review who did what.",
       },
       {
         id: "incomplete",
-        label: "Permit unrestricted access until repair ends",
+        label: "Permit unrestricted access until the repair ends",
         feedback:
-          "This does not establish the needed conclusion. The access arrangement needs individual authorization, appropriate safeguards and review of the business-associate relationship where applicable. Convenience does not remove these obligations.",
+          "The vendor may need only one workstation. Letting that account reach other systems exposes records and services unrelated to the repair.",
       },
     ],
   },

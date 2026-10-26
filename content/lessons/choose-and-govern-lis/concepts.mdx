@@ -1,21 +1,25 @@
-### Turn a workflow into a testable requirement
+### Write requirements you can watch a system meet
 
-A requirement should identify a user, a task, the needed behavior, and evidence that would demonstrate it. “Supports corrections” is too vague. “A corrected report becomes current in the EHR, the prior version remains available, and the communication workflow is triggered” can be tested.
+"Supports corrections" sounds reassuring, but you cannot watch a system do it. Write the requirement as something you could check at a demonstration. When a pathologist corrects a report, the corrected version should become the current one in the electronic health record (EHR). The earlier version should stay available, and someone should be prompted to tell the clinician. You can watch for each of those.
 
-The committee approved three mandatory requirements before ranking vendors. The recovery exercise uses a four-hour service recovery target and a maximum fifteen-minute interval of data requiring reconciliation. These local targets reflect the case's operational planning. In practice, define acceptable downtime and data loss with laboratory leadership, IT, and the clinical services that depend on the results.
+The committee agreed on three requirements like this before any vendor came in:
 
-A **request for information (RFI)** asks the market what capabilities and approaches are available. A **request for proposal (RFP)** asks shortlisted suppliers to respond to defined requirements, scope, responsibilities, pricing, and contract terms. A brochure response is not equivalent to an observed acceptance test.
+- **Corrected reports (C-2):** the corrected report becomes the current one in the EHR, and the earlier version is kept.
+- **Recovery after an outage (R-1):** the system is back within four hours, and the laboratory has to recheck no more than the last fifteen minutes of work. These two limits are called the recovery time objective (RTO) and the recovery point objective (RPO).
+- **Getting the records out (E-1):** if the laboratory ever leaves the vendor, it can export its reports with patient and accession numbers and every earlier version.
 
-### Distinguish failed evidence from missing evidence
+The four-hour and fifteen-minute limits were set for this case. At your own hospital, the laboratory director would set them with IT and the clinical services that rely on the results.
 
-Classify each record below. A demonstrated failure needs correction and retesting. An incomplete demonstration or unsupported assertion needs additional evidence. Both can prevent selection now, but they do not show the same thing about the product.
+Committees usually start with a request for information (RFI), which asks vendors in general what their systems can do. A request for proposal (RFP) then goes to a short list and asks each vendor to answer your requirements, with prices and contract terms. A written answer in a proposal is not the same as watching the system do the job.
 
-The assessment should identify the product version and environment. A future patch is a proposal, not a tested capability. A standard vendor demonstration also cannot confirm that the installed local interfaces and dictionaries will work.
+### A failed demonstration is not the same as an unfinished one
 
-### Keep mandatory requirements separate from preferences
+For each record below, decide whether the demonstration showed the requirement working, showed it failing, or has not shown it yet. If the vendor ran the test and the system failed, the vendor has to fix it and run the test again. If the test stopped partway, or the vendor only says the system can do it, someone still has to see it work. Either way the vendor cannot be chosen yet, but the next step is different.
 
-Usability, analytics, and training quality can be compared with preference scores after necessary capabilities are addressed. Agree on the weights before interpreting a ranking. The weights describe priorities; they do not measure clinical safety.
+Note which version of the software was shown. A patch the vendor promises for next quarter has not been tested. A vendor's standard demonstration also runs on the vendor's own setup, so it cannot show that your interfaces and your test definitions will work.
 
-Do not relabel a failed mandatory requirement as a preference merely to preserve a favored vendor's ranking. A legitimate requirement change needs a documented clinical and operational rationale, approval, and reassessment of all vendors against the revised scope.
+### Requirements first, preferences second
 
-The classification exercise provides feedback after you review your decisions. Even if a learner marks every row as passing, the recommendation cannot ignore the supplied evidence of failure or incomplete verification.
+How easy the screens are to use, what reports the system can produce, and how good the training looks are worth comparing, but only among vendors that meet the requirements. Agree on how much each one counts before you look at the ranking. The weights say what the committee cares about. They say nothing about patient safety.
+
+If a favored vendor fails a requirement, do not quietly turn that requirement into a preference to keep the vendor in the running. If the committee really does need to change a requirement, it should say why, have the laboratory director approve the change, and recheck every vendor against the new list.

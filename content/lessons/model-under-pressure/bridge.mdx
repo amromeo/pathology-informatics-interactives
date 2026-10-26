@@ -1,11 +1,19 @@
-### Separate transfer performance from change over time
+### What did the detector miss?
 
-Sensitivity is the proportion of reference-positive slides detected: detected positives divided by all reference positives. The local study has 50 positive slides and cannot estimate specificity or positive predictive value by itself. Positive predictive value is the proportion of positive model calls that are truly positive; it needs both true and false positive calls in the intended population.
+Here, **sensitivity** is the fraction of slides with metastases that the detector found. Divide detected positive slides by all slides known to be positive. These 50 local slides are all positive. They cannot tell you how often the detector marks a negative slide.
 
-A failure present on first transfer is a **generalizability** problem. The table separates scanner and lesion size so a pooled 84% cannot conceal the micrometastasis misses. **Drift** is a subsequent change in inputs or performance. The September monitor follows a stain change, but that timing is a reason to investigate, not proof of causation. **Brittleness** describes marked sensitivity to a small input change, such as a slight color shift; poor performance in a clinical subgroup alone is not the definition.
+The detector did poorly as soon as it was tested locally. That is a **generalizability** problem: it did not work as well when moved to another setting. Compare the scanners and lesion sizes separately to see where the misses occurred.
 
-### What the sliders calculate
+A later change in the images or the detector's performance is called **drift**. The September results follow a stain change. That gives the laboratory something to investigate, but the timing alone does not tell you what caused the decline.
 
-The sliders use a deliberately simple mathematical model with a fixed threshold. Sensitivity and specificity both equal 1 / (1 + exp(-separation)). Increasing class separation makes positive and negative cases easier to distinguish in this model. Prevalence changes the proportion of positive cases among 10,000 classifications. It changes predictive value without changing sensitivity or specificity. Expected counts may be fractional because these are model expectations, not counted study observations.
+A model is **brittle** when a small change to an input, such as a slight color shift, causes a large change in its output. Missing more lesions in one patient group is a reason to investigate; it does not by itself show this kind of sensitivity to small changes.
 
-The observed verification and monitoring tables never change with the sliders. This calculation cannot predict the actual detector's performance or approve its clinical use.
+### Why disease prevalence matters
+
+**Positive predictive value** asks: among the slides the detector calls positive, how many are truly positive? False positive calls matter to that calculation. When disease is uncommon, the many negative slides can supply enough false positives to make a positive call less reliable.
+
+The sliders let you try this calculation with 10,000 classifications. The prevalence slider changes the proportion that are truly positive. The separation slider changes how easily the model distinguishes the positive and negative groups.
+
+For this calculation, sensitivity and specificity both equal 1 / (1 + exp(-separation)), with a fixed cutoff. Specificity is the fraction of truly negative slides called negative. Moving prevalence alone leaves both rates unchanged; increasing separation improves both.
+
+The counts may have decimal places because they are calculated averages. This calculation is separate from the observed slide counts above; it cannot predict how the laboratory's detector will perform.

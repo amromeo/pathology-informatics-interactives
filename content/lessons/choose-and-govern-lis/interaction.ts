@@ -50,81 +50,81 @@ export const evidenceRows: {
     vendor: "alder",
     requirement: "Corrected reports",
     record:
-      "Script C-2: changed result delivered as a second final report. Prior final still displayed without a correction link. Vendor proposes a future patch.",
+      "Script C-2: the corrected result arrived in the chart as a second final report. The original final report was still displayed, with no link to the correction. Vendor says a patch next quarter will fix this.",
     answer: "fail",
-    note: "The current tested version failed. A promised patch is not a passing retest.",
+    note: "The version Alder showed failed the test. The patch it promises has not been tested, so it cannot count yet.",
   },
   {
     id: "A-restore",
     vendor: "alder",
     requirement: "Recovery exercise",
     record:
-      "Exercise R-1: restored access in 3 hours; 10 minutes of data required reconciliation. Laboratory observed reconciliation of the open-order list.",
+      "Exercise R-1: back in service after 3 hours; the last 10 minutes of work had to be rechecked. Laboratory staff watched the open orders being reconciled.",
     answer: "pass",
-    note: "The observed exercise meets this case's 4-hour recovery and 15-minute data-loss limits.",
+    note: "Three hours and ten minutes of work to recheck are inside this case's limits of 4 hours and 15 minutes.",
   },
   {
     id: "A-export",
     vendor: "alder",
     requirement: "Record export and retrieval",
     record:
-      "Proposal: complete data export available. No sample export, field dictionary, or retrieval demonstration supplied.",
+      "Proposal says a complete data export is available. No sample export, field list or demonstration of pulling up old reports was provided.",
     answer: "unknown",
-    note: "A statement of capability is not evidence that reports, versions, and identifiers remain usable.",
+    note: "Alder says it can export everything, but nobody has seen an export. Ask for a sample and try pulling up reports from it.",
   },
   {
     id: "B-correction",
     vendor: "birch",
     requirement: "Corrected reports",
     record:
-      "Script C-2: current report marked Corrected; old version retained; correction reached the EHR; notification task created and checked.",
+      "Script C-2: current report marked Corrected; earlier version kept; the correction reached the chart; a task to notify the clinician was created and checked.",
     answer: "pass",
-    note: "The defined workflow was demonstrated in the tested version; local acceptance testing is still needed.",
+    note: "The correction worked in the version shown. It still has to be tested on the laboratory's own system after installation.",
   },
   {
     id: "B-restore",
     vendor: "birch",
     requirement: "Recovery exercise",
     record:
-      "Exercise R-1: restored access in 3.5 hours; 12 minutes required reconciliation. Laboratory reconciled open orders and reports.",
+      "Exercise R-1: back in service after 3.5 hours; the last 12 minutes of work had to be rechecked. Laboratory staff reconciled open orders and reports.",
     answer: "pass",
-    note: "This meets the agreed case thresholds, with a smaller margin than Alder. Test the installed environment too.",
+    note: "Inside both limits, though with less to spare than Alder. Repeat the exercise once the system is installed.",
   },
   {
     id: "B-export",
     vendor: "birch",
     requirement: "Record export and retrieval",
     record:
-      "Sample export included patient/accession keys, report versions, timestamps, and a field dictionary. Ten selected reports were retrieved and compared successfully.",
+      "Sample export included patient and accession numbers, every report version, timestamps and a field list. Ten chosen reports were pulled up from it and matched the originals.",
     answer: "pass",
-    note: "The sample supports this requirement. Define full-scale export, verification, cost, and termination obligations in the contract.",
+    note: "The sample export worked. The contract should still say how the full export will be done, checked and paid for.",
   },
   {
     id: "C-correction",
     vendor: "cedar",
     requirement: "Corrected reports",
     record:
-      "Demonstration stopped before the correction reached the EHR. Vendor has scheduled another session.",
+      "The demonstration stopped before the correction reached the chart. The vendor has booked another session.",
     answer: "unknown",
-    note: "An incomplete demonstration is unverified, not proof of failure or success.",
+    note: "The test stopped partway, so nobody knows yet. It is not a failure until the vendor runs the whole test.",
   },
   {
     id: "C-restore",
     vendor: "cedar",
     requirement: "Recovery exercise",
     record:
-      "Exercise R-1: restored access in 2 hours; 8 minutes required reconciliation. Open-order reconciliation observed.",
+      "Exercise R-1: back in service after 2 hours; the last 8 minutes of work had to be rechecked. Laboratory staff watched the open orders being reconciled.",
     answer: "pass",
-    note: "The demonstrated exercise meets the case's thresholds.",
+    note: "Two hours and eight minutes of work to recheck are inside both limits.",
   },
   {
     id: "C-export",
     vendor: "cedar",
     requirement: "Record export and retrieval",
     record:
-      "Sample export contained only each report's latest text. Prior versions and accession keys were absent; contract excludes structured export.",
+      "Sample export held only the latest text of each report. Earlier versions and accession numbers were missing, and the contract excludes a structured export.",
     answer: "fail",
-    note: "The provided export fails the institution's record-access requirement. Fast recovery does not compensate for missing record history.",
+    note: "Without earlier versions and accession numbers, the laboratory could not rebuild its record of what was reported. A fast recovery does not make up for that.",
   },
 ];
 export type Weights = { usability: number; analytics: number; training: number };
@@ -159,110 +159,114 @@ export function vendorSummary(
 }
 export const selectionSources = [
   {
-    title: "Initial procurement summary",
+    title: "Purchasing summary",
     record:
-      "LIS replacement · first demonstration round\nPreference ratings (1 low, 5 high)\n                Usability  Analytics  Training\nAlder               5          5          4\nBirch               3          3          4\nCedar               4          4          3\nInitial weights: 50 / 30 / 20\nEvaluation population: these three vendors",
-    note: "The ratings describe the panel's preferences after demonstrations. They do not establish compliance with mandatory requirements.",
+      "LIS replacement · first round of demonstrations\nPanel ratings (1 low, 5 high)\n                Usability  Analytics  Training\nAlder               5          5          4\nBirch               3          3          4\nCedar               4          4          3\nStarting weights: 50 / 30 / 20\nVendors rated: these three only",
+    note: "These ratings record what the panel liked after the demonstrations. They do not show whether any vendor met the requirements.",
   },
   {
-    title: "Approved requirements",
+    title: "Agreed requirements",
     record:
-      "Mandatory before selection recommendation:\nC-2: corrected report current in EHR; prior version retained\nR-1: recovery time objective (RTO): 4 hours; recovery point objective (RPO): at most 15 minutes of data to recover and reconcile\nE-1: export identifiers, reports and versions for retrieval\nPreferences: usability, analytics, training\nClinical approval: laboratory leadership\nProcurement and IT review: required before contract",
-    note: "The recovery targets and evidence rules are local requirements. Mandatory failures cannot be traded away by increasing a preference score.",
+      "Must be shown before a vendor is recommended:\nC-2: corrected report becomes current in the EHR; earlier version kept\nR-1: recovery time objective (RTO) 4 hours; recovery point objective (RPO) no more than 15 minutes of work to recheck\nE-1: export of identifiers, reports and every version, usable for pulling up old reports\nNice to have: usability, analytics, training\nClinical approval: laboratory director\nPurchasing and IT review: required before any contract",
+    note: "The committee set these limits before the demonstrations. A vendor that fails one cannot make it up with better ratings.",
   },
   {
-    title: "Five-year planning assumptions",
+    title: "Five-year cost assumptions",
     record:
-      "Scope: this single-site module replacement\nCurrency: USD thousands, constant planning prices\nPeriod: implementation plus five annual service charges\nInclude: upfront, service, interfaces, migration, exit\nNo discounting, tax, inflation, or internal staffing included\nAlder interface amount: planning allowance, not a quote\nAll other line items: proposal amounts; not signed contracts",
-    note: "This is a scoped comparison, not a complete budget. Obtain staffing estimates, binding interface responsibilities, and sensitivity analysis before approval.",
+      "Covers: replacing this one module at this one hospital\nCurrency: USD thousands at today's prices\nPeriod: installation plus five years of service fees\nIncludes: installation, service, interfaces, data migration, exit\nLeaves out: discounting, tax, inflation, internal staff time\nAlder interface amount: committee estimate, not a quote\nAll other amounts: from vendor proposals; nothing signed",
+    note: "This puts the vendors side by side; it is not a budget. Staff time, firm interface prices and other local costs still have to be added.",
   },
 ];
 export const lifecycleCases = [
   {
     id: "install",
-    title: "Before installation is accepted",
+    title: "Before go-live",
     record:
-      "The vendor's standard demonstration passed. The local EHR interface and overnight laboratory shift have not been tested.",
+      "The vendor's standard demonstration went well. Nobody has yet tested the connection to the hospital's EHR or how the night shift will use the new system.",
     options: [
-      ["vendor", "Accept the standard demonstration"],
-      ["local", "Run local acceptance scripts and role-based training"],
+      ["vendor", "Go live on the strength of the vendor's demonstration"],
+      ["local", "Test with local interfaces and staff before go-live"],
     ],
     answer: "local",
     notes: {
       vendor:
-        "A demonstration does not test the installed interfaces, local dictionaries, or staff workflows.",
+        "The demonstration ran on the vendor's setup. It did not test your connection to the chart, your test definitions or your staff.",
       local:
-        "Use local specimens/orders, corrections, access roles, workload and downtime cases; document training and clinical acceptance before go-live.",
+        "Run real orders, corrections, user accounts, a busy shift and a downtime drill on the installed system, and train each group of staff, before the director approves go-live.",
     },
   },
   {
     id: "change",
-    title: "During routine operation",
+    title: "An upgrade arrives",
     record:
-      "An upgrade changes the default display of corrected results. The analyst proposes installing it during tonight's maintenance window.",
+      "An upgrade changes how corrected results are displayed. The analyst wants to install it during tonight's maintenance window.",
     options: [
-      ["install", "Install because the vendor tested the release"],
-      ["control", "Assess impact, test affected workflows, approve and document"],
+      ["install", "Install tonight; the vendor has tested the release"],
+      ["control", "Check what it changes and test before installing"],
     ],
     answer: "control",
     notes: {
       install:
-        "Vendor testing does not establish that the local report display and interfaces remain correct.",
+        "The vendor tested its own system, not your reports and interfaces. A change to how corrected results look is exactly what needs checking.",
       control:
-        "Record the change, impacted dictionaries/interfaces/reports, tests, approval, rollback plan, staff communication, and post-change checks.",
+        "Find out which reports, interfaces and screens it touches, test them, plan how to undo it, tell the staff, and have the change approved and written down.",
     },
   },
   {
     id: "outage",
     title: "Before signing the hosted-service contract",
     record:
-      "The proposal lists annual hosting charges but leaves support hours, change notices, export at termination and downtime reconciliation responsibilities unspecified.",
+      "The proposal lists yearly hosting fees but does not say when support is available, how much notice you get before changes, how you get your records back at the end, or who rechecks work after an outage.",
     options: [
-      ["wait", "Accept standard hosting terms without clarification"],
-      ["reconcile", "Specify support, changes, export and reconciliation"],
+      ["wait", "Sign the standard hosting terms as written"],
+      ["reconcile", "Get support, changes and exit spelled out first"],
     ],
     answer: "reconcile",
     notes: {
-      wait: "A hosting fee does not define service obligations. Leaving support hours, changes and exit assistance unspecified creates gaps the laboratory may discover only during a disruption.",
+      wait: "A hosting fee does not say what the vendor will do for it. Gaps like these usually come to light in the middle of an outage.",
       reconcile:
-        "Document support hours and escalation, notice and testing of changes, usable export of reports and versions at termination, and who reconciles interrupted work. Connect the recovery responsibilities to the downtime process in Twelve Hours Offline.",
+        "Write down support hours and who to call, notice and testing before changes, a usable export of reports and their versions at the end, and who rechecks work after an outage. Twelve Hours Offline shows why the last one matters.",
     },
   },
   {
     id: "retire",
     title: "Before the old system is retired",
     record:
-      "The new system is live. Historical corrected reports were not migrated, and the old server contract ends next month.",
+      "The new system is live. Old corrected reports were not moved across, and the contract for the old server ends next month.",
     options: [
-      ["off", "Turn off the old server because the new system is live"],
-      ["retain", "Verify historical retrieval and approved retention before shutdown"],
+      ["off", "Switch off the old server; the new system is live"],
+      ["retain", "Confirm old reports can be found, then switch off"],
     ],
     answer: "retain",
     notes: {
-      off: "Current operations do not establish that historical reports and versions remain accessible.",
+      off: "Being live on the new system says nothing about whether old reports, including corrected ones, can still be found.",
       retain:
-        "Test archived records and permissions, agree on retention and retrieval responsibilities, and document exit assistance before removing access.",
+        "Pull up a sample of old reports, including corrected ones, check who can still reach them, agree how long they are kept and who looks after them, and only then switch off.",
     },
   },
 ] as const;
 export const selectionCopy = {
   eligibility:
-    "Eligible here means the three mandatory case requirements have supporting evidence. It is not contract approval.",
+    "“All three shown working” means someone saw each requirement work at a demonstration. It does not mean the contract is approved.",
   wrong:
-    "Recheck the evidence classifications. Failed and unverified requirements both prevent selection now, but require different follow-up.",
+    "Some classifications do not match the records. A failed test and an unfinished one both keep a vendor out for now, but they lead to different next steps.",
+  includeCosts:
+    "Add the interface, data migration and exit costs before comparing five-year totals.",
+  finishLifecycle:
+    "Choose what to do at go-live, for the upgrade, for the hosting contract and at retirement before recommending a vendor.",
   ready:
-    "Birch can proceed to contract and local acceptance review on the supplied evidence. Costs, implementation responsibilities, and the lifecycle plan still need institutional approval.",
+    "Birch can go forward to contract talks and to testing on the laboratory's own systems. The costs, who does what during installation, and the plans for upgrades and retirement still need approval.",
   defer:
-    "Deferring selection is defensible if you name the remaining evidence or contract questions. Set an owner and due date; do not leave failed workflows hidden behind a score.",
+    "Waiting is reasonable if you say exactly what you still need to see, who will get it and when the committee will decide. Do not let a good score hide a failed test.",
   blocked:
-    "The selected vendor cannot proceed on this evidence. Resolve and retest failed requirements or obtain missing evidence before reconsideration.",
+    "This vendor cannot go forward on what the committee has seen. It has to fix and retest what failed, or show what has not been shown yet.",
 };
 
 export const sectionPurposes = [
-  "Separate mandatory laboratory requirements from the panel’s preferences.",
-  "Classify each vendor claim using the demonstrated result or missing evidence.",
-  "Explore how weights and omitted charges affect the recommendation.",
-  "Choose what must be tested, documented and retained throughout the system’s use.",
+  "Separate what the laboratory cannot do without from what the panel simply liked.",
+  "Decide what each demonstration actually showed.",
+  "See how the weights and the missing costs change the comparison.",
+  "Decide what the laboratory must test or keep from installation to retirement.",
 ];
 
 export function evidenceLabel(row: { vendor: string; requirement: string }) {

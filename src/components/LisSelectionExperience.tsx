@@ -35,9 +35,9 @@ export function LisSelectionExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
   const feedback = !accurate
     ? selectionCopy.wrong
     : !extras
-      ? "Include the scoped interface, migration, and exit costs before comparing the five-year totals."
+      ? selectionCopy.includeCosts
       : !complete
-        ? "Address installation, change control, downtime reconciliation, and record access before completing the recommendation."
+        ? selectionCopy.finishLifecycle
         : recommendation === "defer"
           ? selectionCopy.defer
           : chosen?.eligible
@@ -48,14 +48,14 @@ export function LisSelectionExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
       <Section
         number={1}
         purpose={sectionPurposes[0]}
-        title="Read the procurement summary and requirements"
+        title="Read the purchasing summary and requirements"
       >
         <SourceInspector records={selectionSources} />
       </Section>
       <Section
         number={2}
         purpose={sectionPurposes[1]}
-        title="Check the evidence for mandatory requirements"
+        title="Decide what each demonstration showed"
       >
         <Teaching Content={Concepts} />
         <div className="topic5-card-grid">
@@ -76,10 +76,10 @@ export function LisSelectionExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
                 label={evidenceLabel(row)}
                 value={answers[row.id] ?? ""}
                 options={[
-                  ["", "Classify the evidence"],
-                  ["pass", "Demonstrated requirement met"],
-                  ["fail", "Demonstrated requirement failed"],
-                  ["unknown", "Not yet verified"],
+                  ["", "What did the demonstration show?"],
+                  ["pass", "Shown working"],
+                  ["fail", "Shown failing"],
+                  ["unknown", "Not shown yet"],
                 ]}
                 onChange={(value) => {
                   setAnswers({ ...answers, [row.id]: value });
@@ -89,8 +89,8 @@ export function LisSelectionExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
                 note={
                   answers[row.id]
                     ? (answers[row.id] === row.answer
-                        ? "Classification supported. "
-                        : "Reconsider this classification. ") + row.note
+                        ? "Matches the record. "
+                        : "Look at the record again. ") + row.note
                     : undefined
                 }
               />
@@ -105,13 +105,13 @@ export function LisSelectionExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
             onAttempt?.(true);
           }}
         >
-          Review nine evidence decisions
+          Check my nine classifications
         </button>
         <div role="status" aria-live="polite" aria-atomic="true">
           {reviewed && (
             <p>
-              {evidenceRows.filter((row) => answers[row.id] === row.answer).length} / 9 evidence
-              decisions supported.
+              {evidenceRows.filter((row) => answers[row.id] === row.answer).length} of{" "}
+              {evidenceRows.length} classifications match the records.
             </p>
           )}
         </div>
@@ -152,12 +152,12 @@ export function LisSelectionExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
               setRecommendation("");
             }}
           />{" "}
-          Include interfaces, migration, and exit amounts
+          Add interface, data migration and exit costs
         </label>
         <p>
           {extras
-            ? "All five scoped cost categories are included; internal staffing and other exclusions remain outside these totals."
-            : "Only upfront and five annual service charges are included. Other known or estimated costs are omitted, not zero."}
+            ? "All five cost items are now included. Staff time and other local costs are still left out."
+            : "Only installation and five years of service fees are included. The other costs are missing from the total, but they still have to be paid."}
         </p>
         <div className="topic5-card-grid">
           {summaries.map((row) => (
@@ -170,27 +170,27 @@ export function LisSelectionExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
                 </strong>
               </p>
               <p>
-                Evidence status:{" "}
+                Requirements:{" "}
                 <strong>
                   {!reviewed
-                    ? "Review classifications first"
+                    ? "Check your classifications first"
                     : row.eligible
-                      ? "Three mandatory requirements supported"
-                      : "Cannot recommend on current evidence"}
+                      ? "All three shown working"
+                      : "Not all three shown working"}
                 </strong>
               </p>
               <dl className="topic8-costs">
-                <dt>Upfront</dt>
+                <dt>Installation</dt>
                 <dd>{row.upfront}</dd>
                 <dt>Service: 5 × {row.annual}</dt>
                 <dd>{5 * row.annual}</dd>
-                <dt>Interfaces{row.id === "alder" ? " (allowance)" : ""}</dt>
+                <dt>Interfaces{row.id === "alder" ? " (committee estimate)" : ""}</dt>
                 <dd>{row.interfaces}</dd>
-                <dt>Migration</dt>
+                <dt>Data migration</dt>
                 <dd>{row.migration}</dd>
                 <dt>Exit</dt>
                 <dd>{row.exit}</dd>
-                <dt>Included total (USD thousands)</dt>
+                <dt>Total (USD thousands)</dt>
                 <dd>
                   <strong>{row.cost}</strong>
                 </dd>
@@ -203,7 +203,7 @@ export function LisSelectionExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
       <Section
         number={4}
         purpose={sectionPurposes[3]}
-        title="Plan installation, maintenance, and retirement"
+        title="Plan for go-live, upgrades and retirement"
       >
         {lifecycleCases.map((row) => (
           <article className="topic8-preview" key={row.id}>
@@ -230,8 +230,8 @@ export function LisSelectionExperience({ Concepts, Bridge, onAttempt }: Topic5Pr
           value={recommendation}
           options={[
             ["", "Choose a recommendation"],
-            ...vendors.map((v) => [v.id, "Proceed with " + v.name] as const),
-            ["defer", "Defer pending specified evidence or contract questions"],
+            ...vendors.map((v) => [v.id, "Take " + v.name + " forward"] as const),
+            ["defer", "Wait until the missing tests and contract questions are answered"],
           ]}
           onChange={(value) => {
             setRecommendation(value);

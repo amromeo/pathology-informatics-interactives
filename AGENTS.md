@@ -14,6 +14,20 @@ Apply these instructions whenever planning, writing, revising, or testing this c
 - Put vocabulary close to where the learner needs it and give a concrete pathology example for every abstract definition. Do not use a vocabulary word as a substitute for explaining what actually happened.
 - Harrison/API teaching slides may inform planning, faculty notes, and the source ledger. Do not place Harrison terminology crosswalks or source-oriented commentary in the learner-facing lesson unless it directly helps the learner.
 
+## Plain laboratory voice
+
+- Trainees already know these are teaching cases. Do not label cases, records, messages or images as synthetic or fictional, or add educational-only or no-patient-data disclaimers in visible text or accessibility labels. Continue creating original case data.
+- Write the way an experienced pathologist explains something to a resident at the microscope. If you would not say a sentence aloud to a resident, rewrite it.
+- Start sentences with a person or a named system doing something to a named object: the report, the accession, the worklist, the chart.
+- Say what happens in the laboratory or to the patient, not an abstract consequence.
+- Describe a test as something you could watch happen.
+- Keep most sentences under 25 words. Turn lists of more than three items into bullets.
+- State a case limitation once, in plain words.
+- Avoid these words unless a pathologist would use them in that exact sentence: evidence, establish, demonstrate, unresolved, intended use, workflow, scope, lifecycle, decision authority, mandatory, defensible, tradeoffs, compensate, aggregate, constitute, implementation, responsibilities, governance, stakeholders, leadership, readiness, operational, institutional, configuration, production, deployment, explicit, assessment.
+- Do not write slogans, "X, not Y" sentences, "does not establish" disclaimers, or strings of commands.
+- Never generate a lesson section from a template. Objectives, debriefs, check questions, practicums and faculty guides are written for each case.
+- The reference lesson for voice is `content/lessons/choose-and-govern-lis/`.
+
 ## Case setup and teaching sequence
 
 - Establish the case before presenting vocabulary or an exercise. State who the learner is, what changed, when it happened, what the laboratory observed, why the issue matters, and what the learner has been asked to do.

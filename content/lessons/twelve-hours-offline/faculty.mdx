@@ -2,69 +2,55 @@
 
 ## At a glance
 
-Allow 30 minutes. Use individually or in a small group. Project the case records and the exercise controls; keep the answer key out of view until learners commit to a decision.
-
-Learning objectives: reconcile downtime work before routine release resumes; locate the downtime reconciliation procedure; justify the first local check. PIER: 3.1, 3.3, 4.5.
+Allow 30 minutes. Run this as a discussion of what staff would do through the outage. Have residents name the person and record for each action. The lesson covers PIER 3.1, 3.3 and 4.5.
 
 ## Run of show
 
 | Minutes | Activity | Ask the group |
 | --- | --- | --- |
-| 0–6 | Read the case and records | What decision has the laboratory been asked to make? |
-| 6–21 | Make, test and revise a choice | Which record supports your decision? What could fail? |
-| 21–30 | Debrief and retrieval questions | How would you verify this in your own laboratory? |
+| 0–5 | Read the outage and follow the work moving to paper | How will the specimen stay linked to the patient? |
+| 5–13 | Choose actions in Activate, Operate and Recover | What record will the next shift need? |
+| 13–23 | Match the six patients and choose recovery actions | Has this pending order already been tested? |
+| 23–30 | Change an earlier choice and discuss restarting | Which additional check does that choice create? |
 
 ## Expected answers
 
+First use one numbered identifier block, a named laboratory incident lead, a numbered call log and a central accession log. On recovery, return to electronic work in stages and compare completed paper tests with pending electronic orders before recollection.
 
-Run the exercise as a tabletop. Reveal evidence in stages and require learners to name an owner, communication channel, documentation method, and failure check for each decision.
+On this path, the six paper records match six existing charts. Three further actions make **nine checks** in all:
 
-The most important transition is recovery: every temporary identity, order, result, critical-value call, and repeat test must be accounted for.
+- **DT-204:** match the completed troponin to its order and cancel the duplicate before recollection.
+- **DT-202:** enter the original critical potassium result and link call-log entry CL-02.
+- **DT-205:** preserve 11:06 as collection time and 18:48 as entry time.
 
-Run the controlled path first: controlled identifiers and incident command, a numbered call log and central accession log, then staged recovery and comparison before recollection. The six paper records match six established charts. There are three recovery hazards: the duplicate order for DT-204, missing critical result for DT-202, and collection/entry timestamp conflict for DT-205. A complete check resolves nine items: six identity matches and three recovery actions.
+Then change the identifier choice. Separate unit identifiers add chart MRN-490118 for Liam Brooks, who already has MRN-410118. There are still six paper records. The added chart requires a hold on entry while registration confirms the correct chart and arranges correction of the duplicate.
 
-Then change the identifier and communication decisions. Separate unit identifiers add chart MRN-490118 for the patient already represented by MRN-410118; they do not add a seventh paper record. Unit-specific communication removes call-log entry CL-02 for DT-202. Ask learners to distinguish restoring a documented critical result from investigating a call that cannot be verified in the laboratory log. Do not invent a read-back record during recovery.
+Changing the critical-result choice removes CL-02. The unit reports a call, but the laboratory has no matching record. Residents should choose verification with the clinical team and referral of the missing record for follow-up. They should not invent a read-back.
 
-Have learners deliberately leave one identifier unmatched or accept the duplicate order, check reconciliation, and choose the preferred resumption condition. Approval must still be withheld while an item remains unresolved. Changing an earlier tabletop decision clears the reconciliation selections and approval choice because the records and required actions may change.
-
-Close with the learner's actual path: which early decision created extra recovery work, which source record supports each correction, and who must review unresolved discrepancies. IT restores the service; laboratory, registration, and LIS staff reconcile the episode together, with medical leadership approving resumption under local procedures. Discuss how the team preserves original collection times, documents later entry, and avoids unnecessary recollection.
-
-## Preparing discussion with API slides
-
-Use [Association for Pathology Informatics teaching slides: System Implementation and Management (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%209%20Impl-Mgmt%20slides.pptx) by James H. Harrison, Jr., slides 11–12, 25, to prepare the discussion after residents have explained their case decision. Ask: Compare restoring stored data with restoring laboratory work. Identify which downtime records still need reconciliation after systems restart and who should verify that step. Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
-
-These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
-
+Leave one patient unmatched or choose recollection for DT-204. Even with the best approval condition selected, the laboratory should not resume normal work. Changing an earlier choice clears the recovery selections because the available records and required actions may change.
 
 ## Common misconceptions
 
-- “Confirm that the login screen appears.” Ask: what does the record actually establish? Restored connectivity does not resolve paper orders, duplicate identities or results already communicated. Reconcile them using the approved recovery process.
-- “Enter all paper results as new orders.” Ask: which conclusion would still need evidence? Restored connectivity does not resolve paper orders, duplicate identities or results already communicated. Reconcile them using the approved recovery process.
-- “Use the latest backup time as proof of recovery.” Ask: what must be checked before making the change? Identify how the team tracks unresolved work, verifies entries and prevents duplicate orders or reports.
+- **“We can log in, so downtime is over.”** Ask: where are the paper results in the chart?
+- **“Every pending order needs a specimen.”** Ask: what has already been tested for DT-204?
+- **“We should use the time the result was entered.”** Ask: would 18:48 describe when Grace Kim's blood was collected?
+- **“The nurse remembers a call, so we can mark read-back complete.”** Ask: which record confirms the recipient, time and read-back?
+- **“The duplicate order and duplicate chart are the same problem.”** Ask: which repair prevents another collection, and which keeps all results in one patient's chart?
 
 ## Discussion prompts
 
-1. What supports the case decision? A strong answer includes a specific record and the distinction: reconcile downtime work before routine release resumes.
-2. What would you check locally? A strong answer includes: locate the downtime reconciliation procedure, because identify how the team tracks unresolved work, verifies entries and prevents duplicate orders or reports.
-3. Who needs to participate? A strong answer includes the downtime coordinator and bench supervisor and separates technical work from clinical approval.
+1. Which early choice created more recovery work? *A strong answer:* separate unit identifiers created a second chart for Liam Brooks. Unit-specific call notes left the laboratory unable to verify the potassium call from its own log.
+2. Why should the team compare records before recollecting DT-204? *A strong answer:* the troponin has already been measured. Matching the patient, specimen and order lets staff preserve the result and avoid another blood draw.
+3. What does Dr. Ruiz need before agreeing to restart? *A strong answer:* completed patient matches and checks of orders, results and calls, including repeats and timestamps. The laboratory and LIS team should identify any problem still needing follow-up.
 
 ## Group variant
 
-Assign laboratory director, LIS analyst, laboratory operations and clinical service roles. Add clinical informatics and a patient advocate when considering ordering or chart use. Ask each person to state one requirement, one risk and the evidence needed before approval. The director then summarizes what can proceed and what must be resolved.
+Assign registration, bench technologist, nurse, LIS analyst and Dr. Ruiz. Have each person say what record they need from the previous person. After recovery, ask the nurse whether another collection is needed and ask Dr. Ruiz what remains to be checked.
 
 ## Assess transfer
 
-Walk through one downtime specimen and record recovery time, acceptable data loss and reconciliation steps. A strong response names the record, responsible person, first check and an unresolved risk. Use the three learner retrieval questions to distinguish an unsupported shortcut from a reasoned decision.
+Give the resident the local blank downtime forms. Ask them to show where one specimen's collection time, critical call and later chart match would be recorded. Look for a named person who performs each check.
 
-## PIER coverage
+## Using the API teaching slides
 
-- 3.1: Choose downtime actions and reconcile temporary identifiers, calls and restored records.
-- 3.3: Choose downtime actions and reconcile temporary identifiers, calls and restored records.
-- 4.5: Choose downtime actions and reconcile temporary identifiers, calls and restored records.
-
-
-## Additional source discussion
-
-### Further study with API teaching slides
-
-In [Association for Pathology Informatics teaching slides: System Implementation and Management (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%209%20Impl-Mgmt%20slides.pptx), review slides 11–12, 25. Compare restoring stored data with restoring laboratory work. Identify which downtime records still need reconciliation after systems restart and who should verify that step.
+After residents explain their recovery choices, use James H. Harrison, Jr.'s [System Implementation and Management](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%209%20Impl-Mgmt%20slides.pptx), slides 11–12 and 25. Ask which paper records still need checking after stored data are restored. Use the hospital's current downtime procedure for local practice. If the link moves, find the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets).

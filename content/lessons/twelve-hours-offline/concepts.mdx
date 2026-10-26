@@ -1,17 +1,27 @@
-### The recovery record starts during activation
+### Keep a record staff can match later
 
-A temporary identifier is the controlled label used when the usual registration and medical record number are not available. It must be unique, written on the requisition and specimen, and recorded in an assignment index so staff can later connect the paper record to one verified patient chart.
+When registration cannot supply the usual medical record number, staff need another way to label the patient and specimen. A **temporary identifier** serves that purpose during downtime. Registration records each assignment in a shared index so staff can later find the correct chart.
 
-During the interruption, the paper accession log records the order, specimen, testing, repeats, and result. A separate critical-result call log records who received a phoned result, when it was called, and whether the recipient read it back correctly. Both records are needed during recovery.
+Accessioning records the specimen when it arrives and gives it a paper accession number. The paper accession log connects the order and specimen to testing and repeats. A separate critical-result call log records who called, who received the result and when. It also records the recipient's read-back of the result.
 
-When electronic systems return, staff must preserve the time the specimen was actually collected. The later time when someone enters the paper result is a different event. Connectivity has been restored, but normal laboratory operation should not resume until identities, orders, results, calls, repeats, and timestamps have been reconciled.
+When the systems return, staff compare these paper records with the electronic orders and results. This is **reconciliation**. A result collected earlier in the day keeps its original collection time; the time someone enters it later is recorded separately.
 
-### Recover the records as well as the connection
+### How much time and work can the laboratory recover?
 
-First define how long the service can be unavailable and how much recent work could be lost. These are the recovery time objective (RTO) and recovery point objective (RPO). The laboratory must be able to identify and reconcile any work inside the possible loss interval.
+The laboratory first decides how long a service can be unavailable. That limit is its **recovery time objective (RTO)**. It also decides how much recent work could need recovery after a data loss. That interval is its **recovery point objective (RPO)**. Staff need records that let them identify and recheck work within that interval.
 
-A full backup copies the complete selected dataset. An incremental backup copies changes since the previous backup; a differential copies changes since the last full backup. Restoration requirements differ. A backup is useful only if staff can restore it and verify the recovered records.
+A backup copies data so staff can recover it later:
 
-A hot standby is kept ready for rapid use; a warm standby needs additional recovery steps; a cold standby requires more setup. Replication can copy corruption, so it is not a substitute for protected backup history. Rotating media and an offsite copy reduce shared-site risks. Test restoration, alternate network paths and reconciliation under the planned downtime procedure.
+- A **full backup** copies the complete selected dataset.
+- An **incremental backup** copies changes since the previous backup.
+- A **differential backup** copies changes since the last full backup.
 
-Use governed reporting copies in a separate data warehouse for analysis. Document the extraction schedule, permitted users and missing recent records rather than treating the copy as the live patient-care system.
+These methods require different sets of files during restoration. Ask staff to restore a backup and check the recovered records before relying on it during an outage.
+
+### What is kept ready if the main system fails?
+
+A **hot standby** is kept ready for rapid use. A **warm standby** needs more recovery steps. A **cold standby** needs more setup before staff can use it.
+
+Copying data continuously to another system can also copy corruption. The laboratory still needs protected older backups. Rotating backup media and keeping an offsite copy help if one location is damaged. A downtime drill should test restoration, another network path and reconciliation of the work done on paper.
+
+A **data warehouse** is a separate reporting copy used for analysis. Check when it was last updated and who can use it. It may be missing recent orders and results, so staff should not treat it as the current patient-care record.
