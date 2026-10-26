@@ -24,7 +24,7 @@
     "links:external": "node scripts/check-external-links.mjs"
   },
   "dependencies": {
-    "react": "^19.2.0",
+    "react": "^19.3.1",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
@@ -33,7 +33,7 @@
     "@playwright/test": "^1.64.1",
     "@types/jsdom": "^30.0.0",
     "@types/node": "^22.18.0",
-    "@types/react": "^19.1.0",
+    "@types/react": "^19.3.0",
     "@types/react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^5.0.0",
     "axe-core": "^4.14.0",
