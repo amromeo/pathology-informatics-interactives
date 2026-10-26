@@ -3,10 +3,10 @@
 Learner-facing teaching copy is stored in Markdown/MDX, not React components.
 Each lesson has a folder under `content/lessons/` containing:
 
-- `introduction.mdx` — title, case hook, learner task, and key point.
+- `introduction.mdx` — title, case setup, observable outcomes, and learner task.
 - `debrief.mdx` — principle, failure layers, roles, and safety implications.
 - `faculty.mdx` — facilitation notes, expected reasoning, and review cautions.
-- `practicum.mdx` — optional institution-based extension when present.
+- `practicum.mdx` — supervised work with local records, people, and procedures.
 
 Some lessons use additional MDX files when teaching copy appears between
 interactive sections. Lesson 2, for example, uses `concepts.mdx` for its
@@ -15,29 +15,22 @@ the downtime note. These files can be edited in the same way as the standard
 lesson files.
 
 Lesson 3 uses `concepts.mdx` for the data-quality teaching and `bridge.mdx` for
-the closing examples of pathology data science. Its complete synthetic case
+the closing examples of pathology data science. Its complete case
 table is `content/lessons/can-we-trust-this-report/report.csv`. You may edit the
 CSV in a spreadsheet program or as text. Development, testing, and production
 builds compile it automatically; no React edit is needed. The visible prompts,
 choices, feedback, and report checks are in the lesson's `interaction.ts` file.
 
-You can edit ordinary paragraphs, headings, links, bold text, and lists directly
-on GitHub. Commit the change to `main`; the Pages workflow rebuilds and
-republishes the curriculum automatically.
+You can edit ordinary paragraphs, headings, links, bold text and lists directly on GitHub. Submit a review branch and run the checks before merging. An authorized merge to `main` triggers the Pages deployment.
 
 Before revising a lesson, check `content/HARRISON-SLIDE-MAP.md`. It gives the
 Harrison/API session and slide ranges planned for every tutorial, plus the
 specific ideas that should shape the case and learner decisions. Update that
 map if you change a lesson's source plan.
 
-Structured interaction content—evidence labels, answer choices, system-trace
-steps, and validation cases—usually lives in `src/data/curriculum.ts`. Lesson 1
-keeps its role assignments and support-ticket questions beside the MDX files in
-`content/lessons/steward-at-morning-huddle/interaction.ts`. These items drive
-application state, so preserve the `id`, `owner`, and `answer` values when
-editing the visible wording.
+Each lesson owns its `lesson.ts` manifest, `interaction.ts` records and feedback, and `check.ts` retrieval questions. Preserve stable slugs, IDs and answer keys when editing wording. Primary objective claims must name an actual learner action, mark where it is taught, and point to evidence in that lesson’s content. The validator checks claims against the objective registry in `src/data/pierObjectives.ts`.
 
-Lesson 2 keeps its pathway components, synthetic system records, answer
+Lesson 2 keeps its pathway components, system records, answer
 choices, and restoration checks in
 `content/lessons/inside-a-results-journey/interaction.ts`. Preserve the `id`,
 `answer`, and `correct` values when editing the visible wording.
@@ -106,7 +99,7 @@ The two Topic 6 folders now contain editable introduction, concepts, bridge,
 debrief, faculty, and practicum MDX, plus interaction.ts for the case records,
 choices, and feedback. The stable lesson URLs are unchanged.
 
-The 168-hour window is an institution-specific review trigger, not a clinical
+The 90-day window is an institution-specific review trigger, not a clinical
 recommendation. Preserve clinical exceptions and distinguish acknowledgement,
 order changes, appropriateness, and patient outcomes. The ten-event alert replay
 and the four-week ward comparison are separate datasets; changing the replay
@@ -143,10 +136,28 @@ remain in React.
   undefined when there are no marks. Preserve location, figure, slide, and time
   denominators; do not infer reader effects from moving the threshold.
 
-Explicit coverage and primary source links are in `src/data/topic7Plan.ts`.
+Explicit coverage and primary source links are in the Topic 7 `lesson.ts` manifests.
 Preserve the existing 2.4 cross-topic mapping. Styles are scoped in Topic7.css.
 Run `npm test` and `npm run build:pages`. Completed desktop/phone checks and screenshots are recorded in `review/topic7/`.
 
 ## Topic 5 LOINC lookup
 
 `code-the-meaning` begins with local catalog naming problems, then a website comparison, purposes of other standards, mapping decisions, literature interpretation, and a urine transfer case. Narrative and literature are in concepts/bridge MDX; the lookup validator and structured feedback are in interaction.ts. Preserve code-level versus result-weighted study denominators, the sign-in alternative, and immediate feedback invalidation. Updating a code must not automatically convert numeric values or imply assay equivalence.
+
+
+## Common learner and faculty sections
+
+Every introduction includes observable outcomes. The debrief names the case finding, responsible people and PIER connection. Three questions follow the debrief: principle, local transfer and a spaced question from another lesson. The optional supervised practicum uses Who to meet, Time, Steps, Bring back, Discuss with faculty and Privacy. Faculty materials include timing, a run of show, expected reasoning, misconceptions and source discussion.
+
+All published lessons have a dedicated experience. Shared native choices, persistent feedback, accessible sections and scroll regions live in `src/components/lesson-ui/`; old Topic5 names remain compatibility exports. LessonPage owns the confirmed reset and remounts the experience, including table filters. MDX and experience modules load lazily.
+
+For calculated prose, update the local `facts.ts` and data together; `tests/mdx-facts.test.ts` compares recorded claims with calculations. The CSV compiler validates headers, record uniqueness, column counts, categories, numeric values and timestamp syntax. Do not edit generated files in `src/generated/`.
+
+## Recurring people
+
+- Dr. Maya Chen is the pathology informatics fellow in the security and downtime cases; Jordan Ellis is the LIS analyst and Dr. Elena Ruiz is the core laboratory medical director.
+- M. Okafor, MLS, verifies the complete blood count in The Missing CBC.
+- T. Nguyen is the pathologists' assistant in Where Is the Specimen?
+- Elena Park is the digital pathology technologist. Dr. Anita Shah is the director of surgical pathology in the validation case. Dr. Rao reviews the imaging and image-analysis proposals.
+
+Manifest discovery happens in `scripts/lesson-manifests.mjs`; `data:compile` generates the shared import registry. Add a `lesson.ts` beside the lesson rather than editing a central list. IDs determine order, not directory order. Generated registry and CSV modules stay untracked. The Node `loadLessons()` helper is intended for authoring scripts run with tsx.

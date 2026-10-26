@@ -1,7 +1,7 @@
 specimen_id,range_group,current_lot_ng_l,new_lot_ng_l
 TNI-001,very-low,0.6,0.7
-TNI-002,very-low,0.9,1.0
-TNI-003,very-low,1.1,1.2
+TNI-002,very-low,0.9,0.8
+TNI-003,very-low,1.1,1.3
 TNI-004,very-low,1.3,1.4
 TNI-005,very-low,1.5,1.6
 TNI-006,very-low,1.7,1.8

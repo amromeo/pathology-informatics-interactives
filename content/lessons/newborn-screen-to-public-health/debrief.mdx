@@ -1,4 +1,7 @@
-## Debrief
+## Debrief: match standards to the question they answer
+
+### What happened in this case
+
 
 The original observation identifier and free-text answer could be stored but
 were not usable by the agreed routing rules. The overall observation mapping
@@ -13,13 +16,17 @@ terminology.
 
 The laboratory and program agree on clinical meaning and follow-up. Interface
 staff implement and monitor the exchange. Standards support that agreement;
-they do not replace it or establish that the receiving workflow is complete.
+they do not replace it or confirm that the receiving workflow is complete.
 
 You selected the observation identifier and its allowed answers from a supplied
 agreement. Next, investigate why laboratories need shared observation identifiers
 at all, and verify candidate LOINC terms against a local catalog rather than
 accepting a proposed code because it exists.
 
-## Further study with API teaching slides
+### Who does what
 
-In [Association for Pathology Informatics teaching slides: Interfaces and Interoperability (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%204%20Interoperability%20slides.pptx), review slides 16–22. Compare the organization of a report with the meaning of its coded observations. Identify why a structurally accepted message may still be unusable on the receiving program's worklist.
+Work with a public-health interface lead. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
+
+### Connection to PIER 5.1, 5.2, 5.3
+
+The case asks you to match standards to the question they answer using laboratory records and explain the consequence of your choice.

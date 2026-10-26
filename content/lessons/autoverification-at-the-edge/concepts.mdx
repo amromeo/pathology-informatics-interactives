@@ -41,8 +41,8 @@ same effect for this accession, but the defects are different configurations.
 
 The controls start with the transferred rule. Change one setting at a time and
 inspect its effect below. The numeric eligibility, final-status, and critical
-gates remain in place while you edit the delta, history, QC, and flag settings.
-The trace shows every gate; release requires all gates to pass. A skipped delta
+checks remain in place while you edit the delta, history, QC, and flag settings.
+The trace shows every check; release requires all checks to pass. A skipped delta
 calculation does not override a failed eligibility or history check.
 
 ### A hold is a request for review
@@ -54,3 +54,9 @@ procedure, preserve the original result, and communicate urgent findings promptl
 Likewise, automatic release does not mean that a result is within the reference
 interval or that the patient is well. Reference intervals, reportable ranges,
 critical-result procedures, and automatic-release criteria serve different purposes.
+
+This delta rule applies to the laboratory's serial troponin order (the 1-hour and 3-hour draws in the ED chest-pain pathway). A serial order without a same-assay prior result within 24 hours suggests an ordering or identification problem, so it is held. Initial (0-hour) troponins are released through a separate rule with no delta check.
+
+### Where middleware fits
+
+Instrument middleware is an application between analyzers and the LIS. It can collect results from several instruments, apply quality-control, delta and reflex checks, and hold results for technologist review. A calculated result also needs all inputs required by its validated calculation. For example, missing age can prevent the configured estimated glomerular filtration rate (eGFR) calculation even when creatinine itself is reportable.

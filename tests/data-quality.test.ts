@@ -18,7 +18,7 @@ test("lesson 3 contains the complete synthetic report", () => {
   assert.equal(cutoverRows.length, 35);
   assert.equal(stabilizedRows.length, 210);
   assert.equal(cutoverRows.filter((row) => !row.structuredAccessionAt).length, 27);
-  assert.equal(cutoverRows.filter((row) => row.currentPostIncluded).length, 35);
+  assert.equal(cutoverRows.filter((row) => row.originalTwoPeriodGroup).length, 35);
   assert.equal(new Set(reportRows.map((row) => row.accessionId)).size, 455);
 });
 
@@ -38,7 +38,10 @@ test("the two-period and three-period reports calculate the intended summaries",
 test("the revised report separates cutover and preserves one row per eligible case", () => {
   assert.ok(fairPostRows.every((row) => row.period === "stabilized"));
   assert.ok(reportRows.every((row) => row.eligible));
-  assert.equal(fairPostRows.filter((row) => row.amended).length, new Set(fairPostRows.filter((row) => row.amended).map((row) => row.accessionId)).size);
+  assert.equal(
+    fairPostRows.filter((row) => row.amended).length,
+    new Set(fairPostRows.filter((row) => row.amended).map((row) => row.accessionId)).size,
+  );
   assert.ok(fairPostRows.some((row) => row.specimenGroup === "Biopsy"));
   assert.ok(fairPostRows.some((row) => row.specimenGroup === "Resection"));
 });
@@ -54,7 +57,29 @@ test("the weekly trend contains six pre-go-live weeks, cutover, and six later we
 });
 
 test("working-day calculations skip weekends and retain fractions", () => {
-  assert.equal(workingDaysBetween(new Date("2026-02-13T07:00:00"), new Date("2026-02-16T07:00:00")), 1);
-  assert.equal(workingDaysBetween(new Date("2026-02-16T07:00:00"), new Date("2026-02-17T19:00:00")), 1.5);
-  assert.equal(workingDaysBetween(new Date("2026-02-17T19:00:00"), new Date("2026-02-16T07:00:00")), -1.5);
+  assert.equal(
+    workingDaysBetween(new Date("2026-02-13T07:00:00"), new Date("2026-02-16T07:00:00")),
+    1,
+  );
+  assert.equal(
+    workingDaysBetween(new Date("2026-02-16T07:00:00"), new Date("2026-02-17T19:00:00")),
+    1.5,
+  );
+  assert.equal(
+    workingDaysBetween(new Date("2026-02-17T19:00:00"), new Date("2026-02-16T07:00:00")),
+    -1.5,
+  );
+});
+
+test("every finalization timestamp reproduces TAT on a weekday", () => {
+  for (const row of reportRows) {
+    const start = new Date(row.accessionedAt.replace(" ", "T"));
+    const end = new Date(row.finalizedAt.replace(" ", "T"));
+    assert.equal(
+      workingDaysBetween(start, end).toFixed(1),
+      row.tatWorkingDays.toFixed(1),
+      row.accessionId,
+    );
+    assert.ok(end.getDay() !== 0 && end.getDay() !== 6, row.accessionId);
+  }
 });

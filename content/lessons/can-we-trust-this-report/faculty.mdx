@@ -1,4 +1,21 @@
-# Faculty guide
+# Faculty guide: Can We Trust This Report?
+
+## At a glance
+
+Allow 32 minutes. Use individually or in a small group. Project the case records and the exercise controls; keep the answer key out of view until learners commit to a decision.
+
+Learning objectives: reconcile a report denominator with the source records; reconcile the export count with the accession list; justify the first local check. PIER: 2.1, 1.2.
+
+## Run of show
+
+| Minutes | Activity | Ask the group |
+| --- | --- | --- |
+| 0–6 | Read the case and records | What decision has the laboratory been asked to make? |
+| 6–22 | Make, test and revise a choice | Which record supports your decision? What could fail? |
+| 22–32 | Debrief and retrieval questions | How would you verify this in your own laboratory? |
+
+## Expected answers
+
 
 ## PIER 2.1 coverage
 
@@ -44,3 +61,43 @@ The debrief is intentionally available at any time. Residents do not need to com
 Use [Association for Pathology Informatics teaching slides: Pathology Informatics and Data (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%200%20Orientation%20slides.pptx) by James H. Harrison, Jr., slides 18–20, to prepare the discussion after residents have explained their case decision. Ask: Follow data from its creation to its use. Explain how missing accession times can change a turnaround-time summary even when the spreadsheet calculation runs correctly. Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
 
 These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
+
+
+## Common misconceptions
+
+- “Only the mean of complete records.” Ask: what does the record actually establish? The summary otherwise describes only the retained subset. Missing timestamps may be related to the operational problem being studied.
+- “Only the total number of final results.” Ask: which conclusion would still need evidence? The summary otherwise describes only the retained subset. Missing timestamps may be related to the operational problem being studied.
+- “Remove records with unexpectedly long times.” Ask: what must be checked before making the change? Start by establishing which records were included, excluded or left blank before interpreting a change in the mean.
+
+## Discussion prompts
+
+1. What supports the case decision? A strong answer includes a specific record and the distinction: reconcile a report denominator with the source records.
+2. What would you check locally? A strong answer includes: reconcile the export count with the accession list, because start by establishing which records were included, excluded or left blank before interpreting a change in the mean.
+3. Who needs to participate? A strong answer includes a quality lead and report analyst and separates technical work from clinical approval.
+
+## Group variant
+
+Assign laboratory director, LIS analyst, laboratory operations and clinical service roles. Add clinical informatics and a patient advocate when considering ordering or chart use. Ask each person to state one requirement, one risk and the evidence needed before approval. The director then summarizes what can proceed and what must be resolved.
+
+## Assess transfer
+
+Reconcile a small approved turnaround extract against its source and list missing fields and exclusions. A strong response names the record, responsible person, first check and an unresolved risk. Use the three learner retrieval questions to distinguish an unsupported shortcut from a reasoned decision.
+
+## PIER coverage
+
+- 2.1: Compare a blank structured LIS field with an accession time visible on a scanned requisition.
+- 2.1: Match seven checks on the surgical pathology dataset to the appropriate data-quality dimensions.
+- 2.1: Trace the case from accessioning through the LIS export and spreadsheet to the quality meeting.
+- 2.1: Relate the TAT case to statistical analysis, linked clinical data, image analysis, and AI/ML.
+- 1.2: Match data-quality checks, recover accession times and compare all three reporting periods.
+
+
+## Additional source discussion
+
+### Further study with API teaching slides
+
+In [Association for Pathology Informatics teaching slides: Pathology Informatics and Data (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%200%20Orientation%20slides.pptx), review slides 18–20. Follow data from its creation to its use. Explain how missing accession times can change a turnaround-time summary even when the spreadsheet calculation runs correctly.
+
+
+
+These are examples of work in pathology data science described in [PIER Essentials R5](https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf) and the [API introductory teaching slides](https://www.pathologyinformatics.org/teaching-slide-sets).

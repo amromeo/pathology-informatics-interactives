@@ -1,5 +1,22 @@
 # Faculty guide: Building and Validating a Laboratory Test
 
+## At a glance
+
+Allow 40 minutes. Use individually or in a small group. Project the case records and the exercise controls; keep the answer key out of view until learners commit to a decision.
+
+Learning objectives: validate the complete report before releasing a build; review the approved build specification; justify the first local check. PIER: 8.1, 8.2, 8.4, 4.2.
+
+## Run of show
+
+| Minutes | Activity | Ask the group |
+| --- | --- | --- |
+| 0–8 | Read the case and records | What decision has the laboratory been asked to make? |
+| 8–28 | Make, test and revise a choice | Which record supports your decision? What could fail? |
+| 28–40 | Debrief and retrieval questions | How would you verify this in your own laboratory? |
+
+## Expected answers
+
+
 ## Outcomes and sequence
 
 This lesson addresses PIER 8.1, 8.2, and 8.4 through order/report responsibility, test definition, validation and information maintenance. Allow 40 minutes: 5 for the request and report, 10 for the definition, 15 for testing, and 10 for the release discussion.
@@ -36,3 +53,38 @@ Sources support the general framework. The assay, procedure excerpt, configurati
 Use [Association for Pathology Informatics teaching slides: Laboratory Information Systems and Health Information Systems (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%203%20LIS-HIS%20slides.pptx) by James H. Harrison, Jr., slides 8–13, to prepare the discussion after residents have explained their case decision. Ask: Follow the request, configuration, and testing of a new test through separate environments. Identify which copied parameters require clinical review before the qualitative organism results can be approved. Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
 
 These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
+
+
+## Common misconceptions
+
+- “Approve because the numeric result arrived.” Ask: what does the record actually establish? A technically delivered result is not a complete verified report. Correct the build and rerun affected and unaffected cases before clinical approval.
+- “Remove the interval from the LIS too.” Ask: which conclusion would still need evidence? A technically delivered result is not a complete verified report. Correct the build and rerun affected and unaffected cases before clinical approval.
+- “Copy a similar test without a specification.” Ask: what must be checked before making the change? Compare the requested assay, units, intervals, flags, comments and chart destination with the implemented report.
+
+## Discussion prompts
+
+1. What supports the case decision? A strong answer includes a specific record and the distinction: validate the complete report before releasing a build.
+2. What would you check locally? A strong answer includes: review the approved build specification, because compare the requested assay, units, intervals, flags, comments and chart destination with the implemented report.
+3. Who needs to participate? A strong answer includes a section director and LIS build analyst and separates technical work from clinical approval.
+
+## Group variant
+
+Assign laboratory director, LIS analyst, laboratory operations and clinical service roles. Add clinical informatics and a patient advocate when considering ordering or chart use. Ask each person to state one requirement, one risk and the evidence needed before approval. The director then summarizes what can proceed and what must be resolved.
+
+## Assess transfer
+
+Complete a change record and a validation matrix for a proposed test, including manual updates. A strong response names the record, responsible person, first check and an unresolved risk. Use the three learner retrieval questions to distinguish an unsupported shortcut from a reasoned decision.
+
+## PIER coverage
+
+- 8.1: Test complete reports and record configuration versions, approvals and procedure changes.
+- 8.2: Test complete reports and record configuration versions, approvals and procedure changes.
+- 8.4: Test complete reports and record configuration versions, approvals and procedure changes.
+- 4.2: Test complete reports and record configuration versions, approvals and procedure changes.
+
+
+## Additional source discussion
+
+### Further study with API teaching slides
+
+In [Association for Pathology Informatics teaching slides: Laboratory Information Systems and Health Information Systems (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%203%20LIS-HIS%20slides.pptx), review slides 8–13. Follow the request, configuration, and testing of a new test through separate environments. Identify which copied parameters require clinical review before the qualitative organism results can be approved.

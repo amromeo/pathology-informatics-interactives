@@ -33,6 +33,8 @@ export type PierCoverageClaim = {
   summary: string;
   learnerAction: string;
   primary: boolean;
+  taughtIn?: ("interaction" | "learner-mdx" | "faculty" | "practicum")[];
+  evidence?: { file: string; contains: string }[];
 };
 
 export type SourceReference = {
@@ -43,7 +45,11 @@ export type SourceReference = {
 };
 
 export type LessonManifest = {
+  layout?: "standard" | "wide" | "system";
   id: string;
+  status?: "draft" | "published";
+  summary: string;
+  prerequisites?: string[];
   slug: string;
   title: string;
   topic: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
@@ -54,9 +60,8 @@ export type LessonManifest = {
   apiSessions: number[];
   sources: SourceReference[];
   hasLocalPracticum: boolean;
-  experience?: LessonExperience;
+  experience: LessonExperience;
   pierCoverage?: PierCoverageClaim[];
-  pilot?: "data-quality" | "interoperability" | "downtime" | "digital-pathology";
 };
 
 export type EvidenceItem = {
@@ -104,4 +109,12 @@ export type TopicDefinition = {
   title: string;
   objectives: string[];
   summary: string;
+};
+
+export type RetrievalItem = {
+  id: string;
+  kind: "principle" | "transfer" | "spaced";
+  fromLesson?: string;
+  prompt: string;
+  choices: Choice[];
 };

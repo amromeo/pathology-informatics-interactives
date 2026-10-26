@@ -3,7 +3,7 @@ import { dirname, resolve } from "node:path";
 import sharp from "sharp";
 
 const source = resolve("content/source-assets/synthetic-wsi-field.png");
-const output = resolve("public/assets/synthetic-wsi-field.webp");
+const output = resolve("content/source-assets/synthetic-wsi-field.webp");
 
 await mkdir(dirname(output), { recursive: true });
 await sharp(source)

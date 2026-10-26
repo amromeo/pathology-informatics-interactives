@@ -1,3 +1,4 @@
+import { ResetLessonButton } from "./ResetLessonButton";
 import { useState } from "react";
 import {
   goLiveEvidence,
@@ -13,21 +14,32 @@ type RoleAnswers = Record<string, OrientationRoleId>;
 type TicketAnswers = Record<string, TicketOwnerId>;
 
 export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: boolean) => void }) {
+  const [prediction, setPrediction] = useState("");
   const [roleAnswers, setRoleAnswers] = useState<RoleAnswers>({});
   const [ticketAnswers, setTicketAnswers] = useState<TicketAnswers>({});
   const [goLiveAnswer, setGoLiveAnswer] = useState<"yes" | "no" | null>(null);
+  const [misses, setMisses] = useState<Record<string, number>>({});
   const [reviewed, setReviewed] = useState(false);
 
-  const roleLabel = (id: OrientationRoleId) => orientationRoles.find((role) => role.id === id)?.label ?? id;
-  const allAnswered = orientationTasks.every((task) => roleAnswers[task.id])
-    && orientationTickets.every((ticket) => ticketAnswers[ticket.id])
-    && goLiveAnswer !== null;
+  const roleLabel = (id: OrientationRoleId) =>
+    orientationRoles.find((role) => role.id === id)?.label ?? id;
+  const allAnswered =
+    orientationTasks.every((task) => roleAnswers[task.id]) &&
+    orientationTickets.every((ticket) => ticketAnswers[ticket.id]) &&
+    goLiveAnswer !== null;
   const roleScore = orientationTasks.filter((task) => roleAnswers[task.id] === task.owner).length;
-  const ticketScore = orientationTickets.filter((ticket) => ticketAnswers[ticket.id] === ticket.answer).length;
-  const passed = roleScore === orientationTasks.length && ticketScore === orientationTickets.length && goLiveAnswer === "no";
+  const ticketScore = orientationTickets.filter(
+    (ticket) => ticketAnswers[ticket.id] === ticket.answer,
+  ).length;
+  const passed =
+    roleScore === orientationTasks.length &&
+    ticketScore === orientationTickets.length &&
+    goLiveAnswer === "no";
 
   const reset = () => {
+    setPrediction("");
     setRoleAnswers({});
+    setMisses({});
     setTicketAnswers({});
     setGoLiveAnswer(null);
     setReviewed(false);
@@ -36,21 +48,107 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
 
   return (
     <div className="experience orientation-experience">
+      <section className="lesson-section">
+        <h2>Before the meeting: would you approve Monday?</h2>
+        <dl>
+          {goLiveEvidence.map((row) => (
+            <div key={row.label}>
+              <dt>{row.label}</dt>
+              <dd>{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <fieldset>
+          <legend>Make an initial recommendation</legend>
+          {[
+            ["yes", "Approve Monday’s start"],
+            ["no", "Resolve the open items first"],
+          ].map(([id, label]) => (
+            <label key={id}>
+              <input
+                type="radio"
+                name="prediction"
+                checked={prediction === id}
+                onChange={() => setPrediction(id)}
+              />
+              {label}
+            </label>
+          ))}
+        </fieldset>
+        <p>
+          You will revisit this recommendation after assigning the work and reviewing the calls.
+        </p>
+      </section>
       <section className="lesson-section" aria-labelledby="role-title">
         <div className="section-heading">
           <span className="section-number">01</span>
-          <div><p className="eyebrow">People and responsibilities</p><h2 id="role-title">Assign the work</h2></div>
+          <div>
+            <p className="eyebrow">People and responsibilities</p>
+            <h2 id="role-title">Assign the work</h2>
+          </div>
         </div>
-        <p className="section-guidance">Choose the group primarily responsible for each part of the work.</p>
+        <p className="section-guidance">
+          Choose the group primarily responsible for each part of the work.
+        </p>
         <div className="role-assignment-list">
           {orientationTasks.map((task, index) => {
             const answer = roleAnswers[task.id];
             const correct = answer === task.owner;
-            return <article className="role-assignment-card" key={task.id}>
-              <span className="task-number">{String(index + 1).padStart(2, "0")}</span>
-              <div><h3>{task.task}</h3>{answer && <p className={correct ? "answer-note correct-note" : "answer-note incorrect-note"} aria-live="polite"><strong>{correct ? "Correct." : "Not quite."}</strong> {correct ? task.explanation : `${roleLabel(task.owner)} is the best choice here. ${task.explanation}`}</p>}</div>
-              <label><span>Responsible role or group</span><select value={answer ?? ""} onChange={(event) => { setRoleAnswers((current) => ({ ...current, [task.id]: event.target.value as OrientationRoleId })); setReviewed(false); }}><option value="" disabled>Choose a role or group</option>{orientationRoles.map((role) => <option value={role.id} key={role.id}>{role.label}</option>)}</select></label>
-            </article>;
+            return (
+              <article className="role-assignment-card" key={task.id}>
+                <span className="task-number">{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3>{task.task}</h3>
+                  <div role="status" aria-live="polite" aria-atomic="true">
+                    {answer && (
+                      <p
+                        className={
+                          correct ? "answer-note correct-note" : "answer-note incorrect-note"
+                        }
+                      >
+                        <strong>
+                          {correct
+                            ? "This responsibility fits."
+                            : "Reconsider the responsible team."}
+                        </strong>{" "}
+                        {correct
+                          ? task.explanation
+                          : (misses[task.id] ?? 0) < 2
+                            ? "Reconsider who performs the work and who approves it."
+                            : `${roleLabel(task.owner)} should lead this work. ${task.explanation}`}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <label>
+                  <span>Responsible role or group</span>
+                  <select
+                    value={answer ?? ""}
+                    onChange={(event) => {
+                      if (event.target.value !== task.owner)
+                        setMisses((current) => ({
+                          ...current,
+                          [task.id]: (current[task.id] ?? 0) + 1,
+                        }));
+                      setRoleAnswers((current) => ({
+                        ...current,
+                        [task.id]: event.target.value as OrientationRoleId,
+                      }));
+                      setReviewed(false);
+                    }}
+                  >
+                    <option value="" disabled>
+                      Choose a role or group
+                    </option>
+                    {orientationRoles.map((role) => (
+                      <option value={role.id} key={role.id}>
+                        {role.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </article>
+            );
           })}
         </div>
       </section>
@@ -58,20 +156,54 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
       <section className="lesson-section" aria-labelledby="ticket-title">
         <div className="section-heading">
           <span className="section-number">02</span>
-          <div><p className="eyebrow">After go-live</p><h2 id="ticket-title">Who should lead the investigation?</h2></div>
+          <div>
+            <p className="eyebrow">After go-live</p>
+            <h2 id="ticket-title">Who should lead the investigation?</h2>
+          </div>
         </div>
-        <p className="section-guidance">After go-live, three calls reach the laboratory. For each call, decide who needs to be involved and who should coordinate the response.</p>
+        <p className="section-guidance">
+          After go-live, three calls reach the laboratory. For each call, choose who should lead the
+          response.
+        </p>
         <div className="perspective-list">
           {orientationTickets.map((ticket) => {
             const answer = ticketAnswers[ticket.id];
             const correct = answer === ticket.answer;
-            return <article className="perspective-card" key={ticket.id}>
-              <h3>{ticket.prompt}</h3>
-              <div className="perspective-options" role="radiogroup" aria-label={ticket.prompt}>
-                {ticketOwnerOptions.map((option) => <button type="button" role="radio" aria-checked={answer === option.id} className={answer === option.id ? "selected" : ""} key={option.id} onClick={() => { setTicketAnswers((current) => ({ ...current, [ticket.id]: option.id })); setReviewed(false); }}>{option.label}</button>)}
-              </div>
-              {answer && <p className={correct ? "answer-note correct-note" : "answer-note incorrect-note"} aria-live="polite"><strong>{correct ? "Correct." : "Not quite."}</strong> {ticket.explanation}</p>}
-            </article>;
+            return (
+              <article className="perspective-card" key={ticket.id}>
+                <h3>{ticket.prompt}</h3>
+                <div className="perspective-options" role="radiogroup" aria-label={ticket.prompt}>
+                  {ticketOwnerOptions.map((option) => (
+                    <label key={option.id} className={answer === option.id ? "selected" : ""}>
+                      <input
+                        type="radio"
+                        name="OrientationExperience.tsx-1"
+                        checked={answer === option.id}
+                        onChange={() => {
+                          setTicketAnswers((current) => ({ ...current, [ticket.id]: option.id }));
+                          setReviewed(false);
+                        }}
+                      />
+                      <span>{option.label}</span>
+                    </label>
+                  ))}
+                </div>
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {answer && (
+                    <p
+                      className={
+                        correct ? "answer-note correct-note" : "answer-note incorrect-note"
+                      }
+                    >
+                      <strong>
+                        {correct ? "This responsibility fits." : "Reconsider the responsible team."}
+                      </strong>{" "}
+                      {ticket.explanation}
+                    </p>
+                  )}
+                </div>
+              </article>
+            );
           })}
         </div>
       </section>
@@ -79,26 +211,116 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
       <section className="lesson-section" aria-labelledby="go-live-title">
         <div className="section-heading">
           <span className="section-number">03</span>
-          <div><p className="eyebrow">Monday go-live</p><h2 id="go-live-title">Would you approve the go-live?</h2></div>
+          <div>
+            <p className="eyebrow">Monday go-live</p>
+            <h2 id="go-live-title">Would you approve the go-live?</h2>
+          </div>
         </div>
         <article className="artifact-card go-live-brief">
-          <header><span>Synthetic educational artifact</span><strong>Go-live readiness review</strong></header>
-          <dl className="evidence-grid">{goLiveEvidence.map((item) => <div className={`tone-${item.tone}`} key={item.label}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl>
+          <header>
+            <span>System record</span>
+            <strong>Go-live readiness review</strong>
+          </header>
+          <dl className="evidence-grid">
+            {goLiveEvidence.map((item) => (
+              <div className={`tone-${item.tone}`} key={item.label}>
+                <dt>{item.label}</dt>
+                <dd>{item.value}</dd>
+              </div>
+            ))}
+          </dl>
         </article>
         <fieldset className="go-live-choice">
           <legend>Would you approve the go-live?</legend>
-          <label className={goLiveAnswer === "yes" ? "selected" : ""}><input type="radio" name="go-live" value="yes" checked={goLiveAnswer === "yes"} onChange={() => { setGoLiveAnswer("yes"); setReviewed(false); }}/>Yes — the interface test passed</label>
-          <label className={goLiveAnswer === "no" ? "selected" : ""}><input type="radio" name="go-live" value="no" checked={goLiveAnswer === "no"} onChange={() => { setGoLiveAnswer("no"); setReviewed(false); }}/>No — the interface works, but the report and laboratory operation are not ready</label>
+          <label className={goLiveAnswer === "yes" ? "selected" : ""}>
+            <input
+              type="radio"
+              name="go-live"
+              value="yes"
+              checked={goLiveAnswer === "yes"}
+              onChange={() => {
+                setGoLiveAnswer("yes");
+                setReviewed(false);
+              }}
+            />
+            Yes — the interface test passed
+          </label>
+          <label className={goLiveAnswer === "no" ? "selected" : ""}>
+            <input
+              type="radio"
+              name="go-live"
+              value="no"
+              checked={goLiveAnswer === "no"}
+              onChange={() => {
+                setGoLiveAnswer("no");
+                setReviewed(false);
+              }}
+            />
+            No — the interface works, but the report and laboratory operation are not ready
+          </label>
         </fieldset>
-        {goLiveAnswer && <div className={`feedback ${goLiveAnswer === "no" ? "correct" : "incorrect"}`} role="status"><strong>{goLiveAnswer === "no" ? "Correct." : "Not quite."}</strong><p>{goLiveAnswer === "no" ? "Successful result transmission is only one part of go-live. The report, CDS, procedures, training, and staffing must also be ready." : "The interface test passed, but the assay is not ready for patient use."}</p></div>}
-        <div className="orientation-review">
-          <button className="primary-button" type="button" disabled={!allAnswered} onClick={() => { setReviewed(true); onAttempt?.(true); }}>Review my assignments</button>
-          {!allAnswered && <p>Complete all questions if you want a score. You can open the debrief below at any time.</p>}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {goLiveAnswer && (
+            <div className={`feedback ${goLiveAnswer === "no" ? "correct" : "incorrect"}`}>
+              <strong>
+                {goLiveAnswer === "no"
+                  ? "The assay is not ready."
+                  : "Passing the interface test is not enough."}
+              </strong>
+              <p>
+                {goLiveAnswer === "no"
+                  ? "Successful result transmission is only one part of go-live. The report, CDS, procedures, training, and staffing must also be ready."
+                  : "The interpretive comment is cut off in the verified EHR report location. Pathology has not reviewed the troponin alert logic, and procedures, training and staffing are incomplete."}
+              </p>
+            </div>
+          )}
         </div>
-        {reviewed && <div className={`feedback ${passed ? "correct" : "incorrect"}`} role="status"><strong>{passed ? "The responsibilities are clear. Open the debrief below." : "Some responsibilities are still assigned to the wrong group."}</strong><p>{passed ? "The laboratory can now see who builds, who advises, who runs the operation, and who owns the report." : `You have ${roleScore} of ${orientationTasks.length} responsibility assignments and ${ticketScore} of ${orientationTickets.length} support tickets correct. Review the marked items and try again.`}</p></div>}
+        {prediction && goLiveAnswer && (
+          <p>
+            Your initial recommendation {prediction === goLiveAnswer ? "is unchanged" : "changed"}.
+            Name the record and responsible team that justify your final decision.
+          </p>
+        )}
+        <div className="orientation-review">
+          <button
+            className="primary-button"
+            type="button"
+            disabled={!allAnswered}
+            onClick={() => {
+              setReviewed(true);
+              onAttempt?.(true);
+            }}
+          >
+            Review my assignments
+          </button>
+          {!allAnswered && (
+            <p>
+              Complete all questions if you want a score. You can open the debrief below at any
+              time.
+            </p>
+          )}
+        </div>
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {reviewed && (
+            <div className={`feedback ${passed ? "correct" : "incorrect"}`}>
+              <strong>
+                {passed
+                  ? "The responsibilities are clear. Open the debrief below."
+                  : "Some responsibilities are still assigned to the wrong group."}
+              </strong>
+              <p>
+                {passed
+                  ? "The laboratory can now see who builds, who advises, who runs the operation, and who owns the report."
+                  : `You have ${roleScore} of ${orientationTasks.length} responsibility assignments and ${ticketScore} of ${orientationTickets.length} support tickets correct. Review the marked items and try again.`}
+              </p>
+            </div>
+          )}
+        </div>
       </section>
 
-      <div className="reset-row"><button type="button" className="text-button" onClick={reset}>Reset lesson interactions</button></div>
+      <div className="reset-row">
+        <ResetLessonButton fallback={reset} />
+      </div>
     </div>
   );
 }

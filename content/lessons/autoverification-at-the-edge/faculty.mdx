@@ -1,5 +1,22 @@
 # Faculty guide: Checking Automatic Result Release
 
+## At a glance
+
+Allow 35 minutes. Use individually or in a small group. Project the case records and the exercise controls; keep the answer key out of view until learners commit to a decision.
+
+Learning objectives: test a release rule with both held and releasable results; compare the rule with the approved order pathway; justify the first local check. PIER: 4.3, 4.5, 5.4, 8.2.
+
+## Run of show
+
+| Minutes | Activity | Ask the group |
+| --- | --- | --- |
+| 0–7 | Read the case and records | What decision has the laboratory been asked to make? |
+| 7–25 | Make, test and revise a choice | Which record supports your decision? What could fail? |
+| 25–35 | Debrief and retrieval questions | How would you verify this in your own laboratory? |
+
+## Expected answers
+
+
 Require learners to test boundary values, missing prior results, instrument flags, stable abnormal results, and normal cases. Replaying only the reported result is not sufficient validation.
 
 Have the learner calculate both AV-01 differences before changing a control.
@@ -39,3 +56,40 @@ are not taken from that institution's algorithm.
 Use [Association for Pathology Informatics teaching slides: System Implementation and Management (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%209%20Impl-Mgmt%20slides.pptx) by James H. Harrison, Jr., slides 8–10, to prepare the discussion after residents have explained their case decision. Ask: Compare repeated testing of existing behavior with testing a specific change. Name an unaffected release case that belongs in the test set and explain why it matters. Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
 
 These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
+
+For initial specimens, most laboratories treat absent history as delta not applicable. The hold for missing history in this exercise is specific to the serial order; it must not be applied to every first ED troponin.
+
+
+## Common misconceptions
+
+- “Yes; every first result must be held.” Ask: what does the record actually establish? This lesson scopes its delta rule to serial orders. Initial orders use a separate release process with no delta check; other safety checks still apply.
+- “No; all first results release automatically.” Ask: which conclusion would still need evidence? This lesson scopes its delta rule to serial orders. Initial orders use a separate release process with no delta check; other safety checks still apply.
+- “Change the threshold until fewer cases hold.” Ask: what must be checked before making the change? Confirm which order, assay, prior result and other checks apply before changing a threshold.
+
+## Discussion prompts
+
+1. What supports the case decision? A strong answer includes a specific record and the distinction: test a release rule with both held and releasable results.
+2. What would you check locally? A strong answer includes: compare the rule with the approved order pathway, because confirm which order, assay, prior result and other checks apply before changing a threshold.
+3. Who needs to participate? A strong answer includes a chemistry supervisor and middleware analyst and separates technical work from clinical approval.
+
+## Group variant
+
+Assign laboratory director, LIS analyst, laboratory operations and clinical service roles. Add clinical informatics and a patient advocate when considering ordering or chart use. Ask each person to state one requirement, one risk and the evidence needed before approval. The director then summarizes what can proceed and what must be resolved.
+
+## Assess transfer
+
+Build a release/hold matrix including missing history, missing calculation inputs and an acceptable result. A strong response names the record, responsible person, first check and an unresolved risk. Use the three learner retrieval questions to distinguish an unsupported shortcut from a reasoned decision.
+
+## PIER coverage
+
+- 4.3: Run automatic-release cases, review missing calculation inputs and identify middleware responsibilities.
+- 4.5: Run automatic-release cases, review missing calculation inputs and identify middleware responsibilities.
+- 5.4: Run automatic-release cases, review missing calculation inputs and identify middleware responsibilities.
+- 8.2: Run automatic-release cases, review missing calculation inputs and identify middleware responsibilities.
+
+
+## Additional source discussion
+
+### Further study with API teaching slides
+
+In [Association for Pathology Informatics teaching slides: System Implementation and Management (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%209%20Impl-Mgmt%20slides.pptx), review slides 8–10. Compare repeated testing of existing behavior with testing a specific change. Name an unaffected release case that belongs in the test set and explain why it matters.

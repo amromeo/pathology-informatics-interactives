@@ -30,10 +30,10 @@ configuration has the intended clinical meaning.
    with the accessioning identity check. Agreement supports the identity, but
    does not tell you where the container went after receipt.
 2. **Which team was assigned the case?** Inspect the procedure entry and worklist
-   assignment event. These establish the electronic destination, but do not tell
+   assignment event. These confirm the electronic destination, but do not tell
    you whether that team received the container.
 3. **Where was receipt last documented?** Find the named receiving scan with its
-   time and workstation. This establishes the last recorded location, but not
+   time and workstation. This shows the last recorded location, but not
    necessarily the present location if no later handoff was recorded.
 
 A missing scan is an information gap. It may reflect an undocumented transfer,
@@ -64,3 +64,13 @@ do not relocate the existing container or reconstruct an unrecorded handoff.
 The LIS analyst documents the proposed change and test results for laboratory
 review; accessioning and receiving staff separately correct the existing worklist
 assignment under the approved procedure and document the physical handoff.
+
+### From the order to the worklist
+
+The order catalog presents test names, specimen requirements and collection instructions. Order-time questions collect information needed for processing; duplicate checks prompt review of existing orders; reflex orderables add tests under approved conditions. These are ways the LIS supports appropriate clinician ordering before a specimen reaches a worklist.
+
+Anatomic pathology (AP) commonly organizes a case into parts, blocks and slides. Clinical pathology (CP) commonly links an order, specimen, test and result. Both require identity checks, worklists, audit history and complete reports. Blood bank, microbiology and molecular laboratories may use specialized systems. Billing, outreach connections and dictation support different parts of the service and must preserve links to the clinical record.
+
+### Labeling and physical tracking
+
+Compare two patient identifiers, such as name and date of birth, with the requisition, then confirm accession and part. A readable barcode does not prove that the correct label was applied. Linear Code 128 is used on specimen labels; two-dimensional Data Matrix codes can fit cassettes and slides; ISBT 128 supports blood-product identification. CLSI AUTO12 addresses specimen-label content and placement. Radio-frequency identification (RFID) and location dashboards can support tracking, but a dashboard assignment is not a documented receiving event.

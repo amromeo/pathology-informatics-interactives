@@ -1,4 +1,7 @@
-## Debrief
+## Debrief: distinguish message receipt from faithful result meaning
+
+### What happened in this case
+
 
 FL-01 retained its value, unit, and final status, but CH reached a display table
 that did not recognize it. Translating CH to HH restores critical-high meaning.
@@ -18,8 +21,12 @@ The documented call and the electronic display are separate records of work.
 The next lesson applies the same distinction between arrival and meaning to a
 newborn-screening report. There, the receiving program must recognize both
 which observation is reported and what its answer means. Repairing a flag
-mapping does not establish those separate observation and answer mappings.
+mapping does not show those separate observation and answer mappings.
 
-## Further study with API teaching slides
+### Who does what
 
-In [Association for Pathology Informatics teaching slides: Interfaces and Interoperability (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%204%20Interoperability%20slides.pptx), review slides 12, 19–20. Follow the mapping between sending and receiving systems and inspect the message structure. Explain how a received message can still produce an incorrect flag in the displayed report.
+Work with an interface analyst. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
+
+### Connection to PIER 5.2, 5.3, 5.4, 8.1
+
+The case asks you to distinguish message receipt from faithful result meaning using laboratory records and explain the consequence of your choice.

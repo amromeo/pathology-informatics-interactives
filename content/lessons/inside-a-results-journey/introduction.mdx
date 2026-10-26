@@ -1,13 +1,13 @@
 # The Missing CBC
 
-> **Synthetic case:** The emergency department is treating a patient with a suspected gastrointestinal bleed. The CBC is still listed as pending in the EHR, and the team is waiting for the hemoglobin result.
+> **Case:** The emergency department is treating a patient with a suspected gastrointestinal bleed. The complete blood count (CBC) is still listed as pending in the electronic health record (EHR), and the team is waiting for the hemoglobin result.
 
-The ED calls the hematology lab. The clinical team cannot tell whether the specimen has been received in the laboratory, whether there is a problem with the specimen, or whether testing is complete. All they know is that the CBC is **Pending**.
+The emergency department (ED) calls the hematology lab. The clinical team cannot tell whether the specimen has been received in the laboratory, whether there is a problem with the specimen, or whether testing is complete. All they know is that the CBC is **Pending**.
 
 ## Terms used in this case
 
 - **Analyzer** — the instrument that performs the CBC.
-- **LIS** — the laboratory information system used to manage orders, specimens, and results.
+- **laboratory information system (LIS)** — the laboratory information system used to manage orders, specimens, and results.
 - **Interface engine** — software that sends laboratory results between systems.
 - **Firewall** — a network control that allows or blocks connections between systems.
 - **EHR** — the electronic health record used by the clinical team.
@@ -18,3 +18,12 @@ The ED calls the hematology lab. The clinical team cannot tell whether the speci
 Identify the hardware, software, network connections, and interfaces involved in electronic result reporting. Then use the records from each system to find where the report stopped.
 
 This lesson follows the CBC from the analyzer to a vendor-hosted EHR.
+
+
+## What you will be able to do
+
+- Separate a verified result from successful report delivery.
+- Trace the same result through the LIS, message queue and chart.
+- Explain why “use server uptime as proof of delivery” is an incomplete approach.
+
+Start by reading the case records. Make a choice before checking the explanation; you can revise it and test again.

@@ -19,14 +19,14 @@ before subtracting them.
 
 ### Check when the data were actually refreshed
 
-The noon page view does not establish noon data. The last successful extract
+The noon page view does not show noon data. The last successful extract
 was at 09:00; the next two scheduled queries timed out. The earlier snapshot
 contains only six completed routine records, all with 20-minute total times.
 It cannot describe the 10:00 delivery.
 
 An analytic store receives copies from operational systems through extracts or
 interfaces. **Business intelligence** tools summarize these copies for decisions.
-Data lineage records where fields came from and how they were transformed.
+Data source and processing history records where fields came from and how they were transformed.
 Freshness indicates how recent those copies are. Both matter even when a
 dashboard's arithmetic is correct.
 
@@ -68,3 +68,5 @@ Select the peak group and compare intervals. Receipt-to-analysis stays at
 minutes. The worklist log documents delayed reviewer availability. This
 supports a targeted review of staffing and workflow, rather than concluding
 that analyzer capacity caused the observed delay.
+
+Q-13 and Q-14 remain held because their hemolysis indices exceed the local potassium limit; recollection was requested. They belong in the pending denominator even though they have no final-report timestamp. Each hour, a scheduled query copies finalized results from the LIS into a separate reporting database, and the dashboard summarizes that copy. Pending work is absent unless it is deliberately included.

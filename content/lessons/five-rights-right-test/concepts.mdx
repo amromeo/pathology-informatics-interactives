@@ -2,7 +2,7 @@
 
 Clinical decision support (CDS) supplies information or actions that help someone make a care decision. In this case, the EHR retrieves the patient's prior laboratory report and pending orders, applies an approved rule, and displays guidance. The clinician reviews the information, decides whether to proceed, and leaves an order audit trail.
 
-Each step can fail separately. A correct rule can read the wrong patient's report. A correct patient match can still use an unusable or outdated result. A correct suggestion can arrive too late to help. Testing the screen alone will not establish that the underlying data and rule are correct.
+Each step can fail separately. A correct rule can read the wrong patient's report. A correct patient match can still use an unusable or outdated result. A correct suggestion can arrive too late to help. Testing the screen alone will not confirm that the underlying data and rule are correct.
 
 ### Apply the five rights to this decision
 
@@ -25,3 +25,9 @@ A concise display can make the relevant facts easier to inspect. Repeated interr
 CDS also includes order sets, relevant reference links, result summaries, documentation prompts, and laboratory protocols. For example, an order set can make the intended initial tests easier to find, while an approved reflex protocol can add a follow-up test when defined criteria are met. An interrupting alert is one option among several.
 
 Use the controls below to compare designs. The encounter preview shows the resulting message and lets you record either cancellation after review or continuation with a reason. These actions represent different clinical decisions; neither is automatically the correct response to every repeat.
+
+### Fit the decision to the workflow
+
+The order composer is the screen where a clinician chooses and edits an order. A soft stop interrupts that work but allows continuation; a hard stop prevents continuation under its defined conditions. An inline suggestion supplies information beside the order without requiring dismissal.
+
+Effective decision support must be fast enough for the task, fit the workflow, and make the next action clear. Keep rules simple, use available data, request extra information only when it changes the decision, and prefer a useful alternative over an unexplained stop. Monitor effects and maintain the rules. These principles follow Bates and colleagues' guidance; their application depends on the laboratory problem.
