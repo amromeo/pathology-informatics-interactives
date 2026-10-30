@@ -1,39 +1,31 @@
 # Who Does What in Laboratory Informatics?
 
-You are the chemistry pathology resident at Friday’s go-live readiness meeting.
+You are the chemistry pathology resident at Friday's meeting about a new high-sensitivity troponin assay. The laboratory plans to start patient testing on Monday.
 
-> **Case:** No patient data or proprietary system display is used.
+> **Case:** The analyzer sent test results through the laboratory information system (LIS) to the electronic health record (EHR). The laboratory still needs to check the report and finish preparing the section.
 
-## Is the laboratory ready?
+The laboratory director asks you to work through the remaining tasks. Who will make each change? Who will check the finished work? Would you recommend starting on Monday?
 
-A new high sensitivity troponin assay is due to go live Monday. The analyzer is talking to the laboratory information system (LIS) and the result reaches the electronic health record (EHR). Now the team has to decide whether the test is actually ready for patient use.
+## The people at the meeting
 
-## information technology (IT), the LIS team, and informatics
+- **Hospital information technology (IT)** staff keep the network and shared hospital systems running.
+- **The LIS team** adds the test to the LIS and checks the connections that carry orders and results between systems. Those connections are called interfaces.
+- **Pathology informatics** helps chemistry decide how the test should be ordered and reported, using the laboratory's usual naming and reporting practices.
+- **Clinical informatics** helps clinicians use the EHR to care for patients. That includes reviewing alerts and other functions that use laboratory results.
+- **Laboratory operations** staff prepare the section to run the assay. They arrange procedures, training, supplies and shift coverage.
+- **The pathologist or laboratory director** approves the test's order and complete report, including the report clinicians see in the EHR.
 
-- **hospital IT** supports the hospital-wide systems and keeps the network and shared systems available.
-- **The LIS team** is the laboratory-facing technical group that builds tests, maintains interfaces, and helps troubleshoot laboratory systems. Institutions organize their LIS teams differently. Some are part of pathology, while others are part of hospital IT; the latter arrangement is becoming more common.
-- **Pathology informatics** helps make laboratory systems work the way the laboratory needs them to—from ordering and specimen handling through testing, reporting, and use of the report.
-- **Clinical informatics** focuses on how the EHR and other clinical information systems are configured and used to support patient care.
-- **Laboratory operations** makes sure the procedures, staffing, training, supplies, and support plan are ready before patient testing begins.
-- **The pathologist or laboratory director** is responsible for the laboratory service and approves the order and complete result report, including how the report appears in the EHR.
+Your hospital may use different job titles. The LIS team may belong to pathology or hospital IT, and one person may do several of these jobs.
 
-*How these groups are organized varies by institution, and one person may serve more than one role.*
+## What needs checking in the chart?
 
-## Your role at the go-live meeting
+A report includes the test name, units and reference information as well as the result. Comments, flags and corrections must also reach the clinician. The laboratory checks the complete report in a specified part of the EHR. Other chart views may show only selected parts of it.
 
-Work through the final go-live checklist. Decide who does each piece of work, who must approve it, and what still needs to be fixed.
-
-## Before you start
-
-The laboratory's product is the complete result report, not just the result value. The laboratory is responsible for the report and for how the report appears in the EHR. Because the EHR may reuse parts of the report in other places, the laboratory identifies a specific report location where the complete report is verified to be correct.
-
-Responsibility for clinical decision support (CDS) is not cleanly divided between pathology informatics and clinical informatics. Laboratory-related CDS may be led by pathology informatics, but its design and review often involve clinical informatics, the laboratory, and the clinical services affected by it.
-
+The EHR also has an alert that uses the troponin result with diagnoses and medications. This is **clinical decision support (CDS)**: software that uses patient information to help someone make a care decision. Pathology and clinical informatics need to review this alert with chemistry and the clinicians who receive it.
 
 ## What you will be able to do
 
-- Assign clinical approval and technical work separately.
-- Compare the LIS report with its verified chart view.
-- Explain why “change the display before reviewing the source” is an incomplete approach.
-
-Start by reading the case records. Make a choice before checking the explanation; you can revise it and test again.
+- Assign the test build, report review and bench preparation to the people who do that work.
+- Explain why the laboratory must check the complete report in the EHR.
+- Choose who should lead when a report, trend graph or alert is wrong.
+- Use the meeting notes to decide whether Monday's start should wait.

@@ -4,52 +4,53 @@ export const checks: RetrievalItem[] = [
     id: "principle",
     kind: "principle",
     prompt:
-      "A potassium report displays the wrong units in the chart. Who approves the corrected report?",
+      "A hematology report shows the wrong hemoglobin units in the chart. Who should approve the repaired report?",
     choices: [
       {
         id: "supported",
         label: "The laboratory director",
         correct: true,
         feedback:
-          "The laboratory owns the complete report, including how it appears in the chart. The LIS and EHR teams make and test the technical change.",
+          "The laboratory director checks that the units are correct in the complete chart report. The LIS and EHR analysts make and test the change.",
       },
       {
         id: "shortcut",
         label: "The interface analyst alone",
         feedback:
-          "This leaves the central problem unresolved. The laboratory owns the complete report, including how it appears in the chart. The LIS and EHR teams make and test the technical change.",
+          "The analyst can repair the field and show that it reached the chart. The laboratory still needs to check and approve the complete report.",
       },
       {
         id: "incomplete",
         label: "The software vendor alone",
         feedback:
-          "This does not establish the needed conclusion. The laboratory owns the complete report, including how it appears in the chart. The LIS and EHR teams make and test the technical change.",
+          "The vendor knows the software, but the laboratory must decide what its hemoglobin report should say and check the version clinicians see.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt:
+      "A clinician at your hospital says the interpretive comment is cut off. What would you check before asking someone to change the display?",
     choices: [
       {
         id: "supported",
-        label: "Compare the LIS report with its verified chart view",
+        label: "Compare the LIS report with its complete report view in the EHR",
         correct: true,
         feedback:
-          "Following one result through both systems identifies the field and handoff that need repair.",
+          "Compare the same report in both places. A complete comment in the LIS but a shortened one in the chart helps the analyst trace where it was cut off.",
       },
       {
         id: "shortcut",
-        label: "Change the display before reviewing the source",
+        label: "Ask for a larger chart text box before looking at the LIS report",
         feedback:
-          "This leaves the central problem unresolved. Following one result through both systems identifies the field and handoff that need repair.",
+          "A larger text box will not recover words missing from the source report or message. Compare the reports first so the analyst changes the right part.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "Send the same repair instructions used for the troponin case",
         feedback:
-          "This does not establish the needed conclusion. Following one result through both systems identifies the field and handoff that need repair.",
+          "Your hospital may store and display the comment differently. Show the analyst your own LIS and chart reports before choosing a repair.",
       },
     ],
   },
@@ -65,19 +66,19 @@ export const checks: RetrievalItem[] = [
         label: "Communicate the verified result",
         correct: true,
         feedback:
-          "Use the approved downtime communication process, obtain read-back when required, and document the call while the delivery failure is investigated.",
+          "Call the result through the laboratory's downtime procedure, with read-back when required, and record the call. The team can investigate delivery while the clinician has the result.",
       },
       {
         id: "shortcut",
         label: "Restart the interface before calling",
         feedback:
-          "This leaves the central problem unresolved. Use the approved downtime communication process, obtain read-back when required, and document the call while the delivery failure is investigated.",
+          "A restart may not restore this result to the chart. Call the verified count first so the clinician is not left waiting during troubleshooting.",
       },
       {
         id: "incomplete",
         label: "Wait for the next scheduled report",
         feedback:
-          "This does not establish the needed conclusion. Use the approved downtime communication process, obtain read-back when required, and document the call while the delivery failure is investigated.",
+          "Waiting leaves the clinician with Pending even though the laboratory has a final count. Use the downtime procedure to communicate it now.",
       },
     ],
   },

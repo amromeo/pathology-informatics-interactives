@@ -1,17 +1,48 @@
-## Debrief: verify the model in its intended setting
+## Debrief: explain what the program found and missed
 
-### What happened in this case
+Begin with two separate answers: what the pathologists found on the slide, and what the detector called. A slide containing metastasis is a true positive only if the detector finds it. If the detector misses it, that outcome is a false negative.
 
-The four proposals are a programmed rule, supervised image detector, unsupervised clustering and generative summary. Their first reviews differ: boundaries and exceptions, independent local performance, clinical meaning of clusters, and agreement with source records.
+The local detector found 42 of 50 positive slides and missed eight. Its sensitivity was therefore 42/50, or 84%. Separating the slides into smaller groups shows why the overall number needs a closer look:
 
-The detector's initial local gap is a generalizability failure. Scanner A detects 23/25 positive slides; scanner B detects 19/25. Across scanners, micrometastasis detection is 17/25 while macrometastasis detection is 25/25. The latter result does not justify unreviewed restriction to a new intended use. September's decline from 17/25 to 12/25 micrometastases requires investigation and the agreed response to a safety threshold.
+| Group | Found | Missed | Slides with metastases |
+| --- | ---: | ---: | ---: |
+| Small deposits (micrometastases) | 17 | 8 | 25 |
+| Large deposits (macrometastases) | 25 | 0 | 25 |
+| Scanner A, both deposit sizes | 23 | 2 | 25 |
+| Scanner B, both deposit sizes | 19 | 6 | 25 |
 
-The prevalence slider changes positive predictive value because false positives come from the much larger negative population when disease is uncommon. In this model sensitivity stays fixed when only prevalence changes. Increasing separation improves both sensitivity and specificity. Those modeled changes do not rewrite the study data.
+The first two rows group the slides by deposit size. The last two regroup the same slides by scanner; they are not additional slides. All eight misses were small deposits. Six were in the small-deposit group scanned on B. Dr. Rao should begin by reviewing those missed slides with pathologists and comparing image quality, preparation and case differences.
 
-### Who does what
+### A poorer local result and a later decline
 
-The laboratory director defines the intended use and acceptance criteria. Pathologists confirm independent reference diagnoses and the human review workflow. Analysts retain model, scanner and preparation versions. The regulatory team checks device status and scope. Clinical staff agree on reporting, escalation, pause criteria and patient follow-up after a detected failure.
+The vendor found 96% of its positive slides, while the first local test found 84%. That difference was present when the model was first brought into this laboratory. It raises a generalizability question: how well does performance carry over to new cases and a new setting?
 
-### Connection to PIER 2.4
+September asks a different question. Local detection of small deposits fell from 17/25 to 12/25. The program missed 13 small deposits that month. Staff had changed the staining procedure. That is one possible cause to investigate alongside scanner use, case mix, slide quality and the pathologists' diagnoses.
 
-The learner distinguishes model categories, interprets local and longitudinal performance, and assigns the clinical and organizational reviews needed before use.
+A change over time is called drift. The laboratory needs regular reviews to detect it. If a result crosses the stopping limit agreed before use, staff should pause use while the team investigates. These monthly counts do not show whether a small change to the same image would produce a large change in the model's answer; that would require a separate test for brittleness.
+
+### Sensitivity and positive predictive value start with different groups
+
+For sensitivity, start with all the slides that contain cancer and count how many the program finds.
+
+For positive predictive value, start with all the slides the program calls positive. Some are correct calls; others are false alarms on slides without cancer. Divide the correct positive calls by the total number of positive calls.
+
+In the slider exercise, reducing prevalence from 10% to 1% changes a group of 10,000 slides from 1,000 cancer-containing slides to only 100. The model still finds the same proportion of those positive slides when separation stays fixed. But the much larger negative group continues to produce false alarms. Those false alarms make up a larger share of all positive calls, so positive predictive value falls.
+
+The 50 observed positive slides cannot answer that question by themselves. We would also need results from negative slides. The calculator shows the reasoning using assumed performance; it does not supply those missing local observations.
+
+### Different programs make different kinds of mistakes
+
+The written quality-control rule can mishandle a boundary or an exception. Test whether it holds or releases results under those conditions.
+
+The image detector can miss cancer on new slides. Compare its marks with independently reviewed local diagnoses, including the small deposits and each scanner.
+
+The clustering program can put similar measurements together without identifying a useful disease category. Find out what the tumors in each group share and whether preparation differences explain the grouping.
+
+The text generator can produce a readable summary with an invented finding or an important omission. Compare it with the original reports before using it in a cancer discussion.
+
+### Who checks the work?
+
+Before patient use, the laboratory director and reviewing pathologists agree on what the tool will do, acceptable performance, human review and stopping rules. Analysts keep the model version and scanner and stain settings so later problems can be traced. The hospital's regulatory team checks whether the product's authorization covers the proposed use.
+
+Good detection of large deposits in this small test does not automatically approve a narrower use. The team would still need to define that use, test it appropriately and decide how the pathologist will check the program's output.

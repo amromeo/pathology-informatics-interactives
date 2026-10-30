@@ -38,7 +38,7 @@ test("lesson 1 teaches the Topic 1 role and ownership boundaries", () => {
   assert.equal(orientationTasks.find((task) => task.id === "lis-build")?.owner, "lis-team");
   assert.match(
     orientationTasks.find((task) => task.id === "lis-build")?.explanation ?? "",
-    /technical build/i,
+    /LIS analyst adds the test and changes the interface/i,
   );
   assert.equal(orientationTasks.find((task) => task.id === "report")?.owner, "laboratory");
   assert.equal(
@@ -47,12 +47,12 @@ test("lesson 1 teaches the Topic 1 role and ownership boundaries", () => {
   );
   assert.match(
     orientationTasks.find((task) => task.id === "result-design")?.explanation ?? "",
-    /across the laboratory/i,
+    /across laboratory sections/i,
   );
   assert.equal(orientationTasks.find((task) => task.id === "cds")?.owner, "shared-cds");
   assert.match(
     orientationTasks.find((task) => task.id === "cds")?.explanation ?? "",
-    /not cleanly divided/i,
+    /Pathology informatics may lead.*Clinical informatics.*check.*diagnoses and medications/i,
   );
   assert.deepEqual(
     orientationTickets.map((ticket) => ticket.answer),

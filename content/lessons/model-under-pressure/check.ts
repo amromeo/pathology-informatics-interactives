@@ -4,52 +4,53 @@ export const checks: RetrievalItem[] = [
     id: "principle",
     kind: "principle",
     prompt:
-      "An image model performs poorly on a new scanner from the first local evaluation. What does this suggest?",
+      "A program trained to find abnormal cells in slide images misses them from the first local test on a new scanner. What does this suggest?",
     choices: [
       {
         id: "supported",
         label: "A generalizability problem",
         correct: true,
         feedback:
-          "The model did not transfer well to a new setting. Drift describes a change over time after a baseline has been established.",
+          "The model performed poorly as soon as it was tried in the new laboratory. That is a problem with how well it carries over to another setting.",
       },
       {
         id: "shortcut",
         label: "A proven change over time",
         feedback:
-          "This leaves the central problem unresolved. The model did not transfer well to a new setting. Drift describes a change over time after a baseline has been established.",
+          "There is no earlier local result showing better detection. To call this a later change, you would need to compare results from different times.",
       },
       {
         id: "incomplete",
         label: "A rise in disease prevalence alone",
         feedback:
-          "This does not establish the needed conclusion. The model did not transfer well to a new setting. Drift describes a change over time after a baseline has been established.",
+          "The question concerns misses among slides already known to contain abnormal cells. A different proportion of positive patients does not explain those misses by itself.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt:
+      "Your department wants to try the metastasis detector on both local scanners. What would you ask to see before agreeing?",
     choices: [
       {
         id: "supported",
-        label: "Review local results by scanner and lesion size",
+        label: "Local detection results separated by scanner and lesion size",
         correct: true,
         feedback:
-          "An overall percentage can hide poor sensitivity in a clinically important subgroup.",
+          "Compare each scanner and the small lesions separately. One good result can hide another group's misses when all the slides are pooled.",
       },
       {
         id: "shortcut",
-        label: "Accept the vendor overall accuracy alone",
+        label: "Only the vendor's overall detection rate",
         feedback:
-          "This leaves the central problem unresolved. An overall percentage can hide poor sensitivity in a clinically important subgroup.",
+          "The vendor tested its own scanner and slides. That percentage does not show how many small lesions the model misses on either of your scanners.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "The same start date and review plan used by another hospital",
         feedback:
-          "This does not establish the needed conclusion. An overall percentage can hide poor sensitivity in a clinically important subgroup.",
+          "The other hospital may use different scanners and staining methods. Your pathologists need to review detection on local slides before setting a start date.",
       },
     ],
   },
@@ -58,26 +59,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "5",
     prompt:
-      "A tumor-board image has the right patient but the wrong block. What is the defensible repair?",
+      "A slide image for the cancer discussion belongs to the right patient but comes from the wrong tissue block. A block is a piece of tissue embedded in wax so that thin slices can be cut from it. How should you repair the image's link to the case record?",
     choices: [
       {
         id: "supported",
         label: "Verify the block against the case record",
         correct: true,
         feedback:
-          "Patient identity alone cannot establish specimen or block identity. Trace the accession, part and block before linking the slide to the molecular result.",
+          "Trace the accession, part and block in the case record. Link the slide to the molecular result only after confirming which block was tested.",
       },
       {
         id: "shortcut",
         label: "Link by patient name and report date",
         feedback:
-          "This leaves the central problem unresolved. Patient identity alone cannot establish specimen or block identity. Trace the accession, part and block before linking the slide to the molecular result.",
+          "The patient may have several specimens and blocks from the same date. Name and date alone can still link the image to the wrong tissue.",
       },
       {
         id: "incomplete",
-        label: "Retain it because the diagnosis agrees",
+        label: "Keep it because the diagnosis agrees",
         feedback:
-          "This does not establish the needed conclusion. Patient identity alone cannot establish specimen or block identity. Trace the accession, part and block before linking the slide to the molecular result.",
+          "Two blocks can have the same diagnosis. Matching diagnoses does not show that this image comes from the block used for molecular testing.",
       },
     ],
   },

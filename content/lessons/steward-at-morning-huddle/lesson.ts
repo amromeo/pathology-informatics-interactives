@@ -15,7 +15,7 @@ export const manifest: LessonManifest = {
   layout: "standard",
 
   summary:
-    "A new troponin assay is scheduled to go live before report and staffing problems are resolved.",
+    "A new troponin assay is due to start Monday, but the chart report and bench preparation are unfinished.",
   sources: [
     {
       label: "PIER Essentials Release 5",
@@ -49,9 +49,9 @@ export const manifest: LessonManifest = {
       id: "1.1-steward-at-morning-huddle",
       objective: "1.1",
       summary:
-        "Assign technical work and clinical report approval, then decide whether the service is ready.",
+        "Assign the test build and report review to the right people, then decide whether Monday's start should wait.",
       learnerAction:
-        "Assign technical work and clinical report approval, then decide whether the service is ready.",
+        "Assign the test build and report review to the right people, then decide whether Monday's start should wait.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -65,9 +65,9 @@ export const manifest: LessonManifest = {
       id: "1.2-steward-at-morning-huddle",
       objective: "1.2",
       summary:
-        "Assign technical work and clinical report approval, then decide whether the service is ready.",
+        "Assign the test build and report review to the right people, then decide whether Monday's start should wait.",
       learnerAction:
-        "Assign technical work and clinical report approval, then decide whether the service is ready.",
+        "Assign the test build and report review to the right people, then decide whether Monday's start should wait.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -81,9 +81,9 @@ export const manifest: LessonManifest = {
       id: "1.3-steward-at-morning-huddle",
       objective: "1.3",
       summary:
-        "Assign technical work and clinical report approval, then decide whether the service is ready.",
+        "Assign the test build and report review to the right people, then decide whether Monday's start should wait.",
       learnerAction:
-        "Assign technical work and clinical report approval, then decide whether the service is ready.",
+        "Assign the test build and report review to the right people, then decide whether Monday's start should wait.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -97,9 +97,9 @@ export const manifest: LessonManifest = {
       id: "8.1-steward-at-morning-huddle",
       objective: "8.1",
       summary:
-        "Assign technical work and clinical report approval, then decide whether the service is ready.",
+        "Assign the test build and report review to the right people, then decide whether Monday's start should wait.",
       learnerAction:
-        "Assign technical work and clinical report approval, then decide whether the service is ready.",
+        "Assign the test build and report review to the right people, then decide whether Monday's start should wait.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [

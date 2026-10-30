@@ -30,42 +30,42 @@ export const orientationTasks: {
     task: "Keep the network and shared systems available so the LIS and instrument connections can operate.",
     owner: "it",
     explanation:
-      "hospital IT keeps the network and shared systems running. The LIS team supports the laboratory applications, and the laboratory still tests that orders and results work correctly.",
+      "Hospital IT keeps these shared services running. The LIS team supports the laboratory software and tests orders and results with the laboratory.",
   },
   {
     id: "lis-build",
-    task: "Build the new test in the LIS, make the required interface changes, and complete technical testing before laboratory review.",
+    task: "Add the test to the LIS and test the messages carrying its orders and results before laboratory review.",
     owner: "lis-team",
     explanation:
-      "The LIS team performs and supports the technical build. The laboratory determines what should be reported and reviews the completed work.",
+      "The LIS analyst adds the test and changes the interface. The laboratory tells the analyst what the report should contain, then checks the finished report.",
   },
   {
     id: "report",
     task: "Approve the order and complete result report, including how the report appears in the EHR.",
     owner: "laboratory",
     explanation:
-      "The laboratory is responsible for the complete result report and for how the report appears in the EHR. The technical teams configure the systems to the laboratory's requirements.",
+      "The laboratory director approves what the report says and how it appears in the EHR. The LIS and EHR analysts make the required changes.",
   },
   {
     id: "result-design",
-    task: "Help chemistry fit the new assay into the laboratory's usual approach to orders and results, including names, units, comments, flags, corrections, and EHR display.",
+    task: "Help chemistry use the laboratory's usual naming and reporting practices for the new assay, including its display and corrections in the EHR.",
     owner: "pathology-informatics",
     explanation:
-      "Pathology informatics helps chemistry fit the new assay into the practices used across the laboratory for naming, reporting, corrections, and EHR display.",
+      "Pathology informatics works across laboratory sections. It helps chemistry check that the assay's name, report and corrections follow the laboratory's usual practices.",
   },
   {
     id: "cds",
     task: "Develop and review an EHR alert that uses the troponin result along with diagnoses and medications.",
     owner: "shared-cds",
     explanation:
-      "Responsibility for CDS is not cleanly divided between pathology informatics and clinical informatics. Laboratory-related CDS may be led by pathology informatics, but its design and review often involve clinical informatics, the laboratory, and the clinical services affected by it.",
+      "Pathology informatics may lead an alert based on laboratory results. Clinical informatics and the treating clinicians also need to check how this alert uses diagnoses and medications.",
   },
   {
     id: "operations",
-    task: "Make sure the procedures, staffing, training, supplies, and support plan are ready before patient testing begins.",
+    task: "Prepare staff and procedures for patient testing. Check that each shift has supplies and knows whom to call for help.",
     owner: "laboratory-administration",
     explanation:
-      "Laboratory operations prepares the section to perform the test routinely. The pathologist or laboratory director provides medical oversight.",
+      "Laboratory operations staff arrange the day-to-day work at the bench. The laboratory director checks that the section can safely offer the test.",
   },
 ];
 
@@ -81,7 +81,7 @@ export const orientationTickets: {
       "The laboratory issued a corrected troponin result report, but the report displayed in the EHR is still wrong.",
     answer: "laboratory",
     explanation:
-      "Pathologist or laboratory director should lead. It is responsible for the complete result report and must verify that the corrected report appears properly in the EHR.",
+      "The pathologist or laboratory director should lead. The laboratory must check the complete corrected report in the EHR after the analyst repairs it.",
   },
   {
     id: "wrong-trend",
@@ -89,7 +89,7 @@ export const orientationTickets: {
       "The troponin report is correct. In the EHR trend graph, however, the result is plotted with results from a different assay.",
     answer: "pathology-informatics",
     explanation:
-      "Pathology informatics should lead because the problem is how two laboratory tests are represented in the patient's chart. Test identity, method changes, and whether results are sufficiently comparable to be trended together are laboratory questions. An EHR analyst may be needed to make the configuration change.",
+      "Pathology informatics should review the assays with chemistry. The laboratory must decide whether their results can be compared before an EHR analyst changes the trend graph.",
   },
   {
     id: "repeat-alert",
@@ -97,7 +97,7 @@ export const orientationTickets: {
       "A corrected troponin result causes the same EHR alert to fire again for the treating clinician.",
     answer: "clinical-informatics",
     explanation:
-      "Clinical informatics should coordinate because the alert logic and its firing behavior are EHR decision support configuration. Pathology informatics and the LIS team must first confirm how the correction was sent: a corrected result should replace the original (in HL7 v2, result status C on the same observation), not arrive as a new result. If it arrived as a new result, the fix is on the laboratory side.",
+      "Clinical informatics should coordinate the alert review. First, pathology informatics and the LIS team check whether the correction replaced the original result. In Health Level Seven version 2 (HL7 v2), status C marks a correction to the same observation. If it arrived as a new result, the laboratory team must fix that first.",
   },
 ];
 
@@ -120,8 +120,26 @@ export const goLiveEvidence = [
     tone: "warning",
   },
   {
-    label: "Operational readiness",
+    label: "Procedures, training and staffing",
     value: "Procedures, training, and staffing coverage remain incomplete",
     tone: "critical",
   },
 ] as const;
+
+export const orientationCopy = {
+  hints: {
+    connection:
+      "Which team keeps shared hospital services running when several departments need them?",
+    "lis-build": "Who can add a test definition and change the messages sent by the LIS?",
+    report: "Who can decide that the full report is suitable for patient care?",
+    "result-design":
+      "Which group helps different laboratory sections use consistent test names and reports?",
+    cds: "This alert uses both a laboratory result and other chart information. Who needs to review those together?",
+    operations: "Who arranges the bench procedures and makes sure every shift has trained staff?",
+  } as Record<string, string>,
+  hold: "The team still needs to repair the comment and review the alert. The section also needs completed procedures, trained staff and shift coverage.",
+  premature:
+    "The clinician would receive a report with part of the comment missing. The alert has not had pathology review, and the bench preparation is unfinished.",
+  complete:
+    "You have assigned the build, report review and bench preparation, and identified who should lead each call. The director can use that list to follow up before Monday.",
+};

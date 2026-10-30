@@ -4,52 +4,53 @@ export const checks: RetrievalItem[] = [
     id: "principle",
     kind: "principle",
     prompt:
-      "A vendor demonstration scores well, but a required blood-bank workflow fails. What should the selection team do?",
+      "At a blood bank system demonstration, everyone likes the screens, but a crossmatch result never reaches the chart. What should the committee do?",
     choices: [
       {
         id: "supported",
-        label: "Resolve the required workflow first",
+        label: "Hold the vendor until the fix is retested",
         correct: true,
         feedback:
-          "A high aggregate preference score cannot compensate for an unmet mandatory safety requirement. Require evidence and an acceptable plan before selection.",
+          "A result that never reaches the chart is a patient-safety failure. Good screens cannot make up for it; the vendor has to fix it and show the fix working.",
       },
       {
         id: "shortcut",
-        label: "Average the failure into the total score",
+        label: "Count it as one point in the overall score",
         feedback:
-          "This leaves the central problem unresolved. A high aggregate preference score cannot compensate for an unmet mandatory safety requirement. Require evidence and an acceptable plan before selection.",
+          "Averaging hides the failure. The vendor could lose a point here and still come out on top, even though the crossmatch never reaches the chart.",
       },
       {
         id: "incomplete",
-        label: "Treat every demonstration criterion as optional",
+        label: "Accept the vendor's plan to fix it after go-live",
         feedback:
-          "This does not establish the needed conclusion. A high aggregate preference score cannot compensate for an unmet mandatory safety requirement. Require evidence and an acceptable plan before selection.",
+          "A plan is not a fix. Until someone sees the corrected version deliver the result to the chart, the requirement has not been met.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt:
+      "Your laboratory is about to replace its anatomic pathology system. What should the committee settle before the first vendor demonstration?",
     choices: [
       {
         id: "supported",
-        label: "Agree on requirements and decision authority",
+        label: "Which tasks are must-haves, and who decides",
         correct: true,
         feedback:
-          "The team needs explicit must-haves, weighted preferences and responsibility for approving tradeoffs before viewing demonstrations.",
+          "If the committee agrees on its must-haves, and who has the final say, before any demonstration, a polished presentation cannot quietly rewrite the list.",
       },
       {
         id: "shortcut",
-        label: "Choose the vendor with the most features",
+        label: "Which vendor has the longest feature list",
         feedback:
-          "This leaves the central problem unresolved. The team needs explicit must-haves, weighted preferences and responsibility for approving tradeoffs before viewing demonstrations.",
+          "A long feature list says nothing about whether the system handles your own work, such as amended reports or block and slide tracking.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "How the vendors' prices compare",
         feedback:
-          "This does not establish the needed conclusion. The team needs explicit must-haves, weighted preferences and responsibility for approving tradeoffs before viewing demonstrations.",
+          "Price matters, but looking at it first tempts the committee to excuse a missing must-have in a cheaper system.",
       },
     ],
   },
@@ -58,26 +59,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "22",
     prompt:
-      "A new test result transmits, but its reference interval is absent in the chart. Can it go live?",
+      "A new test's result reaches the chart, but its reference interval is missing. Can the test go live?",
     choices: [
       {
         id: "supported",
-        label: "Hold approval and repair the report",
+        label: "Not yet; fix the build and retest",
         correct: true,
         feedback:
-          "A technically delivered result is not a complete verified report. Correct the build and rerun affected and unaffected cases before clinical approval.",
+          "The number arrived, but the report is incomplete without its reference interval. Correct the build, then rerun the affected cases and some that should be unchanged before the director approves it.",
       },
       {
         id: "shortcut",
-        label: "Approve because the numeric result arrived",
+        label: "Yes; the number itself came through",
         feedback:
-          "This leaves the central problem unresolved. A technically delivered result is not a complete verified report. Correct the build and rerun affected and unaffected cases before clinical approval.",
+          "Clinicians need the interval to read the number. A result that arrives without it is not the report the laboratory approved.",
       },
       {
         id: "incomplete",
-        label: "Remove the interval from the LIS too",
+        label: "Yes, once the interval is removed from the LIS too",
         feedback:
-          "This does not establish the needed conclusion. A technically delivered result is not a complete verified report. Correct the build and rerun affected and unaffected cases before clinical approval.",
+          "That makes the two systems match by making both wrong. The interval belongs on the report, so the fix is in the build.",
       },
     ],
   },

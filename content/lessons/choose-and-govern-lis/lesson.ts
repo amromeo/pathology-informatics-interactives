@@ -14,7 +14,8 @@ export const manifest: LessonManifest = {
   id: "23",
   layout: "system",
 
-  summary: "A laboratory selects a system using verified requirements and plans its maintenance.",
+  summary:
+    "A committee picks a new system by what each demonstration showed, then plans for upgrades and retirement.",
   sources: [
     {
       label: "PIER Essentials Release 5",
@@ -34,10 +35,9 @@ export const manifest: LessonManifest = {
     {
       id: "8.3-choose-and-govern-lis",
       objective: "8.3",
-      summary:
-        "Separate mandatory evidence from preference scores and choose lifecycle responsibilities.",
+      summary: "Judge each vendor by what its demonstrations showed, not by the panel's ratings.",
       learnerAction:
-        "Separate mandatory evidence from preference scores and choose lifecycle responsibilities.",
+        "Judge each vendor by what its demonstrations showed, not by the panel's ratings.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -50,10 +50,8 @@ export const manifest: LessonManifest = {
     {
       id: "8.4-choose-and-govern-lis",
       objective: "8.4",
-      summary:
-        "Separate mandatory evidence from preference scores and choose lifecycle responsibilities.",
-      learnerAction:
-        "Separate mandatory evidence from preference scores and choose lifecycle responsibilities.",
+      summary: "Decide what the laboratory must test or keep from go-live to retirement.",
+      learnerAction: "Decide what the laboratory must test or keep from go-live to retirement.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [

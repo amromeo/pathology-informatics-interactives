@@ -1,16 +1,34 @@
 # Model Under Pressure
 
-You are the pathology resident assisting Dr. Rao with a proposed metastasis second-review tool. The vendor reports detection of 192 of 200 metastasis-positive slides (96%) on its supported scanner. Your laboratory uses two scanners and a different staining workflow. Local review finds 42 of 50 positive slides (84%), including 17 of 25 micrometastases (68%) and 25 of 25 macrometastases (100%).
+Dr. Rao is a pathologist, a physician who examines tissue to diagnose disease. She is reviewing a computer program that marks places where cancer may be present in a lymph-node image. You will help her work out how the program was made, how well it performs, and what the laboratory should check before using it.
 
-Before discussing release, the committee also wants to distinguish this tool from three other proposals: an explicit laboratory rule, gene-expression clustering and a generated tumor-board summary. Your task is to identify what each does and what evidence it needs.
+### What is the program looking for?
+
+Lymph nodes are small organs that help the body respond to infection. Cancer that starts elsewhere can spread to a lymph node. A deposit of cancer that has spread is called a **metastasis**. Finding it can affect how clinicians describe the extent of a patient's cancer and plan treatment.
+
+To examine a node, laboratory staff prepare very thin slices of tissue on glass slides. They add colored stains so that cells and their surroundings are easier to see. A slide scanner makes a detailed digital image. The pathologist can then examine that image on a screen.
+
+The proposed program searches the image and marks areas for the pathologist to review. A small deposit may be difficult to find among much more normal tissue. In the tables, **micrometastases** are the small deposits and **macrometastases** are the larger deposits. We will compare them separately because a program may find large deposits while missing small ones.
+
+### Why Dr. Rao wants a closer look
+
+The company selling the program, called the **vendor**, reports finding cancer on 192 of 200 slides known to contain metastases. That is 96%. Those slides were scanned using a scanner the vendor supports.
+
+Your laboratory uses two scanners and prepares its stains differently. When staff tried the program on 50 local slides known to contain metastases, it found cancer on 42. It missed the other eight. Dr. Rao wants to understand those misses before the laboratory relies on its marks.
+
+The committee has three other proposals to consider: a rule that holds laboratory results for review, a program that groups tumors by measurements, and a program that writes a summary. Each does a different job. You will use those examples to learn why different programs need different checks.
 
 ## What you will be able to do
 
-- Classify four proposals and choose the first review each needs.
-- Inspect performance by scanner and lesion size.
-- Distinguish initial generalizability failure from a later performance change.
-- Explain how prevalence affects predictive value and assign oversight questions.
+- Explain the difference between a rule written by a person and a model trained on examples.
+- Read a detection table: identify which slides contain cancer, which the program found, and which it missed.
+- Distinguish a problem found when the program first arrives from a decline that develops later.
+- Explain why some positive calls can be wrong, especially when most slides do not contain cancer, and identify the people who should review the program before patient use.
 
 ## Your task
 
-Complete the three parts, then check the review. The sliders explore a mathematical example; the observed vendor, local and monthly results remain fixed.
+Start with the four proposals. For each, choose how the program works and what the team should check first. The explanations introduce the terms you will need; you can check each proposal as you go.
+
+Next, read the two slide tables. The first separates results by scanner and deposit size. The second compares results over three months. Use the counts to explain where detection is poor and what changed later.
+
+Then try the sliders. They calculate what might happen in a group of 10,000 slides when you change how common cancer is or how well an example model distinguishes the groups. Watch both the correctly marked slides and the false alarms. Finish by considering who checks the program's work and who can stop its use if something goes wrong.

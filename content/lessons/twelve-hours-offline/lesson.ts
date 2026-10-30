@@ -14,7 +14,8 @@ export const manifest: LessonManifest = {
   id: "08",
   layout: "standard",
 
-  summary: "A twelve-hour network outage requires paper testing, communication and reconciliation.",
+  summary:
+    "During a twelve-hour outage, staff test on paper and phone results. Match that work to the charts when the network returns.",
   sources: [
     {
       label: "PIER Essentials Release 5",
@@ -35,9 +36,9 @@ export const manifest: LessonManifest = {
       id: "3.1-twelve-hours-offline",
       objective: "3.1",
       summary:
-        "Choose downtime actions and reconcile temporary identifiers, calls and restored records.",
+        "Choose how staff work on paper, then match patient identifiers, calls and results to the restored charts.",
       learnerAction:
-        "Choose downtime actions and reconcile temporary identifiers, calls and restored records.",
+        "Choose how staff work on paper, then match patient identifiers, calls and results to the restored charts.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [
@@ -51,9 +52,9 @@ export const manifest: LessonManifest = {
       id: "3.3-twelve-hours-offline",
       objective: "3.3",
       summary:
-        "Choose downtime actions and reconcile temporary identifiers, calls and restored records.",
+        "Choose how staff work on paper, then match patient identifiers, calls and results to the restored charts.",
       learnerAction:
-        "Choose downtime actions and reconcile temporary identifiers, calls and restored records.",
+        "Choose how staff work on paper, then match patient identifiers, calls and results to the restored charts.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -67,9 +68,9 @@ export const manifest: LessonManifest = {
       id: "4.5-twelve-hours-offline",
       objective: "4.5",
       summary:
-        "Choose downtime actions and reconcile temporary identifiers, calls and restored records.",
+        "Choose how staff work on paper, then match patient identifiers, calls and results to the restored charts.",
       learnerAction:
-        "Choose downtime actions and reconcile temporary identifiers, calls and restored records.",
+        "Choose how staff work on paper, then match patient identifiers, calls and results to the restored charts.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [

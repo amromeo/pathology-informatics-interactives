@@ -2,90 +2,69 @@
 
 ## At a glance
 
-Allow 40 minutes. Use individually or in a small group. Project the case records and the exercise controls; keep the answer key out of view until learners commit to a decision.
+Allow 40 minutes. The lesson works for one resident or a small group. Project the purchasing summary and the demonstration records, and keep the answers below out of view until residents have committed to their classifications.
 
-Learning objectives: use workflow evidence to compare system proposals; agree on requirements and decision authority; justify the first local check. PIER: 8.3, 8.4.
+By the end, residents should be able to tell a failed demonstration from an unfinished one, explain why the panel's ratings cannot override a requirement, compare costs once every total includes the same items, and say what the laboratory has to do at go-live, at each upgrade, after an outage and before retiring the old system. The lesson covers PIER objectives 8.3 and 8.4.
 
 ## Run of show
 
 | Minutes | Activity | Ask the group |
 | --- | --- | --- |
-| 0–8 | Read the case and records | What decision has the laboratory been asked to make? |
-| 8–28 | Make, test and revise a choice | Which record supports your decision? What could fail? |
-| 28–40 | Debrief and retrieval questions | How would you verify this in your own laboratory? |
+| 0–5 | Read the case and the purchasing summary | On the ratings alone, which vendor would you pick? |
+| 5–15 | Classify the nine demonstration records | Which of these did someone actually see working? |
+| 15–25 | Move the weights, then add the missing costs | Did anything change about who met the requirements? |
+| 25–33 | Choose the four actions from go-live to retirement | What could go wrong if the laboratory skipped this? |
+| 33–40 | Make a recommendation and read the debrief | Would you take Birch forward now, or wait? What would you need to see first? |
 
 ## Expected answers
 
+**Demonstration records.** Alder: correction failed, recovery met, export not yet shown. Birch: all three met. Cedar: correction not yet shown, recovery met, export failed. A promised patch is not a retest. A demonstration that stopped partway is unfinished, not failed.
 
-## Outcomes and facilitation
+**Scores.** With weights of 50, 30 and 20: Alder 4.8, Birch 3.2, Cedar 3.8. With all the weight on training: 4, 4 and 3. With every weight at zero there is no score. No setting changes who met the requirements.
 
-This lesson addresses PIER 8.3 and 8.4 through selection, implementation, maintenance, and information governance. Allow 40 minutes. Ask learners to recommend a vendor from the initial scorecard, then require them to revise or defend that recommendation using the demonstration records.
+**Costs, in thousands of US dollars.** Installation plus five years of service: Alder 180 + 5 × 80 = 580; Birch 240 + 5 × 65 = 565; Cedar 160 + 5 × 70 = 510. With interfaces, data migration and exit added: 695, 695 and 720. Alder's interface figure is the committee's estimate, not a quote.
 
-Emphasize that the ratings are preferences, not measured patient outcomes. The four-hour recovery and fifteen-minute reconciliation limits are case-specific requirements, not regulatory thresholds.
+**From go-live to retirement.** Test with local interfaces and staff before go-live. Check what the upgrade changes and test it before installing. Get support, change notice, the exit export and post-outage rechecking written into the hosting contract before signing. Confirm old reports can be found before switching off the old server.
 
-## Evidence key and calculations
-
-Alder: correction fails, recovery passes, export unverified. Birch: all three pass. Cedar: correction unverified, recovery passes, export fails. A patch promise is not a retest; an unfinished demonstration is not a demonstrated failure.
-
-At weights 50/30/20, scores are Alder 4.8, Birch 3.2, Cedar 3.8. Training-only weights produce 4, 4, and 3. All-zero weights produce no score. Neither ranking establishes mandatory eligibility.
-
-Five-year base totals are 180 + 5×80 = 580, 240 + 5×65 = 565, and 160 + 5×70 = 510, in USD thousands. Adding interfaces, migration, and exit produces 695, 695, and 720. Ask which numbers are allowances versus proposals and what costs remain outside scope.
-
-The exercise prevents a learner from approving a vendor merely by misclassifying its evidence. Strong reasoning still requires the learner to identify why the failed or missing evidence matters.
-
-## Recommendation and transfer
-
-Birch may proceed to contract and local acceptance review when the evidence is classified accurately, the scoped costs included, and all lifecycle actions addressed. Deferral can also be justified; ask for specific outstanding questions, an owner, and a review date. Neither response is procurement authorization.
-
-The expected lifecycle actions are local testing and training, documented change assessment with testing and approval, downtime operation plus reconciliation, and verified historical retrieval before retirement.
-
-Ask learners to add one institution-specific requirement and a demonstration script that could falsify a vendor claim. Have them identify the approver, technical maintainer, and evidence retained for a future inspection or internal review.
-
-## Sources and limits
-
-- [PIER Essentials R5](https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf), Topic 8.
-- API/Harrison Session 3, slides 3–13 and 20–25; Session 9, slides 3–29.
-- [ASTP/ONC SAFER Guides](https://healthit.gov/clinical-quality-and-safety/safer-guides/), for organizational, system-management and contingency considerations.
-- [NIST SP 800-34 Rev. 1](https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final), for contingency planning and the system lifecycle. It is federal guidance used here as a planning reference, not a claim of a mandatory laboratory standard.
-- [42 CFR 493.1291](https://www.ecfr.gov/current/title-42/section-493.1291), for laboratory reporting and record-access responsibilities.
-
-Vendor names, records, scores, costs and thresholds are original case material. Current accreditation requirements should be checked in the institution's authorized checklist; no proprietary checklist text is reproduced.
-
-## Preparing discussion with API slides
-
-Use [Association for Pathology Informatics teaching slides: System Implementation and Management (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%209%20Impl-Mgmt%20slides.pptx) by James H. Harrison, Jr., slides 16–20, 22–25, to prepare the discussion after residents have explained their case decision. Ask: Compare stated requirements with demonstrations, testing, training, and go-live preparation. Turn one attractive vendor claim into a laboratory workflow that can be observed and judged. Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
-
-These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
-
+**Recommendation.** Birch can go forward to contract talks and testing on the laboratory's own systems. Waiting is also acceptable if the resident names what is still missing, who will get it and by when. Neither answer is permission to buy.
 
 ## Common misconceptions
 
-- “Average the failure into the total score.” Ask: what does the record actually establish? A high aggregate preference score cannot compensate for an unmet mandatory safety requirement. Require evidence and an acceptable plan before selection.
-- “Treat every demonstration criterion as optional.” Ask: which conclusion would still need evidence? A high aggregate preference score cannot compensate for an unmet mandatory safety requirement. Require evidence and an acceptable plan before selection.
-- “Choose the vendor with the most features.” Ask: what must be checked before making the change? The team needs explicit must-haves, weighted preferences and responsibility for approving tradeoffs before viewing demonstrations.
+- **"Alder scored highest, so Alder wins."** Ask: what happened when Alder corrected a report? Send them back to script C-2.
+- **"Cedar didn't finish, so Cedar failed."** Ask: what did the record actually show? An unfinished demonstration needs another session, not a fail.
+- **"The vendor will patch it, so mark it as met."** Ask: has anyone seen the patched version work?
+- **"Cedar is the cheapest."** Ask: which costs are missing from the opening totals?
+- **"The vendor tested the upgrade, so it's safe to install tonight."** Ask: whose reports, interfaces and screens did the vendor test?
 
 ## Discussion prompts
 
-1. What supports the case decision? A strong answer includes a specific record and the distinction: use workflow evidence to compare system proposals.
-2. What would you check locally? A strong answer includes: agree on requirements and decision authority, because the team needs explicit must-haves, weighted preferences and responsibility for approving tradeoffs before viewing demonstrations.
-3. Who needs to participate? A strong answer includes a laboratory director and procurement or project lead and separates technical work from clinical approval.
+1. Alder's correction failed at the demonstration. What would you need to see before considering Alder again? *A strong answer:* the fixed version, retested on the same script, ideally with one of the laboratory's own reports.
+2. Someone on the committee suggests treating corrections as "important but not required." What should happen? *A strong answer:* a change to the requirements needs a clinical reason and the director's approval, and then every vendor is rechecked against the new list, not just Alder.
+3. Who at your hospital would have to agree before the laboratory signs a contract? *A strong answer:* the laboratory director for the clinical requirements, IT and purchasing for the contract, and the LIS team for installation and testing.
 
 ## Group variant
 
-Assign laboratory director, LIS analyst, laboratory operations and clinical service roles. Add clinical informatics and a patient advocate when considering ordering or chart use. Ask each person to state one requirement, one risk and the evidence needed before approval. The director then summarizes what can proceed and what must be resolved.
+Give residents roles: laboratory director, LIS analyst, bench supervisor, a clinician who reads the reports, and someone from purchasing. Each names the one requirement they would refuse to give up and the one cost or risk that worries them most. The director then says what can go forward and what has to wait.
 
 ## Assess transfer
 
-Write a requirements-and-evidence table plus contract questions about support, changes and data export. A strong response names the record, responsible person, first check and an unresolved risk. Use the three learner retrieval questions to distinguish an unsupported shortcut from a reasoned decision.
+Ask each resident to write one requirement from their own laboratory as something a vendor could be watched doing, and the demonstration that would show whether it works. A strong answer names a real task, what success looks like on screen, and who would approve it.
+
+## Sources
+
+- [PIER Essentials R5](https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf), Topic 8.
+- API/Harrison Session 3, slides 3–13 and 20–25; Session 9, slides 3–29.
+- [ASTP/ONC SAFER Guides](https://healthit.gov/clinical-quality-and-safety/safer-guides/), on organizational, system-management and contingency planning.
+- [NIST SP 800-34 Rev. 1](https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final), on contingency planning across a system's life. It is federal guidance, used here as a planning reference rather than a laboratory standard.
+- [42 CFR 493.1291](https://www.ecfr.gov/current/title-42/section-493.1291), on laboratory reporting and access to records.
+
+Check current accreditation requirements in your institution's own checklist; no checklist text is reproduced here.
+
+## Using the API teaching slides
+
+After residents have explained their decision, [System Implementation and Management](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%209%20Impl-Mgmt%20slides.pptx) by James H. Harrison, Jr. (slides 16–20 and 22–25) works well for discussion. Ask residents to take one attractive vendor claim and turn it into a laboratory task they could watch at a demonstration, supporting their answer with a record from this lesson. The slides are background; local policy and the primary sources decide clinical and legal questions. If the link moves, the session is listed on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets).
 
 ## PIER coverage
 
-- 8.3: Separate mandatory evidence from preference scores and choose lifecycle responsibilities.
-- 8.4: Separate mandatory evidence from preference scores and choose lifecycle responsibilities.
-
-
-## Additional source discussion
-
-### Further study with API teaching slides
-
-In [Association for Pathology Informatics teaching slides: System Implementation and Management (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%209%20Impl-Mgmt%20slides.pptx), review slides 16–20, 22–25. Compare stated requirements with demonstrations, testing, training, and go-live preparation. Turn one attractive vendor claim into a laboratory workflow that can be observed and judged.
+- 8.3: choosing a new LIS on what the demonstrations showed rather than on ratings.
+- 8.4: keeping the system and its records dependable from installation to retirement.

@@ -8,7 +8,10 @@ import {
   monitorItems,
   monitoringFeedback,
 } from "../../content/lessons/human-plus-algorithm/interaction";
-import { orientationTasks } from "../../content/lessons/steward-at-morning-huddle/interaction";
+import {
+  orientationTasks,
+  orientationCopy,
+} from "../../content/lessons/steward-at-morning-huddle/interaction";
 import {
   evidenceRows,
   evidenceLabel,
@@ -47,7 +50,7 @@ for (const width of [1365, 390]) {
     const first = page.locator(".role-assignment-card").first(),
       select = first.getByRole("combobox");
     await select.selectOption(orientationTasks[0].owner === "it" ? "laboratory" : "it");
-    await expect(first).toContainText("Reconsider");
+    await expect(first).toContainText(orientationCopy.hints[orientationTasks[0].id]);
     await expect(first).not.toContainText("should lead this work");
     await select.selectOption(orientationTasks[0].owner);
     await expect(first.locator(".correct-note")).toBeVisible();
@@ -58,16 +61,16 @@ for (const width of [1365, 390]) {
     await page
       .getByRole("combobox", { name: "Alder: corrected reports evidence", exact: true })
       .selectOption("pass");
-    await expect(page.locator("main")).toContainText("Reconsider");
+    await expect(page.locator("main")).toContainText("Look at the record again");
     for (const r of evidenceRows)
       await page
         .getByRole("combobox", { name: evidenceLabel(r), exact: true })
         .selectOption(r.answer);
-    await page.getByRole("button", { name: "Review nine evidence decisions" }).click();
-    await expect(page.locator("main")).toContainText("9 / 9");
+    await page.getByRole("button", { name: "Check my nine classifications" }).click();
+    await expect(page.locator("main")).toContainText("9 of 9");
     await page.getByRole("slider", { name: "training weight", exact: true }).focus();
     await page.keyboard.press("End");
-    await expect(page.locator("main")).toContainText("Cannot recommend on current evidence");
+    await expect(page.locator("main")).toContainText("Not all three shown working");
   });
   test(`${width} mitosis monitor rejects selecting every item`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });

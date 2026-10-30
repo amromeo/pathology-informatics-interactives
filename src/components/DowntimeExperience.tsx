@@ -118,7 +118,7 @@ export function DowntimeExperience({
         <div className="section-heading">
           <span className="section-number">02</span>
           <div>
-            <p className="eyebrow">System trace</p>
+            <p className="eyebrow">Work during downtime</p>
             <h2 id="downtime-trace-title">Follow the work that moves to paper</h2>
           </div>
         </div>
@@ -167,8 +167,8 @@ export function DowntimeExperience({
         <div className="section-heading">
           <span className="section-number">03</span>
           <div>
-            <p className="eyebrow">Phased tabletop</p>
-            <h2 id="tabletop-title">Make the decisions that shape recovery</h2>
+            <p className="eyebrow">Through the day</p>
+            <h2 id="tabletop-title">Choose how staff will work during the outage</h2>
           </div>
         </div>
         {Concepts && (
@@ -239,11 +239,6 @@ export function DowntimeExperience({
                   <div role="status" aria-live="polite" aria-atomic="true">
                     {selected && (
                       <div className={`feedback ${selected.preferred ? "correct" : "incorrect"}`}>
-                        <strong>
-                          {selected.preferred
-                            ? "This creates a controlled handoff."
-                            : "This creates additional recovery work."}
-                        </strong>
                         <p>{selected.feedback}</p>
                       </div>
                     )}
@@ -291,9 +286,9 @@ export function DowntimeExperience({
             </strong>
             <small>
               {controlledIdentifiers
-                ? "One assignment index supports matching."
+                ? "Staff can use one index to match patients."
                 : downtimeState.decisions["temporary-identifiers"]
-                  ? "Recovery includes a duplicate-chart pair."
+                  ? "One patient has two charts to check."
                   : "Choose an Activate response."}
             </small>
           </article>
@@ -525,7 +520,7 @@ export function DowntimeExperience({
               {reconciliationRun
                 ? score.hazardsMissed.length
                   ? `${score.hazardsMissed.length} identity or recovery hazards remain.`
-                  : "Every record and recovery hazard is resolved."
+                  : "Every patient match and recovery action is correct."
                 : "Complete the selections, then check the work."}
             </span>
           </div>
@@ -535,7 +530,7 @@ export function DowntimeExperience({
             <div className={`feedback ${reconciliationClean ? "correct" : "incorrect"}`}>
               <strong>
                 {reconciliationClean
-                  ? "The downtime episode reconciles cleanly."
+                  ? "The patient matches and recovery actions are correct."
                   : "Normal operation is not ready to resume."}
               </strong>
               <ul>
@@ -553,9 +548,7 @@ export function DowntimeExperience({
           <span className="section-number">05</span>
           <div>
             <p className="eyebrow">Return to normal operation</p>
-            <h2 id="resumption-title">
-              What must be true before medical leadership approves resumption?
-            </h2>
+            <h2 id="resumption-title">What must Dr. Ruiz check before approving the return?</h2>
           </div>
         </div>
         <fieldset
@@ -585,17 +578,17 @@ export function DowntimeExperience({
             <div className={`feedback ${readyToResume ? "correct" : "incorrect"}`}>
               <strong>
                 {readyToResume
-                  ? "The laboratory is ready for medical review and approval."
+                  ? "The checks are ready for Dr. Ruiz to review."
                   : "Do not approve normal operation yet."}
               </strong>
               <p>{selectedResumption.feedback}</p>
               <p>
                 {controlledIdentifiers
-                  ? "Because registration used a controlled identifier block, the six paper records can be matched to established charts."
-                  : "Because units assigned separate identifiers, recovery includes a duplicate patient chart that must be held and reconciled."}{" "}
+                  ? "Registration used one numbered block, so staff can match the six paper records to existing charts."
+                  : "The units assigned separate identifiers, so registration must check a duplicate patient chart before results are entered."}{" "}
                 {controlledCalls
                   ? "The numbered call log provides the communication record for the critical potassium."
-                  : "The phoned potassium has no laboratory call-log entry, so communication must be verified from other source records."}{" "}
+                  : "The laboratory has no log entry for the potassium call. Staff need to check the call with the clinical unit."}{" "}
                 {reconciliationRun
                   ? `${score.resolved} of ${score.total} reconciliation items are resolved.`
                   : "The reconciliation selections have not been checked."}

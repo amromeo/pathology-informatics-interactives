@@ -55,17 +55,24 @@ for (const width of [1365, 390]) {
     await page.getByRole("button", { name: "Check the AI review", exact: true }).click();
     await expect(page.locator(".experience .feedback.incorrect").first()).toBeVisible();
     for (const r of proposals) {
-      await page
-        .getByRole("group", { name: r.id + ": model type", exact: true })
+      const card = page.getByRole("article", { name: r.title, exact: true });
+      await card
+        .getByRole("group", { name: "How was this program made?", exact: true })
         .locator('input[value="' + r.kind + '"]')
         .check();
-      await page
-        .getByRole("group", { name: r.id + ": first review", exact: true })
+      await card
+        .getByRole("group", { name: "What should the team check first?", exact: true })
         .locator('input[value="' + r.review + '"]')
         .check();
+      await expect(card.locator(".feedback")).toHaveCount(0);
+      await card.getByRole("button", { name: "Check this proposal", exact: true }).click();
+      await expect(card.locator(".feedback.correct")).toContainText(r.why);
     }
     await page
-      .getByRole("group", { name: "What explains the gap at first local use?", exact: true })
+      .getByRole("group", {
+        name: "What does the lower detection rate at the first local test suggest?",
+        exact: true,
+      })
       .locator('input[value="generalize"]')
       .check();
     await page.locator('input[value="change"]').check();
@@ -76,6 +83,70 @@ for (const width of [1365, 390]) {
         .check();
     await page.getByRole("button", { name: "Check the AI review", exact: true }).click();
     await expect(page.locator(".experience .feedback.incorrect")).toHaveCount(0);
+
+    const firstProposal = page.getByRole("article", { name: proposals[0].title, exact: true });
+    await firstProposal
+      .getByRole("group", { name: "How was this program made?", exact: true })
+      .locator('input[value="generative"]')
+      .check();
+    await expect(firstProposal.locator(".feedback")).toHaveCount(0);
+    await expect(
+      page
+        .getByRole("article", { name: proposals[1].title, exact: true })
+        .locator(".feedback.correct"),
+    ).toBeVisible();
+    await firstProposal.getByRole("button", { name: "Check this proposal", exact: true }).click();
+    await expect(firstProposal.locator(".feedback.incorrect")).toBeVisible();
+
+    const observed = page.getByRole("region", { name: "Local verification", exact: true });
+    const monthly = page.getByRole("region", { name: "Monthly monitoring", exact: true });
+    const observedBefore = await observed.innerText();
+    const monthlyBefore = await monthly.innerText();
+    const calculated = page.getByRole("region", { name: "Calculated results", exact: true });
+    await expect(calculated.getByRole("status")).toContainText(
+      "positive predictive value is 45.1%",
+    );
+    await page
+      .getByRole("slider", { name: "Slides with metastases (prevalence)", exact: true })
+      .focus();
+    await page.keyboard.press("Home");
+    await expect(calculated.getByRole("status")).toContainText("100 of 10,000");
+    await expect(calculated.getByRole("status")).toContainText("Sensitivity is 88.1%");
+    await expect(calculated.getByRole("status")).toContainText("specificity is 88.1%");
+    await expect(calculated.getByRole("status")).toContainText("positive predictive value is 6.9%");
+    await expect(
+      calculated
+        .getByRole("row")
+        .filter({ hasText: "True positive: cancer found" })
+        .getByRole("cell")
+        .last(),
+    ).toHaveText("88");
+    await expect(
+      calculated
+        .getByRole("row")
+        .filter({ hasText: "False positive: a false alarm" })
+        .getByRole("cell")
+        .last(),
+    ).toHaveText("1180");
+    await page.getByRole("slider", { name: "Model separation", exact: true }).focus();
+    await page.keyboard.press("End");
+    await expect(calculated.getByRole("status")).toContainText("Sensitivity is 98.2%");
+    expect(await observed.innerText()).toBe(observedBefore);
+    expect(await monthly.innerText()).toBe(monthlyBefore);
+
+    await page
+      .getByRole("button", { name: "Clear my answers and start this lesson over", exact: true })
+      .first()
+      .click();
+    await page.getByRole("button", { name: "Clear all answers", exact: true }).click();
+    await expect(page.locator(".experience .feedback")).toHaveCount(0);
+    await expect(page.locator(".experience input[type=radio]:checked")).toHaveCount(0);
+    await expect(
+      page.getByRole("slider", { name: "Slides with metastases (prevalence)", exact: true }),
+    ).toHaveValue("10");
+    await expect(page.getByRole("slider", { name: "Model separation", exact: true })).toHaveValue(
+      "2",
+    );
   });
   test(width + " build wrong/correct reports and checklist omissions", async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });

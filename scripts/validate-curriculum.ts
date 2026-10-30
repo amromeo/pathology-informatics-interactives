@@ -3,6 +3,7 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { lessons, topics } from "../src/data/curriculum";
 import { pierObjectives } from "../src/data/pierObjectives";
+import { lessonVoice } from "./voice-check";
 const fail = (message: string): never => {
   throw Error(message);
 };
@@ -33,6 +34,11 @@ for (const { manifest: m } of lessons) {
   if (!m.experience || (m.status !== "draft" && m.experience === "generic"))
     fail(m.slug + " lacks a dedicated published experience.");
   const folder = resolve("content/lessons", m.slug);
+  const voice = lessonVoice(folder);
+  if (voice.perThousand > 3 || voice.templates > 0)
+    console.warn(
+      `${m.slug}: voice review — ${voice.perThousand.toFixed(1)} flagged words per 1,000; ${voice.templates} repeated phrases. Read the sentences before revising.`,
+    );
   for (const file of [
     "introduction.mdx",
     "debrief.mdx",

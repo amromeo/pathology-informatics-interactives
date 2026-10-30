@@ -1,11 +1,24 @@
-### Separate transfer performance from change over time
+### Begin with the pathologists' answers
 
-Sensitivity is the proportion of reference-positive slides detected: detected positives divided by all reference positives. The local study has 50 positive slides and cannot estimate specificity or positive predictive value by itself. Positive predictive value is the proportion of positive model calls that are truly positive; it needs both true and false positive calls in the intended population.
+Before the local test, pathologists examine the slides independently of the detector and agree on which contain metastases. Their diagnoses are the **reference diagnoses** used to judge the program's answers. “Reference” tells us which comparison we are using; disagreements still need review.
 
-A failure present on first transfer is a **generalizability** problem. The table separates scanner and lesion size so a pooled 84% cannot conceal the micrometastasis misses. **Drift** is a subsequent change in inputs or performance. The September monitor follows a stain change, but that timing is a reason to investigate, not proof of causation. **Brittleness** describes marked sensitivity to a small input change, such as a slight color shift; poor performance in a clinical subgroup alone is not the definition.
+All 50 slides in this first table contain metastases according to that review. We can therefore ask how many the detector finds and how many it misses.
 
-### What the sliders calculate
+- A **true positive** is a slide that really contains metastasis and that the detector correctly calls positive.
+- A **false negative** is a slide that contains metastasis but that the detector misses.
 
-The sliders use a deliberately simple mathematical model with a fixed threshold. Sensitivity and specificity both equal 1 / (1 + exp(-separation)). Increasing class separation makes positive and negative cases easier to distinguish in this model. Prevalence changes the proportion of positive cases among 10,000 classifications. It changes predictive value without changing sensitivity or specificity. Expected counts may be fractional because these are model expectations, not counted study observations.
+A known-positive slide can become either of those outcomes when we test the detector. Calling all 50 slides “true positives” would assume that it found every one.
 
-The observed verification and monitoring tables never change with the sliders. This calculation cannot predict the actual detector's performance or approve its clinical use.
+### Read one row before comparing the groups
+
+The first row in **Table 1** concerns 12 slides with small deposits, scanned on scanner A. The detector found 10 and missed two. Its detection rate for that group is 10 divided by 12, or 83.3%.
+
+This detection rate is called **sensitivity**: of all the slides that contain metastases, what fraction does the detector find? For the complete local set, the calculation is 42 divided by 50, or 84%. The other eight slides are misses. An 84% sensitivity does not mean that 84% of the detector's positive calls are correct; that is a different question, which we will examine with the sliders.
+
+### Why test in this laboratory?
+
+The vendor reported 96% detection on its positive slides. Local detection was lower from the first test. A model's ability to work on new cases or in a different laboratory is called **generalizability**. The lower local result is a reason to investigate how well this model carries over to your laboratory.
+
+Images can differ because of scanners, stains, tissue preparation and the kinds of cases tested. The table alone cannot tell us which difference caused a miss. Read each row of Table 1, keeping small and large deposits separate. Ask where the detector missed the largest fraction of positive slides and which cases Dr. Rao should review first.
+
+There are no cancer-free slides in this table. We cannot use it to count false alarms on negative slides or to calculate how often a positive call is correct. Those questions require negative slides too.

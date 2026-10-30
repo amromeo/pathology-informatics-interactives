@@ -6,6 +6,7 @@ Apply these instructions whenever planning, writing, revising, or testing this c
 
 - Write for pathology residents and laboratorians. Prefer the words people use in the laboratory over corporate, software-development, or AI-generated language.
 - Prefer clarity over brevity. Use enough words to explain an unfamiliar process completely; do not compress an explanation into a clever label or slogan.
+- Explain new concepts for a college or high-school student encountering the subject for the first time. Define the laboratory task as well as the computing terms, walk through a concrete example, and explain what the learner should notice before asking a question. Short sentences should build a full explanation, not replace it.
 - Use concrete language. Avoid vague phrases such as “evidence aligned,” “metric lineage,” “fair inclusion rule,” “end-to-end build,” “canonical report,” or “operational owner” unless the term is necessary, defined, and natural in context.
 - Name the actual object or action: the report, accession, specimen, result field, worklist, interface, spreadsheet, rule, or person responsible.
 - Do not describe software or data as if they were people. Avoid phrases such as “the export sees,” “the interface expects,” or “the cases disappeared.” State which field is read, copied, left blank, excluded, or used in a calculation.
@@ -13,6 +14,20 @@ Apply these instructions whenever planning, writing, revising, or testing this c
 - When a technical term is necessary, explain the process in ordinary language first and then name the term. Define acronyms and technical terms at first use.
 - Put vocabulary close to where the learner needs it and give a concrete pathology example for every abstract definition. Do not use a vocabulary word as a substitute for explaining what actually happened.
 - Harrison/API teaching slides may inform planning, faculty notes, and the source ledger. Do not place Harrison terminology crosswalks or source-oriented commentary in the learner-facing lesson unless it directly helps the learner.
+
+## Plain laboratory voice
+
+- Trainees already know these are teaching cases. Do not label cases, records, messages or images as synthetic or fictional, or add educational-only or no-patient-data disclaimers in visible text or accessibility labels. Continue creating original case data.
+- Write the way an experienced pathologist explains something to a resident at the microscope. If you would not say a sentence aloud to a resident, rewrite it.
+- Start sentences with a person or a named system doing something to a named object: the report, the accession, the worklist, the chart.
+- Say what happens in the laboratory or to the patient, not an abstract consequence.
+- Describe a test as something you could watch happen.
+- Keep most sentences under 25 words. Turn lists of more than three items into bullets.
+- State a case limitation once, in plain words.
+- Avoid these words unless a pathologist would use them in that exact sentence: evidence, establish, demonstrate, unresolved, intended use, workflow, scope, lifecycle, decision authority, mandatory, defensible, tradeoffs, compensate, aggregate, constitute, implementation, responsibilities, governance, stakeholders, leadership, readiness, operational, institutional, configuration, production, deployment, explicit, assessment.
+- Do not write slogans, "X, not Y" sentences, "does not establish" disclaimers, or strings of commands.
+- Never generate a lesson section from a template. Objectives, debriefs, check questions, practicums and faculty guides are written for each case.
+- The reference lesson for voice is `content/lessons/choose-and-govern-lis/`.
 
 ## Case setup and teaching sequence
 

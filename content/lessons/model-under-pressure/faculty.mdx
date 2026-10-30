@@ -2,53 +2,89 @@
 
 ## At a glance
 
-Allow 40 minutes. PIER 2.4: model types, verification, generalizability, drift, brittleness, implementation and oversight. Use individual prediction followed by small-group discussion. Project the verification and monitoring tables.
+Allow 40 minutes for the core exercise and more time if learners are new to laboratory testing or machine learning. Explain the case at a college or high-school level before asking for technical terms. A learner should be able to describe what the program does, what it gets wrong and how the team would find those mistakes.
+
+The lesson covers PIER 2.4 through four proposals, local slide results, monthly monitoring, a prevalence calculator and questions about patient use. The extra explanation is part of the teaching; it should not be treated as optional background that learners must already know.
 
 ## Run of show
 
-| Minutes | Activity | Ask |
+| Minutes | Activity | Ask the group |
 | --- | --- | --- |
-| 0–10 | Classify proposals and reviews | What was programmed, and what was learned? |
-| 10–22 | Inspect local and monthly results | Which denominator answers this question? |
-| 22–30 | Change prevalence and separation | Which quantity stays unchanged? |
-| 30–40 | Assign oversight questions | Who can pause use, and on what evidence? |
+| 0–10 | Read the case and classify the proposals | What did the programmer supply directly? What changed during training? |
+| 10–22 | Read one row of Table 1, then compare Table 2 | Which slides contain cancer? Which did the program find? What changed in September? |
+| 22–30 | Start at 10% prevalence and separation 2.0; lower prevalence to 1% | Which starting group is used for sensitivity? Which is used for positive predictive value? |
+| 30–40 | Review the questions before patient use and the debrief | Who examines unmarked tissue, reviews errors and can stop use? |
+
+If the first ten minutes are unfamiliar, extend that discussion rather than rushing through the definitions. The expandable notes offer more detail about training and the calculator's formula. The essential explanation is visible without opening them.
+
+## Explain the starting vocabulary
+
+A pathologist examines tissue for disease. A scanner turns a glass slide into a digital image. A metastasis is cancer that has spread from its original site. The detector marks possible deposits for review.
+
+Quality-control material has an expected range of results. A failed control raises concern about the testing process. A run is a period or batch assessed together under the laboratory's procedure; holding results keeps them from being released automatically while staff investigate.
+
+A model is a set of calculations. Parameters are adjustable numbers in those calculations. In supervised training, the program's predictions are compared with supplied answers, and parameters are adjusted to reduce errors. Testing uses separate cases. “Supervised” describes the use of labels during training; it does not promise continuous human review during use.
 
 ## Expected answers
 
-P1 rule/boundaries; P2 supervised/local; P3 unsupervised/meaning; P4 generative/sources. The initial gap is generalizability failure. September requires investigation of a change over time. G1 equity, G2 accountability, G3 documentation, G4 device status.
+**Proposals:** P1 is a programmed rule; check its limits and exceptions, including missing control results. P2 is supervised image detection; compare new local slides with independent diagnoses. P3 is unsupervised clustering; investigate what the grouped tumors share. P4 generates text; compare each statement and any omissions with the original reports.
 
-Vendor detection: 192/200 = 96%. Local: (10+13+7+12)/50 = 84%; micro: (10+7)/25 = 68%; macro: 25/25 = 100%. Scanner A: 23/25 = 92%; B: 19/25 = 76%. September: (12+25)/50 = 74%. These small selected positive sets do not estimate specificity, predictive value or patient outcomes.
+The categories overlap in practice. For this exercise, learners choose the description that best matches the proposal's work. The proposal questions ask for a program type and a first check; they do not constitute an approval decision.
 
-The slider model uses sensitivity = specificity = logistic(separation), with a fixed threshold. Expected true positives equal 10,000 × prevalence × sensitivity. False positives equal 10,000 × (1-prevalence) × (1-specificity). Predictive value is TP/(TP+FP). Prevalence alone does not change sensitivity in this model.
+**Table 1:**
+
+- Vendor: 192/200 = 96%.
+- Local total: (10 + 13 + 7 + 12)/50 = 84%; eight misses.
+- Small deposits: (10 + 7)/25 = 68%; eight misses.
+- Large deposits: 25/25 = 100%; no misses in this set.
+- Scanner A: 23/25 = 92%; scanner B: 19/25 = 76%.
+
+Have the learner explain the first row aloud: “Pathologists found metastases on 12 slides. The detector found 10 and missed two.” Those 10 are true positives; the other two are false negatives. All 12 are known-positive slides. The scanner groups contain different slides, so the difference alone cannot prove that the scanner caused the misses.
+
+**Table 2:** July and August each have 17/25 small deposits detected and 25/25 large deposits detected. September has 12/25 and 25/25: 37/50 overall, or 74%. The stain change is a possible explanation for the decline. Compare the case mix, scanner use, slide quality and independently reviewed diagnoses before assigning a cause.
+
+Generalizability concerns performance on new cases or in another setting. Drift concerns a later change. Brittleness concerns a large output change after a small input change. The lesson explains a paired-image brittleness test but does not perform one; monthly counts alone cannot prove brittleness.
+
+**Sliders:** at separation 2.0, sensitivity and specificity are about 88.1%. At 10% prevalence, expected counts round to 881 true positives, 119 false negatives, 1,073 false positives and 7,927 true negatives. PPV is about 45.1%. At 1% prevalence, counts round to 88, 12, 1,180 and 8,720, with PPV about 6.9%. The two detection rates stay fixed.
+
+Ask the learner to point to the numerator and denominator before calculating a percentage. Sensitivity starts with the truly positive slides. Specificity starts with the truly negative slides. PPV starts with all the program's positive calls.
+
+The calculator sets sensitivity and specificity to 1 / (1 + exp(-separation)). This is an assumption of the exercise, not an estimate from the 50-slide test. Expected true positives are 10,000 × prevalence × sensitivity. Expected false positives are 10,000 × (1 − prevalence) × (1 − specificity). PPV is true positives / (true positives + false positives). The display rounds counts to whole slides and calculates percentages before rounding.
+
+**Questions before patient use:** G1 concerns differences between patient groups and sites. G2 concerns who reviews the work and can stop use. G3 concerns records of versions and settings. G4 concerns device authorization for the proposed use.
 
 ## Common misconceptions
 
-- Vendor performance transfers automatically. Ask which scanner, stain and cases were tested.
-- A pooled rate is sufficient. Ask which lesions are missed.
-- Every performance gap is drift. Ask whether it was present at first use.
-- Fluent generated text is reliable. Ask where each statement appears in the source.
-- A high macrometastasis rate permits a new use. Ask who approved the scope and workflow.
+- **“Positive means the computer found it.”** Separate the pathologists' finding from the program's call. A known-positive slide can be missed.
+- **“It found 84%, so 84% of its positive calls are right.”** Ask which group supplied the denominator. The positive-only test measures sensitivity, not PPV.
+- **“The model keeps learning whenever it sees a slide.”** Ask whether the saved parameters are actually being changed. Running a trained model and training it are separate activities.
+- **“The vendor found 96%, so we should too.”** Compare the scanners, stains and kinds of slides.
+- **“September proves the stain caused the problem.”** Ask what other differences should be checked.
+- **“A cluster is a diagnosis.”** Ask what the tumors share and whether sample preparation could explain the group.
+- **“The summary reads well, so it must be right.”** Find the supporting statement in each original report.
 
 ## Discussion prompts
 
-1. What must happen before a restricted pilot? A strong answer includes intended use, independent local evidence, human review and stop criteria.
-2. Why can predictive value fall when sensitivity stays fixed? A strong answer includes the increasing number of negative cases supplying false positives.
-3. Does September prove the stain change caused the decline? A strong answer includes case mix, reference review and a controlled investigation.
+1. Why test new slides after training? Look for an explanation that success on examples used to adjust the model does not show how it handles new cases.
+2. Why did PPV fall when prevalence fell? Look for both parts: fewer truly positive slides and a larger negative group that still produces false alarms.
+3. What would Dr. Rao need before patient use? Look for a defined job, representative local testing, a plan for human review, stopping rules and a review of device status.
 
 ## Group variant
 
-Assign laboratory director, pathologist, analyst, clinical service and patient advocate. Review the same packet from each role, then agree on an unresolved question and an accountable person.
+Assign the laboratory director, reviewing pathologist, analyst and treating clinician roles. Each learner names one mistake they need to be able to detect and what information they would use. Let another learner explain the proposed checks to a patient in ordinary words.
 
 ## Assess transfer
 
-Ask how the verification plan would change for a different scanner or a generated pathology summary.
+Ask the learner how the first check would change for a new scanner versus a generated cancer summary. The answer should identify different possible mistakes and a different comparison for finding them.
 
 ## Sources
 
-[FDA good machine learning practice](https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/good-machine-learning-practice-medical-device-development-guiding-principles) supports representative local evaluation and monitoring. The API machine-learning session supplies additional teaching background. [Practical Machine Learning in the Clinical Laboratory](https://nspies13.github.io/) informed the use of prevalence exploration and stakeholder discussion; all case data and code here are original.
+The NCI's [explanation of pathology reports](https://www.cancer.gov/about-cancer/diagnosis-staging/diagnosis/pathology-reports-fact-sheet) describes tissue preparation and the pathologist's work. Its definitions of [metastasis](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/metastasis) and [lymph node](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/lymph-node) support the opening explanation.
 
-## Preparing discussion with API slides
+Google's [introduction to machine learning](https://developers.google.com/machine-learning/intro-to-ml/what-is-ml), [linear-regression explanation](https://developers.google.com/machine-learning/crash-course/linear-regression), and [classification metrics guide](https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall) provide optional explanations of models, parameters and denominators. The laboratory examples and calculations here are written for this case.
 
-Use [Association for Pathology Informatics teaching slides: Artificial Intelligence in Pathology (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%206%20AI%20slides.pptx) by James H. Harrison, Jr., slides 33–36, 43, 53, to prepare the discussion after residents have explained their case decision. Ask: Compare verification at a new site with monitoring after implementation. Identify which local scanner or staining differences need investigation before relying on the vendor's performance estimate. Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
+The [FDA's good machine learning practice page](https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/good-machine-learning-practice-medical-device-development-guiding-principles) points to the IMDRF's 2025 principles for medical-device development. [Practical Machine Learning in the Clinical Laboratory](https://nspies13.github.io/) informed the prevalence exercise and the discussion of who should participate.
 
-These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
+## Using the API teaching slides
+
+Use James H. Harrison, Jr.'s [Artificial Intelligence in Pathology](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%206%20AI%20slides.pptx), slides 33–36, 43 and 53, after learners explain the local results. Ask what they would check on a new scanner and what they would check again next month. Use current local policies and the product's current device status when discussing patient use. If the link moves, find the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets).
