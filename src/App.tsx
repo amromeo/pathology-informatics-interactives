@@ -614,7 +614,12 @@ function LessonPage({ slug }: { slug: string }) {
                   setResetKey((key) => key + 1);
                   setDebriefOpen(false);
                   resetDialog.current?.close();
-                  document.getElementById("lesson-introduction")?.focus();
+                  const resetUrl = new URL(location.href);
+                  resetUrl.hash = "lesson-introduction";
+                  history.replaceState(history.state, "", resetUrl);
+                  const introduction = document.getElementById("lesson-introduction");
+                  introduction?.focus({ preventScroll: true });
+                  introduction?.scrollIntoView({ block: "start" });
                 }}
               >
                 Clear all answers

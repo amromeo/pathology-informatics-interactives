@@ -1,33 +1,38 @@
-## Debrief: explain what the program found and missed
+## Debrief: explain what the model found and missed
 
-Begin with two separate answers: what the pathologists found on the slide, and what the detector called. A slide containing metastasis is a true positive only if the detector finds it. If the detector misses it, that outcome is a false negative.
+import { DataTable } from "../../../src/components/lesson-ui";
 
-The local detector found 42 of 50 positive slides and missed eight. Its sensitivity was therefore 42/50, or 84%. Separating the slides into smaller groups shows why the overall number needs a closer look:
+Begin with two separate answers: what the pathologists found on the slide, and what the model called. The pathologists' agreed diagnoses are the reference standard for this test. A slide containing metastasis is a true positive only if the model finds it. If the model misses it, that outcome is a false negative.
 
-| Group | Found | Missed | Slides with metastases |
-| --- | ---: | ---: | ---: |
-| Small deposits (micrometastases) | 17 | 8 | 25 |
-| Large deposits (macrometastases) | 25 | 0 | 25 |
-| Scanner A, both deposit sizes | 23 | 2 | 25 |
-| Scanner B, both deposit sizes | 19 | 6 | 25 |
+In [Table 1](#ai-local-results), the model found 42 of 50 positive slides and missed eight. Its sensitivity was therefore 42/50, or 84%. [Table 4](#ai-local-summary) summarizes those results by deposit size and scanner so we can see which groups account for the misses.
 
-The first two rows group the slides by deposit size. The last two regroup the same slides by scanner; they are not additional slides. All eight misses were small deposits. Six were in the small-deposit group scanned on B. Dr. Rao should begin by reviewing those missed slides with pathologists and comparing image quality, preparation and case differences.
+<DataTable id="ai-local-summary" label="Local results by deposit size and scanner" caption="Table 4. Summary of the first local test">
+  <thead><tr><th scope="col">Group</th><th scope="col">Found</th><th scope="col">Missed</th><th scope="col">Slides with metastases</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">Micrometastases</th><td>17</td><td>8</td><td>25</td></tr>
+    <tr><th scope="row">Macrometastases</th><td>25</td><td>0</td><td>25</td></tr>
+    <tr><th scope="row">Scanner A, both deposit sizes</th><td>23</td><td>2</td><td>25</td></tr>
+    <tr><th scope="row">Scanner B, both deposit sizes</th><td>19</td><td>6</td><td>25</td></tr>
+  </tbody>
+</DataTable>
+
+The first two rows of [Table 4](#ai-local-summary) group the slides by deposit size. The last two regroup the same slides by scanner; they are not additional slides. All eight misses were micrometastases. Six were in the micrometastasis group scanned on B. Dr. Rao should begin by reviewing those missed slides with pathologists and comparing image quality, preparation and case differences.
 
 ### A poorer local result and a later decline
 
 The vendor found 96% of its positive slides, while the first local test found 84%. That difference was present when the model was first brought into this laboratory. It raises a generalizability question: how well does performance carry over to new cases and a new setting?
 
-September asks a different question. Local detection of small deposits fell from 17/25 to 12/25. The program missed 13 small deposits that month. Staff had changed the staining procedure. That is one possible cause to investigate alongside scanner use, case mix, slide quality and the pathologists' diagnoses.
+September asks a different question. In [Table 2](#ai-monthly-results), local detection of small deposits fell from 17/25 to 12/25. The model missed 13 small deposits that month. Staff had changed the staining procedure. That is one possible cause to investigate alongside scanner use, case mix, slide quality and the pathologists' diagnoses.
 
 A change over time is called drift. The laboratory needs regular reviews to detect it. If a result crosses the stopping limit agreed before use, staff should pause use while the team investigates. These monthly counts do not show whether a small change to the same image would produce a large change in the model's answer; that would require a separate test for brittleness.
 
 ### Sensitivity and positive predictive value start with different groups
 
-For sensitivity, start with all the slides that contain cancer and count how many the program finds.
+For sensitivity, start with all the slides that contain metastases and count how many the model finds.
 
-For positive predictive value, start with all the slides the program calls positive. Some are correct calls; others are false alarms on slides without cancer. Divide the correct positive calls by the total number of positive calls.
+For positive predictive value, start with all the slides the model calls positive. Some are correct calls; others are false alarms on slides without metastases. Divide the correct positive calls by the total number of positive calls.
 
-In the slider exercise, reducing prevalence from 10% to 1% changes a group of 10,000 slides from 1,000 cancer-containing slides to only 100. The model still finds the same proportion of those positive slides when separation stays fixed. But the much larger negative group continues to produce false alarms. Those false alarms make up a larger share of all positive calls, so positive predictive value falls.
+In the [slider results](#ai-calculated-outcomes), reducing prevalence from 10% to 1% changes a group of 10,000 slides from 1,000 containing metastases to only 100. The example model still finds the same proportion of those positive slides when separation stays fixed. But the much larger negative group continues to produce false alarms. Those false alarms make up a larger share of all positive calls, so positive predictive value falls.
 
 The 50 observed positive slides cannot answer that question by themselves. We would also need results from negative slides. The calculator shows the reasoning using assumed performance; it does not supply those missing local observations.
 
@@ -35,14 +40,20 @@ The 50 observed positive slides cannot answer that question by themselves. We wo
 
 The written quality-control rule can mishandle a boundary or an exception. Test whether it holds or releases results under those conditions.
 
-The image detector can miss cancer on new slides. Compare its marks with independently reviewed local diagnoses, including the small deposits and each scanner.
+The image model can miss metastases on new slides. Compare its marks with diagnoses that pathologists made before running it. Include micrometastases and images from each scanner.
 
-The clustering program can put similar measurements together without identifying a useful disease category. Find out what the tumors in each group share and whether preparation differences explain the grouping.
+The clustering program can put similar measurements together without identifying a useful disease category. Compare the diagnoses, gene activity and sample-preparation methods within each cluster. A cluster may reflect tumor biology or a difference in how samples were handled.
 
-The text generator can produce a readable summary with an invented finding or an important omission. Compare it with the original reports before using it in a cancer discussion.
+The generative model can produce a readable summary with an invented finding or an important omission. Compare it with the original reports before using it at tumor board. A generative model could have been trained with supervised examples: “supervised” describes its training, while “generative” describes its output.
 
-### Who checks the work?
+### Choose records that answer the question
 
-Before patient use, the laboratory director and reviewing pathologists agree on what the tool will do, acceptable performance, human review and stopping rules. Analysts keep the model version and scanner and stain settings so later problems can be traced. The hospital's regulatory team checks whether the product's authorization covers the proposed use.
+To compare misses between sites, review local test results separated by site and deposit size. Use the number of known-positive slides at each site as the denominator. A software-version record cannot tell you how many metastases were missed.
+
+To find who reviews the whole slide, responds to errors and can pause use, read the laboratory procedure assigning those jobs. The laboratory director and reviewing pathologists should agree on those responsibilities and stopping rules before use.
+
+To investigate a particular result, review its saved model version and scanner, stain and threshold settings. The current settings may differ from those used when the result was produced.
+
+To check whether the proposed use is covered by the product's authorization, review the current authorization and instructions for use with the hospital's regulatory team. Local detection results answer a performance question. The authorization answers which uses and conditions are covered.
 
 Good detection of large deposits in this small test does not automatically approve a narrower use. The team would still need to define that use, test it appropriately and decide how the pathologist will check the program's output.

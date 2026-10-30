@@ -56,9 +56,13 @@ for (const width of [1365, 390, 320])
         for (let i = 0; i < 3; i++) {
           const group = checks.nth(i);
           await group.locator('input[value="shortcut"]').check();
-          await expect(group.getByRole("status")).toContainText("Not supported");
+          await expect(group.getByRole("status")).toContainText(
+            route === "lessons/model-under-pressure/" ? "Try again" : "Not supported",
+          );
           await group.locator('input[value="supported"]').check();
-          await expect(group.getByRole("status")).toContainText("Supported");
+          await expect(group.getByRole("status")).toContainText(
+            route === "lessons/model-under-pressure/" ? "Correct" : "Supported",
+          );
         }
         await expect(page.locator("#lesson-debrief")).toBeVisible();
         await page

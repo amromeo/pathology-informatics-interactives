@@ -104,11 +104,10 @@ sessions and slide ranges that should shape each case and learner decision.
 
 ## Lesson 6: introductory explanations of machine learning
 
-- NCI, Pathology Reports: https://www.cancer.gov/about-cancer/diagnosis-staging/diagnosis/pathology-reports-fact-sheet — tissue preparation, stains, the pathologist's role and how a diagnosis informs care.
-- NCI cancer dictionary: https://www.cancer.gov/publications/dictionaries/cancer-terms/def/metastasis and https://www.cancer.gov/publications/dictionaries/cancer-terms/def/lymph-node — introductory definitions, paraphrased in the case setup.
 - Google, Introduction to Machine Learning: https://developers.google.com/machine-learning/intro-to-ml/what-is-ml — models, labeled examples, clustering and generation. Linked as optional further reading; laboratory examples are original.
 - Google, Linear Regression: https://developers.google.com/machine-learning/crash-course/linear-regression — adjustable parameters and the distinction between inputs and learned numbers. Linked for learners who want a simple equation-based example.
 - Google, Classification Metrics: https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall — true/false positives and negatives, sensitivity/recall and positive predictive value/precision. The lesson's slide counts and calculator examples are original.
+- FDA, Health Canada and MHRA, Transparency for Machine Learning-Enabled Medical Devices: https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/transparency-machine-learning-enabled-medical-devices-guiding-principles — intended use, inputs and outputs, limitations, local testing and monitoring. Supports the records-to-review exercise and faculty discussion. Reviewed October 30, 2026, along with the Google introduction. Basic pathology definitions were removed in that revision because the intended readers already know them.
 
 ## Asset policy
 
