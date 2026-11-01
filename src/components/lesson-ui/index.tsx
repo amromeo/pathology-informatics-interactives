@@ -1,10 +1,20 @@
-import { Component, useId, useState, type ReactNode, type ComponentType } from "react";
+import {
+  Component,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type ReactNode,
+  type ComponentType,
+} from "react";
 export type FeedbackTone = "correct" | "incorrect" | "partial" | "info";
 export function Feedback({
   tone = "info",
+  heading,
   children,
 }: {
   tone?: FeedbackTone;
+  heading?: string;
   children?: ReactNode;
 }) {
   return (
@@ -12,14 +22,13 @@ export function Feedback({
       {children && (
         <div className={"feedback " + tone}>
           <strong>
-            {
+            {heading ??
               {
                 correct: "Supported",
                 incorrect: "Not supported",
                 partial: "Incomplete",
                 info: "Note",
-              }[tone]
-            }
+              }[tone]}
           </strong>
           <div>{children}</div>
         </div>
@@ -90,9 +99,52 @@ export function ChoiceGroup({
     </fieldset>
   );
 }
-export function ScrollRegion({ label, children }: { label: string; children: ReactNode }) {
+export function ScrollRegion({
+  id,
+  label,
+  children,
+}: {
+  id?: string;
+  label: string;
+  children: ReactNode;
+}) {
+  const regionRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!id || location.hash !== "#" + id || !regionRef.current) return;
+    const region = regionRef.current;
+    const main = region.closest("main") ?? document.body;
+    let cancelled = false;
+    // A link from another page may arrive before the lesson's MDX has loaded.
+    // Wait for that content and its fonts before positioning the linked table.
+    const finish = () => {
+      if (main.querySelector(".loading-section, .loading-lesson")) return;
+      observer.disconnect();
+      void (document.fonts?.ready ?? Promise.resolve()).then(() => {
+        if (cancelled || location.hash !== "#" + id) return;
+        // Preserve focus moved deliberately by the learner or the lesson reset.
+        const active = document.activeElement;
+        if (active && active !== document.body && active !== main && active !== region) return;
+        region.focus({ preventScroll: true });
+        region.scrollIntoView({ block: "start" });
+      });
+    };
+    const observer = new MutationObserver(finish);
+    observer.observe(main, { childList: true, subtree: true });
+    finish();
+    return () => {
+      cancelled = true;
+      observer.disconnect();
+    };
+  }, [id]);
   return (
-    <div className="table-scroll" role="region" aria-label={label} tabIndex={0}>
+    <div
+      ref={regionRef}
+      id={id}
+      className="table-scroll"
+      role="region"
+      aria-label={label}
+      tabIndex={0}
+    >
       {children}
     </div>
   );
@@ -188,16 +240,18 @@ function hash(text: string) {
 export { SourceInspector, SelectField } from "./controls";
 
 export function DataTable({
+  id,
   label,
   caption,
   children,
 }: {
+  id?: string;
   label: string;
   caption: ReactNode;
   children: ReactNode;
 }) {
   return (
-    <ScrollRegion label={label}>
+    <ScrollRegion id={id} label={label}>
       <table>
         <caption>{caption}</caption>
         {children}

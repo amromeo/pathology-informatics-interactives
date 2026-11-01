@@ -17,6 +17,7 @@ const prose = new Set([
   "feedback",
   "title",
   "record",
+  "context",
   "note",
   "notes",
   "why",
@@ -66,7 +67,7 @@ function compare(old: unknown, now: unknown, path: string, copy = false) {
   } else if (typeof old === "string" && copy) {
     assert.equal(typeof now, "string", path);
     // Case records include identifier digits, times, prices and measured results.
-    if (/\.(record|evidence)$/.test(path))
+    if (/\.(record|context|evidence)$/.test(path))
       assert.deepEqual(
         (now as string).match(/\d+(?:[.,:]\d+)*/g),
         old.match(/\d+(?:[.,:]\d+)*/g),

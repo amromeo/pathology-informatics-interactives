@@ -1,24 +1,24 @@
 ### Begin with the pathologists' answers
 
-Before the local test, pathologists examine the slides independently of the detector and agree on which contain metastases. Their diagnoses are the **reference diagnoses** used to judge the program's answers. “Reference” tells us which comparison we are using; disagreements still need review.
+Before running the machine-learning model, pathologists examine the local slides and agree on which contain metastases. Those agreed diagnoses serve as the **reference standard** for this test: the answers against which the model's results are checked. Here, a model result counts as a detection when it correctly marks a metastasis for review.
 
-All 50 slides in this first table contain metastases according to that review. We can therefore ask how many the detector finds and how many it misses.
+All 50 slides in [Table 1](#ai-local-results) contain metastases according to the pathologists' review. We can therefore ask how many the model finds and how many it misses.
 
-- A **true positive** is a slide that really contains metastasis and that the detector correctly calls positive.
-- A **false negative** is a slide that contains metastasis but that the detector misses.
+- A **true positive** is a slide that contains metastasis and that the model correctly calls positive.
+- A **false negative** is a slide that contains metastasis but that the model misses.
 
-A known-positive slide can become either of those outcomes when we test the detector. Calling all 50 slides “true positives” would assume that it found every one.
+A known-positive slide can become either of those outcomes when we test the model. Calling all 50 slides “true positives” would assume that it found every one.
 
 ### Read one row before comparing the groups
 
-The first row in **Table 1** concerns 12 slides with small deposits, scanned on scanner A. The detector found 10 and missed two. Its detection rate for that group is 10 divided by 12, or 83.3%.
+The first row in [Table 1](#ai-local-results) concerns 12 slides with micrometastases, scanned on scanner A. The model found 10 and missed two. Its detection rate for that group is 10 divided by 12, or 83.3%.
 
-This detection rate is called **sensitivity**: of all the slides that contain metastases, what fraction does the detector find? For the complete local set, the calculation is 42 divided by 50, or 84%. The other eight slides are misses. An 84% sensitivity does not mean that 84% of the detector's positive calls are correct; that is a different question, which we will examine with the sliders.
+This detection rate is called **sensitivity**: of all the slides that contain metastases, what fraction does the model find? For the complete local set, the calculation is 42 divided by 50, or 84%. The other eight slides are misses. This percentage starts with slides already known to contain metastases. Later, the [slider results](#ai-calculated-outcomes) will answer a different question: of all the model's positive calls, how many are correct?
 
 ### Why test in this laboratory?
 
 The vendor reported 96% detection on its positive slides. Local detection was lower from the first test. A model's ability to work on new cases or in a different laboratory is called **generalizability**. The lower local result is a reason to investigate how well this model carries over to your laboratory.
 
-Images can differ because of scanners, stains, tissue preparation and the kinds of cases tested. The table alone cannot tell us which difference caused a miss. Read each row of Table 1, keeping small and large deposits separate. Ask where the detector missed the largest fraction of positive slides and which cases Dr. Rao should review first.
+Images can differ because of scanners, stains, tissue preparation and the kinds of cases tested. [Table 1](#ai-local-results) alone cannot tell us which difference caused a miss. Read each row, keeping micrometastases and macrometastases separate. Ask where the model missed the largest fraction of positive slides and which cases Dr. Rao should review first.
 
-There are no cancer-free slides in this table. We cannot use it to count false alarms on negative slides or to calculate how often a positive call is correct. Those questions require negative slides too.
+There are no negative slides in [Table 1](#ai-local-results). We cannot use it to count false alarms on negative slides or to calculate how often a positive call is correct. Those questions require negative slides too.

@@ -1,7 +1,15 @@
 import { useState } from "react";
 import type { RetrievalItem } from "../data/types";
 import { ChoiceGroup, Feedback, orderedChoices } from "./lesson-ui";
-export function CheckYourself({ slug, items }: { slug: string; items: RetrievalItem[] }) {
+export function CheckYourself({
+  slug,
+  items,
+  feedbackHeadings,
+}: {
+  slug: string;
+  items: RetrievalItem[];
+  feedbackHeadings?: { correct: string; incorrect: string };
+}) {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   return (
     <section className="retrieval-check" aria-labelledby="retrieval-title">
@@ -18,7 +26,12 @@ export function CheckYourself({ slug, items }: { slug: string; items: RetrievalI
               choices={orderedChoices(slug + item.id, item.choices)}
               onChange={(value) => setAnswers({ ...answers, [item.id]: value })}
             />
-            <Feedback tone={chosen?.correct ? "correct" : "incorrect"}>{chosen?.feedback}</Feedback>
+            <Feedback
+              heading={feedbackHeadings?.[chosen?.correct ? "correct" : "incorrect"]}
+              tone={chosen?.correct ? "correct" : "incorrect"}
+            >
+              {chosen?.feedback}
+            </Feedback>
           </div>
         );
       })}

@@ -1,4 +1,5 @@
 import type { RetrievalItem } from "../../../src/data/types";
+export const feedbackHeadings = { correct: "Correct", incorrect: "Try again" };
 export const checks: RetrievalItem[] = [
   {
     id: "principle",
@@ -31,7 +32,7 @@ export const checks: RetrievalItem[] = [
     id: "transfer",
     kind: "transfer",
     prompt:
-      "Your department wants to try the metastasis detector on both local scanners. What would you ask to see before agreeing?",
+      "Your department wants to try the metastasis-detection model on both local scanners. What would you ask to see before agreeing?",
     choices: [
       {
         id: "supported",
@@ -59,7 +60,7 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "5",
     prompt:
-      "A slide image for the cancer discussion belongs to the right patient but comes from the wrong tissue block. A block is a piece of tissue embedded in wax so that thin slices can be cut from it. How should you repair the image's link to the case record?",
+      "A slide image for the tumor board belongs to the right patient but comes from the wrong tissue block. How should you repair the image's link to the case record?",
     choices: [
       {
         id: "supported",

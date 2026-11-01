@@ -85,7 +85,7 @@ export function AiDeploymentExperience({
             <h3 id={"proposal-" + row.id}>{row.title}</h3>
             <p>{row.record}</p>
             <ChoiceGroup
-              question="How was this program made?"
+              question="Which description best fits this proposal?"
               value={answers[row.id] ?? ""}
               choices={orderedChoices(row.id, modelKinds)}
               onChange={(v) => choose(row.id, v)}
@@ -100,13 +100,38 @@ export function AiDeploymentExperience({
               Check this proposal
             </button>
             <Feedback
+              heading={
+                !answers[row.id] || !answers[row.id + "review"]
+                  ? "Choose both answers"
+                  : answers[row.id] === row.kind && answers[row.id + "review"] === row.review
+                    ? "Correct"
+                    : "Try again"
+              }
               tone={
                 answers[row.id] === row.kind && answers[row.id + "review"] === row.review
                   ? "correct"
                   : "incorrect"
               }
             >
-              {checked[row.id] && row.why}
+              {checked[row.id] && (
+                <>
+                  {answers[row.id] !== row.kind && (
+                    <p>
+                      {Object.entries(row.wrongKindFeedback).find(
+                        ([id]) => id === answers[row.id],
+                      )?.[1] ?? "Choose the description that fits this program."}
+                    </p>
+                  )}
+                  {answers[row.id + "review"] !== row.review && (
+                    <p>
+                      {Object.entries(row.wrongReviewFeedback).find(
+                        ([id]) => id === answers[row.id + "review"],
+                      )?.[1] ?? "Choose a first check for this program."}
+                    </p>
+                  )}
+                  {answers[row.id] && answers[row.id + "review"] && <p>{row.why}</p>}
+                </>
+              )}
             </Feedback>
           </article>
         ))}
@@ -118,7 +143,11 @@ export function AiDeploymentExperience({
       >
         <MdxBlock Content={Bridge} />
         <p className="ai-table-help">Scroll the table sideways to see every column.</p>
-        <DataTable label="Local verification" caption={<>Table 1. First local test</>}>
+        <DataTable
+          id="ai-local-results"
+          label="Local verification"
+          caption={<>Table 1. First local test</>}
+        >
           <thead>
             <tr>
               <th scope="col">Scanner</th>
@@ -153,14 +182,27 @@ export function AiDeploymentExperience({
         <button type="button" className="secondary-button" onClick={() => check("initial")}>
           Check the first local result
         </button>
-        <Feedback tone={answers.initial === "generalize" ? "correct" : "incorrect"}>
+        <Feedback
+          heading={
+            !answers.initial
+              ? "Choose an answer"
+              : answers.initial === "generalize"
+                ? "Correct"
+                : "Try again"
+          }
+          tone={answers.initial === "generalize" ? "correct" : "incorrect"}
+        >
           {checked.initial &&
             (performanceChoices.find((r) => r.id === answers.initial)?.feedback ??
               "Choose an explanation for the first local result, then check it.")}
         </Feedback>
         <MdxBlock Content={Investigation} />
         <p className="ai-table-help">Scroll the table sideways to see every column.</p>
-        <DataTable label="Monthly monitoring" caption={<>Table 2. Monthly detection checks</>}>
+        <DataTable
+          id="ai-monthly-results"
+          label="Monthly monitoring"
+          caption={<>Table 2. Monthly detection checks</>}
+        >
           <thead>
             <tr>
               <th scope="col">Month</th>
@@ -189,7 +231,12 @@ export function AiDeploymentExperience({
         <button type="button" className="secondary-button" onClick={() => check("time")}>
           Check the September decision
         </button>
-        <Feedback tone={answers.time === "change" ? "correct" : "incorrect"}>
+        <Feedback
+          heading={
+            !answers.time ? "Choose an answer" : answers.time === "change" ? "Correct" : "Try again"
+          }
+          tone={answers.time === "change" ? "correct" : "incorrect"}
+        >
           {checked.time &&
             (timeChoices.find((r) => r.id === answers.time)?.feedback ??
               "Choose what the laboratory should do about September, then check it.")}
@@ -229,13 +276,20 @@ export function AiDeploymentExperience({
             {(p.specificity * 100).toFixed(1)}%, and positive predictive value is{" "}
             {(p.ppv * 100).toFixed(1)}%.
           </p>
-          <p>The table shows expected counts, rounded to whole slides.</p>
+          <p>
+            <a href="#ai-calculated-outcomes">Table 3</a> shows expected counts, rounded to whole
+            slides.
+          </p>
           <p className="ai-table-help">Scroll the table sideways to see every column.</p>
-          <DataTable label="Four calculated outcomes" caption={<>Table 3. Calculated outcomes</>}>
+          <DataTable
+            id="ai-calculated-outcomes"
+            label="Four calculated outcomes"
+            caption={<>Table 3. Calculated outcomes</>}
+          >
             <thead>
               <tr>
                 <th scope="col">What is on the slide?</th>
-                <th scope="col">Program's call</th>
+                <th scope="col">Model's call</th>
                 <th scope="col">Outcome</th>
                 <th scope="col">Slides</th>
               </tr>
@@ -252,22 +306,21 @@ export function AiDeploymentExperience({
             </tbody>
           </DataTable>
           <p>
-            <strong>Start with the slides containing cancer:</strong> the program finds about{" "}
+            <strong>Start with the slides containing metastases:</strong> the model finds about{" "}
             {p.tp.toFixed(0)} of {(p.tp + p.fn).toFixed(0)}. That is{" "}
             {(p.sensitivity * 100).toFixed(1)}% sensitivity.
           </p>
           <p>
-            <strong>Now start with the program's positive calls:</strong> about {p.tp.toFixed(0)}{" "}
-            are true positives and {p.fp.toFixed(0)} are false alarms. Only{" "}
-            {(p.ppv * 100).toFixed(1)}% of its positive calls contain cancer. That is the positive
-            predictive value.
+            <strong>Now start with the model's positive calls:</strong> about {p.tp.toFixed(0)} are
+            true positives and {p.fp.toFixed(0)} are false alarms. Only {(p.ppv * 100).toFixed(1)}%
+            of its positive calls contain metastases. That is the positive predictive value.
           </p>
         </div>
       </Section>
       <Section
         number={3}
-        title="What needs checking before patient use?"
-        purpose="The laboratory needs a plan for reviewing errors, protecting patients and keeping track of changes. Read each situation and identify the question it raises."
+        title="Which records should the team review before patient use?"
+        purpose="For each question, choose the information the team should review to answer it. Each choice names a set of results, a record or a document."
       >
         {governance.map((row) => (
           <article className="artifact-card" key={row.id} aria-label={row.prompt}>
@@ -281,8 +334,23 @@ export function AiDeploymentExperience({
             <button type="button" className="secondary-button" onClick={() => check(row.id)}>
               Check this answer
             </button>
-            <Feedback tone={answers[row.id] === row.answer ? "correct" : "incorrect"}>
-              {checked[row.id] && row.why}
+            <Feedback
+              heading={
+                !answers[row.id]
+                  ? "Choose a record"
+                  : answers[row.id] === row.answer
+                    ? "Correct"
+                    : "Try again"
+              }
+              tone={answers[row.id] === row.answer ? "correct" : "incorrect"}
+            >
+              {checked[row.id] &&
+                (answers[row.id] === row.answer
+                  ? row.why
+                  : (Object.entries(row.wrongFeedback).find(
+                      ([id]) => id === answers[row.id],
+                    )?.[1] ??
+                    "Choose the information that would answer this question, then check your answer."))}
             </Feedback>
           </article>
         ))}

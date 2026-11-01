@@ -1,34 +1,27 @@
 # Model Under Pressure
 
-Dr. Rao is a pathologist, a physician who examines tissue to diagnose disease. She is reviewing a computer program that marks places where cancer may be present in a lymph-node image. You will help her work out how the program was made, how well it performs, and what the laboratory should check before using it.
-
-### What is the program looking for?
-
-Lymph nodes are small organs that help the body respond to infection. Cancer that starts elsewhere can spread to a lymph node. A deposit of cancer that has spread is called a **metastasis**. Finding it can affect how clinicians describe the extent of a patient's cancer and plan treatment.
-
-To examine a node, laboratory staff prepare very thin slices of tissue on glass slides. They add colored stains so that cells and their surroundings are easier to see. A slide scanner makes a detailed digital image. The pathologist can then examine that image on a screen.
-
-The proposed program searches the image and marks areas for the pathologist to review. A small deposit may be difficult to find among much more normal tissue. In the tables, **micrometastases** are the small deposits and **macrometastases** are the larger deposits. We will compare them separately because a program may find large deposits while missing small ones.
+You are the pathology resident helping Dr. Rao review a machine-learning model that marks possible metastases on digital lymph-node slides. The laboratory is considering using its marks to direct a pathologist's attention to areas that need review. The pathologist would still examine the whole slide, including unmarked tissue.
 
 ### Why Dr. Rao wants a closer look
 
-The company selling the program, called the **vendor**, reports finding cancer on 192 of 200 slides known to contain metastases. That is 96%. Those slides were scanned using a scanner the vendor supports.
+The vendor reports that the model found metastases on 192 of 200 known-positive slides, or 96%. Those slides were scanned using a scanner the vendor supports.
 
-Your laboratory uses two scanners and prepares its stains differently. When staff tried the program on 50 local slides known to contain metastases, it found cancer on 42. It missed the other eight. Dr. Rao wants to understand those misses before the laboratory relies on its marks.
+Your laboratory uses two scanners and a different staining procedure. When staff tested the model on 50 local slides known to contain metastases, it found 42 and missed eight. Dr. Rao wants to understand those misses before the laboratory relies on the model's marks. You will compare results for micrometastases and macrometastases on each scanner, then examine what happened over the next two months.
 
 The committee has three other proposals to consider: a rule that holds laboratory results for review, a program that groups tumors by measurements, and a program that writes a summary. Each does a different job. You will use those examples to learn why different programs need different checks.
 
 ## What you will be able to do
 
 - Explain the difference between a rule written by a person and a model trained on examples.
-- Read a detection table: identify which slides contain cancer, which the program found, and which it missed.
-- Distinguish a problem found when the program first arrives from a decline that develops later.
-- Explain why some positive calls can be wrong, especially when most slides do not contain cancer, and identify the people who should review the program before patient use.
+- Read the model's test results: identify which positive slides it found and which it missed.
+- Distinguish a problem present at the first local test from a decline that develops later.
+- Explain why a positive call may be wrong even when the model detects most metastases.
+- Choose the records needed to answer questions about missed lesions, staff responsibilities, model settings and authorization before patient use.
 
 ## Your task
 
 Start with the four proposals. For each, choose how the program works and what the team should check first. The explanations introduce the terms you will need; you can check each proposal as you go.
 
-Next, read the two slide tables. The first separates results by scanner and deposit size. The second compares results over three months. Use the counts to explain where detection is poor and what changed later.
+Next, read [Table 1](#ai-local-results), which separates results by scanner and deposit size, and [Table 2](#ai-monthly-results), which compares three months. Use the counts to explain where detection is poor and what changed later.
 
-Then try the sliders. They calculate what might happen in a group of 10,000 slides when you change how common cancer is or how well an example model distinguishes the groups. Watch both the correctly marked slides and the false alarms. Finish by considering who checks the program's work and who can stop its use if something goes wrong.
+Then try the sliders. They calculate what might happen in a group of 10,000 slides when you change how common metastases are or how well an example model distinguishes positive and negative slides. Watch the correct calls and false alarms in [Table 3](#ai-calculated-outcomes). Finish by choosing which records the team should review to answer four questions before patient use.

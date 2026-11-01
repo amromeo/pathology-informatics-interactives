@@ -49,105 +49,172 @@ for (const width of [1365, 390]) {
     await expect(page.locator(".experience .feedback")).toHaveCount(0);
     await expect(page.locator("#lesson-debrief")).toBeVisible();
   });
-  test(width + " AI classifications, subgroup review and governance", async ({ page }) => {
-    await page.setViewportSize({ width, height: 900 });
-    await page.goto("lessons/model-under-pressure/");
-    await page.getByRole("button", { name: "Check the AI review", exact: true }).click();
-    await expect(page.locator(".experience .feedback.incorrect").first()).toBeVisible();
-    for (const r of proposals) {
-      const card = page.getByRole("article", { name: r.title, exact: true });
-      await card
-        .getByRole("group", { name: "How was this program made?", exact: true })
-        .locator('input[value="' + r.kind + '"]')
-        .check();
-      await card
-        .getByRole("group", { name: "What should the team check first?", exact: true })
-        .locator('input[value="' + r.review + '"]')
-        .check();
-      await expect(card.locator(".feedback")).toHaveCount(0);
-      await card.getByRole("button", { name: "Check this proposal", exact: true }).click();
-      await expect(card.locator(".feedback.correct")).toContainText(r.why);
-    }
-    await page
-      .getByRole("group", {
-        name: "What does the lower detection rate at the first local test suggest?",
-        exact: true,
-      })
-      .locator('input[value="generalize"]')
-      .check();
-    await page.locator('input[value="change"]').check();
-    for (const r of governance)
+  test(
+    width + " AI classifications, subgroup review and records before patient use",
+    async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("lessons/model-under-pressure/");
+      await page.getByRole("button", { name: "Check the AI review", exact: true }).click();
+      await expect(page.locator(".experience .feedback.incorrect").first()).toBeVisible();
+      for (const r of proposals) {
+        const card = page.getByRole("article", { name: r.title, exact: true });
+        await card
+          .getByRole("group", { name: "Which description best fits this proposal?", exact: true })
+          .locator('input[value="' + r.kind + '"]')
+          .check();
+        await card
+          .getByRole("group", { name: "What should the team check first?", exact: true })
+          .locator('input[value="' + r.review + '"]')
+          .check();
+        await expect(card.locator(".feedback")).toHaveCount(0);
+        await card.getByRole("button", { name: "Check this proposal", exact: true }).click();
+        await expect(card.locator(".feedback.correct")).toContainText(r.why);
+      }
       await page
-        .getByRole("group", { name: r.prompt, exact: true })
-        .locator('input[value="' + r.answer + '"]')
+        .getByRole("group", {
+          name: "What does the lower detection rate at the first local test suggest?",
+          exact: true,
+        })
+        .locator('input[value="generalize"]')
         .check();
-    await page.getByRole("button", { name: "Check the AI review", exact: true }).click();
-    await expect(page.locator(".experience .feedback.incorrect")).toHaveCount(0);
+      await page.locator('input[value="change"]').check();
+      const siteQuestion = page.getByRole("article", { name: governance[0].prompt, exact: true });
+      await expect(siteQuestion.locator(".feedback strong")).toHaveText("Choose a record");
+      await expect(siteQuestion.locator(".feedback")).not.toContainText(governance[0].why);
+      await siteQuestion.locator('input[value="documentation"]').check();
+      await expect(siteQuestion.locator(".feedback")).toHaveCount(0);
+      await siteQuestion.getByRole("button", { name: "Check this answer", exact: true }).click();
+      await expect(siteQuestion.locator(".feedback strong")).toHaveText("Try again");
+      await expect(siteQuestion.locator(".feedback")).toContainText("Version and setting records");
+      await siteQuestion.locator('input[value="device"]').check();
+      await expect(siteQuestion.locator(".feedback")).toHaveCount(0);
+      await siteQuestion.getByRole("button", { name: "Check this answer", exact: true }).click();
+      await expect(siteQuestion.locator(".feedback")).toContainText("The authorization states");
+      await expect(siteQuestion.locator(".feedback")).not.toContainText(
+        "Version and setting records",
+      );
+      for (const r of governance)
+        await page
+          .getByRole("group", { name: r.prompt, exact: true })
+          .locator('input[value="' + r.answer + '"]')
+          .check();
+      await page.getByRole("button", { name: "Check the AI review", exact: true }).click();
+      await expect(page.locator(".experience .feedback.incorrect")).toHaveCount(0);
+      await expect(siteQuestion.locator(".feedback strong")).toHaveText("Correct");
+      await expect(siteQuestion.locator(".feedback")).toContainText(
+        "Divide misses by all known-positive slides",
+      );
 
-    const firstProposal = page.getByRole("article", { name: proposals[0].title, exact: true });
-    await firstProposal
-      .getByRole("group", { name: "How was this program made?", exact: true })
-      .locator('input[value="generative"]')
-      .check();
-    await expect(firstProposal.locator(".feedback")).toHaveCount(0);
-    await expect(
-      page
-        .getByRole("article", { name: proposals[1].title, exact: true })
-        .locator(".feedback.correct"),
-    ).toBeVisible();
-    await firstProposal.getByRole("button", { name: "Check this proposal", exact: true }).click();
-    await expect(firstProposal.locator(".feedback.incorrect")).toBeVisible();
+      const firstProposal = page.getByRole("article", { name: proposals[0].title, exact: true });
+      await firstProposal
+        .getByRole("group", { name: "Which description best fits this proposal?", exact: true })
+        .locator('input[value="generative"]')
+        .check();
+      await expect(firstProposal.locator(".feedback")).toHaveCount(0);
+      await expect(
+        page
+          .getByRole("article", { name: proposals[1].title, exact: true })
+          .locator(".feedback.correct"),
+      ).toBeVisible();
+      await firstProposal.getByRole("button", { name: "Check this proposal", exact: true }).click();
+      await expect(firstProposal.locator(".feedback.incorrect")).toBeVisible();
+      await expect(firstProposal.locator(".feedback.incorrect")).toContainText(
+        "A generative model produces content",
+      );
+      await expect(firstProposal.locator(".feedback strong")).toHaveText("Try again");
 
-    const observed = page.getByRole("region", { name: "Local verification", exact: true });
-    const monthly = page.getByRole("region", { name: "Monthly monitoring", exact: true });
-    const observedBefore = await observed.innerText();
-    const monthlyBefore = await monthly.innerText();
-    const calculated = page.getByRole("region", { name: "Calculated results", exact: true });
-    await expect(calculated.getByRole("status")).toContainText(
-      "positive predictive value is 45.1%",
-    );
-    await page
-      .getByRole("slider", { name: "Slides with metastases (prevalence)", exact: true })
-      .focus();
-    await page.keyboard.press("Home");
-    await expect(calculated.getByRole("status")).toContainText("100 of 10,000");
-    await expect(calculated.getByRole("status")).toContainText("Sensitivity is 88.1%");
-    await expect(calculated.getByRole("status")).toContainText("specificity is 88.1%");
-    await expect(calculated.getByRole("status")).toContainText("positive predictive value is 6.9%");
-    await expect(
-      calculated
-        .getByRole("row")
-        .filter({ hasText: "True positive: cancer found" })
-        .getByRole("cell")
-        .last(),
-    ).toHaveText("88");
-    await expect(
-      calculated
-        .getByRole("row")
-        .filter({ hasText: "False positive: a false alarm" })
-        .getByRole("cell")
-        .last(),
-    ).toHaveText("1180");
-    await page.getByRole("slider", { name: "Model separation", exact: true }).focus();
-    await page.keyboard.press("End");
-    await expect(calculated.getByRole("status")).toContainText("Sensitivity is 98.2%");
-    expect(await observed.innerText()).toBe(observedBefore);
-    expect(await monthly.innerText()).toBe(monthlyBefore);
+      const recall = page.locator(".retrieval-item").first();
+      await recall.locator('input[value="shortcut"]').check();
+      await expect(recall.locator(".feedback strong")).toHaveText("Try again");
+      await recall.locator('input[value="supported"]').check();
+      await expect(recall.locator(".feedback strong")).toHaveText("Correct");
 
-    await page
-      .getByRole("button", { name: "Clear my answers and start this lesson over", exact: true })
-      .first()
-      .click();
-    await page.getByRole("button", { name: "Clear all answers", exact: true }).click();
-    await expect(page.locator(".experience .feedback")).toHaveCount(0);
-    await expect(page.locator(".experience input[type=radio]:checked")).toHaveCount(0);
-    await expect(
-      page.getByRole("slider", { name: "Slides with metastases (prevalence)", exact: true }),
-    ).toHaveValue("10");
-    await expect(page.getByRole("slider", { name: "Model separation", exact: true })).toHaveValue(
-      "2",
-    );
-  });
+      const observed = page.getByRole("region", { name: "Local verification", exact: true });
+      const monthly = page.getByRole("region", { name: "Monthly monitoring", exact: true });
+      const observedBefore = await observed.innerText();
+      const monthlyBefore = await monthly.innerText();
+      const calculated = page.getByRole("region", { name: "Calculated results", exact: true });
+      await expect(calculated.getByRole("status")).toContainText(
+        "positive predictive value is 45.1%",
+      );
+      await page
+        .getByRole("slider", { name: "Slides with metastases (prevalence)", exact: true })
+        .focus();
+      await page.keyboard.press("Home");
+      await expect(calculated.getByRole("status")).toContainText("100 of 10,000");
+      await expect(calculated.getByRole("status")).toContainText("Sensitivity is 88.1%");
+      await expect(calculated.getByRole("status")).toContainText("specificity is 88.1%");
+      await expect(calculated.getByRole("status")).toContainText(
+        "positive predictive value is 6.9%",
+      );
+      await expect(
+        calculated
+          .getByRole("row")
+          .filter({ hasText: "True positive: cancer found" })
+          .getByRole("cell")
+          .last(),
+      ).toHaveText("88");
+      await expect(
+        calculated
+          .getByRole("row")
+          .filter({ hasText: "False positive: a false alarm" })
+          .getByRole("cell")
+          .last(),
+      ).toHaveText("1180");
+      await page.getByRole("slider", { name: "Model separation", exact: true }).focus();
+      await page.keyboard.press("End");
+      await expect(calculated.getByRole("status")).toContainText("Sensitivity is 98.2%");
+      expect(await observed.innerText()).toBe(observedBefore);
+      expect(await monthly.innerText()).toBe(monthlyBefore);
+
+      await page
+        .getByRole("button", { name: "Clear my answers and start this lesson over", exact: true })
+        .first()
+        .click();
+      await page.getByRole("button", { name: "Clear all answers", exact: true }).click();
+      await expect(page.locator(".experience .feedback")).toHaveCount(0);
+      await expect(page.locator(".experience input[type=radio]:checked")).toHaveCount(0);
+      await expect(
+        page.getByRole("slider", { name: "Slides with metastases (prevalence)", exact: true }),
+      ).toHaveValue("10");
+      await expect(page.getByRole("slider", { name: "Model separation", exact: true })).toHaveValue(
+        "2",
+      );
+    },
+  );
+  test(
+    width + " AI table links reach the named table from lesson and faculty text",
+    async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("lessons/model-under-pressure/");
+      const introduction = page.locator("#lesson-introduction");
+      for (const [name, id] of [
+        ["Table 1", "ai-local-results"],
+        ["Table 2", "ai-monthly-results"],
+        ["Table 3", "ai-calculated-outcomes"],
+      ]) {
+        await introduction.getByRole("link", { name, exact: true }).click();
+        await expect(page.locator("#" + id + " caption")).toBeInViewport();
+        await expect(page.locator("#" + id)).toBeFocused();
+      }
+      await page.getByRole("button", { name: "Open debrief", exact: true }).click();
+      await page.getByRole("link", { name: "Table 4", exact: true }).first().click();
+      await expect(page.locator("#ai-local-summary caption")).toBeInViewport();
+
+      await page.goto("faculty/model-under-pressure/");
+      await page.getByRole("link", { name: "Table 2", exact: true }).first().click();
+      await expect(page).toHaveURL(/lessons\/model-under-pressure\/#ai-monthly-results$/);
+      await expect(page.locator("#ai-monthly-results caption")).toBeInViewport();
+      await page
+        .getByRole("button", { name: "Clear my answers and start this lesson over", exact: true })
+        .first()
+        .click();
+      await page.getByRole("button", { name: "Clear all answers", exact: true }).click();
+      await expect(page).toHaveURL(/#lesson-introduction$/);
+      await expect(page.locator("#lesson-introduction")).toBeFocused();
+      await expect(page.locator("#lesson-introduction h1")).toBeInViewport();
+    },
+  );
   test(width + " build wrong/correct reports and checklist omissions", async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("lessons/build-the-new-test/");

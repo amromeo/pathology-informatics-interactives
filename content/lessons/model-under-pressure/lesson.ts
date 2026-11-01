@@ -16,7 +16,7 @@ export const manifest: LessonManifest = {
   layout: "standard",
 
   summary:
-    "A metastasis detector misses more small lesions on local slides. Review the scanners, stains and monthly results.",
+    "A metastasis-detection model misses more small lesions on local slides. Review the scanners, stains and monthly results.",
   sources: [
     {
       label: "PIER Essentials Release 5",
@@ -67,7 +67,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Convolutional neural networks and generative AI",
       learnerAction:
-        "Identify how the image detector and generated summary work, then choose what to check first.",
+        "Identify how the image model and generated summary work, then choose what to check first.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -82,7 +82,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Pathology AI/ML applications",
       learnerAction:
-        "Decide whether each proposed tool is ready to try, needs more work or should be declined. Explain the laboratory job it is meant to do.",
+        "Identify how each proposed program does its laboratory job, then choose a first check that could reveal mistakes.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -97,7 +97,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Local verification",
       learnerAction:
-        "Check the metastasis detector on local slides, separating scanners and small and large lesions.",
+        "Check the metastasis-detection model on local slides, separating scanners and small and large lesions.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -112,7 +112,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Generalizability and bias",
       learnerAction:
-        "Find which lesions the detector misses when used in a laboratory with different scanners and cases.",
+        "Find which lesions the model misses when used in a laboratory with different scanners and cases.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -142,7 +142,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Starting use and checking later results",
       learnerAction:
-        "State what the tool will do and how pathologists will check it. Set the limits for starting or stopping use and plan later reviews.",
+        "Choose the procedure assigning slide review and stopping decisions, and identify the records needed to investigate an error or later decline.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -157,7 +157,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Ethical and regulatory considerations",
       learnerAction:
-        "Identify questions about missed lesions and patient groups. Name who reviews the tool and check its version records and device status.",
+        "Choose the results needed to compare missed metastases across sites and the documents needed to check responsibilities, settings and authorized use.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
