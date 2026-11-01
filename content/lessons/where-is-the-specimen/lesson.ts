@@ -28,6 +28,18 @@ export const manifest: LessonManifest = {
       license: "CC BY 4.0",
       use: "Foundational concepts and terminology, adapted with attribution.",
     },
+    {
+      label: "CLSI AUTO12 — Specimen Labels",
+      url: "https://clsi.org/shop/standards/auto12/",
+      license: "Linked source; content not reproduced.",
+      use: "Faculty background on specimen-label content and placement.",
+    },
+    {
+      label: "CLSI AUTO14 — Two-dimensional barcoding",
+      url: "https://clsi.org/shop/standards/auto14/",
+      license: "Linked source; content not reproduced.",
+      use: "Faculty background on barcode content and its use in clinical and anatomic pathology.",
+    },
   ],
   status: "published",
   pierCoverage: [

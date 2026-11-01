@@ -186,6 +186,15 @@ export function evaluateReflex(row: ReflexCase, config: ReflexConfig) {
 }
 export const reflexReplay = (config: ReflexConfig) =>
   reflexCases.map((row) => ({ ...row, ...evaluateReflex(row, config) }));
+export const reflexControlDescriptions: Record<keyof ReflexConfig, string> = {
+  lower: "Compare TSH with this lower value when deciding whether to add FT4.",
+  upper: "Compare TSH with this upper value when deciding whether to add FT4.",
+  inclusive: "Choose whether a result exactly equal to a limit meets the order condition.",
+  preventDuplicate:
+    "Check for an FT4 already linked to the accession before creating another order.",
+  requireFinal: "Check whether the TSH result is final before using it for a reflex decision.",
+  restrictScope: "Check the patient's age and the requested order type before applying the rule.",
+};
 export const reflexControlNotes = (config: ReflexConfig): Record<keyof ReflexConfig, string> => ({
   lower: `TH-01 at 0.30 mIU/L: ${evaluateReflex(reflexCases[0], config).action}. The approved lower threshold is 0.27.`,
   upper: `TH-07 at 4.21 mIU/L: ${evaluateReflex(reflexCases[6], config).action}. The approved upper threshold is 4.20.`,
@@ -251,13 +260,13 @@ export const reflexApprovalChoices = [
     id: "display",
     label: "Approve because the TSH interval displays correctly on the report.",
     feedback:
-      "The report and order rule are separate. Correct display does not validate the predicates, scope, or duplicate prevention.",
+      "The report definition already displays the approved interval for TH-01. Revision 8 still orders from a lower threshold of 0.40. Test the ordering conditions, age and order type, result status and existing FT4 orders.",
   },
   {
     id: "count",
     label: "Approve once the number of FT4 orders decreases.",
     feedback:
-      "A lower count can also mean indicated tests were missed. Compare every expected action, including retained orders and boundary cases.",
+      "Widening the thresholds enough would reduce the count by missing FT4s needed at TH-03 and TH-07. Compare every expected action, including those retained orders and the exact boundaries.",
   },
   {
     id: "complete",
@@ -274,24 +283,33 @@ export const additionalExercises = {
   questions: [
     {
       id: "QI1",
-      prompt: "Which denominator supports review of the updated thyroid reflex rule?",
+      prompt:
+        "To check for both missed and unnecessary FT4 additions, which accessions should the team review during a defined period?",
       answer: "eligible",
       choices: [
         {
           id: "eligible",
-          label: "All eligible thyroid orders in the period",
+          label: "Every eligible adult reflex accession in the period",
         },
         {
           id: "added",
-          label: "Only orders with a follow-up test added",
+          label: "Only eligible accessions with a new FT4 order",
         },
         {
           id: "released",
-          label: "Only orders released without a hold",
+          label: "Only accessions whose TSH was released automatically",
         },
       ],
       feedback:
         "Review all eligible orders and compare expected with observed follow-up actions. Selecting only added tests hides missed additions; selecting only released orders hides holds.",
+      feedbackByChoice: {
+        eligible:
+          "Include all adult TSH-with-reflex accessions with final numeric results in the defined period. Compare the expected action with what happened for each, including those without an added FT4. Account separately for unresolved results and records outside scope.",
+        added:
+          "A missed FT4 addition leaves no new FT4 order to select. Start with all eligible TSH-with-reflex accessions so those missing orders remain visible.",
+        released:
+          "A final result may have required staff review before release. Selecting only automatic releases would omit those eligible accessions. Define the review group from age, order type, final result and period.",
+      },
     },
     {
       id: "QI2",
@@ -313,6 +331,13 @@ export const additionalExercises = {
       ],
       feedback:
         "Fewer tests is not sufficient evidence of improvement. Include erroneous omissions, unnecessary additions, turnaround time and clinical review of exceptions.",
+      feedbackByChoice: {
+        both: "Compare expected and actual actions to find both missing FT4s and additions that the protocol did not call for. Also inspect duplicates, unresolved exceptions and reporting delays.",
+        fewer:
+          "A rule that never adds FT4 would produce a low count while missing indicated tests. Check each accession's expected action before interpreting the total.",
+        revenue:
+          "Billing totals combine prices, volumes and other work. They do not identify which eligible accession missed an FT4 or received an unnecessary one. Review the order records against the protocol.",
+      },
     },
   ],
 };

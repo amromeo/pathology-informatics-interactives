@@ -1,78 +1,44 @@
 # Faculty guide: Where Is the Specimen?
 
-## At a glance
-
-Allow 25 minutes. Use individually or in a small group. Project the case records and the exercise controls; keep the answer key out of view until learners commit to a decision.
-
-Learning objectives: connect an order to its specimen and worklist; trace the order catalog entry to the worklist; justify the first local check. PIER: 4.1, 4.2, 4.4.
+Allow 25 minutes. The resident should explain how the LIS connects an order, specimen and worklist, then propose a tested routing correction and a documented physical handoff. The lesson addresses PIER 4.1, 4.2 and 4.4.
 
 ## Run of show
 
-| Minutes | Activity | Ask the group |
-| --- | --- | --- |
-| 0–5 | Read the case and records | What decision has the laboratory been asked to make? |
-| 5–18 | Make, test and revise a choice | Which record supports your decision? What could fail? |
-| 18–25 | Debrief and retrieval questions | How would you verify this in your own laboratory? |
+Spend about 5 minutes on the case and terms, 7 on the events, 8 on the routing tests and 5 on recovery and local application. The explanation before the event controls teaches the lookup process; the explanation before the routing controls teaches the replay.
 
-## Expected answers
+## Read the events together
 
+Ask the resident to describe the 08:11 record aloud: J. Lee received C-1042-A at ACC-02 and linked it to S26-1042, part A. Then ask who authored the 08:12 event. It is a routing-service entry, produced when the LIS read the SP-EX destination in revision 17.
 
-Do not let learners relabel or recollect without evidence of an identification failure. The case deliberately separates positive identification from routing logic.
+A complete answer separates the identified case, the assigned team and the last documented receipt. The current physical location remains to be confirmed. Ask whom the resident would call and what observation should be recorded after the container is found.
 
-Ask learners to open all four events and distinguish a person documenting receipt from a routing service assigning work. Accessioning is the last documented physical location; the current location remains unknown until staff confirm it. Ask what evidence would establish a subsequent handoff.
+Use the procedure lookup to explain the informatics step. The barcode retrieves the accession; the accession supplies SP-EX; the dictionary supplies its destination. Copying an entry can retain a setting inappropriate for the new procedure. The change review omitted a test of the newly added code.
 
-Replay the original configuration first: three of five routes pass. SP-EX incorrectly goes to cytology, and an unmatched code goes to the gross room. Change SP-EX alone and rerun to show the remaining exception failure. The complete repair sends SP-EX to the gross room and holds unmatched codes for accessioning review, preserving the other three entries.
+## Work through the routing checks
 
-Try routing every procedure to the gross room. Cytology and frozen-section checks fail even though the reported excision is corrected. Discuss why adding a new dictionary entry requires a test of that entry, plus neighboring routes, rather than only repeating existing examples.
+Run the unchanged settings first: three of five pass. Changing SP-EX from cytology to gross gives four of five. Holding unmatched codes for accessioning review gives five of five.
 
-Select the electronic-receipt shortcut after a passing replay. The final review still fails because it would record a handoff that has not occurred. The approved recovery plan requires accessioning and receiving staff to locate, verify, and document the real container. The LIS team implements the configuration; the laboratory supervisor and pathologist review its clinical meaning and authorize use under local procedures.
+Then deliberately route all cases to gross. Ask the resident to name the consequences for cytology and frozen-section processing. Return to the approved configuration and repeat the complete test set.
 
-## Assess the explanation as well as the selections
+Changing a setting clears the preceding test result. Ask why the previous result can no longer support the new configuration. The expected destinations come from the supervisor's approved plan; they remain fixed as learners edit the settings.
 
-Ask the learner to explain why a valid barcode can retrieve the right case while a dictionary lookup assigns it incorrectly. A complete explanation identifies the patient/part check, SP-EX as the input to routing, and revision 17 as the configuration that supplies the destination. “The LIS made an error” is too general to guide a repair.
-
-Ask what the assistant can conclude at 08:40. The answer should distinguish the last documented receipt from the current physical location. Accept possible explanations for the missing handoff, but require the learner to name the evidence needed to choose among them. The case does not establish that the container was physically delivered to cytology.
-
-For the change review, ask the learner to describe expected and observed destinations for all five test cases. A strong answer explains why the unknown-code test adds information beyond the reported excision and why a corrected routing table does not automatically update a previously assigned worklist. In a real LIS, the analyst must verify how configuration changes affect existing cases before selecting a recovery method.
-
-Close with a short handoff to the supervisor: affected case and procedure, observed configuration, last documented location, proposed repair, test results, and outstanding physical recovery. Ask who will confirm receipt and how the original audit trail will be preserved.
-
-## Preparing discussion with API slides
-
-Use [Association for Pathology Informatics teaching slides: Laboratory Information Systems and Health Information Systems (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%203%20LIS-HIS%20slides.pptx) by James H. Harrison, Jr., slides 16–18, to prepare the discussion after residents have explained their case decision. Ask: Compare the order, specimen, and result records. Explain why finding an accession does not establish the container's physical location or the correctness of its worklist assignment. Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
-
-These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
-
+After a passing replay, select the option that records receipt from the queue entry. The recovery review still fails. The correct plan requires staff to locate and verify the container, correct its worklist assignment and document its actual handoff.
 
 ## Common misconceptions
 
-- “The patient name by itself.” Ask: what does the record actually establish? Patient identity is necessary but does not distinguish separate ordered tests or specimens. Preserve the accession and specimen relationship through routing.
-- “The destination worklist by itself.” Ask: which conclusion would still need evidence? Patient identity is necessary but does not distinguish separate ordered tests or specimens. Preserve the accession and specimen relationship through routing.
-- “Reroute every specimen to the same bench.” Ask: what must be checked before making the change? Check requirements, collection instructions and specimen routing before changing a worklist rule.
+- **The worklist proves the container reached that department.** Ask for the receiving event, person and timestamp. The cytology assignment was generated by software.
+- **A barcode problem explains any routing error.** Here the scan retrieved the intended patient, accession and part. Inspect the SP-EX dictionary entry.
+- **Fixing the reported route completes the repair.** Ask about SP-NEW and the unaffected routes, then ask who is locating the existing container.
+- **One correct patient identifier is enough to connect all work.** Have the learner follow the specific order, accession, container and part through the records.
 
-## Discussion prompts
+## Extend the discussion
 
-1. What supports the case decision? A strong answer includes a specific record and the distinction: connect an order to its specimen and worklist.
-2. What would you check locally? A strong answer includes: trace the order catalog entry to the worklist, because check requirements, collection instructions and specimen routing before changing a worklist rule.
-3. Who needs to participate? A strong answer includes an accessioning supervisor and LIS analyst and separates technical work from clinical approval.
+The additional questions compare how anatomic and clinical pathology organize records. Parts, blocks and slides describe the AP example; individual chemistry tests and numeric results describe the CP example. Both benefit from specimen instructions, order-time questions and review of possible duplicate orders.
 
-## Group variant
+Ask how the receiving section sees information entered during ordering. This makes the connection between an order catalog and the worklist concrete. A record can contain the right answer while placing it on a screen the responsible staff do not use.
 
-Assign laboratory director, LIS analyst, laboratory operations and clinical service roles. Add clinical informatics and a patient advocate when considering ordering or chart use. Ask each person to state one requirement, one risk and the evidence needed before approval. The director then summarizes what can proceed and what must be resolved.
+## Teaching sources
 
-## Assess transfer
+[API's LIS and health-information-system teaching slides](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%203%20LIS-HIS%20slides.pptx), by James H. Harrison, Jr., provide background on specimen-centered records and LIS functions. Use session 3, slides 6–10 and 16–18, after the resident has explained this case.
 
-Draw an order-to-specimen-to-worklist trace, comparing one AP and one CP workflow. A strong response names the record, responsible person, first check and an unresolved risk. Use the three learner retrieval questions to distinguish an unsupported shortcut from a reasoned decision.
-
-## PIER coverage
-
-- 4.1: Repair worklist routing and classify ordering and tracking records across laboratory sections.
-- 4.2: Repair worklist routing and classify ordering and tracking records across laboratory sections.
-- 4.4: Repair worklist routing and classify ordering and tracking records across laboratory sections.
-
-
-## Additional source discussion
-
-### Further study with API teaching slides
-
-In [Association for Pathology Informatics teaching slides: Laboratory Information Systems and Health Information Systems (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%203%20LIS-HIS%20slides.pptx), review slides 16–18. Compare the order, specimen, and result records. Explain why finding an accession does not establish the container's physical location or the correctness of its worklist assignment.
+For optional reading about labeling, [CLSI AUTO12](https://clsi.org/shop/standards/auto12/) addresses specimen-label content and placement. [CLSI AUTO14](https://clsi.org/shop/standards/auto14/) addresses two-dimensional barcoding in clinical and anatomic pathology, including encoded content and its use. These are sources for discussing local label design and validation. The case's procedure codes and routing destinations are local examples.

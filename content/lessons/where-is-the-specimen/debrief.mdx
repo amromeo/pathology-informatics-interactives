@@ -1,19 +1,24 @@
-## Debrief: connect an order to its specimen and worklist
+## Debrief: explain the assignment and locate the container
 
-### What happened in this case
+The [audit events](#specimen-audit-title) connect C-1042-A to the intended accession and part. J. Lee documented receipt at accessioning at 08:11. One minute later, the LIS routing service used SP-EX in dictionary revision 17 to assign the case to cytology.
 
+Those events explain why the case appeared on the cytology worklist. They leave its physical movement after accessioning unresolved. The assistant and accessioning staff need to locate the container, verify its identity and record the actual handoff.
 
-The barcode scan identified the right patient and case, but the SP-EX procedure entry sent the case to the cytology worklist.
+### What the routing tests show
 
-The barcode resolved to the right case, but a procedure-to-work-area mapping sent it to the wrong queue. The missing gross-room handoff delayed processing while the audit trail preserved enough evidence to diagnose the defect.
+The original settings pass **three of five** checks. SP-EX sends the excision to cytology, and SP-NEW falls through to the default gross-room destination.
 
-The 08:11 accessioning scan documents physical receipt. The 08:12 cytology assignment records what the LIS did with SP-EX; it cannot confirm where the container moved. If you selected cytology as the last physical location, compare the actor and event type in those two records.
+Changing SP-EX to the gross room produces **four of five** passing checks. The unrecognized code still needs attention. Changing the unmatched-code destination to accessioning review gives **five of five**, while preserving the biopsy, cytology and frozen-section routes.
 
-Changing SP-EX to the gross room fixes the reported route. Holding unrecognized procedure codes for accessioning review addresses the separate exception path. The five-case replay also checks that biopsy, cytology, and intraoperative workflows remain correct. Sending every case to the gross room solves one example while disrupting the others.
+Sending every procedure to the gross room would create new problems for cytology and frozen-section work. The [routing results](#specimen-routing-results) make those consequences visible one case at a time.
 
-The existing container still needs to be located, verified, and handed off. Choosing a recovery plan in this exercise does not create a receiving scan. Preserve the original events and document actual recovery rather than replacing the accession or recording an unobserved receipt.
+### What staff still need to do
 
-LIS and operations teams repair and test routing. The pathologist approves clinical workflow meaning and the safe recovery of affected specimens.
+A passing replay supports review of the proposed configuration. The LIS analyst should retain the tested settings and results with the change record. The laboratory supervisor reviews the destinations and agrees on when the correction will be used.
+
+For S26-1042, staff also need to correct the existing worklist assignment under the local procedure. They should record gross-room receipt when that team actually receives the verified container. Creating a replacement accession would introduce another record for a case whose identity was already established.
+
+When reporting this incident to the supervisor, name the procedure entry that caused the assignment, the last documented physical location, the proposed correction and the person following up on the container.
 
 <details className="teaching-supplement">
 <summary>A closer look: check what a scan actually recorded</summary>
@@ -28,11 +33,3 @@ Standardized labels can help laboratories exchange identifiers, but the receivin
 
 <p className="supplement-credit">Conference context: Alexis Carter, MD. 2D Specimen Label Bar Codes for Anatomic and Clinical Pathology Come of Age: The 10+ Year Journey of CLSI’s AUTO14 Label Standard. Pathology Informatics Summit 2023.</p>
 </details>
-
-### Who does what
-
-Work with an accessioning supervisor and LIS analyst. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
-
-### Connection to PIER 4.1, 4.2, 4.4
-
-The case asks you to connect an order to its specimen and worklist using laboratory records and explain the consequence of your choice.

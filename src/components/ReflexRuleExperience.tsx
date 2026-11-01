@@ -9,6 +9,7 @@ import {
   reflexReplay,
   reflexSummary,
   reflexControlNotes,
+  reflexControlDescriptions,
   type ReflexConfig,
 } from "../../content/lessons/reflex-rule-ripple-effect/interaction";
 type Mdx = ComponentType<Record<string, unknown>>;
@@ -77,7 +78,9 @@ export function ReflexRuleExperience({
           <span className="section-number">02</span>
           <div>
             <p className="eyebrow">Order rule</p>
-            <h2>Configure when an FT4 order should be added</h2>
+            <h2 id="reflex-config-heading" tabIndex={-1}>
+              Configure when an FT4 order should be added
+            </h2>
           </div>
         </div>
         {Concepts && (
@@ -100,7 +103,7 @@ export function ReflexRuleExperience({
                 </option>
               ))}
             </select>
-            <small role="status">{notes.lower}</small>
+            <small>{tested ? notes.lower : reflexControlDescriptions.lower}</small>
           </label>
           <label>
             Upper TSH threshold (mIU/L)
@@ -115,7 +118,7 @@ export function ReflexRuleExperience({
                 </option>
               ))}
             </select>
-            <small role="status">{notes.upper}</small>
+            <small>{tested ? notes.upper : reflexControlDescriptions.upper}</small>
           </label>
           <label>
             Boundary comparison
@@ -127,7 +130,7 @@ export function ReflexRuleExperience({
               <option value="strict">Strictly outside limits</option>
               <option value="inclusive">Include boundary values</option>
             </select>
-            <small role="status">{notes.inclusive}</small>
+            <small>{tested ? notes.inclusive : reflexControlDescriptions.inclusive}</small>
           </label>
           <label className="rule-check">
             <input
@@ -138,7 +141,9 @@ export function ReflexRuleExperience({
             />
             <span>
               Reuse pending or completed FT4 on this accession
-              <small role="status">{notes.preventDuplicate}</small>
+              <small>
+                {tested ? notes.preventDuplicate : reflexControlDescriptions.preventDuplicate}
+              </small>
             </span>
           </label>
           <label className="rule-check">
@@ -149,7 +154,8 @@ export function ReflexRuleExperience({
               onChange={(e) => update({ requireFinal: e.target.checked })}
             />
             <span>
-              Require a final TSH result<small role="status">{notes.requireFinal}</small>
+              Require a final TSH result
+              <small>{tested ? notes.requireFinal : reflexControlDescriptions.requireFinal}</small>
             </span>
           </label>
           <label className="rule-check">
@@ -161,10 +167,15 @@ export function ReflexRuleExperience({
             />
             <span>
               Apply only to adults with a TSH-with-reflex order
-              <small role="status">{notes.restrictScope}</small>
+              <small>
+                {tested ? notes.restrictScope : reflexControlDescriptions.restrictScope}
+              </small>
             </span>
           </label>
         </fieldset>
+        <h3 id="reflex-replay-heading" tabIndex={-1}>
+          Accession replay
+        </h3>
         <button
           type="button"
           className="primary-button"
@@ -180,6 +191,11 @@ export function ReflexRuleExperience({
             ? `${summary.correct} of ${summary.total} expected actions match.`
             : "Run the records after changing the configuration."}
         </p>
+        {tested && (
+          <p>
+            <a href="#reflex-config-heading">Review the feedback beside each setting</a>
+          </p>
+        )}
         <div role="status" aria-live="polite" aria-atomic="true">
           {tested && (
             <div className="rule-counts">

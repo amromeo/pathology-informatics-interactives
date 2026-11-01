@@ -1,34 +1,23 @@
-## Debrief: test a release rule with both held and releasable results
+## Debrief: explain why AV-01 was released
 
-### What happened in this case
+AV-01 rose from 12 to 48 ng/L. The absolute difference was **36 ng/L**; dividing 36 by the prior value of 12 gave a **300%** relative difference.
 
+The transferred rule used only the absolute branch. Because 36 was below its 50 ng/L threshold, that branch allowed the result to continue. The other checks passed, and the middleware released the result.
 
-The serial troponin rule must hold unusable history and release eligible results at the stated boundaries.
+The approved policy also contains a relative branch. AV-01 meets both of its conditions: at least 200% and at least 20 ng/L. Joining the branches with OR gives that branch a way to hold the result. The [branch comparison](#release-branch-examples) explains why joining them with AND would still let AV-01 continue.
 
-AV-01 had a 36 ng/L absolute difference and a 300% relative difference. The
-absolute-only configuration released it because 36 is below 50. The approved
-relative branch requires at least 200% and at least 20 ng/L; both are met.
-Combining the branches with OR restores the intended hold. Combining them with
-AND still permits the reported result to release.
+### What the other records add
 
-Compare that result with the 2-to-8 ng/L record. It has the same percentage change
-but does not meet the 20 ng/L minimum. Removing that minimum causes an unintended
-hold. Missing history, older or different-assay results, QC failure, instrument
-flags, and result status each need their own decision; none can be inferred from
-the delta alone.
+The original rule matches **20 of 22** expected decisions. It misses the holds for AV-01 and AV-03. With the approved OR configuration and the other approved settings intact, all **22** match.
 
-The replay demonstrates the configured behavior against the laboratory's policy.
-It does not determine whether a held troponin represents disease, an analytical
-problem, or a specimen problem. Staff investigate holds and avoid delaying urgent
-communication. A stable higher result may release under this policy without being
-clinically normal.
+AV-04 also has a 300% change, but it rises only from 2 to 8 ng/L. The relative branch's 20 ng/L minimum preserves the intended release. Removing that minimum creates an unnecessary hold.
 
-The LIS or middleware analyst implements the rule. Technical and medical leadership approve criteria, validation, monitoring, and change control.
+AV-06 has no usable prior result. Its delta cannot be calculated, and the serial-order history check sends it to review. AV-09 has unaccepted QC; its small numerical change does not resolve that separate problem. Open their entries in the [complete check list](#release-replay-heading) to connect each outcome with its reason.
 
-### Who does what
+### What staff review before use
 
-Work with a chemistry supervisor and middleware analyst. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
+The analyst documents the configuration and the expected and observed outcomes for the entire set. Chemistry staff and the director review the policy, the handling of held results, the reporting workflow and the monitoring plan.
 
-### Connection to PIER 4.3, 4.5, 5.4, 8.2
+A hold asks staff to investigate. A real clinical change, a specimen problem or an analytical issue may require different action. Staff follow the local procedure and communicate urgent findings promptly. The exercise checks whether the software applies that procedure consistently.
 
-The case asks you to test a release rule with both held and releasable results using laboratory records and explain the consequence of your choice.
+For local application, begin by identifying the order type, assay, required prior result and other release checks. Those details determine which records belong in the validation set and how missing information should be handled.

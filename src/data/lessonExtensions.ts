@@ -26,5 +26,6 @@ export type Extension = {
     answer: string;
     choices: { id: string; label: string }[];
     feedback: string;
+    feedbackByChoice?: Partial<Record<string, string>>;
   }[];
 };

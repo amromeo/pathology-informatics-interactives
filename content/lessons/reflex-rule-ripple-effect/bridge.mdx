@@ -1,33 +1,27 @@
-### Read the counts with their denominator
+### Account for the 13 records
 
-The replay contains **13 selected accession records** from the first morning's
-review. Nine have final numeric adult TSH-with-reflex results; two need review
-and two are outside the adult reflex rule. Two of the nine eligible accessions
-already have an FT4 pending or complete. All 13 remain in the displayed set.
+The [accession replay](#reflex-replay-heading) contains **13 selected records** from the morning investigation. Of these, **nine** have final numeric TSH results on adult TSH-with-reflex orders. Two of those nine already have an FT4 pending or complete. Two other records require review, and two are outside this adult reflex rule.
 
-The original rule creates **five new FT4 orders** in these records. The approved
-rule creates **two**, at TH-03 and TH-07. TH-01, TH-02, and TH-04 account for the three
-additional orders under the old lower threshold. TH-04 is exactly at the new
-boundary, but below the old threshold. “Use existing FT4” does not count
-as a new order. These selected records confirm a mechanism; they do not estimate
-a hospital-wide percentage increase or prove a change in clinical case mix.
+The original settings create **five new FT4 orders**. The approved settings create **two**, at TH-03 and TH-07. TH-01, TH-02 and TH-04 account for the three additional orders under the original lower threshold. TH-08 and TH-09 use their existing FT4s and do not add to the new-order count.
 
-### Review all objects affected by the assay change
+Read the action for each accession before judging the totals. A setting that suppresses every FT4 would reduce the total while missing the indicated tests at TH-03 and TH-07. Matching the approved actions means accounting for needed additions, existing tests, review cases and records outside the rule.
 
-The change record should identify the assay and report definitions, the separate
-reflex rule, the authorized order type and population, downstream order codes,
-duplicate checks, result status handling, and monitoring report. Test the lower
-and upper branches, their exact boundaries, missing and preliminary results,
-pending/completed FT4s, and cases outside the rule. Verify that an added order is
-attached to the correct accession and reaches the intended worklist.
+### Choose a monitoring group before counting
 
-For affected production cases, chemistry staff and laboratory leadership review
-which orders were added, whether testing has begun, and what action is appropriate.
-Do not automatically cancel every FT4 or discard completed results. Document any
-correction and communication. After the revised rule is approved, monitor added
-orders per eligible TSH-with-reflex accession, duplicate orders, missed indicated
-orders, and unresolved exceptions. Compare like populations and time periods.
+After use begins, the team needs a defined review period and a list of the eligible accessions. For example, it could review all adult TSH-with-reflex accessions with final numeric TSH results during that period.
 
-### Check dependent calculations and quality indicators
+For every accession on that list, determine what the approved rule should have done, then compare it with the actual action. This reveals unnecessary additions, missed additions and duplicates. A list containing only newly ordered FT4s would omit patients whose FT4 should have been added but was missed.
 
-An assay change can affect estimated glomerular filtration rate calculated from creatinine or calculated low-density lipoprotein cholesterol. Recheck dependent results, units and applicable inputs. After a reflex-rule change, count both missed indicated follow-up tests and unnecessary additions among all eligible orders. A decrease in total test volume alone cannot show that ordering improved.
+Use the number of eligible accessions as the denominator when reporting how often those errors occur. Also account separately for missing or preliminary results awaiting review and records outside the rule. The 13 records in this exercise demonstrate particular conditions; a routine monitoring rate requires the complete defined population and period.
+
+### Review the other settings affected by a change
+
+A **dependency** is an item that uses the changed result or definition. In this case, list the displayed interval, reflex thresholds, order type, age restriction, result status, FT4 order code and duplicate check. Then verify that an added order is linked correctly and reaches the intended worklist.
+
+The same approach applies to calculated results. Changing a creatinine assay can affect eGFR; changing the measurements used to calculate LDL cholesterol can affect that reported result. The team needs to identify the inputs, units, equation and report fields involved before deciding what to test.
+
+### Follow up on orders already created
+
+Chemistry staff and laboratory leadership review the affected production accessions. They check whether an added FT4 is still pending, whether testing has begun, whether a result is already available and whether clinical review supports further action.
+
+Record any approved correction and communication while preserving the original history. A blanket cancellation would fail to account for completed testing or a clinician's subsequent need for the result. The analyst documents the new rule and testing; the director reviews the intended clinical sequence and the plan for affected cases.

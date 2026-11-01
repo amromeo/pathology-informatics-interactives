@@ -28,6 +28,24 @@ export const manifest: LessonManifest = {
       license: "CC BY 4.0",
       use: "Foundational concepts and terminology, adapted with attribution.",
     },
+    {
+      label: "CLSI AUTO15 — Autoverification",
+      url: "https://clsi.org/shop/standards/auto15/",
+      license: "Linked source; content not reproduced.",
+      use: "Professional context for design and validation; the case thresholds are local policy.",
+    },
+    {
+      label: "Krasowski et al. — Autoverification in core chemistry",
+      url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4023033/",
+      license: "Linked source; content not reproduced.",
+      use: "An optional published example of middleware and result-release checks.",
+    },
+    {
+      label: "NIDDK — Adult eGFR equations",
+      url: "https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults",
+      license: "Linked source; content not reproduced.",
+      use: "Documents calculation inputs, including age, for the missing-input example.",
+    },
   ],
   status: "published",
   pierCoverage: [

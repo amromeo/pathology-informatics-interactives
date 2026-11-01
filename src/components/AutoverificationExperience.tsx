@@ -9,6 +9,7 @@ import {
   releaseCases,
   releaseReplay,
   releaseControlNotes,
+  releaseControlDescriptions,
   type ReleaseConfig,
 } from "../../content/lessons/autoverification-at-the-edge/interaction";
 type Mdx = ComponentType<Record<string, unknown>>;
@@ -46,7 +47,9 @@ export function AutoverificationExperience({
           <span className="section-number">01</span>
           <div>
             <p className="eyebrow">Release policy</p>
-            <h2>Compare the approved policy with the configured rule</h2>
+            <h2 id="release-config-heading" tabIndex={-1}>
+              Compare the approved policy with the configured rule
+            </h2>
           </div>
         </div>
         {Concepts && (
@@ -67,7 +70,7 @@ export function AutoverificationExperience({
               <option value="either">Absolute OR relative</option>
               <option value="both">Absolute AND relative</option>
             </select>
-            <small>{tested ? notes.delta : ""}</small>
+            <small>{tested ? notes.delta : releaseControlDescriptions.delta}</small>
           </label>
           <label>
             Absolute-change limit (ng/L)
@@ -80,7 +83,7 @@ export function AutoverificationExperience({
                 <option key={n}>{n}</option>
               ))}
             </select>
-            <small>{tested ? notes.absoluteLimit : ""}</small>
+            <small>{tested ? notes.absoluteLimit : releaseControlDescriptions.absoluteLimit}</small>
           </label>
           <label>
             Relative-change limit (%)
@@ -93,7 +96,7 @@ export function AutoverificationExperience({
                 <option key={n}>{n}</option>
               ))}
             </select>
-            <small>{tested ? notes.relativeLimit : ""}</small>
+            <small>{tested ? notes.relativeLimit : releaseControlDescriptions.relativeLimit}</small>
           </label>
           <label>
             Minimum absolute change for the relative branch (ng/L)
@@ -106,7 +109,7 @@ export function AutoverificationExperience({
                 <option key={n}>{n}</option>
               ))}
             </select>
-            <small>{tested ? notes.minimumChange : ""}</small>
+            <small>{tested ? notes.minimumChange : releaseControlDescriptions.minimumChange}</small>
           </label>
           <label>
             Maximum age of prior result (hours)
@@ -119,7 +122,7 @@ export function AutoverificationExperience({
                 <option key={n}>{n}</option>
               ))}
             </select>
-            <small>{tested ? notes.historyHours : ""}</small>
+            <small>{tested ? notes.historyHours : releaseControlDescriptions.historyHours}</small>
           </label>
           <label>
             When there is no usable history
@@ -131,7 +134,9 @@ export function AutoverificationExperience({
               <option value="hold">Hold for review</option>
               <option value="release">Let other checks decide</option>
             </select>
-            <small>{tested ? notes.missingHistory : ""}</small>
+            <small>
+              {tested ? notes.missingHistory : releaseControlDescriptions.missingHistory}
+            </small>
           </label>
           <label className="rule-check">
             <input
@@ -141,7 +146,8 @@ export function AutoverificationExperience({
               onChange={(e) => update({ checkQc: e.target.checked })}
             />
             <span>
-              Require accepted QC<small>{tested ? notes.checkQc : ""}</small>
+              Require accepted QC
+              <small>{tested ? notes.checkQc : releaseControlDescriptions.checkQc}</small>
             </span>
           </label>
           <label className="rule-check">
@@ -152,7 +158,8 @@ export function AutoverificationExperience({
               onChange={(e) => update({ checkFlags: e.target.checked })}
             />
             <span>
-              Hold unresolved instrument flags<small>{tested ? notes.checkFlags : ""}</small>
+              Hold unresolved instrument flags
+              <small>{tested ? notes.checkFlags : releaseControlDescriptions.checkFlags}</small>
             </span>
           </label>
         </fieldset>
@@ -162,7 +169,9 @@ export function AutoverificationExperience({
           <span className="section-number">02</span>
           <div>
             <p className="eyebrow">Result trace</p>
-            <h2 id="release-trace-heading">Follow one result through every check</h2>
+            <h2 id="release-trace-heading" tabIndex={-1}>
+              Follow one result through every check
+            </h2>
           </div>
         </div>
         <label className="rule-case-picker">
@@ -240,7 +249,7 @@ export function AutoverificationExperience({
           <span className="section-number">03</span>
           <div>
             <p className="eyebrow">Regression testing</p>
-            <h2 id="release-replay-heading">
+            <h2 id="release-replay-heading" tabIndex={-1}>
               Check results that should hold and results that should release
             </h2>
           </div>
@@ -260,6 +269,11 @@ export function AutoverificationExperience({
             ? `${passed} of ${results.length} expected decisions match.`
             : "Run the complete set after changing the configuration."}
         </p>
+        {tested && (
+          <p>
+            <a href="#release-config-heading">Review the feedback beside each setting</a>
+          </p>
+        )}
         <div className="rule-result-list">
           {results.map((item) => (
             <details
