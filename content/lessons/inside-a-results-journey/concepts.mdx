@@ -2,9 +2,9 @@
 
 The analyzer sends its CBC measurements to the LIS. A technologist reviews and releases the report there. The LIS then sends a message containing the report to the interface engine. The interface engine holds messages waiting to be sent in a **queue** and delivers them to the EHR.
 
-For the final transfer, the message crosses the hospital network and a **firewall**. The firewall applies rules about which systems may connect to one another. The EHR receives the message and uses its contents to update the patient's chart.
+The message travels over the hospital's internal network to a program that receives laboratory messages for the EHR. We will call that program the **receiving service**. It reads the message and passes the report into the EHR so the patient's chart can be updated.
 
-Build that path below. The firewall and network are shown as one step between the interface engine and EHR because that is the connection you will investigate. Other steps also use network connections.
+Build that path below. The map shows the hospital network between the interface engine and EHR to highlight the connection you will investigate. The analyzer-to-LIS and LIS-to-interface transfers also use the network.
 
 ## Separate the computer from the work it performs
 
@@ -12,18 +12,36 @@ Build that path below. The firewall and network are shown as one step between th
 
 **System software** manages those resources. The operating system starts applications and gives them access to memory, storage and network connections.
 
-**Application software** performs a particular job. The LIS manages orders and results. The interface engine prepares and routes messages. Both applications depend on an operating system and hardware, but they are separate from those supporting parts.
+**Application software** performs a particular job. The LIS manages orders and results. The interface engine prepares and routes messages. Both applications use the operating system to access the computer's memory, storage and network connection.
 
-For example, an interface server can have unused memory and a running application while every outgoing report waits in its queue. Those observations tell you the computer is running. They do not tell you that the next system received a report.
+For example, an interface server can have unused memory and a running application while every outgoing report waits in its queue. To investigate that delay, the analyst opens the delivery log and checks what happened when the application tried to send a report.
 
 ## What a connection needs
 
-An **Internet Protocol (IP) address** identifies a destination on the network. A **port** identifies the service at that destination. The sending application needs the correct address and port, a working network path and a firewall rule that permits the connection.
+### IP addresses: reaching the computer
 
-**Transmission Control Protocol (TCP)** provides an ordered, reliable stream of data between connected applications. TCP/IP names these communication protocols. They carry information; they do not define the clinical meaning of a hemoglobin result.
+A **protocol** is an agreed set of rules for communication. **Internet Protocol (IP)** provides rules for addressing and moving data across a network. Data travels in small pieces called **packets**, which carry source and destination addresses. Network equipment uses the destination address to forward each packet toward the receiving computer.
 
-Here, the interface engine connects to the EHR's receiving service and sends a laboratory message. Messages commonly follow a Health Level Seven (HL7) format so that systems can agree where to find the patient, test and result information.
+An **IP address** can look like `10.20.30.40`: four numbers separated by dots. In this hospital, that is the address used to reach the EHR computer that receives laboratory messages. The interface engine's computer has its own address, `10.20.30.15`. These addresses are used within the hospital's private network.
 
-The receiving application returns an **acknowledgment (ACK)**. Its meaning depends on the agreed message process: check whether it reports acceptance or an error. An accepted message still needs to appear as the complete report in the correct chart. Here, the engine retains messages without the expected acknowledgment and retries delivery.
+### Ports: reaching the receiving service
 
-The interface engine acts as a **client** when it opens a connection to the receiving **server** service. These names describe their jobs in that exchange, not whether either computer is inside the hospital.
+One computer can run several programs that accept network connections. A **port** is a number that directs a connection to a particular service. The EHR's laboratory receiving service is configured to wait for connections on port `5000`. Staff describe this as **listening on port 5000**.
+
+Think of the IP address as a building's street address and the port as an office number inside it. The interface engine needs both settings to connect to the receiving service. For this hospital, the destination is written as `10.20.30.40:5000`. The number after the colon is the port. The interface and EHR teams agreed on 5000 for this connection; another hospital may use a different number.
+
+When you inspect the records below, compare the sender's destination address and port with the receiving service's settings. Also check that the receiving service is running and listening. Together, these checks explain where the sender is trying to connect and which service is ready to receive it.
+
+### TCP/IP: moving the data between applications
+
+**Transmission Control Protocol (TCP)** establishes a connection between the two applications and keeps track of the data sent over it. TCP resends missing data and puts received data back in order. If a connection fails, the sending application can report the failure and decide when to try again.
+
+**TCP/IP** is the name commonly used for this family of network communication protocols. IP supplies the addressing and packet delivery; TCP provides an ordered, reliable stream of data for applications. Hospitals use TCP/IP on their internal networks as well as for connections to outside services.
+
+The program that opens the connection is the **client**. Here, the interface engine is the client. The **server** is the service waiting to accept that connection: the EHR's laboratory receiving service. Once connected, the two programs can exchange data in both directions.
+
+### Sending and accepting the laboratory message
+
+After connecting, the interface engine sends the laboratory message. Its patient identifier, test name, result, units and other fields follow an agreed format. **Health Level Seven (HL7)** provides commonly used message formats that let the sending and receiving applications find those fields consistently.
+
+The receiving application returns an **acknowledgment (ACK)** to report acceptance or an error, according to the agreed message process. The interface engine records that reply. In this hospital, it keeps messages awaiting the expected acknowledgment in the queue and retries delivery. The laboratory then checks that the accepted message appears as a complete report in the correct patient's chart.

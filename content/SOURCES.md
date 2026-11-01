@@ -263,7 +263,7 @@ All new clinical and regulatory teaching remains subject to author review before
 
 ## Foundational lesson explanations — November 1, 2026
 
-Reviewed the following primary sources while revising lessons 2–4. Case records, counts, numerical calculations and acceptance limits are unchanged.
+Reviewed the following primary sources while revising lessons 2–4. The initial batch preserved case records, counts, numerical calculations and acceptance limits. The subsequent Missing CBC case correction is documented below.
 
 - [RFC 9293](https://www.rfc-editor.org/rfc/rfc9293.html): TCP's ordered, reliable transport service. The Missing CBC distinguishes transport, the receiving application's acknowledgment and review of the complete chart report.
 - [Government Data Quality Framework](https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework): the six common dimensions and the broader question of fitness for purpose. Can We Trust This Report? applies these to fields, source documents and report use.
@@ -273,3 +273,9 @@ Reviewed the following primary sources while revising lessons 2–4. Case record
 - [CLSI EP26 public overview](https://clsi.org/shop/standards/ep26/): patient-sample lot comparisons and protocol setup before routine evaluations. The case's numerical criteria remain local assumptions; the lesson does not claim to implement the complete guideline.
 
 No source prose or figures were copied. Existing PIER and Harrison coverage is retained. The turnaround-time conclusion now distinguishes a descriptive difference between periods from proof that the LIS caused improvement.
+
+### Missing CBC author feedback — November 1, 2026
+
+Following the author's review, replaced the vendor-hosted EHR/firewall failure with an internal interface configuration error after maintenance. The outgoing destination uses port 5100; the EHR's receiving service listens on the agreed port 5000. The lesson now compares those settings, corrects the sender and checks delivery. Analyzer/LIS results, timestamps, queue count and restoration outcomes remain unchanged. New connection settings and records are original case content.
+
+[RFC 791](https://www.rfc-editor.org/rfc/rfc791.html) supports the beginner explanation of addressing and packet forwarding. [RFC 1918](https://www.rfc-editor.org/rfc/rfc1918.html) supports private network addressing and TCP/IP use within an organization. [RFC 9293, section 2.2](https://www.rfc-editor.org/rfc/rfc9293.html#section-2.2) supports the explanations of ports, ordered delivery and retransmission. The case's port numbers are local configuration choices. The changes also replace repeated negative contrasts with direct descriptions of each system's work.

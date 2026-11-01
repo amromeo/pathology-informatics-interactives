@@ -56,7 +56,7 @@ export function ResultJourneyExperience({
   const classifiedCount = componentClasses.filter(
     (item) => classifications[item.id] === item.answer,
   ).length;
-  const validationPassed = repair === "restore-firewall";
+  const validationPassed = repair === "correct-port";
 
   const placeNode = (id: string) => {
     const expected = expectedPath[path.length];
@@ -493,8 +493,8 @@ export function ResultJourneyExperience({
             <div className={`feedback ${selectedRepair.correct ? "correct" : "incorrect"}`}>
               <strong>
                 {selectedRepair.correct
-                  ? "This restores the blocked connection."
-                  : "This does not restore the reporting path."}
+                  ? "This corrects the connection settings."
+                  : "The reporting problem still needs repair."}
               </strong>
               <p>{selectedRepair.feedback}</p>
             </div>
@@ -578,8 +578,8 @@ export function ResultJourneyExperience({
               </strong>
               <p>
                 {validationPassed
-                  ? "Hospital IT confirms the firewall correction. The LIS team confirms that the queue cleared and new results are moving. The laboratory confirms that reports reached the correct patient charts and completes downtime reconciliation."
-                  : "The selected action did not remove the firewall block. The queued and new reports still cannot reach the EHR."}
+                  ? "The interface team confirms that the destination matches the EHR's receiving address and port. The LIS team confirms that the queue cleared and new results are moving. The laboratory confirms that reports reached the correct patient charts and completes downtime reconciliation."
+                  : "The sender still uses port 5100 while the EHR receives on 5000. Waiting and new reports remain in the queue. Correct the destination port, then check delivery."}
               </p>
             </div>
           )}

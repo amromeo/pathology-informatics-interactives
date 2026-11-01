@@ -4,6 +4,9 @@ Date: November 1, 2026. Branch: `codex/foundational-lesson-explanations`.
 Base: `1bf7264357ef0e225c444ab7688b10b53b2ca250`.
 Status: implemented for author review; this batch is not deployed.
 
+This record describes the initial batch at `abda3ac`. The subsequent Missing CBC
+case revision and its verification are recorded in [the author-feedback follow-up](cbc-author-feedback.md).
+
 The author authorized publication of the reviewed Model Under Pressure revision
 and continuation with the next batch. This batch applies the consolidated lesson
 style guide to lessons 2, 3 and 4, including interactions and supporting materials.

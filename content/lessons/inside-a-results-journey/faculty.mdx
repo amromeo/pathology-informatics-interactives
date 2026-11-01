@@ -10,24 +10,26 @@ Spend 4 minutes on the ED call and LIS check, 8 minutes on the map and component
 
 Begin with the ED screen. Ask what Pending tells the clinician and what remains unknown. The first useful laboratory check is the LIS: it contains a final CBC verified at 09:42. The technologist can communicate the hemoglobin under the downtime procedure while the analyst investigates.
 
-Give learners time to read the system explanation before building the map. The order is analyzer, LIS, interface engine, firewall/network, EHR. The map highlights the final network connection; it does not imply that the earlier systems communicate without networks.
+Give learners time to read the system explanation before building the map. The order is analyzer, LIS, interface engine, hospital network, EHR. These systems communicate within the health system's data center. The map highlights the final connection; the earlier transfers also use the network.
 
-For component classification, the server and switch are hardware, the operating system is system software, and the LIS and interface engine are applications. TCP/IP supplies communication rules.
+For component classification, the server and switch are hardware, the operating system is system software, and the LIS and interface engine are applications. TCP/IP supplies communication rules. Have learners read `10.20.30.40:5000` aloud as a destination address followed by a port. Ask which setting identifies the computer and which directs the connection to its laboratory receiving service.
+
+Use the client/server explanation to describe this exchange: the interface engine opens the connection, and the EHR service waits to accept it. Explain how TCP tracks data delivery and restores the order of received data before the application processes the message. Then follow the message acknowledgment and complete report into the chart.
 
 Ask learners to explain each record before moving to the next tab:
 
-- **Analyzer:** testing finished at 09:40 and the LIS accepted the result. This does not establish EHR display.
-- **LIS:** verification at 09:42 rules out a result still awaiting laboratory release. It does not establish the next transfer.
-- **Interface:** 18% processor use and 46% memory use argue against overload at the recorded time. The running application, queue of 214 results and connection-reset log direct attention to delivery.
-- **Firewall:** the deny record identifies the blocked connection to the EHR service. It cannot establish whether a hemoglobin measurement is analytically correct.
+- **Analyzer:** testing finished at 09:40 and the LIS accepted the result. The next record to inspect is the LIS report.
+- **LIS:** verification at 09:42 establishes laboratory release. Staff can communicate that verified result to the clinician while the analyst checks the next transfer.
+- **Interface:** 18% processor use and 46% memory use argue against overload at the recorded time. The queue contains 214 results. The log shows outgoing settings reloaded after maintenance at 09:35, followed by a refused connection to `10.20.30.40:5100`.
+- **EHR receiving service:** the EHR's laboratory service runs at `10.20.30.40` and listens on port 5000. Compare both settings with the sender. The addresses match; the port numbers differ.
 
 ## Explain the repair and checks
 
-Hospital IT restores the rule for the approved connection. The LIS analyst then checks delivery. Restarting the application leaves the firewall block intact; repeating the CBC produces another result waiting on the same connection.
+The interface analyst corrects the sender's destination port to 5000, as confirmed with the EHR analyst. The teams test the connection and check delivery. Restarting the application with its unchanged settings would reload port 5100; repeating the CBC would produce another result waiting on the same connection.
 
-Run the checks after selecting manual entry as well as after selecting the firewall repair. Manual entry passes the original-CBC check only. Ask why that is insufficient for the other queued reports, new CBC, other laboratory section and downtime record. The restoration exercise represents the expected consequences of the selected action; it is not a live connection test.
+Run the checks after selecting manual entry as well as after selecting the port correction. Manual entry passes the original-CBC check only. Ask why that is insufficient for the other queued reports, new CBC, other laboratory section and downtime record. The restoration exercise shows the expected consequences of the selected action.
 
-The laboratory must confirm the complete report in the correct chart. An acknowledgment alone cannot establish that the clinician sees the intended display. Support teams may be organized differently locally; avoid treating the example department names as universal boundaries.
+The acknowledgment reports how the receiving application handled the message. The laboratory then confirms the complete report in the correct chart, including its results, units, flags and comments. Ask learners which local teams would perform these checks at their institution.
 
 ## Questions to carry into practice
 
@@ -41,7 +43,9 @@ Use the practicum to obtain a local result-path diagram, the record available at
 
 [API teaching slides](https://www.pathologyinformatics.org/teaching-slide-sets), Harrison Session 1, slides 5, 11 and 14–15, help distinguish hardware, operating systems, applications and networking. Session 3 supplies the connected laboratory-systems context. Use them after discussing what the records show.
 
-[RFC 9293](https://www.rfc-editor.org/rfc/rfc9293.html) describes TCP's transport service. The lesson distinguishes transport from the receiving application's acknowledgment and from chart-display review. Retry behavior and support responsibilities in the case describe this hospital's arrangement.
+[RFC 791](https://www.rfc-editor.org/rfc/rfc791.html) describes IP addressing and packet forwarding. [RFC 1918](https://www.rfc-editor.org/rfc/rfc1918.html) explains private network addresses, including the 10.x.x.x range used here. These are optional technical references for faculty; the learner's explanation is contained in the lesson.
+
+[RFC 9293](https://www.rfc-editor.org/rfc/rfc9293.html), section 2.2, describes TCP's ordered transport service and use of port numbers. The port settings, retry behavior and support responsibilities in this case describe this hospital's arrangement. The revised case investigates an internal interface configuration error. Connections to outside organizations, such as a reference laboratory, have their own network arrangements to inspect.
 ## Common misconceptions
 
-A running server can still have a blocked connection. An accepted message can still need chart-display review. A manual fix for one CBC does not account for the other waiting reports. Ask which record would address each of these different questions.
+A running server can still send to the wrong port. A receiving service can accept a message that later needs chart-display review. Entering one CBC manually leaves the other reports waiting. Ask which record would address each of these different questions.

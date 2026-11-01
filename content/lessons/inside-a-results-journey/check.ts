@@ -51,7 +51,7 @@ export const checks: RetrievalItem[] = [
         id: "incomplete",
         label: "Apply this case decision without checking local policy",
         feedback:
-          "A firewall rule caused this case, but another missing report could have a different cause. First locate the failed handoff and identify the appropriate local support team.",
+          "An incorrect destination port caused this case. To choose a repair for a new incident, first trace the missing report through the local systems and identify where delivery stopped.",
       },
     ],
   },

@@ -8,9 +8,9 @@ export const pathwayOrder = ["analyzer", "lis", "interface", "network", "ehr"] a
 
 export const pathwayNodes: PathwayNode[] = [
   { id: "interface", label: "Interface engine", location: "Health-system data center" },
-  { id: "ehr", label: "EHR", location: "Vendor-hosted service" },
+  { id: "ehr", label: "EHR", location: "Health-system data center" },
   { id: "analyzer", label: "Analyzer", location: "Hematology lab" },
-  { id: "network", label: "Firewall and network", location: "Hospital boundary" },
+  { id: "network", label: "Hospital network", location: "Internal network" },
   { id: "lis", label: "LIS", location: "Health-system data center" },
 ];
 
@@ -87,7 +87,7 @@ export const evidenceViews = [
     tab: "Interface server",
     heading: "The interface application is running, but its queue is growing",
     summary:
-      "The server itself is not overloaded. Results are waiting because repeated delivery attempts fail.",
+      "The LIS analyst opens the server status, outgoing connection settings and delivery log. Results are waiting after repeated failed delivery attempts.",
     fields: [
       { label: "Processor", value: "18%" },
       { label: "Memory", value: "46%" },
@@ -96,27 +96,33 @@ export const evidenceViews = [
       { label: "Operating system", value: "Running" },
       { label: "Interface application", value: "Running" },
       { label: "Outbound queue", value: "214 results", tone: "critical" },
+      { label: "Destination IP address", value: "10.20.30.40" },
+      { label: "Destination TCP port", value: "5100" },
     ],
     log: [
-      "10:21:04  Delivery failed",
-      "10:21:04  TCP connection reset",
+      "09:35:00  Outgoing connection settings reloaded after maintenance",
+      "10:21:04  Connecting to 10.20.30.40:5100",
+      "10:21:04  TCP connection refused",
       "10:21:04  Result queued; retry scheduled",
     ],
   },
   {
-    id: "firewall",
-    tab: "Firewall",
-    heading: "The hospital firewall is blocking the EHR connection",
+    id: "ehr-receiver",
+    tab: "EHR receiving service",
+    heading: "Check where the EHR receives laboratory messages",
     summary:
-      "The interface server can reach the hospital network, but the approved connection to the vendor-hosted EHR is being denied.",
+      "The EHR analyst opens the settings and status for the laboratory receiving service. Compare its address and port with the outgoing interface settings.",
     fields: [
-      { label: "Recent change", value: "Firewall rules updated at 09:35" },
-      { label: "Affected route", value: "Interface server → EHR service" },
+      { label: "Service", value: "Laboratory results" },
+      { label: "Status", value: "Running" },
+      { label: "IP address", value: "10.20.30.40" },
+      { label: "Listening TCP port", value: "5000" },
+      { label: "Last settings change", value: "October 12, 14:10" },
     ],
     log: [
-      "10:18  Interface server → EHR service",
-      "10:18  Connection blocked by firewall rule",
-      "10:18  Action: deny",
+      "10:18  Laboratory receiving service: running",
+      "10:18  Listening at 10.20.30.40:5000",
+      "10:18  Most recent laboratory message accepted: 09:34",
     ],
   },
 ] as const;
@@ -141,72 +147,72 @@ export const connectionChoices = [
     label: "Interface engine to EHR",
     correct: true,
     feedback:
-      "The analyzer completed the CBC, and the LIS released the result. The result is waiting in the interface queue because the connection between the interface engine and EHR is blocked.",
+      "The CBC reached the interface queue. The interface engine is trying port 5100, while the EHR's laboratory receiving service listens on port 5000. The report is waiting at this connection.",
   },
 ] as const;
 
 export const repairChoices = [
   {
-    id: "restore-firewall",
-    label: "Correct the firewall rule and check delivery.",
+    id: "correct-port",
+    label: "Correct the destination port and check delivery.",
     correct: true,
     feedback:
-      "This corrects the demonstrated failure. The queued results still need to be transmitted and reconciled before the incident is closed.",
+      "The interface analyst changes the destination port from 5100 to the agreed port 5000 and tests the connection with the EHR analyst. The team then checks delivery of waiting and new reports and accounts for results communicated during the interruption.",
   },
   {
     id: "repeat-cbc",
     label: "Repeat the patient's CBC on the analyzer.",
     correct: false,
     feedback:
-      "The CBC is already complete. Repeating it does not restore electronic reporting and may create an unnecessary recollection and another delayed result.",
+      "The LIS already contains the verified CBC. Repeating the analysis would add another result to the same waiting queue. Staff should communicate the existing result and investigate the connection.",
   },
   {
     id: "restart-interface",
     label: "Restart the running interface application.",
     correct: false,
     feedback:
-      "The interface application is running. Restarting it does not remove the firewall block, and the queued results still cannot reach the EHR.",
+      "Restarting the application reloads its saved destination port of 5100. The EHR service listens on 5000, so the analyst needs to correct that setting before testing delivery.",
   },
   {
     id: "manual-entry",
-    label: "Ask the EHR vendor to enter the CBC manually.",
+    label: "Have the EHR team enter this CBC manually.",
     correct: false,
     feedback:
-      "Manual entry would not restore the reporting path or address the other queued results. The laboratory should use its approved downtime procedure until the connection is restored.",
+      "Entering this CBC would address one report. Other queued reports and new results would keep waiting at the failed connection. Use the downtime process while the interface team corrects the destination port.",
   },
 ] as const;
 
 export const validationCases = [
   {
-    passingRepairs: ["restore-firewall", "manual-entry"] as string[],
+    passingRepairs: ["correct-port", "manual-entry"] as string[],
     failNote: "The original report still needs verified placement in the chart.",
     id: "original",
     name: "Original CBC",
     note: "Appears once in the correct patient chart",
   },
   {
-    passingRepairs: ["restore-firewall"] as string[],
+    passingRepairs: ["correct-port"] as string[],
     failNote: "A one-result repair leaves other queued reports unresolved.",
     id: "queue",
     name: "Queued results",
     note: "All queued reports reach the correct patients without duplicates",
   },
   {
-    passingRepairs: ["restore-firewall"] as string[],
-    failNote: "The blocked connection still delays new reports.",
+    passingRepairs: ["correct-port"] as string[],
+    failNote: "The incorrect destination port still delays new reports.",
     id: "new-cbc",
     name: "New CBC",
     note: "Transmits to the EHR without delay",
   },
   {
-    passingRepairs: ["restore-firewall"] as string[],
-    failNote: "Other laboratory sections still use the blocked connection.",
+    passingRepairs: ["correct-port"] as string[],
+    failNote: "Other laboratory sections still use the same outgoing connection settings.",
     id: "other-section",
     name: "Another laboratory section",
     note: "A report using the same connection also reaches the EHR",
   },
   {
-    passingRepairs: ["restore-firewall"] as string[],
+    passingRepairs: ["correct-port"] as string[],
     failNote: "Reconcile results already communicated during the interruption.",
     id: "downtime",
     name: "Downtime results",
@@ -240,7 +246,7 @@ export const firstChecks = [
 
 export const lessonCopy = {
   text01:
-    "Choose whether each named item is physical equipment, system software, application software or a communication protocol. Classify the item itself: an interface application runs on a server, but it is not the server hardware.",
+    "Choose whether each named item is physical equipment, system software, application software or a communication protocol. For example, the server is physical equipment and the interface application is software running on it.",
   text02:
     "The LIS team starts with the laboratory systems, then follows the result toward the EHR. Open each check and decide what it rules in or out.",
   text03:
@@ -251,7 +257,8 @@ export const pathwayExplanations: Record<string, string> = {
   analyzer: "The analyzer produces the measurement and sends it to the LIS for laboratory review.",
   lis: "The LIS stores the verified report and sends it to the interface engine.",
   interface: "The interface application prepares and queues the outbound report.",
-  network: "The network and firewall must permit the approved connection to the EHR.",
+  network:
+    "The internal network carries data to the EHR computer. The destination port selects the receiving service on that computer.",
   ehr: "The clinical team must be able to view the complete report in the correct chart.",
 };
 export const classExplanations: Record<string, string> = {
@@ -263,7 +270,7 @@ export const classExplanations: Record<string, string> = {
   interface:
     "The interface engine is an application that transforms and routes messages; its server is the host hardware.",
   tcpip:
-    "Transmission Control Protocol/Internet Protocol (TCP/IP) supplies communication rules, not the laboratory report application.",
+    "TCP/IP supplies rules for sending data across a network. IP provides addressing, and TCP delivers an ordered stream of data between connected applications.",
 };
 export const evidenceQuestions: Record<
   string,
@@ -276,46 +283,46 @@ export const evidenceQuestions: Record<
 > = {
   analyzer: {
     incorrectFeedback:
-      "The analyzer record cannot establish how the EHR displays a report. It does show that analysis completed and the LIS accepted the result, so unfinished analyzer testing is the explanation this check rules out.",
+      "To assess EHR display mapping, staff need to inspect the report in the chart. The analyzer record shows completed testing and LIS acceptance, which rules out unfinished analyzer testing.",
     answer: "testing",
     choices: [
       { id: "testing", label: "Incomplete analyzer testing" },
       { id: "display", label: "An incorrect EHR display mapping" },
     ],
     feedback:
-      "Normal analysis and LIS acceptance show that testing and the first transfer completed. They do not establish the later chart display.",
+      "The completion time and LIS acceptance show that testing and the first transfer finished. Follow the report into the LIS next.",
   },
   lis: {
     incorrectFeedback:
-      "A final LIS report can coexist with a blocked connection to the EHR. The verification time rules out a result still awaiting laboratory release; it does not test that later connection.",
+      "To investigate the connection to the EHR, inspect the interface's delivery log and the EHR's receiving service. The final status here establishes that the laboratory released the result at 09:42.",
     answer: "verification",
     choices: [
       { id: "verification", label: "An unverified laboratory result" },
-      { id: "network", label: "A blocked EHR network connection" },
+      { id: "network", label: "A failed connection to the EHR" },
     ],
     feedback:
-      "Final status and the 09:42 verification show the laboratory result is available. They do not prove delivery beyond the LIS.",
+      "Final status and the 09:42 verification show that the laboratory released the report. Staff can communicate that result while the analyst follows its electronic delivery.",
   },
   interface: {
     incorrectFeedback:
-      "The connection reset does not rule out a firewall block. The recorded processor and memory use argue against overload; the firewall record is still needed to investigate the failed delivery.",
+      "A refused connection is a reason to compare the destination settings with the EHR's receiving service. The processor and memory readings address the other choice: overload.",
     answer: "overload",
     choices: [
       { id: "overload", label: "Server processor or memory overload" },
-      { id: "routing", label: "A firewall rule blocking the destination" },
+      { id: "routing", label: "An incorrect destination port" },
     ],
     feedback:
-      "Processor use of 18% and memory use of 46% do not suggest overload. Connection resets and a growing queue require checking the network route.",
+      "Processor use of 18% and memory use of 46% leave capacity available at the recorded time. Compare the destination address and port in the failed connection with the EHR's receiving settings next.",
   },
-  firewall: {
+  "ehr-receiver": {
     incorrectFeedback:
-      "A firewall log cannot establish the analytical accuracy of hemoglobin. The deny entry shows that this connection was blocked, ruling out normal delivery along it.",
+      "Assessing a hemoglobin measurement would require laboratory analytical checks. These records concern message delivery: the EHR listens on port 5000 and the interface engine is trying port 5100.",
     answer: "normal",
     choices: [
-      { id: "normal", label: "Normal delivery over the approved route" },
+      { id: "normal", label: "Matching sender and receiver port settings" },
       { id: "result", label: "An incorrect hemoglobin measurement" },
     ],
     feedback:
-      "The deny log demonstrates a blocked route. It says nothing about the analytic accuracy of the hemoglobin measurement.",
+      "The sender's destination address matches the EHR's address. The EHR receives laboratory messages on port 5000; the sender is trying 5100. Correcting the sender's port is the next step.",
   },
 };
