@@ -11,6 +11,7 @@ import {
   hasUniqueVisibleMatch,
   matchCount,
   minGroupSize,
+  transformOptions,
   privacyRows,
   type DatasetClassification,
   type FilterField,
@@ -40,20 +41,6 @@ const filterFeedbackLabels: Record<FilterField, string> = {
   diagnosis: "diagnosis",
 };
 
-const transformOptions: { id: TransformId; label: string; note: string }[] = [
-  { id: "date-to-year", label: "Generalize exact dates to year", note: "2026-04-18 becomes 2026." },
-  {
-    id: "zip-to-three",
-    label: "Truncate five-digit ZIP to three digits",
-    note: "02108 becomes 021**. Safe Harbor permits this only because the 021 area has more than 20,000 residents.",
-  },
-  {
-    id: "rare-diagnosis-to-category",
-    label: "Generalize the rare diagnosis",
-    note: "Ewing sarcoma becomes bone and soft tissue neoplasm.",
-  },
-];
-
 const classificationLabels: Record<DatasetClassification, string> = {
   "coded-reidentifiable": "Coded, reidentifiable protected health information",
   "limited-data-set-candidate": "Possible limited data set pathway — privacy review required",
@@ -77,14 +64,16 @@ function PrivacyTable({
   rows,
   caption,
   summaryId,
+  id,
 }: {
   rows: readonly PrivacyRow[];
   caption: string;
   summaryId: string;
+  id: string;
 }) {
   return (
     <div className="privacy-table-wrap" role="region" aria-label={caption} tabIndex={0}>
-      <table aria-describedby={summaryId}>
+      <table id={id} tabIndex={-1} aria-describedby={summaryId}>
         <caption>{caption}</caption>
         <thead>
           <tr>
@@ -118,10 +107,12 @@ function PrivacyTable({
 export function PrivacyExperience({
   lesson,
   Concepts,
+  Bridge,
   onAttempt,
 }: {
   lesson: LessonDefinition;
   Concepts?: MdxComponent;
+  Bridge?: MdxComponent;
   onAttempt?: (attempted: boolean) => void;
 }) {
   const [activeTrace, setActiveTrace] = useState(0);
@@ -305,6 +296,11 @@ export function PrivacyExperience({
           </div>
         </div>
         <p className="section-guidance">{lessonCopy.text01}</p>
+        {Concepts && (
+          <div className="mdx-content embedded-mdx privacy-concepts">
+            <Concepts />
+          </div>
+        )}
         <div className="privacy-filter-grid">
           {filterFields.map((field) => {
             const options = [...new Set(privacyRows.map((row) => String(row[field])))].sort(
@@ -314,6 +310,7 @@ export function PrivacyExperience({
               <label key={field}>
                 <span>{filterLabels[field]}</span>
                 <select
+                  aria-label={filterLabels[field]}
                   value={filters[field] === undefined ? "" : String(filters[field])}
                   onChange={(event) => updateFilter(field, event.target.value)}
                 >
@@ -342,6 +339,7 @@ export function PrivacyExperience({
           {lessonCopy.text02}
         </p>
         <PrivacyTable
+          id="raw-privacy-table"
           rows={filteredRows}
           caption="Proposed research export — matching records"
           summaryId="raw-privacy-summary"
@@ -389,9 +387,9 @@ export function PrivacyExperience({
             <h2 id="workbench-title">{lessonCopy.redactionHeading}</h2>
           </div>
         </div>
-        {Concepts && (
+        {Bridge && (
           <div className="mdx-content embedded-mdx privacy-concepts">
-            <Concepts />
+            <Bridge />
           </div>
         )}
         <div className="privacy-workbench-grid">
@@ -470,19 +468,20 @@ export function PrivacyExperience({
             </small>
           </article>
           <article>
-            <span>Educational routing result</span>
+            <span>Next privacy review</span>
             <strong>{classificationLabels[classification]}</strong>
             <small>
-              The privacy office—not this counter—determines the permitted release path.
+              Priya reviews the complete file, recipient and disclosure method before release.
             </small>
           </article>
         </div>
-        <details className="privacy-preview">
+        <details className="privacy-preview" id="transformed-privacy-preview">
           <summary>View all 18 transformed records</summary>
           <p className="privacy-table-summary" id="transformed-privacy-summary">
             {lessonCopy.text04}
           </p>
           <PrivacyTable
+            id="transformed-privacy-table"
             rows={transformedRows}
             caption="Transformation exercise preview"
             summaryId="transformed-privacy-summary"
@@ -550,6 +549,18 @@ export function PrivacyExperience({
                 </label>
               ))}
             </div>
+            <div role="status" aria-live="polite" aria-atomic="true">
+              {selectedRepair && (
+                <div className={`feedback ${selectedRepair.correct ? "correct" : "incorrect"}`}>
+                  <strong>
+                    {selectedRepair.correct
+                      ? "Prepare this proposal for review."
+                      : "This proposal leaves problems to resolve."}
+                  </strong>
+                  <p>{selectedRepair.feedback}</p>
+                </div>
+              )}
+            </div>
           </fieldset>
           <article className="test-console" aria-live="polite">
             <header>
@@ -595,7 +606,6 @@ export function PrivacyExperience({
                   ? "The proposal is ready for documented privacy review."
                   : "The proposal is not ready for release."}
               </strong>
-              <p>{selectedRepair.feedback}</p>
               <p>
                 Your exercise applies {transforms.length} of {transformOptions.length} field
                 transformations, leaves the key {keySequestered ? "sequestered" : "shared"}, and

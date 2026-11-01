@@ -58,6 +58,7 @@ export function SecurityReviewExperience({
   const covered = results.filter((result) => result.status !== "unmitigated").length;
 
   const toggleProperty = (findingId: string, property: SecurityProperty) => {
+    setReviewedFindings((current) => current.filter((id) => id !== findingId));
     setFindingAssignments((current) => {
       const selected = current[findingId] ?? [];
       return {
@@ -333,7 +334,9 @@ export function SecurityReviewExperience({
           <span className="section-number">05</span>
           <div>
             <p className="eyebrow">test the control plan</p>
-            <h2 id="stress-test-title">Run the control plan against five laboratory events</h2>
+            <h2 id="stress-test-title" tabIndex={-1}>
+              Run the control plan against five laboratory events
+            </h2>
           </div>
         </div>
         <p className="section-guidance">{lessonCopy.text03}</p>

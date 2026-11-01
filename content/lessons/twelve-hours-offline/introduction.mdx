@@ -8,11 +8,27 @@ North River University Hospital is a Level I trauma center. On April 18, 2026, c
 
 The middleware server loses its only usable network path. Staff have never restored it from backup or rehearsed recovery after an outage. The unfinished work did not cause the cable damage, but it leaves the team less prepared to recover.
 
+Network separation limits which computers can connect to each other. An alternate network route provides another way for messages to travel. A restricted network boundary would not repair the severed cable. This incident requires restoring connectivity and checking the work accumulated during the interruption; the case does not report destruction of the server's stored data.
+
 Dr. Maya Chen is working with Jordan Ellis, a laboratory information system (LIS) analyst, the core laboratory and nursing units. Dr. Elena Ruiz is the laboratory medical director. They need to keep testing on paper, phone critical results and keep each specimen linked to the right patient. When the network returns at 18:20, they must match the paper work to the electronic orders and results.
+
+## Terms used in this case
+
+- **Middleware:** software that routes instrument messages to the LIS and holds messages waiting for delivery.
+- **Temporary patient identifier:** a number assigned during downtime to connect a patient with their orders and specimens. Registration records who received each number.
+- **Medical record number (MRN):** the identifier for a patient's hospital chart. Staff must verify which MRN belongs to each temporary identifier.
+- **Paper accession number:** the laboratory's identifier for a specimen and its testing. It is separate from the patient identifier.
+- **Reconciliation:** comparing paper and electronic records so each order, result and call is accounted for in the correct chart.
+- **Back-entry:** entering earlier paper work into the restored system. Its entry time is recorded separately from specimen collection time.
+- **Recovery time objective (RTO):** the planned maximum time a service can remain unavailable before the effect becomes unacceptable.
+- **Recovery point objective (RPO):** the amount of recent data loss the organization plans to tolerate, expressed as a time interval before the interruption.
+- **Backup and standby:** a backup is a saved data copy used for restoration. A standby is an alternate system prepared to take over service.
 
 ## Your task
 
 Choose how the laboratory begins downtime, works through the day and returns to electronic records. Your early choices change the records available during recovery. Then match the six paper records to patient charts and decide how to handle the remaining problems.
+
+The incident board reports 17 active trauma patients and 9 pending critical tests at 06:20. These are separate counts of people and tests. The six records used for reconciliation are selected recovery examples, not a complete census of the day's testing. The identifier and call-log choices change those examples; the other choices teach how to coordinate work through their feedback.
 
 ## What you will be able to do
 

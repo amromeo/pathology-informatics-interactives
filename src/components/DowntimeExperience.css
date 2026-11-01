@@ -1,0 +1,53 @@
+.downtime-table-wrap table {
+  table-layout: fixed;
+}
+
+.downtime-table-wrap td:last-child {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 720px) {
+  .downtime-reconciliation-fieldset .downtime-table-wrap table,
+  .downtime-reconciliation-fieldset .downtime-table-wrap tbody,
+  .downtime-reconciliation-fieldset .downtime-table-wrap tr,
+  .downtime-reconciliation-fieldset .downtime-table-wrap th,
+  .downtime-reconciliation-fieldset .downtime-table-wrap td,
+  .downtime-reconciliation-fieldset .downtime-table-wrap caption {
+    display: block;
+    width: auto;
+    min-width: 0;
+  }
+
+  .downtime-reconciliation-fieldset .downtime-table-wrap thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .downtime-reconciliation-fieldset .downtime-table-wrap tr {
+    border-bottom: 3px solid var(--line);
+  }
+
+  .downtime-reconciliation-fieldset .downtime-table-wrap tbody th {
+    background: #15332e;
+    color: white;
+  }
+
+  .downtime-reconciliation-fieldset .downtime-table-wrap td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 6px;
+    font-family: inherit;
+    font-weight: 700;
+  }
+
+  .downtime-reconciliation-fieldset .downtime-table-wrap td:first-of-type {
+    white-space: normal;
+  }
+
+  .downtime-reconciliation-fieldset .downtime-table-wrap .downtime-selected-action {
+    margin-bottom: 0;
+  }
+}

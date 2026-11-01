@@ -8,6 +8,7 @@ import {
   applyDecision,
   buildReconciliationRecords,
   initialDowntimeState,
+  patientMatchFeedback,
   resumptionChoices,
   scoreReconciliation,
   tabletopPhases,
@@ -24,10 +25,12 @@ const emptyAssignments = (): LearnerAssignments => ({ matches: {}, actions: {} }
 export function DowntimeExperience({
   lesson,
   Concepts,
+  Investigation,
   onAttempt,
 }: {
   lesson: LessonDefinition;
   Concepts?: MdxComponent;
+  Investigation?: MdxComponent;
   onAttempt?: (attempted: boolean) => void;
 }) {
   const [activeTrace, setActiveTrace] = useState(0);
@@ -327,6 +330,11 @@ export function DowntimeExperience({
             </h2>
           </div>
         </div>
+        {Investigation && (
+          <div className="mdx-content embedded-mdx">
+            <Investigation />
+          </div>
+        )}
         <p className="section-guidance">{lessonCopy.text01}</p>
         <div role="status" aria-live="polite" aria-atomic="true">
           {!allPhasesComplete && (
@@ -340,7 +348,7 @@ export function DowntimeExperience({
           )}
         </div>
         <div className="downtime-reference-grid">
-          <article>
+          <article id="restored-charts" tabIndex={-1}>
             <h3>Restored patient charts</h3>
             <div className="downtime-chart-list">
               {records.restoredCharts.map((chart) => (
@@ -355,6 +363,8 @@ export function DowntimeExperience({
             </div>
           </article>
           <article
+            id="downtime-call-log"
+            tabIndex={-1}
             className={records.callLogEntries.length ? "call-log-ready" : "call-log-missing"}
           >
             <h3>Critical-result call log</h3>
@@ -388,12 +398,12 @@ export function DowntimeExperience({
             aria-label="Downtime reconciliation records"
             tabIndex={0}
           >
-            <table>
+            <table id="downtime-records" tabIndex={-1} role="table">
               <caption>
                 Paper records compared with the restored laboratory information system
               </caption>
-              <thead>
-                <tr>
+              <thead role="rowgroup">
+                <tr role="row">
                   <th scope="col">Temporary ID</th>
                   <th scope="col">Paper record</th>
                   <th scope="col">Patient and unit</th>
@@ -403,30 +413,34 @@ export function DowntimeExperience({
                   <th scope="col">Match to MRN</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody role="rowgroup">
                 {records.paperRecords.map((record) => (
-                  <tr key={record.tempId}>
-                    <th scope="row">{record.tempId}</th>
-                    <td>
+                  <tr key={record.tempId} role="row">
+                    <th scope="row" role="rowheader">
+                      {record.tempId}
+                    </th>
+                    <td role="cell" data-label="Paper record">
                       <strong>{record.paperAccession}</strong>
                       <small>{record.restoredOrder}</small>
                     </td>
-                    <td>
+                    <td role="cell" data-label="Patient and unit">
                       <strong>{record.patientName}</strong>
                       <small>
                         {record.birthDate} · {record.unit}
                       </small>
                     </td>
-                    <td>
+                    <td role="cell" data-label="Test and result">
                       <strong>{record.test}</strong>
                       <small>{record.result}</small>
                     </td>
-                    <td>
+                    <td role="cell" data-label="Times">
                       <strong>Collected {record.collectionTime}</strong>
                       {record.backEntryTime && <small>Entered {record.backEntryTime}</small>}
                     </td>
-                    <td>{record.chartStatus}</td>
-                    <td>
+                    <td role="cell" data-label="Restored status">
+                      {record.chartStatus}
+                    </td>
+                    <td role="cell" data-label="Match to MRN">
                       <label>
                         <select
                           disabled={!allPhasesComplete}
@@ -448,6 +462,13 @@ export function DowntimeExperience({
                           ))}
                         </select>
                       </label>
+                      <div role="status" aria-live="polite">
+                        {reconciliationRun && (
+                          <p className="downtime-selected-action">
+                            {patientMatchFeedback(record, assignments.matches[record.tempId])}
+                          </p>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}

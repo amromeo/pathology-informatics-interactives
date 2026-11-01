@@ -1,0 +1,37 @@
+
+Running 28 tests using 2 workers
+
+(node:23540) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22960) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\review.spec.ts:5:5 › 1365 server-behind-the-analyzer additional decisions (8.6s)
+  ok  3 tests\e2e\review.spec.ts:5:5 › 1365 where-is-the-specimen additional decisions (2.8s)
+  ok  4 tests\e2e\review.spec.ts:5:5 › 390 server-behind-the-analyzer additional decisions (3.1s)
+  ok  5 tests\e2e\review.spec.ts:5:5 › 390 where-is-the-specimen additional decisions (2.6s)
+  ok  2 tests\e2e\routes.spec.ts:14:5 › 1365px lessons/server-behind-the-analyzer/ (27.7s)
+  ok  6 tests\e2e\topic3-teaching.spec.ts:49:3 › 1365 server explanations, changed mapping and control plan (17.2s)
+  ok  7 tests\e2e\routes.spec.ts:14:5 › 1365px faculty/server-behind-the-analyzer/ (9.2s)
+  ok  8 tests\e2e\topic3-teaching.spec.ts:101:3 › 1365 downtime wrong matches, recovery actions and earlier decisions (10.6s)
+  ok  9 tests\e2e\routes.spec.ts:14:5 › 1365px lessons/twelve-hours-offline/ (18.6s)
+  ok 10 tests\e2e\topic3-teaching.spec.ts:184:3 › 1365 privacy fixed export, transformations, feedback and reset (11.3s)
+  ok 11 tests\e2e\routes.spec.ts:14:5 › 1365px faculty/twelve-hours-offline/ (10.6s)
+  ok 12 tests\e2e\topic3-teaching.spec.ts:49:3 › 390 server explanations, changed mapping and control plan (17.0s)
+  ok 14 tests\e2e\topic3-teaching.spec.ts:101:3 › 390 downtime wrong matches, recovery actions and earlier decisions (13.4s)
+  ok 13 tests\e2e\routes.spec.ts:14:5 › 1365px lessons/not-anonymous-enough/ (20.7s)
+  ok 16 tests\e2e\routes.spec.ts:14:5 › 1365px faculty/not-anonymous-enough/ (8.1s)
+  ok 15 tests\e2e\topic3-teaching.spec.ts:184:3 › 390 privacy fixed export, transformations, feedback and reset (11.8s)
+  ok 17 tests\e2e\routes.spec.ts:14:5 › 390px lessons/server-behind-the-analyzer/ (16.2s)
+  ok 18 tests\e2e\routes.spec.ts:14:5 › 390px faculty/server-behind-the-analyzer/ (8.1s)
+  ok 19 tests\e2e\routes.spec.ts:14:5 › 390px lessons/twelve-hours-offline/ (15.5s)
+  ok 20 tests\e2e\routes.spec.ts:14:5 › 390px faculty/twelve-hours-offline/ (9.4s)
+  ok 21 tests\e2e\routes.spec.ts:14:5 › 390px lessons/not-anonymous-enough/ (11.8s)
+  ok 22 tests\e2e\routes.spec.ts:14:5 › 390px faculty/not-anonymous-enough/ (4.9s)
+  ok 23 tests\e2e\routes.spec.ts:14:5 › 320px lessons/server-behind-the-analyzer/ (12.6s)
+  ok 24 tests\e2e\routes.spec.ts:14:5 › 320px faculty/server-behind-the-analyzer/ (4.8s)
+  ok 25 tests\e2e\routes.spec.ts:14:5 › 320px lessons/twelve-hours-offline/ (12.8s)
+  ok 26 tests\e2e\routes.spec.ts:14:5 › 320px faculty/twelve-hours-offline/ (12.2s)
+  ok 27 tests\e2e\routes.spec.ts:14:5 › 320px lessons/not-anonymous-enough/ (12.8s)
+  ok 28 tests\e2e\routes.spec.ts:14:5 › 320px faculty/not-anonymous-enough/ (6.2s)
+
+  28 passed (3.9m)

@@ -17,20 +17,21 @@ export const checks: RetrievalItem[] = [
         id: "shortcut",
         label: "It meets Safe Harbor without review",
         feedback:
-          "This leaves the central problem unresolved. Safe Harbor removes all date elements except year and all five-digit ZIP codes. Limited three-digit ZIP retention has a population condition; other disclosure methods require their own review.",
+          "Exact birth dates and full ZIP codes remain in this extract. Those fields fail Safe Harbor requirements even though names were removed.",
       },
       {
         id: "incomplete",
         label: "A study number alone makes it anonymous",
         feedback:
-          "This does not establish the needed conclusion. Safe Harbor removes all date elements except year and all five-digit ZIP codes. Limited three-digit ZIP retention has a population condition; other disclosure methods require their own review.",
+          "A study number changes the row label. It leaves the exact birth dates and ZIP codes available for linkage and may itself connect to a separate identity key.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt:
+      "An investigator requests a laboratory export containing dates and ZIP codes. What should you check before preparing the file?",
     choices: [
       {
         id: "supported",
@@ -43,13 +44,13 @@ export const checks: RetrievalItem[] = [
         id: "shortcut",
         label: "Delete names and send the remaining file",
         feedback:
-          "This leaves the central problem unresolved. The fields and safeguards depend on the authorized method; a data use agreement is not a substitute for satisfying that method.",
+          "Deleting names leaves dates, geography and potentially a key. Ask the privacy office which disclosure method and field list were approved before preparing the export.",
       },
       {
         id: "incomplete",
         label: "Apply this case decision without checking local policy",
         feedback:
-          "This does not establish the needed conclusion. The fields and safeguards depend on the authorized method; a data use agreement is not a substitute for satisfying that method.",
+          "This case's three transformations may remove details another study needs. Use the local approved method and field list, with the privacy office reviewing any change.",
       },
     ],
   },
@@ -71,14 +72,16 @@ export const checks: RetrievalItem[] = [
         id: "shortcut",
         label: "Share the supervisor login temporarily",
         feedback:
-          "This leaves the central problem unresolved. The access arrangement needs individual authorization, appropriate safeguards and review of the business-associate relationship where applicable. Convenience does not remove these obligations.",
+          "The shared account would attribute the vendor's work to the supervisor. Arrange named, limited access so the hospital can review who changed the workstation.",
       },
       {
         id: "incomplete",
         label: "Permit unrestricted access until repair ends",
         feedback:
-          "This does not establish the needed conclusion. The access arrangement needs individual authorization, appropriate safeguards and review of the business-associate relationship where applicable. Convenience does not remove these obligations.",
+          "The repair may need only one workstation. Restricting the session protects unrelated records and settings and lets the laboratory approve and review the work.",
       },
     ],
   },
 ];
+
+export const feedbackHeadings = { correct: "Correct", incorrect: "Try again" };

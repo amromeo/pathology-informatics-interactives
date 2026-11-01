@@ -259,6 +259,14 @@ export type ReconciliationHazard = {
   resolvedNote: string;
 };
 
+export function patientMatchFeedback(record: PaperRecord, selectedMrn: string | undefined): string {
+  if (selectedMrn === record.expectedMrn)
+    return `${record.tempId} matches ${record.patientName}'s verified chart.`;
+  if (selectedMrn)
+    return `Check ${record.patientName}, born ${record.birthDate}, against the restored charts. The selected MRN is not the verified match; ask registration to resolve conflicting charts before entry.`;
+  return `Select a verified chart for ${record.patientName}, born ${record.birthDate}.`;
+}
+
 export type ReconciliationRecords = {
   paperRecords: readonly PaperRecord[];
   restoredCharts: readonly RestoredChart[];

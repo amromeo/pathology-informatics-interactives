@@ -1,22 +1,35 @@
 # Not Anonymous Enough
 
-> **Story so far:** After North River University Hospital's April 18 outage, Dr. Maya Chen, a pathology informatics fellow, and Jordan Ellis, a laboratory information system analyst, helped reconcile paper records with the restored system; this case uses a fixed post-incident record, so earlier simulated choices do not change the export reviewed here.
+## A file prepared after recovery
 
-## Case setup
+Two weeks after North River University Hospital's April 18, 2026 network outage, the quality office asks Dr. Maya Chen to help review a proposed research export. You are working with Dr. Chen and Priya Nair, the privacy officer. The investigator wants to study test completion and critical-result communication during the outage.
 
-North River University Hospital is a Level I trauma center. Two weeks after the outage, the quality office asks Dr. Chen to help Priya Nair, the hospital privacy officer, review a research export assembled from the outage-period reconciliation records. Jordan extracted the requested fields from the laboratory information system. The investigator wants to study how prolonged downtime affected test completion and critical-result communication.
+Jordan Ellis, the laboratory information system (LIS) analyst, starts with the records assembled after paper work was reconciled with the restored system. He selects the 18 patient records in this review file, all with an April 18 admission date. He copies birth year, sex, ZIP code, admission date and diagnosis into a worksheet, then replaces names and medical record numbers (MRNs) with study codes. The displayed file is the patient-description portion of the proposed export; it does not contain the completion and call outcomes needed to answer the research question.
 
-The file contains no names or medical record numbers, but it retains exact admission dates, full five-digit ZIP codes, rare diagnoses, and a linkage key stored in a shared project folder. The review must determine what the remaining fields could reveal, which institutional release pathway may apply, and what must change before the file leaves the hospital.
+Each row represents one patient in this selected file. The six specimens in Twelve Hours Offline were a separate set of recovery examples. This export is fixed: changing a downtime choice does not change its rows or values.
+
+Jordan keeps a separate lookup file connecting each linkage code to the patient's identity. That lookup file is still in the shared project folder. The exported column contains the **code**; the separate lookup file is the **key**. Anyone who can use both can reconnect the row to a person. Priya has not yet approved the recipient, fields or disclosure method.
+
+## Terms used in this case
+
+- **Export:** selected information copied from a system into another file. Here, each worksheet row contains selected fields from one patient record.
+- **Direct identifier:** information that identifies a person directly, such as a name or MRN.
+- **Quasi-identifier:** a detail that can help distinguish a person when combined with other information. Birth year, sex, ZIP, admission date and diagnosis are the five fields examined here.
+- **Coded data and linkage key:** the file uses codes in place of direct identifiers. A separate key connects the codes to identities.
+- **Generalization:** replacing a detailed value with a broader one. For example, 2026-04-18 becomes 2026.
+- **Reidentification:** connecting a released record to a person using a key or other information.
+- **Group size, or k:** the number of rows sharing a combination of the fields being compared. The displayed k is the smallest such group in this file.
+- **Protected health information (PHI):** individually identifiable health information protected by the Health Insurance Portability and Accountability Act (HIPAA).
+- **Safe Harbor and Expert Determination:** the two HIPAA methods for deidentifying health information. Safe Harbor specifies information to remove and an additional knowledge condition; Expert Determination requires a qualified expert's documented assessment.
+- **Limited data set and data use agreement:** a limited data set excludes specified direct identifiers but remains PHI. Its permitted use requires a data use agreement defining the recipient's allowed use and safeguards.
 
 ## Your task
 
-Inspect which identifiers and distinguishing details remain, classify the export as presented, and choose a release path. Then run that path against field-minimization, linkage-key, uniqueness-risk, recipient, and confidentiality checks.
-
+Use the filters to find how two known facts can isolate one row. Then change the displayed fields and observe the group sizes. Classify the original file and prepare a proposal for Priya's review. Explain what each change protects and what information the research would lose.
 
 ## What you will be able to do
 
-- Distinguish removing names from satisfying a disclosure method.
-- Ask which disclosure method was approved.
-- Explain why “delete names and send the remaining file” is an incomplete approach.
-
-Start by reading the case records. Make a choice before checking the explanation; you can revise it and test again.
+- Follow a patient record into an export and distinguish a study code from its lookup key.
+- Explain why a combination of fields can distinguish a row after names are removed.
+- Calculate the smallest group size and explain its limits.
+- Compare deidentification review with a controlled limited-data-set pathway.

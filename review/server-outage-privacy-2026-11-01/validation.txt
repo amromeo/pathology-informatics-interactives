@@ -1,0 +1,438 @@
+
+> pathology-informatics-interactives@0.1.0 test
+> npm run format:check && npm run lint && npm run test:curriculum && npm run test:unit && npm run build
+
+
+> pathology-informatics-interactives@0.1.0 format:check
+> prettier --check "src/**/*.{ts,tsx,css}" "scripts/*.{ts,mjs}" "tests/**/*.{ts,tsx}" "content/lessons/*/*.ts" vite.config.ts playwright.config.ts
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> pathology-informatics-interactives@0.1.0 lint
+> eslint src content tests
+
+
+> pathology-informatics-interactives@0.1.0 test:curriculum
+> npm run data:compile && tsx scripts/validate-curriculum.ts
+
+
+> pathology-informatics-interactives@0.1.0 data:compile
+> node scripts/compile-lesson-data.mjs
+
+Compiled the editable Lesson 3 and Lesson 4 CSV files.
+inside-a-results-journey: voice review — 2.0 flagged words per 1,000; 1 repeated phrases. Read the sentences before revising.
+can-we-trust-this-report: voice review — 1.8 flagged words per 1,000; 1 repeated phrases. Read the sentences before revising.
+can-we-accept-this-lot: voice review — 3.3 flagged words per 1,000; 1 repeated phrases. Read the sentences before revising.
+five-vs-slide-archive: voice review — 10.2 flagged words per 1,000; 7 repeated phrases. Read the sentences before revising.
+model-under-pressure: voice review — 3.5 flagged words per 1,000; 0 repeated phrases. Read the sentences before revising.
+server-behind-the-analyzer: voice review — 4.6 flagged words per 1,000; 2 repeated phrases. Read the sentences before revising.
+not-anonymous-enough: voice review — 1.2 flagged words per 1,000; 2 repeated phrases. Read the sentences before revising.
+where-is-the-specimen: voice review — 12.9 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+autoverification-at-the-edge: voice review — 12.9 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+reflex-rule-ripple-effect: voice review — 12.1 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+follow-the-flag: voice review — 9.8 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+newborn-screen-to-public-health: voice review — 14.3 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+code-the-meaning: voice review — 7.4 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+invisible-bottleneck: voice review — 14.7 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+five-rights-right-test: voice review — 12.6 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+alert-everyone-ignores: voice review — 10.6 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+pixel-budget: voice review — 9.9 flagged words per 1,000; 10 repeated phrases. Read the sentences before revising.
+validate-before-go-live: voice review — 32.7 flagged words per 1,000; 10 repeated phrases. Read the sentences before revising.
+human-plus-algorithm: voice review — 14.5 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+build-the-new-test: voice review — 17.4 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+Validated 23 lessons and 34 objectives with published primary interaction evidence.
+
+> pathology-informatics-interactives@0.1.0 test:unit
+> npm run data:compile && tsx --test tests/*.test.ts tests/*.test.tsx
+
+
+> pathology-informatics-interactives@0.1.0 data:compile
+> node scripts/compile-lesson-data.mjs
+
+Compiled the editable Lesson 3 and Lesson 4 CSV files.
+✔ archive decisions use native labeled choices and persistent feedback (63.5468ms)
+✔ the WSI review exposes labeled plans and discordance decisions (33.5011ms)
+✔ the missing CBC map and decisions expose labeled controls (88.1594ms)
+✔ the surgical pathology report has labeled controls and a semantic table (146.674ms)
+✔ the reagent-lot lesson exposes tables, chart alternatives, and labeled choices (135.0976ms)
+✔ the privacy workbench exposes native filters, semantic tables, and live results (79.1749ms)
+✔ the downtime tabletop exposes phased choices and semantic reconciliation controls (79.0635ms)
+✔ the security review exposes native threat mapping and portfolio controls (108.7951ms)
+inside-a-results-journey: voice review — 2.0 flagged words per 1,000; 1 repeated phrases. Read the sentences before revising.
+can-we-trust-this-report: voice review — 1.8 flagged words per 1,000; 1 repeated phrases. Read the sentences before revising.
+can-we-accept-this-lot: voice review — 3.3 flagged words per 1,000; 1 repeated phrases. Read the sentences before revising.
+five-vs-slide-archive: voice review — 10.2 flagged words per 1,000; 7 repeated phrases. Read the sentences before revising.
+model-under-pressure: voice review — 3.5 flagged words per 1,000; 0 repeated phrases. Read the sentences before revising.
+server-behind-the-analyzer: voice review — 4.6 flagged words per 1,000; 2 repeated phrases. Read the sentences before revising.
+not-anonymous-enough: voice review — 1.2 flagged words per 1,000; 2 repeated phrases. Read the sentences before revising.
+where-is-the-specimen: voice review — 12.9 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+autoverification-at-the-edge: voice review — 12.9 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+reflex-rule-ripple-effect: voice review — 12.1 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+follow-the-flag: voice review — 9.8 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+newborn-screen-to-public-health: voice review — 14.3 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+code-the-meaning: voice review — 7.4 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+invisible-bottleneck: voice review — 14.7 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+five-rights-right-test: voice review — 12.6 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+alert-everyone-ignores: voice review — 10.6 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+pixel-budget: voice review — 9.9 flagged words per 1,000; 10 repeated phrases. Read the sentences before revising.
+validate-before-go-live: voice review — 32.7 flagged words per 1,000; 10 repeated phrases. Read the sentences before revising.
+human-plus-algorithm: voice review — 14.5 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+build-the-new-test: voice review — 17.4 flagged words per 1,000; 11 repeated phrases. Read the sentences before revising.
+✔ coverage validator rejects loss of the primary ordering interaction (3921.0304ms)
+✔ prevalence changes predictive value without changing intrinsic sensitivity (22.098ms)
+✔ local verification retains subgroup denominators (0.6556ms)
+✔ archive repair retains a correct link and distinguishes wrong identity levels (1.26ms)
+✔ removing missing-time cases produces partial rather than uniform report checks (1.1567ms)
+✔ checklists require omitting plausible but insufficient actions (21.877ms)
+✔ whole result message identifies patient, order, result and version in their specified fields (1.5422ms)
+✔ steward-at-morning-huddle has complete learner and faculty materials (125.4745ms)
+✔ inside-a-results-journey has complete learner and faculty materials (15.0193ms)
+✔ can-we-trust-this-report has complete learner and faculty materials (21.153ms)
+✔ can-we-accept-this-lot has complete learner and faculty materials (110.8541ms)
+✔ five-vs-slide-archive has complete learner and faculty materials (44.7755ms)
+✔ model-under-pressure has complete learner and faculty materials (17.874ms)
+✔ server-behind-the-analyzer has complete learner and faculty materials (9.8595ms)
+✔ twelve-hours-offline has complete learner and faculty materials (42.6529ms)
+✔ not-anonymous-enough has complete learner and faculty materials (11.8109ms)
+✔ where-is-the-specimen has complete learner and faculty materials (26.2587ms)
+✔ autoverification-at-the-edge has complete learner and faculty materials (25.2784ms)
+✔ reflex-rule-ripple-effect has complete learner and faculty materials (81.5611ms)
+✔ follow-the-flag has complete learner and faculty materials (15.4441ms)
+✔ newborn-screen-to-public-health has complete learner and faculty materials (16.845ms)
+✔ code-the-meaning has complete learner and faculty materials (164.588ms)
+✔ invisible-bottleneck has complete learner and faculty materials (16.1824ms)
+✔ five-rights-right-test has complete learner and faculty materials (22.6795ms)
+✔ alert-everyone-ignores has complete learner and faculty materials (74.8ms)
+✔ pixel-budget has complete learner and faculty materials (37.8542ms)
+✔ validate-before-go-live has complete learner and faculty materials (16.8462ms)
+✔ human-plus-algorithm has complete learner and faculty materials (18.4973ms)
+✔ build-the-new-test has complete learner and faculty materials (80.375ms)
+✔ choose-and-govern-lis has complete learner and faculty materials (30.7857ms)
+✔ single-answer choices do not signal the key by excessive length (300.7362ms)
+✔ the controlled repair passes every lesson validation set (5.5996ms)
+✔ unsafe shortcuts fail at least one validation case (0.8798ms)
+✔ lesson 1 teaches the Topic 1 role and ownership boundaries (4.6245ms)
+✔ lesson 2 covers PIER 1.4 through an observable result-reporting investigation (1.3352ms)
+✔ lesson 3 covers each active PIER 2.1 subtopic with an observable action (0.8257ms)
+✔ lesson 4 covers every PIER 2.2 statistics element with an observable action (0.9976ms)
+✔ lesson 3 contains the complete synthetic report (4.8602ms)
+✔ the two-period and three-period reports calculate the intended summaries (0.8695ms)
+✔ the revised report separates cutover and preserves one row per eligible case (2.0269ms)
+✔ the weekly trend contains six pre-go-live weeks, cutover, and six later weeks (0.7305ms)
+✔ working-day calculations skip weekends and retain fractions (0.7912ms)
+✔ every finalization timestamp reproduces TAT on a weekday (22.3039ms)
+✔ can-we-trust-this-report numerical prose agrees with calculated records (482.1659ms)
+✔ can-we-accept-this-lot numerical prose agrees with calculated records (224.9534ms)
+✔ invisible-bottleneck numerical prose agrees with calculated records (79.9187ms)
+✔ pixel-budget numerical prose agrees with calculated records (46.431ms)
+✔ the lot-comparison worksheet contains the planned paired specimens (3.6126ms)
+✔ the primary paired-result statistics reproduce the lesson values (0.9145ms)
+✔ all three concentration-range checks support the controlled decision (0.7088ms)
+✔ the common-test exercise includes the five planned statistical choices (3.1106ms)
+✔ all CSS variables have a definition (48.0216ms)
+✔ public teaching supplements carry attribution without presentation addresses or embeds (334.9286ms)
+✔ the all-controlled path yields the locked baseline reconciliation set (25.3575ms)
+✔ uncontrolled temporary identifiers create exactly one duplicate-chart pair (1.084ms)
+✔ unit-specific critical-result communication removes the potassium call-log entry (2.6083ms)
+✔ reconciliation scoring identifies the unmatched critical result and duplicate order (1.6722ms)
+✔ a fully correct reconciliation scores clean (0.8351ms)
+✔ a missing call record cannot be resolved by linking nonexistent documentation (0.9964ms)
+✔ downtime state is serializable plain data (1.1435ms)
+✔ the synthetic privacy dataset is frozen at 18 exact outage-day rows (7.226ms)
+✔ raw quasi-identifiers are unique while the rare cohort requires a conjunction (7.9738ms)
+✔ the full workbench creates groups of at least four with no unique filter conjunction (6.8946ms)
+✔ each single data transformation still leaves a concrete isolating conjunction (0.876ms)
+✔ key control changes governance classification without changing the table (1.2547ms)
+✔ the six installation findings have the locked confidentiality, integrity, and availability map (8.7319ms)
+✔ an empty portfolio leaves all five scenarios unmitigated (1.2308ms)
+✔ buying every control exceeds both portfolio limits (1.2035ms)
+✔ the reference portfolio is affordable and covers every scenario (2.682ms)
+✔ a password-only portfolio blocks only shared-credential misuse (0.9063ms)
+✔ two distinct affordable portfolios provide full scenario coverage (1.2965ms)
+✔ the tempting low-value controls do not mitigate a stress scenario by themselves (0.6541ms)
+✔ Topic 3 contains the three planned lessons (18.3465ms)
+✔ each Topic 3 lesson starts with at least three validation cases (0.7589ms)
+✔ each Topic 3 lesson starts with one correct diagnosis and repair (1.5551ms)
+✔ Topic 3 repairs produce the intended partial-credit matrices (3.8609ms)
+✔ Topic 3 failure results explain the laboratory consequence (1.0614ms)
+✔ Topic 3 metadata names only the interactions currently implemented (0.6966ms)
+✔ original route matrix exposes excision and unrecognized-code failures (12.0223ms)
+✔ targeted correction preserves neighbors and holds unknown codes (1.1812ms)
+✔ routing everything to gross breaks cytology and intraoperative work (0.7206ms)
+✔ software repair and physical recovery are independent requirements (0.7588ms)
+✔ absolute-only release reproduces two missed holds; approved rule preserves releases (22.375ms)
+✔ AND between delta branches misses independent absolute and relative holds (0.8719ms)
+✔ small denominators, missing history, and exact history boundaries are handled separately (3.8419ms)
+✔ release gates preserve QC, flag, status, range and critical exceptions (4.8346ms)
+✔ reflex replay accounts for every record and three additional orders under original rule (2.173ms)
+✔ inclusive reflex boundaries and disabled duplicate protection produce distinct failures (1.1118ms)
+✔ reflex scope and result status cannot be replaced by numeric threshold checks (0.997ms)
+✔ a lower order count can conceal missed indicated FT4 orders (0.6205ms)
+✔ flag translation preserves both critical directions and routine categories (6.8832ms)
+✔ recognized flags can still lose severity and unknown must not become normal (0.6873ms)
+✔ newborn exchange needs both observation and answer mappings (1.2177ms)
+✔ identity, retransmission and correction checks survive terminology repair (1.2205ms)
+✔ terminology review distinguishes properties, unsupported assays, and panel orders (1.3797ms)
+✔ stale extract contains only earlier completed work and no peak evidence (1.336ms)
+✔ current linked view preserves pending work without zero-duration imputation (0.9124ms)
+✔ peak delay occurs after analysis and all event sequences remain valid (1.097ms)
+✔ new topic experiences expose labeled controls and text equivalents (279.3207ms)
+✔ LOINC lookup requires definitions as well as valid code numbers (11.4489ms)
+✔ original guidance preserves absent history but fails delivery and recipient checks (12.2466ms)
+✔ CDS review window includes the exact boundary and excludes unusable results (1.3151ms)
+✔ hard stops violate discretion while an interrupting continue option preserves it (0.774ms)
+✔ each five-rights regression detects the corresponding defect (0.975ms)
+✔ targeting and deduplication retain a new decision for the same patient (2.5945ms)
+✔ hard stops expose documented-exception harm even after targeting improves (0.7728ms)
+✔ changing recipients and targeting have independently observable effects (0.7982ms)
+✔ ward comparison uses pooled decision denominators and both period changes (1.4349ms)
+✔ bespoke experiences render named controls and distinguish replay from observed outcomes (155.9337ms)
+✔ sampling doubles both axes, planes and copies have separate effects (9.1603ms)
+✔ comparison files match recorded byte sizes and preserve distinct operations (13.1869ms)
+✔ validation distinguishes a sufficient plan from initial gaps and failed investigations (5.9446ms)
+✔ threshold boundary is inclusive and zero-mark predictive value is undefined (1.8448ms)
+✔ site denominators and independent reader study remain accountable (0.9533ms)
+✔ Topic 7 uses bespoke stable routes with explicit coverage and open debrief registration (42.0262ms)
+✔ image and algorithm controls have native labels, fieldsets, text metrics, and reset (179.3674ms)
+✔ copied test definition fails all reports and approved version preserves all eight (4.3585ms)
+✔ fields and units alone do not repair invalid, pending, specimen, correction or retry cases (7.6904ms)
+✔ each unsafe configuration has an independently detectable consequence (2.1299ms)
+✔ correction preserves history and retry preserves a single current report (2.1831ms)
+✔ only Birch has evidence supporting all mandatory requirements (1.6093ms)
+✔ marking every requirement as passing cannot conceal failed or missing evidence (2.3835ms)
+✔ preference weights normalize and cannot change mandatory eligibility (0.8128ms)
+✔ five year scoped costs include each annual charge and explicit one-time categories (0.7269ms)
+✔ experiences expose labeled controls, expected results, and lifecycle choices (204.421ms)
+ℹ tests 133
+ℹ suites 0
+ℹ pass 133
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12336.9089
+
+> pathology-informatics-interactives@0.1.0 build
+> npm run data:compile && tsc --noEmit && vite build --configLoader runner && tsx scripts/export-coverage.ts && node scripts/create-pages-fallback.mjs
+
+
+> pathology-informatics-interactives@0.1.0 data:compile
+> node scripts/compile-lesson-data.mjs
+
+Compiled the editable Lesson 3 and Lesson 4 CSV files.
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 287 modules transformed.
+rendering chunks...
+computing gzip size...
+pages-dist/index.html                                       0.78 kB │ gzip:   0.40 kB
+pages-dist/assets/report-5VPFY1ol.csv                      45.20 kB
+pages-dist/assets/index-q8waGT3U.css                       89.67 kB │ gzip:  16.97 kB
+pages-dist/assets/mustFind-BiQxcpQq.js                      0.12 kB │ gzip:   0.12 kB
+pages-dist/assets/tabKeys-CM_NFJhz.js                       0.36 kB │ gzip:   0.25 kB
+pages-dist/assets/downtime-UKq5c6fA.js                      0.74 kB │ gzip:   0.44 kB
+pages-dist/assets/controls-XgyzFyZI.js                      1.01 kB │ gzip:   0.51 kB
+pages-dist/assets/bridge-8OidYCsc.js                        1.05 kB │ gzip:   0.61 kB
+pages-dist/assets/bridge-Cp3HwEd1.js                        1.08 kB │ gzip:   0.63 kB
+pages-dist/assets/bridge-DQXU1zmn.js                        1.14 kB │ gzip:   0.68 kB
+pages-dist/assets/bridge-CuBxGLUx.js                        1.28 kB │ gzip:   0.71 kB
+pages-dist/assets/concepts-DdyB3DB-.js                      1.42 kB │ gzip:   0.76 kB
+pages-dist/assets/bridge-BqrlSkwI.js                        1.46 kB │ gzip:   0.74 kB
+pages-dist/assets/bridge-XOoE7nHR.js                        1.53 kB │ gzip:   0.84 kB
+pages-dist/assets/comparison-DlnXL635.js                    1.57 kB │ gzip:   0.79 kB
+pages-dist/assets/practicum-BrC3qjFx.js                     1.60 kB │ gzip:   0.74 kB
+pages-dist/assets/bridge-Co5sNxTG.js                        1.68 kB │ gzip:   0.91 kB
+pages-dist/assets/practicum-D5m4fQUN.js                     1.77 kB │ gzip:   0.86 kB
+pages-dist/assets/introduction-CTQ7bwjr.js                  1.78 kB │ gzip:   0.90 kB
+pages-dist/assets/practicum-16vhPeUn.js                     1.83 kB │ gzip:   0.83 kB
+pages-dist/assets/investigation-BzcDJDrc.js                 1.84 kB │ gzip:   0.85 kB
+pages-dist/assets/practicum-gs4_TCFG.js                     1.85 kB │ gzip:   0.83 kB
+pages-dist/assets/practicum-ByH-MdUC.js                     1.86 kB │ gzip:   0.81 kB
+pages-dist/assets/introduction-C97Cd2i0.js                  1.92 kB │ gzip:   1.02 kB
+pages-dist/assets/comparison-Czbhg0DQ.js                    1.95 kB │ gzip:   0.99 kB
+pages-dist/assets/introduction-DKvET4NJ.js                  1.99 kB │ gzip:   1.03 kB
+pages-dist/assets/introduction-oRCoqFbD.js                  1.99 kB │ gzip:   1.01 kB
+pages-dist/assets/introduction-Qi6NBHpF.js                  2.01 kB │ gzip:   0.98 kB
+pages-dist/assets/introduction-DUihO_0w.js                  2.01 kB │ gzip:   1.02 kB
+pages-dist/assets/practicum-o_g0Z6Lz.js                     2.04 kB │ gzip:   0.95 kB
+pages-dist/assets/introduction-9-T4d_yK.js                  2.10 kB │ gzip:   1.04 kB
+pages-dist/assets/introduction-D90P4Wro.js                  2.11 kB │ gzip:   1.07 kB
+pages-dist/assets/introduction-kzfRcLKh.js                  2.13 kB │ gzip:   1.05 kB
+pages-dist/assets/practicum-gd8EAuuE.js                     2.16 kB │ gzip:   0.96 kB
+pages-dist/assets/practicum-C8hwqM15.js                     2.20 kB │ gzip:   1.03 kB
+pages-dist/assets/practicum-CnSEu1Qq.js                     2.21 kB │ gzip:   0.96 kB
+pages-dist/assets/introduction-CEQMpg1a.js                  2.21 kB │ gzip:   1.12 kB
+pages-dist/assets/practicum-DZwv5PhK.js                     2.22 kB │ gzip:   0.97 kB
+pages-dist/assets/practicum-CbHsO1P1.js                     2.23 kB │ gzip:   1.00 kB
+pages-dist/assets/practicum-DW8aypNd.js                     2.29 kB │ gzip:   1.03 kB
+pages-dist/assets/concepts-BDp8pXVR.js                      2.31 kB │ gzip:   1.14 kB
+pages-dist/assets/introduction-BMbMqeDQ.js                  2.31 kB │ gzip:   1.10 kB
+pages-dist/assets/introduction-BCeC1FsJ.js                  2.32 kB │ gzip:   1.08 kB
+pages-dist/assets/debrief-xQTbbuG6.js                       2.39 kB │ gzip:   1.17 kB
+pages-dist/assets/introduction-Clu__wtx.js                  2.40 kB │ gzip:   1.17 kB
+pages-dist/assets/practicum-De06ouM-.js                     2.43 kB │ gzip:   1.09 kB
+pages-dist/assets/check-9IFpFtDm.js                         2.47 kB │ gzip:   0.75 kB
+pages-dist/assets/practicum-DnJed4IR.js                     2.50 kB │ gzip:   1.14 kB
+pages-dist/assets/introduction-BCmvv77E.js                  2.51 kB │ gzip:   1.22 kB
+pages-dist/assets/check-D3DexMmt.js                         2.52 kB │ gzip:   0.76 kB
+pages-dist/assets/concepts-DO84-u60.js                      2.56 kB │ gzip:   1.20 kB
+pages-dist/assets/practicum-CsAo3N35.js                     2.57 kB │ gzip:   1.12 kB
+pages-dist/assets/check-DR3qyZFY.js                         2.57 kB │ gzip:   0.80 kB
+pages-dist/assets/check-AoqFQGg2.js                         2.57 kB │ gzip:   1.05 kB
+pages-dist/assets/check-3bL3TolU.js                         2.58 kB │ gzip:   1.09 kB
+pages-dist/assets/practicum-hRfkSWM_.js                     2.58 kB │ gzip:   1.14 kB
+pages-dist/assets/check-B2Oa7hNa.js                         2.59 kB │ gzip:   0.79 kB
+pages-dist/assets/check-z-czeEAR.js                         2.59 kB │ gzip:   0.78 kB
+pages-dist/assets/investigation-CAhzSmED.js                 2.59 kB │ gzip:   1.21 kB
+pages-dist/assets/concepts-CtCeiLho.js                      2.61 kB │ gzip:   1.28 kB
+pages-dist/assets/check-14DiCou5.js                         2.62 kB │ gzip:   0.79 kB
+pages-dist/assets/check-FlxCML9w.js                         2.62 kB │ gzip:   0.80 kB
+pages-dist/assets/check-COdVv_K9.js                         2.63 kB │ gzip:   0.76 kB
+pages-dist/assets/practicum-uGZ0Uf8f.js                     2.63 kB │ gzip:   1.16 kB
+pages-dist/assets/check-BpP6EkMa.js                         2.63 kB │ gzip:   0.78 kB
+pages-dist/assets/check-CEj2eDEf.js                         2.64 kB │ gzip:   0.80 kB
+pages-dist/assets/concepts-SvI8C9OS.js                      2.64 kB │ gzip:   1.22 kB
+pages-dist/assets/check-Cfyz_KGG.js                         2.65 kB │ gzip:   0.80 kB
+pages-dist/assets/check-DZy2vSge.js                         2.65 kB │ gzip:   0.77 kB
+pages-dist/assets/practicum-Dd1A2ejw.js                     2.66 kB │ gzip:   1.15 kB
+pages-dist/assets/check-CmnGurr9.js                         2.68 kB │ gzip:   0.77 kB
+pages-dist/assets/concepts-CbT7iwkN.js                      2.70 kB │ gzip:   1.32 kB
+pages-dist/assets/check-CWkb7JOv.js                         2.72 kB │ gzip:   1.18 kB
+pages-dist/assets/check-B9LdhrNT.js                         2.73 kB │ gzip:   1.12 kB
+pages-dist/assets/check-Ejit0RPw.js                         2.76 kB │ gzip:   1.18 kB
+pages-dist/assets/check-cFI14CZ-.js                         2.76 kB │ gzip:   0.82 kB
+pages-dist/assets/practicum-BgYygJoF.js                     2.78 kB │ gzip:   1.21 kB
+pages-dist/assets/practicum-qw3oCkAk.js                     2.78 kB │ gzip:   1.22 kB
+pages-dist/assets/check-BjLBdmhD.js                         2.82 kB │ gzip:   1.22 kB
+pages-dist/assets/check-BsbIUsRG.js                         2.84 kB │ gzip:   1.21 kB
+pages-dist/assets/practicum-DdZSEwe8.js                     2.85 kB │ gzip:   1.23 kB
+pages-dist/assets/check-BnCpi59_.js                         2.87 kB │ gzip:   1.18 kB
+pages-dist/assets/check-aLG2mki_.js                         2.91 kB │ gzip:   1.22 kB
+pages-dist/assets/bridge-DbRBcCee.js                        2.91 kB │ gzip:   1.40 kB
+pages-dist/assets/bridge-BJqaluBI.js                        2.95 kB │ gzip:   1.26 kB
+pages-dist/assets/bridge-D0FBGoDz.js                        2.95 kB │ gzip:   1.32 kB
+pages-dist/assets/investigation-BmhL1NSz.js                 2.98 kB │ gzip:   1.29 kB
+pages-dist/assets/practicum-147MBEOe.js                     2.98 kB │ gzip:   1.27 kB
+pages-dist/assets/concepts-DFNdYHfQ.js                      2.99 kB │ gzip:   1.28 kB
+pages-dist/assets/debrief-CtFPXuG4.js                       3.02 kB │ gzip:   1.41 kB
+pages-dist/assets/practicum-BTymscUj.js                     3.07 kB │ gzip:   1.33 kB
+pages-dist/assets/bridge-NSWbMvdP.js                        3.10 kB │ gzip:   1.42 kB
+pages-dist/assets/bridge-Bso7BKmt.js                        3.15 kB │ gzip:   1.53 kB
+pages-dist/assets/investigation-De6REExU.js                 3.17 kB │ gzip:   1.34 kB
+pages-dist/assets/concepts-C4FQlT8C.js                      3.35 kB │ gzip:   1.52 kB
+pages-dist/assets/bridge-DEraPNNw.js                        3.36 kB │ gzip:   1.68 kB
+pages-dist/assets/TestBuildExperience-B8IL-V6l.js           3.42 kB │ gzip:   1.32 kB
+pages-dist/assets/bridge-CAeUehBC.js                        3.42 kB │ gzip:   1.61 kB
+pages-dist/assets/concepts-C1X_2iMs.js                      3.43 kB │ gzip:   1.43 kB
+pages-dist/assets/debrief-N1CYOnv4.js                       3.44 kB │ gzip:   1.61 kB
+pages-dist/assets/bridge-BSf1Cxlv.js                        3.47 kB │ gzip:   1.59 kB
+pages-dist/assets/introduction-BVSaPiSm.js                  3.52 kB │ gzip:   1.44 kB
+pages-dist/assets/bridge-3wELi_hA.js                        3.55 kB │ gzip:   1.40 kB
+pages-dist/assets/debrief-BCLxIthG.js                       3.58 kB │ gzip:   1.63 kB
+pages-dist/assets/NewbornExperience-DscC-Dxb.js             3.59 kB │ gzip:   1.53 kB
+pages-dist/assets/debrief-Do94H4-G.js                       3.67 kB │ gzip:   1.70 kB
+pages-dist/assets/debrief-BQwFcdns.js                       3.67 kB │ gzip:   1.73 kB
+pages-dist/assets/investigation-DJi6FsgQ.js                 3.69 kB │ gzip:   1.65 kB
+pages-dist/assets/FlagExperience-C6E23-Gw.js                3.74 kB │ gzip:   1.56 kB
+pages-dist/assets/debrief-CzRr_-qE.js                       3.74 kB │ gzip:   1.76 kB
+pages-dist/assets/debrief-DvWud6RA.js                       3.78 kB │ gzip:   1.74 kB
+pages-dist/assets/introduction-BxnLzUyP.js                  3.79 kB │ gzip:   1.48 kB
+pages-dist/assets/concepts-Dns1oOno.js                      3.82 kB │ gzip:   1.62 kB
+pages-dist/assets/debrief-K-f9IMqN.js                       3.82 kB │ gzip:   1.73 kB
+pages-dist/assets/debrief-BPhKcKkt.js                       3.86 kB │ gzip:   1.71 kB
+pages-dist/assets/bridge-Hfyw-23k.js                        3.99 kB │ gzip:   1.83 kB
+pages-dist/assets/CdsDesignExperience-DINvO8AO.js           4.00 kB │ gzip:   1.72 kB
+pages-dist/assets/debrief-NnVtxJfM.js                       4.04 kB │ gzip:   1.89 kB
+pages-dist/assets/concepts-D6_M5ldr.js                      4.20 kB │ gzip:   1.81 kB
+pages-dist/assets/debrief-CoH-WsFJ.js                       4.32 kB │ gzip:   1.77 kB
+pages-dist/assets/debrief-2LCLp77L.js                       4.46 kB │ gzip:   1.92 kB
+pages-dist/assets/bridge-0tqDxerz.js                        4.46 kB │ gzip:   1.96 kB
+pages-dist/assets/debrief-vAxz6Gm-.js                       4.51 kB │ gzip:   2.05 kB
+pages-dist/assets/debrief-fKRkZNZO.js                       4.53 kB │ gzip:   1.97 kB
+pages-dist/assets/debrief-DhCAjlMk.js                       4.58 kB │ gzip:   2.06 kB
+pages-dist/assets/concepts-CWxH3Anm.js                      4.61 kB │ gzip:   1.81 kB
+pages-dist/assets/debrief-vytGFDkq.js                       4.64 kB │ gzip:   2.09 kB
+pages-dist/assets/debrief-BAbSTYqq.js                       4.68 kB │ gzip:   2.03 kB
+pages-dist/assets/debrief-DTR9L1kb.js                       4.82 kB │ gzip:   2.11 kB
+pages-dist/assets/concepts-s8o-pH5p.js                      4.83 kB │ gzip:   1.99 kB
+pages-dist/assets/debrief-CXNx5NCm.js                       4.96 kB │ gzip:   2.14 kB
+pages-dist/assets/concepts-zdVNE5oE.js                      5.10 kB │ gzip:   2.30 kB
+pages-dist/assets/introduction-CiHodCLk.js                  5.15 kB │ gzip:   2.03 kB
+pages-dist/assets/concepts-DLYFSP7z.js                      5.15 kB │ gzip:   2.03 kB
+pages-dist/assets/concepts-CbfEFQMx.js                      5.17 kB │ gzip:   2.20 kB
+pages-dist/assets/concepts-BgMdOCKe.js                      5.19 kB │ gzip:   2.17 kB
+pages-dist/assets/introduction-CiMjWCWX.js                  5.29 kB │ gzip:   2.05 kB
+pages-dist/assets/comparison-DlLX5CAb.js                    5.29 kB │ gzip:   1.97 kB
+pages-dist/assets/debrief-Cxyq98M6.js                       5.40 kB │ gzip:   2.24 kB
+pages-dist/assets/introduction-DAMvMILH.js                  5.42 kB │ gzip:   2.04 kB
+pages-dist/assets/debrief-B3tsma25.js                       5.44 kB │ gzip:   2.23 kB
+pages-dist/assets/introduction-82-BcCnN.js                  5.51 kB │ gzip:   2.11 kB
+pages-dist/assets/faculty-BkzECRNI.js                       5.58 kB │ gzip:   2.29 kB
+pages-dist/assets/introduction-BUq18ESK.js                  5.72 kB │ gzip:   2.02 kB
+pages-dist/assets/faculty-BbMMtRlP.js                       5.88 kB │ gzip:   2.44 kB
+pages-dist/assets/concepts-DX5FHvzI.js                      6.01 kB │ gzip:   2.46 kB
+pages-dist/assets/faculty-BjpHyPLb.js                       6.04 kB │ gzip:   2.56 kB
+pages-dist/assets/concepts-BfUL6uHh.js                      6.41 kB │ gzip:   2.58 kB
+pages-dist/assets/concepts-C6FjO7z4.js                      6.41 kB │ gzip:   2.49 kB
+pages-dist/assets/MultimodalExperience-BEvi1syP.js          6.58 kB │ gzip:   2.75 kB
+pages-dist/assets/SpecimenRoutingExperience-Dt8DAfK1.js     6.61 kB │ gzip:   2.02 kB
+pages-dist/assets/introduction-BW-6gV2d.js                  6.61 kB │ gzip:   2.26 kB
+pages-dist/assets/ReflexRuleExperience-CtnPvCOf.js          6.77 kB │ gzip:   2.03 kB
+pages-dist/assets/concepts-CdYx0NLu.js                      6.87 kB │ gzip:   2.44 kB
+pages-dist/assets/PixelBudgetExperience-BMpADQxj.js         7.04 kB │ gzip:   2.73 kB
+pages-dist/assets/faculty-ByLYNDp_.js                       7.07 kB │ gzip:   2.74 kB
+pages-dist/assets/faculty-DzfZQps7.js                       7.30 kB │ gzip:   2.87 kB
+pages-dist/assets/concepts-C2jb38Yr.js                      7.63 kB │ gzip:   3.17 kB
+pages-dist/assets/introduction-CLwY1G-6.js                  7.73 kB │ gzip:   2.60 kB
+pages-dist/assets/faculty-B_8dymBa.js                       7.88 kB │ gzip:   2.88 kB
+pages-dist/assets/faculty-B31OweZK.js                       8.12 kB │ gzip:   2.90 kB
+pages-dist/assets/QueueExperience-CIec9x8Y.js               8.33 kB │ gzip:   3.29 kB
+pages-dist/assets/AutoverificationExperience-CzgoCKGt.js    8.45 kB │ gzip:   2.40 kB
+pages-dist/assets/faculty-B_9oHnvT.js                       8.48 kB │ gzip:   2.98 kB
+pages-dist/assets/faculty-BiLsedUB.js                       8.49 kB │ gzip:   3.23 kB
+pages-dist/assets/faculty-1S4a_p9Q.js                       8.51 kB │ gzip:   3.17 kB
+pages-dist/assets/faculty-BkU10Scl.js                       8.57 kB │ gzip:   3.26 kB
+pages-dist/assets/faculty-C0uvoMZI.js                       8.71 kB │ gzip:   3.09 kB
+pages-dist/assets/faculty-D7FswvSk.js                       9.17 kB │ gzip:   3.41 kB
+pages-dist/assets/SecurityReviewExperience-CIuvYJH4.js      9.19 kB │ gzip:   2.73 kB
+pages-dist/assets/faculty-CqYwGViy.js                       9.26 kB │ gzip:   3.31 kB
+pages-dist/assets/debrief-CBeAZcmQ.js                       9.32 kB │ gzip:   3.42 kB
+pages-dist/assets/faculty-DMRqJ7ew.js                       9.36 kB │ gzip:   3.37 kB
+pages-dist/assets/faculty-C3M5zA6W.js                       9.47 kB │ gzip:   3.42 kB
+pages-dist/assets/faculty-DkcvWFIm.js                       9.72 kB │ gzip:   3.34 kB
+pages-dist/assets/faculty-Cm4HkNYx.js                       9.73 kB │ gzip:   3.44 kB
+pages-dist/assets/faculty-BGCds8oR.js                       9.99 kB │ gzip:   3.63 kB
+pages-dist/assets/MitosisReviewExperience-BAA-ScXZ.js      10.02 kB │ gzip:   3.47 kB
+pages-dist/assets/faculty-CKLwdrxZ.js                      10.22 kB │ gzip:   3.72 kB
+pages-dist/assets/faculty-C-Rzia-M.js                      10.24 kB │ gzip:   3.48 kB
+pages-dist/assets/WsiValidationExperience-Dm2-tgng.js      10.46 kB │ gzip:   4.08 kB
+pages-dist/assets/OrientationExperience-CgOBJDq_.js        11.90 kB │ gzip:   3.78 kB
+pages-dist/assets/faculty-oGN5K0mW.js                      11.95 kB │ gzip:   4.36 kB
+pages-dist/assets/AlertEvaluationExperience-CSHnDV0K.js    13.37 kB │ gzip:   4.90 kB
+pages-dist/assets/TerminologyExperience-DaZH84m_.js        14.23 kB │ gzip:   5.29 kB
+pages-dist/assets/faculty-DY7yHoIw.js                      14.36 kB │ gzip:   4.91 kB
+pages-dist/assets/PrivacyExperience--UdoXv8H.js            14.49 kB │ gzip:   4.22 kB
+pages-dist/assets/LisSelectionExperience-BttvLfH6.js       14.79 kB │ gzip:   5.47 kB
+pages-dist/assets/DowntimeExperience-CXKbHqMY.js           15.43 kB │ gzip:   4.25 kB
+pages-dist/assets/AiDeploymentExperience-y3az_F8D.js       23.98 kB │ gzip:   7.55 kB
+pages-dist/assets/ResultJourneyExperience-BIvRjjWA.js      24.11 kB │ gzip:   6.73 kB
+pages-dist/assets/StatisticsExperience-AqoDNZ70.js         32.27 kB │ gzip:   8.85 kB
+pages-dist/assets/DataQualityExperience-wkz5U9tj.js        84.52 kB │ gzip:  17.92 kB
+pages-dist/assets/index-cU4yLpaK.js                       415.64 kB │ gzip: 118.69 kB
+
+(!) Some chunks are larger than 300 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 19.22s
+Exported pages-dist/curriculum-coverage.json
+
+Fontconfig error: No writable cache directories
+	C:/Users/amrom/AppData/Local/fontconfig/cache
+	C:/Users/amrom/.cache/fontconfig
+
+Fontconfig error: No writable cache directories
+	C:/Users/amrom/AppData/Local/fontconfig/cache
+	C:/Users/amrom/.cache/fontconfig
+Created 55 route pages with metadata, sitemap and preview image.

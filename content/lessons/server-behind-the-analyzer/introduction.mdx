@@ -1,22 +1,37 @@
 # The Server Behind the Analyzer
 
-> **connected case:** North River University Hospital is a Level I trauma center. In March 2026, the hospital plans to install a middleware server that will receive instrument results and route them to the laboratory information system.
+## Before the server is installed
 
-## Case setup
+In March 2026, North River University Hospital plans to install a server for laboratory middleware. This software receives instrument results, holds messages waiting for delivery, and routes them to the laboratory information system (LIS). The computer running it will contain patient identifiers, orders, results and routing settings.
 
-Dr. Maya Chen, a pathology informatics fellow, joins Jordan Ellis, a laboratory information system (LIS) analyst, for the pre-installation review requested by Dr. Elena Ruiz, the core laboratory medical director. The review documents a proposed server location beside instrument heat vents, shared local access, protected health information stored on the server, a flat instrument network, a persistent vendor support connection, and a backup that has not been restored in a test environment.
+You are working with Dr. Maya Chen, the pathology informatics fellow, and Jordan Ellis, the LIS analyst. Dr. Elena Ruiz, the core laboratory medical director, asks you to review the proposed installation before patient testing starts.
 
-The hospital will proceed with the installation before every recommended control is complete. That later decision is part of the fixed chronology shared by all three Topic 3 cases; your work here is to identify the risks and recommend a defensible plan before installation.
+Jordan combines the room inspection, proposed account permissions, network diagram, vendor support arrangement and backup job record into the findings below. The proposed location is beside instrument heat vents. Staff would share an unrestricted login, instrument workstations could reach the server freely, and the vendor connection would remain available between support visits. Backup jobs report success, but nobody has restored the server and checked its records.
+
+Your task is to explain how these findings could affect laboratory work and recommend controls. In the later case chronology, the hospital installs the server before completing network separation and a recovery drill. Your choices here do not rewrite that history.
+
+## Terms used in this case
+
+- **Server and middleware:** the server is the computer hosting the middleware application. The application routes instrument messages to the LIS.
+- **Queue:** messages waiting for processing or delivery. A result may be stored in a queue while the receiving system is unavailable.
+- **Confidentiality:** protecting information from unauthorized disclosure. Someone opening a patient result without permission threatens confidentiality.
+- **Integrity:** protecting records and settings from improper alteration or loss. An incomplete queue or an unauthorized routing change threatens integrity.
+- **Availability:** keeping information and services accessible when needed. A stopped middleware server delays electronic result delivery.
+- **Protected health information (PHI):** individually identifiable health information protected by the Health Insurance Portability and Accountability Act (HIPAA). Patient-linked orders and results are examples; electronic PHI is often called ePHI.
+- **Least privilege and audit log:** give each person only the access needed for their work, and keep a record of actions attributable to that person.
+- **Network segmentation:** restrict connections between groups of computers. For example, allow instrument messages while denying a workstation access to server files.
+- **Encryption:** encode stored or transmitted information so it requires an authorized key to read. Account permissions still control what a signed-in user can do.
+- **Hardening and endpoint protection:** reduce unnecessary services and permissions on the server, apply supported updates and monitor for malicious software. **Ransomware** is malicious software that can encrypt files and interrupt access to them.
+- **Backup and restoration:** a backup is a saved copy; restoration uses that copy to rebuild a service and its records.
+- **Business associate agreement:** an agreement covering a service provider's handling of PHI on the hospital's behalf. The vendor's support access needs this review.
 
 ## Your task
 
-Inspect the installation findings and trace who would encounter each risk in ordinary laboratory work. Decide whether the findings can be corrected one at a time or require a coordinated plan, then run the proposed plan against environmental, access, network, vendor, and recovery checks.
-
+For each installation finding, select the confidentiality, integrity and availability effects described in the case. Then choose controls within the two resource limits and test them against five events. Explain any remaining risk and name the person who should check the work before Dr. Ruiz reviews the installation.
 
 ## What you will be able to do
 
-- Match a security finding to its laboratory consequence.
-- Review the approved access and risk assessment.
-- Explain why “count passwords without reviewing access” is an incomplete approach.
-
-Start by reading the case records. Make a choice before checking the explanation; you can revise it and test again.
+- Explain how one server finding can affect several parts of laboratory service.
+- Compare what a proposed control prevents, reduces or leaves unchanged.
+- Distinguish a successful backup job from a tested restoration.
+- Identify the access, agreement and privacy reviews needed for the case.

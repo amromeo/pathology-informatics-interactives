@@ -30,6 +30,24 @@ export const fullTransformSet: TransformId[] = [
   "rare-diagnosis-to-category",
 ];
 
+export const transformOptions: { id: TransformId; label: string; note: string }[] = [
+  {
+    id: "date-to-year",
+    label: "Generalize exact dates to year",
+    note: "2026-04-18 becomes 2026. The group count stays the same because every admission date was identical.",
+  },
+  {
+    id: "zip-to-three",
+    label: "Truncate five-digit ZIP to three digits",
+    note: "02108 becomes 021** and 02445 becomes 024**. Priya must check the population condition before retaining either prefix under Safe Harbor.",
+  },
+  {
+    id: "rare-diagnosis-to-category",
+    label: "Generalize the three-row diagnosis group",
+    note: `${rareDiagnosis} becomes ${generalizedDiagnosis}. This combines the first three rows with NR-004 when their other fields also match.`,
+  },
+];
+
 // Frozen by exact-value tests. All records and identifiers are synthetic.
 export const privacyRows: readonly PrivacyRow[] = [
   {
@@ -284,7 +302,7 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
       tone: "warning",
     },
     {
-      label: "Rare cohort",
+      label: "Breast carcinoma group",
       value: "3 people",
       tone: "critical",
     },
@@ -304,14 +322,15 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
     {
       system: "Workspace",
       role: "Investigator",
-      sees: "Rare cases can be singled out.",
-      implication: "Context changes risk.",
+      sees: "Three rows have breast carcinoma; ZIP distinguishes them.",
+      implication: "Someone who knows the diagnosis and ZIP could link one row to a person.",
     },
     {
       system: "Linkage",
       role: "Data steward",
-      sees: "The key is broadly accessible.",
-      implication: "Coded data remain identifiable.",
+      sees: "The lookup file maps linkage codes to patient identities and remains in the shared folder.",
+      implication:
+        "Restrict who can open the lookup file, separately from changing the exported fields.",
     },
     {
       system: "Release",
@@ -345,29 +364,29 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
         "A limited data set may retain dates and some geography, but it remains protected health information. The institution must first confirm the permitted purpose and recipient, remove prohibited direct identifiers, protect the linkage mechanism, and execute the required data use agreement.",
     },
   ],
-  repairPrompt: "Which release path should be approved?",
+  repairPrompt: "Which proposal should the team prepare for Priya's privacy review?",
   repairChoices: [
     {
       id: "validated",
       label:
-        "Minimize fields, generalize dates and geography, protect the key, address rare cases, and require privacy-office approval.",
+        "Prepare a file with broader dates, geography and diagnosis groups; restrict the key and document the purpose, recipient and agreement for privacy review.",
       correct: true,
       feedback:
-        "This path matches the disclosed fields and safeguards to the research question and intended recipient. It preserves less detail and requires privacy review, data-steward work, and an appropriate agreement before release.",
+        "This proposal reduces the displayed detail and documents controls for the intended recipient. Complete the field and access controls above, then ask Priya to review the full export, the known April 18 cohort and the research detail lost. She must determine which disclosure method applies.",
     },
     {
       id: "narrow",
       label:
         "Remove the linkage key but retain exact dates and five-digit ZIP codes, then release the file publicly because it has no names.",
       feedback:
-        "Separating the key removes one direct route to identity, but the detailed dates, geography, and rare cohort still create a distinguishable dataset. Public release also removes the recipient controls needed for protected health information.",
+        "Separating the key removes one direct route to identity, but the detailed dates, geography, and small diagnosis group still create a distinguishable dataset. Public release also removes the recipient controls needed for protected health information.",
     },
     {
       id: "unsafe",
       label:
         "Keep the fields but require the investigator to sign a confidentiality agreement before receiving the file.",
       feedback:
-        "A confidentiality commitment is useful, but it does not minimize unnecessary fields, protect a broadly accessible linkage key, resolve the rare cohort, or substitute for privacy-office review and the agreement required for the approved release path.",
+        "A confidentiality commitment is useful, but it does not minimize unnecessary fields, protect a broadly accessible linkage key, resolve the small diagnosis group, or substitute for privacy-office review and the agreement required for the approved release path.",
     },
   ],
   validationCases: [
@@ -392,13 +411,13 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
     },
     {
       name: "Uniqueness-risk review",
-      note: "Detailed dates, geography, and the three-person rare cohort are reviewed and reduced as required.",
+      note: "Detailed dates, geography, and the three-person diagnosis group are reviewed and reduced as required.",
       passingRepairs: ["validated"],
       failNotes: {
         narrow:
-          "The public file still contains exact dates, five-digit ZIP codes, and the rare cohort even though the linkage key was removed.",
+          "The public file still contains exact dates, five-digit ZIP codes, and the small diagnosis group even though the linkage key was removed.",
         unsafe:
-          "The confidentiality agreement does not reduce the combinations that distinguish rare records.",
+          "The confidentiality agreement does not reduce the combinations that distinguish distinctive records.",
       },
     },
     {
@@ -427,11 +446,11 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
 export const lessonCopy = {
   redactionHeading: "Remove identifying details and protect the key",
   text01:
-    "Start with the rare diagnosis. Then add another fact that an outside person might know. Confirm the result only when at least two filters leave one record.",
+    "Read the worked example, then use two facts to isolate a row and explain what someone could learn from that combination.",
   text02:
     "The table contains 18 records from the April 18 outage period. It displays five potential quasi-identifiers and a coded linkage value; names and medical record numbers are not present.",
   text03:
     "Move the key out of the shared folder and limit access to approved stewards. This does not change the table or its group size.",
   text04:
-    "The values below reflect the selected field transformations. The linkage code is unchanged because key sequestration is an access control, not a data transformation.",
+    "These 18 rows reflect the selected field changes. The linkage code stays in each row; restricting the separate lookup key changes who can reconnect that code to a patient.",
 };

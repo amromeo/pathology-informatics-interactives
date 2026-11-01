@@ -57,7 +57,7 @@ for (const width of [1365, 390, 320])
           const group = checks.nth(i);
           await group.locator('input[value="shortcut"]').check();
           await expect(group.getByRole("status")).toContainText(
-            /lessons\/(model-under-pressure|inside-a-results-journey|can-we-trust-this-report|can-we-accept-this-lot)\//.test(
+            /lessons\/(model-under-pressure|inside-a-results-journey|can-we-trust-this-report|can-we-accept-this-lot|server-behind-the-analyzer|twelve-hours-offline|not-anonymous-enough)\//.test(
               route,
             )
               ? "Try again"
@@ -65,7 +65,7 @@ for (const width of [1365, 390, 320])
           );
           await group.locator('input[value="supported"]').check();
           await expect(group.getByRole("status")).toContainText(
-            /lessons\/(model-under-pressure|inside-a-results-journey|can-we-trust-this-report|can-we-accept-this-lot)\//.test(
+            /lessons\/(model-under-pressure|inside-a-results-journey|can-we-trust-this-report|can-we-accept-this-lot|server-behind-the-analyzer|twelve-hours-offline|not-anonymous-enough)\//.test(
               route,
             )
               ? "Correct"

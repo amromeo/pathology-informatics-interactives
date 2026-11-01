@@ -2,64 +2,49 @@
 
 ## At a glance
 
-Allow 25 minutes. Use individually or in a small group. Project the case records and the exercise controls; keep the answer key out of view until learners commit to a decision.
-
-Learning objectives: distinguish removing names from satisfying a disclosure method; ask which disclosure method was approved; justify the first local check. PIER: 3.2, 3.4.
+Allow 25 minutes. The case follows recovery from the April 18 outage. Jordan prepared a fixed 18-patient file; the six downtime specimens are separate examples. Residents work with Dr. Chen and Priya to inspect a proposed export before release. Teach PIER 3.2 and 3.4 through field combinations, transformations and disclosure review.
 
 ## Run of show
 
-| Minutes | Activity | Ask the group |
+| Minutes | Work | Ask |
 | --- | --- | --- |
-| 0–5 | Read the case and records | What decision has the laboratory been asked to make? |
-| 5–18 | Make, test and revise a choice | Which record supports your decision? What could fail? |
-| 18–25 | Debrief and retrieval questions | How would you verify this in your own laboratory? |
+| 0–5 | Read how the export and key were prepared | Where could a recipient find a patient's identity? |
+| 5–10 | Filter the original file | What does one matching row prove, and what does it leave unknown? |
+| 10–18 | Change fields and protect the key | Why can a useful change leave k unchanged? |
+| 18–25 | Classify, test a proposal and debrief | Which details does the research need, and who approves the disclosure method? |
 
-## Expected answers
+## Expected reasoning
 
+The original file is coded and reidentifiable. The shared lookup key directly connects codes to identity. A combination of known patient details provides another possible route. The visible linkage code and the separate key must not be described as the same object.
 
-Ask learners to explain how the combination of fields—not just one field—changes reidentification risk. Removing the linkage key is a real safeguard, but it does not make detailed dates, geography, and a rare cohort suitable for public release.
+Breast carcinoma selects three rows; adding ZIP 02108 selects NR-001. The diagnosis is common in practice but appears in only three rows here. The file is a selected patient-description extract, not a representative disease-frequency sample or a table of all completed tests.
 
-Start with Breast carcinoma: three records remain. Adding ZIP 02108 isolates NR-001. Generalizing ZIP and diagnosis together raises the smallest group to four. Because every record shares the outage admission date, generalizing the date does not change k in this table. Safe Harbor still requires removing date elements other than year, and the cohort definition itself reveals the date to anyone who knows the study. Sequestering the key alone leaves that group size unchanged. Ask what research detail each transformation removes and whether the approved research question still can be answered.
+Broadening ZIP and diagnosis creates groups of **4, 4, 5 and 5**, so the minimum is **4**. Date generalization leaves these group counts unchanged because every admission date was April 18. Restricting the key also leaves k unchanged because neither the key nor the unique row labels/codes are part of the five-field comparison.
 
-Run the public-release shortcut and inspect its partial credit: separating the key passes one check but leaves four failures. For the controlled release path, the exercise must also document purpose, recipient, and agreement. A passing result means the proposal is ready for documented privacy review; it does not authorize release. Reset and repeat with one safeguard missing to show why selecting the preferred narrative answer alone is insufficient.
+Every single transformation still leaves a unique combination somewhere in the file. ZIP alone leaves NR-004 distinguishable from the breast-carcinoma rows; diagnosis alone leaves detailed ZIPs. Have residents inspect the transformed rows instead of inferring a privacy conclusion from the green counter.
 
-Make the regulatory distinction explicit: the HIPAA Privacy Rule recognizes Safe Harbor and Expert Determination as deidentification methods. A limited data set remains protected health information and requires an appropriate purpose, recipient, and data use agreement. Local policies and legal review remain authoritative; this exercise is educational and not legal advice.
+## Release decisions
 
-## Preparing discussion with API slides
+The public-release shortcut passes only the key-control check when the key has been restricted. A confidentiality promise alone does not specify the full approved disclosure method. The preferred proposal requires all three field changes, key restriction, purpose, recipient and agreement before its five exercise checks pass.
 
-Use [Association for Pathology Informatics teaching slides: Cybersecurity (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%208%20Cybersecurity%20slides.pptx) by James H. Harrison, Jr., slides 11–12, 14, to prepare the discussion after residents have explained their case decision. Ask: Examine the discussion of reidentification and data-use agreements. Identify which combinations of fields in the proposed export require review by the privacy officer. Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
+Those checks implement this case's conservative proposal. They do not define all lawful research releases. A limited data set may retain dates and ZIPs if its requirements are met. When that detail is needed, the investigator and Priya should review that route instead of assuming that every lawful file must use the three transformations.
 
-These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
+The known cohort is an important remaining issue: everyone who knows the file contains April 18 admissions can infer the date from that context. The application also does not verify Census population counts for the ZIP prefixes or the derivation of retained codes. All five checks passing means the proposal is ready for documented review, not that the institution has established deidentification.
 
+The patient-description fields shown here cannot answer whether tests were completed or critical results communicated. Ask the investigator to specify the outcome fields and their time requirements. Any added fields require review too.
 
 ## Common misconceptions
 
-- “It meets Safe Harbor without review.” Ask: what does the record actually establish? Safe Harbor removes all date elements except year and all five-digit ZIP codes. Limited three-digit ZIP retention has a population condition; other disclosure methods require their own review.
-- “A study number alone makes it anonymous.” Ask: which conclusion would still need evidence? Safe Harbor removes all date elements except year and all five-digit ZIP codes. Limited three-digit ZIP retention has a population condition; other disclosure methods require their own review.
-- “Delete names and send the remaining file.” Ask: what must be checked before making the change? The fields and safeguards depend on the authorized method; a data use agreement is not a substitute for satisfying that method.
+- **No names means anonymous:** ask what the lookup key and the diagnosis-plus-ZIP combination reveal.
+- **A larger k proves HIPAA compliance:** ask which fields were counted and which legal and contextual checks remain.
+- **Protecting the key changes the rows:** ask the learner to compare the preview before and after changing key access.
+- **Dates must always be removed from research:** ask whether the proposed method is Safe Harbor, Expert Determination or a limited data set.
+- **Breast carcinoma is rare:** distinguish three rows in this selected file from disease frequency in the hospital or population.
 
-## Discussion prompts
+Assign Jordan to explain the export, the investigator to justify each requested field, and Priya to identify the required review and agreement. Have the resident explain the proposed release to each person. The local practicum uses a field list and local policy without copying patient records.
 
-1. What supports the case decision? A strong answer includes a specific record and the distinction: distinguish removing names from satisfying a disclosure method.
-2. What would you check locally? A strong answer includes: ask which disclosure method was approved, because the fields and safeguards depend on the authorized method; a data use agreement is not a substitute for satisfying that method.
-3. Who needs to participate? A strong answer includes the privacy office or research data steward and separates technical work from clinical approval.
+## Sources and attribution
 
-## Group variant
+[HHS deidentification guidance](https://www.hhs.gov/hipaa/for-professionals/special-topics/de-identification/index.html) explains Safe Harbor, Expert Determination, geography and codes. [45 CFR 164.514](https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-E/section-164.514) provides the actual conditions, including limited data sets and agreements. Use [HHS research guidance](https://www.hhs.gov/hipaa/for-professionals/special-topics/research/index.html) to distinguish deidentification from authorization, waiver and limited-data-set pathways.
 
-Assign laboratory director, LIS analyst, laboratory operations and clinical service roles. Add clinical informatics and a patient advocate when considering ordering or chart use. Ask each person to state one requirement, one risk and the evidence needed before approval. The director then summarizes what can proceed and what must be resolved.
-
-## Assess transfer
-
-Compare an approved data request with the permitted fields and document how reidentification keys are controlled. A strong response names the record, responsible person, first check and an unresolved risk. Use the three learner retrieval questions to distinguish an unsupported shortcut from a reasoned decision.
-
-## PIER coverage
-
-- 3.2: Compare field combinations and transformations, then choose a governed release pathway.
-- 3.4: Compare field combinations and transformations, then choose a governed release pathway.
-
-
-## Additional source discussion
-
-### Further study with API teaching slides
-
-In [Association for Pathology Informatics teaching slides: Cybersecurity (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%208%20Cybersecurity%20slides.pptx), review slides 11–12, 14. Examine the discussion of reidentification and data-use agreements. Identify which combinations of fields in the proposed export require review by the privacy officer.
+James H. Harrison, Jr.'s [API Cybersecurity slides](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%208%20Cybersecurity%20slides.pptx), slides 11–12 and 14, provide optional background on reidentification and data-use agreements. Ask residents to explain one actual field combination before discussing the slides. The debrief preserves the Summit attribution to Amrom Obstfeld and Peter Gershkovich.

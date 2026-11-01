@@ -1,0 +1,17 @@
+# Primary-source review
+
+Checked November 1, 2026. Legal and security claims were checked using current official sources; no proposed rule was treated as effective. Sources were added to the affected lesson manifests and relevant teaching/faculty text. This local ledger avoids an overlapping edit to the curriculum-wide source ledger.
+
+| Source | Supports | Treatment in this revision |
+| --- | --- | --- |
+| [HHS Security Rule summary](https://www.hhs.gov/hipaa/for-professionals/security/laws-regulations/index.html) | Administrative, physical and technical safeguards; risk analysis; rule currently in effect | Connect server findings to specific safeguards. HHS separately labels the Security Rule update as proposed. |
+| [HHS business associate guidance](https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/business-associates/index.html) | Service providers handling PHI for a covered entity and agreements | Vendor support with PHI access requires review of the relationship and agreement as well as account controls. |
+| [HHS Breach Notification Rule](https://www.hhs.gov/hipaa/for-professionals/breach-notification/index.html) | Assessment and notice after a breach of unsecured PHI | Faculty distinguishes individual notice, HHS threshold of 500 or more, and media threshold of more than 500 state/jurisdiction residents. |
+| [HHS breach reporting](https://www.hhs.gov/hipaa/for-professionals/breach-notification/breach-reporting/index.html) | HHS timing for 500 or more and fewer than 500 people | Cross-check of the notification distinction; internal escalation remains prompt. |
+| [HHS Part 2 fact sheet](https://www.hhs.gov/hipaa/for-professionals/regulatory-initiatives/fact-sheet-42-cfr-part-2-final-rule/index.html) | Part 2 scope and February 16, 2026 compliance date | Applicability depends on records and source program; no inference from diagnosis alone. |
+| [HHS deidentification guidance](https://www.hhs.gov/hipaa/for-professionals/special-topics/de-identification/index.html) | Safe Harbor, Expert Determination, dates, ZIPs and reidentification codes | Group size alone supplies no legal determination. No unverified assertion about current population of 021 or 024. |
+| [45 CFR 164.514](https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-E/section-164.514) | Deidentification, code conditions, limited data sets and agreements | eCFR displayed Title 45 current through October 29, 2026. Review complete release and known cohort, not just displayed fields. |
+| [HHS research guidance](https://www.hhs.gov/hipaa/for-professionals/special-topics/research/index.html) | Research disclosures, limited data sets, authorization and waiver | Preserve a controlled pathway when dates/geography are needed. A confidentiality promise alone is incomplete. |
+| [NIST SP 800-34 Rev. 1, updated edition](https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final) | Contingency planning, recovery objectives, backup and alternate processing | Use the updated November 2010 publication, not the superseded May 2010 landing page. Example targets are not hospital policy. |
+
+No new images, external datasets or copied slide material were added. Screenshots show original lesson records and UI. Existing PIER/Harrison sources and optional Summit supplements retain attribution. Specific state-law and accreditation-checklist requirements are intentionally left to local review because the case identifies neither a jurisdiction-specific rule nor a checklist clause.

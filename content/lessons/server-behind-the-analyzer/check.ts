@@ -17,20 +17,21 @@ export const checks: RetrievalItem[] = [
         id: "shortcut",
         label: "Share the supervisor login temporarily",
         feedback:
-          "This leaves the central problem unresolved. The access arrangement needs individual authorization, appropriate safeguards and review of the business-associate relationship where applicable. Convenience does not remove these obligations.",
+          "A shared supervisor login attributes the vendor's work to the supervisor. Arrange a named account with the permissions needed for the repair and a record of the session.",
       },
       {
         id: "incomplete",
         label: "Permit unrestricted access until repair ends",
         feedback:
-          "This does not establish the needed conclusion. The access arrangement needs individual authorization, appropriate safeguards and review of the business-associate relationship where applicable. Convenience does not remove these obligations.",
+          "Unrestricted access may expose other patient records and settings. Limit the named vendor account to the approved task, then end and review the session.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt:
+      "Your laboratory wants to change vendor remote access. Which records should you review first?",
     choices: [
       {
         id: "supported",
@@ -43,13 +44,13 @@ export const checks: RetrievalItem[] = [
         id: "shortcut",
         label: "Count passwords without reviewing access",
         feedback:
-          "This leaves the central problem unresolved. The laboratory and security team must understand what the vendor can access and how that access is monitored and removed.",
+          "A password count does not show which server files or settings the vendor can reach. Review the approved access, risk analysis and session records with security staff.",
       },
       {
         id: "incomplete",
         label: "Apply this case decision without checking local policy",
         feedback:
-          "This does not establish the needed conclusion. The laboratory and security team must understand what the vendor can access and how that access is monitored and removed.",
+          "Local systems and support arrangements may differ from this case. Review the approved access and local procedure before proposing account or connection changes.",
       },
     ],
   },
@@ -71,14 +72,16 @@ export const checks: RetrievalItem[] = [
         id: "shortcut",
         label: "Restart the interface before calling",
         feedback:
-          "This leaves the central problem unresolved. Use the approved downtime communication process, obtain read-back when required, and document the call while the delivery failure is investigated.",
+          "Restarting the interface may not correct the delivery problem and leaves the clinician waiting. Communicate the verified result through the approved process while the analyst investigates.",
       },
       {
         id: "incomplete",
         label: "Wait for the next scheduled report",
         feedback:
-          "This does not establish the needed conclusion. Use the approved downtime communication process, obtain read-back when required, and document the call while the delivery failure is investigated.",
+          "Waiting for another report leaves the verified platelet count unavailable to the clinical team. Use the approved communication process and document the call now.",
       },
     ],
   },
 ];
+
+export const feedbackHeadings = { correct: "Correct", incorrect: "Try again" };

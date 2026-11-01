@@ -1,0 +1,228 @@
+
+> pathology-informatics-interactives@0.1.0 build:pages
+> npm run build
+
+
+> pathology-informatics-interactives@0.1.0 build
+> npm run data:compile && tsc --noEmit && vite build --configLoader runner && tsx scripts/export-coverage.ts && node scripts/create-pages-fallback.mjs
+
+
+> pathology-informatics-interactives@0.1.0 data:compile
+> node scripts/compile-lesson-data.mjs
+
+Compiled the editable Lesson 3 and Lesson 4 CSV files.
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 287 modules transformed.
+rendering chunks...
+computing gzip size...
+pages-dist/index.html                                       0.78 kB │ gzip:   0.40 kB
+pages-dist/assets/report-5VPFY1ol.csv                      45.20 kB
+pages-dist/assets/index-q8waGT3U.css                       89.67 kB │ gzip:  16.97 kB
+pages-dist/assets/mustFind-BiQxcpQq.js                      0.12 kB │ gzip:   0.12 kB
+pages-dist/assets/tabKeys-CM_NFJhz.js                       0.36 kB │ gzip:   0.25 kB
+pages-dist/assets/downtime-CMhT9biG.js                      0.74 kB │ gzip:   0.44 kB
+pages-dist/assets/controls-Di6NnK3U.js                      1.01 kB │ gzip:   0.51 kB
+pages-dist/assets/bridge-Ch9TCkig.js                        1.05 kB │ gzip:   0.62 kB
+pages-dist/assets/bridge-DBzWc7Pi.js                        1.08 kB │ gzip:   0.64 kB
+pages-dist/assets/bridge-ByokHzpf.js                        1.14 kB │ gzip:   0.68 kB
+pages-dist/assets/bridge-DNoFclcm.js                        1.28 kB │ gzip:   0.71 kB
+pages-dist/assets/concepts-CJe1Ueb3.js                      1.42 kB │ gzip:   0.77 kB
+pages-dist/assets/bridge-D9oFGPAm.js                        1.46 kB │ gzip:   0.75 kB
+pages-dist/assets/bridge-DMKsRMtF.js                        1.53 kB │ gzip:   0.84 kB
+pages-dist/assets/comparison-NvXxFuug.js                    1.57 kB │ gzip:   0.79 kB
+pages-dist/assets/practicum-xxYSbBo3.js                     1.60 kB │ gzip:   0.74 kB
+pages-dist/assets/bridge-B1TovCYT.js                        1.68 kB │ gzip:   0.91 kB
+pages-dist/assets/practicum-CE4Kl2lT.js                     1.77 kB │ gzip:   0.86 kB
+pages-dist/assets/introduction-D-2j80uq.js                  1.78 kB │ gzip:   0.90 kB
+pages-dist/assets/practicum-B8_P-OWN.js                     1.83 kB │ gzip:   0.83 kB
+pages-dist/assets/investigation-B1az84jn.js                 1.84 kB │ gzip:   0.85 kB
+pages-dist/assets/practicum-DLijIatK.js                     1.85 kB │ gzip:   0.83 kB
+pages-dist/assets/practicum-CtDRnCMI.js                     1.86 kB │ gzip:   0.81 kB
+pages-dist/assets/introduction-CO0_pge1.js                  1.92 kB │ gzip:   1.02 kB
+pages-dist/assets/comparison-1_UKg2K6.js                    1.95 kB │ gzip:   0.99 kB
+pages-dist/assets/introduction-D-Z9EHZL.js                  1.99 kB │ gzip:   1.04 kB
+pages-dist/assets/introduction-COAvFaIq.js                  1.99 kB │ gzip:   1.01 kB
+pages-dist/assets/introduction-B8Y8yPQm.js                  2.01 kB │ gzip:   0.98 kB
+pages-dist/assets/introduction-BnupEeGH.js                  2.01 kB │ gzip:   1.02 kB
+pages-dist/assets/practicum-MEbrlU97.js                     2.04 kB │ gzip:   0.95 kB
+pages-dist/assets/introduction-IVrVmvxc.js                  2.10 kB │ gzip:   1.04 kB
+pages-dist/assets/introduction-CRk0RjOd.js                  2.11 kB │ gzip:   1.07 kB
+pages-dist/assets/introduction-Da2qmk29.js                  2.13 kB │ gzip:   1.05 kB
+pages-dist/assets/practicum-DDLEN3uy.js                     2.16 kB │ gzip:   0.96 kB
+pages-dist/assets/practicum-C1Th1on7.js                     2.20 kB │ gzip:   1.03 kB
+pages-dist/assets/practicum-jhyJ1BOZ.js                     2.21 kB │ gzip:   0.96 kB
+pages-dist/assets/introduction-B6dD6jHV.js                  2.21 kB │ gzip:   1.12 kB
+pages-dist/assets/practicum-DOSG4I7w.js                     2.22 kB │ gzip:   0.97 kB
+pages-dist/assets/practicum-DW6QosJl.js                     2.23 kB │ gzip:   1.00 kB
+pages-dist/assets/practicum-CG581AIv.js                     2.29 kB │ gzip:   1.04 kB
+pages-dist/assets/concepts-CNANsqbG.js                      2.31 kB │ gzip:   1.14 kB
+pages-dist/assets/introduction-BH7c5pS3.js                  2.31 kB │ gzip:   1.10 kB
+pages-dist/assets/introduction-BUA6w2z7.js                  2.32 kB │ gzip:   1.08 kB
+pages-dist/assets/debrief-Cz_ecMTf.js                       2.39 kB │ gzip:   1.17 kB
+pages-dist/assets/introduction-CyaSJeAf.js                  2.40 kB │ gzip:   1.17 kB
+pages-dist/assets/practicum-smYCyNdm.js                     2.43 kB │ gzip:   1.09 kB
+pages-dist/assets/check-9IFpFtDm.js                         2.47 kB │ gzip:   0.75 kB
+pages-dist/assets/practicum-CjCyaO8q.js                     2.50 kB │ gzip:   1.14 kB
+pages-dist/assets/introduction-BNP-caCd.js                  2.51 kB │ gzip:   1.22 kB
+pages-dist/assets/check-D3DexMmt.js                         2.52 kB │ gzip:   0.76 kB
+pages-dist/assets/concepts-DugNO-Ha.js                      2.56 kB │ gzip:   1.20 kB
+pages-dist/assets/practicum-DwMVZ95V.js                     2.57 kB │ gzip:   1.12 kB
+pages-dist/assets/check-DR3qyZFY.js                         2.57 kB │ gzip:   0.80 kB
+pages-dist/assets/check-AoqFQGg2.js                         2.57 kB │ gzip:   1.05 kB
+pages-dist/assets/check-3bL3TolU.js                         2.58 kB │ gzip:   1.09 kB
+pages-dist/assets/practicum-Dz-sO5B2.js                     2.58 kB │ gzip:   1.15 kB
+pages-dist/assets/check-B2Oa7hNa.js                         2.59 kB │ gzip:   0.79 kB
+pages-dist/assets/check-z-czeEAR.js                         2.59 kB │ gzip:   0.78 kB
+pages-dist/assets/investigation-Ce7HnKKR.js                 2.59 kB │ gzip:   1.21 kB
+pages-dist/assets/concepts-CQouOPBw.js                      2.61 kB │ gzip:   1.28 kB
+pages-dist/assets/check-14DiCou5.js                         2.62 kB │ gzip:   0.79 kB
+pages-dist/assets/check-FlxCML9w.js                         2.62 kB │ gzip:   0.80 kB
+pages-dist/assets/check-COdVv_K9.js                         2.63 kB │ gzip:   0.76 kB
+pages-dist/assets/practicum-DGrbdc_O.js                     2.63 kB │ gzip:   1.16 kB
+pages-dist/assets/check-BpP6EkMa.js                         2.63 kB │ gzip:   0.78 kB
+pages-dist/assets/check-CEj2eDEf.js                         2.64 kB │ gzip:   0.80 kB
+pages-dist/assets/concepts-DExJvs-U.js                      2.64 kB │ gzip:   1.22 kB
+pages-dist/assets/check-Cfyz_KGG.js                         2.65 kB │ gzip:   0.80 kB
+pages-dist/assets/check-DZy2vSge.js                         2.65 kB │ gzip:   0.77 kB
+pages-dist/assets/practicum-DbZMOs12.js                     2.66 kB │ gzip:   1.15 kB
+pages-dist/assets/check-CmnGurr9.js                         2.68 kB │ gzip:   0.77 kB
+pages-dist/assets/concepts-ZnT_QMNZ.js                      2.70 kB │ gzip:   1.32 kB
+pages-dist/assets/check-CWkb7JOv.js                         2.72 kB │ gzip:   1.18 kB
+pages-dist/assets/check-B9LdhrNT.js                         2.73 kB │ gzip:   1.12 kB
+pages-dist/assets/check-Ejit0RPw.js                         2.76 kB │ gzip:   1.18 kB
+pages-dist/assets/check-cFI14CZ-.js                         2.76 kB │ gzip:   0.82 kB
+pages-dist/assets/practicum-DLReqweW.js                     2.78 kB │ gzip:   1.21 kB
+pages-dist/assets/practicum-DhqOYNEU.js                     2.78 kB │ gzip:   1.22 kB
+pages-dist/assets/check-BjLBdmhD.js                         2.82 kB │ gzip:   1.22 kB
+pages-dist/assets/check-BsbIUsRG.js                         2.84 kB │ gzip:   1.21 kB
+pages-dist/assets/practicum-MlY5VMIA.js                     2.85 kB │ gzip:   1.23 kB
+pages-dist/assets/check-BnCpi59_.js                         2.87 kB │ gzip:   1.18 kB
+pages-dist/assets/check-aLG2mki_.js                         2.91 kB │ gzip:   1.22 kB
+pages-dist/assets/bridge-UomV6PZM.js                        2.91 kB │ gzip:   1.40 kB
+pages-dist/assets/bridge-DecZuP-G.js                        2.95 kB │ gzip:   1.26 kB
+pages-dist/assets/bridge-YCqQqULR.js                        2.95 kB │ gzip:   1.32 kB
+pages-dist/assets/investigation-0CkjDpnx.js                 2.98 kB │ gzip:   1.29 kB
+pages-dist/assets/practicum-3ftBT6DZ.js                     2.98 kB │ gzip:   1.27 kB
+pages-dist/assets/concepts-B1EIYmBv.js                      2.99 kB │ gzip:   1.28 kB
+pages-dist/assets/debrief-Dcy9q5hP.js                       3.02 kB │ gzip:   1.42 kB
+pages-dist/assets/practicum-Cm-g2Oqn.js                     3.07 kB │ gzip:   1.33 kB
+pages-dist/assets/bridge-DpcsPlpQ.js                        3.10 kB │ gzip:   1.42 kB
+pages-dist/assets/bridge-zAtmZoLF.js                        3.15 kB │ gzip:   1.53 kB
+pages-dist/assets/investigation-DMr_ElSM.js                 3.17 kB │ gzip:   1.35 kB
+pages-dist/assets/concepts-szbXFIet.js                      3.35 kB │ gzip:   1.52 kB
+pages-dist/assets/bridge-C0cdM7nD.js                        3.36 kB │ gzip:   1.68 kB
+pages-dist/assets/TestBuildExperience-dCwzcOZ8.js           3.42 kB │ gzip:   1.32 kB
+pages-dist/assets/bridge-BZrwkAg0.js                        3.42 kB │ gzip:   1.61 kB
+pages-dist/assets/concepts-DkaGTPih.js                      3.43 kB │ gzip:   1.43 kB
+pages-dist/assets/debrief-S_QZny2Y.js                       3.44 kB │ gzip:   1.61 kB
+pages-dist/assets/bridge-O2xZE8tm.js                        3.47 kB │ gzip:   1.59 kB
+pages-dist/assets/introduction-u0yerk1d.js                  3.52 kB │ gzip:   1.44 kB
+pages-dist/assets/bridge-CBzlyUf0.js                        3.55 kB │ gzip:   1.40 kB
+pages-dist/assets/debrief-ByFX3RCd.js                       3.58 kB │ gzip:   1.63 kB
+pages-dist/assets/NewbornExperience-DfZTs8_j.js             3.59 kB │ gzip:   1.53 kB
+pages-dist/assets/debrief-S63Qbe36.js                       3.67 kB │ gzip:   1.70 kB
+pages-dist/assets/debrief-BVdHBqfA.js                       3.67 kB │ gzip:   1.73 kB
+pages-dist/assets/investigation-DxIKK16I.js                 3.69 kB │ gzip:   1.66 kB
+pages-dist/assets/FlagExperience-CAtdUE-o.js                3.74 kB │ gzip:   1.56 kB
+pages-dist/assets/debrief-ubHwCSHE.js                       3.74 kB │ gzip:   1.76 kB
+pages-dist/assets/debrief-yhXDGXeg.js                       3.78 kB │ gzip:   1.74 kB
+pages-dist/assets/introduction-DpWTciPa.js                  3.79 kB │ gzip:   1.48 kB
+pages-dist/assets/concepts-Bts0jrGM.js                      3.82 kB │ gzip:   1.62 kB
+pages-dist/assets/debrief-BxGDUS01.js                       3.82 kB │ gzip:   1.73 kB
+pages-dist/assets/debrief-B9EGPCVl.js                       3.86 kB │ gzip:   1.71 kB
+pages-dist/assets/bridge-Dya1U00n.js                        3.99 kB │ gzip:   1.83 kB
+pages-dist/assets/CdsDesignExperience-C7xf2UP3.js           4.00 kB │ gzip:   1.72 kB
+pages-dist/assets/debrief-B8JaJDbz.js                       4.04 kB │ gzip:   1.90 kB
+pages-dist/assets/concepts-CRRNGogV.js                      4.20 kB │ gzip:   1.81 kB
+pages-dist/assets/debrief-CFmvwJYr.js                       4.32 kB │ gzip:   1.78 kB
+pages-dist/assets/debrief-DE8aOJG2.js                       4.46 kB │ gzip:   1.92 kB
+pages-dist/assets/bridge-Dvv7zvji.js                        4.46 kB │ gzip:   1.96 kB
+pages-dist/assets/debrief-SJ_CpJqt.js                       4.51 kB │ gzip:   2.05 kB
+pages-dist/assets/debrief--bwCPo2G.js                       4.53 kB │ gzip:   1.97 kB
+pages-dist/assets/debrief-B1B9Nrt9.js                       4.58 kB │ gzip:   2.06 kB
+pages-dist/assets/concepts-BPTfrcLX.js                      4.61 kB │ gzip:   1.81 kB
+pages-dist/assets/debrief-B1kklScg.js                       4.64 kB │ gzip:   2.09 kB
+pages-dist/assets/debrief-CEvzMlqT.js                       4.68 kB │ gzip:   2.03 kB
+pages-dist/assets/debrief-CRLdDS-m.js                       4.82 kB │ gzip:   2.11 kB
+pages-dist/assets/concepts-DYiv6_l9.js                      4.83 kB │ gzip:   1.99 kB
+pages-dist/assets/debrief-CgDlosKt.js                       4.96 kB │ gzip:   2.14 kB
+pages-dist/assets/concepts-D_XnzSul.js                      5.10 kB │ gzip:   2.30 kB
+pages-dist/assets/introduction-B5O_Gvlo.js                  5.15 kB │ gzip:   2.03 kB
+pages-dist/assets/concepts-DOlNX7Hm.js                      5.15 kB │ gzip:   2.04 kB
+pages-dist/assets/concepts-CZYokLlT.js                      5.17 kB │ gzip:   2.20 kB
+pages-dist/assets/concepts-C38vRgtG.js                      5.19 kB │ gzip:   2.17 kB
+pages-dist/assets/introduction-B0i_v8zw.js                  5.29 kB │ gzip:   2.05 kB
+pages-dist/assets/comparison-BKOd-SG2.js                    5.29 kB │ gzip:   1.97 kB
+pages-dist/assets/debrief-DqSST6we.js                       5.40 kB │ gzip:   2.25 kB
+pages-dist/assets/introduction-CauDA4y8.js                  5.42 kB │ gzip:   2.04 kB
+pages-dist/assets/debrief-WoAbzm_s.js                       5.44 kB │ gzip:   2.23 kB
+pages-dist/assets/introduction-Tw4Nuh9W.js                  5.51 kB │ gzip:   2.11 kB
+pages-dist/assets/faculty-CIoilQ5_.js                       5.58 kB │ gzip:   2.29 kB
+pages-dist/assets/introduction-pednfS9e.js                  5.72 kB │ gzip:   2.02 kB
+pages-dist/assets/faculty-1GUk_3FA.js                       5.88 kB │ gzip:   2.44 kB
+pages-dist/assets/concepts-9EQTl5jN.js                      6.01 kB │ gzip:   2.46 kB
+pages-dist/assets/faculty-Ci5uLqxm.js                       6.04 kB │ gzip:   2.56 kB
+pages-dist/assets/concepts-DgTqOy5s.js                      6.41 kB │ gzip:   2.58 kB
+pages-dist/assets/concepts-3E_nZCZe.js                      6.41 kB │ gzip:   2.49 kB
+pages-dist/assets/MultimodalExperience-BnFlVD0z.js          6.58 kB │ gzip:   2.75 kB
+pages-dist/assets/SpecimenRoutingExperience-B-Zjx5L0.js     6.61 kB │ gzip:   2.02 kB
+pages-dist/assets/introduction-kuYspmUe.js                  6.61 kB │ gzip:   2.26 kB
+pages-dist/assets/ReflexRuleExperience-DkWbRweN.js          6.77 kB │ gzip:   2.03 kB
+pages-dist/assets/concepts-D95js-d4.js                      6.87 kB │ gzip:   2.44 kB
+pages-dist/assets/PixelBudgetExperience-Dvt74y-3.js         7.04 kB │ gzip:   2.73 kB
+pages-dist/assets/faculty-BFXIQhyr.js                       7.07 kB │ gzip:   2.74 kB
+pages-dist/assets/faculty-CEyVlA-t.js                       7.30 kB │ gzip:   2.87 kB
+pages-dist/assets/concepts-BvuotSp7.js                      7.63 kB │ gzip:   3.18 kB
+pages-dist/assets/introduction-BKJ3MzzS.js                  7.73 kB │ gzip:   2.60 kB
+pages-dist/assets/faculty-BAAHN0kF.js                       7.88 kB │ gzip:   2.88 kB
+pages-dist/assets/faculty-coVYETVX.js                       8.12 kB │ gzip:   2.91 kB
+pages-dist/assets/QueueExperience-BOW5UzJS.js               8.33 kB │ gzip:   3.29 kB
+pages-dist/assets/AutoverificationExperience-Dkg1jsm0.js    8.45 kB │ gzip:   2.40 kB
+pages-dist/assets/faculty-CKnXUt_l.js                       8.48 kB │ gzip:   2.98 kB
+pages-dist/assets/faculty-1_lmbm5P.js                       8.49 kB │ gzip:   3.23 kB
+pages-dist/assets/faculty-B-a0KQcH.js                       8.51 kB │ gzip:   3.17 kB
+pages-dist/assets/faculty-CfK7q_vN.js                       8.57 kB │ gzip:   3.26 kB
+pages-dist/assets/faculty-DLLr8TMD.js                       8.71 kB │ gzip:   3.09 kB
+pages-dist/assets/faculty-DdkuIOia.js                       9.17 kB │ gzip:   3.41 kB
+pages-dist/assets/SecurityReviewExperience-DTAMiMVd.js      9.19 kB │ gzip:   2.73 kB
+pages-dist/assets/faculty-DjDoqn0s.js                       9.26 kB │ gzip:   3.31 kB
+pages-dist/assets/debrief-CCA-iCcQ.js                       9.32 kB │ gzip:   3.42 kB
+pages-dist/assets/faculty-zkcNAVhR.js                       9.36 kB │ gzip:   3.37 kB
+pages-dist/assets/faculty-D0DGEl68.js                       9.47 kB │ gzip:   3.42 kB
+pages-dist/assets/faculty-BZqSmguw.js                       9.72 kB │ gzip:   3.34 kB
+pages-dist/assets/faculty-ozsdWFFL.js                       9.73 kB │ gzip:   3.44 kB
+pages-dist/assets/faculty-B3yPjQec.js                       9.99 kB │ gzip:   3.64 kB
+pages-dist/assets/MitosisReviewExperience-BqwpOwmw.js      10.02 kB │ gzip:   3.47 kB
+pages-dist/assets/faculty-CpVcrugB.js                      10.22 kB │ gzip:   3.72 kB
+pages-dist/assets/faculty-CnZbK34g.js                      10.24 kB │ gzip:   3.48 kB
+pages-dist/assets/WsiValidationExperience-QGZgeLrY.js      10.46 kB │ gzip:   4.08 kB
+pages-dist/assets/OrientationExperience-7P4jmBf-.js        11.90 kB │ gzip:   3.78 kB
+pages-dist/assets/faculty-C-FrhX8O.js                      11.95 kB │ gzip:   4.36 kB
+pages-dist/assets/AlertEvaluationExperience-3Yeb6FZ5.js    13.37 kB │ gzip:   4.90 kB
+pages-dist/assets/TerminologyExperience-7z68Gcfm.js        14.23 kB │ gzip:   5.29 kB
+pages-dist/assets/faculty-1lIpq_mZ.js                      14.36 kB │ gzip:   4.91 kB
+pages-dist/assets/PrivacyExperience-Cuvk5vPH.js            14.49 kB │ gzip:   4.22 kB
+pages-dist/assets/LisSelectionExperience-YSr0oCYu.js       14.79 kB │ gzip:   5.47 kB
+pages-dist/assets/DowntimeExperience-nqGzeD-L.js           15.10 kB │ gzip:   4.15 kB
+pages-dist/assets/AiDeploymentExperience-D_JF-DpB.js       23.98 kB │ gzip:   7.55 kB
+pages-dist/assets/ResultJourneyExperience-B6PwMv-C.js      24.11 kB │ gzip:   6.73 kB
+pages-dist/assets/StatisticsExperience-CSKg9ljh.js         32.27 kB │ gzip:   8.85 kB
+pages-dist/assets/DataQualityExperience-BDzObr8R.js        84.52 kB │ gzip:  17.92 kB
+pages-dist/assets/index-41_UinVC.js                       416.00 kB │ gzip: 118.88 kB
+
+(!) Some chunks are larger than 300 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 35.26s
+Exported pages-dist/curriculum-coverage.json
+
+Fontconfig error: No writable cache directories
+	C:/Users/amrom/AppData/Local/fontconfig/cache
+	C:/Users/amrom/.cache/fontconfig
+
+Fontconfig error: No writable cache directories
+	C:/Users/amrom/AppData/Local/fontconfig/cache
+	C:/Users/amrom/.cache/fontconfig
+Created 55 route pages with metadata, sitemap and preview image.
