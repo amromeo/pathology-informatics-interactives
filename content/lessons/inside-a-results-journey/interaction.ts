@@ -148,21 +148,21 @@ export const connectionChoices = [
 export const repairChoices = [
   {
     id: "restore-firewall",
-    label: "Restore route; verify delivery.",
+    label: "Correct the firewall rule and check delivery.",
     correct: true,
     feedback:
       "This corrects the demonstrated failure. The queued results still need to be transmitted and reconciled before the incident is closed.",
   },
   {
     id: "repeat-cbc",
-    label: "Repeat the CBC.",
+    label: "Repeat the patient's CBC on the analyzer.",
     correct: false,
     feedback:
       "The CBC is already complete. Repeating it does not restore electronic reporting and may create an unnecessary recollection and another delayed result.",
   },
   {
     id: "restart-interface",
-    label: "Restart the interface engine.",
+    label: "Restart the running interface application.",
     correct: false,
     feedback:
       "The interface application is running. Restarting it does not remove the firewall block, and the queued results still cannot reach the EHR.",
@@ -240,11 +240,11 @@ export const firstChecks = [
 
 export const lessonCopy = {
   text01:
-    "Choose the best category for each item. Some systems include more than one kind of component; classify the item named in each row.",
+    "Choose whether each named item is physical equipment, system software, application software or a communication protocol. Classify the item itself: an interface application runs on a server, but it is not the server hardware.",
   text02:
     "The LIS team starts with the laboratory systems, then follows the result toward the EHR. Open each check and decide what it rules in or out.",
   text03:
-    "A single result appearing in the EHR is not enough. Check the delayed reports, a new report, and the downtime record.",
+    "Run the checks to see the expected result of your selected action. Read each row: would that action deliver the waiting reports and new reports, and let staff account for results communicated during the interruption?",
 };
 
 export const pathwayExplanations: Record<string, string> = {
@@ -267,9 +267,16 @@ export const classExplanations: Record<string, string> = {
 };
 export const evidenceQuestions: Record<
   string,
-  { answer: string; choices: { id: string; label: string }[]; feedback: string }
+  {
+    answer: string;
+    choices: { id: string; label: string }[];
+    feedback: string;
+    incorrectFeedback: string;
+  }
 > = {
   analyzer: {
+    incorrectFeedback:
+      "The analyzer record cannot establish how the EHR displays a report. It does show that analysis completed and the LIS accepted the result, so unfinished analyzer testing is the explanation this check rules out.",
     answer: "testing",
     choices: [
       { id: "testing", label: "Incomplete analyzer testing" },
@@ -279,6 +286,8 @@ export const evidenceQuestions: Record<
       "Normal analysis and LIS acceptance show that testing and the first transfer completed. They do not establish the later chart display.",
   },
   lis: {
+    incorrectFeedback:
+      "A final LIS report can coexist with a blocked connection to the EHR. The verification time rules out a result still awaiting laboratory release; it does not test that later connection.",
     answer: "verification",
     choices: [
       { id: "verification", label: "An unverified laboratory result" },
@@ -288,6 +297,8 @@ export const evidenceQuestions: Record<
       "Final status and the 09:42 verification show the laboratory result is available. They do not prove delivery beyond the LIS.",
   },
   interface: {
+    incorrectFeedback:
+      "The connection reset does not rule out a firewall block. The recorded processor and memory use argue against overload; the firewall record is still needed to investigate the failed delivery.",
     answer: "overload",
     choices: [
       { id: "overload", label: "Server processor or memory overload" },
@@ -297,6 +308,8 @@ export const evidenceQuestions: Record<
       "Processor use of 18% and memory use of 46% do not suggest overload. Connection resets and a growing queue require checking the network route.",
   },
   firewall: {
+    incorrectFeedback:
+      "A firewall log cannot establish the analytical accuracy of hemoglobin. The deny entry shows that this connection was blocked, ruling out normal delivery along it.",
     answer: "normal",
     choices: [
       { id: "normal", label: "Normal delivery over the approved route" },

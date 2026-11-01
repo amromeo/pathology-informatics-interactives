@@ -1,11 +1,11 @@
-### Why the mean and median disagree
+## Read the comparison before judging it
 
-The **mean** is calculated by adding the TAT for every case and dividing by the number of cases. A small number of very long cases can pull the mean upward.
+In the [original summary table](#tat-original-summary), each case contributes one turnaround time (TAT). The mean adds those times and divides by the number of cases. The median puts the times in order and identifies the middle. With an even number of cases, it averages the two middle values.
 
-The **median** is the TAT of the middle case after the cases are arranged from shortest to longest. A few very long cases have less effect on the median.
+To see why they can disagree, consider five example times: 2, 2, 3, 3 and 10 working days. Their sum is 20, so the mean is 20 ÷ 5 = 4 days. The middle value is 3 days, so the median is 3. If the longest case takes 20 days instead, the mean becomes 6 days while the median stays 3.
 
-In this report, the post-go-live median is slightly lower than the pre-go-live median, but the post-go-live mean is higher. That usually means the post-go-live cases are **skewed**: most cases are clustered toward the shorter end, with a smaller group of much longer cases forming a long tail.
+Now read the post-go-live row. It includes 245 cases, with a mean of 3.8 days and a median of 2.5. The pre-go-live mean is 3.3 and median is 2.7. The lower median suggests that the middle of the distribution moved down. The higher mean suggests that longer cases deserve attention. Neither statistic tells you when those cases occurred.
 
-The report does not yet tell you when those long cases occurred. Before deciding that TAT improved or worsened, look at the post-go-live period week by week.
+A distribution with a group of long times stretching beyond most cases is called **right-skewed**. The mean/median difference is a reason to inspect the cases, not proof of a particular shape. Look at the weeks separately before deciding what to tell the director.
 
-The last two baseline weeks have higher medians than the first four. Compare the weekly pattern as well as the overall baseline summary; the before/after difference alone cannot attribute a change to the new system.
+The baseline also varies: the last two pre-go-live weeks have higher medians than the first four. A before/after comparison describes these periods; by itself, it cannot show that the LIS caused any later difference.

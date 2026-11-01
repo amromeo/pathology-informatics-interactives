@@ -260,3 +260,16 @@ The ten original PowerPoint decks were retrieved from the API course archive and
 - [HL7 v2.5.1, chapter 7](https://www.hl7.eu/HL7v2x/v251/std251/ch07.html): result-message fields.
 
 All new clinical and regulatory teaching remains subject to author review before merge. No source text or figures have been reproduced.
+
+## Foundational lesson explanations — November 1, 2026
+
+Reviewed the following primary sources while revising lessons 2–4. Case records, counts, numerical calculations and acceptance limits are unchanged.
+
+- [RFC 9293](https://www.rfc-editor.org/rfc/rfc9293.html): TCP's ordered, reliable transport service. The Missing CBC distinguishes transport, the receiving application's acknowledgment and review of the complete chart report.
+- [Government Data Quality Framework](https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework): the six common dimensions and the broader question of fitness for purpose. Can We Trust This Report? applies these to fields, source documents and report use.
+- [NIST confidence limits for the mean](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm) and [confidence interval interpretation](https://www.itl.nist.gov/div898/handbook/prc/section1/prc14.htm): standard error, t-based interval and repeated-sampling interpretation. The worked numbers are calculated from the lesson's 18 paired differences.
+- [NIST critical values and p-values](https://www.itl.nist.gov/div898/handbook/prc/section1/prc131.htm): interpreting a test result conditional on a null hypothesis, distinct from medical acceptance.
+- [NIST signed-rank reference](https://www.itl.nist.gov/div898/software/dataplot/refman1/auxillar/signrank.htm): symmetry of paired differences is an assumption. Corrected the test-selection scenario from markedly skewed differences to roughly symmetric, non-normal numerical differences; the answer and stable scenario ID remain unchanged. The ANOVA example now explicitly uses independent samples.
+- [CLSI EP26 public overview](https://clsi.org/shop/standards/ep26/): patient-sample lot comparisons and protocol setup before routine evaluations. The case's numerical criteria remain local assumptions; the lesson does not claim to implement the complete guideline.
+
+No source prose or figures were copied. Existing PIER and Harrison coverage is retained. The turnaround-time conclusion now distinguishes a descriptive difference between periods from proof that the LIS caused improvement.

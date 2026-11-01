@@ -1,29 +1,17 @@
 # The Missing CBC
 
-> **Case:** The emergency department is treating a patient with a suspected gastrointestinal bleed. The complete blood count (CBC) is still listed as pending in the electronic health record (EHR), and the team is waiting for the hemoglobin result.
+The emergency department (ED) calls the hematology lab about a patient with a suspected gastrointestinal bleed. The complete blood count (CBC) still says **Pending** in the electronic health record (EHR). The clinician is waiting for the hemoglobin result.
 
-The emergency department (ED) calls the hematology lab. The clinical team cannot tell whether the specimen has been received in the laboratory, whether there is a problem with the specimen, or whether testing is complete. All they know is that the CBC is **Pending**.
+You are the pathology resident working with the hematology technologist and the laboratory information system (LIS) analyst. The ED cannot see the laboratory's worklist. Its pending status alone cannot tell you whether testing is unfinished or a completed report failed to reach the chart.
 
-## Terms used in this case
-
-- **Analyzer** — the instrument that performs the CBC.
-- **laboratory information system (LIS)** — the laboratory information system used to manage orders, specimens, and results.
-- **Interface engine** — software that sends laboratory results between systems.
-- **Firewall** — a network control that allows or blocks connections between systems.
-- **EHR** — the electronic health record used by the clinical team.
-- **Vendor-hosted** — the application runs in an environment operated by the vendor rather than on a server operated by the health system.
+The LIS is the application staff use to manage laboratory orders, specimens and results. A result released there must still travel to the EHR before the clinician can read it. In this hospital, an **interface engine** receives the LIS message and sends it to the EHR. The vendor operates the EHR's computing environment; the LIS and interface engine run in the health system's data center.
 
 ## Your task
 
-Identify the hardware, software, network connections, and interfaces involved in electronic result reporting. Then use the records from each system to find where the report stopped.
-
-This lesson follows the CBC from the analyzer to a vendor-hosted EHR.
-
+Start by checking whether the laboratory has a verified CBC. If it does, the team needs to communicate that result while the LIS analyst investigates the missing electronic report. You will then follow the result through each system, identify the failed connection and choose the checks needed after repair.
 
 ## What you will be able to do
 
-- Separate a verified result from successful report delivery.
-- Trace the same result through the LIS, message queue and chart.
-- Explain why “use server uptime as proof of delivery” is an incomplete approach.
-
-Start by reading the case records. Make a choice before checking the explanation; you can revise it and test again.
+- Explain the separate jobs of a computer, its software and its network connection.
+- Use a record from each system to identify how far a result traveled.
+- Check that delayed and new reports reached the correct charts after a connection is restored.

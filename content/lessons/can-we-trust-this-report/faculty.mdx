@@ -1,103 +1,48 @@
 # Faculty guide: Can We Trust This Report?
 
-## At a glance
-
-Allow 32 minutes. Use individually or in a small group. Project the case records and the exercise controls; keep the answer key out of view until learners commit to a decision.
-
-Learning objectives: reconcile a report denominator with the source records; reconcile the export count with the accession list; justify the first local check. PIER: 2.1, 1.2.
+Allow 32 minutes. Learners review a surgical pathology spreadsheet after an LIS replacement, trace a missing structured time to its source and revise the comparison without discarding delayed cases. This addresses PIER 2.1 and 1.2.
 
 ## Run of show
 
-| Minutes | Activity | Ask the group |
-| --- | --- | --- |
-| 0–6 | Read the case and records | What decision has the laboratory been asked to make? |
-| 6–22 | Make, test and revise a choice | Which record supports your decision? What could fail? |
-| 22–32 | Debrief and retrieval questions | How would you verify this in your own laboratory? |
+Spend 6 minutes on the report definitions and mean/median example, 10 minutes on weekly and source records, 8 minutes on the data-quality checks and 8 minutes revising the report and discussing its limits.
 
-## Expected answers
+## Start with the comparison
 
+Ask learners to name the start event, endpoint and periods before interpreting the summary. TAT runs from accession to the initial final report in working days. Amendments do not create another case row. The export was run on April 20, after all cases accessioned through April 3 had an initial final report.
 
-## PIER 2.1 coverage
+The [original summary](../../lessons/can-we-trust-this-report/#tat-original-summary) contains 210 pre-go-live cases and 245 post-go-live cases. Read one row aloud. Use the five-case example to show why changing a long time can move the mean without moving the median.
 
-This lesson uses one surgical pathology quality report to teach four parts of PIER 2.1:
+The appropriate first action is to inspect the weeks. The higher post-go-live mean and lower median are a reason to investigate, not a choice between two competing verdicts.
 
-- **Structured and unstructured data:** compare a blank structured LIS field with a time documented on the requisition and paper cutover log.
-- **Seven data-quality dimensions:** apply accuracy, completeness, validity, consistency, uniqueness, timeliness, and fitness for purpose to specific checks.
-- **Data flow:** follow the accession time from the source documents and LIS into the spreadsheet and quality report.
-- **Pathology data science:** compare mean and median, recognize a skewed distribution, separate an unusual interval from routine performance, and review TAT over time.
+## Follow the case into the spreadsheet
 
-## Case mechanism
+Cutover week contains 35 cases. The first eight were accessioned in the LIS. After the interruption began at 08:30 Tuesday, 27 were recorded on paper. Their original times were not entered into the structured field during later data entry.
 
-The dataset contains 455 unique surgical pathology accessions: 210 pre-go-live cases, 35 cutover cases, and 210 post-go-live cases after cutover.
+Ask the learner to open the requisition and identify the original time. Paper accessioning occurred at receipt, as confirmed by the accessioning supervisor. The coordinator checked that event definition before using the paper time in the spreadsheet.
 
-The original report combines cutover week with the following six weeks. The 245-case post-go-live group has a mean of 3.8 working days and a median of 2.5, compared with a pre-go-live mean of 3.3 and median of 2.7. The higher mean and lower median should prompt the learner to look for a smaller group of unusually long cases.
+Use the [case-list table](../../lessons/can-we-trust-this-report/#tat-case-table) to distinguish a missing LIS field from a missing TAT calculation. Both the blank field and the source time remain visible. Replacing the original time with later data entry would make TAT artificially short.
 
-The cutover cases have a mean of 8.4 and a median of 9.5 working days. The six weeks after cutover have a mean of 3.0 and median of 2.5. The first eight cutover cases were accessioned directly in the new LIS. The remaining 27 were recorded on requisitions and in a paper cutover log after the accessioning function was taken offline. Their original accession times were not entered into the structured LIS field. The quality coordinator recovered those documented times and used them to calculate TAT, keeping all 35 cutover cases in the report.
+## Explain the seven checks
 
-## Answers and rationale
+Accuracy compares a populated value with the source event; completeness asks whether a required value exists. Validity concerns the format and permitted sequence. Consistency concerns a shared definition across periods. Uniqueness prevents duplicate accessions. Timeliness asks whether records are current for the report date. Fitness for purpose asks whether the comparison supports the intended use.
 
-The first safe action is to review TAT by week. Choosing either the mean or median alone would give an incomplete account of what happened.
+The categories can overlap. For the report-date check, the focus is whether the export is current enough to include late-finalized cases. Do not teach that waiting indefinitely is always the solution: an earlier report could instead identify pending cases explicitly.
 
-The correct report keeps all 455 cases but shows pre-go-live, cutover week, and post-go-live after cutover as separate groups. This makes the temporary cutover delay visible without allowing that week to describe the later routine workflow. Removing only the 27 delayed cases would selectively hide the longest TAT values.
+## Explain the revised conclusion
 
-The final conclusion is two-part: cutover caused severe temporary delays, and routine TAT was modestly better after cutover than before go-live.
+Keep 210 pre-go-live, 35 cutover and 210 later cases. The means are 3.3, 8.4 and 3.0 working days; medians are 2.7, 9.5 and 2.5. Removing the 27 cases with blank structured fields would selectively remove known delays whose original times were available.
 
-## Facilitation
+The report shows a substantial temporary delay during cutover and somewhat shorter overall TAT in the later period. It does not prove that replacing the LIS improved TAT. The last two baseline weeks already differ from the earlier baseline. Case mix and other workflow changes may also need investigation.
 
-Ask residents why the mean and median appear to disagree and what each statistic tells them. Then ask what changed when the same 245 post-go-live cases were separated by week. Emphasize that the cutover cases were not deleted from the report.
+Ask the learner to summarize both the cutover delay and the later pattern in two sentences, then identify a remaining question. That is a better check of understanding than reciting the seven terms.
 
-When discussing the 27 blank LIS fields, distinguish the event from its source. The original accession event was documented on the requisition and cutover log, allowing the cases to remain in the analysis after review. The structured LIS data were still incomplete and required a prospective workflow correction.
+## Local work and further reading
 
-The debrief is intentionally available at any time. Residents do not need to complete every audit item to read it.
+The practicum asks learners to trace one report's fields, count included and excluded cases, and inspect any unusual interval. Have them identify who prepares the report and who approves its use.
 
-## Sources
+The [Government Data Quality Framework](https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework) explains quality dimensions and choosing checks for a purpose. The lesson uses six commonly described dimensions plus the broader question of fitness for purpose.
 
-- [PIER Essentials R5](https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf), Topic 2.1, establishes the curricular content.
-- [Government Data Quality Framework](https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework) supplies the formal data-quality definitions, adapted here with original pathology examples.
-- [API Pathology Informatics Introductory Course](https://www.pathologyinformatics.org/teaching-slide-sets), especially Harrison sessions 0 and 2, informs the discussion of data representation, data quality, and the path from data creation to use.
-
-## Preparing discussion with API slides
-
-Use [Association for Pathology Informatics teaching slides: Pathology Informatics and Data (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%200%20Orientation%20slides.pptx) by James H. Harrison, Jr., slides 18–20, to prepare the discussion after residents have explained their case decision. Ask: Follow data from its creation to its use. Explain how missing accession times can change a turnaround-time summary even when the spreadsheet calculation runs correctly. Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
-
-These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
-
-
+[API teaching slides](https://www.pathologyinformatics.org/teaching-slide-sets), Harrison Session 0, slides 18–20, and Session 2, slides 5–12 and 24–26, support discussion of how data are recorded, selected and used. PIER R5 provides the curriculum objectives. The lesson's counts and TAT values come from its editable case dataset.
 ## Common misconceptions
 
-- “Only the mean of complete records.” Ask: what does the record actually establish? The summary otherwise describes only the retained subset. Missing timestamps may be related to the operational problem being studied.
-- “Only the total number of final results.” Ask: which conclusion would still need evidence? The summary otherwise describes only the retained subset. Missing timestamps may be related to the operational problem being studied.
-- “Remove records with unexpectedly long times.” Ask: what must be checked before making the change? Start by establishing which records were included, excluded or left blank before interpreting a change in the mean.
-
-## Discussion prompts
-
-1. What supports the case decision? A strong answer includes a specific record and the distinction: reconcile a report denominator with the source records.
-2. What would you check locally? A strong answer includes: reconcile the export count with the accession list, because start by establishing which records were included, excluded or left blank before interpreting a change in the mean.
-3. Who needs to participate? A strong answer includes a quality lead and report analyst and separates technical work from clinical approval.
-
-## Group variant
-
-Assign laboratory director, LIS analyst, laboratory operations and clinical service roles. Add clinical informatics and a patient advocate when considering ordering or chart use. Ask each person to state one requirement, one risk and the evidence needed before approval. The director then summarizes what can proceed and what must be resolved.
-
-## Assess transfer
-
-Reconcile a small approved turnaround extract against its source and list missing fields and exclusions. A strong response names the record, responsible person, first check and an unresolved risk. Use the three learner retrieval questions to distinguish an unsupported shortcut from a reasoned decision.
-
-## PIER coverage
-
-- 2.1: Compare a blank structured LIS field with an accession time visible on a scanned requisition.
-- 2.1: Match seven checks on the surgical pathology dataset to the appropriate data-quality dimensions.
-- 2.1: Trace the case from accessioning through the LIS export and spreadsheet to the quality meeting.
-- 2.1: Relate the TAT case to statistical analysis, linked clinical data, image analysis, and AI/ML.
-- 1.2: Match data-quality checks, recover accession times and compare all three reporting periods.
-
-
-## Additional source discussion
-
-### Further study with API teaching slides
-
-In [Association for Pathology Informatics teaching slides: Pathology Informatics and Data (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%200%20Orientation%20slides.pptx), review slides 18–20. Follow data from its creation to its use. Explain how missing accession times can change a turnaround-time summary even when the spreadsheet calculation runs correctly.
-
-
-
-These are examples of work in pathology data science described in [PIER Essentials R5](https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf) and the [API introductory teaching slides](https://www.pathologyinformatics.org/teaching-slide-sets).
+A blank LIS field does not mean the original time is unknowable: check the paper source and event definition. A lower median does not erase the long delays. Showing cutover separately does not mean removing its cases. Ask learners to point to the records supporting each distinction.

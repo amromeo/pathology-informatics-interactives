@@ -1,4 +1,5 @@
 import type { RetrievalItem } from "../../../src/data/types";
+export const feedbackHeadings = { correct: "Correct", incorrect: "Try again" };
 export const checks: RetrievalItem[] = [
   {
     id: "principle",
@@ -11,45 +12,46 @@ export const checks: RetrievalItem[] = [
         label: "The excluded count and missing field",
         correct: true,
         feedback:
-          "The summary otherwise describes only the retained subset. Missing timestamps may be related to the operational problem being studied.",
+          "State how many orders were excluded and that their collection times were missing. The average describes only the included orders. Investigate whether the missing times are concentrated during the delay being studied.",
       },
       {
         id: "shortcut",
         label: "Only the mean of complete records",
         feedback:
-          "This leaves the central problem unresolved. The summary otherwise describes only the retained subset. Missing timestamps may be related to the operational problem being studied.",
+          "That mean cannot describe the excluded orders. If the longest delays also caused missing timestamps, reporting only complete records could make performance look better than it was.",
       },
       {
         id: "incomplete",
         label: "Only the total number of final results",
         feedback:
-          "This does not establish the needed conclusion. The summary otherwise describes only the retained subset. Missing timestamps may be related to the operational problem being studied.",
+          "The total does not identify how many orders contributed to the turnaround calculation or why others were omitted. Show the included and excluded counts and the missing field.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt:
+      "Before interpreting a new turnaround-time export, how would you check whether it represents the intended cases?",
     choices: [
       {
         id: "supported",
         label: "Reconcile the export count with the accession list",
         correct: true,
         feedback:
-          "Start by establishing which records were included, excluded or left blank before interpreting a change in the mean.",
+          "Start with the eligible accessions. Account for each included or excluded case, check blank fields and look for duplicate rows. That establishes what the later averages describe.",
       },
       {
         id: "shortcut",
         label: "Remove records with unexpectedly long times",
         feedback:
-          "This leaves the central problem unresolved. Start by establishing which records were included, excluded or left blank before interpreting a change in the mean.",
+          "A long time may be the important finding. Check its source before changing it, and keep a real delay in the report rather than deleting it because it is inconvenient.",
       },
       {
         id: "incomplete",
         label: "Apply this case decision without checking local policy",
         feedback:
-          "This does not establish the needed conclusion. Start by establishing which records were included, excluded or left blank before interpreting a change in the mean.",
+          "Your report may use a different start event, endpoint or eligible group. Establish those definitions and inspect the source records before deciding how to group its cases.",
       },
     ],
   },
@@ -65,19 +67,19 @@ export const checks: RetrievalItem[] = [
         label: "The laboratory director",
         correct: true,
         feedback:
-          "The laboratory owns the complete report, including how it appears in the chart. The LIS and EHR teams make and test the technical change.",
+          "The laboratory director or designated laboratory approver reviews the complete corrected report. The LIS and EHR teams make and test the technical change.",
       },
       {
         id: "shortcut",
         label: "The interface analyst alone",
         feedback:
-          "This leaves the central problem unresolved. The laboratory owns the complete report, including how it appears in the chart. The LIS and EHR teams make and test the technical change.",
+          "The analyst can change the mapping and test transmission. Clinical approval still belongs to the laboratory, which must review the complete report as it appears in the chart.",
       },
       {
         id: "incomplete",
         label: "The software vendor alone",
         feedback:
-          "This does not establish the needed conclusion. The laboratory owns the complete report, including how it appears in the chart. The LIS and EHR teams make and test the technical change.",
+          "The vendor can help correct the display, but it cannot replace the laboratory's review of its report. The laboratory director or designated approver confirms that the corrected result is suitable for clinical use.",
       },
     ],
   },

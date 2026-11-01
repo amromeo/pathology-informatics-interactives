@@ -1,11 +1,17 @@
-## Choose a test that fits the question
+## Match the question to a statistical test
 
-A statistical test should match both the kind of result and the way the specimens were selected.
+Start with the study design. Are the same specimens measured twice, or are the groups unrelated? Then identify the result: a numerical measurement, or a category such as mutation detected versus not detected. Finally, inspect the distribution and the assumptions of the proposed test.
 
-- A **paired t-test** compares the mean difference when the same specimens are measured twice and the paired differences have no marked outlier or severe skew.
-- A **Wilcoxon signed-rank test** is a common alternative for paired numerical results when the differences are markedly non-normal.
-- An **independent-samples t-test** compares numerical results from two unrelated groups.
-- **Analysis of variance**, commonly called **ANOVA**, compares a numerical measurement across three or more groups.
-- **Chi-square** and **Fisher exact** tests compare counts or proportions. Fisher exact is especially useful when the groups are small.
+**Paired t-test:** keep each specimen's two results together and analyze their difference. It tests the mean paired difference. In this lot study, the differences have no marked outlier or severe skew. At this sample size, that makes the t procedure a reasonable starting choice.
 
-The examples below are intentionally brief. They teach how study design and result type guide the initial choice; a real analysis also requires checking the assumptions of the selected test.
+**Wilcoxon signed-rank test:** also keeps pairs together, but uses the signs and ranks of their differences. Ranks describe their order by size. This can help with paired differences that are not normally distributed but remain roughly symmetric. It is not an automatic solution for strongly skewed differences; symmetry still matters.
+
+A **normal distribution** has a roughly symmetric bell shape. Symmetry means the values spread out in a similar way on either side of the center. A distribution can be symmetric without having that bell shape. Inspect the paired differences, rather than assuming the original measurements have the same shape as their differences.
+
+**Independent-samples t-test:** compares means from two unrelated groups, such as hemoglobin results from different patients in two groups. There is no specimen-to-specimen pairing to preserve.
+
+**Analysis of variance (ANOVA):** compares a numerical outcome across three or more groups. For example, compare RNA yields from independent tissue samples assigned to three fixatives. A significant result indicates that the group means are not all equal; further comparisons identify the differences.
+
+**Fisher exact test:** compares counts in categories, such as mutation detected versus not detected in two patient groups. It is useful when counts are small. Chi-square tests also address categorical counts when their assumptions are met.
+
+For each example below, select the best initial test from these choices. The examples supply the features needed for that choice. A complete study also needs an appropriate sampling plan and a check of the selected test's assumptions.

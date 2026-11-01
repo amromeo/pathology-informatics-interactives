@@ -1,22 +1,29 @@
-## Hardware, software, and networks
+## Follow one report through the systems
 
-A laboratory information system is not one machine. It depends on physical equipment, software running on that equipment, and network connections to other systems.
+The analyzer sends its CBC measurements to the LIS. A technologist reviews and releases the report there. The LIS then sends a message containing the report to the interface engine. The interface engine holds messages waiting to be sent in a **queue** and delivers them to the EHR.
 
-**Hardware** is the physical equipment: processors, memory, storage, network adapters, workstations, servers, and switches.
+For the final transfer, the message crosses the hospital network and a **firewall**. The firewall applies rules about which systems may connect to one another. The EHR receives the message and uses its contents to update the patient's chart.
 
-**System software** provides the environment in which other software runs. The operating system is the main example in this case.
+Build that path below. The firewall and network are shown as one step between the interface engine and EHR because that is the connection you will investigate. Other steps also use network connections.
 
-**Application software** performs work for users. The LIS and interface engine are both applications. The LIS stores and manages laboratory orders and results. The interface engine sends, receives, and routes messages between systems.
+## Separate the computer from the work it performs
 
-## How the systems communicate
+**Hardware** means physical equipment. A server is a computer that runs services used by other computers. Its processor carries out instructions, its memory holds information being used, and its storage keeps files and records. A network adapter connects it to the network. A network switch passes traffic between connected devices.
 
-Several things must work before one system can send a result to another:
+**System software** manages those resources. The operating system starts applications and gives them access to memory, storage and network connections.
 
-1. The equipment and physical connection must be working. A network switch connects devices on the local network.
-2. Each system needs the correct network address and route. An **IP address** is like a street address; a **port** is like the particular door used by an application.
-3. A firewall must allow the connection. Think of the route as the road and the firewall rule as the checkpoint that decides which traffic may pass.
-4. **TCP** opens and maintains the connection between the sending and receiving applications. Once that connection is available, the interface engine can send the laboratory message, often an HL7 message.
+**Application software** performs a particular job. The LIS manages orders and results. The interface engine prepares and routes messages. Both applications depend on an operating system and hardware, but they are separate from those supporting parts.
 
-In a **client-server** arrangement, one application requests or sends information and another provides or receives the service. The names describe how the applications communicate; they do not tell you whether either system is physically inside the hospital.
+For example, an interface server can have unused memory and a running application while every outgoing report waits in its queue. Those observations tell you the computer is running. They do not tell you that the next system received a report.
 
-The receiving system replies with an acknowledgment (ACK). Until an ACK arrives, the interface engine keeps the result in its message queue and retries according to the interface agreement. An ACK confirms message handling; the laboratory must still verify the report in the electronic health record.
+## What a connection needs
+
+An **Internet Protocol (IP) address** identifies a destination on the network. A **port** identifies the service at that destination. The sending application needs the correct address and port, a working network path and a firewall rule that permits the connection.
+
+**Transmission Control Protocol (TCP)** provides an ordered, reliable stream of data between connected applications. TCP/IP names these communication protocols. They carry information; they do not define the clinical meaning of a hemoglobin result.
+
+Here, the interface engine connects to the EHR's receiving service and sends a laboratory message. Messages commonly follow a Health Level Seven (HL7) format so that systems can agree where to find the patient, test and result information.
+
+The receiving application returns an **acknowledgment (ACK)**. Its meaning depends on the agreed message process: check whether it reports acceptance or an error. An accepted message still needs to appear as the complete report in the correct chart. Here, the engine retains messages without the expected acknowledgment and retries delivery.
+
+The interface engine acts as a **client** when it opens a connection to the receiving **server** service. These names describe their jobs in that exchange, not whether either computer is inside the hospital.

@@ -1,9 +1,23 @@
-## What can we conclude beyond these specimens?
+## How precise is the average shift?
 
-The 18 specimens give the laboratory an estimate of the average lot difference, but another set of specimens would not produce exactly the same mean. Inferential statistics describe that uncertainty.
+The mean of these 18 differences is +1.2 ng/L. A different set of suitable patient specimens would probably give a somewhat different mean. We need to describe that uncertainty before comparing the shift with the laboratory's limit.
 
-The **95% confidence interval** gives the range of average lot differences reasonably supported by this comparison. It does not contain 95% of the individual specimen differences. It describes uncertainty around the estimated mean difference.
+The **standard error** describes uncertainty in the estimated mean. It differs from the SD, which describes the spread of individual differences. Here, divide the SD of about 1.2 by the square root of 18: the standard error is about **0.28 ng/L**.
 
-The **p-value** addresses a narrower question: do these specimens provide evidence of an average difference between the lots? It does not tell us whether the difference is large enough to affect patient care.
+A **95% confidence interval** extends on each side of the estimated mean. For these 18 pairs, the t calculation uses a multiplier of about 2.11. The margin is 2.11 × 0.28, or about 0.6 ng/L. Thus +1.2 minus or plus 0.6 gives an interval of approximately **+0.6 to +1.8 ng/L**.
 
-This laboratory decided before testing that an average shift between −2 and +2 ng/L near the clinical decision concentration would be medically acceptable. The confidence interval must be compared with that limit. The p-value alone cannot make the lot-acceptance decision.
+This interval describes uncertainty about the average shift. It does not promise that 95% of individual differences lie inside it. TNI-016's +3.5 ng/L difference, for example, lies outside the interval for the mean.
+
+The 95% describes the calculation method: across many comparable samples, about 95% of intervals made this way would contain the underlying mean, if the assumptions hold. It does not guarantee the next sample's mean.
+
+## What question does the p-value answer?
+
+The paired t-test starts with the assumption that the underlying average difference is zero. This is called the **null hypothesis**. It compares the observed mean with its standard error to ask how unusual this result would be under that assumption.
+
+Here, **p < 0.001** means that, if the zero-difference assumption and the test's assumptions were true, a test result this extreme or more extreme would occur less than once in a thousand such comparisons. The data therefore provide evidence of an average difference. This is not a probability that the lot is acceptable, or that a particular patient's result is correct.
+
+## Compare the size of the shift with the agreed limit
+
+Before testing, the director specified an acceptable average shift from −2 to +2 ng/L near this assay's clinical decision concentration. The interval from +0.6 to +1.8 is entirely inside that range. A measurable difference can therefore satisfy this case's criterion.
+
+The six very low and six elevated specimens still need their separate checks. Those checks answer questions that the average of these 18 differences cannot answer.
