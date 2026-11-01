@@ -11,6 +11,20 @@ The separate reader study found 36/40 figures without assistance, 38/40 with ass
 
 A pathologist must confirm proposed marks, inspect unmarked tissue, and use an appropriate counting area. The team needs evidence for the intended population, scanner, stain, interface, and reader workflow. Investigate failures and site differences, preserve accountable denominators, and assess changed versions or thresholds before clinical release. The concepts extend Topic 2's AI work to an image-analysis workflow without turning detection into automatic diagnosis or prognosis.
 
+<details className="teaching-supplement">
+<summary>A closer look: watch how the pathologist searches the slide</summary>
+
+An algorithm’s marks change where a reader may look first. Lowering its threshold can add both useful marks and distracting ones. The final count depends on how the pathologist checks those marks and searches the remaining tissue.
+
+Compare assistance with full-area review against the marks-only condition in this case. The faster review missed more reference figures. To understand that finding, examine reader differences, the cases each reader saw, session order and time spent searching. Keep the algorithm’s candidate-level results separate from the pathologists’ final counts.
+
+Later checks need independent review of unmarked tissue as well as marked areas. If the program’s suggestions become the labels used to judge a later version, earlier misses can be carried into the next comparison.
+
+**When planning the audit:** How would you find a missed mitosis that no reader had been prompted to inspect?
+
+<p className="supplement-credit">Conference context: Elizabeth Krupinski, PhD. Evaluating New Technologies (Including AI) – What Makes a Good Observer Study?. Pathology Informatics Summit 2023. Patrick Day, MPH, MLS (ASCP); Paul Jannetto, PhD. AI Label Feedback Loops in Clinical Practice: How AI Influences Labels Complicate Model Retraining. Pathology Informatics Summit 2026.</p>
+</details>
+
 ### Who does what
 
 Work with a pathologist using image-analysis tools. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.

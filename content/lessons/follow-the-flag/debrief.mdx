@@ -23,6 +23,20 @@ newborn-screening report. There, the receiving program must recognize both
 which observation is reported and what its answer means. Repairing a flag
 mapping does not show those separate observation and answer mappings.
 
+<details className="teaching-supplement">
+<summary>A closer look: carry the flag’s severity through the whole report</summary>
+
+A result can retain its number and unit while losing the severity communicated by a flag. The analyst must compare what the sending laboratory meant with what the receiving display shows. Recognizing a code is only one part of that comparison.
+
+For CH, the intended display needs to preserve critical-high meaning. Translating it to H would retain “high” while losing “critical.” Check the critical-low mapping independently, and send an unfamiliar code for review rather than assigning normal meaning.
+
+The same review should include comments, status and reference information in the complete report. Different chart views can display different parts of the received message, so open the location clinicians use to read the official laboratory report.
+
+**When documenting the repair:** What would you compare on the sending and receiving reports to show that critical severity survived?
+
+<p className="supplement-credit">Conference context: Darci R. Block, PhD, DABCC. Enhancing Laboratory Informatics: Result Naming Standards and Flagging in LIS Conversion. Pathology Informatics Summit 2026. Hung Luu, PharmD, MD. How Systemic Harmonization and Interoperability Enhancement for Laboratory Data (SHIELD) will Affect the Laboratorian. Pathology Informatics Summit 2024.</p>
+</details>
+
 ### Who does what
 
 Work with an interface analyst. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.

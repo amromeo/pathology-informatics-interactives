@@ -23,6 +23,20 @@ agreement. Next, investigate why laboratories need shared observation identifier
 at all, and verify candidate LOINC terms against a local catalog rather than
 accepting a proposed code because it exists.
 
+<details className="teaching-supplement">
+<summary>A closer look: ask what happens after the message arrives</summary>
+
+A receiving program can store a message without placing it in the worklist used for follow-up. Staff from the laboratory and public-health program need to agree on the observation being reported, the allowed answers and the action associated with each answer.
+
+Trace a corrected newborn-screening report through that agreement. The program needs to recognize which earlier observation it changes and whether follow-up must change. A retry of the same report also needs to remain distinguishable from a new observation.
+
+Shared message formats and terminology help both teams describe these requirements. The acceptance test still needs to show what the program does with the report, including an unfamiliar answer and an incomplete patient match.
+
+**At the joint review:** Which receiving worklist or follow-up record would you ask the program to show after each test message?
+
+<p className="supplement-credit">Conference context: Hung Luu, PharmD, MD. How Systemic Harmonization and Interoperability Enhancement for Laboratory Data (SHIELD) will Affect the Laboratorian. Pathology Informatics Summit 2024.</p>
+</details>
+
 ### Who does what
 
 Work with a public-health interface lead. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.

@@ -23,6 +23,18 @@ You cannot tell whether a system is more reliable just because it is local or ve
 
 This case addresses PIER objective **1.4** by asking you to identify common computer and network components and use them to explain a real laboratory reporting problem.
 
+<details className="teaching-supplement">
+<summary>A closer look: find the last place the report was available</summary>
+
+A reporting path can include several applications even when clinicians use one chart. The analyzer completes the measurement, the LIS releases the result, and another application sends the report to the EHR. Staff need a record from each step to find where delivery stopped.
+
+For the CBC, compare the accession and result identifiers as you move along that path. A queue entry for another CBC would not explain this patient’s pending report. After the connection is repaired, check the reports that waited in the queue as well as a newly released result.
+
+**Consider another call:** If the EHR team can show that this report was received, which chart display would you ask them to open next?
+
+<p className="supplement-credit">Conference context: Hung Luu, PharmD, MD. How Systemic Harmonization and Interoperability Enhancement for Laboratory Data (SHIELD) will Affect the Laboratorian. Pathology Informatics Summit 2024.</p>
+</details>
+
 ### Who does what
 
 Work with an LIS analyst and a bench technologist. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
