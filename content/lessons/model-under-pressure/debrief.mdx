@@ -57,3 +57,17 @@ To investigate a particular result, review its saved model version and scanner, 
 To check whether the proposed use is covered by the product's authorization, review the current authorization and instructions for use with the hospital's regulatory team. Local detection results answer a performance question. The authorization answers which uses and conditions are covered.
 
 Good detection of large deposits in this small test does not automatically approve a narrower use. The team would still need to define that use, test it appropriately and decide how the pathologist will check the program's output.
+
+<details className="teaching-supplement">
+<summary>A closer look: keep a reference that the model did not supply</summary>
+
+Pathologists need diagnoses made independently of the model’s marks when they check what it found and missed. If reviewers see the marks first and inspect only those areas, a small unmarked metastasis may never enter the comparison. The apparent result then depends partly on the program being tested.
+
+The first local review should include slides from each scanner and deposits of different sizes. Later reviews also need saved versions, stain settings and the dates when those settings changed. These records help the team investigate a decline without assuming that the most recent change caused it.
+
+Retraining creates another reason to preserve independent review. If staff routinely accept a program’s suggestions, those answers may become labels for its next training set. Keep a way to examine difficult cases and unmarked tissue.
+
+**Plan the next review:** How would Dr. Rao obtain reference diagnoses for the small deposits while preventing the model’s own answers from determining those diagnoses?
+
+<p className="supplement-credit">Conference context: James Harrison, MD, PhD. Verification And Monitoring of Machine Learning Models in Pathology and Laboratory Medicine. Pathology Informatics Summit 2026. Patrick Day, MPH, MLS (ASCP); Paul Jannetto, PhD. AI Label Feedback Loops in Clinical Practice: How AI Influences Labels Complicate Model Retraining. Pathology Informatics Summit 2026.</p>
+</details>

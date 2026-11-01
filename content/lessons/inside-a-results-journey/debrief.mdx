@@ -23,3 +23,15 @@ In this case, the LIS, interface engine and EHR run in the health system's own d
 Other laboratories use outside computing services for part of this work. A **cloud** service supplies computing resources from shared infrastructure that can be allocated as needed. **Software as a service (SaaS)** means the vendor operates the application as a service. A **hybrid** arrangement combines institutional and outside systems. When drawing your own laboratory's reporting path, identify where each system runs and who supports its connections.
 
 For your own laboratory, ask who checks each connection, who can repair it and how results are communicated during an interruption. PIER 1.4 uses these hardware, software and networking distinctions to help you investigate a laboratory problem.
+
+<details className="teaching-supplement">
+<summary>A closer look: find the last place the report was available</summary>
+
+A reporting path can include several applications even when clinicians use one chart. The analyzer completes the measurement, the LIS releases the result, and another application sends the report to the EHR. Staff need a record from each step to find where delivery stopped.
+
+For the CBC, compare the accession and result identifiers as you move along that path. A queue entry for another CBC would not explain this patient’s pending report. After the connection is repaired, check the reports that waited in the queue as well as a newly released result.
+
+**Consider another call:** If the EHR team can show that this report was received, which chart display would you ask them to open next?
+
+<p className="supplement-credit">Conference context: Hung Luu, PharmD, MD. How Systemic Harmonization and Interoperability Enhancement for Laboratory Data (SHIELD) will Affect the Laboratorian. Pathology Informatics Summit 2024.</p>
+</details>

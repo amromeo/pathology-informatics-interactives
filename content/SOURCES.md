@@ -279,3 +279,107 @@ No source prose or figures were copied. Existing PIER and Harrison coverage is r
 Following the author's review, replaced the vendor-hosted EHR/firewall failure with an internal interface configuration error after maintenance. The outgoing destination uses port 5100; the EHR's receiving service listens on the agreed port 5000. The lesson now compares those settings, corrects the sender and checks delivery. Analyzer/LIS results, timestamps, queue count and restoration outcomes remain unchanged. New connection settings and records are original case content.
 
 [RFC 791](https://www.rfc-editor.org/rfc/rfc791.html) supports the beginner explanation of addressing and packet forwarding. [RFC 1918](https://www.rfc-editor.org/rfc/rfc1918.html) supports private network addressing and TCP/IP use within an organization. [RFC 9293, section 2.2](https://www.rfc-editor.org/rfc/rfc9293.html#section-2.2) supports the explanations of ports, ordered delivery and retransmission. The case's port numbers are local configuration choices. The changes also replace repeated negative contrasts with direct descriptions of each system's work.
+
+## Conference context for the debrief supplements
+
+The optional “A closer look” sections contain original explanations and questions for these cases. They draw on the conference presentations listed below. No slide images, source PDFs, media embeds or presentation download addresses are included in these additions. Detailed page mappings remain in the separately held teaching handoff. The existing introductory-course attribution and primary references continue to support the lessons.
+
+### Lesson 01 Who Does What in Laboratory Informatics?
+
+- Samuel Barasch, MD. So you have a job in Clinical Informatics - What now? Working with hospital and Lab Information Technology. Pathology Informatics Summit 2026.
+
+### Lesson 02 The Missing CBC
+
+- Hung Luu, PharmD, MD. How Systemic Harmonization and Interoperability Enhancement for Laboratory Data (SHIELD) will Affect the Laboratorian. Pathology Informatics Summit 2024.
+
+### Lesson 03 Can We Trust This Report?
+
+- Patrick Mathias, MD, PhD. Laboratory Data Leadership: Best Practices. Pathology Informatics Summit 2025.
+- Srikar Chamala, MD & Amrom Obstfeld, MD, PhD. Data Visualization & Analytics in Pathology: Traditional and Emerging AI Approaches (Hands on). Pathology Informatics Summit 2025.
+
+### Lesson 04 Can We Accept This Lot?
+
+- Yonah Ziemba, MD. Common Pitfalls in Data Analysis that Lead to False Discovery in Pathology Research. Pathology Informatics Summit 2025.
+
+### Lesson 05 Five Vs in the Slide Archive
+
+- Lisa-Jean Clifford. Data Use in Digital Pathology. Pathology Informatics Summit 2023.
+
+### Lesson 06 Model Under Pressure
+
+- James Harrison, MD, PhD. Verification And Monitoring of Machine Learning Models in Pathology and Laboratory Medicine. Pathology Informatics Summit 2026.
+- Patrick Day, MPH, MLS (ASCP); Paul Jannetto, PhD. AI Label Feedback Loops in Clinical Practice: How AI Influences Labels Complicate Model Retraining. Pathology Informatics Summit 2026.
+
+### Lesson 07 The Server Behind the Analyzer
+
+- David McClintock, MD. Cybersecurity Preparedness. Pathology Informatics Summit 2024.
+
+### Lesson 08 Twelve Hours Offline
+
+- David McClintock, MD. Cybersecurity Preparedness. Pathology Informatics Summit 2024.
+
+### Lesson 09 Not Anonymous Enough
+
+- Amrom Obstfeld, MD, PhD. Ethics in Research Data Use. Pathology Informatics Summit 2023.
+- Peter Gershkovich, MD, MHA. Orchestrating WSI De-identification: Balancing Privacy, Scalability, Cost, and Innovation. Pathology Informatics Summit 2025.
+
+### Lesson 10 Where Is the Specimen?
+
+- Alexis Carter, MD. 2D Specimen Label Bar Codes for Anatomic and Clinical Pathology Come of Age: The 10+ Year Journey of CLSI’s AUTO14 Label Standard. Pathology Informatics Summit 2023.
+
+### Lesson 12 Updating a Thyroid Reflex Rule
+
+- Darci R. Block, PhD, DABCC. Enhancing Laboratory Informatics: Result Naming Standards and Flagging in LIS Conversion. Pathology Informatics Summit 2026.
+
+### Lesson 13 Tracing a Missing Critical Flag
+
+- Darci R. Block, PhD, DABCC. Enhancing Laboratory Informatics: Result Naming Standards and Flagging in LIS Conversion. Pathology Informatics Summit 2026.
+- Hung Luu, PharmD, MD. How Systemic Harmonization and Interoperability Enhancement for Laboratory Data (SHIELD) will Affect the Laboratorian. Pathology Informatics Summit 2024.
+
+### Lesson 14 Sending a Newborn Screening Report
+
+- Hung Luu, PharmD, MD. How Systemic Harmonization and Interoperability Enhancement for Laboratory Data (SHIELD) will Affect the Laboratorian. Pathology Informatics Summit 2024.
+
+### Lesson 15 Why Laboratory Results Need LOINC
+
+- Darci R. Block, PhD, DABCC. Enhancing Laboratory Informatics: Result Naming Standards and Flagging in LIS Conversion. Pathology Informatics Summit 2026.
+- Hung Luu, PharmD, MD. How Systemic Harmonization and Interoperability Enhancement for Laboratory Data (SHIELD) will Affect the Laboratorian. Pathology Informatics Summit 2024.
+
+### Lesson 16 Investigating Delayed Result Release
+
+- Khalda Ibrahim, MD. Laboratory Stewardship: Essential Dependency on Informatics. Pathology Informatics Summit 2024.
+- Patrick Mathias, MD, PhD. Laboratory Data Leadership: Best Practices. Pathology Informatics Summit 2025.
+
+### Lesson 17 Designing Repeat-Test Guidance
+
+- Ronald Jackups, MD, PhD. Clinical Decision Support for Stewardship of Daily Orders: Why Do Some Strategies Work and Others Fail?. Pathology Informatics Summit 2026.
+
+### Lesson 18 Evaluating a Repeat-Test Alert
+
+- Grace Mahowald, MD. Impact of Clinical Decision Support Tools in the Clinical Laboratory. Pathology Informatics Summit 2023.
+- Ronald Jackups, MD, PhD. Clinical Decision Support for Stewardship of Daily Orders: Why Do Some Strategies Work and Others Fail?. Pathology Informatics Summit 2026.
+
+### Lesson 19 Choosing Image Settings for a Pathology Service
+
+- George Yousef, MD, PhD. Selecting High Throughput Scanners for Clinical Usage: A Multi-Center Institution Experience. Pathology Informatics Summit 2025.
+- Ryan Landvater, MD. Digital Pathology Architectures in the Age of Cloud Computing. Pathology Informatics Summit 2026.
+
+### Lesson 20 Reviewing a Whole-Slide Imaging Validation
+
+- Omar Baba, MD. Total Quality Management in Digital Pathology: From Tissues to Pixels. Pathology Informatics Summit 2026.
+- Elizabeth Krupinski, PhD. Evaluating New Technologies (Including AI) – What Makes a Good Observer Study?. Pathology Informatics Summit 2023.
+
+### Lesson 21 Reviewing a Mitosis Detection Tool
+
+- Elizabeth Krupinski, PhD. Evaluating New Technologies (Including AI) – What Makes a Good Observer Study?. Pathology Informatics Summit 2023.
+- Patrick Day, MPH, MLS (ASCP); Paul Jannetto, PhD. AI Label Feedback Loops in Clinical Practice: How AI Influences Labels Complicate Model Retraining. Pathology Informatics Summit 2026.
+
+### Lesson 22 Building and Validating a Laboratory Test
+
+- Darci R. Block, PhD, DABCC. Enhancing Laboratory Informatics: Result Naming Standards and Flagging in LIS Conversion. Pathology Informatics Summit 2026.
+- Hung Luu, PharmD, MD. How Systemic Harmonization and Interoperability Enhancement for Laboratory Data (SHIELD) will Affect the Laboratorian. Pathology Informatics Summit 2024.
+
+### Lesson 23 Selecting and Maintaining a Laboratory Information System
+
+- Dennis Winsten, MS, FHIMSS, FCLMA. Laboratory Information Systems: Are They Commodities? -What's Important in Selection Now?. Pathology Informatics Summit 2026.
+- Michelle Stoffel, MD, PhD. End-of-Life Planning for the LIS: Data Archiving. Pathology Informatics Summit 2023.

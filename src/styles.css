@@ -4899,6 +4899,31 @@ h3 {
   margin: 0;
   text-align: right;
 }
+.teaching-supplement {
+  margin-block: 1.75rem;
+  padding-block: 1rem;
+  border-block: 1px solid var(--line, #d6dfdc);
+}
+.teaching-supplement > summary {
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.teaching-supplement > summary:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 5px;
+}
+.teaching-supplement[open] > summary {
+  margin-bottom: 1rem;
+}
+.teaching-supplement .supplement-credit {
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
 .topic8-preview summary {
   cursor: pointer;
   font-weight: 700;
