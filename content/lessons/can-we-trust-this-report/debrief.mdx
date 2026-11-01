@@ -1,17 +1,24 @@
-## Debrief: reconcile a report denominator with the source records
+## Debrief: What should the director take to the quality meeting?
 
-### What happened in this case
+The [original summary table](#tat-original-summary) compared 210 pre-go-live cases with 245 cases accessioned after go-live. Its mean rose from 3.3 to 3.8 working days, while its median fell from 2.7 to 2.5. Either number alone would give an incomplete account.
 
+The weekly review located the largest delay in cutover week. Its 35 cases had a mean of 8.4 and a median of 9.5 working days. In the six following weeks, 210 cases had a mean of 3.0 and a median of 2.5. Those later values were slightly lower than the overall pre-go-live values. The baseline itself varied, so this comparison does not establish that the new LIS caused an improvement.
 
-The original report compared 210 pre-go-live cases with 245 post-go-live cases. The pre-go-live mean was 3.3 working days and the median was 2.7. After go-live, the mean increased to 3.8 while the median decreased to 2.5. Those two statistics seemed to point in opposite directions because the post-go-live TAT values were skewed by a smaller group of very long cases.
+Show all three periods: pre-go-live, cutover week and the six weeks after cutover. Keep all 455 cases. The unusual week matters to the laboratory and to the patients who experienced the delays. Separating that week makes the event visible; deleting the long cases would conceal it.
 
-The weekly review showed that the long cases were concentrated during cutover. The 35 cutover cases had a mean TAT of 8.4 working days and a median of 9.5. During the six weeks after cutover, the 210 cases had a mean of 3.0 and a median of 2.5. Showing cutover week separately explains both findings: the laboratory experienced a severe temporary delay during cutover, followed by a modest improvement in routine TAT.
+## What happened to the missing accession times?
 
-The cutover cases should not disappear from the report. The revised report keeps all 455 cases and shows three periods: pre-go-live, cutover week, and post-go-live after cutover. The weekly graph also makes the temporary spike visible.
+Twenty-seven structured LIS fields were blank. The original accession times still existed on requisitions and in the paper cutover log. The coordinator used those sources to calculate TAT. The accessioning supervisor confirmed that paper accessioning occurred at receipt, so the received stamp and paper log described the intended start event.
 
-The investigation identified a second issue. Twenty-seven cutover accession times were documented on requisitions and in the paper cutover log but were not entered into the structured LIS field. The quality coordinator used those source documents to calculate TAT, so the delayed cases remained in the report. The report should disclose that source and confirm that it represents the same accession event used for the other cases. Accessioning and the LIS team should also make sure the structured field is completed in future workflows.
+In the [case-list table](#tat-case-table), these cases retain both the blank LIS field and the recovered time. That distinction lets another reviewer reproduce the calculation and see what remains incomplete in the LIS. Using the later data-entry time would shorten the measured delay.
 
-The quality coordinator can prepare the report, the LIS analyst can explain the fields and reporting process, and the resident can review the cases and calculations. The director of surgical pathology is responsible for deciding whether the report is clinically sound and ready for use.
+The first eight cutover cases had structured times; the other 27 needed the source-document review. All 35 belonged in the report. For future reports, accessioning staff and the LIS analyst should check that original accession times are captured in the required field.
+
+## What should be checked before the next report?
+
+The coordinator prepares the spreadsheet. The analyst explains which records and fields the export selects. The resident compares the spreadsheet with the accession records and works through a calculation. The surgical pathology director reviews the definitions, unusual periods and conclusions before the report is used.
+
+The central questions are practical: which cases are included, where did each time come from, and what does the chosen comparison show? The seven data-quality checks help organize that review. This is the data-literacy work described by PIER 2.1 and 1.2.
 
 <details className="teaching-supplement">
 <summary>A closer look: ask how each timestamp reached the spreadsheet</summary>
@@ -26,11 +33,3 @@ A weekly plot helps the director see when delays occurred. A summary for the ent
 
 <p className="supplement-credit">Conference context: Patrick Mathias, MD, PhD. Laboratory Data Leadership: Best Practices. Pathology Informatics Summit 2025. Srikar Chamala, MD &amp; Amrom Obstfeld, MD, PhD. Data Visualization &amp; Analytics in Pathology: Traditional and Emerging AI Approaches (Hands on). Pathology Informatics Summit 2025.</p>
 </details>
-
-### Who does what
-
-Work with a quality lead and report analyst. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
-
-### Connection to PIER 2.1, 1.2
-
-The case asks you to reconcile a report denominator with the source records using laboratory records and explain the consequence of your choice.

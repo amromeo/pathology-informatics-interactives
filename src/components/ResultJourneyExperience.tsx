@@ -56,7 +56,7 @@ export function ResultJourneyExperience({
   const classifiedCount = componentClasses.filter(
     (item) => classifications[item.id] === item.answer,
   ).length;
-  const validationPassed = repair === "restore-firewall";
+  const validationPassed = repair === "correct-port";
 
   const placeNode = (id: string) => {
     const expected = expectedPath[path.length];
@@ -194,6 +194,11 @@ export function ResultJourneyExperience({
             <h2 id="pathway-title">Build the path to the EHR</h2>
           </div>
         </div>
+        {Concepts && (
+          <div className="mdx-content embedded-mdx">
+            <Concepts />
+          </div>
+        )}
         <p className="section-guidance">
           Starting with the analyzer, select each component in the order the result passes through
           it.
@@ -259,11 +264,6 @@ export function ResultJourneyExperience({
 
         {mapComplete && (
           <div className="journey-concepts">
-            {Concepts && (
-              <div className="mdx-content embedded-mdx">
-                <Concepts />
-              </div>
-            )}
             <h3>Classify the components</h3>
             <p>{lessonCopy.text01}</p>
             <div className="classification-list">
@@ -375,13 +375,21 @@ export function ResultJourneyExperience({
           onChange={(value) => setEvidenceAnswers({ ...evidenceAnswers, [activeEvidence]: value })}
         />
         <Feedback
+          heading={
+            evidenceAnswers[activeEvidence] === evidenceQuestions[activeEvidence].answer
+              ? "Correct"
+              : "Try again"
+          }
           tone={
             evidenceAnswers[activeEvidence] === evidenceQuestions[activeEvidence].answer
               ? "correct"
               : "incorrect"
           }
         >
-          {evidenceAnswers[activeEvidence] && evidenceQuestions[activeEvidence].feedback}
+          {evidenceAnswers[activeEvidence] &&
+            (evidenceAnswers[activeEvidence] === evidenceQuestions[activeEvidence].answer
+              ? evidenceQuestions[activeEvidence].feedback
+              : evidenceQuestions[activeEvidence].incorrectFeedback)}
         </Feedback>
       </section>
 
@@ -485,8 +493,8 @@ export function ResultJourneyExperience({
             <div className={`feedback ${selectedRepair.correct ? "correct" : "incorrect"}`}>
               <strong>
                 {selectedRepair.correct
-                  ? "This addresses the demonstrated failure."
-                  : "This does not restore the reporting path."}
+                  ? "This corrects the connection settings."
+                  : "The reporting problem still needs repair."}
               </strong>
               <p>{selectedRepair.feedback}</p>
             </div>
@@ -570,8 +578,8 @@ export function ResultJourneyExperience({
               </strong>
               <p>
                 {validationPassed
-                  ? "hospital IT confirms the firewall correction. The LIS team confirms that the queue cleared and new results are moving. The laboratory confirms that reports reached the correct patient charts and completes downtime reconciliation."
-                  : "The selected action did not remove the firewall block. The queued and new reports still cannot reach the EHR."}
+                  ? "The interface team confirms that the destination matches the EHR's receiving address and port. The LIS team confirms that the queue cleared and new results are moving. The laboratory confirms that reports reached the correct patient charts and completes downtime reconciliation."
+                  : "The sender still uses port 5100 while the EHR receives on 5000. Waiting and new reports remain in the queue. Correct the destination port, then check delivery."}
               </p>
             </div>
           )}

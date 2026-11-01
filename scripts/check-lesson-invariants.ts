@@ -39,6 +39,7 @@ const prose = new Set([
   "lessonCopy",
   "reconciliationActionNotes",
   "failNotes",
+  "failNote",
 ]);
 const fixed =
   /^(id|answer|correct|owner|expected|expectedMrn|correctActionId|kind|review|fromLesson|preferred|value|result|tempId|paperAccession|patientName|birthDate|unit|test|collectionTime|backEntryTime|restoredOrder|mrn|duplicateOf|calledAt|recipient|readBack|relatedIds|passingRepairs)$/;
@@ -73,6 +74,18 @@ function compare(old: unknown, now: unknown, path: string, copy = false) {
         old.match(/\d+(?:[.,:]\d+)*/g),
         path + " numbers",
       );
+  } else if (
+    typeof old === "string" &&
+    typeof now === "string" &&
+    /\.(reportCsvUrl|lotComparisonCsvUrl)$/.test(path)
+  ) {
+    // import.meta.url resolves under the temporary baseline folder when imported
+    // above. Compare the lesson/file target, not the checkout's absolute folder.
+    assert.equal(
+      new URL(now).pathname.split("/").slice(-2).join("/"),
+      new URL(old).pathname.split("/").slice(-2).join("/"),
+      path,
+    );
   } else assert.deepEqual(now, old, path);
 }
 function numbers(source: string) {

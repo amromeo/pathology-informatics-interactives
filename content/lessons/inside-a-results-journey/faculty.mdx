@@ -1,90 +1,51 @@
 # Faculty guide: The Missing CBC
 
-## At a glance
-
-Allow 22 minutes. Use individually or in a small group. Project the case records and the exercise controls; keep the answer key out of view until learners commit to a decision.
-
-Learning objectives: separate a verified result from successful report delivery; trace the same result through the lis, message queue and chart; justify the first local check. PIER: 1.4.
+Allow 22 minutes. The learner should finish able to distinguish a released LIS report from successful chart delivery and use system records to locate a failed connection. This addresses PIER 1.4.
 
 ## Run of show
 
-| Minutes | Activity | Ask the group |
-| --- | --- | --- |
-| 0–4 | Read the case and records | What decision has the laboratory been asked to make? |
-| 4–15 | Make, test and revise a choice | Which record supports your decision? What could fail? |
-| 15–22 | Debrief and retrieval questions | How would you verify this in your own laboratory? |
+Spend 4 minutes on the ED call and LIS check, 8 minutes on the map and component explanation, 6 minutes following the system records and 4 minutes discussing restoration.
 
-## Expected answers
+## Lead the discussion through the records
 
+Begin with the ED screen. Ask what Pending tells the clinician and what remains unknown. The first useful laboratory check is the LIS: it contains a final CBC verified at 09:42. The technologist can communicate the hemoglobin under the downtime procedure while the analyst investigates.
 
-## Learning objective
+Give learners time to read the system explanation before building the map. The order is analyzer, LIS, interface engine, hospital network, EHR. These systems communicate within the health system's data center. The map highlights the final connection; the earlier transfers also use the network.
 
-By the end of the lesson, the learner should be able to identify the hardware, software, network connections, and interfaces involved in electronic result reporting.
+For component classification, the server and switch are hardware, the operating system is system software, and the LIS and interface engine are applications. TCP/IP supplies communication rules. Have learners read `10.20.30.40:5000` aloud as a destination address followed by a port. Ask which setting identifies the computer and which directs the connection to its laboratory receiving service.
 
-## Case mechanism
+Use the client/server explanation to describe this exchange: the interface engine opens the connection, and the EHR service waits to accept it. Explain how TCP tracks data delivery and restores the order of received data before the application processes the message. Then follow the message acknowledgment and complete report into the chart.
 
-- The ED sees the CBC as pending and does not know whether testing is complete.
-- The hematology lab checks the LIS and finds a final result verified at 09:42.
-- The result reached the interface engine, where it joined a growing outbound queue.
-- The interface server and application are running.
-- A hospital firewall change blocks the connection from the interface server to the vendor-hosted EHR.
-- hospital IT corrects the firewall setting. The LIS team checks the queue and confirms that reporting resumes.
-- The laboratory confirms that delayed and new reports reached the correct patient charts and reconciles results communicated during downtime.
+Ask learners to explain each record before moving to the next tab:
 
-## Discussion points
+- **Analyzer:** testing finished at 09:40 and the LIS accepted the result. The next record to inspect is the LIS report.
+- **LIS:** verification at 09:42 establishes laboratory release. Staff can communicate that verified result to the clinician while the analyst checks the next transfer.
+- **Interface:** 18% processor use and 46% memory use argue against overload at the recorded time. The queue contains 214 results. The log shows outgoing settings reloaded after maintenance at 09:35, followed by a refused connection to `10.20.30.40:5100`.
+- **EHR receiving service:** the EHR's laboratory service runs at `10.20.30.40` and listens on port 5000. Compare both settings with the sender. The addresses match; the port numbers differ.
 
-Ask learners what finding clears each earlier part of the path. A final result in the LIS clears neither the interface nor the EHR. A running interface application also does not prove that it can connect to the receiving system.
+## Explain the repair and checks
 
-The lesson distinguishes the analyzer's analytical work from the postanalytic result-reporting pathway. The network is essential to delivering the report, but it is not part of the analyzer's analytical process.
+The interface analyst corrects the sender's destination port to 5000, as confirmed with the EHR analyst. The teams test the connection and check delivery. Restarting the application with its unchanged settings would reload port 5100; repeating the CBC would produce another result waiting on the same connection.
 
-Do not imply that every institution organizes support in the same way. The LIS team may be part of hospital IT or may be housed in the pathology department. The roles shown here describe the work that must occur, not a mandatory reporting structure.
+Run the checks after selecting manual entry as well as after selecting the port correction. Manual entry passes the original-CBC check only. Ask why that is insufficient for the other queued reports, new CBC, other laboratory section and downtime record. The restoration exercise shows the expected consequences of the selected action.
 
-The technical terms are drawn from the API Pathology Informatics Introductory Course sessions on computer hardware, software, networking, and laboratory information systems. The case and artifacts are original.
+The acknowledgment reports how the receiving application handled the message. The laboratory then confirms the complete report in the correct chart, including its results, units, flags and comments. Ask learners which local teams would perform these checks at their institution.
 
-## Suggested facilitation
+## Questions to carry into practice
 
-1. Before opening the LIS record, ask what the ED actually knows.
-2. During the map, ask learners to name the comparable systems at their institution.
-3. In the evidence section, ask what each finding rules out before opening the next check.
-4. After repair, ask why checking only the original CBC would be inadequate.
-5. Use the hosting discussion to compare local support arrangements without claiming that one model is inherently safer or more reliable.
+Ask the learner to name the next record to inspect when a result is final in the LIS but pending in the EHR. A strong answer follows that same result through the interface and receiving system, rather than relying on server uptime.
 
-The debrief may be opened without completing every interaction. This lesson is formative practice, not a scored assessment.
+Ask who would review a corrected result display. The analyst makes and tests the change; the laboratory director or designated laboratory approver accepts the complete report for clinical use.
 
-## Preparing discussion with API slides
+Use the practicum to obtain a local result-path diagram, the record available at each handoff and the method for accounting for downtime communications. The debrief remains available before all exercises are complete.
 
-Use [Association for Pathology Informatics teaching slides: Computer Hardware, Software, Networking, and Data Files (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%201%20Basics%20slides.pptx) by James H. Harrison, Jr., slides 5, 11, 14–15, to prepare the discussion after residents have explained their case decision. Ask: Separate the computer, network connection, operating system, and application. Which observation in the missing-result case would help you locate a failure among these layers? Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
+## Teaching sources
 
-These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
+[API teaching slides](https://www.pathologyinformatics.org/teaching-slide-sets), Harrison Session 1, slides 5, 11 and 14–15, help distinguish hardware, operating systems, applications and networking. Session 3 supplies the connected laboratory-systems context. Use them after discussing what the records show.
 
+[RFC 791](https://www.rfc-editor.org/rfc/rfc791.html) describes IP addressing and packet forwarding. [RFC 1918](https://www.rfc-editor.org/rfc/rfc1918.html) explains private network addresses, including the 10.x.x.x range used here. These are optional technical references for faculty; the learner's explanation is contained in the lesson.
 
+[RFC 9293](https://www.rfc-editor.org/rfc/rfc9293.html), section 2.2, describes TCP's ordered transport service and use of port numbers. The port settings, retry behavior and support responsibilities in this case describe this hospital's arrangement. The revised case investigates an internal interface configuration error. Connections to outside organizations, such as a reference laboratory, have their own network arrangements to inspect.
 ## Common misconceptions
 
-- “Restart the interface before calling.” Ask: what does the record actually establish? Use the approved downtime communication process, obtain read-back when required, and document the call while the delivery failure is investigated.
-- “Wait for the next scheduled report.” Ask: which conclusion would still need evidence? Use the approved downtime communication process, obtain read-back when required, and document the call while the delivery failure is investigated.
-- “Use server uptime as proof of delivery.” Ask: what must be checked before making the change? A successful acknowledgment establishes receipt at one handoff; it does not prove the clinician can view the complete report.
-
-## Discussion prompts
-
-1. What supports the case decision? A strong answer includes a specific record and the distinction: separate a verified result from successful report delivery.
-2. What would you check locally? A strong answer includes: trace the same result through the lis, message queue and chart, because a successful acknowledgment establishes receipt at one handoff; it does not prove the clinician can view the complete report.
-3. Who needs to participate? A strong answer includes an LIS analyst and a bench technologist and separates technical work from clinical approval.
-
-## Group variant
-
-Assign laboratory director, LIS analyst, laboratory operations and clinical service roles. Add clinical informatics and a patient advocate when considering ordering or chart use. Ask each person to state one requirement, one risk and the evidence needed before approval. The director then summarizes what can proceed and what must be resolved.
-
-## Assess transfer
-
-Draw a result path with five timestamps and identify how urgent results are communicated during an interruption. A strong response names the record, responsible person, first check and an unresolved risk. Use the three learner retrieval questions to distinguish an unsupported shortcut from a reasoned decision.
-
-## PIER coverage
-
-- 1.4: Build the reporting path and identify the connection that prevents the ED receiving a final result.
-
-
-## Additional source discussion
-
-### Further study with API teaching slides
-
-In [Association for Pathology Informatics teaching slides: Computer Hardware, Software, Networking, and Data Files (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%201%20Basics%20slides.pptx), review slides 5, 11, 14–15. Separate the computer, network connection, operating system, and application. Which observation in the missing-result case would help you locate a failure among these layers?
+A running server can still send to the wrong port. A receiving service can accept a message that later needs chart-display review. Entering one CBC manually leaves the other reports waiting. Ask which record would address each of these different questions.

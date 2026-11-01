@@ -101,10 +101,12 @@ export function ChoiceGroup({
 }
 export function ScrollRegion({
   id,
+  className,
   label,
   children,
 }: {
   id?: string;
+  className?: string;
   label: string;
   children: ReactNode;
 }) {
@@ -140,7 +142,7 @@ export function ScrollRegion({
     <div
       ref={regionRef}
       id={id}
-      className="table-scroll"
+      className={["table-scroll", className].filter(Boolean).join(" ")}
       role="region"
       aria-label={label}
       tabIndex={0}
@@ -246,6 +248,7 @@ export function DataTable({
   children,
 }: {
   id?: string;
+  className?: string;
   label: string;
   caption: ReactNode;
   children: ReactNode;

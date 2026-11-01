@@ -1,3 +1,4 @@
+import { ScrollRegion } from "./lesson-ui";
 import { lessonCopy } from "../../content/lessons/can-we-accept-this-lot/interaction";
 import { orderedChoices } from "./lesson-ui";
 import { ResetLessonButton } from "./ResetLessonButton";
@@ -8,6 +9,8 @@ import {
   decisionResults,
   decisionSummary,
   descriptiveChecks,
+  statisticChoiceFeedback,
+  testChoiceFeedback,
   descriptiveTerms,
   elevatedRangePasses,
   elevatedResults,
@@ -82,11 +85,10 @@ function LotWorksheet() {
           </select>
         </label>
       </div>
-      <div
+      <ScrollRegion
         className="report-table-wrap lot-table-wrap"
-        tabIndex={0}
-        role="region"
-        aria-label="Scrollable records 1"
+        id="lot-results-table"
+        label="Paired current- and new-lot troponin results"
       >
         <table>
           <caption>Paired current- and new-lot troponin results</caption>
@@ -129,7 +131,7 @@ function LotWorksheet() {
             ))}
           </tbody>
         </table>
-      </div>
+      </ScrollRegion>
       <p className="table-count" role="status">
         Showing {rows.length} of 30 specimens.
       </p>
@@ -148,7 +150,10 @@ function DifferenceDotPlot({ showSummaries = false }: { showSummaries?: boolean 
   const rows = [70, 98, 126, 154];
 
   return (
-    <figure className="difference-figure" aria-labelledby="difference-chart-caption">
+    <figure
+      className="difference-figure"
+      aria-labelledby={showSummaries ? "difference-summary-caption" : "difference-chart-caption"}
+    >
       <div className="chart-legend">
         <span className="dot-key">Individual specimen</span>
         {showSummaries && (
@@ -162,12 +167,20 @@ function DifferenceDotPlot({ showSummaries = false }: { showSummaries?: boolean 
         <svg
           viewBox={`0 0 ${width} ${height}`}
           role="img"
-          aria-labelledby="difference-chart-title difference-chart-description"
+          aria-labelledby={
+            showSummaries
+              ? "difference-summary-title difference-summary-description"
+              : "difference-chart-title difference-chart-description"
+          }
         >
-          <title id="difference-chart-title">
+          <title id={showSummaries ? "difference-summary-title" : "difference-chart-title"}>
             Paired differences near the clinical decision concentration
           </title>
-          <desc id="difference-chart-description">{lessonCopy.text01}</desc>
+          <desc
+            id={showSummaries ? "difference-summary-description" : "difference-chart-description"}
+          >
+            {lessonCopy.text01}
+          </desc>
           {[-1, 0, 1, 2, 3, 4].map((tick) => (
             <g key={tick}>
               <line
@@ -228,7 +241,9 @@ function DifferenceDotPlot({ showSummaries = false }: { showSummaries?: boolean 
           </text>
         </svg>
       </div>
-      <figcaption id="difference-chart-caption">{lessonCopy.text02}</figcaption>
+      <figcaption id={showSummaries ? "difference-summary-caption" : "difference-chart-caption"}>
+        {lessonCopy.text02}
+      </figcaption>
       <details className="chart-data-table">
         <summary>View the plotted differences in a table</summary>
         <div
@@ -520,11 +535,8 @@ export function StatisticsExperience({
                         correct ? "answer-note correct-note" : "answer-note incorrect-note"
                       }
                     >
-                      <strong>
-                        {correct
-                          ? "This statistic answers the question."
-                          : "This statistic answers a different question."}
-                      </strong>{" "}
+                      <strong>{correct ? "Correct." : "Try again."}</strong>{" "}
+                      {!correct && (statisticChoiceFeedback[answer] ?? testChoiceFeedback[answer])}{" "}
                       {item.explanation}
                     </p>
                   )}
@@ -733,11 +745,8 @@ export function StatisticsExperience({
                         correct ? "answer-note correct-note" : "answer-note incorrect-note"
                       }
                     >
-                      <strong>
-                        {correct
-                          ? "This test fits the design."
-                          : "This test does not match the observations."}
-                      </strong>{" "}
+                      <strong>{correct ? "Correct." : "Try again."}</strong>{" "}
+                      {!correct && (statisticChoiceFeedback[answer] ?? testChoiceFeedback[answer])}{" "}
                       {item.explanation}
                     </p>
                   )}

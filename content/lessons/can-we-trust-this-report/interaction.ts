@@ -189,7 +189,7 @@ export const dataPathInstruction =
 export const dataPathChoices = [
   {
     id: "missing-both",
-    label: "The accession time is missing from both the requisition and the LIS",
+    label: "It could not be calculated because neither source contained an accession time",
     correct: false,
     feedback:
       "The requisition contains the accession time 08:56. The time is missing only from the structured LIS field.",
@@ -332,7 +332,8 @@ export const validationCases = [
   },
   {
     passingRepairs: ["defined-cutover", "creation-time"] as string[],
-    failNote: "The proposed report omits recovered accession-time provenance.",
+    failNote:
+      "The proposed report does not explain which accession times came from the paper records.",
     label: "Accession-time source",
     result:
       "The report identifies the 27 cutover times recovered from requisitions and the paper cutover log.",
@@ -345,7 +346,7 @@ export const validationCases = [
   },
   {
     passingRepairs: ["defined-cutover"] as string[],
-    failNote: "The report needs both center and spread for each period.",
+    failNote: "The report needs the mean and median for each period, with the case counts.",
     label: "Summary statistics",
     result: "Mean, median, and biopsy/resection counts remain available for each period.",
   },
@@ -374,7 +375,7 @@ export const lessonCopy = {
   text01:
     "The 35 cutover cases are shown in their own group rather than mixed with the later post-go-live cases",
   text02:
-    "Mean and median turnaround time are stable before go-live, rise sharply during cutover week, and then return slightly below the pre-go-live values.",
+    "Mean and median turnaround time vary before go-live, rise sharply during cutover week and are generally lower afterward. The last two baseline weeks are higher than the first four.",
   text03:
     "Each point summarizes the cases accessioned during one week. The solid line shows the mean; the dashed line shows the median. Cutover week is shaded.",
   text04:
@@ -395,4 +396,17 @@ export const lessonCopy = {
     "It shows a severe, temporary delay during cutover and a modest improvement afterward. All 455 cases remain visible, and the report states that 27 cutover accession times were recovered from requisitions and the paper cutover log.",
   text12:
     "The weekly view shows why one pre/post summary was misleading. Follow both lines across the six pre-go-live weeks, cutover week, and the six weeks after cutover.",
+};
+
+export const qualityChoiceFeedback: Record<string, string> = {
+  accuracy: "Accuracy asks whether a recorded value agrees with what happened.",
+  completeness: "Completeness asks whether the required information is present.",
+  validity: "Validity asks whether a value follows the allowed format and rules.",
+  consistency:
+    "Consistency asks whether definitions and handling agree across the records being compared.",
+  uniqueness: "Uniqueness asks whether the same accession has been counted more than once.",
+  timeliness:
+    "Timeliness asks whether the data are current and available for the intended report date.",
+  fitness:
+    "Fitness for purpose asks whether the analysis can answer the intended laboratory question.",
 };

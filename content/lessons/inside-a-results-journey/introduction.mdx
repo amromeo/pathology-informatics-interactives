@@ -1,29 +1,39 @@
 # The Missing CBC
 
-> **Case:** The emergency department is treating a patient with a suspected gastrointestinal bleed. The complete blood count (CBC) is still listed as pending in the electronic health record (EHR), and the team is waiting for the hemoglobin result.
+The emergency department (ED) calls the hematology lab about a patient with a suspected gastrointestinal bleed. The complete blood count (CBC) still says **Pending** in the electronic health record (EHR). The clinician is waiting for the hemoglobin result.
 
-The emergency department (ED) calls the hematology lab. The clinical team cannot tell whether the specimen has been received in the laboratory, whether there is a problem with the specimen, or whether testing is complete. All they know is that the CBC is **Pending**.
+You are the pathology resident working with the hematology technologist and the laboratory information system (LIS) analyst. The ED cannot see the laboratory's worklist. Its pending status alone cannot tell you whether testing is unfinished or a completed report failed to reach the chart.
+
+The LIS is the application staff use to manage laboratory orders, specimens and results. A result released there must still travel to the EHR before the clinician can read it. In this hospital, an **interface engine** receives the LIS message and sends it to the EHR. All three systems run in the health system's data center and exchange messages over its internal network.
+
+The interface team completed scheduled maintenance earlier this morning. You will review the systems' records to find where delivery stopped and whether a setting changed during that work.
 
 ## Terms used in this case
 
-- **Analyzer** — the instrument that performs the CBC.
-- **laboratory information system (LIS)** — the laboratory information system used to manage orders, specimens, and results.
-- **Interface engine** — software that sends laboratory results between systems.
-- **Firewall** — a network control that allows or blocks connections between systems.
-- **EHR** — the electronic health record used by the clinical team.
-- **Vendor-hosted** — the application runs in an environment operated by the vendor rather than on a server operated by the health system.
+### Systems and messages
+
+- **LIS and EHR:** the laboratory information system manages laboratory orders, specimens and results. The electronic health record brings information from different services together in the patient's chart.
+- **Interface engine:** software that receives messages from one system, prepares them for another system and sends them onward. Here, it carries reports from the LIS to the EHR.
+- **Queue:** a list of messages waiting to be sent or accepted. A growing result queue can help the analyst locate a reporting delay.
+- **Health Level Seven (HL7):** standards for exchanging health information. An HL7 laboratory message uses agreed fields for information such as the patient identifier, test, result and units.
+- **Acknowledgment (ACK):** a reply from the receiving application reporting acceptance or an error. The analyst checks that reply when tracing a message.
+
+### Computers and connections
+
+- **Hardware:** physical equipment, including a computer's processor, memory, storage and network adapter.
+- **Operating system:** software that manages the computer's resources and provides the services applications need to run.
+- **Application:** software that performs a particular job. The LIS and interface engine are applications.
+- **Internet Protocol (IP) address:** an address used to reach a computer on the network. In this case, `10.20.30.40` identifies the destination for messages sent to the EHR.
+- **Port:** a number that directs a connection to a receiving service on that computer. In `10.20.30.40:5000`, the number after the colon is the port.
+- **TCP/IP:** a family of network communication protocols. Internet Protocol supplies addressing and packet delivery; Transmission Control Protocol (TCP) keeps track of transmitted data, resends missing data and delivers it in order.
+- **Client and server:** the client opens a connection, and the server service waits to accept it. Here, the interface engine is the client and the EHR's receiving service is the server. The computer hosting a service is also commonly called a server.
 
 ## Your task
 
-Identify the hardware, software, network connections, and interfaces involved in electronic result reporting. Then use the records from each system to find where the report stopped.
-
-This lesson follows the CBC from the analyzer to a vendor-hosted EHR.
-
+Start by checking whether the laboratory has a verified CBC. If it does, the team needs to communicate that result while the LIS analyst investigates the missing electronic report. You will then follow the result through each system, identify the failed connection and choose the checks needed after repair.
 
 ## What you will be able to do
 
-- Separate a verified result from successful report delivery.
-- Trace the same result through the LIS, message queue and chart.
-- Explain why “use server uptime as proof of delivery” is an incomplete approach.
-
-Start by reading the case records. Make a choice before checking the explanation; you can revise it and test again.
+- Explain the separate jobs of a computer, its software and its network connection.
+- Use a record from each system to identify how far a result traveled.
+- Check that delayed and new reports reached the correct charts after a connection is restored.

@@ -77,7 +77,7 @@ test("lesson 2 covers PIER 1.4 through an observable result-reporting investigat
     { label: "Outbound queue", value: "214 results", tone: "critical" },
   );
   assert.equal(connectionChoices.find((choice) => choice.correct)?.id, "interface-ehr");
-  assert.equal(repairChoices.find((choice) => choice.correct)?.id, "restore-firewall");
+  assert.equal(repairChoices.find((choice) => choice.correct)?.id, "correct-port");
   assert.deepEqual(
     validationCases.map((item) => item.id),
     ["original", "queue", "new-cbc", "other-section", "downtime"],

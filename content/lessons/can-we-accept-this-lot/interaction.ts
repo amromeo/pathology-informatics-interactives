@@ -120,7 +120,7 @@ export const descriptiveChecks = [
       "Which summary, if increased to 4.0 ng/L with the same sample size, would widen the confidence interval?",
     answer: "standard-deviation",
     explanation:
-      "Larger standard deviation increases the standard error at the same sample size. The interval would widen, so the laboratory would reassess whether it lies within the approved medical limit.",
+      "The standard deviation measures variation between the individual differences. With the same 18 specimens, a larger spread makes the estimated average less precise and widens its confidence interval.",
   },
 ] as const;
 
@@ -200,10 +200,10 @@ export const testScenarios = [
   {
     id: "skewed-pairs",
     prompt:
-      "The same tumors are scored before and after decalcification, but the paired score differences are markedly skewed.",
+      "The same tumors have a numerical measurement before and after decalcification. The paired differences are roughly symmetric but are not normally distributed; a rank-based comparison is planned.",
     answer: "wilcoxon",
     explanation:
-      "The Wilcoxon signed-rank test is a common nonparametric choice for paired numerical data with markedly non-normal differences.",
+      "The Wilcoxon signed-rank test uses the signs and ranks of paired differences. It can suit these non-normal differences because they remain roughly symmetric; marked skew alone would not justify this choice.",
   },
   {
     id: "unrelated-groups",
@@ -214,7 +214,8 @@ export const testScenarios = [
   },
   {
     id: "three-fixatives",
-    prompt: "Mean RNA yield is compared across tissue processed with three different fixatives.",
+    prompt:
+      "Mean RNA yield is compared across independent tissue samples assigned to three different fixatives.",
     answer: "anova",
     explanation:
       "ANOVA is used to compare a numerical outcome across three or more groups when its assumptions are reasonable.",
@@ -231,7 +232,7 @@ export const testScenarios = [
 export const finalChoices = [
   {
     id: "accept-monitor",
-    label: "Accept after director review; document and monitor",
+    label: "Approve after review and document the shift",
     detail:
       "The confidence interval is inside the predetermined limit, and the very low and elevated checks pass.",
     correct: true,
@@ -252,7 +253,7 @@ export const finalChoices = [
     detail: "The mean difference is less than 2 ng/L, so no follow-up is needed.",
     correct: false,
     feedback:
-      "The lot can be accepted, but the consistent positive shift should still be documented and monitored after implementation.",
+      "The measured average shift needs to be recorded even when the lot meets the criteria. The chemistry team should follow its planned checks after the change so a later problem can be recognized.",
   },
 ] as const;
 
@@ -316,4 +317,20 @@ export const lessonCopy = {
     "The average shift is measurable, but its confidence interval remains within the range the laboratory accepted before testing. The low- and high-concentration checks also pass. Choose the next step.",
   text06:
     "The paired result pattern, summary statistics, confidence interval, predetermined medical limit, and checks at the low and high ends of the range all support acceptance after laboratory-director review.",
+};
+
+export const statisticChoiceFeedback: Record<string, string> = {
+  mean: "The mean describes the average of all the differences.",
+  median: "The median describes the middle of the ordered differences.",
+  "standard-deviation":
+    "The standard deviation describes the spread of individual differences around their mean.",
+};
+export const testChoiceFeedback: Record<string, string> = {
+  "paired-t": "A paired t-test addresses the mean difference within matched pairs.",
+  wilcoxon:
+    "Signed-rank uses paired differences and assumes their distribution is roughly symmetric.",
+  "independent-t": "An independent-samples t-test compares means from two unrelated groups.",
+  anova:
+    "The ANOVA taught here compares a numerical outcome across three or more independent groups.",
+  fisher: "Fisher exact compares counts in categories, such as detected and not detected.",
 };

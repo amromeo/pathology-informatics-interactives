@@ -261,6 +261,25 @@ The ten original PowerPoint decks were retrieved from the API course archive and
 
 All new clinical and regulatory teaching remains subject to author review before merge. No source text or figures have been reproduced.
 
+## Foundational lesson explanations — November 1, 2026
+
+Reviewed the following primary sources while revising lessons 2–4. The initial batch preserved case records, counts, numerical calculations and acceptance limits. The subsequent Missing CBC case correction is documented below.
+
+- [RFC 9293](https://www.rfc-editor.org/rfc/rfc9293.html): TCP's ordered, reliable transport service. The Missing CBC distinguishes transport, the receiving application's acknowledgment and review of the complete chart report.
+- [Government Data Quality Framework](https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework): the six common dimensions and the broader question of fitness for purpose. Can We Trust This Report? applies these to fields, source documents and report use.
+- [NIST confidence limits for the mean](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm) and [confidence interval interpretation](https://www.itl.nist.gov/div898/handbook/prc/section1/prc14.htm): standard error, t-based interval and repeated-sampling interpretation. The worked numbers are calculated from the lesson's 18 paired differences.
+- [NIST critical values and p-values](https://www.itl.nist.gov/div898/handbook/prc/section1/prc131.htm): interpreting a test result conditional on a null hypothesis, distinct from medical acceptance.
+- [NIST signed-rank reference](https://www.itl.nist.gov/div898/software/dataplot/refman1/auxillar/signrank.htm): symmetry of paired differences is an assumption. Corrected the test-selection scenario from markedly skewed differences to roughly symmetric, non-normal numerical differences; the answer and stable scenario ID remain unchanged. The ANOVA example now explicitly uses independent samples.
+- [CLSI EP26 public overview](https://clsi.org/shop/standards/ep26/): patient-sample lot comparisons and protocol setup before routine evaluations. The case's numerical criteria remain local assumptions; the lesson does not claim to implement the complete guideline.
+
+No source prose or figures were copied. Existing PIER and Harrison coverage is retained. The turnaround-time conclusion now distinguishes a descriptive difference between periods from proof that the LIS caused improvement.
+
+### Missing CBC author feedback — November 1, 2026
+
+Following the author's review, replaced the vendor-hosted EHR/firewall failure with an internal interface configuration error after maintenance. The outgoing destination uses port 5100; the EHR's receiving service listens on the agreed port 5000. The lesson now compares those settings, corrects the sender and checks delivery. Analyzer/LIS results, timestamps, queue count and restoration outcomes remain unchanged. New connection settings and records are original case content.
+
+[RFC 791](https://www.rfc-editor.org/rfc/rfc791.html) supports the beginner explanation of addressing and packet forwarding. [RFC 1918](https://www.rfc-editor.org/rfc/rfc1918.html) supports private network addressing and TCP/IP use within an organization. [RFC 9293, section 2.2](https://www.rfc-editor.org/rfc/rfc9293.html#section-2.2) supports the explanations of ports, ordered delivery and retransmission. The case's port numbers are local configuration choices. The changes also replace repeated negative contrasts with direct descriptions of each system's work.
+
 ## Conference context for the debrief supplements
 
 The optional “A closer look” sections contain original explanations and questions for these cases. They draw on the conference presentations listed below. No slide images, source PDFs, media embeds or presentation download addresses are included in these additions. Detailed page mappings remain in the separately held teaching handoff. The existing introductory-course attribution and primary references continue to support the lessons.

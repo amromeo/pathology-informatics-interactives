@@ -1,3 +1,4 @@
+import { ScrollRegion } from "./lesson-ui";
 import { lessonCopy } from "../../content/lessons/can-we-trust-this-report/interaction";
 import { orderedChoices } from "./lesson-ui";
 import { ResetLessonButton } from "./ResetLessonButton";
@@ -9,6 +10,7 @@ import {
   exampleMissingSource,
   openingChoices,
   qualityChecks,
+  qualityChoiceFeedback,
   qualityTerms,
   repairChoices,
   reportTableInstructions,
@@ -63,11 +65,10 @@ function ReportSummary({ mode }: { mode: SummaryMode }) {
         <span aria-current="page">Summary</span>
         <a href="#rows-title">Data · 455 rows</a>
       </div>
-      <div
+      <ScrollRegion
         className="report-summary-table-wrap"
-        tabIndex={0}
-        role="region"
-        aria-label="Scrollable records 1"
+        id={separated ? "tat-revised-summary" : "tat-original-summary"}
+        label="Turnaround-time summary"
       >
         <table className="report-summary-table">
           <caption>
@@ -125,7 +126,7 @@ function ReportSummary({ mode }: { mode: SummaryMode }) {
             </tr>
           </tbody>
         </table>
-      </div>
+      </ScrollRegion>
       {separated && (
         <div className="spreadsheet-note qualified">
           <strong>All 455 cases remain in the report</strong>
@@ -272,11 +273,10 @@ function ReportTable() {
           Download editable CSV
         </a>
       </div>
-      <div
+      <ScrollRegion
+        id="tat-case-table"
         className="report-table-wrap"
-        tabIndex={0}
-        role="region"
-        aria-label="Scrollable records 2"
+        label="All surgical pathology cases"
       >
         <table>
           <caption>All surgical pathology cases used to prepare the turnaround-time report</caption>
@@ -301,7 +301,7 @@ function ReportTable() {
             ))}
           </tbody>
         </table>
-      </div>
+      </ScrollRegion>
       <div className="pagination" aria-label="Report pages">
         <button
           type="button"
@@ -836,12 +836,8 @@ export function DataQualityExperience({
                         correct ? "answer-note correct-note" : "answer-note incorrect-note"
                       }
                     >
-                      <strong>
-                        {correct
-                          ? "This quality dimension fits the record."
-                          : "This dimension does not describe the record."}
-                      </strong>{" "}
-                      {check.explanation}
+                      <strong>{correct ? "Correct." : "Try again."}</strong>{" "}
+                      {!correct && qualityChoiceFeedback[answer]} {check.explanation}
                     </p>
                   )}
                 </div>
