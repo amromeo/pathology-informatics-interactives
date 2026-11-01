@@ -9,6 +9,7 @@ import {
   buildReconciliationRecords,
   initialDowntimeState,
   patientMatchFeedback,
+  pendingRegistrationCheck,
   resumptionChoices,
   scoreReconciliation,
   tabletopPhases,
@@ -414,64 +415,92 @@ export function DowntimeExperience({
                 </tr>
               </thead>
               <tbody role="rowgroup">
-                {records.paperRecords.map((record) => (
-                  <tr key={record.tempId} role="row">
-                    <th scope="row" role="rowheader">
-                      {record.tempId}
-                    </th>
-                    <td role="cell" data-label="Paper record">
-                      <strong>{record.paperAccession}</strong>
-                      <small>{record.restoredOrder}</small>
-                    </td>
-                    <td role="cell" data-label="Patient and unit">
-                      <strong>{record.patientName}</strong>
-                      <small>
-                        {record.birthDate} · {record.unit}
-                      </small>
-                    </td>
-                    <td role="cell" data-label="Test and result">
-                      <strong>{record.test}</strong>
-                      <small>{record.result}</small>
-                    </td>
-                    <td role="cell" data-label="Times">
-                      <strong>Collected {record.collectionTime}</strong>
-                      {record.backEntryTime && <small>Entered {record.backEntryTime}</small>}
-                    </td>
-                    <td role="cell" data-label="Restored status">
-                      {record.chartStatus}
-                    </td>
-                    <td role="cell" data-label="Match to MRN">
-                      <label>
-                        <select
-                          disabled={!allPhasesComplete}
-                          aria-label={`Medical record number for ${record.tempId}`}
-                          value={assignments.matches[record.tempId] ?? ""}
-                          onChange={(event) => {
-                            setAssignments((current) => ({
-                              ...current,
-                              matches: { ...current.matches, [record.tempId]: event.target.value },
-                            }));
-                            setReconciliationRun(false);
-                          }}
-                        >
-                          <option value="">Select MRN</option>
-                          {records.restoredCharts.map((chart) => (
-                            <option value={chart.mrn} key={chart.mrn}>
-                              {chart.mrn}
-                            </option>
-                          ))}
-                        </select>
-                      </label>
-                      <div role="status" aria-live="polite">
-                        {reconciliationRun && (
-                          <p className="downtime-selected-action">
-                            {patientMatchFeedback(record, assignments.matches[record.tempId])}
+                {records.paperRecords.map((record) => {
+                  const registrationCheck = pendingRegistrationCheck(record, records, assignments);
+                  return (
+                    <tr key={record.tempId} role="row">
+                      <th scope="row" role="rowheader">
+                        {record.tempId}
+                      </th>
+                      <td role="cell" data-label="Paper record">
+                        <strong>{record.paperAccession}</strong>
+                        <small>{record.restoredOrder}</small>
+                      </td>
+                      <td role="cell" data-label="Patient and unit">
+                        <strong>{record.patientName}</strong>
+                        <small>
+                          {record.birthDate} · {record.unit}
+                        </small>
+                      </td>
+                      <td role="cell" data-label="Test and result">
+                        <strong>{record.test}</strong>
+                        <small>{record.result}</small>
+                      </td>
+                      <td role="cell" data-label="Times">
+                        <strong>Collected {record.collectionTime}</strong>
+                        {record.backEntryTime && <small>Entered {record.backEntryTime}</small>}
+                      </td>
+                      <td role="cell" data-label="Restored status">
+                        {record.chartStatus}
+                      </td>
+                      <td role="cell" data-label="Match to MRN">
+                        <label>
+                          <select
+                            id={`match-${record.tempId}`}
+                            disabled={!allPhasesComplete || Boolean(registrationCheck)}
+                            aria-label={`Medical record number for ${record.tempId}`}
+                            aria-describedby={
+                              registrationCheck ? `registration-hold-${record.tempId}` : undefined
+                            }
+                            value={assignments.matches[record.tempId] ?? ""}
+                            onChange={(event) => {
+                              setAssignments((current) => ({
+                                ...current,
+                                matches: {
+                                  ...current.matches,
+                                  [record.tempId]: event.target.value,
+                                },
+                              }));
+                              setReconciliationRun(false);
+                            }}
+                          >
+                            <option value="">Select MRN</option>
+                            {records.restoredCharts.map((chart) => (
+                              <option value={chart.mrn} key={chart.mrn}>
+                                {chart.mrn}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+                        {registrationCheck && (
+                          <p
+                            id={`registration-hold-${record.tempId}`}
+                            className="downtime-selected-action"
+                          >
+                            Two charts have the same identifying details.{" "}
+                            <a href={`#recovery-${registrationCheck.id}`}>
+                              Ask registration to confirm the chart
+                            </a>{" "}
+                            before selecting an MRN.
                           </p>
                         )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                        <div role="status" aria-live="polite">
+                          {reconciliationRun && !registrationCheck && (
+                            <p className="downtime-selected-action">
+                              {patientMatchFeedback(
+                                record,
+                                assignments.matches[record.tempId],
+                                records.hazards.some(
+                                  (hazard) => hazard.registrationTempId === record.tempId,
+                                ),
+                              )}
+                            </p>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -480,10 +509,32 @@ export function DowntimeExperience({
           <legend>Recovery actions</legend>
           <div className="downtime-hazard-grid">
             {records.hazards.map((hazard) => (
-              <article key={hazard.id}>
+              <article key={hazard.id} id={`recovery-${hazard.id}`} tabIndex={-1}>
                 <span>{hazard.kind.replaceAll("-", " ")}</span>
                 <h3>{hazard.title}</h3>
                 <p>{hazard.evidence}</p>
+                {hazard.orderComparison && (
+                  <div
+                    className="downtime-order-comparison"
+                    role="group"
+                    aria-label="Restored troponin orders"
+                  >
+                    {hazard.orderComparison.map((order) => (
+                      <article key={order.orderId} aria-label={order.orderId}>
+                        <h4>{order.orderId}</h4>
+                        <dl>
+                          <dt>Entered</dt>
+                          <dd>{order.enteredAt}</dd>
+                          <dt>Paper accession</dt>
+                          <dd>{order.paperAccession}</dd>
+                          <dt>Requested specimen collection</dt>
+                          <dd>{order.collectionTime}</dd>
+                        </dl>
+                        <p>{order.note}</p>
+                      </article>
+                    ))}
+                  </div>
+                )}
                 <label>
                   <strong>Choose an action</strong>
                   <select
@@ -492,6 +543,9 @@ export function DowntimeExperience({
                     onChange={(event) => {
                       setAssignments((current) => ({
                         ...current,
+                        matches: hazard.registrationTempId
+                          ? { ...current.matches, [hazard.registrationTempId]: "" }
+                          : current.matches,
                         actions: { ...current.actions, [hazard.id]: event.target.value },
                       }));
                       setReconciliationRun(false);
@@ -506,13 +560,24 @@ export function DowntimeExperience({
                   </select>
                 </label>
                 <div role="status" aria-live="polite" aria-atomic="true">
-                  {reconciliationRun && (
-                    <p className="downtime-selected-action">
-                      {assignments.actions[hazard.id] === hazard.correctActionId
-                        ? hazard.resolvedNote
-                        : (reconciliationActionNotes[assignments.actions[hazard.id]] ??
-                          "Choose a reconciliation action.")}
-                    </p>
+                  {hazard.registrationTempId &&
+                  assignments.actions[hazard.id] === hazard.correctActionId ? (
+                    <div className="feedback correct downtime-registration-response">
+                      <strong>Registration response</strong>
+                      <p>{hazard.resolvedNote}</p>
+                      <a href={`#match-${hazard.registrationTempId}`}>
+                        Return to the {hazard.registrationTempId} match
+                      </a>
+                    </div>
+                  ) : (
+                    reconciliationRun && (
+                      <p className="downtime-selected-action">
+                        {assignments.actions[hazard.id] === hazard.correctActionId
+                          ? hazard.resolvedNote
+                          : (reconciliationActionNotes[assignments.actions[hazard.id]] ??
+                            "Choose a reconciliation action.")}
+                      </p>
+                    )
                   )}
                 </div>
               </article>

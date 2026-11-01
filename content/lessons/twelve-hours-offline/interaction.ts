@@ -180,10 +180,10 @@ export const tabletopPhases: readonly DowntimePhase[] = [
           {
             id: "compare-before-recollection",
             label:
-              "Compare the paper and electronic records for the same patient and specimen. Link the completed result and cancel the duplicate order before asking for another collection.",
+              "Compare the patient, specimen and requested collection time. Link the completed result to its order, and cancel an extra order only after confirming that it requests the same testing.",
             preferred: true,
             feedback:
-              "The comparison preserves the completed result and prevents an unnecessary second collection.",
+              "A pending order may be waiting for a result obtained during downtime. Compare the records and check with the clinical unit before cancelling an extra order. A separate request for a later specimen needs its own review.",
           },
           {
             id: "recollect-pending-orders",
@@ -257,11 +257,25 @@ export type ReconciliationHazard = {
   actions: readonly ReconciliationAction[];
   correctActionId: string;
   resolvedNote: string;
+  registrationTempId?: string;
+  orderComparison?: readonly {
+    orderId: string;
+    enteredAt: string;
+    paperAccession: string;
+    collectionTime: string;
+    note: string;
+  }[];
 };
 
-export function patientMatchFeedback(record: PaperRecord, selectedMrn: string | undefined): string {
+export function patientMatchFeedback(
+  record: PaperRecord,
+  selectedMrn: string | undefined,
+  registrationConfirmed = false,
+): string {
   if (selectedMrn === record.expectedMrn)
     return `${record.tempId} matches ${record.patientName}'s verified chart.`;
+  if (selectedMrn && registrationConfirmed)
+    return `The response from registration identifies ${record.expectedMrn} as ${record.patientName}'s existing chart. Use that confirmed number for ${record.tempId}.`;
   if (selectedMrn)
     return `Check ${record.patientName}, born ${record.birthDate}, against the restored charts. The selected MRN is not the verified match; ask registration to resolve conflicting charts before entry.`;
   return `Select a verified chart for ${record.patientName}, born ${record.birthDate}.`;
@@ -325,7 +339,7 @@ const baselinePaperRecords: readonly PaperRecord[] = [
     result: "86 ng/L",
     expectedMrn: "MRN-410307",
     restoredOrder: "ORD-R-8821",
-    chartStatus: "Same restored order remains pending",
+    chartStatus: "ORD-R-8821 awaits result entry; ORD-R-8840 also requests the 09:44 specimen",
   },
   {
     tempId: "DT-205",
@@ -369,28 +383,45 @@ const baselineHazards: readonly ReconciliationHazard[] = [
   {
     id: "duplicate-order-DT-204",
     kind: "duplicate-order",
-    title: "Restored order overlaps completed paper testing",
+    title: "Two restored orders refer to the same troponin specimen",
     evidence:
-      "DT-204 has a completed troponin result, while ORD-R-8821 is still pending in the restored worklist.",
-    relatedIds: ["DT-204", "ORD-R-8821"],
+      "DT-204 has a troponin result of 86 ng/L from the specimen collected at 09:44. At 18:46, the Cardiac ICU nurse confirms that ORD-R-8840 was entered to record that same downtime test. Neither order requests a later specimen.",
+    relatedIds: ["DT-204", "ORD-R-8821", "ORD-R-8840"],
+    orderComparison: [
+      {
+        orderId: "ORD-R-8821",
+        enteredAt: "18:28 · laboratory recovery entry",
+        paperAccession: "D26-0418-004",
+        collectionTime: "09:44",
+        note: "Entered from the paper requisition; awaiting the paper result.",
+      },
+      {
+        orderId: "ORD-R-8840",
+        enteredAt: "18:32 · Cardiac ICU entry",
+        paperAccession: "D26-0418-004",
+        collectionTime: "09:44",
+        note: "Order comment: record the troponin collected during downtime at 09:44.",
+      },
+    ],
     actions: [
       {
         id: "link-result-cancel-duplicate",
         label:
-          "Link the paper result to the verified chart and cancel the duplicate restored order before recollection.",
+          "Enter the verified paper result on ORD-R-8821 and cancel ORD-R-8840, which requests the same 09:44 specimen.",
       },
       {
         id: "recollect-restored-order",
-        label: "Recollect ORD-R-8821 because its electronic status is pending.",
+        label: "Collect another specimen for ORD-R-8840 because its electronic status is pending.",
       },
       {
         id: "enter-both-orders",
-        label: "Enter the paper result and leave the restored order active for the clinical team.",
+        label:
+          "Enter the paper result on ORD-R-8821 and leave ORD-R-8840 pending for the clinical team.",
       },
     ],
     correctActionId: "link-result-cancel-duplicate",
     resolvedNote:
-      "The completed paper result is preserved and the pending duplicate order is cancelled before another collection.",
+      "ORD-R-8821 receives the verified result from the 09:44 specimen. Cancelling ORD-R-8840 removes the extra request for that same specimen. The two order records and the nurse's confirmation support this decision.",
   },
   {
     id: "missing-critical-DT-202",
@@ -467,8 +498,9 @@ const duplicateChartHazard: ReconciliationHazard = {
     },
   ],
   correctActionId: "hold-and-reconcile-charts",
+  registrationTempId: "DT-202",
   resolvedNote:
-    "Registration confirms which chart belongs to the patient and starts correcting the duplicate before the laboratory enters results.",
+    "Registration compared Liam Brooks's pre-outage encounter with the downtime registration forms. His existing chart is MRN-410118. MRN-490118 was opened as a duplicate during recovery, and registration has flagged it for correction. Use MRN-410118 for DT-202.",
 };
 
 export const buildReconciliationRecords = (state: DowntimeState): ReconciliationRecords => {
@@ -536,6 +568,18 @@ export type ReconciliationScore = {
   notes: string[];
 };
 
+export function pendingRegistrationCheck(
+  record: PaperRecord,
+  records: ReconciliationRecords,
+  assignments: LearnerAssignments,
+): ReconciliationHazard | undefined {
+  return records.hazards.find(
+    (hazard) =>
+      hazard.registrationTempId === record.tempId &&
+      assignments.actions[hazard.id] !== hazard.correctActionId,
+  );
+}
+
 export const scoreReconciliation = (
   records: ReconciliationRecords,
   assignments: LearnerAssignments,
@@ -543,7 +587,12 @@ export const scoreReconciliation = (
   const hazardsMissed: string[] = [];
   const notes: string[] = [];
   for (const record of records.paperRecords) {
-    if (assignments.matches[record.tempId] === record.expectedMrn)
+    if (pendingRegistrationCheck(record, records, assignments)) {
+      hazardsMissed.push(`identity-${record.tempId}`);
+      notes.push(
+        `${record.tempId} is not matched: ask registration to confirm ${record.patientName}'s chart, then use its response to select the medical record number.`,
+      );
+    } else if (assignments.matches[record.tempId] === record.expectedMrn)
       notes.push(`${record.tempId} is matched to the verified chart.`);
     else {
       hazardsMissed.push(`identity-${record.tempId}`);
@@ -746,16 +795,16 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
 
 export const lessonCopy = {
   text01:
-    "Match every temporary identifier to a restored chart. Then choose how to resolve the duplicate order, missing critical result, timestamp conflict, and any duplicate chart created by your tabletop path.",
+    "Match each temporary identifier using the records shown. If a patient has two charts, choose the registration check under Recovery actions first. Read the response, then return to that patient's match. Compare both troponin orders before choosing which one to complete and which one to cancel.",
   text02:
     "The unit reports that the potassium was phoned, but the laboratory call log contains no entry for DT-202.",
 };
 
 export const reconciliationActionNotes: Record<string, string> = {
   "recollect-restored-order":
-    "Recollection repeats testing that is already complete. Reconcile the pending order with the verified paper result before requesting another specimen.",
+    "Both orders request the 09:44 specimen, and the nurse confirms that ORD-R-8840 repeats the downtime request. Enter the existing result on ORD-R-8821 and cancel the extra order. Review any separate request for a later specimen on its own terms.",
   "enter-both-orders":
-    "Leaving the duplicate active can trigger recollection and duplicate billing. Preserve the completed result and resolve the redundant order.",
+    "ORD-R-8840 still asks staff to collect a specimen already tested at 09:44. The order details and the nurse's confirmation identify it as the extra request. Cancel that order after preserving the result on ORD-R-8821.",
   "no-entry-result-called":
     "The clinician heard the result, but it is still missing from the chart. Enter the verified paper result and link the call record.",
   "repeat-critical-only":

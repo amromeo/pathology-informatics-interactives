@@ -6,6 +6,40 @@
   overflow-wrap: anywhere;
 }
 
+.downtime-order-comparison {
+  display: grid;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.downtime-hazard-grid .downtime-order-comparison article {
+  padding: 16px;
+  border: 1px solid var(--line);
+}
+
+.downtime-order-comparison h4 {
+  margin: 0 0 12px;
+}
+
+.downtime-order-comparison dt {
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.downtime-order-comparison dd {
+  margin: 0;
+}
+
+.downtime-order-comparison p {
+  margin-bottom: 0;
+  min-height: 0;
+}
+
+.downtime-hazard-grid article[id],
+.downtime-table-wrap select[id] {
+  scroll-margin-top: 110px;
+}
+
 @media (max-width: 720px) {
   .downtime-reconciliation-fieldset .downtime-table-wrap table,
   .downtime-reconciliation-fieldset .downtime-table-wrap tbody,
