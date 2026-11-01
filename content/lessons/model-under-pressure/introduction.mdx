@@ -10,6 +10,34 @@ Your laboratory uses two scanners and a different staining procedure. When staff
 
 The committee has three other proposals to consider: a rule that holds laboratory results for review, a program that groups tumors by measurements, and a program that writes a summary. Each does a different job. You will use those examples to learn why different programs need different checks.
 
+## Terms used in this case
+
+### How the programs work
+
+- **Programmed rule:** a condition and action written by a person. For example, hold patient results when a quality-control result falls outside the allowed range.
+- **Artificial intelligence (AI):** a broad term for computer methods that perform tasks such as recognizing images or producing language. **Machine learning** is one approach: developers use examples to adjust a model.
+- **Model:** a set of calculations that turns an input into an output. Here, the input is a slide image and the output identifies areas that may contain metastases.
+- **Training and parameters:** training adjusts the model using examples. Parameters are the numbers within its calculations that are adjusted. The trained model uses those saved numbers when examining a new slide.
+- **Labels and supervised learning:** labels are supplied answers attached to training examples. Supervised learning uses those answers during training; this slide model uses images with cancer identified by pathologists.
+- **Unsupervised clustering:** grouping examples by similarities in their measurements. For example, a program may group tumors with similar measured gene activity.
+- **Generative model:** a model that produces content, such as a written summary of reports. Its output needs comparison with the original reports.
+
+### Comparing the model's calls with the slides
+
+- **Reference standard:** the answers used to judge the model's calls. In this case, pathologists establish which slides contain metastases before the model is tested.
+- **True positive and false negative:** a true positive is a slide with metastasis that the model calls positive. A false negative is a slide with metastasis that the model misses.
+- **False positive and true negative:** a false positive is a slide without metastasis that the model calls positive. A true negative is a slide without metastasis that it correctly calls negative.
+- **Sensitivity:** the fraction of slides with metastases that the model detects. Start with all slides known to contain metastases, then count the ones it found.
+- **Specificity:** the fraction of slides without metastases that the model correctly calls negative. Start with all slides known to be negative.
+- **Positive predictive value (PPV):** the fraction of the model's positive calls that actually contain metastases. Start with all positive calls, including false alarms.
+- **Prevalence:** the fraction of slides in the group that contain metastases. The lesson's prevalence slider changes that fraction in the example calculation.
+
+### Performance in a new setting and over time
+
+- **Generalizability:** how well performance carries over to new cases or settings, such as this laboratory's scanners and staining procedure.
+- **Drift:** a change over time in the model's inputs or performance. The monthly review checks for changes after the first local test.
+- **Brittleness:** a large change in the model's answer after a small change in its input, such as a slight color shift in an image.
+
 ## What you will be able to do
 
 - Explain the difference between a rule written by a person and a model trained on examples.

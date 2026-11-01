@@ -6,6 +6,8 @@ Status: implemented for author review; this batch is not deployed.
 
 This record describes the initial batch at `abda3ac`. The subsequent Missing CBC
 case revision and its verification are recorded in [the author-feedback follow-up](cbc-author-feedback.md).
+The visible terms sections added to three lessons are recorded in
+[the terms-section follow-up](terms-sections.md).
 
 The author authorized publication of the reviewed Model Under Pressure revision
 and continuation with the next batch. This batch applies the consolidated lesson
