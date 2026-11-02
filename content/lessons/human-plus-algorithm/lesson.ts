@@ -18,7 +18,7 @@ export const manifest: LessonManifest = {
 
       summary: "Processing, detection, counting, diagnosis versus prognosis, and productivity",
       learnerAction:
-        "Change an inclusive threshold, inspect false marks and misses, compare final reader performance, and build monitoring.",
+        "Change the threshold, look at false marks and misses, compare how readers finally perform, and plan monitoring.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -33,7 +33,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Independent testing, case mix, human factors, and oversight",
       learnerAction:
-        "Separate candidate metrics from final reader outcomes and investigate site-specific monitoring findings.",
+        "Keep the tool's results separate from readers' final results, and look into a problem at one site.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [

@@ -104,8 +104,8 @@ export function AlertEvaluationExperience({ Concepts, Bridge, onAttempt }: Topic
           }}
           note={
             comparison === "yes"
-              ? "The comparison ward helps identify a change occurring outside the pilot, although the wards may still differ."
-              : "The pilot-only view cannot distinguish the intervention from changes affecting both wards."
+              ? "The comparison ward shows what changed without the trial, although the two wards may still differ in other ways."
+              : "Looking only at the trial ward, you cannot tell the alert's effect from changes that affected both wards."
           }
         />
         <div
@@ -225,7 +225,7 @@ export function AlertEvaluationExperience({ Concepts, Bridge, onAttempt }: Topic
           {plan && (
             <p className="topic5-note">
               {complete
-                ? "The review plan includes targeting, comparison data, benefit, burden, and safety. This supports investigating and revising the limited pilot, not immediate expansion."
+                ? "The review plan covers who gets the alert, the comparison ward, benefit, extra work and safety. That supports investigating and revising the small trial, not rolling it out straight away."
                 : "Before completing the review, target the relevant ordering decisions, suppress repeated presentations, preserve the ability to proceed, include the comparison ward and all four measure categories, and address the delayed test."}
             </p>
           )}

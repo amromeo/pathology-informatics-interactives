@@ -1,18 +1,15 @@
 # Building and Validating a Laboratory Test
 
-You are the pathology resident assigned to a microbiology test implementation. The laboratory is bringing influenza A, influenza B, and respiratory syncytial virus (RSV) testing in-house. The emergency department needs each organism shown separately in the electronic health record (EHR).
+You are the pathology resident helping to set up a new microbiology test. The laboratory is bringing influenza A, influenza B and respiratory syncytial virus (RSV) testing in-house. The emergency department needs each virus shown separately in the electronic health record (EHR).
 
-The laboratory information system (LIS) analyst copied an existing respiratory test to start the build in the test environment. A sample message reached the EHR successfully, but the report says “Respiratory panel: Detected copies/mL.” The procedure describes a qualitative assay, and the report does not identify the detected organism.
+To start the build in the test system, the laboratory information system (LIS) analyst copied an existing respiratory test. A sample message reached the EHR without trouble, but the report says “Respiratory panel: Detected copies/mL.” The procedure describes a test that only says detected or not detected, and the report does not say which virus was found.
 
-The microbiology director asks you to compare the request, procedure, and displayed report, then help specify the repair. The copied configuration also governs invalid runs, pending results, specimens, corrections, and message retries. Repairing the opening display alone will not confirm that the new test is ready.
+The microbiology director asks you to compare the request, the procedure and the report as it appears, then help work out the fix. The copied settings also decide what happens to failed runs, pending results, specimens, corrections and messages that are sent again. Fixing the first report alone will not show that the new test is ready.
 
-Inspect the three source records, configure the result behavior, and run the eight report checks. Then prepare a release recommendation that separates technical testing from clinical and operational approval.
-
+Look at the three source records, set up how results behave, and run the eight report checks. Then write a recommendation for go-live that keeps technical testing separate from clinical and operational approval.
 
 ## What you will be able to do
 
-- Validate the complete report before releasing a build.
-- Review the approved build specification.
-- Explain why “copy a similar test without a specification” is an incomplete approach.
-
-Start by reading the case records. Make a choice before checking the explanation; you can revise it and test again.
+- Check the whole report, not just one result, before a build goes live.
+- Start from the approved specification for the test.
+- Explain why copying a similar test without a specification causes problems.

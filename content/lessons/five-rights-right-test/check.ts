@@ -11,45 +11,46 @@ export const checks: RetrievalItem[] = [
         label: "Show relevant history at order entry",
         correct: true,
         feedback:
-          "Timely patient-specific information can prevent an avoidable repeat while preserving justified exceptions. Test workflow and safety before broad deployment.",
+          "Showing this patient's history at the right moment can prevent an unnecessary repeat while still allowing justified ones. Test it in practice, and for safety, before rolling it out widely.",
       },
       {
         id: "shortcut",
         label: "Send a weekly list after discharge",
         feedback:
-          "This leaves the central problem unresolved. Timely patient-specific information can prevent an avoidable repeat while preserving justified exceptions. Test workflow and safety before broad deployment.",
+          "A list after discharge arrives long after the order was placed, when nothing can be changed. The history has to be shown while the clinician is ordering.",
       },
       {
         id: "incomplete",
         label: "Interrupt every order regardless of history",
         feedback:
-          "This does not establish the needed conclusion. Timely patient-specific information can prevent an avoidable repeat while preserving justified exceptions. Test workflow and safety before broad deployment.",
+          "Interrupting every order, whatever the history, trains clinicians to click past the message. Show the history only when there is a recent result or pending order.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt:
+      "Your laboratory wants to add guidance for a test that is often repeated. What would you do first?",
     choices: [
       {
         id: "supported",
         label: "Observe the ordering workflow",
         correct: true,
         feedback:
-          "Identify who decides, what information is available and whether the proposed support reaches that person at the useful moment.",
+          "Find out who makes the decision, what information they have and whether the proposed support would reach them at the right moment.",
       },
       {
         id: "shortcut",
         label: "Add a warning without observing ordering",
         feedback:
-          "This leaves the central problem unresolved. Identify who decides, what information is available and whether the proposed support reaches that person at the useful moment.",
+          "A warning added without seeing how clinicians order may go to the wrong person or arrive too late, as it did in this case.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "Copy this lesson's design",
         feedback:
-          "This does not establish the needed conclusion. Identify who decides, what information is available and whether the proposed support reaches that person at the useful moment.",
+          "Your test, your clinicians and your ordering screens may be different. Watch how ordering works locally before choosing a design.",
       },
     ],
   },
@@ -65,19 +66,19 @@ export const checks: RetrievalItem[] = [
         label: "The order and specimen identifiers",
         correct: true,
         feedback:
-          "Patient identity is necessary but does not distinguish separate ordered tests or specimens. Preserve the accession and specimen relationship through routing.",
+          "The patient's identity is needed, but it does not tell two tests or specimens apart. Keep the accession and specimen linked all the way through routing.",
       },
       {
         id: "shortcut",
         label: "The patient name by itself",
         feedback:
-          "This leaves the central problem unresolved. Patient identity is necessary but does not distinguish separate ordered tests or specimens. Preserve the accession and specimen relationship through routing.",
+          "Both specimens belong to the same patient, so the name cannot tell them apart. Use the order and specimen identifiers.",
       },
       {
         id: "incomplete",
         label: "The destination worklist by itself",
         feedback:
-          "This does not establish the needed conclusion. Patient identity is necessary but does not distinguish separate ordered tests or specimens. Preserve the accession and specimen relationship through routing.",
+          "A worklist can hold many specimens from the same patient. The destination does not say which specimen is which; the order and specimen identifiers do.",
       },
     ],
   },

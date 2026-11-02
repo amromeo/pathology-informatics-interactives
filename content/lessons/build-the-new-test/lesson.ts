@@ -34,10 +34,9 @@ export const manifest: LessonManifest = {
     {
       id: "8.1-build-the-new-test",
       objective: "8.1",
-      summary:
-        "Test complete reports and record configuration versions, approvals and procedure changes.",
+      summary: "Test whole reports, and record settings versions, approvals and procedure changes.",
       learnerAction:
-        "Test complete reports and record configuration versions, approvals and procedure changes.",
+        "Test whole reports, and record settings versions, approvals and procedure changes.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -50,10 +49,9 @@ export const manifest: LessonManifest = {
     {
       id: "8.2-build-the-new-test",
       objective: "8.2",
-      summary:
-        "Test complete reports and record configuration versions, approvals and procedure changes.",
+      summary: "Test whole reports, and record settings versions, approvals and procedure changes.",
       learnerAction:
-        "Test complete reports and record configuration versions, approvals and procedure changes.",
+        "Test whole reports, and record settings versions, approvals and procedure changes.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -66,10 +64,9 @@ export const manifest: LessonManifest = {
     {
       id: "8.4-build-the-new-test",
       objective: "8.4",
-      summary:
-        "Test complete reports and record configuration versions, approvals and procedure changes.",
+      summary: "Test whole reports, and record settings versions, approvals and procedure changes.",
       learnerAction:
-        "Test complete reports and record configuration versions, approvals and procedure changes.",
+        "Test whole reports, and record settings versions, approvals and procedure changes.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -82,10 +79,9 @@ export const manifest: LessonManifest = {
     {
       id: "4.2-build-the-new-test",
       objective: "4.2",
-      summary:
-        "Test complete reports and record configuration versions, approvals and procedure changes.",
+      summary: "Test whole reports, and record settings versions, approvals and procedure changes.",
       learnerAction:
-        "Test complete reports and record configuration versions, approvals and procedure changes.",
+        "Test whole reports, and record settings versions, approvals and procedure changes.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [

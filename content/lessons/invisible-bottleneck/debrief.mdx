@@ -2,42 +2,26 @@
 
 ### What happened in this case
 
+The 20-minute median came from six early results in a copy of the data made at 09:00. At noon, the full set has 12 completed and two pending accessions. The completed total median is 40 minutes and the 90th percentile is 80 minutes, using the nearest-rank method. The two pending accessions are still waiting.
 
-The original 20-minute median described six early completions in a stale
-09:00 extract. At noon the full set contains 12 completed and two pending
-accessions. The completed total median is 40 minutes and the nearest-rank
-90th percentile is 80 minutes. The pending records are still unresolved.
+The finished records from the 10:00 delivery took 15 minutes from receipt to analysis, but 45–70 minutes after analysis. The middleware log explains why: reviewers arrived late. Another analyzer would do nothing about that part of the delay. Switching off the review rules would remove a clinical safety check, with nothing to show that those results were safe to release.
 
-The completed peak group has a 15-minute receipt-to-analysis interval but
-45–70 minutes after analysis. The middleware log supplies the workflow context:
-review coverage was delayed. Another analyzer would not address that observed
-interval. Disabling review rules would remove a clinical safeguard without
-establishing that the affected results could safely release.
-
-A useful improvement plan therefore combines queue investigation, appropriate
-coverage, resolution of open accessions, and reliable analytic refresh.
-Laboratory operations owns the work; middleware and analytics staff supply
-configuration and trustworthy measurements. Monitor clinical and financial
-consequences alongside speed.
+So a useful plan combines looking at the queue, having reviewers there when they are needed, finishing the open accessions and making the data copy reliable. The laboratory runs that work; middleware and analytics staff supply the settings and trustworthy numbers. Keep an eye on clinical and cost effects as well as speed.
 
 <details className="teaching-supplement">
 <summary>A closer look: look at the work still waiting</summary>
 
-A report based on completed results describes the specimens that reached completion by its extraction time. The oldest work can be absent if it is still waiting. Staff need a separate view of pending accessions to understand the current queue.
+A report built from finished results only describes the specimens that were finished when the data were copied. The oldest work can be missing because it is still waiting. Staff need a separate view of pending accessions to see the current queue.
 
-For each accession, define the intervals from receipt to analysis and from analysis to release. The delay after analysis directs attention to review coverage and release conditions. Buying another analyzer would require a different finding about where work accumulated.
+For each accession, work out the time from receipt to analysis and from analysis to release. A long delay after analysis points to review coverage and release conditions. Buying another analyzer would need evidence that work was piling up somewhere else.
 
-Write down the report’s refresh time and the population used for each measure. Keep a pending result visible as pending; assigning it a completed turnaround time would change what the number means.
+Write down when the report was last updated and which specimens each measure covers. Show a pending result as pending; giving it a finished turnaround time would change what the number means.
 
-**At noon:** What would you show beside the completed-result median so the manager could see both finished work and the remaining queue?
+**At noon:** What would you show next to the median for finished results so the manager could see both the finished work and the queue still waiting?
 
 <p className="supplement-credit">Conference context: Khalda Ibrahim, MD. Laboratory Stewardship: Essential Dependency on Informatics. Pathology Informatics Summit 2024. Patrick Mathias, MD, PhD. Laboratory Data Leadership: Best Practices. Pathology Informatics Summit 2025.</p>
 </details>
 
 ### Who does what
 
-Work with an operations manager and reporting analyst. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
-
-### Connection to PIER 5.5, 2.1
-
-The case asks you to choose a denominator that includes unfinished work using laboratory records and explain the consequence of your choice.
+The reporting analyst fixes the data copy and records how it was tested. The chemistry supervisor and laboratory manager decide on reviewer coverage and approve any change to how work is done.

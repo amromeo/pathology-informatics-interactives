@@ -1,27 +1,27 @@
-### Translate the clinical request into a test definition
+### Turn the clinical request into a test definition
 
-A **test definition** is the collection of settings that determines how a test is ordered, processed, reported, and maintained. The clinical request explains the need; the approved procedure and method documentation supply facts that a copied build may not preserve.
+A **test definition** is the set of settings that decides how a test is ordered, processed, reported and kept up to date. The clinical request explains what is needed; the approved procedure and the method documents give facts that a copied build may not carry over.
 
-Start with the order name and purpose, performing laboratory, specimen and container, collection instructions, method, result components, permitted values, units, reference information, comments, and turnaround expectations. Identify the order and component codes in each system and verify their mappings. A similar display name is not sufficient evidence that two codes mean the same test.
+Start with the order name and purpose, the laboratory doing the test, the specimen and container, collection instructions, the method, the results it produces, the answers allowed, units, reference information, comments and expected turnaround. Find the order and result codes in each system and check how they are mapped. A similar display name does not show that two codes mean the same test.
 
-For this case, one order produces three separately named qualitative results. “Detected” is an allowed categorical answer, not a concentration. The local build therefore has no numeric units, and its reference information is “Not detected.” A valid negative result differs from a pending test, an invalid run, or an unsuitable specimen.
+Here, one order produces three separately named results, each detected or not detected. “Detected” is one of the allowed answers, not an amount. So the build has no units, and its reference information is “Not detected.” A valid negative result is different from a pending test, a failed run or an unsuitable specimen.
 
-An internal control provides technical evidence about the run. It belongs in the laboratory's technical record; the approved patient-facing message explains when the run is invalid and what happens next. Hiding a control from the clinician does not mean ignoring its effect on whether results can be released.
+An internal control tells the laboratory whether the run worked. It belongs in the laboratory's technical record; the approved message on the report explains when a run is invalid and what happens next. Not showing the control to the clinician does not mean ignoring what it says about whether results can be released.
 
 ### Follow the information to its clinical destination
 
-The instrument produces target calls and technical status. The LIS applies the test definition and laboratory release procedure. The interface transmits the report to the EHR, where a clinician reads it. An acknowledgment shows receipt at one step; it does not show correct units, component meaning, or final display.
+The instrument calls each virus and reports whether the run worked. The LIS applies the test definition and the laboratory's release procedure. The interface sends the report to the EHR, where a clinician reads it. An acknowledgment shows the report arrived at one step; it does not show that the units, the meaning of each result or the final display are right.
 
-The laboratory must identify where the complete official report is verified in the EHR. Other views may reuse selected elements. Test both the designated report and downstream uses that matter to the clinical workflow, including any decision support, worklists, or public-health interfaces affected by the change.
+The laboratory has to decide where in the EHR the full official report is checked. Other screens may show parts of it. Test both the official report and any other places that matter clinically, including decision support, worklists or public health connections the change affects.
 
-The preview below deliberately isolates the result section. In a full validation, verify patient and accession identity, collection and report times, performing laboratory, specimen information, and interpretation as well. These fields remain unchanged in this exercise so you can examine the effect of each configuration choice.
+The preview below shows only the results section, on purpose. A full validation also checks the patient and accession, collection and report times, the laboratory doing the test, the specimen information and the interpretation. Those fields stay the same in this exercise so you can see the effect of each setting.
 
 ### Keep a correction distinct from another test
 
-An accession identifies the laboratory episode or specimen record; an interface message identifier identifies a transmission. A retry may have a new message identifier while carrying the same accession, component, and result version.
+An accession identifies the specimen and its testing; a message identifier identifies one sending of a message. A repeat send can have a new message identifier but the same accession, result and result version.
 
-For a correction, the latest result must be identifiable as current and corrected, with the earlier version retained in the audit history. The correction also requires the institution's communication process. A second unlinked final report or a silent replacement without history does not adequately represent what happened.
+For a correction, the newest result has to be marked as current and corrected, with the earlier version kept in the history. The correction also has to go through the hospital's process for telling clinicians. A second final report with no link to the first, or a quiet replacement with no history, does not show what really happened.
 
-Change the controls and inspect the preview. Open the expected-result explanation when needed. A setting that makes the first case look right may still fail a pending, invalid, or corrected case.
+Change the controls and look at the preview. Open the explanation of the expected result when you need it. A setting that makes the first case look right may still fail a pending, failed or corrected case.
 
-If the interface engine resends the identical message, it normally keeps the original message control ID. If the result is resent from the LIS after an outage, the message may have a new control ID with the same accession, component and result version. Matching those report identifiers handles both kinds of resend.
+If the interface engine sends the identical message again, it usually keeps the original message control number. If the LIS sends the result again after an outage, the message may have a new control number but the same accession, result and result version. Matching on those report identifiers handles both kinds of repeat.

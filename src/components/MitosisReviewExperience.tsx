@@ -224,7 +224,7 @@ export function MitosisReviewExperience({ Concepts, Bridge, onAttempt }: Topic5P
               "review",
               "Investigate the new staining workflow and limit affected use pending review",
             ],
-            ["threshold", "Lower the threshold in production immediately"],
+            ["threshold", "Lower the threshold for live use straight away"],
           ]}
           onChange={(v) => {
             setAction(v);

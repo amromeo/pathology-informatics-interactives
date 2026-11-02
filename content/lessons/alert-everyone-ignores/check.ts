@@ -11,45 +11,46 @@ export const checks: RetrievalItem[] = [
         label: "Compare the changes in both groups",
         correct: true,
         feedback:
-          "The concurrent comparison helps distinguish a pilot-associated change from a broader trend. Small counts and nonrandom assignment limit causal claims.",
+          "Comparing the two over the same period helps separate a change linked to the trial from a wider trend. Small numbers, and wards that were not chosen at random, limit how sure you can be about the cause.",
       },
       {
         id: "shortcut",
         label: "Attribute the whole pilot decrease to the alert",
         feedback:
-          "This leaves the central problem unresolved. The concurrent comparison helps distinguish a pilot-associated change from a broader trend. Small counts and nonrandom assignment limit causal claims.",
+          "Repeats also fell on the comparison service, which did not get the alert. Part of the trial ward's drop was probably happening anyway.",
       },
       {
         id: "incomplete",
         label: "Ignore the comparison service after go-live",
         feedback:
-          "This does not establish the needed conclusion. The concurrent comparison helps distinguish a pilot-associated change from a broader trend. Small counts and nonrandom assignment limit causal claims.",
+          "Without the comparison service, you cannot tell how much of the drop would have happened without the alert. Keep following both.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt:
+      "Your laboratory wants to judge whether an existing alert works. What would you settle first?",
     choices: [
       {
         id: "supported",
         label: "Define eligible decisions and balancing measures",
         correct: true,
         feedback:
-          "A rate requires a denominator; evaluation also needs justified repeats, missed needed testing and workflow burden.",
+          "A rate needs a denominator. The evaluation also has to count justified repeats, needed tests that were missed and the extra work for staff.",
       },
       {
         id: "shortcut",
         label: "Count dismissed alerts as prevented repeats",
         feedback:
-          "This leaves the central problem unresolved. A rate requires a denominator; evaluation also needs justified repeats, missed needed testing and workflow burden.",
+          "Dismissing a message is not the same as cancelling a test, and a cancelled test is not always one that should have been avoided.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "Reuse this lesson's ward comparison",
         feedback:
-          "This does not establish the needed conclusion. A rate requires a denominator; evaluation also needs justified repeats, missed needed testing and workflow burden.",
+          "Your alert, your wards and your test may be different. Decide which decisions count and what side effects to measure for your own case.",
       },
     ],
   },
@@ -64,19 +65,19 @@ export const checks: RetrievalItem[] = [
         label: "Work still waiting in the queue",
         correct: true,
         feedback:
-          "Completed-case turnaround and current queue age answer different questions. A queue analysis must include unfinished eligible work.",
+          "Turnaround for finished cases and the age of the current queue answer different questions. To study the queue, include the work that is not finished.",
       },
       {
         id: "shortcut",
         label: "The final times of completed cases",
         feedback:
-          "This leaves the central problem unresolved. Completed-case turnaround and current queue age answer different questions. A queue analysis must include unfinished eligible work.",
+          "A dashboard of finished cases does include their final times. What it misses is the work still waiting, which may be where the delay is.",
       },
       {
         id: "incomplete",
         label: "The number already finalized",
         feedback:
-          "This does not establish the needed conclusion. Completed-case turnaround and current queue age answer different questions. A queue analysis must include unfinished eligible work.",
+          "The finished count is exactly what such a dashboard shows. It is the specimens still waiting that drop out of view.",
       },
     ],
   },

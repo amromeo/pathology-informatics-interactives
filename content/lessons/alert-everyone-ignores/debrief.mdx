@@ -3,26 +3,26 @@
 ### What happened in this case
 
 
-The original monthly report mixed repeated presentations and different staff roles. Its “Accept” button recorded acknowledgment, so the 3.3% rate did not measure appropriate ordering.
+The original monthly report mixed repeated displays with different staff roles. Its “Accept” button only recorded a click, so the 3.3% rate said nothing about whether ordering was appropriate.
 
-In the replay, selecting relevant prior information, the ordering clinician, and one presentation per decision reduces ten presentations to four. Making those suggestions inline removes mandatory interruptions in this event set. The new decision at 10:00 still receives review; suppression does not last for the entire admission.
+In the replay, showing the message only when there is relevant history, only to the ordering clinician and only once per decision cuts ten displays to four. Showing those suggestions beside the order removes the interruptions in this set. The new decision at 10:00 is still checked; holding back repeats does not last for the whole admission.
 
-These counts describe software behavior in a small audit sample. They do not demonstrate fewer unnecessary tests, safer care, or a predicted monthly reduction. A soft stop could be considered if its added burden were justified. A hard stop conflicts with the case's clinical discretion and exception requirements.
+These counts describe what the software did in a small sample. They do not show fewer unnecessary tests, safer care or a predicted monthly saving. A soft stop might be considered if the extra interruption could be justified. A hard stop goes against this case's requirement to leave the decision, and the exceptions, to the clinician.
 
 ### Interpret the comparison and the safety event together
 
-The pilot ward's decrease was 40 avoidable repeats per 1,000 decisions, while the comparison ward decreased by 10. Their changes differed by 30 per 1,000. That finding is more informative than the pilot-only change, but remains an observational comparison with a short follow-up.
+The pilot ward's decrease was 40 avoidable repeats per 1,000 decisions, while the comparison ward decreased by 10. Their changes differed by 30 per 1,000. That tells you more than the trial ward's change alone, but it is still an observational comparison over a short time.
 
-SR-14 shows why success cannot be defined by clicking or cancelling. Investigate the delayed indicated test with the treating team, inspect how the report comment was omitted, assess the patient's course, and correct the rule inputs and display. Replay cases with incomplete or conflicting source information before reassessing a limited pilot.
+SR-14 shows why success cannot be measured by clicks or cancellations. Look into the delayed test with the treating team, find out how the report comment was left out, check how the patient did, and fix what the rule reads and shows. Replay cases with incomplete or conflicting information before deciding on a small trial again.
 
-The review plan should include unique decisions and actual order changes; clinically reviewed avoidable repeats; message burden and time by role; and delayed or missed needed testing. Assign responsibility for reviewing safety events and define when the intervention should be paused, revised, or retired. A completed checklist supports this review process; it is not a deployment approval.
+The review plan should count each decision once and track actual order changes; count unnecessary repeats as judged by clinical reviewers; measure how many messages each role sees and how much time they take; and look for needed tests that were delayed or missed. Name who reviews safety events, and decide in advance when the alert should be paused, changed or switched off. A finished checklist helps that review; it does not approve the alert for use.
 
 <details className="teaching-supplement">
 <summary>A closer look: follow the order decision beyond the click</summary>
 
-An acknowledgment tells you that someone interacted with a message. To assess the alert, link that interaction to a particular order decision and find out what happened afterward. Repeated presentations to several staff members can otherwise make one decision appear many times in a report.
+A click tells you someone did something with the message. To judge the alert, link that click to a particular order decision and find out what happened next. Otherwise, showing the message several times to several people can make one decision look like many in a report.
 
-An order-volume plot can reveal a change after an alert begins. Review what changed elsewhere during the same period, and ask clinicians whether the avoided orders were unnecessary. Also investigate needed tests that were delayed or omitted.
+A plot of order numbers can show a change after an alert starts. Check what else changed over the same period, and ask clinicians whether the orders that were avoided really were unnecessary. Also look for needed tests that were delayed or never ordered.
 
 SR-14 supplies that last question in this case. The review needs the omitted comment, the treating team’s reasoning and the patient’s subsequent course. A lower order count would not reveal those details.
 
@@ -33,8 +33,4 @@ SR-14 supplies that last question in this case. The review needs the omitted com
 
 ### Who does what
 
-Work with a quality lead and clinical informatics analyst. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
-
-### Connection to PIER 6.3, 6.4
-
-The case asks you to compare pilot changes with concurrent changes elsewhere using laboratory records and explain the consequence of your choice.
+The clinical informatics analyst changes the alert and records how it was tested. The quality lead and clinical reviewers judge whether decisions were appropriate and review safety events. The laboratory director and the CDS committee decide whether the alert continues, changes or is switched off.

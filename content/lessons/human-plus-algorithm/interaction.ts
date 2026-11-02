@@ -84,7 +84,7 @@ export const reviewChoices = [
   {
     id: "automatic",
     label: "Copy the model count directly into the report.",
-    note: "False marks inflate the count while missed figures lower it. This detection-assist use does not support automatic reporting, grading, or prognosis.",
+    note: "False marks push the count up and missed mitoses pull it down. A tool that suggests where to look is not fit for reporting, grading or prognosis on its own.",
   },
 ];
 export const monitorItems = [
@@ -98,13 +98,13 @@ export const monitorItems = [
     correct: true,
     id: "mix",
     label: "Track case mix, site, stain, scanner, and image-quality failures.",
-    note: "Changes in inputs can alter errors; stratify performance and include unreadable or failed analyses in an accountable workflow.",
+    note: "Changes in the images coming in can change the errors. Break performance down by group, and keep unreadable or failed analyses where someone is responsible for following them up.",
   },
   {
     correct: true,
     id: "human",
     label: "Measure final reader errors, review time, and changes after seeing the overlay.",
-    note: "The clinically used system includes the reader. Faster work alone is insufficient if misses increase.",
+    note: "The system used clinically includes the reader. Faster work is not enough if more mitoses are missed.",
   },
   {
     correct: true,
@@ -121,7 +121,7 @@ export const monitorItems = [
   {
     id: "speed-only",
     label: "Approve a new threshold if reading time falls",
-    note: "Faster work cannot establish safety. Review reader errors, input changes and the approved validation process.",
+    note: "Faster work does not show it is safe. Review reader errors, changes in the images and the approved validation process.",
     correct: false,
   },
 ] as const;
@@ -147,11 +147,11 @@ export const monitoringRecords = [
 ];
 export const monitoringFeedback = {
   complete:
-    "The plan covers reference errors, case mix, readers, and change review. Investigate the affected site and document evidence before resuming or expanding assistance.",
+    "The plan covers errors against reference answers, case mix, readers and how changes are reviewed. Look into the affected site and record the evidence before using the tool again there or more widely.",
   incomplete:
-    "The investigation is appropriate. Include all four evidence groups so failures, false negatives, human performance, and changes remain visible.",
+    "Investigating is right. Include all four kinds of evidence so that failures, missed mitoses, how readers perform and changes all stay in view.",
   unsafe:
-    "Faster work does not establish safe performance. An untested threshold change or expansion can worsen errors; investigate the new site and staining workflow first.",
+    "Faster work does not show the tool is safe. An untested threshold change or wider use can make errors worse; look into the new site and staining process first.",
 };
 
 export const sectionPurposes = [

@@ -1,33 +1,33 @@
 ### How clinical decision support reaches an order
 
-Clinical decision support (CDS) supplies information or actions that help someone make a care decision. In this case, the EHR retrieves the patient's prior laboratory report and pending orders, applies an approved rule, and displays guidance. The clinician reviews the information, decides whether to proceed, and leaves an order audit trail.
+Clinical decision support (CDS) is information or an action that helps someone make a decision about care. In this case, the EHR looks up the patient's earlier laboratory report and any pending orders, applies an approved rule and shows guidance. The clinician reads it, decides whether to go ahead, and the order audit records what happened.
 
-Each step can fail separately. A correct rule can read the wrong patient's report. A correct patient match can still use an unusable or outdated result. A correct suggestion can arrive too late to help. Testing the screen alone will not confirm that the underlying data and rule are correct.
+Each step can go wrong on its own. A correct rule can read the wrong patient's report. The right patient can still have a result that is unusable or out of date. A good suggestion can arrive too late to help. Testing the screen alone will not show that the data and rule behind it are right.
 
 ### Apply the five rights to this decision
 
-The **five rights of CDS** are a way to examine the information, recipient, format, channel, and timing of support. Here, they become concrete design questions:
+The **five rights of CDS** are a way to check the information, the person, the format, the channel and the timing of support. Here they become five practical design questions:
 
-- **Information:** Does the clinician see the dated report or pending order, its status, and enough context to judge its relevance? A long policy does not answer the patient-specific question.
-- **Person:** Can the recipient act on this ordering decision? The collecting nurse has a different task from the prescribing clinician.
-- **Format:** Should the information be a suggestion beside the order, an interrupting message that permits continuation, or a hard stop? The approved policy preserves clinical discretion.
-- **Channel:** Is the guidance in the order composer where the test is selected, or in a separate inbox?
-- **Timing:** Does it arrive before the clinician signs, when changing the proposed order is straightforward?
+- **Information:** Does the clinician see the dated report or pending order, its status, and enough context to judge whether it matters? A long policy does not answer the question about this patient.
+- **Person:** Can the person who sees it act on this ordering decision? The nurse collecting the sample has a different job from the clinician ordering the test.
+- **Format:** Should the information be a suggestion next to the order, an interruption that still lets the clinician continue, or a hard stop? The approved policy leaves the decision to the clinician.
+- **Channel:** Does the guidance appear in the order screen where the test is chosen, or in a separate inbox?
+- **Timing:** Does it arrive before the clinician signs, when changing the order is still easy?
 
-Format describes how the intervention is presented; channel describes where it is delivered. An inline suggestion and a soft stop can both be delivered within the EHR, but require different amounts of attention.
+Format is how the support is presented; channel is where it shows up. A suggestion beside the order and a soft stop can both appear inside the EHR, but they ask for very different amounts of attention.
 
-### Choose support for the thinking required
+### Match the support to the thinking needed
 
-Recognizing a familiar pattern can be fast and largely automatic, often called Type I thinking. Deliberately comparing an earlier result, the reason for testing, and the current clinical question requires more effort, often called Type II thinking. These are descriptions of cognitive work, not two fixed types of clinician.
+Recognizing a familiar pattern can be quick and almost automatic, often called Type I thinking. Deliberately comparing an earlier result, the reason for testing and the current clinical question takes more effort, often called Type II thinking. These describe kinds of mental work, not two kinds of clinician.
 
-A concise display can make the relevant facts easier to inspect. Repeated interruptions can instead train a habitual dismissal. Do not infer that a clinician ignored the science simply because a poorly timed message was closed.
+A short, clear display can make the relevant facts easier to check. Being interrupted over and over can instead train people to click past messages without reading them. Do not assume a clinician ignored the evidence just because they closed a badly timed message.
 
-CDS also includes order sets, relevant reference links, result summaries, documentation prompts, and laboratory protocols. For example, an order set can make the intended initial tests easier to find, while an approved reflex protocol can add a follow-up test when defined criteria are met. An interrupting alert is one option among several.
+CDS also includes order sets, links to relevant references, result summaries, documentation prompts and laboratory protocols. For example, an order set can make the right first tests easier to find, and an approved reflex protocol can add a follow-up test when set criteria are met. An interrupting alert is just one option among several.
 
-Use the controls below to compare designs. The encounter preview shows the resulting message and lets you record either cancellation after review or continuation with a reason. These actions represent different clinical decisions; neither is automatically the correct response to every repeat.
+Use the controls below to compare designs. The encounter preview shows the message your design produces and lets you record either cancelling after review or continuing with a reason. These are different clinical decisions; neither one is automatically right for every repeat.
 
-### Fit the decision to the workflow
+### Fit the support to how people work
 
-The order composer is the screen where a clinician chooses and edits an order. A soft stop interrupts that work but allows continuation; a hard stop prevents continuation under its defined conditions. An inline suggestion supplies information beside the order without requiring dismissal.
+The order composer is the screen where a clinician chooses and edits an order. A soft stop interrupts that work but lets the clinician carry on; a hard stop blocks them under set conditions. An inline suggestion puts information next to the order without anything to dismiss.
 
-Effective decision support must be fast enough for the task, fit the workflow, and make the next action clear. Keep rules simple, use available data, request extra information only when it changes the decision, and prefer a useful alternative over an unexplained stop. Monitor effects and maintain the rules. These principles follow Bates and colleagues' guidance; their application depends on the laboratory problem.
+Good decision support has to be fast enough for the task, fit the way people work and make the next step obvious. Keep rules simple, use data that already exist, ask for more information only when it would change the decision, and offer a useful alternative rather than an unexplained stop. Watch what the rules do and keep them up to date. These principles come from Bates and colleagues; how to apply them depends on the laboratory problem.

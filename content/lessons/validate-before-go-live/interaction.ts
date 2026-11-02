@@ -78,7 +78,7 @@ export const studyRows = [
     total: 17,
     agree: 14,
     days: 8,
-    note: "Three discordances; focus problems under review. Exploratory series, not a completed frozen-section validation.",
+    note: "Three disagreements; focus problems being looked into. An early series, not a finished frozen-section validation.",
   },
 ];
 export const discordances = [
@@ -90,19 +90,19 @@ export const discordances = [
       {
         id: "rescan",
         label: "Rescan and repeat the affected checks.",
-        note: "A rescan may correct acquisition, but the original discordance stays in the study. Add targeted difficult cases and document the effect before clinical approval.",
+        note: "A rescan may fix the scanning problem, but the original disagreement stays in the study. Add more difficult cases of this kind and record the result before clinical approval.",
         correct: true,
       },
       {
         id: "exclude",
         label: "Remove this difficult biopsy from the denominator.",
-        note: "Difficult biopsies are part of the proposed use. Removing a failure would exaggerate performance and hide a correctable acquisition problem.",
+        note: "Difficult biopsies are part of the work the service will do. Removing a failure would make performance look better than it is and hide a scanning problem that could be fixed.",
         correct: false,
       },
       {
         id: "zoom",
         label: "Increase viewer zoom and count it as resolved.",
-        note: "Display enlargement cannot recover detail not captured in focus. Inspect the glass, preparation, scan, and viewer before assigning a cause.",
+        note: "Enlarging the image cannot bring back detail that was never captured in focus. Look at the glass, the preparation, the scan and the viewer before deciding on a cause.",
         correct: false,
       },
     ],
@@ -115,19 +115,19 @@ export const discordances = [
       {
         id: "review",
         label: "Retain and investigate the disagreement.",
-        note: "Not every disagreement is caused by the scanner. Document both reads and adjudication, distinguish major from minor clinical effects, and compare with glass-reader variability as appropriate.",
+        note: "Not every disagreement is the scanner's fault. Record both readings and how they were reconciled, sort major from minor clinical effects, and compare with how much pathologists disagree on glass.",
         correct: true,
       },
       {
         id: "scanner",
         label: "Assign every disagreement to scanner failure.",
-        note: "The current evidence does not establish a technical defect. Investigate interpretation and reader variability without erasing the event.",
+        note: "Nothing so far shows a technical fault. Look into how the slide was interpreted and how much readers vary, without erasing the event.",
         correct: false,
       },
       {
         id: "replace",
         label: "Replace the first digital answer with the adjudicated answer.",
-        note: "Adjudication explains the disagreement; it does not change the original paired observations used to calculate concordance.",
+        note: "Reconciling the readings explains the disagreement; it does not change the original pair of readings used to calculate agreement.",
         correct: false,
       },
     ],
@@ -137,7 +137,7 @@ export const decisions = [
   {
     id: "full",
     label: "Approve the entire requested scope now.",
-    note: "The frozen-section series has only 17 cases, an 8-day interval, and 3 disagreements. Home reporting has no completed system evidence. The fixed-tissue aggregate cannot cover these gaps.",
+    note: "The frozen-section series has only 17 cases, an 8-day gap and 3 disagreements. Home reporting has not been tested at all. The fixed-tissue total cannot cover those gaps.",
   },
   {
     id: "limited",
@@ -148,7 +148,7 @@ export const decisions = [
   {
     id: "reject",
     label: "Repeat the whole study before investigating the scan.",
-    note: "These findings identify gaps and a potentially correctable acquisition issue. A targeted hold and further evidence are more proportionate than a permanent conclusion about all digital pathology.",
+    note: "These findings show gaps and a scanning problem that may be fixable. Holding the specific uses and gathering more evidence makes more sense than reaching a final verdict on all digital pathology.",
   },
 ] as const;
 export function reviewValidation(c: ValidationConfig, answers: Record<string, string>) {
@@ -156,37 +156,37 @@ export function reviewValidation(c: ValidationConfig, answers: Record<string, st
     {
       label: "Scope supported by this study",
       pass: c.scope === "fixed",
-      note: "Limit the review to fixed H&E at the tested hospital workstation; other applications and sites need their own evidence.",
+      note: "Limit the review to fixed H&E at the hospital workstation that was tested; other uses and locations need their own evidence.",
     },
     {
       label: "Representative selection",
       pass: c.cases === "spectrum",
-      note: "Case count alone cannot compensate for missing complexity, small foci, artifacts, and expected diagnoses.",
+      note: "A large number of cases cannot make up for leaving out difficult cases, small foci, artifacts and the diagnoses the service will see.",
     },
     {
       label: "Intraobserver comparison",
       pass: c.method === "paired",
-      note: "Compare each pathologist with their own separate glass read; a historical report is not the same comparison.",
+      note: "Compare each pathologist with their own separate glass reading; the original report is a different comparison.",
     },
     {
       label: "At least two weeks between reads",
       pass: Number(c.washout) >= 14,
-      note: "A 14-day or longer interval addresses the guideline washout recommendation; randomize order and avoid access to prior answers.",
+      note: "A gap of 14 days or more meets the guideline's recommendation for time between readings; shuffle the order and keep earlier answers out of sight.",
     },
     {
       label: "Complete intended system",
       pass: c.system === "intended",
-      note: "Scanner performance alone does not demonstrate identity, retrieval, display, navigation, or fallback behavior.",
+      note: "How the scanner performs says nothing about slide identity, retrieval, display, moving around the slide or falling back to glass.",
     },
     {
       label: "Acquisition discordance investigated",
       pass: answers.V12 === "rescan",
-      note: "Retain V12, investigate blur, and require corrective evidence.",
+      note: "Keep V12, look into the blur and require evidence that it is fixed.",
     },
     {
       label: "Interpretive discordance retained",
       pass: answers.V44 === "review",
-      note: "Retain V44 and document clinical significance rather than rewriting the original read.",
+      note: "Keep V44 and record how much it matters clinically, rather than rewriting the original reading.",
     },
   ];
 }
@@ -195,25 +195,25 @@ export const changes = [
     id: "viewer",
     label: "Viewer update changes image rendering.",
     answer: "targeted",
-    note: "Assess the changed rendering and affected workflows against documented baseline behavior; determine the scope of revalidation with clinical leadership before release.",
+    note: "Compare how images now look, and the work affected, with what was recorded before the change; decide with the director how much needs revalidating before release.",
   },
   {
     id: "frozen",
     label: "Add frozen sections for intraoperative consultation.",
     answer: "new",
-    note: "A new application needs representative clinical validation, time-critical workflow and fallback testing, and review of device labeling and applicable requirements.",
+    note: "A new use needs its own clinical validation on typical cases, testing of the urgent workflow and fallback to glass, and a check of the device labeling and any rules that apply.",
   },
   {
     id: "account",
     label: "Correct a user phone number; image workflow is unchanged.",
     answer: "document",
-    note: "Document and verify the administrative edit. Risk-based change review should explain why image-performance revalidation is unnecessary for this edit.",
+    note: "Record and check the administrative edit. The change review should say why a change like this does not need the images revalidated.",
   },
 ] as const;
 
 export const sectionPurposes = [
-  "Identify the readers, case mix and applications represented in the supplied evidence.",
-  "Choose a comparison design appropriate to the intended clinical use.",
+  "Find out which readers, cases and uses the evidence actually covers.",
+  "Choose a comparison that fits the proposed clinical use.",
   "Keep both disagreements in the study and choose how to investigate their causes.",
-  "Distinguish administrative changes from changes that need targeted checks or new validation.",
+  "Tell administrative changes apart from changes that need targeted checks or a new validation.",
 ];

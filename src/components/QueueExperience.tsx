@@ -58,7 +58,7 @@ export function QueueExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
             note={
               config.freshness === "stale"
                 ? "The 10:00 delivery has not occurred in this snapshot."
-                : "The review extract includes the later delivery and events available at noon."
+                : "This copy includes the later delivery and everything recorded by noon."
             }
           />
           <Topic5Select
@@ -71,8 +71,8 @@ export function QueueExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
             onChange={(value) => update("source", value)}
             note={
               config.source === "lis"
-                ? "The completed-result statistics cannot show unfinished work. The audit comparison reports how many received accessions this view omits."
-                : "Unfinished accessions remain visible with elapsed ages, separate from completed-duration statistics."
+                ? "Statistics on finished results cannot show unfinished work. The comparison shows how many received accessions this view leaves out."
+                : "Unfinished accessions stay in view with how long they have waited, separate from the statistics on finished results."
             }
           />
           <Topic5Select
@@ -83,7 +83,7 @@ export function QueueExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
               ["peak", "10:00 courier group"],
             ]}
             onChange={(value) => update("period", value)}
-            note="The selection changes the denominator. Compare the same group before interpreting a difference."
+            note="Your choice changes the denominator. Compare the same group before reading anything into a difference."
           />
           <Topic5Select
             label="Time interval"
@@ -98,7 +98,7 @@ export function QueueExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
               config.stage === "post"
                 ? "This interval includes waiting and review after the analyzer finished."
                 : config.stage === "analysis"
-                  ? "This includes pre-analysis waiting and preparation, not just instrument processing."
+                  ? "This includes waiting and preparation before the run, not just the analyzer's own time."
                   : "Only released records have a completed total duration."
             }
           />
@@ -209,8 +209,8 @@ export function QueueExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
           {plan && (
             <p className="topic5-note">
               {ready
-                ? "The current linked records support a monitored review-coverage pilot."
-                : "Before recommending a change, use current linked records and inspect the post-analysis interval; preserve required review controls."}
+                ? "The current linked records support a monitored trial of reviewer coverage."
+                : "Before recommending a change, use current linked records and look at the time after analysis. Keep the required review checks."}
             </p>
           )}
         </div>

@@ -18,7 +18,7 @@ export const manifest: LessonManifest = {
 
       summary: "Capture, storage, retrieval, viewing; static, live, and whole-slide applications",
       learnerAction:
-        "Compare fields, trace image identity and retrieval, and recommend checks for the reporting workflow.",
+        "Compare image patches, follow slide identity and retrieval, and recommend checks before images are used for reporting.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -33,7 +33,7 @@ export const manifest: LessonManifest = {
       objective: "7.2",
       summary: "Formats, resolution, compression, display, and practical storage",
       learnerAction:
-        "Inspect identical regions after downsampling and encoding, calculate storage tradeoffs, and reject approval based on extension or size alone.",
+        "Compare the same patch after downsampling and compression, work out storage costs, and refuse to approve on file type or size alone.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [

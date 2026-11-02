@@ -143,13 +143,13 @@ export function alertReplay(config: AlertConfig) {
         : suppressed
           ? "The same order decision has already received guidance."
           : row.id === "E10" && shown
-            ? "A new decision is reviewed again; suppression must not last for the whole admission."
+            ? "A new decision is checked again; holding back repeats must not last for the whole admission."
             : shown && row.role !== "ordering"
               ? "Collection staff cannot revise the prescribing decision."
               : shown && !candidate(row)
                 ? "The record does not meet the approved review criteria."
                 : shown
-                  ? "Context is available for review; the log cannot tell us whether a test should be cancelled."
+                  ? "The earlier information is there to review; the log cannot tell us whether a test should be cancelled."
                   : "No message is presented for this event.",
     };
   });
@@ -188,8 +188,8 @@ export const alertControls = [
       ["once", "Once per order decision"],
     ],
     notes: {
-      every: "Reopening a panel can create another interruption without new information.",
-      once: "Reopening the same decision is suppressed. A new decision, including changed clinical context, is evaluated again.",
+      every: "Reopening a panel can interrupt again with nothing new to say.",
+      once: "Reopening the same decision does not bring the message back. A new decision, including one after the patient's situation changes, is checked again.",
     },
   },
   {
@@ -201,8 +201,8 @@ export const alertControls = [
       ["hard", "Hard stop"],
     ],
     notes: {
-      soft: "Each displayed message interrupts work but permits the clinician to continue.",
-      inline: "The suggestion remains available without a mandatory interruption.",
+      soft: "Each message interrupts work but lets the clinician carry on.",
+      inline: "The suggestion is there to read without interrupting anyone.",
       hard: "This policy does not justify preventing a needed repeat or an order without a usable prior result.",
     },
   },
@@ -212,13 +212,13 @@ export const alertSources = [
     title: "Monthly message report",
     record:
       "August 2026 · HbA1c repeat-test message\nRole              Shown     Accept clicked\nAttending          2,400       120\nResident           7,200       180\nCollecting nurse   2,400       100\nTotal             12,000       400",
-    note: "The displayed acceptance rate is 400 / 12,000 = 3.3%. The button acknowledges the message; it does not cancel the order. Counts are presentations, not unique patients.",
+    note: "The acceptance rate shown is 400 / 12,000 = 3.3%. The button closes the message; it does not cancel the order. The counts are times the message was shown, not patients.",
   },
   {
     title: "Linked audit review",
     record:
       "August 2026\nDistinct order decisions linked to presentations: 3,000\nButton action: acknowledge and close\nOrder cancellation: separate order-audit field\nClinical appropriateness: not captured by message report",
-    note: "There were four presentations per linked decision on average. This average does not mean every decision received four. Join by decision identifier before relating messages to order changes.",
+    note: "On average, each decision got four displays. That does not mean every decision got four. Join the records on the decision identifier before linking messages to order changes.",
   },
   {
     title: "Pilot safety review",
@@ -257,7 +257,7 @@ export const measures = [
     correct: true,
     id: "process",
     label: "Order changes linked to unique decisions",
-    note: "Count cancellations and retained orders with reasons. Message acknowledgment is a different event.",
+    note: "Count cancellations, and orders kept with a reason. Clicking the message is a different event.",
   },
   {
     correct: true,
@@ -269,18 +269,18 @@ export const measures = [
     correct: true,
     id: "burden",
     label: "Presentations and time spent, by role",
-    note: "Look for repeat messages and work displaced to other staff; a lower total can hide unequal burden.",
+    note: "Look for repeat messages and work pushed onto other staff; a lower total can hide extra work for some people.",
   },
   {
     correct: true,
     id: "harm",
     label: "Delayed indicated tests and missed testing",
-    note: "Review safety events and sampled cancellations. No reported event does not establish that no harm occurred.",
+    note: "Review safety events and a sample of cancellations. No reported event does not mean no harm happened.",
   },
   {
     id: "dismissals",
     label: "Count every dismissal as an avoided repeat",
-    note: "Dismissal is a user-interface event; the order may still be placed. Link the event to the clinical decision.",
+    note: "Dismissing is just a click on the screen; the order may still go ahead. Link the click to the clinical decision.",
     correct: false,
   },
   {
@@ -294,29 +294,29 @@ export const rolloutPlans = [
   {
     id: "expand",
     label: "Expand because test use fell",
-    note: "The comparison ward also improved, and one indicated test was delayed. A before/after difference alone does not establish benefit or safety.",
+    note: "The comparison ward also improved, and one needed test was delayed. A before-and-after difference on its own does not show benefit or safety.",
   },
   {
     id: "review",
     label: "Investigate the delay, revise the rule and display, and reassess a limited pilot",
-    note: "Review SR-14 with the treating team, laboratory director, and CDS team. Correct the missing context, replay exception cases, and agree on safety review and pause criteria before restarting.",
+    note: "Review SR-14 with the treating team, the laboratory director and the CDS team. Fix the missing information, replay the exception cases, and agree how safety will be reviewed and when to pause before starting again.",
   },
   {
     id: "acceptance",
     label: "Keep only acceptance rate as the success measure",
-    note: "Acknowledgement does not establish a correct clinical action. It can rise even when needed tests are cancelled.",
+    note: "A click does not show the right clinical action was taken. Clicks can go up even when needed tests are being cancelled.",
   },
 ];
 
 export const lessonCopy = {
   text01:
-    "Counts apply only to these 10 audit events across 7 order decisions. They are not estimated monthly effects or clinical outcomes.",
+    "These counts apply only to these 10 audit events from 7 order decisions. They are not estimated monthly effects or clinical outcomes.",
   text02:
     "Clinically reviewed avoidable repeat orders per 1,000 eligible order decisions each week in each ward. Weeks 1–2 precede the change; weeks 3–4 follow it.",
 };
 
 export const sectionPurposes = [
   "Link each message count to an actual ordering decision before interpreting alert use.",
-  "Test whether the revised rule reaches the right decisions without blocking documented exceptions.",
+  "Test whether the changed rule reaches the right decisions without blocking documented exceptions.",
   "Compare rates in both services and choose benefit, burden and safety measures.",
 ];

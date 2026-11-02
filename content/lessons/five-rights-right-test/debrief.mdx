@@ -2,29 +2,28 @@
 
 ### What happened in this case
 
+The ordering audit showed a problem with how the guidance reached people: an inbox message arrived after the order was signed, and it also went to collection staff. Changing the clinical rule alone would not fix either problem.
 
-The ordering audit showed a workflow problem: an inbox message arrived after signing and also reached collection staff. Changing the clinical rule alone would not fix either problem.
+In the builder, the right information was the dated report or pending order, the right person was the ordering clinician, the right channel was the order screen and the right time was before signing. A suggestion beside the order left the decision with the clinician without anything to dismiss. A soft stop also let the clinician continue, but added an interruption that would need a good reason.
 
-In the builder, the relevant information was the dated report or pending order, the recipient was the ordering clinician, the channel was the order composer, and the useful time was before signing. An inline suggestion preserved discretion without requiring dismissal. A soft stop also allowed continuation, but added an interruption that would need justification.
+A hard stop failed the specification, because the local rule did not allow blocking every repeat. The encounter with a documented clinical reason shows why. Cancelling an order is not automatically a success, and continuing is not automatically a failure. The audit should keep the decision, the earlier order or report that was shown, and the reason.
 
-A hard stop failed the specification because the local review rule did not authorize preventing every repeat. The encounter with a documented clinical reason makes that consequence explicit. A cancellation is not inherently a success, and continuation is not inherently a failure. The audit should retain the decision, the prior order or report used, and the reason.
+### What still needs clinical and technical review
 
-### What still requires clinical and technical review
+The laboratory director and the clinical CDS committee approve the clinical criteria and how exceptions are handled. The EHR and laboratory teams check that the right patient and test are matched, and check report status, collection times, pending-order status, comments and where the "usable" information comes from. Before the guidance goes live, they also test corrected reports, out-of-date data, missing fields and changes in the patient's condition.
 
-The laboratory director and clinical CDS committee approve the clinical criteria and exception handling. The EHR and laboratory teams verify patient and test matching, report status, collection times, pending-order status, comments, and the source of usability information. They also test corrected reports, stale data, missing fields, and changed clinical context before deployment.
+A screen that says "usable" is only as reliable as the data behind it. The next lesson looks at a suggestion that was accepted and delayed a test that was needed, because important context was not stored in a field the rule could read.
 
-A screen that says “usable” is only as reliable as the source data. The next lesson examines an accepted suggestion that delayed an indicated test because important context was not represented in a structured field.
-
-A monitored pilot should link unique order decisions to messages and clinical actions, measure workload, review appropriateness, and look for delayed needed testing. Eight passing encounters are evidence about these eight checks; they are not approval to deploy.
+A monitored trial should link each order decision to the message shown and what the clinician did, measure the extra work, review whether the decisions were appropriate and look for needed tests that were delayed. Eight encounters passing is evidence about those eight checks; it is not approval to go live.
 
 <details className="teaching-supplement">
 <summary>A closer look: choose the moment when the order can change</summary>
 
-An ordering clinician can reconsider a repeat test while reviewing the order. The same advice sent after signing may require finding and changing an order that has already been placed. Sending it to collection staff gives the message to people who may be unable to make that decision.
+A clinician can rethink a repeat test while still looking at the order. The same advice sent after signing means finding and changing an order already placed. Sending it to collection staff gives it to people who cannot make that decision.
 
-Useful guidance includes the relevant prior report or pending order, reaches the clinician making the decision and appears while the choice is still being made. An inline suggestion can provide that information without requiring every clinician to dismiss an alert. A soft stop adds an interruption whose value needs review.
+Useful guidance shows the earlier report or pending order, reaches the clinician making the decision and appears while the choice is still open. A suggestion next to the order can give that information without making every clinician dismiss an alert. A soft stop adds an interruption, and whether it is worth it needs checking.
 
-A recurring-magnesium-order example from conference teaching shows one way to use a default in an alert. This case requires its own choice of presentation, with an accessible route for indicated repeat testing.
+A conference example about repeated daily magnesium orders shows one way to use a default setting in an alert. This case needs its own choice of design, with an easy way to order a repeat when one is needed.
 
 **Before a pilot:** Which encounter would you use to check that a clinician can still order a repeat when the patient’s condition has changed?
 
@@ -33,8 +32,4 @@ A recurring-magnesium-order example from conference teaching shows one way to us
 
 ### Who does what
 
-Work with a clinical service representative and informatics lead. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
-
-### Connection to PIER 6.1, 6.2, 4.2
-
-The case asks you to place decision support at the decision it can improve using laboratory records and explain the consequence of your choice.
+The EHR team builds and tests the guidance and records the results. The laboratory director and a representative of the clinicians who order the test agree on the clinical criteria and approve the design.

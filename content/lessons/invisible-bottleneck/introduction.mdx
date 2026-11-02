@@ -1,26 +1,13 @@
 # Investigating Delayed Result Release
 
-At noon, the chemistry supervisor reports that specimens delivered around
-10:00 have taken much longer than usual to appear as final results. The
-operations dashboard still shows a median receipt-to-release time of
-**20 minutes**. A manager asks whether another analyzer is needed.
+At noon, the chemistry supervisor reports that specimens delivered around 10:00 are taking much longer than usual to come out as final results. The operations dashboard still shows a median of **20 minutes** from receipt to release. A manager asks whether the laboratory needs another analyzer.
 
-You are the resident assisting the supervisor and analytics team. The dashboard
-was built from finalized laboratory information system (LIS) results. It opens in a web page whose clock shows
-the current time, but its data come from a scheduled extract. Middleware review
-events and unfinished accessions are stored in separate operational systems.
+You are the resident helping the supervisor and the analytics team. The dashboard is built from final results in the laboratory information system (LIS). It opens in a web page whose clock shows the current time, but its numbers come from a copy of the data made on a schedule. The middleware's review records, and accessions that are not finished yet, are kept in other systems.
 
-The review set contains 14 accessions received from 08:00 through 10:07 on
-the same day: six earlier routine records and eight from the 10:00 delivery.
-Can the dashboard answer the manager’s question? Inspect the records to decide what, if anything, must change before proposing an intervention.
-
-
-
+The review set has 14 accessions received between 08:00 and 10:07 the same day: six earlier routine ones and eight from the 10:00 delivery. Can the dashboard answer the manager's question? Look at the records and decide what, if anything, has to change before anyone proposes a fix.
 
 ## What you will be able to do
 
-- Choose a denominator that includes unfinished work.
-- Check the extract inclusion rule.
-- Explain why “sort the completed cases by longest time” is an incomplete approach.
-
-Start by reading the case records. Make a choice before checking the explanation; you can revise it and test again.
+- Choose a denominator that includes work that is not finished.
+- Check which records the data copy picks up.
+- Explain why sorting the finished cases by longest time can mislead you.

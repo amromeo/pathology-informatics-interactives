@@ -1,7 +1,7 @@
-### Preserve the cases that should behave differently
+### Keep the cases that should behave differently
 
-The opening encounter is only one test. Run the design against a collecting nurse, absent history, an older report, an unusable report, a pending order, a documented reason to repeat, and the exact 90-day boundary.
+The first encounter is only one test. Run your design against a collecting nurse, a patient with no history, an older report, an unusable report, a pending order, a documented reason to repeat and a result exactly 90 days old.
 
-In this exercise, the rule uses collection time for a final report and includes exactly 90 days. A pending order must be described as pending, without implying that a final result exists. The documented exception retains access to the earlier information and the ability to proceed.
+In this exercise, the rule uses the collection time of a final report and counts exactly 90 days as inside the window. A pending order has to be described as pending, without suggesting a final result exists. The documented exception still shows the earlier information and still lets the clinician go ahead.
 
-The checks assess the approved delivery specification. They do not certify clinical effectiveness. Both an inline suggestion and a soft stop may preserve the required decision, but their burden differs. Explain why an interruption is necessary before choosing one. Changing the design clears the previous test result, so rerun the encounters after a revision.
+The checks test the approved specification for how the guidance is delivered. They do not show that it works clinically. A suggestion beside the order and a soft stop can both leave the decision with the clinician, but the soft stop costs more attention. Explain why an interruption is needed before choosing one. Changing the design clears the last test result, so run the encounters again after each change.
