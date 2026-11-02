@@ -1,9 +1,5 @@
 export type ReflexAction =
-  | "Order FT4"
-  | "Use existing FT4"
-  | "No reflex"
-  | "Review"
-  | "Outside this rule";
+  "Order FT4" | "Use existing FT4" | "No reflex" | "Review" | "Outside this rule";
 export type ReflexConfig = {
   lower: number;
   upper: number;
