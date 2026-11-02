@@ -1,50 +1,21 @@
-### Other standards solve other parts of the report
+### Other standards cover other parts of the report
 
-An **orderable** is something a clinician can request. A panel order may cause
-several observations to be performed and reported. An **observation** identifies
-what was measured or assessed. Its **value** is the answer, and its **unit**
-expresses the quantity when applicable. A report assembles those observations
-with interpretation and context.
+An **orderable** is something a clinician can order. Ordering a panel may lead to several results being measured and reported. An **observation** says what was measured or assessed. Its **value** is the answer, and its **unit** says what quantity the number describes, where there is one. A report brings those observations together with an interpretation and context.
 
-For example, an estrogen-receptor observation, its percentage result, the %
-unit, and the pathologist's interpretation are separate data elements. The
-breast panel order does not supply all of those meanings. A billing entry
-documents a service for administrative use; it cannot confirm what a
-particular tumor's result was.
+For example, an estrogen-receptor result, its percentage, the % unit and the pathologist's interpretation are separate pieces of data. The breast panel order does not carry all of those meanings. A billing entry records a service for administrative purposes; it cannot confirm what a particular tumor's result was.
 
-### Match each standard to the actual task
+### Match each standard to the job
 
-**LOINC** identifies observations and related clinical information. **SNOMED
-CT** represents detailed clinical concepts, including findings. **UCUM** gives
-units a machine-readable representation. These can work together in one
-record; choosing one does not eliminate the other elements.
+**LOINC** identifies tests, observations and related clinical information. **SNOMED CT** represents detailed clinical concepts, including findings. **UCUM** writes units in a form computers can read. These can all be used together in one record; picking one does not do away with the others.
 
-**ICD** classifications support diagnosis classification for specified
-administrative and reporting uses. **CPT** represents services in the US
-billing workflow named here. The required edition, documented service, and
-submission rules matter; this exercise does not assign a billable code.
+**ICD** classifies diagnoses for particular administrative and reporting purposes. **CPT** describes services for US billing. The right edition, the service documented and the submission rules all matter; this exercise does not assign a billing code.
 
-**DICOM** describes medical imaging objects and associated metadata, including
-whole-slide microscopy. **CAP cancer protocols** specify structured reporting
-elements for the relevant cancer and procedure. Neither an image format nor a
-report template is a universal clinical vocabulary. Report elements may use
-terminology codes within their structure.
+**DICOM** describes medical images and the information stored with them, including whole-slide microscopy images. **CAP cancer protocols** set out the structured reporting items for each cancer and procedure. Neither an image format nor a report template is a general clinical vocabulary, though report items may use terminology codes inside them.
 
-A short HER2 label does not show the specimen, method, or result
-scale. An immunostain interpretation and a gene-amplification assessment cannot
-be merged solely because their labels contain HER2. If the source catalog
-lacks the needed definition, obtain it from the assay owner before accepting
-a mapping. Requesting the missing assay definition is the appropriate review decision.
+A short label such as HER2 does not tell you the specimen, the method or the kind of result. An immunostain interpretation and a gene-amplification result cannot be treated as the same just because both labels say HER2. If the local test list does not say what the assay is, get that from the person responsible for the assay before accepting a mapping. Asking for the missing assay definition is the right decision here.
 
-### Document what the mapping asserts
+### Write down what the mapping claims
 
-Record the local identifier and definition, target system and code, terminology
-version, relationship, reviewer, date, and intended consumer. A broader or
-narrower concept may be useful for a specified purpose, but it is not
-automatically an exact equivalent. Do not infer that two local assays are
-interchangeable merely because they share a LOINC code; analytical comparability
-requires separate evidence.
+Record the local code and its definition, the code system and code you mapped to, the terminology version, how closely they match, the reviewer, the date and who will use the result. A broader or narrower code may be fine for a particular purpose, but it is not automatically an exact match. Sharing a LOINC code does not show that two local assays give interchangeable results; that needs its own evidence.
 
-Test representative values, units, interpretation categories, and missing
-fields at the destination. A valid code can still produce an invalid record
-when combined with the wrong value, specimen, or unit.
+Test typical values, units, interpretation categories and missing fields in the receiving system. A valid code can still produce a wrong record when it is paired with the wrong value, specimen or unit.

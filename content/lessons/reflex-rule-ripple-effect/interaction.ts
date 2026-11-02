@@ -1,5 +1,9 @@
 export type ReflexAction =
-  "Order FT4" | "Use existing FT4" | "No reflex" | "Review" | "Outside this rule";
+  | "Order FT4"
+  | "Use existing FT4"
+  | "No reflex"
+  | "Review"
+  | "Outside this rule";
 export type ReflexConfig = {
   lower: number;
   upper: number;
@@ -43,14 +47,14 @@ export const reflexCases: readonly ReflexCase[] = [
     tsh: 0.39,
     expected: "No reflex",
     purpose:
-      "A second case in the changed interval tests that the repair is not limited to one exact value.",
+      "A second result in the changed range checks that the fix works for more than one exact value.",
   },
   {
     ...base,
     id: "TH-03",
     tsh: 0.26,
     expected: "Order FT4",
-    purpose: "A value just below the approved lower threshold must retain the FT4 order.",
+    purpose: "A value just below the approved lower threshold must still get its FT4 order.",
   },
   {
     ...base,
@@ -64,7 +68,7 @@ export const reflexCases: readonly ReflexCase[] = [
     id: "TH-05",
     tsh: 0.4,
     expected: "No reflex",
-    purpose: "The old lower boundary and the current interval both permit no reflex here.",
+    purpose: "Under both the old lower threshold and the new interval, no FT4 is added here.",
   },
   {
     ...base,
@@ -78,7 +82,7 @@ export const reflexCases: readonly ReflexCase[] = [
     id: "TH-07",
     tsh: 4.21,
     expected: "Order FT4",
-    purpose: "The higher-TSH branch must be preserved during a change to the lower threshold.",
+    purpose: "Changing the lower threshold must not break the high-TSH branch.",
   },
   {
     ...base,
@@ -112,7 +116,7 @@ export const reflexCases: readonly ReflexCase[] = [
     tsh: 0.1,
     age: 12,
     expected: "Outside this rule",
-    purpose: "The approved adult reflex rule does not apply to this pediatric order.",
+    purpose: "The approved adult reflex rule does not apply to this child's order.",
   },
   {
     ...base,
@@ -120,7 +124,7 @@ export const reflexCases: readonly ReflexCase[] = [
     tsh: 0.1,
     order: "TSH only",
     expected: "Outside this rule",
-    purpose: "A standalone TSH order does not authorize this reflex sequence.",
+    purpose: "A TSH-only order does not allow this reflex sequence.",
   },
   {
     ...base,
@@ -128,7 +132,7 @@ export const reflexCases: readonly ReflexCase[] = [
     tsh: 0.1,
     final: false,
     expected: "Review",
-    purpose: "A numeric but preliminary result is not yet eligible to place a reflex order.",
+    purpose: "A preliminary result, even with a number, cannot place a reflex order yet.",
   },
 ];
 export function evaluateReflex(row: ReflexCase, config: ReflexConfig) {
@@ -141,7 +145,7 @@ export function evaluateReflex(row: ReflexCase, config: ReflexConfig) {
   trace.push(
     config.restrictScope
       ? "Adult TSH-with-reflex order confirmed."
-      : "Age and order-type restriction bypassed.",
+      : "Age and order-type restriction switched off.",
   );
   if (
     row.tsh === null ||
@@ -157,7 +161,9 @@ export function evaluateReflex(row: ReflexCase, config: ReflexConfig) {
       ],
     };
   trace.push(
-    row.final ? "Final numeric TSH result available." : "Preliminary-result restriction bypassed.",
+    row.final
+      ? "Final numeric TSH result available."
+      : "Preliminary-result restriction switched off.",
   );
   const triggers = config.inclusive
     ? row.tsh <= config.lower || row.tsh >= config.upper
@@ -209,7 +215,7 @@ export const reflexControlNotes = (config: ReflexConfig): Record<keyof ReflexCon
     : "A preliminary numeric result may place an order before final verification.",
   restrictScope: config.restrictScope
     ? "Pediatric and TSH-only records remain outside this adult reflex rule."
-    : "The rule now applies to records outside the approved age and order scope.",
+    : "The rule now applies to records outside the approved ages and order type.",
 });
 export function reflexSummary(config: ReflexConfig) {
   const results = reflexReplay(config);
@@ -231,28 +237,28 @@ export const dependencyRecords = [
     title: "TSH display definition",
     text: "Adult reference interval 0.27–4.20 mIU/L, effective Monday 06:00. TH-01 displays 0.30 mIU/L without an interval flag.",
     meaning:
-      "The report uses this definition to display the interval. The reflex process reads a separate configuration.",
+      "The report uses this definition to print the interval. The reflex program reads separate settings.",
   },
   {
     id: "approval",
     title: "Approved adult reflex protocol",
     text: "For final numeric adult TSH-with-reflex orders: add FT4 when TSH is below 0.27 or above 4.20 mIU/L. Reuse a pending or completed FT4 on the same accession.",
     meaning:
-      "The director approved these order criteria for this assay and population. Updating a reference interval alone does not authorize changing a clinical order rule.",
+      "The director approved these ordering criteria for this assay and these patients. Updating a reference interval does not by itself approve a change to an ordering rule.",
   },
   {
     id: "rule",
     title: "Configured reflex rule",
     text: "Revision 8: adult TSH-with-reflex; final numeric result; TSH < 0.40 or > 4.20; do not duplicate a linked FT4.",
     meaning:
-      "The separate lower threshold still contains 0.40. This is the value used for TH-01's downstream order.",
+      "This separate lower threshold is still 0.40. That is the value that added TH-01's FT4.",
   },
   {
     id: "order",
     title: "TH-01 order record",
     text: "TSH 0.30 mIU/L finalized at 07:18. Reflex revision 8 evaluated at 07:18. FT4 order created on TH-01 at 07:18; no earlier linked FT4.",
     meaning:
-      "The order record connects an additional FT4 to a particular rule evaluation. A changed display does not prove that the order rule changed.",
+      "The order record ties the extra FT4 to one particular run of the rule. A changed report does not prove that the ordering rule changed.",
   },
 ];
 export const reflexApprovalChoices = [
@@ -271,15 +277,15 @@ export const reflexApprovalChoices = [
   {
     id: "complete",
     label:
-      "Review all expected actions, document the approved rule revision, assess affected accessions, and monitor added and missed orders after release.",
+      "Review all expected actions, record the approved rule revision, check the accessions already affected, and monitor added and missed orders once the rule is live.",
     feedback:
-      "The analyst documents the build and test results. Laboratory leadership approves clinical criteria and recovery of affected cases. Monitoring includes missed indicated orders, duplicate orders, and exceptions as well as total volume.",
+      "The analyst records the build and the test results. The laboratory director approves the ordering criteria and the plan for affected cases. Monitoring looks at missed orders, duplicate orders and exceptions, not just the total number of tests.",
   },
 ];
 
 export const additionalExercises = {
-  title: "Choose a quality indicator after the change",
-  purpose: "Define a denominator that can detect unnecessary additions and missed indicated tests.",
+  title: "Choose what to measure after the change",
+  purpose: "Choose a denominator that can show both unnecessary additions and missed tests.",
   questions: [
     {
       id: "QI1",
@@ -301,14 +307,14 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "Review all eligible orders and compare expected with observed follow-up actions. Selecting only added tests hides missed additions; selecting only released orders hides holds.",
+        "Review every eligible order and compare the expected follow-up with what happened. Looking only at added tests hides missed additions; looking only at released results hides holds.",
       feedbackByChoice: {
         eligible:
-          "Include all adult TSH-with-reflex accessions with final numeric results in the defined period. Compare the expected action with what happened for each, including those without an added FT4. Account separately for unresolved results and records outside scope.",
+          "Include every adult TSH-with-reflex accession with a final numeric result in the period. For each, compare the expected action with what happened, including those with no added FT4. Count results still under review, and records outside the rule, separately.",
         added:
           "A missed FT4 addition leaves no new FT4 order to select. Start with all eligible TSH-with-reflex accessions so those missing orders remain visible.",
         released:
-          "A final result may have required staff review before release. Selecting only automatic releases would omit those eligible accessions. Define the review group from age, order type, final result and period.",
+          "Some final results needed staff review before release. Looking only at automatic releases would leave those accessions out. Choose the group by age, order type, final result and period.",
       },
     },
     {
@@ -330,11 +336,11 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "Fewer tests is not sufficient evidence of improvement. Include erroneous omissions, unnecessary additions, turnaround time and clinical review of exceptions.",
+        "Fewer tests on its own does not show things got better. Look at tests wrongly left out, unnecessary additions, turnaround time and a clinical review of exceptions.",
       feedbackByChoice: {
-        both: "Compare expected and actual actions to find both missing FT4s and additions that the protocol did not call for. Also inspect duplicates, unresolved exceptions and reporting delays.",
+        both: "Compare expected and actual actions to find both missing FT4s and additions the protocol did not call for. Also look at duplicates, exceptions still open and reporting delays.",
         fewer:
-          "A rule that never adds FT4 would produce a low count while missing indicated tests. Check each accession's expected action before interpreting the total.",
+          "A rule that never adds FT4 would give a low count while missing tests that were needed. Check each accession's expected action before reading anything into the total.",
         revenue:
           "Billing totals combine prices, volumes and other work. They do not identify which eligible accession missed an FT4 or received an unnecessary one. Review the order records against the protocol.",
       },

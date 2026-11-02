@@ -30,63 +30,63 @@ export const flagFields = [
   {
     id: "MSH-9",
     value: "ORU^R01^ORU_R01",
-    meaning: "Message type, trigger event and structure: an unsolicited observation result.",
+    meaning: "Message type, trigger event and structure: a result sent without being asked for.",
   },
   {
     id: "MSH-10",
     value: "F001",
     meaning:
-      "Message control ID. The acknowledgment echoes it in MSA-2 so the sender can match the response.",
+      "Message control number. The acknowledgment repeats it in MSA-2 so the sender can match the reply to the message.",
   },
   { id: "MSH-12", value: "2.5.1", meaning: "HL7 version used by this interface agreement." },
   {
     id: "PID-3",
     value: "MRN0041872^^^HOSP^MR",
     meaning:
-      "Patient identifier with its assigning authority. The same number at another hospital may identify a different patient.",
+      "Patient identifier, with the organization that issued it. The same number at another hospital may belong to a different patient.",
   },
   { id: "OBR-3", value: "FL-01^LIS", meaning: "Filler order number assigned by the laboratory." },
   {
     id: "OBR-25",
     value: "F",
-    meaning: "Result status for the order: final. This is separate from a critical flag.",
+    meaning: "Status of the order's results: final. This has nothing to do with the critical flag.",
   },
 
   {
     id: "OBX-3",
     value: "K^Potassium^L",
     meaning:
-      "Identifies the observation. K is this laboratory's local potassium identifier; L names the local coding system. It is not the result or severity.",
+      "Names the test. K is this laboratory's own code for potassium, and L says the code is a local one. It is not the result or its severity.",
   },
   {
     id: "OBX-5",
     value: "6.8",
     meaning:
-      "Carries the numerical result. Preserving this number does not prove that units, flags, or report status were preserved.",
+      "Carries the number. The number coming through correctly does not show that the unit, flag or status did.",
   },
   {
     id: "OBX-6",
     value: "mmol/L",
     meaning:
-      "Carries the unit. A changed unit without a corresponding validated numeric conversion changes clinical meaning.",
+      "Carries the unit. Changing the unit without correctly converting the number changes what the result means.",
   },
   {
     id: "OBX-7",
     value: "3.5-5.0",
     meaning:
-      "Carries reference information for this result. The reference interval is not a definition of the laboratory's critical limits.",
+      "Carries the reference interval for this result. The reference interval is not the laboratory's critical limits.",
   },
   {
     id: "OBX-8",
     value: "CH",
     meaning:
-      "Abnormal Flags in version 2.5.1, called Interpretation Codes from version 2.7. CH, CL and XH are this sender's local codes. The sender uses CH for critical high; this receiver's agreed table uses HH. The interface must preserve the category when translating it.",
+      "Called Abnormal Flags in version 2.5.1 and Interpretation Codes from version 2.7 on. CH, CL and XH are this laboratory's own codes. The laboratory uses CH for critical high; the EHR's agreed table uses HH. The interface has to keep the meaning when it translates the code.",
   },
   {
     id: "OBX-11",
     value: "F",
     meaning:
-      "Identifies a final observation. A final status is separate from the severity flag; F does not mean normal.",
+      "Marks the result as final. Final status has nothing to do with the flag; F does not mean normal.",
   },
 ];
 export const flagTrace = [
@@ -94,31 +94,31 @@ export const flagTrace = [
     title: "LIS verified result",
     record:
       "Accession FL-01 · Potassium 6.8 mmol/L · CH · Final\nCritical-result call: documented at 08:03",
-    note: "The LIS retains the critical category and its communication record. Inspect what was sent next.",
+    note: "The LIS still has the critical flag and the record of the phone call. Look at what was sent next.",
   },
   {
     title: "Interface outbound record",
     record: outboundMessage,
-    note: "The outbound flag is still CH. The numeric value and status arrived in their expected fields.",
+    note: "The flag going out is still CH. The number and status are in the right fields.",
   },
   {
     title: "Receiver import log",
     record:
       "08:04 · F001 · MSA|AA|F001\nObservation stored · interpretation CH not in display table",
-    note: "This receiver acknowledges application acceptance and logs an unknown interpretation. That behavior is specific to its contract; an acknowledgment is not a screenshot of the clinical report.",
+    note: "This EHR confirms it accepted the message and logs the flag it did not recognize. That is how this particular EHR is set up; an acknowledgment is not a picture of the report clinicians see.",
   },
   {
     title: "EHR laboratory report",
     record:
       "FL-01 · Potassium 6.8 mmol/L\nReference 3.5–5.0 · Final · severity indicator unavailable",
-    note: "The report is incomplete even though the number is correct. Verify the official laboratory report and any reused result views after the change.",
+    note: "The report is incomplete even though the number is right. After the fix, check the official laboratory report and any other screen that shows this result.",
   },
 ];
 
 export const additionalExercises = {
   title: "Identify the laboratory interface",
   purpose:
-    "Distinguish message routing from the work performed between analyzers and the laboratory system.",
+    "Tell the program that passes messages between systems apart from the work done between the analyzers and the LIS.",
   questions: [
     {
       id: "IF1",
@@ -144,7 +144,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "A unidirectional interface sends results in one direction. A valid result feed does not show that order download is supported.",
+        "A one-way interface only sends results. Results arriving correctly does not show that orders can be sent to the analyzer.",
     },
     {
       id: "IF2",
@@ -170,7 +170,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "Host query retrieves orders for the scanned identifier. Verify the specimen association and the returned tests.",
+        "Host query fetches the orders for the barcode just scanned. Check that the right specimen and the right tests come back.",
     },
     {
       id: "IF3",
@@ -195,7 +195,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "Order download sends work ahead of testing. Test additions, cancellations and duplicates as well as the initial list.",
+        "Order download sends the work ahead of testing. Test added tests, cancellations and duplicates as well as the first list.",
     },
     {
       id: "IF4",
@@ -220,7 +220,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "An interface engine routes and translates messages. Instrument middleware may also perform release, delta and reflex checks before the LIS receives a result.",
+        "An interface engine passes messages on and translates them. Instrument middleware may also run release, delta and reflex checks before a result reaches the LIS.",
     },
   ],
 };
@@ -228,6 +228,6 @@ export const additionalExercises = {
 export const sectionPurposes = [
   "Follow the same potassium result from the analyzer to the chart.",
   "Locate the message fields that identify the patient, order, result and critical flag.",
-  "Repair the flag mapping while preserving high, low, normal and unrecognized values.",
-  "Check whether the complete report and previously affected results need correction.",
+  "Fix the flag translation without breaking high, low, normal or unrecognized flags.",
+  "Check whether the full report, and results already sent, need correcting.",
 ];

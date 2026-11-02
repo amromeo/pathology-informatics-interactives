@@ -2,27 +2,26 @@
 
 ### What happened in this case
 
+LOINC gives everyone the same way to identify a test when local names and codes differ. Hospitals A and B can map their differently named serum/plasma glucose results, both reported as mass concentration, to **2345-7**. Hospital C, the partner hospital in Canada, reports moles per volume, which maps to **14749-6**. Sharing a code does not convert 5.5 mmol/L into another unit, and it does not show that the assays give interchangeable results.
 
-LOINC supplies a common way to identify an observation when local names and identifiers differ. Hospitals A and B can map their differently named serum/plasma mass-concentration glucose observations to **2345-7**. Hospital C, a partner hospital in Canada's moles-per-volume observation maps to **14749-6**. Assigning a shared code does not convert 5.5 mmol/L to another unit or confirm assay interchangeability.
+Looking up the code took more than copying a number: glucose, the property, a single point in time, serum/plasma, a numeric result and the unspecified method all had to match the local records. The urine example fails on the specimen, even though "glucose" and "mg/dL" look familiar.
 
-The website lookup required more than copying a number: glucose, property, point-in-time, serum/plasma, quantitative scale, and the unspecified method part had to fit the local records. The urine transfer case fails the specimen comparison even though glucose and mg/dL look familiar.
+In the later review, TM-01 supports 2345-7 and TM-02 supports 14749-6. TM-03 needs its assay definition first. TM-04 is an order, and each of the results it produces needs its own mapping. Holding a mapping back when the information is missing is a proper decision, not an unfinished one.
 
-In the later review, TM-01 supports 2345-7 and TM-02 supports 14749-6. TM-03 needs its assay definition. TM-04 is an order whose component results need separate mappings. Deferral is a responsible completed decision when the evidence is missing.
+LOINC identifies the test; the value and the unit stay separate. SNOMED CT can represent a clinical finding, UCUM writes units, ICD classifies diagnoses and CPT describes services for billing. DICOM images and CAP reporting templates solve other problems. These standards can work together; none of them does the job of all the others.
 
-LOINC identifies the observation; the value and unit remain separate. SNOMED CT can represent a clinical finding, UCUM expresses units, ICD classifies diagnoses, and CPT represents services for the named administrative use. DICOM imaging objects and CAP reporting structures solve different problems. These standards can work together; none substitutes for all the others.
+The studies found mapping errors using different denominators. They are a reason to check your own mappings, not a reason to assume a published percentage applies to you. A valid code does not show that the local mapping is right. Before approving the exchange, explain what the local test means, what the LOINC code means and why they match.
 
-The studies document mapping errors with different denominators. They justify checking local mappings, not assuming that a published percentage applies here. A valid code is not evidence that the local assignment is correct. Explain what the source means, what the target means, and why they match before approving the exchange.
-
-This connects the Topic 5 lessons: a message may arrive yet lose a critical flag; an observation and its answer may require separate mappings; a mapping needs source evidence; and downstream analysis still requires complete, current, correctly linked records.
+This ties together the lessons on sharing laboratory data: a message can arrive but lose its critical flag; a result and its answer may each need their own code; every mapping needs evidence from the source; and any later analysis still needs complete, current, correctly linked records.
 
 <details className="teaching-supplement">
 <summary>A closer look: explain why the candidate term fits</summary>
 
-Start with the local observation: what was measured, in which specimen, over what time, and how the result is expressed. Then compare those details with the candidate LOINC term. A familiar test name is a useful starting point for a search, but it leaves those details to be checked.
+Start with the local test: what was measured, in which specimen, over what time and how the result is expressed. Then compare those details with the candidate LOINC code. A familiar test name is a good place to start a search, but it leaves all of those details to be checked.
 
-The serum/plasma glucose examples use different properties for mass concentration and amount of substance per volume. The urine example changes the specimen. A shared code does not perform a unit conversion, and two assays still need clinical review before their results are treated as interchangeable.
+The serum/plasma glucose examples use different properties: mass concentration and amount of substance per volume. The urine example changes the specimen. A shared code does not convert units, and two assays still need a clinical review before their results are treated as interchangeable.
 
-Keep the supporting test definition with the approved mapping. When a local assay changes, staff can return to that definition and check whether the mapping still describes the reported observation.
+Keep the test definition that supports a mapping with the approved mapping. When a local assay changes, staff can go back to that definition and check whether the code still describes the result being reported.
 
 **Explain a deferral:** What information is missing from TM-03, and who could supply it before a code is approved?
 
@@ -31,8 +30,4 @@ Keep the supporting test definition with the approved mapping. When a local assa
 
 ### Who does what
 
-Work with a terminology steward and section director. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
-
-### Connection to PIER 5.3
-
-The case asks you to map a laboratory observation using its full definition using laboratory records and explain the consequence of your choice.
+The LIS analyst or terminology specialist proposes the mapping and records the evidence for it. The section director, or whoever is responsible for the assay, confirms what the test measures and approves the mapping.

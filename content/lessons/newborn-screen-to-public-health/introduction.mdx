@@ -1,27 +1,13 @@
 # Sending a Newborn Screening Report
 
-At 09:00, a newborn-screening program coordinator cannot find report NB-01
-on the referral worklist. The screening laboratory finalized an overall
-interpretation requiring immediate referral at 08:40. Staff initiated the
-program's urgent communication procedure, but the electronic report remains
-in the receiver's exception queue.
+At 09:00, a coordinator at the newborn screening program cannot find report NB-01 on the referral worklist. The screening laboratory finalized it at 08:40 with an overall result calling for immediate referral. Staff have already started the program's urgent contact procedure, but the electronic report is stuck in the program's exception queue.
 
-The laboratory recently connected its laboratory information system (LIS) to the public-health program. The
-interface analyst configured the message structure and patient identifiers.
-The local overall-interpretation field, NBS_SUM, and its local answer REFERRAL
-were passed through unchanged. A sample report was stored successfully during
-testing, but its entry into a follow-up worklist was not checked.
+The laboratory has just connected its laboratory information system (LIS) to the public health program. The interface analyst set up the message structure and the patient identifiers. But the laboratory's own name for the overall-result field, NBS_SUM, and its own answer, REFERRAL, were sent through unchanged. During testing, a sample report was stored successfully, but nobody checked whether it reached a follow-up worklist.
 
-You are the resident assisting the laboratory and program staff. Compare the
-received fields with their agreed profile, select observation and answer
-mappings, and replay eight message situations. Preserve identity,
-retransmissions, corrections, and exceptions while restoring usable routing.
-
+You are the resident helping the laboratory and program staff. Compare the fields the program received with the format both sides agreed, choose the codes for the test and its answers, and replay eight test messages. Keep the infant's identity, repeat sends, corrected reports and exceptions handled properly while getting the report onto the right worklist.
 
 ## What you will be able to do
 
-- Match standards to the question they answer.
-- Read the receiver implementation guide.
-- Explain why “assume the latest standard needs no local testing” is an incomplete approach.
-
-Start by reading the case records. Make a choice before checking the explanation; you can revise it and test again.
+- Match each standard to the question it answers.
+- Read the receiving program's implementation guide.
+- Explain why assuming the newest standard needs no local testing leads the team astray.

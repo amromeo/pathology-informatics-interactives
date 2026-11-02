@@ -1,71 +1,39 @@
 ### What an interface does
 
-An interface connects systems that may store the same information differently.
-Here the LIS sends a verified result to an **interface engine**, which transforms
-selected fields and routes the message to the EHR. **Middleware** commonly sits
-between instruments and the LIS and may manage instrument communication,
-quality checks, or result rules. These roles can overlap in a particular
-installation; identify which configured transformation actually handles this
-message.
+An interface connects systems that may store the same information in different ways. Here the LIS sends a verified result to an **interface engine**, which changes some fields and sends the message on to the EHR. **Middleware** usually sits between the instruments and the LIS, and may handle instrument communication, quality checks or result rules. The two can overlap in a particular hospital, so find out which program's settings actually handle this message.
 
-**HL7 v2** is a messaging standard. An observation message contains named
-segments and numbered fields. The vertical bar separates fields, including
-empty fields, and the caret separates components within a field. In the
-displayed OBX segment, the observation identifier, value, unit, reference
-interval, flag, and status occupy different positions. Moving a value into the
-wrong position is a structural error. Keeping it in the right position while
-using a code the receiver cannot interpret is a meaning or mapping error.
+**HL7 v2** is a standard format for these messages. A result message is made of named segments, each with numbered fields. A vertical bar separates fields, including empty ones, and a caret separates the parts within a field. In the OBX segment shown, the test identifier, value, unit, reference interval, flag and status each have their own position. Putting a value in the wrong position is a structure error. Putting it in the right position but using a code the receiver does not understand is a meaning error, often called a mapping error.
 
 ### Follow the category, not just the number
 
-The sender uses CH and CL for critical high and critical low. The receiver
-contract uses HH and LL for those categories, H and L for noncritical
-high and low, and N for normal. This is the agreed mapping for this connection.
-The exercise preserves the laboratory's already assigned categories; it does
-not calculate new critical limits from the displayed reference interval.
+The laboratory uses CH and CL for critical high and critical low. The EHR's agreed table uses HH and LL for those, H and L for high and low that are not critical, and N for normal. That is the translation agreed for this connection. The exercise keeps the categories the laboratory already assigned; it does not work out new critical limits from the reference interval.
 
-CH → H is an attractive but incomplete repair. The receiver recognizes H,
-but the critical distinction is lost. CH → HH addresses only one direction;
-CL still needs a corresponding mapping. Leave the routine categories unchanged
-and route an unexpected category to visible review. Treating an unknown flag as
-normal would turn missing knowledge into a clinical assertion.
+Translating CH → H is tempting but only half right. The EHR understands H, but the result is no longer marked critical. Translating CH → HH fixes only one direction; CL still needs its own translation. Leave the routine flags alone, and send any flag the EHR does not expect for review where someone will see it. Treating an unknown flag as normal would turn "we don't know" into a statement about the patient.
 
 ### What the acknowledgment shows
 
-The receiver returned an application acknowledgment with AA and the matching
-message control ID. In this implementation, that means the observation was
-accepted and stored; an unknown flag is logged separately. Other implementations
-may reject it. Read the receiving system's contract and logs rather than
-assuming that every acknowledgment has the same operational meaning.
+The EHR sent back an acknowledgment with AA and the matching message control number. For this EHR, that means the result was accepted and stored; the unknown flag was written to a separate log. Another EHR might reject the message instead. Read the receiving system's interface agreement and logs rather than assuming every acknowledgment means the same thing.
 
-Transport, message structure, interpretation, and clinical use therefore need
-separate evidence. Inspect the official EHR laboratory report, its status,
-units, reference information, comments, and flags. If other chart views reuse
-these elements, include those views in the agreed validation scope.
+So delivery, message structure, meaning and clinical use each need their own check. Look at the official EHR laboratory report: its status, units, reference information, comments and flags. If other screens in the chart reuse these fields, check those screens too.
 
-### Repair and recovery
+### Fixing it and following up
 
-The interface analyst implements a versioned mapping in a test environment.
-Laboratory and EHR staff verify the resulting report, and laboratory leadership
-approves its clinical meaning. Existing critical-result communication procedures
-continue during investigation. Correcting a future message does not prove that
-an earlier report was corrected, nor does a red indicator prove that the
-required communication occurred.
+The interface analyst builds a new, numbered version of the translation in a test environment. Laboratory and EHR staff check the report it produces, and the laboratory director approves what it means clinically. The usual critical-result phone procedure carries on during the investigation. Fixing future messages does not fix reports already sent, and a red flag on the screen does not show that the required call was made.
 
 ### Which HL7 standard is this?
 
-Health Level Seven (HL7) version 2 messages carry laboratory orders and results. OML^O21 and the older ORM^O01 carry orders; ORU^R01 carries results; ADT messages carry registration changes; ACK messages acknowledge handling. Many US laboratory and public-health guides use version 2.5.1. Local fields and codes still require a written interface agreement and testing.
+Health Level Seven (HL7) version 2 messages carry laboratory orders and results. OML^O21, and the older ORM^O01, carry orders; ORU^R01 carries results; ADT messages carry registration changes; ACK messages confirm that a message was handled. Many US laboratory and public health guides use version 2.5.1. Local fields and codes still need a written interface agreement and testing.
 
-HL7 version 3 Clinical Document Architecture (CDA) describes clinical documents. Fast Healthcare Interoperability Resources (FHIR) exposes resources such as Observation and DiagnosticReport through web interfaces. It also needs profiles, terminology bindings and testing. Parsing the message structure is syntactic interoperability; preserving the clinical meaning is semantic interoperability.
+HL7 version 3 Clinical Document Architecture (CDA) describes clinical documents. Fast Healthcare Interoperability Resources (FHIR) offers items such as Observation and DiagnosticReport over web connections. It also needs agreed profiles, code lists and testing. A system that can read the message structure has syntactic interoperability; one that also keeps the clinical meaning has semantic interoperability.
 
 ### Interfaces in the laboratory
 
 | Interface | What it carries |
 | --- | --- |
 | Registration (ADT) | Patient identifiers and location updates |
-| EHR orders and results | Requested examinations and complete reports |
-| Billing | Charges associated with completed services |
-| Reference laboratory | Referred orders, identifiers and returned reports |
+| EHR orders and results | Tests ordered and complete reports |
+| Billing | Charges for completed services |
+| Reference laboratory | Tests sent out, identifiers and returned reports |
 | Instruments and middleware | Test requests, results and instrument flags |
 
-A unidirectional instrument connection only sends results. A bidirectional connection also receives orders by host query (the analyzer asks after scanning a barcode) or download (the LIS sends a worklist in advance). Instrument protocols may use ASTM/CLSI LIS2-A2 or HL7. The interface agreement must state identifiers, status handling, local codes, retries and expected clinical reports.
+A one-way instrument connection only sends results. A two-way connection also receives orders, either by host query (the analyzer asks for the tests after scanning a barcode) or by download (the LIS sends a worklist ahead of time). Instrument connections may use ASTM/CLSI LIS2-A2 or HL7. The interface agreement has to spell out identifiers, how statuses are handled, local codes, retries and what the clinical report should look like.

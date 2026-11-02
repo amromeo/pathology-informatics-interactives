@@ -14,8 +14,7 @@ export const manifest: LessonManifest = {
   id: "15",
   layout: "wide",
 
-  summary:
-    "Glucose reports from different laboratories need terminology that preserves their meaning.",
+  summary: "Glucose results from three hospitals need a shared code that keeps their meaning.",
   sources: [
     {
       label: "PIER Essentials Release 5",
@@ -36,9 +35,9 @@ export const manifest: LessonManifest = {
       id: "5.3-code-the-meaning",
       objective: "5.3",
       summary:
-        "Compare observation attributes and choose a terminology mapping supported by source records.",
+        "Compare the parts of each test's definition and choose a LOINC code the local records support.",
       learnerAction:
-        "Compare observation attributes and choose a terminology mapping supported by source records.",
+        "Compare the parts of each test's definition and choose a LOINC code the local records support.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [

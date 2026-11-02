@@ -2,45 +2,28 @@
 
 ### What happened in this case
 
+FL-01 kept its value, unit and final status, but its CH flag reached an EHR table that did not recognize it. Translating CH to HH brings back the critical-high meaning. FL-02 tests the separate CL-to-LL translation. Translating CH to H makes the code recognizable but still drops the word "critical."
 
-FL-01 retained its value, unit, and final status, but CH reached a display table
-that did not recognize it. Translating CH to HH restores critical-high meaning.
-FL-02 tests the independent CL-to-LL mapping. Mapping CH to H makes the code
-recognizable while still losing severity.
+The original settings match four of the six flag categories. Translating both critical flags gives six of six, as long as the unknown XH flag still goes for review. Turning unknown flags into normal creates a new failure, even once the critical results are fixed.
 
-The unchanged configuration matches four of six selected category outcomes.
-Both critical translations yield six of six, provided unknown XH still enters
-review. Converting unknown codes to normal creates a new failure even after
-the reported result is repaired.
+The laboratory is still responsible for the complete report and for checking how it appears in the EHR. The analyst changes the interface; laboratory and clinical staff approve what the flags mean and look at the reports already affected. The phone call and the flag on the screen are two separate records of the laboratory's work.
 
-The laboratory remains responsible for the complete report and its verified
-appearance in the EHR. The analyst changes the interface; clinical and
-laboratory staff approve interpretation and assess already affected reports.
-The documented call and the electronic display are separate records of work.
-
-The next lesson applies the same distinction between arrival and meaning to a
-newborn-screening report. There, the receiving program must recognize both
-which observation is reported and what its answer means. Repairing a flag
-mapping does not show those separate observation and answer mappings.
+The next lesson applies the same idea, that arriving is not the same as arriving with the right meaning, to a newborn screening report. There, the public health program has to recognize both which result is being reported and what the answer means. Fixing a flag translation does not show that either of those is right.
 
 <details className="teaching-supplement">
 <summary>A closer look: carry the flag’s severity through the whole report</summary>
 
-A result can retain its number and unit while losing the severity communicated by a flag. The analyst must compare what the sending laboratory meant with what the receiving display shows. Recognizing a code is only one part of that comparison.
+A result can keep its number and unit and still lose the severity its flag carried. The analyst has to compare what the sending laboratory meant with what the receiving screen shows. Recognizing the code is only part of that.
 
-For CH, the intended display needs to preserve critical-high meaning. Translating it to H would retain “high” while losing “critical.” Check the critical-low mapping independently, and send an unfamiliar code for review rather than assigning normal meaning.
+For CH, the screen has to keep the critical-high meaning. Translating it to H keeps "high" but loses "critical." Check the critical-low translation on its own, and send an unfamiliar code for review instead of calling it normal.
 
-The same review should include comments, status and reference information in the complete report. Different chart views can display different parts of the received message, so open the location clinicians use to read the official laboratory report.
+The same check should cover comments, status and reference information in the complete report. Different screens in the chart can show different parts of the message, so open the screen clinicians actually use to read the official laboratory report.
 
-**When documenting the repair:** What would you compare on the sending and receiving reports to show that critical severity survived?
+**When documenting the fix:** What would you compare on the sending and receiving reports to show that the critical flag came through?
 
 <p className="supplement-credit">Conference context: Darci R. Block, PhD, DABCC. Enhancing Laboratory Informatics: Result Naming Standards and Flagging in LIS Conversion. Pathology Informatics Summit 2026. Hung Luu, PharmD, MD. How Systemic Harmonization and Interoperability Enhancement for Laboratory Data (SHIELD) will Affect the Laboratorian. Pathology Informatics Summit 2024.</p>
 </details>
 
 ### Who does what
 
-Work with an interface analyst. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
-
-### Connection to PIER 5.2, 5.3, 5.4, 8.1
-
-The case asks you to distinguish message receipt from faithful result meaning using laboratory records and explain the consequence of your choice.
+The interface analyst changes the translation and records the test results. Laboratory and EHR staff check the report clinicians see. The laboratory director approves what the flags mean and decides what follow-up the affected reports need.

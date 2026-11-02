@@ -11,45 +11,45 @@ export const checks: RetrievalItem[] = [
         label: "The full observation definition",
         correct: true,
         feedback:
-          "Component, property, timing, specimen, scale and method where relevant distinguish observations. Similar display names are insufficient.",
+          "What is measured, the property, timing, specimen, scale and, where it matters, the method tell tests apart. Similar display names are not enough.",
       },
       {
         id: "shortcut",
         label: "The shortest matching display name",
         feedback:
-          "This leaves the central problem unresolved. Component, property, timing, specimen, scale and method where relevant distinguish observations. Similar display names are insufficient.",
+          "A short name hides the details that matter here. Two troponin tests with different methods and decision limits can share a name and still need different codes.",
       },
       {
         id: "incomplete",
         label: "The code used at a neighboring hospital",
         feedback:
-          "This does not establish the needed conclusion. Component, property, timing, specimen, scale and method where relevant distinguish observations. Similar display names are insufficient.",
+          "The neighboring hospital may run a different assay, and its mapping may simply be wrong. Map from the definition of your own test.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt: "Your laboratory needs a LOINC code for a new test. What would you do first?",
     choices: [
       {
         id: "supported",
-        label: "Compare specimen, units, method and timing",
+        label: "Write down its specimen, units, method and timing",
         correct: true,
         feedback:
-          "A terminology decision must describe what was actually measured before a code is selected.",
+          "You need to know exactly what the test measures before you can choose a code that describes it.",
       },
       {
         id: "shortcut",
-        label: "Choose the most common code from a search",
+        label: "Pick the most common code from a search",
         feedback:
-          "This leaves the central problem unresolved. A terminology decision must describe what was actually measured before a code is selected.",
+          "The most common code may describe a different specimen, property or method. Compare the code's definition with your test before choosing it.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "Reuse the codes from this lesson",
         feedback:
-          "This does not establish the needed conclusion. A terminology decision must describe what was actually measured before a code is selected.",
+          "The glucose codes here fit these glucose tests. Your test needs its own comparison, part by part, with the candidate code.",
       },
     ],
   },
@@ -58,26 +58,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "14",
     prompt:
-      "A newborn result has a valid message structure but an unrecognized local code. What remains unresolved?",
+      "A newborn result arrives in a valid message but with a local code the program does not recognize. What is still unknown?",
     choices: [
       {
         id: "supported",
-        label: "The meaning of the coded result",
+        label: "What the coded result means",
         correct: true,
         feedback:
-          "Structural validation cannot establish that both organizations understand the same test or value. Terminology and value-set agreement are needed.",
+          "A valid structure does not show that both organizations understand the same test or answer. The two sides need agreed codes and an agreed list of allowed answers.",
       },
       {
         id: "shortcut",
-        label: "Whether any bytes were received",
+        label: "Whether anything was received",
         feedback:
-          "This leaves the central problem unresolved. Structural validation cannot establish that both organizations understand the same test or value. Terminology and value-set agreement are needed.",
+          "The message arrived and its structure was valid, so it was received. What is still unknown is what the local code means to the program.",
       },
       {
         id: "incomplete",
-        label: "Whether a message control ID exists",
+        label: "Whether the message has a control number",
         feedback:
-          "This does not establish the needed conclusion. Structural validation cannot establish that both organizations understand the same test or value. Terminology and value-set agreement are needed.",
+          "A valid message already carries a control number. The control number identifies the message; it says nothing about what the result code means.",
       },
     ],
   },

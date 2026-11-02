@@ -19,7 +19,7 @@ export const nbsCases = [
     status: "F",
     duplicate: false,
     expected: "Referral worklist",
-    note: "The laboratory has already assigned the immediate-referral interpretation. The receiver must preserve it and make the case visible to program staff.",
+    note: "The laboratory has already called this an immediate referral. The program has to keep that meaning and put the case where its staff will see it.",
   },
   {
     id: "NB-02",
@@ -28,7 +28,7 @@ export const nbsCases = [
     status: "F",
     duplicate: false,
     expected: "Routine record",
-    note: "An in-range result should not become an urgent referral merely because the message was repaired.",
+    note: "An in-range result should not turn into an urgent referral just because the message was fixed.",
   },
   {
     id: "NB-03",
@@ -37,7 +37,7 @@ export const nbsCases = [
     status: "F",
     duplicate: false,
     expected: "Specimen follow-up",
-    note: "An unsuitable specimen needs follow-up; it is not an in-range screen.",
+    note: "An unsuitable specimen needs follow-up; it is not a normal screen.",
   },
   {
     id: "NB-04",
@@ -46,7 +46,7 @@ export const nbsCases = [
     status: "F",
     duplicate: false,
     expected: "Identity exception",
-    note: "The infant identifier lacks its assigning authority. A local identifier alone may refer to different infants at different facilities.",
+    note: "The infant's identifier has no assigning authority. On its own, a local identifier could belong to different infants at different hospitals.",
   },
   {
     id: "NB-05",
@@ -55,7 +55,7 @@ export const nbsCases = [
     status: "F",
     duplicate: true,
     expected: "Existing message retained",
-    note: "This is a retransmission of NB-01 with the same control ID and report version. It must not create another referral.",
+    note: "This is NB-01 sent again, with the same control number and report version. It must not create a second referral.",
   },
   {
     id: "NB-06",
@@ -64,7 +64,7 @@ export const nbsCases = [
     status: "C",
     duplicate: false,
     expected: "Correction review",
-    note: "A new corrected version of NB-01 replaces an earlier interpretation. Staff must reconcile the existing follow-up; do not silently close it.",
+    note: "A corrected version of NB-01 replaces the earlier interpretation. Staff have to check the follow-up already under way; it must not be quietly closed.",
   },
   {
     id: "NB-07",
@@ -73,7 +73,7 @@ export const nbsCases = [
     status: "F",
     duplicate: false,
     expected: "Terminology exception",
-    note: "The unrecognized answer remains visible for review rather than becoming normal.",
+    note: "The unrecognized answer stays in view for review instead of becoming normal.",
   },
   {
     id: "NB-08",
@@ -82,7 +82,7 @@ export const nbsCases = [
     status: "P",
     duplicate: false,
     expected: "Preliminary review",
-    note: "A preliminary result does not enter the final-report routing used in this receiver profile.",
+    note: "A preliminary result does not go through the routing this program uses for final reports.",
   },
 ] as const;
 export function nbsReplay(config: NbsConfig) {
@@ -119,11 +119,11 @@ export const nbsFields = [
     ],
     notes: {
       local:
-        "The receiver has no NBS_SUM mapping. A readable display name does not establish an observation identifier.",
+        "The program has no translation for NBS_SUM. A name a person can read is not a test code the program can use.",
       overall:
-        "This source field summarizes the entire screen. The selected LOINC observation has that same scope.",
+        "This field sums up the whole screen. The LOINC code you chose covers exactly the same thing.",
       condition:
-        "This code describes a condition-specific interpretation. Applying it to an overall screen changes what the result claims.",
+        "This code is for an interpretation about one condition. Using it for the overall screen changes what the result says.",
     },
   },
   {
@@ -134,9 +134,9 @@ export const nbsFields = [
       ["coded", "Agreed coded answers"],
     ],
     notes: {
-      text: "The case receiver archives this text but cannot use it in its coded routing rules.",
+      text: "The program stores this text but cannot use it in its routing rules, which need codes.",
       coded:
-        "REFERRAL → LA25817-0; IN_RANGE → LA12428-1; UNSAT → LA16205-9, each with coding system LN. Unknown answers remain exceptions.",
+        "REFERRAL → LA25817-0; IN_RANGE → LA12428-1; UNSAT → LA16205-9, each marked with coding system LN. Unknown answers stay as exceptions.",
     },
   },
   {
@@ -147,9 +147,9 @@ export const nbsFields = [
       ["number", "Identifier number only"],
     ],
     notes: {
-      authority: "A missing authority is an identity exception requiring reconciliation.",
+      authority: "A missing authority is an identity problem that someone has to sort out.",
       number:
-        "Identifier 004812 may exist at more than one hospital. Guessing the source can attach a report to the wrong infant.",
+        "Identifier 004812 may exist at more than one hospital. Guessing which one can attach the report to the wrong infant.",
     },
   },
   {
@@ -161,8 +161,8 @@ export const nbsFields = [
     ],
     notes: {
       version:
-        "An exact retransmission reuses its existing record; a corrected version enters correction review.",
-      new: "A retry can create a duplicate referral, and a correction can become a separate routine record without reconciliation.",
+        "An exact repeat uses the existing record; a corrected version goes for correction review.",
+      new: "A repeat send can create a duplicate referral, and a correction can end up as a separate routine record that nobody links to the original.",
     },
   },
 ] as const;
@@ -181,7 +181,7 @@ export const additionalExercises = {
   ],
   title: "Request a standards change",
   purpose:
-    "Match the laboratory need to the organization that maintains or applies the relevant standard.",
+    "Match each laboratory need to the organization that maintains or applies the standard involved.",
   questions: [
     {
       id: "HL7",
@@ -214,7 +214,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "HL7 develops message and resource specifications; use its documented proposal and review process.",
+        "HL7 writes the message and resource specifications; use its published process for proposals and review.",
     },
     {
       id: "LOINC",
@@ -247,7 +247,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "Search existing LOINC terms, gather the assay attributes, then submit a documented request if no suitable term exists.",
+        "Search the existing LOINC codes and gather the details of the assay. If no code fits, send in a written request.",
     },
     {
       id: "SNOMED",
@@ -280,11 +280,11 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "SNOMED CT represents clinical concepts. Provide the definition and use case through the appropriate terminology request process.",
+        "SNOMED CT covers clinical concepts. Send the definition and an example of its use through SNOMED's request process.",
     },
     {
       id: "IHE",
-      prompt: "Several existing standards must be combined into a tested workflow.",
+      prompt: "Several existing standards need combining into one tested process.",
       answer: "IHE",
       choices: [
         {
@@ -313,7 +313,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "Integrating the Healthcare Enterprise publishes integration profiles that combine standards for a workflow.",
+        "Integrating the Healthcare Enterprise publishes profiles that combine several standards for one task.",
     },
     {
       id: "ISO",
@@ -379,7 +379,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "ASTP/ONC is a US federal office that names standards in certification policy; it is not a terminology developer.",
+        "ASTP/ONC is a US federal office that names the standards certified EHR software must use; it does not write terminologies.",
     },
     {
       id: "REQUEST",
@@ -400,15 +400,15 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "Define the need, search existing terms, document specimen/method/scale and expected use, submit to the maintainer, then test the approved implementation with the receiving organization.",
+        "Describe the need, search the existing codes, write down the specimen, method, scale and intended use, send it to the maintainer, then test the approved code with the receiving organization.",
     },
   ],
 };
 
 export const sectionPurposes = [
-  "Identify what the receiving program must understand beyond a valid message structure.",
-  "Repair observation and answer mappings while preserving identity, corrections and retries.",
-  "Choose the communication and reconciliation needed after repairing the exchange.",
+  "Work out what the program has to understand beyond a message with a valid structure.",
+  "Fix the test and answer codes without breaking identity checks, corrections or repeat sends.",
+  "Choose the contact and follow-up checks needed once the connection is fixed.",
 ];
 
 export const answerDisplay: Record<string, string> = {

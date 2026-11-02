@@ -2,45 +2,28 @@
 
 ### What happened in this case
 
+The original test code and free-text answer could be stored, but the program's routing rules could not use them. Coding the overall result correctly, with coded answers, gets NB-01, NB-02 and NB-03 to the right place.
 
-The original observation identifier and free-text answer could be stored but
-were not usable by the agreed routing rules. The overall observation mapping
-and coded answers restore the intended actions for NB-01, NB-02, and NB-03.
+The other five messages each test something different: the infant's identity, one record for a repeat send, linking a corrected report to the original, keeping unknown answers in view, and reviewing preliminary results. The original settings match five of the eight actions; the full fix matches all eight. Removing the identity or version checks causes failures even when the codes are right.
 
-The other five tests protect different requirements: identity context, one
-record for a retry, reconciliation of a corrected report, visible handling of
-unknown answers, and preliminary-result review. The original configuration
-matches five of eight actions; the complete repair matches eight of eight.
-Removing the identity or version safeguards creates failures despite correct
-terminology.
+The laboratory and the program agree on what each result means and what follow-up it needs. Interface staff build and watch the connection. Standards help with that agreement; they do not replace it, and they do not show that the program's follow-up process works.
 
-The laboratory and program agree on clinical meaning and follow-up. Interface
-staff implement and monitor the exchange. Standards support that agreement;
-they do not replace it or confirm that the receiving workflow is complete.
-
-You selected the observation identifier and its allowed answers from a supplied
-agreement. Next, investigate why laboratories need shared observation identifiers
-at all, and verify candidate LOINC terms against a local catalog rather than
-accepting a proposed code because it exists.
+You chose the test code and its allowed answers from an agreement you were given. The next lesson asks why laboratories need shared test codes at all, and has you check proposed LOINC codes against a local test list instead of accepting a code just because it exists.
 
 <details className="teaching-supplement">
 <summary>A closer look: ask what happens after the message arrives</summary>
 
-A receiving program can store a message without placing it in the worklist used for follow-up. Staff from the laboratory and public-health program need to agree on the observation being reported, the allowed answers and the action associated with each answer.
+A program's system can store a message without putting it on the worklist staff use for follow-up. Laboratory and public health staff need to agree on what result is being reported, which answers are allowed and what happens for each answer.
 
-Trace a corrected newborn-screening report through that agreement. The program needs to recognize which earlier observation it changes and whether follow-up must change. A retry of the same report also needs to remain distinguishable from a new observation.
+Follow a corrected newborn screening report through that agreement. The program has to recognize which earlier result it replaces and whether the follow-up has to change. A repeat send of the same report also has to stay distinguishable from a new result.
 
-Shared message formats and terminology help both teams describe these requirements. The acceptance test still needs to show what the program does with the report, including an unfamiliar answer and an incomplete patient match.
+Shared message formats and codes help both teams describe what they need. The acceptance test still has to show what the program actually does with the report, including an unfamiliar answer and an infant who cannot be matched.
 
-**At the joint review:** Which receiving worklist or follow-up record would you ask the program to show after each test message?
+**At the joint review:** After each test message, which worklist or follow-up record would you ask the program to show you?
 
 <p className="supplement-credit">Conference context: Hung Luu, PharmD, MD. How Systemic Harmonization and Interoperability Enhancement for Laboratory Data (SHIELD) will Affect the Laboratorian. Pathology Informatics Summit 2024.</p>
 </details>
 
 ### Who does what
 
-Work with a public-health interface lead. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
-
-### Connection to PIER 5.1, 5.2, 5.3
-
-The case asks you to match standards to the question they answer using laboratory records and explain the consequence of your choice.
+The laboratory's interface analyst and the program's interface lead build and test the connection and record the results. Laboratory and program staff agree on what each result means and confirm that reports reach the right follow-up worklist.

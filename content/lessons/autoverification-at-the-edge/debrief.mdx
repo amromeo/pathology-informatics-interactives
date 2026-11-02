@@ -2,7 +2,7 @@
 
 AV-01 rose from 12 to 48 ng/L. The absolute difference was **36 ng/L**; dividing 36 by the prior value of 12 gave a **300%** relative difference.
 
-The transferred rule used only the absolute branch. Because 36 was below its 50 ng/L threshold, that branch allowed the result to continue. The other checks passed, and the middleware released the result.
+The rule as moved to the middleware used only the absolute branch. Because 36 was below its 50 ng/L limit, that branch let the result through. The other checks passed, and the middleware released the result.
 
 The approved policy also contains a relative branch. AV-01 meets both of its conditions: at least 200% and at least 20 ng/L. Joining the branches with OR gives that branch a way to hold the result. The [branch comparison](#release-branch-examples) explains why joining them with AND would still let AV-01 continue.
 
@@ -10,14 +10,14 @@ The approved policy also contains a relative branch. AV-01 meets both of its con
 
 The original rule matches **20 of 22** expected decisions. It misses the holds for AV-01 and AV-03. With the approved OR configuration and the other approved settings intact, all **22** match.
 
-AV-04 also has a 300% change, but it rises only from 2 to 8 ng/L. The relative branch's 20 ng/L minimum preserves the intended release. Removing that minimum creates an unnecessary hold.
+AV-04 also has a 300% change, but it only rises from 2 to 8 ng/L. The relative branch's 20 ng/L minimum keeps it released, as intended. Take that minimum away and it is held for no reason.
 
-AV-06 has no usable prior result. Its delta cannot be calculated, and the serial-order history check sends it to review. AV-09 has unaccepted QC; its small numerical change does not resolve that separate problem. Open their entries in the [complete check list](#release-replay-heading) to connect each outcome with its reason.
+AV-06 has no usable prior result. Its delta cannot be calculated, and the serial-order history check sends it to review. AV-09's QC was not accepted, and a small change in the result does nothing about that separate problem. Open their entries in the [complete check list](#release-replay-heading) to connect each outcome with its reason.
 
 ### What staff review before use
 
-The analyst documents the configuration and the expected and observed outcomes for the entire set. Chemistry staff and the director review the policy, the handling of held results, the reporting workflow and the monitoring plan.
+The analyst records the settings and the expected and actual outcomes for the whole set. Chemistry staff and the director review the policy, how held results are handled, how results are reported and the monitoring plan.
 
-A hold asks staff to investigate. A real clinical change, a specimen problem or an analytical issue may require different action. Staff follow the local procedure and communicate urgent findings promptly. The exercise checks whether the software applies that procedure consistently.
+A hold asks staff to look into the result. A real change in the patient, a problem with the specimen and a problem with the analysis each need something different. Staff follow the local procedure and pass on urgent findings quickly. The exercise checks whether the software applies that procedure the same way every time.
 
-For local application, begin by identifying the order type, assay, required prior result and other release checks. Those details determine which records belong in the validation set and how missing information should be handled.
+To apply this in your own laboratory, start with the order type, the assay, the prior result needed and the other release checks. Those details decide which records belong in the validation set and how missing information should be handled.

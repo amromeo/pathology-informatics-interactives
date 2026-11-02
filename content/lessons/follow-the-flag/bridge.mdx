@@ -1,12 +1,5 @@
-### Review more than the incident
+### Test more than the one result
 
-The six replay records are selected category checks, not a patient population
-or an estimate of the interface failure rate. The corrected mapping should
-preserve both critical directions, routine high and low, and normal results.
-The unfamiliar XH category should produce an exception requiring investigation.
+The six replay records are chosen to test each flag category. They are not a sample of patients, and they cannot tell you how often the interface fails. The fixed translation should keep both critical directions, ordinary high and low, and normal results. The unfamiliar XH flag should be held for someone to look into.
 
-Before release, record expected and observed displays, the mapping revision,
-the approver, and how to restore the previous version. Review the affected time
-period for already transmitted results, reconcile missing indicators, and
-document necessary communications. Monitor unknown-category logs after release.
-A test that checks only that messages were accepted would miss this defect.
+Before the fix goes live, record the expected and actual displays, the version of the translation, who approved it and how to go back to the previous version. Look back over the time the faulty version was running for results already sent, find the ones missing their flag and record any calls that need to be made. Keep an eye on the unknown-flag log afterward. A test that only checked that messages were accepted would have missed this problem.

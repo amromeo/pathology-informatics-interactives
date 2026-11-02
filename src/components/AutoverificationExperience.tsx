@@ -267,7 +267,7 @@ export function AutoverificationExperience({
         <p role="status">
           {tested
             ? `${passed} of ${results.length} expected decisions match.`
-            : "Run the complete set after changing the configuration."}
+            : "Run the whole set again after changing a setting."}
         </p>
         {tested && (
           <p>
@@ -309,7 +309,7 @@ export function AutoverificationExperience({
           <span className="section-number">04</span>
           <div>
             <p className="eyebrow">Review before use</p>
-            <h2>Decide what is needed before production use</h2>
+            <h2>Decide what is needed before use on patient results</h2>
           </div>
         </div>
         {Bridge && (

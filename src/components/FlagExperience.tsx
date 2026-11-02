@@ -110,7 +110,7 @@ export function FlagExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
             note={
               config.unknown === "review"
                 ? "An unknown category remains visible for investigation."
-                : "Unknown is being converted into normal, which the source did not establish."
+                : "Unknown flags are being turned into normal, which the laboratory never said."
             }
             onChange={(value) => update("unknown", value)}
           />
@@ -128,7 +128,7 @@ export function FlagExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
         <p role="status">
           {tested
             ? `${passed} of ${results.length} category outcomes match.`
-            : "Run the complete category set after each change."}
+            : "Run all six categories again after each change."}
         </p>
         <ReplayResultList
           items={results}
@@ -168,14 +168,14 @@ export function FlagExperience({ Concepts, Bridge, onAttempt }: Topic5Props) {
             checked={review}
             onChange={(event) => setReview(event.target.checked)}
           />
-          Verify actual EHR reports and reconcile already affected results.
+          Check the actual EHR reports and follow up the results that already went out.
         </label>
         <div role="status" aria-live="polite" aria-atomic="true">
           {review && (
             <p className="topic5-note">
               {tested && passed === results.length
-                ? "The category replay supports report validation and review of affected results."
-                : "Complete the matching six-category replay before recommending this mapping."}
+                ? "The replay supports checking the EHR reports and reviewing the results already affected."
+                : "Run all six categories with these settings before recommending this translation."}
             </p>
           )}
         </div>

@@ -2,25 +2,25 @@
 
 TH-01 displayed the new reference interval, **0.27–4.20 mIU/L**, but revision 8 of the ordering rule still used **0.40** as its lower threshold. Its TSH of **0.30** was below that saved threshold. The order record connects the resulting FT4 to revision 8.
 
-With the approved lower threshold of **0.27**, TH-01 meets neither the lower nor upper condition. Correcting that threshold removes the unintended additions at TH-01, TH-02 and TH-04.
+With the approved lower threshold of **0.27**, TH-01 meets neither the lower nor upper condition. Fixing that threshold removes the unwanted FT4s at TH-01, TH-02 and TH-04.
 
 ### What the complete replay shows
 
-The original configuration matches **10 of 13** expected actions and creates **five** new FT4 orders. The corrected configuration matches **13 of 13** and creates **two**. TH-03 and TH-07 retain their indicated additions. TH-08 and TH-09 use FT4s already linked to their accessions.
+The original configuration matches **10 of 13** expected actions and creates **five** new FT4 orders. The corrected configuration matches **13 of 13** and creates **two**. TH-03 and TH-07 keep the FT4s they need. TH-08 and TH-09 use FT4s already linked to their accessions.
 
-The [boundary examples](#reflex-boundary-examples) explain why including 0.27 or 4.20 would add unintended orders at TH-04 or TH-06. Removing duplicate prevention adds another FT4 at TH-08 and TH-09. Removing the age/order restriction or accepting preliminary results creates different errors. Each setting therefore needs an appropriate record in the test set.
+The [boundary examples](#reflex-boundary-examples) explain why including 0.27 or 4.20 would add unintended orders at TH-04 or TH-06. Removing duplicate prevention adds another FT4 at TH-08 and TH-09. Removing the age and order-type restriction, or accepting preliminary results, causes other errors. So each setting needs its own record in the test set.
 
 ### What the order count leaves unanswered
 
-Fewer new orders can reflect a successful correction or missed indicated tests. Read the full [replay](#reflex-replay-heading) to determine which occurred. The fixed expected action for each record provides the comparison.
+Fewer new orders can mean the fix worked, or that needed tests were missed. Read the full [replay](#reflex-replay-heading) to see which. The fixed expected action for each record provides the comparison.
 
-For monitoring, define the period and eligible population before counting errors. Include eligible accessions that received no FT4 so that missed additions remain visible. Track review exceptions and unresolved orders as well.
+For monitoring, set the period and the eligible accessions before counting errors. Include eligible accessions that got no FT4, so missed additions still show up. Keep track of exceptions sent for review and orders still open, too.
 
 ### Prepare the change and affected cases for review
 
-The analyst records which settings changed and retains expected and observed test actions. The director and chemistry staff review the protocol, the follow-up for affected accessions and the checks after use begins.
+The analyst records which settings changed and keeps the expected and actual test actions. The director and chemistry staff review the protocol, the follow-up for affected accessions and the checks once the rule is in use.
 
-The main lesson is to follow a change into each record or rule that uses it. Finding the correct interval on the report is one check. The order history and replay establish how the separate ordering rule behaved.
+The main lesson is to follow a change into every record or rule that uses it. Seeing the right interval on the report is one check. The order history and the replay show how the separate ordering rule behaved.
 
 <details className="teaching-supplement">
 <summary>A closer look: test the meaning of an exact boundary</summary>
@@ -29,7 +29,7 @@ A laboratory may approve a limit in a written procedure, then build that limit s
 
 Prepare records just below, exactly at and just above each approved boundary. The exact-boundary records distinguish “below” from “at or below.” Then test the other conditions separately: assay, result status and whether an FT4 order already exists.
 
-Reference-interval builds have a similar translation problem when days, weeks and months are converted into LIS age ranges. In both settings, the laboratory must explain which records belong on each side of a boundary before the analyst writes the condition.
+Reference intervals have the same kind of problem when days, weeks and months are turned into LIS age ranges. In both cases, the laboratory has to say which records fall on each side of a boundary before the analyst writes the condition.
 
 **For this assay change:** Which separate definitions would you ask the analyst to find before beginning the replay?
 
