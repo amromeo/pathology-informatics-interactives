@@ -2,26 +2,22 @@
 
 ### What happened in this case
 
-TB-01 needs a block-link correction: the image label identifies A2, while the view says A1. TB-02 is already linked to the current lung specimen and should remain unchanged. TB-03 contains a documented transposition of the patient identifier. TB-04 belongs to a prior colon specimen, and TB-05 contains a stage from that earlier episode. Keep those historical records separate while obtaining current findings.
+In TB-01, the image label says block A2, but the view showed it as A1. The image needs to go back to its documented block. TB-02 is already linked to the current lung biopsy and should stay as it is. In TB-03, the import swapped the last two digits of the patient's medical record number; the source laboratory confirmed the correct one. TB-04 is a variant report from an earlier colon specimen, and TB-05 holds the stage from that colon cancer. Keep those older records as history, separate from the lung case, and get the current findings.
 
-The record repairs address veracity. They do not increase storage or throughput. The workload test addresses volume and velocity; it must run peak scanning alongside clinical retrieval. Variety requires preserving the meaning and provenance of each data type. Value depends on answering the board's current clinical question.
+Fixing these records is about veracity. It adds no storage and no speed. The load test is about volume and velocity, and it has to run overnight scanning and clinical viewing at the same time. Variety means keeping track of what each kind of data means and where it came from. Value depends on whether the view answers the board's question about the current tumor.
+
+### Who does what
+
+The LIS analyst and the archive team look into the import and the image links. The pathologist confirms which specimen each result came from and what the report means. The clinical team confirms which encounter holds the current stage. Researchers work from approved copies and write down how they chose their cases. Every correction is recorded; nobody quietly changes an identifier in the source system.
 
 <details className="teaching-supplement">
 <summary>A closer look: follow the specimen as well as the patient</summary>
 
-A tumor-board view brings together information recorded for different purposes. Staff may link an image to a block, a genomic report to a specimen and a stage to a clinical encounter. All three records can contain the correct patient identifier while referring to different tumors or episodes of care.
+A tumor-board view brings together records made for different reasons. An image is linked to a block, a genomic report to a specimen and a stage to a clinical encounter. All three can carry the right patient identifier and still refer to different tumors or different episodes of care.
 
-Trace one finding from the combined view back to its source. For an image, inspect the slide label, block and accession. For a genomic result, inspect the submitted specimen and report date. Ask the clinical team which encounter supplied the stage. Preserve a correctly linked current result while correcting a different link.
+Trace one finding in the combined view back to where it came from. For an image, check the slide label, the block and the accession. For a genomic result, check the submitted specimen and the report date. Ask the clinical team which encounter the stage came from. Fix a wrong link without disturbing a current result that is linked correctly.
 
-**At tumor board:** Which source record would you open first if the genomic finding seemed inconsistent with the slide under review?
+**At tumor board:** If the genomic finding did not seem to fit the slide on screen, which source record would you open first?
 
 <p className="supplement-credit">Conference context: Lisa-Jean Clifford. Data Use in Digital Pathology. Pathology Informatics Summit 2023.</p>
 </details>
-
-### Who does what
-
-The LIS analyst and archive team investigate the import and image links. The pathologist confirms specimen relationships and report meaning. The clinical team confirms the current staging encounter. Research staff use approved copies and document selection criteria. Record every correction rather than silently changing source identifiers.
-
-### Connection to PIER 2.3
-
-The learner uses the five big-data questions to inspect a combined pathology dataset and choose a suitable test of its clinical use.

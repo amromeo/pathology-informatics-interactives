@@ -1,35 +1,35 @@
 ## Debrief: what still needs to happen before Monday?
 
-The assay should wait. The result reached the EHR, but part of the interpretive comment was cut off. Pathology has not reviewed the troponin alert. The section also needs to finish its procedures, training and staffing arrangements.
+The assay should wait. The result reaches the EHR, but part of the interpretive comment is cut off. Pathology has not reviewed the troponin alert. And the section still has procedures, training and shift coverage to finish.
 
 ### Who finishes the work?
 
-The LIS team builds the test and checks the interface. Hospital IT keeps the network and shared systems running. Pathology informatics helps chemistry check how the new assay fits the laboratory's ordering and reporting practices. The laboratory director approves the order and complete report.
+The LIS team builds the test and checks the interface. Hospital IT keeps the network and shared systems running. Pathology informatics helps chemistry make sure the new assay is ordered and reported like the laboratory's other tests. The laboratory director approves the order and the complete report.
 
-The bench supervisor and laboratory operations staff prepare the section to run the test on every shift. Pathology and clinical informatics review the alert with the clinicians who will receive it. Sending a result successfully leaves all of those jobs to be checked.
+The bench supervisor and laboratory operations staff get the section ready to run the test on every shift. Pathology and clinical informatics review the alert with the clinicians who will receive it. A result reaching the chart does not tell you that any of this work is done.
 
-### Follow the problem through the chart
+### Who leads when something goes wrong in the chart?
 
-The three calls ask different questions:
+The three calls after go-live need different people to lead:
 
-- **The corrected report is still wrong in the EHR.** The laboratory director should lead the review. The LIS and EHR teams can trace the correction and repair the display. The laboratory then checks the complete corrected report where clinicians read it.
-- **Two troponin assays appear on one trend graph.** Pathology informatics should lead with chemistry and the EHR analyst. The laboratory has to decide whether the assays are comparable before their results are plotted together.
-- **The alert fires again after a correction.** Clinical informatics should coordinate the alert review. Pathology informatics and the LIS team first check whether the correction replaced the original result or arrived as another result.
+- **The corrected report is still wrong in the EHR.** The laboratory director should lead. The LIS and EHR teams trace the correction and fix the display, and the laboratory then checks the complete corrected report where clinicians read it.
+- **Two troponin assays appear on one trend graph.** Pathology informatics should lead, with chemistry and the EHR analyst. Only the laboratory can say whether results from the two assays can be compared, so that has to be settled before they are plotted together.
+- **The alert fires again after a correction.** Clinical informatics should coordinate the review of the alert. But first, pathology informatics and the LIS team check whether the correction replaced the original result or arrived as a second one.
 
-That last distinction matters. In a Health Level Seven version 2 (HL7 v2) message, status C identifies a corrected result on the same observation. If the laboratory sent a new result instead, the laboratory team needs to fix that first. If the correction arrived properly, the team can then examine why the EHR alert fired again.
+That last check decides who fixes what. In a Health Level Seven version 2 (HL7 v2) message, status C marks a corrected result on the same observation. If the laboratory sent a new result instead, the laboratory team fixes that first. If the correction arrived properly, the team can look at why the alert fired again.
 
-### Check the report clinicians will use
+### Check the report clinicians will read
 
-The laboratory must check the complete report in its agreed location in the chart. A correct number in a flowsheet would not reveal the missing interpretive comment in this case. Ask the person reviewing the report to show the comment on screen before the director signs off.
+The laboratory has to check the complete report in its agreed place in the chart. A correct number in a flowsheet would not have shown that the interpretive comment was cut off. Before the director signs off, ask whoever is reviewing the report to show you the comment on screen.
 
 <details className="teaching-supplement">
 <summary>A closer look: ask someone to show the finished report</summary>
 
-At the Friday meeting, “the interface works” could mean that the analyst saw an acknowledgment from the EHR. The laboratory director still needs to read the complete troponin report in the chart. The bench supervisor needs to confirm that staff on the weekend shift can perform the test and handle its exceptions.
+At the Friday meeting, "the interface works" may only mean that the analyst saw an acknowledgment come back from the EHR. The laboratory director still needs to read the complete troponin report in the chart. The bench supervisor needs to confirm that the weekend shift can run the test and knows what to do when something goes wrong.
 
-Each person can bring a different piece of the answer. Ask the analyst to show the transmitted result, the director to show the report being approved, and the supervisor to show the remaining bench preparation. When a comment is cut off, seeing the finished report gives the group a specific problem to repair.
+Each person can show you a different part of the answer. Ask the analyst to show the result that was sent, the director to show the report being approved, and the supervisor to show what is left to prepare at the bench. If the comment is cut off, everyone can see it, and the group knows exactly what to fix.
 
-**At the next meeting:** What would you ask each person to show before recommending that testing begin?
+**At the next meeting:** What would you ask each person to show you before recommending that testing begin?
 
 <p className="supplement-credit">Conference context: Samuel Barasch, MD. So you have a job in Clinical Informatics - What now? Working with hospital and Lab Information Technology. Pathology Informatics Summit 2026.</p>
 </details>

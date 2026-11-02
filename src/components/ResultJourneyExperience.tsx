@@ -494,7 +494,7 @@ export function ResultJourneyExperience({
               <strong>
                 {selectedRepair.correct
                   ? "This corrects the connection settings."
-                  : "The reporting problem still needs repair."}
+                  : "The reporting problem is not fixed yet."}
               </strong>
               <p>{selectedRepair.feedback}</p>
             </div>
@@ -511,14 +511,14 @@ export function ResultJourneyExperience({
         <div className="section-heading">
           <span className="section-number">06</span>
           <div>
-            <p className="eyebrow">Restoration</p>
+            <p className="eyebrow">After the fix</p>
             <h2 id="validation-title">Check the restored connection</h2>
           </div>
         </div>
         <p className="section-guidance">{lessonCopy.text03}</p>
         <article className="test-console journey-validation">
           <header>
-            <span>Post-restoration checks</span>
+            <span>Checks after the fix</span>
             <strong>
               {testsRun
                 ? validationCases.filter((item) => item.passingRepairs.includes(repair ?? ""))

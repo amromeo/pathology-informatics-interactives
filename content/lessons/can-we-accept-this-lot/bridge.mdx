@@ -1,17 +1,17 @@
 ## Match the question to a statistical test
 
-Start with the study design. Are the same specimens measured twice, or are the groups unrelated? Then identify the result: a numerical measurement, or a category such as mutation detected versus not detected. Finally, inspect the distribution and the assumptions of the proposed test.
+Start with the design. Were the same specimens measured twice, or are the groups unrelated? Then look at the result: is it a number, or a category such as mutation detected or not detected? Finally, look at how the data are distributed and check the assumptions of the test you have in mind.
 
-**Paired t-test:** keep each specimen's two results together and analyze their difference. It tests the mean paired difference. In this lot study, the differences have no marked outlier or severe skew. At this sample size, that makes the t procedure a reasonable starting choice.
+**Paired t-test:** keeps each specimen's two results together and analyzes the difference between them. It tests the mean paired difference. In this lot comparison, the differences have no marked outlier and no severe skew, so at this sample size the paired t-test is a reasonable first choice.
 
-**Wilcoxon signed-rank test:** also keeps pairs together, but uses the signs and ranks of their differences. Ranks describe their order by size. This can help with paired differences that are not normally distributed but remain roughly symmetric. It is not an automatic solution for strongly skewed differences; symmetry still matters.
+**Wilcoxon signed-rank test:** also keeps the pairs together, but works with the signs and ranks of the differences instead of their values. A rank is a value's position when the values are sorted by size. This test can help when paired differences are not normally distributed but are still roughly symmetric. It does not fix strongly skewed differences; symmetry still matters.
 
-A **normal distribution** has a roughly symmetric bell shape. Symmetry means the values spread out in a similar way on either side of the center. A distribution can be symmetric without having that bell shape. Inspect the paired differences, rather than assuming the original measurements have the same shape as their differences.
+A **normal distribution** has a roughly symmetric bell shape. Symmetric means the values spread out in much the same way on either side of the center. Data can be symmetric without being bell-shaped. Look at the paired differences themselves; do not assume they have the same shape as the original measurements.
 
-**Independent-samples t-test:** compares means from two unrelated groups, such as hemoglobin results from different patients in two groups. There is no specimen-to-specimen pairing to preserve.
+**Independent-samples t-test:** compares the means of two unrelated groups, such as hemoglobin results from two different groups of patients. There are no pairs to keep together.
 
-**Analysis of variance (ANOVA):** compares a numerical outcome across three or more groups. For example, compare RNA yields from independent tissue samples assigned to three fixatives. A significant result indicates that the group means are not all equal; further comparisons identify the differences.
+**Analysis of variance (ANOVA):** compares a numerical result across three or more groups. For example, it could compare RNA yields from separate tissue samples fixed in three different fixatives. A significant result means the group means are not all the same; further comparisons show which ones differ.
 
-**Fisher exact test:** compares counts in categories, such as mutation detected versus not detected in two patient groups. It is useful when counts are small. Chi-square tests also address categorical counts when their assumptions are met.
+**Fisher exact test:** compares counts in categories, such as mutation detected or not detected in two patient groups. It is useful when the counts are small. Chi-square tests also compare counts, when their assumptions are met.
 
-For each example below, select the best initial test from these choices. The examples supply the features needed for that choice. A complete study also needs an appropriate sampling plan and a check of the selected test's assumptions.
+For each example below, choose the best first test from this list. Each example gives you the details you need to choose. A real study would also need a sampling plan and a check that the chosen test's assumptions hold.

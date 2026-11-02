@@ -55,7 +55,7 @@ export const manifest: LessonManifest = {
       objective: "2.2",
       summary: "Confidence intervals",
       learnerAction:
-        "Interpret the confidence interval for the observed lot difference against a medical acceptance limit.",
+        "Compare the confidence interval for the lot difference with the limit the director set before testing.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -70,7 +70,7 @@ export const manifest: LessonManifest = {
       objective: "2.2",
       summary: "Hypothesis testing and p-values",
       learnerAction:
-        "Explain what the p-value answers and why it does not by itself determine lot acceptance.",
+        "Explain what the p-value answers and why it cannot decide on its own whether to accept the lot.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -97,7 +97,7 @@ export const manifest: LessonManifest = {
   ],
   id: "04",
   layout: "standard",
-  summary: "A new troponin reagent lot produces small paired differences that need medical review.",
+  summary: "A new troponin reagent lot reads slightly higher than the current one.",
   sources: [
     {
       label: "PIER Essentials Release 5",

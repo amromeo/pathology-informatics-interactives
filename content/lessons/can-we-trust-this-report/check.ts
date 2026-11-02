@@ -12,19 +12,19 @@ export const checks: RetrievalItem[] = [
         label: "The excluded count and missing field",
         correct: true,
         feedback:
-          "State how many orders were excluded and that their collection times were missing. The average describes only the included orders. Investigate whether the missing times are concentrated during the delay being studied.",
+          "Say how many orders were left out and that their collection times were missing; otherwise readers will assume the average covers every order. Then check whether the missing times cluster around the very delay being studied.",
       },
       {
         id: "shortcut",
         label: "Only the mean of complete records",
         feedback:
-          "That mean cannot describe the excluded orders. If the longest delays also caused missing timestamps, reporting only complete records could make performance look better than it was.",
+          "That mean says nothing about the orders left out. If the worst delays also left timestamps missing, reporting only complete records would make things look better than they were.",
       },
       {
         id: "incomplete",
         label: "Only the total number of final results",
         feedback:
-          "The total does not identify how many orders contributed to the turnaround calculation or why others were omitted. Show the included and excluded counts and the missing field.",
+          "The total does not say how many orders went into the turnaround calculation or why the others were left out. Show both counts and name the missing field.",
       },
     ],
   },
@@ -36,22 +36,22 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "Reconcile the export count with the accession list",
+        label: "Check the export against the accession list",
         correct: true,
         feedback:
-          "Start with the eligible accessions. Account for each included or excluded case, check blank fields and look for duplicate rows. That establishes what the later averages describe.",
+          "Start from the eligible accessions. Account for every case that was included or left out, look for blank fields and check for duplicate rows. Then you know what the averages actually describe.",
       },
       {
         id: "shortcut",
         label: "Remove records with unexpectedly long times",
         feedback:
-          "A long time may be the important finding. Check its source before changing it, and keep a real delay in the report rather than deleting it because it is inconvenient.",
+          "A long time may be the most important finding. Check where it came from, and if the delay was real, keep it in the report.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "Split the report into the same three periods as this case",
         feedback:
-          "Your report may use a different start event, endpoint or eligible group. Establish those definitions and inspect the source records before deciding how to group its cases.",
+          "Your report may start and stop the clock at different events, or include different cases. Pin those down and look at the source records before deciding how to group anything.",
       },
     ],
   },
@@ -67,19 +67,19 @@ export const checks: RetrievalItem[] = [
         label: "The laboratory director",
         correct: true,
         feedback:
-          "The laboratory director or designated laboratory approver reviews the complete corrected report. The LIS and EHR teams make and test the technical change.",
+          "The laboratory director, or whoever the laboratory has named to approve reports, reviews the complete corrected report. The LIS and EHR teams make and test the change.",
       },
       {
         id: "shortcut",
         label: "The interface analyst alone",
         feedback:
-          "The analyst can change the mapping and test transmission. Clinical approval still belongs to the laboratory, which must review the complete report as it appears in the chart.",
+          "The analyst can change the units and test that the message goes through. Approving the report is still the laboratory's job, and it has to look at the complete report as it appears in the chart.",
       },
       {
         id: "incomplete",
         label: "The software vendor alone",
         feedback:
-          "The vendor can help correct the display, but it cannot replace the laboratory's review of its report. The laboratory director or designated approver confirms that the corrected result is suitable for clinical use.",
+          "The vendor can help fix the display, but it cannot approve the laboratory's report. The laboratory director, or the laboratory's named approver, decides whether the corrected report is ready for patient care.",
       },
     ],
   },

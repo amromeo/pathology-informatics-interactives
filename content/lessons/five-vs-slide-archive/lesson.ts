@@ -36,7 +36,7 @@ export const manifest: LessonManifest = {
       id: "2.3-five-vs",
       objective: "2.3",
       summary: "Volume, velocity, variety, veracity, and value",
-      learnerAction: "Apply all five Vs to a multimodal lung-cancer dataset.",
+      learnerAction: "Use the five Vs to describe a combined lung-cancer dataset.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -51,7 +51,7 @@ export const manifest: LessonManifest = {
       objective: "2.3",
       summary: "Imaging, genomic, pathology, and EHR data",
       learnerAction:
-        "Identify the patient-, specimen-, block-, and case-level links needed across a report, WSI, PD-L1 result, genomic findings, and EHR information.",
+        "Find the patient, specimen, block and case links that tie a report, slide images, a PD-L1 result, genomic findings and EHR staging together.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -66,7 +66,7 @@ export const manifest: LessonManifest = {
       objective: "2.3",
       summary: "Integration into pathology practice",
       learnerAction:
-        "Repair mismatched links and decide whether the combined tumor-board view is safe to present.",
+        "Fix the wrong links and decide whether the combined tumor-board view is safe to show.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
