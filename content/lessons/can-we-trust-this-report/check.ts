@@ -49,9 +49,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "Split the report into the same three periods as this case",
+        label: "Average the times and compare with last month",
         feedback:
-          "Your report may start and stop the clock at different events, or include different cases. Pin those down and look at the source records before deciding how to group anything.",
+          "Averages say nothing about whether the export holds the right cases. Check it against the accession list first.",
       },
     ],
   },
@@ -60,26 +60,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "1",
     prompt:
-      "A potassium report displays the wrong units in the chart. Who approves the corrected report?",
+      "A new alert would combine a laboratory result with the patient's current medications. Who should design it?",
     choices: [
       {
         id: "supported",
-        label: "The laboratory director",
+        label: "Laboratory and clinical informatics together",
         correct: true,
         feedback:
-          "The laboratory director, or whoever the laboratory has named to approve reports, reviews the complete corrected report. The LIS and EHR teams make and test the change.",
+          "The alert depends on both the laboratory result and information from the chart. Pathology informatics can lead, but clinical informatics needs to check the medication and diagnosis data.",
       },
       {
         id: "shortcut",
-        label: "The interface analyst alone",
+        label: "The LIS analyst, since the result comes from the LIS",
         feedback:
-          "The analyst can change the units and test that the message goes through. Approving the report is still the laboratory's job, and it has to look at the complete report as it appears in the chart.",
+          "The LIS analyst knows the result, but not how medication data are recorded in the chart or how clinicians will use the alert. Both sides need to design it.",
       },
       {
         id: "incomplete",
-        label: "The software vendor alone",
+        label: "Pharmacy, since the alert is about medications",
         feedback:
-          "The vendor can help fix the display, but it cannot approve the laboratory's report. The laboratory director, or the laboratory's named approver, decides whether the corrected report is ready for patient care.",
+          "Pharmacy can advise, but the alert also depends on what the laboratory result means. Laboratory and clinical informatics need to design it together.",
       },
     ],
   },

@@ -36,7 +36,7 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "Trace the same result through the LIS, message queue and chart",
+        label: "Follow the result from LIS to chart",
         correct: true,
         feedback:
           "Follow one accession and result through the release record, the outgoing message, the acknowledgment and the chart. Each record shows a different step, so the first one that is missing tells you where delivery stopped.",
@@ -49,9 +49,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "Correct the destination port, as in this case",
+        label: "Resend the result from the LIS",
         feedback:
-          "A wrong port caused this case, but your missing result may have a different cause. Trace it through your own systems and find where it stopped before choosing a fix.",
+          "Resending before you know where it stopped may just add another copy to a stuck queue. Trace the result first.",
       },
     ],
   },
@@ -60,26 +60,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "1",
     prompt:
-      "A potassium report displays the wrong units in the chart. Who approves the corrected report?",
+      "The EHR team wants to move the reference interval to a second screen to tidy the result view. Who has to agree before it changes?",
     choices: [
       {
         id: "supported",
         label: "The laboratory director",
         correct: true,
         feedback:
-          "The laboratory director, or whoever the laboratory has named to approve reports, reviews the complete corrected report. The LIS and EHR teams make and test the change.",
+          "The reference interval is part of the laboratory's report. The laboratory decides whether the report is still complete and safe to read after the change.",
       },
       {
         id: "shortcut",
-        label: "The interface analyst alone",
+        label: "The EHR team, since it owns the screen",
         feedback:
-          "The analyst can change the units and test that the message goes through. Approving the report is still the laboratory's job, and it has to look at the complete report as it appears in the chart.",
+          "The EHR team builds the screen, but the report on it belongs to the laboratory. The laboratory director has to agree to a change in what clinicians see.",
       },
       {
         id: "incomplete",
-        label: "The software vendor alone",
+        label: "The clinicians who asked for a tidier view",
         feedback:
-          "The vendor can help fix the display, but it cannot approve the laboratory's report. The laboratory director, or the laboratory's named approver, decides whether the corrected report is ready for patient care.",
+          "Their views matter, but they cannot approve a change to the laboratory's report. The laboratory director decides, with their input.",
       },
     ],
   },

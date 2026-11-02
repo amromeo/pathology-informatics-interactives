@@ -59,26 +59,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "3",
     prompt:
-      "A chemistry turnaround report leaves out orders that have no collection time. What should its summary say?",
+      "An export for a turnaround study has 512 rows, but the LIS shows 498 eligible accessions. What do you do before analyzing it?",
     choices: [
       {
         id: "supported",
-        label: "How many were left out, and why",
+        label: "Find out what the extra 14 rows are",
         correct: true,
         feedback:
-          "Without that, readers will assume the summary covers every order. The orders with missing times may be the very ones caught up in the delay being studied.",
+          "The extra rows may be duplicates, amended reports counted twice or cases outside the study. Until you know, you cannot tell what the averages describe.",
       },
       {
         id: "shortcut",
-        label: "Only the mean of complete records",
+        label: "Analyze all 512, since more data is better",
         feedback:
-          "That mean says nothing about the orders left out. If the worst delays also left times missing, the report would make things look better than they were.",
+          "More rows are only better if they are the right ones. Duplicates or ineligible cases would change the results without anyone knowing.",
       },
       {
         id: "incomplete",
-        label: "Only the total number of final results",
+        label: "Drop the last 14 rows so the counts match",
         feedback:
-          "The total does not say how many orders went into the turnaround calculation or why the others were left out. Show both counts and name the missing field.",
+          "Matching the count does not mean you removed the right rows. Find out what the extra rows are first.",
       },
     ],
   },

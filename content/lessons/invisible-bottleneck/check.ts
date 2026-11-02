@@ -7,7 +7,7 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "Work still waiting in the queue",
+        label: "Specimens still waiting to be finished",
         correct: true,
         feedback:
           "Turnaround for finished cases and the age of the current queue answer different questions. To study the queue, include the work that is not finished.",
@@ -47,9 +47,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "Use this lesson's conclusion about reviewers",
+        label: "Ask for a faster analyzer",
         feedback:
-          "Your delay may have a different cause. Check which records your dashboard includes, then look at where the time goes.",
+          "Without knowing where the time goes, a faster analyzer may change nothing. Check which records the dashboard includes first.",
       },
     ],
   },
@@ -58,26 +58,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "3",
     prompt:
-      "A chemistry turnaround report leaves out orders that have no collection time. What should its summary say?",
+      "A surgical pathology turnaround report has three cases over 20 days. The analyst wants to delete them as errors. What do you do first?",
     choices: [
       {
         id: "supported",
-        label: "How many were left out, and why",
+        label: "Check them in the source records",
         correct: true,
         feedback:
-          "Without that, readers will assume the summary covers every order. The orders with missing times may be the very ones caught up in the delay being studied.",
+          "Long cases may be the most important finding. Look at the requisitions and case history before deciding whether a time is wrong.",
       },
       {
         id: "shortcut",
-        label: "Only the mean of complete records",
+        label: "Delete them, since they distort the mean",
         feedback:
-          "That mean says nothing about the orders left out. If the worst delays also left times missing, the report would make things look better than they were.",
+          "If the delays were real, deleting them hides exactly what the report should show. Check them first.",
       },
       {
         id: "incomplete",
-        label: "Only the total number of final results",
+        label: "Report the median so they don't matter",
         feedback:
-          "The total does not say how many orders went into the turnaround calculation or why the others were left out. Show both counts and name the missing field.",
+          "The median would hide the long cases rather than explain them. Check whether they are real before choosing what to report.",
       },
     ],
   },

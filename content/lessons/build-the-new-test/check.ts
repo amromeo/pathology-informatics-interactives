@@ -8,7 +8,7 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "Hold approval and repair the report",
+        label: "Hold approval, fix the report and retest it",
         correct: true,
         feedback:
           "A result that arrives is not the same as a complete, checked report. Fix the build and rerun the affected cases, and the unaffected ones, before clinical approval.",
@@ -47,9 +47,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "This lesson's respiratory build",
+        label: "What the EHR team can build quickly",
         feedback:
-          "This build fits this respiratory test. Your test needs its own specification for results, units, intervals and comments.",
+          "What is quick to build is not necessarily what the test needs. Start from the approved specification.",
       },
     ],
   },
@@ -58,26 +58,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "1",
     prompt:
-      "A potassium report displays the wrong units in the chart. Who approves the corrected report?",
+      "A new analyzer goes live next week, but nobody on nights has been trained yet. Whose job is it to sort that out?",
     choices: [
       {
         id: "supported",
-        label: "The laboratory director",
+        label: "The laboratory's supervisors and managers",
         correct: true,
         feedback:
-          "The laboratory is responsible for the whole report, including how it looks in the chart. The LIS and EHR teams make and test the change.",
+          "Bench procedures, training and shift coverage belong to the laboratory. The LIS team and the vendor can help, but the laboratory makes sure each shift is ready.",
       },
       {
         id: "shortcut",
-        label: "The interface analyst alone",
+        label: "The LIS team, who built the test",
         feedback:
-          "The analyst can change the units and test that the message goes through. Approving the report is still the laboratory's job.",
+          "The LIS team builds and tests the system, but staffing and training on the bench are the laboratory's responsibility.",
       },
       {
         id: "incomplete",
-        label: "The software vendor alone",
+        label: "The vendor's trainer, who ran the first class",
         feedback:
-          "The vendor can help fix the display, but it cannot approve the laboratory's report. That is the laboratory director's decision.",
+          "The vendor can train staff, but making sure every shift is covered is the laboratory's job.",
       },
     ],
   },

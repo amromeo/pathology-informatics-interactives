@@ -8,7 +8,7 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "The message arrived, but not its full meaning",
+        label: "It arrived without its full meaning",
         correct: true,
         feedback:
           "An acknowledgment shows the message was received at one handoff. The field translation and the report clinicians see also have to keep the critical flag.",
@@ -47,9 +47,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "This lesson's flag translations",
+        label: "The EHR's list of allowed flags",
         feedback:
-          "Your interface may use different codes and a different agreed table. Start from your own message and your own interface agreement.",
+          "The EHR's list shows what it accepts, but not what was actually sent. Put the sent message beside the EHR report.",
       },
     ],
   },
@@ -58,26 +58,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "2",
     prompt:
-      "The LIS shows a final platelet count, but the clinician still sees Pending. What comes first?",
+      "Restarting the interface clears an error, but the setting that sent results to the wrong port has not been changed. Is the problem fixed?",
     choices: [
       {
         id: "supported",
-        label: "Get the verified result to the clinician",
+        label: "No, it will happen again",
         correct: true,
         feedback:
-          "Phone it through using the downtime procedure, get a read-back if required and record the call. Then keep working out why it did not reach the chart.",
+          "A restart reloads the same saved setting, so results will go to the wrong port again. Fix and test the setting itself.",
       },
       {
         id: "shortcut",
-        label: "Restart the interface before calling",
+        label: "Yes, the error has cleared",
         feedback:
-          "A restart may not fix the problem, and the clinician is still waiting. Phone the verified result through while the analyst works out what went wrong.",
+          "The error clearing only means the program restarted. The wrong port is still saved and will be used again.",
       },
       {
         id: "incomplete",
-        label: "Wait for the next scheduled report",
+        label: "Yes, once the queue has emptied",
         feedback:
-          "Waiting leaves the clinical team without a platelet count the laboratory has already verified. Phone it through now and record the call.",
+          "The queue may empty for a while, but new results will still be sent to the wrong port. The saved setting has to be fixed.",
       },
     ],
   },

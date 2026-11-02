@@ -48,9 +48,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "Send the same repair instructions used for the troponin case",
+        label: "Ask the LIS analyst to shorten the comment",
         feedback:
-          "Your hospital may store and display the comment differently. Show the analyst your own LIS and chart reports before choosing a repair.",
+          "Shortening the comment changes what the laboratory reports. First find out whether the full comment reached the EHR and where it is cut off.",
       },
     ],
   },
@@ -59,26 +59,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "2",
     prompt:
-      "The LIS contains a final platelet count, but the clinician sees Pending. What comes first?",
+      "A blood culture Gram stain is final in the LIS, but the ward's chart still says Pending. The nurse phones the laboratory. What do you do first?",
     choices: [
       {
         id: "supported",
-        label: "Give the clinician the result now",
+        label: "Give the nurse the result and record the call",
         correct: true,
         feedback:
-          "Phone the result under the laboratory's downtime procedure, with read-back when required, and record the call. The team can work out what went wrong once the clinician has the result.",
+          "The patient needs the result now. Give it by phone under the laboratory's procedure, get a read-back if required and record the call, then find out why it did not reach the chart.",
       },
       {
         id: "shortcut",
-        label: "Restart the interface before calling",
+        label: "Ask the nurse to check the chart in an hour",
         feedback:
-          "A restart may not get this result into the chart. Call the count first, so the clinician is not left waiting while the team troubleshoots.",
+          "Nothing suggests the chart will catch up by itself, and a Gram stain may change treatment now. Give the nurse the verified result and record the call.",
       },
       {
         id: "incomplete",
-        label: "Wait for the next scheduled report",
+        label: "Verify the result again so the LIS resends it",
         feedback:
-          "Waiting leaves the clinician looking at Pending when the laboratory already has a final count. Phone it through now under the downtime procedure.",
+          "Verifying again may add a second copy to the same stuck queue, and the nurse is still waiting. Phone the result first, then trace where it stopped.",
       },
     ],
   },

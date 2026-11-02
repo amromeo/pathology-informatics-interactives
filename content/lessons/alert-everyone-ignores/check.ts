@@ -35,7 +35,7 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "Define eligible decisions and balancing measures",
+        label: "Which decisions count, and what to measure",
         correct: true,
         feedback:
           "A rate needs a denominator. The evaluation also has to count justified repeats, needed tests that were missed and the extra work for staff.",
@@ -48,9 +48,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "Reuse this lesson's ward comparison",
+        label: "Compare total test volume before and after",
         feedback:
-          "Your alert, your wards and your test may be different. Decide which decisions count and what side effects to measure for your own case.",
+          "Volume changes with patient numbers and many other things. Decide first which decisions count and which side effects to measure.",
       },
     ],
   },
@@ -58,26 +58,27 @@ export const checks: RetrievalItem[] = [
     id: "spaced",
     kind: "spaced",
     fromLesson: "16",
-    prompt: "A dashboard includes only completed specimens. What can it miss?",
+    prompt:
+      "At 2 pm, a dashboard says it was updated at 10:00. The 11:00 and noon copies failed. What does it show?",
     choices: [
       {
         id: "supported",
-        label: "Work still waiting in the queue",
+        label: "Only what had happened by 10:00",
         correct: true,
         feedback:
-          "Turnaround for finished cases and the age of the current queue answer different questions. To study the queue, include the work that is not finished.",
+          "The page shows the last copy that worked. Anything after 10:00, including the morning's slowest work, is missing.",
       },
       {
         id: "shortcut",
-        label: "The final times of completed cases",
+        label: "Everything up to when you opened it",
         feedback:
-          "A dashboard of finished cases does include their final times. What it misses is the work still waiting, which may be where the delay is.",
+          "The page clock is not the time of the data. The failed copies mean nothing after 10:00 is included.",
       },
       {
         id: "incomplete",
-        label: "The number already finalized",
+        label: "The morning's results, plus anything pending",
         feedback:
-          "The finished count is exactly what such a dashboard shows. It is the specimens still waiting that drop out of view.",
+          "A dashboard built from final results leaves out pending work, and this one stops at 10:00 as well.",
       },
     ],
   },

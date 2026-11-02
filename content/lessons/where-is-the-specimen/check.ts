@@ -9,7 +9,7 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "The order linked to each accession and specimen",
+        label: "The order, accession and specimen links",
         correct: true,
         feedback:
           "Follow the order, accession and specimen identifiers together. That keeps track of which examination was requested for each container, even when both belong to the same patient.",
@@ -60,26 +60,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "2",
     prompt:
-      "The LIS contains a final platelet count, but the clinician sees Pending. What comes first?",
+      "After the connection is fixed, 40 queued results flow into the chart. What still needs checking?",
     choices: [
       {
         id: "supported",
-        label: "Get the verified result to the clinician",
+        label: "That each reached the right chart once",
         correct: true,
         feedback:
-          "Phone it through using the laboratory's procedure, get a read-back if required and record the call. The analyst can look into the delivery problem while the clinical team has the result.",
+          "A queue clearing does not show every result landed correctly. Check that each one appears once, in the right patient's chart, and compare it with any results phoned during the outage.",
       },
       {
         id: "shortcut",
-        label: "Restart the interface before calling",
+        label: "Nothing, since the queue is now empty",
         feedback:
-          "A restart may not fix the problem, and the clinical team would be left waiting for a result the laboratory already has. Phone it through and record the call while the connection is checked.",
+          "An empty queue means the messages were sent, not that each one arrived once in the right chart. Check them before calling the problem fixed.",
       },
       {
         id: "incomplete",
-        label: "Wait for the next scheduled report",
+        label: "Only the first result in the queue",
         feedback:
-          "The result is already verified in the LIS. Waiting for another transmission leaves the clinical team without it. Phone it through using the laboratory's procedure and record the call.",
+          "One result arriving correctly does not show the other 39 did. Check all of them, and any phoned results, against the chart.",
       },
     ],
   },

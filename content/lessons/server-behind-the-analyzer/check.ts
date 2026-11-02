@@ -48,9 +48,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "The access plan used in this lesson",
+        label: "The vendor's own description of its access",
         feedback:
-          "Your systems and support contract may be quite different from this case. Start from your own approved access and local procedure before proposing changes to accounts or connections.",
+          "The vendor's description says what it plans to do, not what the hospital approved or can watch. Start with the approved access and the risk analysis.",
       },
     ],
   },
@@ -59,26 +59,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "2",
     prompt:
-      "The LIS shows a final platelet count, but the clinician still sees Pending. What comes first?",
+      "Results verified in the LIS after 09:30 are missing from the chart; earlier ones arrived. The interface engine's queue keeps growing. Where has delivery stopped?",
     choices: [
       {
         id: "supported",
-        label: "Get the verified result to the clinician",
+        label: "Between the interface engine and the EHR",
         correct: true,
         feedback:
-          "Phone it through using the downtime procedure, get a read-back if required and record the call. Then keep working out why it did not reach the chart.",
+          "The results left the LIS and are piling up in the interface engine, so they are not getting from there to the EHR. Check that connection and its settings.",
       },
       {
         id: "shortcut",
-        label: "Restart the interface before calling",
+        label: "At the analyzer, which may have stopped sending",
         feedback:
-          "A restart may not fix the problem, and the clinician is still waiting. Phone the verified result through while the analyst works out what went wrong.",
+          "The results are already verified in the LIS, so the analyzer did its part. They are stuck further along, in the interface engine's queue.",
       },
       {
         id: "incomplete",
-        label: "Wait for the next scheduled report",
+        label: "In the clinicians' chart view, which needs refreshing",
         feedback:
-          "Waiting leaves the clinical team without a platelet count the laboratory has already verified. Phone it through now and record the call.",
+          "A growing queue in the interface engine means the results never reached the chart. Refreshing the view will not bring them in.",
       },
     ],
   },

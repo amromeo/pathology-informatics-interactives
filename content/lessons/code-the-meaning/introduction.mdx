@@ -6,10 +6,20 @@ The interface analyst's first draft groups results by display name. **GLU** from
 
 You are the pathology resident reviewing the proposed mapping with the laboratory information system (LIS) analyst and chemistry staff. The messages arrive without trouble; the question is what each result actually is. Look at the test-list extracts below before deciding how the shared record should identify these results.
 
-You will explain why a shared code is needed, look up candidate codes on the Logical Observation Identifiers Names and Codes (LOINC) website, check their definitions against the local test list, and see how a correctly formed standard code can still mislead the system that receives it. You do not need to know any code numbers before you start.
+## Terms used in this case
+
+- **Local code and display name:** the code and name a laboratory gives a test in its own system. They only mean something inside that laboratory.
+- **Logical Observation Identifiers Names and Codes (LOINC):** shared codes for tests and observations, each with a published definition.
+- **Parts of a LOINC definition:** what is measured (component), how it is expressed (property, such as mass or moles per volume), over what time, in which specimen (system), whether the answer is a number or a category (scale), and sometimes the method.
+- **Mapping:** a checked link between a local test and a LOINC code.
+
+## Your task
+
+Compare the three hospitals' test-list entries and explain why matching on names fails. Look up the two candidate codes on the LOINC website and record how each part compares with the local tests. Then sort out which standard answers which question, review four proposed mappings, read two published studies of mapping errors, and apply the same checks to a urine glucose test. You do not need to know any code numbers before you start.
 
 ## What you will be able to do
 
-- Map a laboratory result to a code using its full definition.
-- Compare the specimen, units, method and timing of two tests.
-- Explain why picking the most common code from a search can give the wrong answer.
+- Explain why matching on test names fails when hospitals share results.
+- Compare a local test with a LOINC code part by part, and choose the code that fits.
+- Hold back a mapping when the assay definition is missing, and say what is needed.
+- Read a published error rate with its denominator in mind.

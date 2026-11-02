@@ -2,14 +2,25 @@
 
 You are the pathology resident helping Dr. Rao, a breast pathologist, evaluate a tool that detects mitoses.
 
-The tool marks possible mitotic figures within a chosen tumor area. The pathologist has to check those marks, search the rest of the area and record the final count. The tool does not give a diagnosis, a grade or a prognosis.
-
-The vendor's sensitivity figure does not tell Dr. Rao how many false marks someone will have to check, or what happens when a reader sees no marks at all. You will look at the marked locations, change the marking threshold, compare the errors at two sites, and review a separate study of pathologists using the tool and a monitoring report.
+The tool marks possible mitotic figures within a chosen tumor area. The pathologist has to check those marks, search the rest of the area and record the final count. The tool does not give a diagnosis, a grade or a prognosis. The vendor's sensitivity figure does not tell Dr. Rao how many false marks someone will have to check, or what happens when a reader sees no marks at all.
 
 The list has 12 locations picked from a development review: five that are mitotic figures and seven that are not. Two pathologists agreed the right answer for each one. All 12 stay in the exercise. This small, hand-picked set is for working through the arithmetic and looking at errors; it does not estimate how accurate the tool is on whole slides in practice.
 
+## Terms used in this case
+
+- **Mitotic figure:** a cell caught in division. Pathologists count them in a set area to help grade a tumor.
+- **Threshold:** the score at or above which the tool marks a location.
+- **Reference answer:** what two pathologists agreed each location was, used to judge the tool.
+- **Reader study:** a study of pathologists reading slides with and without the tool.
+- **Automation bias:** trusting a system's output too much, for example taking a slide with no marks as having no mitoses.
+
+## Your task
+
+Look at the marked locations and change the marking threshold. Compare the errors at two sites. Then review a separate study of pathologists using the tool, and a monthly monitoring report, and choose what to keep checking once the tool is in use.
+
 ## What you will be able to do
 
-- Evaluate the pathologist and the tool working together, not just the tool.
-- Review the whole design of a study of readers using the tool.
-- Explain why the share of correct marks on a hand-picked list is not the tool's clinical sensitivity.
+- Work out sensitivity, specificity and the share of correct marks at a chosen threshold, and see how they change.
+- Explain why checking only the marked spots misses mitoses the tool never flagged.
+- Read a reader study for what it shows about the pathologist and tool working together.
+- Choose what to monitor once the tool is in use, and what to do about a problem at one site.
