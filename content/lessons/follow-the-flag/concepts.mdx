@@ -20,6 +20,9 @@ So delivery, message structure, meaning and clinical use each need their own che
 
 The interface analyst builds a new, numbered version of the translation in a test environment. Laboratory and EHR staff check the report it produces, and the laboratory director approves what it means clinically. The usual critical-result phone procedure carries on during the investigation. Fixing future messages does not fix reports already sent, and a red flag on the screen does not show that the required call was made.
 
+<details>
+<summary>For the questions at the end: other HL7 standards and other laboratory interfaces</summary>
+
 ### Which HL7 standard is this?
 
 Health Level Seven (HL7) version 2 messages carry laboratory orders and results. OML^O21, and the older ORM^O01, carry orders; ORU^R01 carries results; ADT messages carry registration changes; ACK messages confirm that a message was handled. Many US laboratory and public health guides use version 2.5.1. Local fields and codes still need a written interface agreement and testing.
@@ -37,3 +40,5 @@ HL7 version 3 Clinical Document Architecture (CDA) describes clinical documents.
 | Instruments and middleware | Test requests, results and instrument flags |
 
 A one-way instrument connection only sends results. A two-way connection also receives orders, either by host query (the analyzer asks for the tests after scanning a barcode) or by download (the LIS sends a worklist ahead of time). Instrument connections may use ASTM/CLSI LIS2-A2 or HL7. The interface agreement has to spell out identifiers, how statuses are handled, local codes, retries and what the clinical report should look like.
+
+</details>
