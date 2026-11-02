@@ -107,19 +107,19 @@ export function cdsOutcome(config: CdsConfig, row: OrderCase) {
           ? ["The collecting nurse cannot revise the prescriber's order."]
           : []),
         ...(config.information !== "context"
-          ? ["The policy text omits the prior result or pending order needed for this decision."]
+          ? ["The policy text leaves out the earlier result or pending order this decision needs."]
           : []),
         ...(config.channel !== "composer"
-          ? ["An inbox message separates the advice from the active order."]
+          ? ["An inbox message puts the advice somewhere other than the order being placed."]
           : []),
         ...(config.timing !== "before"
-          ? ["The order is already signed; acting now requires another workflow."]
+          ? ["The order is already signed; acting on the advice now means going back to change it."]
           : []),
         ...(blocked
           ? [
               row.exception
                 ? "The hard stop blocks a documented clinical reason to repeat."
-                : "A hard stop removes clinical discretion that the approved guidance requires.",
+                : "A hard stop takes away the clinician's judgment, which the approved guidance requires.",
             ]
           : []),
       ];
@@ -140,9 +140,9 @@ export function cdsOutcome(config: CdsConfig, row: OrderCase) {
       : !shown
         ? "No order guidance is needed for this role or available history."
         : row.exception
-          ? "Show the context and preserve the documented reason to proceed."
+          ? "Show the earlier information and keep the documented reason to go ahead."
           : row.prior === "pending"
-            ? "Review the pending order; do not present it as a completed result."
+            ? "Review the pending order; do not show it as a finished result."
             : "Review the dated result before deciding whether another order is needed.",
   };
 }
@@ -195,9 +195,9 @@ export const cdsControls = [
       ["hard", "Hard stop without an override"],
     ],
     notes: {
-      soft: "A soft stop preserves discretion but adds an interruption. Justify this burden before choosing it.",
+      soft: "A soft stop leaves the decision to the clinician but adds an interruption. Have a good reason before choosing it.",
       inline: "The clinician can review the information without dismissing a modal message.",
-      hard: "The approved policy asks for review; it does not authorize blocking all repeat orders.",
+      hard: "The approved policy asks for a review; it does not allow blocking every repeat order.",
     },
   },
   {
@@ -208,8 +208,8 @@ export const cdsControls = [
       ["before", "Before the order is signed"],
     ],
     notes: {
-      after: "The decision has already been committed, so cancellation requires extra work.",
-      before: "The clinician can review the earlier test while the order is still editable.",
+      after: "The decision has already been made, so cancelling takes extra work.",
+      before: "The clinician can look at the earlier test while the order can still be changed.",
     },
   },
 ] as const;
@@ -218,32 +218,32 @@ export const cdsSources = [
     title: "Ordering audit",
     record:
       "09:14:02  Encounter 62018 · HbA1c selected\n09:14:19  Order 80421 signed · Dr. Patel\n09:14:20  Repeat-test message sent to inbox\n09:22:10  Chart opened · collecting nurse\n09:22:11  Repeat-test message sent to inbox",
-    note: "The audit establishes recipient and timing. It does not establish whether either person read the policy or whether the repeat was appropriate.",
+    note: "The audit shows who got the message and when. It does not show whether either person read the policy, or whether the repeat was appropriate.",
   },
   {
     title: "Prior laboratory report",
     record:
       "Patient 62018 · Accession A26090718\nCollected: 11 Aug 2026 09:14\nHbA1c: 6.8 %\nStatus: Final\nReport quality: Usable\nCurrent order time: 10 Sep 2026 09:14",
-    note: "The prior report was collected 30 days before the current order. Confirm patient identity, collection time, report status, and usability before using it.",
+    note: "The earlier specimen was collected 30 days before the current order. Check the patient, collection time, report status and whether the result is usable before relying on it.",
   },
   {
     title: "Approved review specification",
     record:
       "Repeat-test guidance · version 2\nScope: HbA1c order review\nShow a usable final result collected within 90 days,\nor an existing pending order for the same patient/test.\nRetain the option to proceed with a clinical reason.\nDo not interrupt collection staff.\nClinical approval: laboratory director and CDS committee",
-    note: "The 90-day window belongs to this institution's case specification. It is a trigger to review available information, not a universal testing interval or a determination that every repeat is unnecessary.",
+    note: "The 90-day window comes from this hospital's specification for the case. It is a prompt to look at the information already available, not a general rule for how often to test, and it does not mean every repeat is unnecessary.",
   },
 ];
 export const responseNotes = {
   cancel:
-    "The proposed order is cancelled after review. Record the linked earlier order/report and the clinician's decision; cancellation alone does not establish appropriateness.",
+    "The order is cancelled after review. Record the earlier order or report that was shown and the clinician's decision; a cancellation on its own does not show the decision was right.",
   continue:
-    "The order is retained with a documented clinical reason. An override can represent appropriate care; audit the reason and review selected cases.",
+    "The order is kept, with a documented clinical reason. Overriding can be good care; check the reasons and review some of the cases.",
 };
 
 export const additionalExercises = {
   title: "Compare decision support categories",
   purpose:
-    "Choose the workflow category for each laboratory example and consider whether it interrupts work.",
+    "Choose what kind of support each laboratory example is, and think about whether it interrupts people's work.",
   questions: [
     {
       id: "CDS1",
@@ -276,7 +276,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "An order set organizes selections; it can guide ordering without a mandatory interruption.",
+        "An order set groups the choices together; it can guide ordering without interrupting anyone.",
     },
     {
       id: "CDS2",
@@ -309,7 +309,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "This noninterrupting suggestion supports a decision using prior results and preserves an exception.",
+        "This suggestion helps with the decision using earlier results, without interrupting, and still allows an exception.",
     },
     {
       id: "CDS3",
@@ -342,7 +342,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "A report comment guides interpretation after testing; it is not an order-entry pop-up.",
+        "A report comment helps interpret the result after testing; it is not a pop-up at ordering.",
     },
     {
       id: "CDS4",
@@ -375,7 +375,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "This communication deliberately interrupts work because the result needs timely review and an accountable recipient.",
+        "This call interrupts work on purpose, because the result needs to reach a named person quickly.",
     },
     {
       id: "CDS5",
@@ -408,7 +408,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "Information at order entry can prevent collection errors without requiring a modal alert.",
+        "Information shown at ordering can prevent collection errors without a pop-up alert.",
     },
     {
       id: "CDS6",
@@ -441,7 +441,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "A reflex rule acts on a prior result. Its approved conditions and exceptions need validation even when no message is shown.",
+        "A reflex rule acts on an earlier result. Its approved conditions and exceptions need testing even though nobody sees a message.",
     },
   ],
 };
@@ -449,5 +449,5 @@ export const additionalExercises = {
 export const sectionPurposes = [
   "Find who received the guidance and whether it arrived before the ordering decision.",
   "Choose the recipient, timing, display and exception handling for a repeat-test review.",
-  "Check intended interruptions and justified orders across the full encounter set.",
+  "Check the intended interruptions and the justified orders across all the encounters.",
 ];

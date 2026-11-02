@@ -48,7 +48,7 @@ export const buildControls = [
     ],
     notes: {
       ignore:
-        "A failed internal control makes the instrument's raw negative calls unsuitable for release under this procedure.",
+        "When the internal control fails, the instrument's negative calls cannot be released under this procedure.",
       hold: "Keep control details in the technical record; show an invalid result and follow the approved repeat procedure.",
     },
   },
@@ -61,7 +61,7 @@ export const buildControls = [
     ],
     notes: {
       numeric:
-        "The source assay is qualitative. The copied numeric units imply a concentration that was not measured.",
+        "The assay only says detected or not detected. The copied units suggest an amount that was never measured.",
       qualitative:
         "Detected/not detected is a categorical result, with reference information approved for this assay.",
     },
@@ -86,7 +86,7 @@ export const buildControls = [
       ["validated", "Accept only the procedure's NP swab in medium V"],
     ],
     notes: {
-      any: "The local procedure has not established this assay for every respiratory specimen.",
+      any: "The local procedure has not checked this assay on every kind of respiratory specimen.",
       validated:
         "This case's approved specimen is a nasopharyngeal swab in medium V. Route other specimens for review; this is not a universal assay restriction.",
     },
@@ -114,7 +114,7 @@ export const buildControls = [
     ],
     notes: {
       message:
-        "A retry receives a new message identifier but does not represent another specimen or result.",
+        "A repeat send gets a new message identifier, but it is not another specimen or result.",
       accession:
         "The same result version updates the same report; different accessions remain separate.",
     },
@@ -205,7 +205,7 @@ export const buildCases: BuildCase[] = [
     values: ["Detected", "Not detected", "Not detected"],
     expected:
       "Influenza A: Detected; Influenza B: Not detected; RSV: Not detected | Reference: Not detected; units: none | Final | 1 current report",
-    why: "A transport retry must not create a second clinical report.",
+    why: "Sending the same result again must not create a second report.",
   },
 ];
 export function buildReport(config: BuildConfig, row: BuildCase) {

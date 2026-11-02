@@ -156,9 +156,9 @@ export function CdsDesignExperience({ Concepts, Bridge, onAttempt }: Topic5Props
                 </strong>{" "}
                 {results.every((row) => row.pass)
                   ? config.format === "soft"
-                    ? "Clinical discretion is preserved, but every suggestion still interrupts work. Compare an inline design before approving this burden."
-                    : "The design preserves clinical discretion and avoids mandatory interruptions. Clinical review and a monitored pilot are still needed."
-                  : "Read the failed encounters and revise the delivery. A repaired opening case must also preserve the exceptions."}
+                    ? "The clinician still decides, but every suggestion interrupts their work. Compare a design that shows the information beside the order before accepting that."
+                    : "The clinician still decides, and nobody has to dismiss an alert. A clinical review and a monitored trial are still needed."
+                  : "Read the encounters that failed and change how the guidance is delivered. Fixing the first case must not break the exceptions."}
               </p>
               <div className="topic5-card-grid">
                 {results.map((row) => (

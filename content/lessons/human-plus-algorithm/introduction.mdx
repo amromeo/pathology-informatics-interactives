@@ -1,18 +1,15 @@
 # Reviewing a Mitosis Detection Tool
 
-You are the pathology resident helping Dr. Rao, a breast pathologist, evaluate a mitosis-detection tool.
+You are the pathology resident helping Dr. Rao, a breast pathologist, evaluate a tool that detects mitoses.
 
-Dr. Rao is evaluating a tool that marks possible mitotic figures in a defined tumor area. The pathologist must review those locations, search the rest of the area, and record the final count. The tool does not assign a diagnosis, grade, or prognosis.
+The tool marks possible mitotic figures within a chosen tumor area. The pathologist has to check those marks, search the rest of the area and record the final count. The tool does not give a diagnosis, a grade or a prognosis.
 
-The vendor's sensitivity figure does not tell Dr. Rao how many false marks require review or what happens when a reader sees an empty overlay. You will inspect candidate locations, change the marking threshold, compare site-specific errors, and review a separate reader study and monitoring report.
+The vendor's sensitivity figure does not tell Dr. Rao how many false marks someone will have to check, or what happens when a reader sees no marks at all. You will look at the marked locations, change the marking threshold, compare the errors at two sites, and review a separate study of pathologists using the tool and a monitoring report.
 
-The candidate list contains 12 selected locations from a development review: five reference mitotic figures and seven nonmitotic locations. Two pathologists established the reference labels by consensus. All 12 locations remain in the exercise. This deliberately small selected set supports arithmetic and error inspection; it is not an estimate of slide-level clinical accuracy.
-
+The list has 12 locations picked from a development review: five that are mitotic figures and seven that are not. Two pathologists agreed the right answer for each one. All 12 stay in the exercise. This small, hand-picked set is for working through the arithmetic and looking at errors; it does not estimate how accurate the tool is on whole slides in practice.
 
 ## What you will be able to do
 
-- Evaluate the pathologist and algorithm working together.
-- Review the complete reader-study design.
-- Explain why “use candidate precision as clinical sensitivity” is an incomplete approach.
-
-Start by reading the case records. Make a choice before checking the explanation; you can revise it and test again.
+- Evaluate the pathologist and the tool working together, not just the tool.
+- Review the whole design of a study of readers using the tool.
+- Explain why the share of correct marks on a hand-picked list is not the tool's clinical sensitivity.

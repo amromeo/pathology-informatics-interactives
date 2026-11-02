@@ -14,7 +14,7 @@ export const manifest: LessonManifest = {
   id: "18",
   layout: "wide",
 
-  summary: "An alert gets many acknowledgments, but its clinical effect remains uncertain.",
+  summary: "An alert gets clicked often, but nobody knows whether it changes care.",
   sources: [
     {
       label: "PIER Essentials Release 5",
@@ -35,9 +35,9 @@ export const manifest: LessonManifest = {
       id: "6.3-alert-everyone-ignores",
       objective: "6.3",
       summary:
-        "Compare alert presentations with order decisions, interpret pilot rates and select safety measures.",
+        "Compare how often an alert was shown with actual order decisions, read the results of a ward trial and choose safety measures.",
       learnerAction:
-        "Compare alert presentations with order decisions, interpret pilot rates and select safety measures.",
+        "Compare how often an alert was shown with actual order decisions, read the results of a ward trial and choose safety measures.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -51,9 +51,9 @@ export const manifest: LessonManifest = {
       id: "6.4-alert-everyone-ignores",
       objective: "6.4",
       summary:
-        "Compare alert presentations with order decisions, interpret pilot rates and select safety measures.",
+        "Compare how often an alert was shown with actual order decisions, read the results of a ward trial and choose safety measures.",
       learnerAction:
-        "Compare alert presentations with order decisions, interpret pilot rates and select safety measures.",
+        "Compare how often an alert was shown with actual order decisions, read the results of a ward trial and choose safety measures.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [

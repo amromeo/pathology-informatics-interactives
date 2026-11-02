@@ -22,8 +22,7 @@ export const manifest: LessonManifest = {
       objective: "7.1",
 
       summary: "Different evidence needs for fixed tissue, frozen consultation, and remote use",
-      learnerAction:
-        "Bound the requested scope to the application and system supported by the packet.",
+      learnerAction: "Limit the approval to the use and the system the evidence actually covers.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [
@@ -38,7 +37,7 @@ export const manifest: LessonManifest = {
       objective: "7.4",
       summary: "Validation guidance, device scope, clinical approval, and change review",
       learnerAction:
-        "Build a representative paired comparison, retain and investigate disagreements, recommend an approval boundary, and classify subsequent changes.",
+        "Plan a fair glass-versus-screen comparison, keep and look into disagreements, recommend what the approval should cover, and sort later changes.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -51,7 +50,7 @@ export const manifest: LessonManifest = {
   ],
   id: "20",
   layout: "wide",
-  summary: "A whole-slide imaging proposal extends beyond the evidence in its validation packet.",
+  summary: "A whole-slide imaging proposal asks for more than its validation packet supports.",
   sources: [
     {
       label: "PIER Essentials Release 5",

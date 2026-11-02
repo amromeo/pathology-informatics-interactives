@@ -3,22 +3,22 @@
 ### What happened in this case
 
 
-At 0.5 µm/pixel, one plane contains 600 million pixels and 1.8 GB before compression. At 0.25 µm/pixel it contains 2.4 billion pixels and 7.2 GB. Three planes triple those amounts. At a modeled 10:1 ratio and two copies, one year at 0.25 µm/pixel requires 180 TB for one plane. None of these calculations shows an acceptable diagnostic setting.
+At 0.5 µm/pixel, one plane contains 600 million pixels and 1.8 GB before compression. At 0.25 µm/pixel it contains 2.4 billion pixels and 7.2 GB. Three planes triple those amounts. At a modeled 10:1 ratio and two copies, one year at 0.25 µm/pixel requires 180 TB for one plane. None of these calculations tells you which setting is good enough for diagnosis.
 
-Downsampling and strong compression each change displayed detail. Neither fixes the blurred source region. A lossless copy preserves the pixels it receives; it cannot reverse earlier loss. Cropping can preserve detail within its borders while omitting the rest of the specimen.
+Downsampling and heavy compression both change the detail you see. Neither fixes the blurred patch in the original scan. A lossless copy keeps exactly the pixels it is given; it cannot undo earlier loss. Cropping can keep the detail inside its borders while leaving out the rest of the specimen.
 
-Elena Park checks preparation, focus, coverage, identity, and rescans. Malik measures encoded sizes, access times, retention needs, and recovery. Dr. Rao and the director define clinical tasks and review representative performance on the proposed complete system. Retention and archive replacement require applicable institutional and regulatory review.
+Elena Park checks preparation, focus, whether all the tissue was scanned, slide identity and rescans. Malik measures real file sizes, how long images take to open, how long they must be kept and how they would be recovered. Dr. Rao and the director decide what pathologists need to be able to see, and review how the whole proposed system performs on typical cases. How long images are kept, and replacing the archive, need the hospital's own review and any regulatory review that applies.
 
-The next lesson examines clinical validation. A field that looks similar on this page does not approve a scanner, encoding, viewer, display, or diagnostic application.
+The next lesson looks at clinical validation. A patch of tissue that looks similar on this page does not approve a scanner, a compression setting, a viewer, a screen or any diagnostic use.
 
 <details className="teaching-supplement">
 <summary>A closer look: distinguish sampling from enlargement</summary>
 
-A scanner records tissue on a grid. Smaller pixel spacing gives more samples across the same area. The optics, focus and preparation also affect the detail recorded. Enlarging the displayed image changes its size on screen without collecting additional information from the slide.
+A scanner records tissue on a grid. Smaller pixel spacing gives more samples across the same area. The lenses, focus and preparation also affect the detail recorded. Enlarging the image on screen makes it bigger without collecting any more information from the slide.
 
-A whole-slide file often contains smaller versions of the image as well as the largest one. The viewer can request tiles from a level suited to the displayed area and zoom. Those additional levels and the file’s metadata contribute to its stored size.
+A whole-slide file often holds smaller versions of the image as well as the full-size one. The viewer can ask for tiles from whichever level suits the area and zoom on screen. Those extra levels, and the information stored about the file, add to its size.
 
-Compression, focal planes, extra copies and retrieval needs add further questions to the service’s storage estimate. Measure representative files and viewing performance before using the estimate to choose a system.
+Compression, focal planes, extra copies and how fast images must open all affect the storage estimate. Measure typical files and how quickly they open before using the estimate to choose a system.
 
 **Return to the blurred field:** Which step would have to change to obtain information that a sharper display or lossless copy cannot recover?
 
@@ -27,8 +27,4 @@ Compression, focal planes, extra copies and retrieval needs add further question
 
 ### Who does what
 
-Work with a digital pathology technologist. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
-
-### Connection to PIER 7.1, 7.2
-
-The case asks you to relate image detail to storage and delivery using laboratory records and explain the consequence of your choice.
+The digital pathology technologist and the infrastructure team test proposed settings and record the results. The surgical pathologists and the laboratory director decide what detail is needed for reporting and approve any change.

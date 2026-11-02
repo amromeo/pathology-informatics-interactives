@@ -1,72 +1,29 @@
-### Define the interval before interpreting a number
+### Define the interval before reading the number
 
-**Turnaround time** requires a start and an end. This dashboard begins at
-laboratory receipt and ends at final release. It does not measure collection
-to receipt, clinician review of the report, or action on the result.
-A different question requires different events.
+**Turnaround time** needs a start and an end. This dashboard starts the clock at laboratory receipt and stops it at final release. It does not cover collection to receipt, the clinician reading the report, or anything done about the result. A different question needs different start and end points.
 
-The selected records also contain an analysis-complete time from the analyzer
-log. Receipt-to-analysis includes any wait or preparation before analysis as
-well as processing. Analysis-to-release includes queueing, review, and other
-post-analysis work. Neither interval alone measures staff effort or pure
-instrument processing time.
+The chosen records also have an analysis-complete time from the analyzer log. Receipt-to-analysis covers any waiting or preparation before the specimen is run, as well as the run itself. Analysis-to-release covers waiting in a queue, review and anything else after the run. Neither one on its own measures staff effort or the analyzer's own processing time.
 
-Join these records by the accession key, preserving one intended row per
-accession. Joining every message or rerun without resolving repeated events
-can multiply records and distort durations. Check event definitions,
-time zones, clock synchronization, duplicate handling, and missing timestamps
-before subtracting them.
+Join these records on the accession number, keeping one row per accession. If every message or rerun is joined without sorting out repeated events, records multiply and the times come out wrong. Before subtracting one time from another, check what each event means, the time zones, whether the clocks agree, how duplicates are handled and whether any times are missing.
 
-### Check when the data were actually refreshed
+### Check when the data were last updated
 
-The noon page view does not show noon data. The last successful extract
-was at 09:00; the next two scheduled queries timed out. The earlier snapshot
-contains only six completed routine records, all with 20-minute total times.
-It cannot describe the 10:00 delivery.
+The page viewed at noon does not show noon's data. Each hour, a scheduled query copies final results from the LIS into a separate reporting database, and the dashboard summarizes that copy. The last copy that worked was made at 09:00; the next two timed out. That copy holds only six finished routine records, each taking 20 minutes. It cannot tell you anything about the 10:00 delivery.
 
-An analytic store receives copies from operational systems through extracts or
-interfaces. **Business intelligence** tools summarize these copies for decisions.
-Data source and processing history records where fields came from and how they were transformed.
-Freshness indicates how recent those copies are. Both matter even when a
-dashboard's arithmetic is correct.
+Reporting databases get copies of data from the systems used in daily work. **Business intelligence** tools summarize those copies to help people make decisions. A record of where each field came from and how it was changed tells you whether to trust it, and the time of the last update tells you how current it is. Both matter even when the dashboard's arithmetic is right.
 
-The analytics team should examine the failed query, join keys, execution plan,
-indexes, and incremental extraction strategy. Changes require testing for
-completeness and duplicates. Running a larger query more frequently against
-the production LIS may worsen operational load. An extract-health indicator
-and an explicit data timestamp should remain visible to users.
+The analytics team should look at the failed query, how the tables are joined, how the query runs and whether it could copy only new records. Any change needs testing for missing and duplicate records. Running a bigger query more often against the live LIS could slow it down for everyone. Users should always be able to see whether the last copy worked and what time the data are from.
 
-### Include work that has not finished
+### Include work that is not finished
 
-A finalized-result table excludes accessions still awaiting release. At noon,
-Q-13 and Q-14 have completed analysis but remain in the middleware review
-queue. Their total turnaround times are not yet known. Show their elapsed
-ages separately; do not insert zero, pretend noon is their release time, or
-drop them without explanation.
+A table of final results leaves out accessions still waiting for release. At noon, Q-13 and Q-14 have been run but are still in the middleware review queue. Q-13 and Q-14 are being held because their hemolysis indices are above the local limit for potassium, and recollection has been requested. Their total turnaround times are not known yet. Show how long they have been waiting, separately. Do not enter zero, pretend noon is their release time, or drop them without saying so.
 
-The linked view retains those records while calculating completed-result
-statistics only from completed results. Its denominator is therefore explicit:
-12 completed and two pending out of 14 received in the selected interval.
-These are records chosen for investigation, not a validated estimate of the
-whole laboratory's performance.
+The linked view keeps those records, but calculates the summary numbers only from finished results. That makes the denominator clear: 12 finished and two pending, out of 14 received in the chosen period. These records were picked for this investigation; they are not a checked estimate of how the whole laboratory performs.
 
-### Compare typical values with the long delays
+### Compare the typical time with the long delays
 
-The **median** is the middle completed duration, averaging the two middle
-values when the number is even. Six earlier records finish in 20 minutes.
-The six completed peak records take 60–85 minutes, so the combined median is
-40 minutes. Reporting only the earlier median conceals the changed group.
+The **median** is the middle finished time, or the average of the two middle times when there is an even number. The six earlier records finish in 20 minutes. The six finished records from the 10:00 delivery take 60–85 minutes, so the median for all 12 is 40 minutes. Reporting only the earlier median hides the group that changed.
 
-The displayed **90th percentile** uses the nearest-rank convention: sort the
-completed durations and take rank rounded upward from 0.9 times their count.
-For 12 records it is the eleventh value, 80 minutes. Small samples and other
-percentile conventions can yield different summaries. The individual records
-and pending ages remain necessary evidence.
+The **90th percentile** shown here uses the nearest-rank method: sort the finished times, multiply their number by 0.9, round up and take that position. For 12 records that is the 11th value, 80 minutes. With small numbers, other ways of calculating percentiles can give different answers, so the individual records and the waiting times of the pending ones still matter.
 
-Select the peak group and compare intervals. Receipt-to-analysis stays at
-15 minutes, while the completed post-analysis delays range from 45 to 70
-minutes. The worklist log documents delayed reviewer availability. This
-supports a targeted review of staffing and workflow, rather than concluding
-that analyzer capacity caused the observed delay.
-
-Q-13 and Q-14 remain held because their hemolysis indices exceed the local potassium limit; recollection was requested. They belong in the pending denominator even though they have no final-report timestamp. Each hour, a scheduled query copies finalized results from the LIS into a separate reporting database, and the dashboard summarizes that copy. Pending work is absent unless it is deliberately included.
+Select the 10:00 group and compare the two intervals. Receipt-to-analysis stays at 15 minutes, while the time after analysis runs from 45 to 70 minutes for the finished records. The worklist log shows that reviewers were late to arrive. That points to a closer look at staffing and how review is organized, not to the analyzer being too slow.

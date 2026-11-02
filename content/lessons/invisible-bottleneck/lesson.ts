@@ -35,9 +35,9 @@ export const manifest: LessonManifest = {
       id: "5.5-invisible-bottleneck",
       objective: "5.5",
       summary:
-        "Include pending work and distinguish collection, review and release delays in operational records.",
+        "Include work still pending, and separate delays before analysis, in review and at release.",
       learnerAction:
-        "Include pending work and distinguish collection, review and release delays in operational records.",
+        "Include work still pending, and separate delays before analysis, in review and at release.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -51,9 +51,9 @@ export const manifest: LessonManifest = {
       id: "2.1-invisible-bottleneck",
       objective: "2.1",
       summary:
-        "Include pending work and distinguish collection, review and release delays in operational records.",
+        "Include work still pending, and separate delays before analysis, in review and at release.",
       learnerAction:
-        "Include pending work and distinguish collection, review and release delays in operational records.",
+        "Include work still pending, and separate delays before analysis, in review and at release.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [

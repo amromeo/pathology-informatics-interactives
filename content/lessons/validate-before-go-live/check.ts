@@ -11,45 +11,45 @@ export const checks: RetrievalItem[] = [
         label: "Investigate that reader and the cases",
         correct: true,
         feedback:
-          "Pooling can conceal a reader-specific or workflow-specific problem. Review causes and readiness for the intended use before clinical approval.",
+          "Combining readers can hide a problem with one reader or one way of working. Look into the causes, and whether that reader is ready for this use, before clinical approval.",
       },
       {
         id: "shortcut",
         label: "Approve every reader from the pooled rate",
         feedback:
-          "This leaves the central problem unresolved. Pooling can conceal a reader-specific or workflow-specific problem. Review causes and readiness for the intended use before clinical approval.",
+          "The overall rate hides this reader's repeated disagreements. Agreement is judged for each pathologist, not for the group.",
       },
       {
         id: "incomplete",
         label: "Exclude the reader from the denominator",
         feedback:
-          "This does not establish the needed conclusion. Pooling can conceal a reader-specific or workflow-specific problem. Review causes and readiness for the intended use before clinical approval.",
+          "Removing the reader makes the numbers look better without fixing anything. Keep their cases and find out why the readings differed.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt: "Your department wants to start reporting on screen. What would you look at first?",
     choices: [
       {
         id: "supported",
-        label: "Review intended use and local validation protocol",
+        label: "The proposed use and the local validation plan",
         correct: true,
         feedback:
-          "The validation must represent the system, users and clinical use being approved.",
+          "The validation has to cover the system, the pathologists and the clinical use being approved.",
       },
       {
         id: "shortcut",
-        label: "Reuse another institution validation unchanged",
+        label: "Another hospital's validation, unchanged",
         feedback:
-          "This leaves the central problem unresolved. The validation must represent the system, users and clinical use being approved.",
+          "Another hospital's study used its own scanners, screens, pathologists and cases. It cannot show how your setup performs.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "This lesson's approval decision",
         feedback:
-          "This does not establish the needed conclusion. The validation must represent the system, users and clinical use being approved.",
+          "This case approved one narrow use on one tested setup. Your proposed uses need their own evidence.",
       },
     ],
   },
@@ -65,19 +65,19 @@ export const checks: RetrievalItem[] = [
         label: "Multiplies the count by four",
         correct: true,
         feedback:
-          "Width and height both double, so their product quadruples. Compression, pyramid levels and file overhead affect stored size separately.",
+          "Width and height both double, so the number of pixels goes up four times. Compression, pyramid levels and file overhead change the stored size separately.",
       },
       {
         id: "shortcut",
         label: "Doubles the count",
         feedback:
-          "This leaves the central problem unresolved. Width and height both double, so their product quadruples. Compression, pyramid levels and file overhead affect stored size separately.",
+          "Doubling only one dimension would double the count. Doubling both multiplies width by height twice over: 2 × 2 = 4 times as many pixels.",
       },
       {
         id: "incomplete",
         label: "Leaves the count unchanged",
         feedback:
-          "This does not establish the needed conclusion. Width and height both double, so their product quadruples. Compression, pyramid levels and file overhead affect stored size separately.",
+          "A larger grid always holds more pixels. With both dimensions doubled, the count goes up four times.",
       },
     ],
   },

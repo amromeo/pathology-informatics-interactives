@@ -69,51 +69,51 @@ export const queueSources = [
   {
     title: "Courier and accessioning",
     record: "10:00 courier delivery · eight chemistry accessions received 10:00–10:07",
-    note: "Receipt is an accession event. Courier delivery alone is not an individual specimen timestamp; retain accession-level receipt for durations.",
+    note: "Receipt is recorded for each accession. The courier's arrival is not a time for any one specimen, so use each accession's receipt time to measure durations.",
   },
   {
     title: "Analyzer event log",
     record: "Q-07…Q-14 · analysis completed 10:15–10:22 · instrument available after 10:22",
-    note: "The interval from receipt to analysis is 15 minutes for every record in this set. It includes any pre-analysis wait; it is not pure instrument run time.",
+    note: "Every record in this set took 15 minutes from receipt to analysis. That includes any waiting before the run; it is not just the analyzer's run time.",
   },
   {
     title: "Middleware worklist",
     record:
       "10:25 · Q-07…Q-14 awaiting manual review\nReviewer assigned to another bench until 11:00\n12:00 · Q-13, Q-14 still unresolved",
-    note: "The post-analysis interval includes waiting and review. These records support investigation of review coverage, not removal of review criteria.",
+    note: "The time after analysis includes waiting and review. These records point to looking at reviewer coverage, not to removing the review rules.",
   },
   {
     title: "Dashboard refresh log",
     record:
       "Page viewed 12:00 · last successful extract 09:00\n10:00 and 11:00 scheduled extracts failed · join query timed out",
-    note: "The page clock is not the data clock. An analytic query failure makes an apparently current dashboard show only the earlier group.",
+    note: "The clock on the page is not the time of the data. Because the copy failed, a dashboard that looks current shows only the earlier group.",
   },
 ];
 export const queuePlans = [
   {
     id: "analyzer",
     label: "Purchase another analyzer",
-    note: "Every selected specimen already completed analysis in 15 minutes. More analyzer capacity does not address the observed review wait; confirm broader workload before a capital decision.",
+    note: "Every specimen here was analyzed within 15 minutes. Another analyzer would not shorten the wait for review; look at the wider workload before spending on equipment.",
   },
   {
     id: "bypass",
     label: "Disable manual-review rules",
-    note: "Removing required review may shorten release times by removing a control. The records do not establish that the held results are safe for automatic release.",
+    note: "Removing required review would shorten release times by removing a safety check. Nothing in the records shows the held results are safe to release automatically.",
   },
   {
     id: "coverage",
     label: "Pilot review coverage at courier arrival and repair the analytic refresh",
-    note: "Preserve clinical rules, assign trained review coverage, resolve the two open accessions, and compare post-analysis delays and balancing measures during the pilot.",
+    note: "Keep the clinical rules, make sure trained reviewers are there, finish the two open accessions, and during the trial compare the delays after analysis and any side effects.",
   },
 ];
 
 export const lessonCopy = {
   text01:
-    "Selected records · times on the review day. Minutes show the completed interval, or age since receipt for pending results.",
+    "Chosen records · times on the review day. Minutes show the finished time, or for pending results, how long since receipt.",
 };
 
 export const sectionPurposes = [
-  "Check when data were copied and whether unfinished specimens are included.",
+  "Check when the data were copied and whether unfinished specimens are included.",
   "Link the timestamps and choose a population that can answer the manager’s question.",
-  "Match the proposed intervention to the observed delay and specify how to assess it.",
+  "Match the proposed fix to where the delay actually is, and say how you would judge whether it worked.",
 ];

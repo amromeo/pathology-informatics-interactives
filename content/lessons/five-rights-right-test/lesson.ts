@@ -34,9 +34,9 @@ export const manifest: LessonManifest = {
     {
       id: "6.1-five-rights-right-test",
       objective: "6.1",
-      summary: "Configure repeat-test guidance and classify six decision-support applications.",
+      summary: "Set up repeat-test guidance and sort six examples of decision support by type.",
       learnerAction:
-        "Configure repeat-test guidance and classify six decision-support applications.",
+        "Set up repeat-test guidance and sort six examples of decision support by type.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -49,9 +49,9 @@ export const manifest: LessonManifest = {
     {
       id: "6.2-five-rights-right-test",
       objective: "6.2",
-      summary: "Configure repeat-test guidance and classify six decision-support applications.",
+      summary: "Set up repeat-test guidance and sort six examples of decision support by type.",
       learnerAction:
-        "Configure repeat-test guidance and classify six decision-support applications.",
+        "Set up repeat-test guidance and sort six examples of decision support by type.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -64,9 +64,9 @@ export const manifest: LessonManifest = {
     {
       id: "4.2-five-rights-right-test",
       objective: "4.2",
-      summary: "Configure repeat-test guidance and classify six decision-support applications.",
+      summary: "Set up repeat-test guidance and sort six examples of decision support by type.",
       learnerAction:
-        "Configure repeat-test guidance and classify six decision-support applications.",
+        "Set up repeat-test guidance and sort six examples of decision support by type.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [
