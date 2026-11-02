@@ -2,7 +2,7 @@
 
 The local test in [Table 1](#ai-local-results) included only positive slides. Now consider a larger group containing both slides with metastases and slides without them. The model can make two kinds of mistakes: miss a metastasis or mark a negative slide as positive. The second mistake is a **false positive**, or false alarm. A negative slide correctly called negative is a **true negative**.
 
-[Table 3](#ai-calculated-outcomes), beneath the sliders, shows all four possible outcomes. To judge detection, start with the slides that contain metastases. To judge false alarms, start with the slides without metastases. Keeping those two starting groups separate makes the percentages easier to interpret.
+[Table 3](#ai-calculated-outcomes), beneath the sliders, shows all four possible outcomes. To judge detection, start with the slides that contain metastases. To judge false alarms, start with the slides without metastases. Keeping those two starting groups separate makes the percentages easier to read.
 
 **Sensitivity** asks what fraction of positive slides the model finds. **Specificity** asks what fraction of negative slides it correctly leaves negative. **Positive predictive value (PPV)** asks a third question: of the slides the model calls positive, how many actually contain metastases? For PPV, divide the true positives by all positive calls: true positives plus false positives.
 
@@ -12,7 +12,7 @@ These sliders use an example model to show how prevalence affects the results in
 
 1. Leave model separation at **2.0**. Begin with **10% prevalence**, meaning 1,000 of the 10,000 slides contain metastases. The remaining 9,000 do not. Compare the true-positive and false-positive counts in [Table 3](#ai-calculated-outcomes).
 2. Lower prevalence to **1%**. Now only 100 slides contain metastases, and 9,900 do not. The same detection rate finds fewer positive slides because there are fewer to find. False alarms still come from the much larger negative group. Watch the positive predictive value fall even though sensitivity and specificity stay the same.
-3. Return prevalence to **10%**, then increase **model separation**. This control represents how readily the example model distinguishes the positive and negative groups. Better separation produces more correct answers in both groups. Compare the number of misses and false alarms with the starting values.
+3. Return prevalence to **10%**, then increase **model separation**. This control sets how easily the example model tells the positive and negative groups apart. Better separation produces more correct answers in both groups. Compare the number of misses and false alarms with the starting values.
 
 The separation scale runs from 0 to 4 and has no clinical unit. It changes the performance assumed for the example model. The actual local results in [Table 1](#ai-local-results) and [Table 2](#ai-monthly-results) stay fixed while you move either slider.
 
@@ -23,9 +23,9 @@ For this calculator, sensitivity and specificity are set equal to one another. B
 
 The calculation holds the positive-call cutoff fixed. That cutoff, also called a threshold, is the level of the model's score at which it calls a slide positive. Changing a real model's cutoff can trade fewer misses for more false alarms. This exercise changes the assumed separation between groups instead.
 
-Multiply the number of slides with cancer by sensitivity to obtain the expected true positives. The remaining cancer-containing slides are false negatives. Multiply the number without cancer by specificity to obtain true negatives. The remaining cancer-free slides are false positives.
+Multiply the number of slides with cancer by sensitivity to get the expected true positives. The remaining cancer-containing slides are false negatives. Multiply the number without cancer by specificity to get the true negatives. The remaining cancer-free slides are false positives.
 
-The displayed counts are rounded to whole slides. The percentages use the unrounded calculations. These are expected counts, rather than observations from an additional slide study.
+The displayed counts are rounded to whole slides. The percentages use the unrounded calculations. These are expected counts, not results from another slide study.
 
 </details>
 

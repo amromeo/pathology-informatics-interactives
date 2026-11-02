@@ -24,7 +24,7 @@ export const proposals = [
       "An analyst writes a rule: if a quality-control result falls outside the allowed range, hold the affected patient results for staff to review. The analyst enters the conditions directly. The program does not learn them from examples.",
     kind: "rule",
     review: "boundaries",
-    why: "This is a programmed rule because the analyst supplied its conditions. Check control values just inside, exactly at and just outside the allowed range. Also try an exception such as a missing control result. Watch which patient results are held. These checks show whether the program follows the laboratory's instructions when testing is acceptable, when it fails and when information is missing.",
+    why: "This is a programmed rule because the analyst supplied its conditions. Check control values just inside, exactly at and just outside the allowed range. Also try an exception such as a missing control result. Watch which patient results are held. These checks show whether the program does what the laboratory intended when the control is acceptable, when it fails and when information is missing.",
     wrongKindFeedback: {
       supervised:
         "Supervised image models learn from labeled images. Here the analyst writes the condition for holding a result directly.",
@@ -236,10 +236,10 @@ export const governance = [
     prompt:
       "Which document should assign slide review, error reporting and the decision to pause use?",
     answer: "accountability",
-    why: "The laboratory procedure should assign each job to a named role: reviewing the whole slide, receiving error reports and deciding when to pause use. It should also state which findings require a pause. These responsibilities need to be agreed before staff rely on the model's marks.",
+    why: "The laboratory procedure should assign each job to a named role: reviewing the whole slide, receiving error reports and deciding when to pause use. It should also state which findings require a pause. These jobs need to be agreed before staff rely on the model's marks.",
     wrongFeedback: {
       equity:
-        "Detection counts may show a problem, but they do not assign responsibility for acting on it. Staff need a laboratory procedure naming the reviewer, contact and person who can pause use.",
+        "Detection counts may show a problem, but they do not say who acts on it. Staff need a laboratory procedure naming the reviewer, contact and person who can pause use.",
       documentation:
         "Saved versions and settings help reconstruct a result. They do not tell staff who must review unmarked tissue or respond to an error. Those assignments belong in the laboratory procedure.",
       device:
@@ -258,9 +258,9 @@ export const governance = [
       equity:
         "Found and missed counts describe performance across cases. They do not identify the version and settings used for one result. Review the record saved with that result.",
       accountability:
-        "The procedure assigns responsibility for an investigation. It does not show which software version and settings produced the result. The team needs the saved result-specific record.",
+        "The procedure says who investigates. It does not show which software version and settings produced the result. The team needs the saved result-specific record.",
       device:
-        "The authorization and instructions describe permitted configurations. They do not establish which configuration was actually used for a particular slide. Check that result's saved version and settings.",
+        "The authorization and instructions describe the settings the product is approved for. They do not show which settings were actually used for a particular slide. Check that result's saved version and settings.",
     },
   },
   {
@@ -270,14 +270,14 @@ export const governance = [
     prompt:
       "Which documents should the regulatory team compare with the laboratory's proposed use?",
     answer: "device",
-    why: "Review the current authorization and instructions for use with the hospital's regulatory team. Compare the permitted tissue types, scanners and role of the pathologist with the laboratory's plan. Good local detection results do not establish that the proposed use is covered.",
+    why: "Review the current authorization and instructions for use with the hospital's regulatory team. Compare the permitted tissue types, scanners and role of the pathologist with the laboratory's plan. Good local detection results do not show that the proposed use is covered.",
     wrongFeedback: {
       equity:
-        "Local detection results show performance on the tested slides. They do not establish the product's authorized use. The regulatory team needs the current authorization and instructions for use.",
+        "Local detection results show performance on the tested slides. They do not tell you which uses the product is authorized for. The regulatory team needs the current authorization and instructions for use.",
       accountability:
-        "A local procedure can assign review and stopping responsibilities. It cannot establish which uses the product's authorization covers. Compare the authorization and instructions with the proposed use.",
+        "A local procedure can say who reviews slides and who can stop use. It cannot tell you which uses the product's authorization covers. Compare the authorization and instructions with the proposed use.",
       documentation:
-        "Version and setting records show how the model was run. They do not establish whether that use is covered by its authorization. Check the current authorization and instructions for use.",
+        "Version and setting records show how the model was run. They do not show whether that use is covered by its authorization. Check the current authorization and instructions for use.",
     },
   },
 ] satisfies {

@@ -1,39 +1,39 @@
 ### How a scan becomes a worklist entry
 
-When J. Lee scans C-1042-A at accessioning, the scanner reads the identifier encoded on the label. The LIS uses that identifier to open S26-1042, part A. J. Lee checks the patient, part and requested examination, then records receipt at the accessioning desk.
+When J. Lee scans C-1042-A at accessioning, the scanner reads the identifier on the label. The LIS uses it to open S26-1042, part A. J. Lee checks the patient, the part and the examination requested, then records receipt at the accessioning desk.
 
-The accession also contains the examination code **SP-EX**. Next, the LIS uses that code to find a row in its procedure dictionary. Think of the dictionary as a set of instructions organized by examination. The routing program reads the destination in that row and adds the case to the corresponding worklist.
+The accession also holds the examination code **SP-EX**. The LIS then uses that code to find a row in its procedure dictionary. Think of the dictionary as a set of instructions, one row per examination. The routing program reads the destination in that row and puts the case on that worklist.
 
-A **revision** identifies a saved version of those settings. The 08:12 event names revision 17, so the analyst can check which settings were used at that time. This is more useful than opening the current settings and assuming they were identical.
+A **revision** is a saved version of those settings. The 08:12 event names revision 17, so the analyst can see exactly which settings were used at the time. That is more reliable than opening today's settings and assuming they were the same.
 
-The two steps can succeed independently: the scanner can retrieve the intended accession, and the routing program can faithfully use a destination that was entered incorrectly. To explain this case, follow the identifier into the accession, then follow SP-EX into its dictionary entry.
+Each step can work correctly on its own: the scanner can find the right accession, and the routing program can faithfully follow a destination that was entered wrongly. To explain this case, follow the identifier into the accession, then follow SP-EX into its dictionary entry.
 
 ### Read an event as a record of an action
 
-Open each of the four events below. Begin with its time and author, then read the action and identifiers.
+Open each of the four events below. Start with its time and author, then read the action and the identifiers.
 
-For example, the **08:11 receipt event** names J. Lee, workstation ACC-02, container C-1042-A and part A of S26-1042. It records a staff member receiving that container at accessioning. The **08:12 assignment event** names the LIS routing service and a destination worklist. Its author and action tell you that software assigned the case to cytology.
+For example, the **08:11 receipt event** names J. Lee, workstation ACC-02, container C-1042-A and part A of S26-1042. It records a person receiving that container at accessioning. The **08:12 assignment event** names the LIS routing service and a destination worklist. Its author and action tell you that software, not a person, sent the case to cytology.
 
 These records answer different questions:
 
-1. **Which case was retrieved?** The receipt record links the scanned container to its patient, accession and part.
-2. **Which team was assigned the work?** The assignment event identifies the procedure code, dictionary revision and electronic destination.
-3. **Where did someone last receive the container?** A receiving event identifies the staff member, time and location of that physical handoff.
+1. **Which case was opened?** The receipt record links the scanned container to its patient, accession and part.
+2. **Which team was given the work?** The assignment event shows the procedure code, the dictionary revision and the electronic destination.
+3. **Where did someone last receive the container?** A receiving event shows who received it, when and where it was handed over.
 
-At 08:40, the assistant finds a gap in the record after accessioning receipt. The container may still be there, or staff may have moved it without documenting the transfer. Someone needs to contact the staff involved and check the actual container. Use the records to guide that search.
+At 08:40, the assistant finds nothing in the record after the receipt at accessioning. The container may still be there, or someone may have moved it without recording it. Someone has to ask the staff involved and look for the container itself. Use the records to decide where to look.
 
 ### How other LIS records fit together
 
-The order catalog is the clinician's starting point. A clear examination name, specimen requirement and collection instruction help the clinician request the intended work. Order-time questions can collect a specimen site or other information needed for processing. Duplicate-order checks ask staff to review a potentially repeated request. Each answer or warning must reach the person who can act on it.
+The order catalog is where the clinician starts. A clear examination name, specimen requirement and collection instruction help the clinician order the right test. Questions asked at ordering can collect the specimen site or other details needed for processing. Duplicate-order checks ask staff to look at a request that may be a repeat. Each answer or warning has to reach the person who can act on it.
 
-Once the laboratory receives a specimen, the LIS connects the order to an accession and the required work. In anatomic pathology, linked records commonly include parts, blocks and slides. In clinical pathology, they commonly include orders, specimens, tests and results. Both use identifiers, worklists and audit histories to keep the work connected. Blood bank, microbiology and molecular services may use specialized systems.
+Once the laboratory receives a specimen, the LIS ties the order to an accession and to the work needed. In anatomic pathology, the linked records usually include parts, blocks and slides. In clinical pathology, they usually include orders, specimens, tests and results. Both use identifiers, worklists and audit histories to keep the work connected. Blood bank, microbiology and molecular services may use their own specialized systems.
 
-Other LIS functions support this work: dictation places report text into the correct case; outreach connections carry orders and reports to outside practices; billing uses records of the services provided. When investigating a problem, identify which function performed the action you are examining.
+Other parts of the LIS support this work: dictation puts report text into the right case; outreach connections carry orders and reports to and from outside practices; billing uses the record of services provided. When looking into a problem, find out which part of the system did the thing you are looking at.
 
 ### Reading a label and recording a handoff
 
-A scan saves staff from typing an identifier. Staff still check that the label belongs to the patient, accession and part in front of them. A label on the wrong container can scan successfully.
+Scanning saves staff from typing an identifier. Staff still check that the label belongs to the patient, accession and part in front of them. A label stuck on the wrong container will still scan without complaint.
 
-A linear barcode represents an identifier with bars; a two-dimensional barcode stores information in a pattern that can fit a small label. The receiving software must be configured to read that format and use its contents correctly. A radio-frequency identification (**RFID**) system reads an electronic tag using radio signals. For any tracking method, ask what event the system records and how that event is linked to the container.
+A linear barcode stores an identifier as bars; a two-dimensional barcode stores information in a pattern that fits on a small label. The receiving software has to be set up to read that format and use what it contains correctly. A radio-frequency identification (**RFID**) system reads an electronic tag by radio. Whatever the tracking method, ask what event the system records and how that event is tied to the container.
 
-A tracking dashboard gathers these events into a view. Read the event names and timestamps before treating a displayed location as the container's present location. The exercise below gives you the underlying records so you can make that judgment.
+A tracking dashboard pulls these events together into one screen. Read the event names and times before taking a location on the screen as where the container is now. The exercise below shows you the records behind it so you can judge for yourself.

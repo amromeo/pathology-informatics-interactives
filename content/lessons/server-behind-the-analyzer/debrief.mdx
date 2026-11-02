@@ -2,37 +2,30 @@
 
 ### What happened in this case
 
+The middleware server needs protecting from people who should not get in, and it needs a tested way to keep results moving during an outage.
 
-The middleware server needs protection from unauthorized access and a tested way to keep results available during an outage.
+The map links six installation findings to confidentiality, integrity and availability. A shared login lets someone see results and change settings without anyone knowing who did it. An open network also gives an infection a way to stop result routing. A backup job that reports success does not show that restored orders, results and settings will be complete and correct.
 
-The threat map connects six installation findings to confidentiality, integrity, and availability. A shared account permits disclosure and unattributed changes; a flat network also creates a route for interruption of result routing. A successful backup job does not show that restored orders, results, and configuration will be complete and correct.
+If you built a control plan, compare the [five event results](#stress-test-title) with the fixes you chose. Named accounts deal with misuse of a shared login, but vendor work stays only partly controlled until sessions are approved and time-limited. Protected hosting deals with the heat and power event; a restore drill is what checks recovery from backup.
 
-If you built a control plan, compare the [five event results](#stress-test-title) with the controls you selected. Named accounts address shared-credential misuse, but leave vendor work only partially controlled without approved, time-limited sessions. Protected hosting addresses the local heat and power event; a restore drill separately checks recovery from backup.
+The coverage score counts partial results. The plan in the faculty key, at 14 budget and 11 effort points, only partly handles the ransomware event. The other plan, at 13 budget and 11 effort, restricts the network but still means shutting down during a heat or power event. Explain what interruption or exposure is left before recommending a plan. Dr. Ruiz and the supporting teams also have to look at risks outside these five events.
 
-The coverage score includes partial mitigation. The 14-budget/11-effort plan in the faculty key leaves the ransomware event partly addressed. The 13-budget/11-effort plan restricts the network but still requires shutdown during an environmental event. Explain the remaining interruption or disclosure risk before recommending a plan. Dr. Ruiz and the supporting teams must also review risks outside these five events.
+Heat or power loss shows why one finding can hit two properties: routing stops, and a write cut off halfway can damage records. So a restore drill has to check both that the service comes back and that its queues and settings are complete.
 
-Heat or power loss illustrates why one finding can affect two properties: routing stops, and an interrupted storage write can damage records. A restore drill therefore needs to check both service availability and the completeness of its queues and settings.
-
-In the later outage, construction severs the network. Segmentation would restrict access between computers; an alternate route would provide another connection. The unfinished recovery drill leaves staff less prepared to check the recovered service and reconcile paper work. Keep those effects separate from the cause of the cable damage.
-
-Facilities, security, LIS, and vendor-management teams implement controls. The laboratory director retains responsibility for approved procedures, access, continuity, and clinical use.
+In the outage later in the case, construction cuts the network cable. Segmentation would limit which computers can reach each other; a second route would give another connection. Because the restore drill was never done, staff are less ready to check the recovered service and match it against the paper records. Keep those effects separate from the cause of the cable damage.
 
 <details className="teaching-supplement">
 <summary>A closer look: follow one vendor support session</summary>
 
-Suppose a vendor needs to investigate a problem with instrument messages. The LIS analyst should know who connected, when the session began and what was changed. A shared account makes it harder to attribute that work. A connection left active afterward can remain usable beyond the original support task.
+Suppose the vendor needs to look into a problem with instrument messages. The LIS analyst should know who connected, when the session started and what was changed. A shared login makes it hard to tell who did the work. A connection left open afterward can still be used long after that support task is over.
 
-Named accounts, approved sessions and a record of changes address different parts of that problem. The network team also needs to review which other systems can be reached from the middleware server. Separately, staff need to restore a backup and inspect the recovered orders, results and settings before relying on that recovery method.
+Named accounts, approved sessions and a record of changes each deal with a different part of that problem. The network team also needs to check which other systems the middleware server can reach. Separately, staff need to restore a backup and look through the recovered orders, results and settings before counting on that way of recovering.
 
-**During the installation review:** What would you ask the vendor, security team and LIS analyst to show about a completed support session?
+**During the installation review:** What would you ask the vendor, the security team and the LIS analyst to show you about a finished support session?
 
 <p className="supplement-credit">Conference context: David McClintock, MD. Cybersecurity Preparedness. Pathology Informatics Summit 2024.</p>
 </details>
 
 ### Who does what
 
-Jordan checks message routing and restored records with laboratory staff. Security staff review accounts, network restrictions and logs. Facilities checks cooling and power. Vendor management reviews the support agreement. Dr. Ruiz reviews the resulting laboratory procedures and remaining risks before approving patient use.
-
-### Connection to PIER 3.1, 3.2
-
-The case asks you to match a security finding to its laboratory consequence using laboratory records and explain the consequence of your choice.
+Jordan checks message routing and the restored records with laboratory staff. Security staff review accounts, network restrictions and logs. Facilities checks cooling and power. Vendor management reviews the support agreement. The laboratory director stays accountable for the procedures, access, continuity plan and clinical use, so Dr. Ruiz reviews the procedures and the remaining risks before approving patient use.

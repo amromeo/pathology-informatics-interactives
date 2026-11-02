@@ -11,19 +11,19 @@ export const checks: RetrievalItem[] = [
         label: "It does not meet Safe Harbor",
         correct: true,
         feedback:
-          "Safe Harbor removes all date elements except year and all five-digit ZIP codes. Limited three-digit ZIP retention has a population condition; other disclosure methods require their own review.",
+          "Safe Harbor removes every part of a date except the year, and every five-digit ZIP code. A three-digit ZIP prefix can stay only if its area is large enough. Other methods of sharing need their own review.",
       },
       {
         id: "shortcut",
         label: "It meets Safe Harbor without review",
         feedback:
-          "Exact birth dates and full ZIP codes remain in this extract. Those fields fail Safe Harbor requirements even though names were removed.",
+          "Exact birth dates and full ZIP codes are still in the file. Those fields fail Safe Harbor, even though the names are gone.",
       },
       {
         id: "incomplete",
         label: "A study number alone makes it anonymous",
         feedback:
-          "A study number changes the row label. It leaves the exact birth dates and ZIP codes available for linkage and may itself connect to a separate identity key.",
+          "A study number only changes the row label. The exact birth dates and ZIP codes can still be linked to people, and the number itself may lead back to them through a separate key.",
       },
     ],
   },
@@ -31,26 +31,26 @@ export const checks: RetrievalItem[] = [
     id: "transfer",
     kind: "transfer",
     prompt:
-      "An investigator requests a laboratory export containing dates and ZIP codes. What should you check before preparing the file?",
+      "An investigator asks for a laboratory export that includes dates and ZIP codes. What should you check before preparing the file?",
     choices: [
       {
         id: "supported",
         label: "Ask which disclosure method was approved",
         correct: true,
         feedback:
-          "The fields and safeguards depend on the authorized method; a data use agreement is not a substitute for satisfying that method.",
+          "Which fields can go out, and how they must be protected, depends on the approved method. A data use agreement does not replace meeting that method's requirements.",
       },
       {
         id: "shortcut",
         label: "Delete names and send the remaining file",
         feedback:
-          "Deleting names leaves dates, geography and potentially a key. Ask the privacy office which disclosure method and field list were approved before preparing the export.",
+          "Deleting names still leaves dates, locations and possibly a key. Ask the privacy office which method and field list were approved before preparing the export.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "Make the same three changes as in this case",
         feedback:
-          "This case's three transformations may remove details another study needs. Use the local approved method and field list, with the privacy office reviewing any change.",
+          "The three changes in this case may remove details another study needs. Use the method and field list approved locally, and have the privacy office review any change.",
       },
     ],
   },
@@ -63,22 +63,22 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "Review authorized access and safeguards",
+        label: "Set up approved, limited access",
         correct: true,
         feedback:
-          "The access arrangement needs individual authorization, appropriate safeguards and review of the business-associate relationship where applicable. Convenience does not remove these obligations.",
+          "The vendor needs its own named account, limited to the repair, with the session recorded. Check that a business associate agreement is in place if the vendor will see PHI. Being in a hurry does not change any of this.",
       },
       {
         id: "shortcut",
         label: "Share the supervisor login temporarily",
         feedback:
-          "The shared account would attribute the vendor's work to the supervisor. Arrange named, limited access so the hospital can review who changed the workstation.",
+          "With a shared login, the vendor's work looks like the supervisor's. Set up named, limited access so the hospital can see who changed the workstation.",
       },
       {
         id: "incomplete",
-        label: "Permit unrestricted access until repair ends",
+        label: "Allow unrestricted access until the repair ends",
         feedback:
-          "The repair may need only one workstation. Restricting the session protects unrelated records and settings and lets the laboratory approve and review the work.",
+          "The repair may need only one workstation. Limiting the session protects other records and settings, and lets the laboratory approve and review the work.",
       },
     ],
   },

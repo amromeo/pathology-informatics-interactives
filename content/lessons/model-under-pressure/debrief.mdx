@@ -4,7 +4,7 @@ import { DataTable } from "../../../src/components/lesson-ui";
 
 Begin with two separate answers: what the pathologists found on the slide, and what the model called. The pathologists' agreed diagnoses are the reference standard for this test. A slide containing metastasis is a true positive only if the model finds it. If the model misses it, that outcome is a false negative.
 
-In [Table 1](#ai-local-results), the model found 42 of 50 positive slides and missed eight. Its sensitivity was therefore 42/50, or 84%. [Table 4](#ai-local-summary) summarizes those results by deposit size and scanner so we can see which groups account for the misses.
+In [Table 1](#ai-local-results), the model found 42 of 50 positive slides and missed eight. Its sensitivity was therefore 42/50, or 84%. [Table 4](#ai-local-summary) sorts those results by deposit size and by scanner, so you can see where the misses were.
 
 <DataTable id="ai-local-summary" label="Local results by deposit size and scanner" caption="Table 4. Summary of the first local test">
   <thead><tr><th scope="col">Group</th><th scope="col">Found</th><th scope="col">Missed</th><th scope="col">Slides with metastases</th></tr></thead>
@@ -50,13 +50,13 @@ The generative model can produce a readable summary with an invented finding or 
 
 To compare misses between sites, review local test results separated by site and deposit size. Use the number of known-positive slides at each site as the denominator. A software-version record cannot tell you how many metastases were missed.
 
-To find who reviews the whole slide, responds to errors and can pause use, read the laboratory procedure assigning those jobs. The laboratory director and reviewing pathologists should agree on those responsibilities and stopping rules before use.
+To find out who reviews the whole slide, who deals with errors and who can pause use, read the laboratory procedure that assigns those jobs. The laboratory director and the reviewing pathologists should agree on those jobs, and on when to stop, before use.
 
 To investigate a particular result, review its saved model version and scanner, stain and threshold settings. The current settings may differ from those used when the result was produced.
 
 To check whether the proposed use is covered by the product's authorization, review the current authorization and instructions for use with the hospital's regulatory team. Local detection results answer a performance question. The authorization answers which uses and conditions are covered.
 
-Good detection of large deposits in this small test does not automatically approve a narrower use. The team would still need to define that use, test it appropriately and decide how the pathologist will check the program's output.
+Good detection of large deposits in this small test does not automatically approve a narrower use. The team would still need to define that use, test it properly and decide how the pathologist will check the program's output.
 
 <details className="teaching-supplement">
 <summary>A closer look: keep a reference that the model did not supply</summary>

@@ -1,6 +1,6 @@
 ### Has detection changed since the first local test?
 
-[Table 2](#ai-monthly-results) shows a monthly review of 50 slides known to contain metastases: 25 with micrometastases and 25 with macrometastases. Each month's result comes from that month's review set. The team uses these results to check whether the model's sensitivity has changed over time. They do not measure how common metastases are among all patients.
+[Table 2](#ai-monthly-results) shows a monthly review of 50 slides known to contain metastases: 25 with micrometastases and 25 with macrometastases. Each month's result comes from that month's review set. The team uses these results to see whether the model's sensitivity has changed over time. They do not show how common metastases are among all patients.
 
 In July and August, the model found 17 of 25 small deposits. In September, it found 12 of 25. It therefore missed 13 small deposits in September, compared with eight in each of the earlier months. Detection of the large deposits stayed at 25 of 25.
 
@@ -14,6 +14,6 @@ The timing makes the stain change worth investigating. It does not prove that st
 
 **Drift:** have the data or performance changed over time? September adds a later decline to the earlier local problem. Reviewing the monthly results helps the laboratory notice such a change.
 
-**Brittleness:** does a small change in an input cause a large change in the model's answer? Imagine making a slight color change to an image while leaving the cells and their arrangement unchanged. If the model's answer changes greatly, that would be a reason to test its sensitivity to small image changes. We have not performed that paired-image test here, so the monthly counts in [Table 2](#ai-monthly-results) alone cannot show brittleness.
+**Brittleness:** does a small change in an input cause a large change in the model's answer? Imagine making a slight color change to an image while leaving the cells and their arrangement unchanged. If the model's answer changed a lot, that would be a reason to test how it responds to small image changes. That paired-image test has not been done here, so the monthly counts in [Table 2](#ai-monthly-results) alone cannot show brittleness.
 
-Use [Table 2](#ai-monthly-results) to choose what the laboratory should do about September. Consider which slides need review and whether the result crosses a stopping limit agreed by the laboratory before use.
+Use [Table 2](#ai-monthly-results) to choose what the laboratory should do about September. Think about which slides need review, and whether the result crosses a stopping limit the laboratory agreed before use.

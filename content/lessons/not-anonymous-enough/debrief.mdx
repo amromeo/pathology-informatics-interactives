@@ -2,35 +2,30 @@
 
 ### What happened in this case
 
+Jordan removed names and MRNs but left a lookup key in the shared folder. That key can link an exported code back to the patient. In the [original export](#raw-privacy-table), someone who knows a patient's diagnosis and ZIP can also pick out NR-001 from the other 17 rows.
 
-Jordan removed names and MRNs but kept a lookup key in the shared folder. That key can reconnect an exported code to the patient. The [original export](#raw-privacy-table) also lets a person combine diagnosis and ZIP to distinguish NR-001 from the other 17 rows.
+So the original file is coded and can be reidentified. Narrowing it to one row shows that someone with outside knowledge could make a link; it does not show that a real person has been identified. Breast carcinoma appears in three rows of this file. That says nothing about how common it is among the hospital's patients.
 
-The original dataset is coded and reidentifiable. Filtering to one row demonstrates a possible linkage using outside knowledge; it does not show that a real person has been identified. Breast carcinoma appears in three rows of this selected file. Its frequency in this file says nothing about its frequency in the hospital population.
+After broadening ZIP and diagnosis, the groups have four, four, five and five rows. The [transformed preview](#transformed-privacy-preview) shows why the smallest is four. Changing the shared admission date to the year alone leaves that count the same, and so does locking down the key. Each step deals with a different part of the problem.
 
-After broadening ZIP and diagnosis, the groups contain four, four, five and five rows. The [transformed preview](#transformed-privacy-preview) shows why the minimum is four. Changing the common admission date to year leaves that count unchanged. Protecting the separate key also leaves the count unchanged. Each action addresses a different part of the proposed disclosure.
+The full proposal passes the five checks in the exercise only once the field changes, the locked-down key, the purpose, the recipient and the agreement are all recorded. Priya still has to review the whole file, the fact that everyone in it was admitted on April 18, the ZIP population rules and the study codes. If the study needs exact dates or locations, she can consider sharing a limited data set, which keeps more of that detail. A bigger group count cannot choose the method or approve the file on its own.
 
-The complete proposal passes five exercise checks only after the field changes, key restriction, purpose, recipient and agreement are recorded. Priya still must review the whole export, the known April 18 cohort, the ZIP population conditions and the codes. If exact timing or geography is needed for the study, she can consider a limited-data-set pathway that retains permissible detail. A larger group count alone cannot choose or approve the method.
-
-Jordan prepares the approved fields and protects the key. The investigator explains which details are needed to study completion and calls. Priya and the research office determine the required disclosure review and agreement with the responsible data owner. The patient-description fields shown here still need the proposed outcome fields before the research question can be answered.
+Jordan prepares the approved fields and locks down the key. The investigator explains which details are needed to study test completion and phoned results. Priya and the research office decide which review and agreement are needed, with whoever is responsible for the data. The patient fields shown here still need the outcome fields added before the study question can be answered.
 
 <details className="teaching-supplement">
 <summary>A closer look: review the combination of fields being released</summary>
 
-A researcher may need dates to follow a patient’s course and a diagnosis to select relevant cases. Those fields can also distinguish a small group when combined with location information. Review the proposed dataset as a whole, including who can use any linkage key.
+A researcher may need dates to follow a patient's course, and a diagnosis to pick the right cases. Combined with location, those same fields can single out a small group. Look at the proposed file as a whole, including who can use any key that links it back to patients.
 
-Images add other places to inspect. A whole-slide image can include a label image, information stored within the file and a file name derived from an accession. Renaming the file leaves the other locations to be reviewed. Staff need a process for checking the prepared files and holding those that still need attention.
+Images bring more places to check. A whole-slide image file can include a picture of the slide label, information stored inside the file, and a file name based on the accession number. Renaming the file still leaves the other places to check. Staff need a way to check the prepared files and hold back any that still need work.
 
-The privacy and research teams can help preserve useful information while reviewing the proposed release. The small-group counter in this exercise answers one question about this table; approval also depends on the permitted use and disclosure method.
+The privacy and research teams can help keep information useful while they review the release. The small-group counter in this exercise answers one question about this table; approval also depends on how the data may be used and how they will be shared.
 
-**For a slide-sharing project:** Which parts of the image file and associated case list would you include in that review?
+**For a slide-sharing project:** Which parts of the image file, and of the case list that goes with it, would you include in that review?
 
 <p className="supplement-credit">Conference context: Amrom Obstfeld, MD, PhD. Ethics in Research Data Use. Pathology Informatics Summit 2023. Peter Gershkovich, MD, MHA. Orchestrating WSI De-identification: Balancing Privacy, Scalability, Cost, and Innovation. Pathology Informatics Summit 2025.</p>
 </details>
 
 ### Who does what
 
-Ask Jordan to show the selection instructions and field list, ask the investigator to justify the requested detail, and ask Priya to document the permitted disclosure method and safeguards.
-
-### Connection to PIER 3.2, 3.4
-
-The case asks you to distinguish removing names from satisfying a disclosure method using laboratory records and explain the consequence of your choice.
+Ask Jordan to show how he chose the records and which fields he copied. Ask the investigator to explain why the study needs each detail. Ask Priya to record which way of sharing is allowed and what safeguards go with it.
