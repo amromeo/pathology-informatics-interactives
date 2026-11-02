@@ -1,35 +1,35 @@
 ## Debrief: explain the assignment and locate the container
 
-The [audit events](#specimen-audit-title) connect C-1042-A to the intended accession and part. J. Lee documented receipt at accessioning at 08:11. One minute later, the LIS routing service used SP-EX in dictionary revision 17 to assign the case to cytology.
+The [audit events](#specimen-audit-title) link C-1042-A to the right accession and part. J. Lee recorded receipt at accessioning at 08:11. One minute later, the LIS routing service used SP-EX in dictionary revision 17 to send the case to cytology.
 
-Those events explain why the case appeared on the cytology worklist. They leave its physical movement after accessioning unresolved. The assistant and accessioning staff need to locate the container, verify its identity and record the actual handoff.
+Those events explain why the case showed up on the cytology worklist. They say nothing about where the container went after accessioning. The assistant and accessioning staff need to find it, check that it is the right container and record the handoff that actually happens.
 
 ### What the routing tests show
 
-The original settings pass **three of five** checks. SP-EX sends the excision to cytology, and SP-NEW falls through to the default gross-room destination.
+The original settings pass **three of five** checks. SP-EX sends the excision to cytology, and SP-NEW falls through to the default destination, the gross room.
 
-Changing SP-EX to the gross room produces **four of five** passing checks. The unrecognized code still needs attention. Changing the unmatched-code destination to accessioning review gives **five of five**, while preserving the biopsy, cytology and frozen-section routes.
+Changing SP-EX to the gross room gives **four of five** passes. The unrecognized code still needs fixing. Changing the destination for unmatched codes to accessioning review gives **five of five**, and the biopsy, cytology and frozen-section routes still work.
 
-Sending every procedure to the gross room would create new problems for cytology and frozen-section work. The [routing results](#specimen-routing-results) make those consequences visible one case at a time.
+Sending every procedure to the gross room would cause new problems for cytology and frozen-section work. The [routing results](#specimen-routing-results) show those effects one case at a time.
 
 ### What staff still need to do
 
-A passing replay supports review of the proposed configuration. The LIS analyst should retain the tested settings and results with the change record. The laboratory supervisor reviews the destinations and agrees on when the correction will be used.
+A passing replay is a reason to review the proposed settings, not to switch them on. The LIS analyst should keep the tested settings and results with the change record. The laboratory supervisor reviews the destinations and agrees when the fix will go live.
 
-For S26-1042, staff also need to correct the existing worklist assignment under the local procedure. They should record gross-room receipt when that team actually receives the verified container. Creating a replacement accession would introduce another record for a case whose identity was already established.
+For S26-1042, staff also need to correct the worklist assignment following the local procedure. They should record receipt in the gross room when that team actually receives the checked container. Creating a new accession would add a second record for a case whose identity was never in doubt.
 
-When reporting this incident to the supervisor, name the procedure entry that caused the assignment, the last documented physical location, the proposed correction and the person following up on the container.
+When reporting this to the supervisor, name the procedure entry that caused the problem, the last place the container was recorded, the proposed fix and the person following up on the container.
 
 <details className="teaching-supplement">
 <summary>A closer look: check what a scan actually recorded</summary>
 
-A successful barcode read identifies the record encoded on the label. Staff still need to know what happened when the code was read: receipt at accessioning, assignment to a worklist or a physical handoff to another section.
+A good barcode read tells you which record the label points to. Staff still need to know what happened when it was read: receipt at accessioning, assignment to a worklist, or a handoff to another section.
 
-The SP-EX case illustrates why those events need separate names and times. The accessioning scan documents receipt. The cytology worklist entry documents a software assignment. Locating the container requires a later observation or handoff record. Keep the original events so the team can reconstruct the delay.
+The SP-EX case shows why those events need their own names and times. The scan at accessioning records receipt. The entry on the cytology worklist records a software assignment. Finding the container needs a later sighting or handoff record. Keep the original events so the team can work out what caused the delay.
 
-Standardized labels can help laboratories exchange identifiers, but the receiving software must still interpret the identifier and apply the correct local routing rule.
+Standard labels can help laboratories share identifiers, but the receiving software still has to read the identifier and apply the right local routing rule.
 
-**When reviewing a tracking screen:** Which event tells you that someone physically received the container, and who recorded it?
+**When reviewing a tracking screen:** Which event tells you that someone actually received the container, and who recorded it?
 
 <p className="supplement-credit">Conference context: Alexis Carter, MD. 2D Specimen Label Bar Codes for Anatomic and Clinical Pathology Come of Age: The 10+ Year Journey of CLSI’s AUTO14 Label Standard. Pathology Informatics Summit 2023.</p>
 </details>

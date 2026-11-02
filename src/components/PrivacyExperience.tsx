@@ -43,20 +43,19 @@ const filterFeedbackLabels: Record<FilterField, string> = {
 
 const classificationLabels: Record<DatasetClassification, string> = {
   "coded-reidentifiable": "Coded, reidentifiable protected health information",
-  "limited-data-set-candidate": "Possible limited data set pathway — privacy review required",
-  "deidentification-review-required":
-    "Candidate for documented Safe Harbor or Expert Determination review",
+  "limited-data-set-candidate": "Possibly a limited data set — needs privacy review",
+  "deidentification-review-required": "Could be reviewed under Safe Harbor or Expert Determination",
 };
 
 const releaseContextOptions: { id: keyof ReleaseContext; label: string }[] = [
   {
     id: "eligiblePurpose",
-    label: "An eligible research, public-health, or health-care-operations purpose is documented",
+    label: "An allowed purpose (research, public health or health care operations) is written down",
   },
   { id: "namedRecipient", label: "The recipient is named and approved" },
   {
     id: "dataUseAgreement",
-    label: "The required data use agreement and confidentiality limits are in place",
+    label: "The data use agreement and its confidentiality limits are in place",
   },
 ];
 
@@ -148,8 +147,7 @@ export function PrivacyExperience({
   const workbenchChecks: Record<string, { passed: boolean; failNote: string }> = {
     "Minimum necessary fields": {
       passed: fullTransformSet.every((item) => transforms.includes(item)),
-      failNote:
-        "The exercise still retains at least one detailed field that the release plan says should be generalized.",
+      failNote: "At least one field is still more detailed than the release plan allows.",
     },
     "Linkage key control": {
       passed: keySequestered,
@@ -161,12 +159,11 @@ export function PrivacyExperience({
     },
     "Approved recipient and purpose": {
       passed: releaseContext.eligiblePurpose && releaseContext.namedRecipient,
-      failNote:
-        "The exercise does not yet document both an eligible purpose and a named recipient.",
+      failNote: "The purpose and the named recipient are not both written down yet.",
     },
     "Recipient confidentiality commitment": {
       passed: releaseContext.dataUseAgreement,
-      failNote: "The recipient agreement and its restrictions have not been documented.",
+      failNote: "The recipient's agreement and its limits have not been written down.",
     },
   };
   const releaseChecks = baseValidation.cases.map((testCase) => {

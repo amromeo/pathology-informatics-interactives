@@ -14,7 +14,7 @@ export const manifest: LessonManifest = {
   id: "07",
   layout: "standard",
 
-  summary: "A laboratory middleware server has unresolved physical, access and recovery risks.",
+  summary: "A new laboratory middleware server has problems with its room, logins and backups.",
   sources: [
     {
       label: "HHS — Security Rule summary",
@@ -59,9 +59,9 @@ export const manifest: LessonManifest = {
       id: "3.1-server-behind-the-analyzer",
       objective: "3.1",
       summary:
-        "Match threats to protections, test a control plan and match findings to regulatory obligations.",
+        "Match each threat to a fix, test a set of fixes and match each finding to the review it needs.",
       learnerAction:
-        "Match threats to protections, test a control plan and match findings to regulatory obligations.",
+        "Match each threat to a fix, test a set of fixes and match each finding to the review it needs.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -75,9 +75,9 @@ export const manifest: LessonManifest = {
       id: "3.2-server-behind-the-analyzer",
       objective: "3.2",
       summary:
-        "Match threats to protections, test a control plan and match findings to regulatory obligations.",
+        "Match each threat to a fix, test a set of fixes and match each finding to the review it needs.",
       learnerAction:
-        "Match threats to protections, test a control plan and match findings to regulatory obligations.",
+        "Match each threat to a fix, test a set of fixes and match each finding to the review it needs.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [

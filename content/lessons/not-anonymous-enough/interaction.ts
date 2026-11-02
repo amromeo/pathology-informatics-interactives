@@ -39,12 +39,12 @@ export const transformOptions: { id: TransformId; label: string; note: string }[
   {
     id: "zip-to-three",
     label: "Truncate five-digit ZIP to three digits",
-    note: "02108 becomes 021** and 02445 becomes 024**. Priya must check the population condition before retaining either prefix under Safe Harbor.",
+    note: "02108 becomes 021** and 02445 becomes 024**. Under Safe Harbor, Priya has to check the population rule before either prefix can stay.",
   },
   {
     id: "rare-diagnosis-to-category",
-    label: "Generalize the three-row diagnosis group",
-    note: `${rareDiagnosis} becomes ${generalizedDiagnosis}. This combines the first three rows with NR-004 when their other fields also match.`,
+    label: "Broaden the diagnosis shared by three rows",
+    note: `${rareDiagnosis} becomes ${generalizedDiagnosis}. This puts the first three rows in one group with NR-004 when their other fields also match.`,
   },
 ];
 
@@ -328,9 +328,9 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
     {
       system: "Linkage",
       role: "Data steward",
-      sees: "The lookup file maps linkage codes to patient identities and remains in the shared folder.",
+      sees: "The lookup file links each study code to a patient, and it is still in the shared folder.",
       implication:
-        "Restrict who can open the lookup file, separately from changing the exported fields.",
+        "Limit who can open the lookup file. This is separate from changing the exported fields.",
     },
     {
       system: "Release",
@@ -339,32 +339,32 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
       implication: "Controls depend on intended use.",
     },
   ],
-  decisionPrompt: "How should the privacy office classify this export as presented?",
+  decisionPrompt: "As it stands, what kind of file is this export?",
   decisionChoices: [
     {
       id: "correct",
       label:
-        "Coded and reidentifiable protected health information because the key and quasi-identifiers remain available.",
+        "Coded PHI that can be reidentified, because the key and the revealing fields are still there.",
       correct: true,
       feedback:
-        "Exact dates, five-digit ZIP codes, and a diagnosis can distinguish records, while the accessible key provides a direct route back to identity. Removing names did not make this export deidentified.",
+        "Exact dates, five-digit ZIP codes and a diagnosis can single out records, and the key in the shared folder leads straight back to the patients. Removing names did not deidentify this file.",
     },
     {
       id: "narrow",
       label:
         "Deidentified under the HIPAA Safe Harbor method because names and medical record numbers were removed.",
       feedback:
-        "Safe Harbor requires more than removing names and record numbers. All elements of dates except the year, and all five-digit ZIP codes, must be removed; the first three ZIP digits may be kept only when that three-digit area contains more than 20,000 people. Any retained study code must not be derived from patient information, and the key cannot be disclosed.",
+        "Safe Harbor needs more than removing names and record numbers. Every part of a date except the year, and every five-digit ZIP code, has to go; the first three ZIP digits can stay only if that three-digit area holds more than 20,000 people. Any study code that stays must not be made from patient information, and its key cannot be shared.",
     },
     {
       id: "unsafe",
       label:
         "A limited data set that may be shared with the investigator under a data use agreement exactly as it is.",
       feedback:
-        "A limited data set may retain dates and some geography, but it remains protected health information. The institution must first confirm the permitted purpose and recipient, remove prohibited direct identifiers, protect the linkage mechanism, and execute the required data use agreement.",
+        "A limited data set can keep dates and some geography, but it is still PHI. The hospital first has to confirm the purpose and the recipient, remove the direct identifiers that are not allowed, protect the key, and sign the data use agreement.",
     },
   ],
-  repairPrompt: "Which proposal should the team prepare for Priya's privacy review?",
+  repairPrompt: "Which proposal should the team put to Priya for review?",
   repairChoices: [
     {
       id: "validated",
@@ -372,72 +372,72 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
         "Prepare a file with broader dates, geography and diagnosis groups; restrict the key and document the purpose, recipient and agreement for privacy review.",
       correct: true,
       feedback:
-        "This proposal reduces the displayed detail and documents controls for the intended recipient. Complete the field and access controls above, then ask Priya to review the full export, the known April 18 cohort and the research detail lost. She must determine which disclosure method applies.",
+        "This proposal shows less detail and writes down the limits for the named recipient. Finish the field and access changes above, then ask Priya to review the whole file, the fact that everyone was admitted on April 18, and the detail the study loses. She decides which way of sharing applies.",
     },
     {
       id: "narrow",
       label:
         "Remove the linkage key but retain exact dates and five-digit ZIP codes, then release the file publicly because it has no names.",
       feedback:
-        "Separating the key removes one direct route to identity, but the detailed dates, geography, and small diagnosis group still create a distinguishable dataset. Public release also removes the recipient controls needed for protected health information.",
+        "Removing the key closes one direct route back to the patients, but the exact dates, locations and small diagnosis group can still single people out. A public release also drops the limits on who receives PHI.",
     },
     {
       id: "unsafe",
       label:
         "Keep the fields but require the investigator to sign a confidentiality agreement before receiving the file.",
       feedback:
-        "A confidentiality commitment is useful, but it does not minimize unnecessary fields, protect a broadly accessible linkage key, resolve the small diagnosis group, or substitute for privacy-office review and the agreement required for the approved release path.",
+        "A promise to keep the file confidential helps, but it does not remove fields the study does not need, lock down the key in the shared folder or deal with the small diagnosis group. It cannot replace the privacy office's review or the agreement the approved method requires.",
     },
   ],
   validationCases: [
     {
       name: "Minimum necessary fields",
-      note: "The release contains only the detail needed to answer the approved research question.",
+      note: "The file contains only the detail needed to answer the approved research question.",
       passingRepairs: ["validated"],
       failNotes: {
         narrow:
-          "Removing the key does not explain why exact dates and five-digit ZIP codes are necessary for the research question.",
+          "Removing the key does not explain why the study needs exact dates and five-digit ZIP codes.",
         unsafe:
           "A confidentiality agreement does not remove fields that the investigator does not need.",
       },
     },
     {
       name: "Linkage key control",
-      note: "The reidentification key is separated from the released data and limited to approved stewards.",
+      note: "The key is kept apart from the released file, and only approved staff can open it.",
       passingRepairs: ["validated", "narrow"],
       failNotes: {
-        unsafe: "The proposal leaves the linkage key in the broadly accessible shared folder.",
+        unsafe: "The proposal leaves the key in the shared folder, where many people can open it.",
       },
     },
     {
       name: "Uniqueness-risk review",
-      note: "Detailed dates, geography, and the three-person diagnosis group are reviewed and reduced as required.",
+      note: "Exact dates, locations and the three-person diagnosis group are reviewed and broadened where needed.",
       passingRepairs: ["validated"],
       failNotes: {
         narrow:
           "The public file still contains exact dates, five-digit ZIP codes, and the small diagnosis group even though the linkage key was removed.",
         unsafe:
-          "The confidentiality agreement does not reduce the combinations that distinguish distinctive records.",
+          "The confidentiality agreement does nothing about the combinations of fields that single out records.",
       },
     },
     {
       name: "Approved recipient and purpose",
-      note: "The privacy office documents who will receive the data, for which permitted purpose, and under which release path.",
+      note: "The privacy office records who will receive the data, for what purpose and under which method of sharing.",
       passingRepairs: ["validated"],
       failNotes: {
         narrow:
-          "A public release has no named recipient, bounded purpose, or institutional approval.",
+          "A public release has no named recipient, no stated purpose and no hospital approval.",
         unsafe:
-          "The investigator's signature alone does not document privacy-office approval or the permitted disclosure pathway.",
+          "The investigator's signature alone does not record the privacy office's approval or the method of sharing.",
       },
     },
     {
       name: "Recipient confidentiality commitment",
-      note: "The recipient accepts enforceable limits on use, disclosure, and attempts to identify individuals.",
+      note: "The recipient agrees, in a binding contract, to limits on use and sharing and not to try to identify anyone.",
       passingRepairs: ["validated", "unsafe"],
       failNotes: {
         narrow:
-          "Public release provides no enforceable recipient commitment or restriction on reidentification.",
+          "A public release has no binding promise from a recipient and nothing stopping attempts to identify people.",
       },
     },
   ],
@@ -446,11 +446,11 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
 export const lessonCopy = {
   redactionHeading: "Remove identifying details and protect the key",
   text01:
-    "Read the worked example, then use two facts to isolate a row and explain what someone could learn from that combination.",
+    "Read the worked example, then use two facts to single out a row and explain what someone could learn from them.",
   text02:
-    "The table contains 18 records from the April 18 outage period. It displays five potential quasi-identifiers and a coded linkage value; names and medical record numbers are not present.",
+    "The table holds 18 records from the day of the April 18 outage. It shows five fields that could help identify someone, plus a study code; there are no names or medical record numbers.",
   text03:
-    "Move the key out of the shared folder and limit access to approved stewards. This does not change the table or its group size.",
+    "Move the key out of the shared folder and let only approved staff open it. This does not change the table or its group sizes.",
   text04:
-    "These 18 rows reflect the selected field changes. The linkage code stays in each row; restricting the separate lookup key changes who can reconnect that code to a patient.",
+    "These 18 rows show the field changes you chose. The study code stays in each row; locking down the separate key changes who can link that code back to a patient.",
 };

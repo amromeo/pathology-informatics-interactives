@@ -148,7 +148,7 @@ export const tabletopPhases: readonly DowntimePhase[] = [
     title: "Recover",
     time: "18:20 onward",
     situation:
-      "Connectivity returns while paper testing is still active. Restored electronic orders overlap with downtime work.",
+      "The network comes back while paper testing is still going on. Some restored electronic orders cover work already done on paper.",
     decisions: [
       {
         id: "recovery-transition",
@@ -711,7 +711,7 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
     {
       id: "unsafe",
       label:
-        "Have each unit start its own downtime forms now and consolidate the paperwork after restoration.",
+        "Have each unit start its own downtime forms now and combine the paperwork once the systems are back.",
       feedback:
         "Different unit forms can give the same patient several identifiers and leave calls off the laboratory log. Staff will have to resolve those differences when the chart returns.",
     },
@@ -729,14 +729,13 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
     {
       id: "narrow",
       label:
-        "Begin back-entering all paper results, including documented critical calls, immediately and in collection order.",
+        "Start entering all paper results now, in collection order, including the critical results that were phoned.",
       feedback:
         "Entering every result preserves more of the day's testing, but the patient matches come first. Otherwise, staff can put a correct result in the wrong chart.",
     },
     {
       id: "unsafe",
-      label:
-        "Back-enter only the results that were phoned as critical and retain the rest on paper for the record.",
+      label: "Enter only the results that were phoned as critical, and keep the rest on paper.",
       feedback:
         "Routine and other abnormal results would still be missing from the chart. Patient matches and duplicate orders also need checking before staff resume normal work.",
     },
@@ -744,13 +743,13 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
   validationCases: [
     {
       name: "Controlled transition",
-      note: "New electronic work pauses while active paper records are identified and assigned for reconciliation.",
+      note: "New electronic work pauses while staff find the paper records still in use and assign someone to check each one.",
       passingRepairs: ["validated"],
       failNotes: {
         narrow:
-          "Immediate back-entry starts before staff know which temporary records belong to which restored charts.",
+          "Entering results straight away starts before staff know which temporary records belong to which restored charts.",
         unsafe:
-          "Entering only critical results still begins without a controlled transition or assigned reconciliation work.",
+          "Entering only critical results still starts before the switch has been planned or anyone has been assigned to check the records.",
       },
     },
     {
@@ -761,7 +760,7 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
         narrow:
           "The order in which specimens were collected does not tell staff which chart belongs to each temporary identifier.",
         unsafe:
-          "The critical-only plan does not reconcile temporary identifiers before placing results in the chart.",
+          "The critical-only plan does not match temporary identifiers to charts before results go in.",
       },
     },
     {
@@ -778,16 +777,16 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
         narrow:
           "Back-entry in collection order does not compare restored orders with paper orders and repeat tests.",
         unsafe:
-          "A critical-only entry process leaves duplicate routine orders and repeat testing unreconciled.",
+          "Entering only critical results leaves duplicate routine orders and repeat tests unchecked.",
       },
     },
     {
       name: "Complete result inclusion",
-      note: "Routine, abnormal, and critical downtime results are represented in the longitudinal chart.",
+      note: "Routine, abnormal and critical downtime results all appear in the patient's chart.",
       passingRepairs: ["validated", "narrow"],
       failNotes: {
         unsafe:
-          "Retaining noncritical results only on paper leaves part of the downtime episode absent from the electronic chart.",
+          "Keeping noncritical results only on paper leaves part of the day's testing out of the electronic chart.",
       },
     },
   ],
@@ -812,9 +811,9 @@ export const reconciliationActionNotes: Record<string, string> = {
   "use-back-entry-time":
     "The specimen was collected earlier than the result was entered. Using the entry time would move it to the wrong point in the patient's history and change the turnaround calculation.",
   "use-restoration-time":
-    "A single restoration time erases individual specimen collection times. Preserve the paper collection time and separately record entry time.",
+    "Using one restore time for everything wipes out each specimen's real collection time. Keep the collection time from the paper record and record the entry time separately.",
   "use-newest-chart":
-    "The newest chart may be the duplicate. Confirm the established medical record number through registration before entering results.",
+    "The newest chart may be the duplicate. Have registration confirm the existing medical record number before entering results.",
   "split-results-between-charts":
     "A clinician opening one chart could miss results stored in the other. Registration must confirm the correct chart and arrange correction of the duplicate.",
 };

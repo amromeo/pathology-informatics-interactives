@@ -8,22 +8,22 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "Review authorized access and safeguards",
+        label: "Set up approved, limited access",
         correct: true,
         feedback:
-          "The access arrangement needs individual authorization, appropriate safeguards and review of the business-associate relationship where applicable. Convenience does not remove these obligations.",
+          "The vendor needs its own named account, limited to the repair, with the session recorded. Check that a business associate agreement is in place if the vendor will see PHI. Being in a hurry does not change any of this.",
       },
       {
         id: "shortcut",
         label: "Share the supervisor login temporarily",
         feedback:
-          "A shared supervisor login attributes the vendor's work to the supervisor. Arrange a named account with the permissions needed for the repair and a record of the session.",
+          "With a shared supervisor login, the vendor's work looks like the supervisor's. Set up a named account with only the permissions the repair needs, and record the session.",
       },
       {
         id: "incomplete",
-        label: "Permit unrestricted access until repair ends",
+        label: "Allow unrestricted access until the repair ends",
         feedback:
-          "Unrestricted access may expose other patient records and settings. Limit the named vendor account to the approved task, then end and review the session.",
+          "Unrestricted access may expose other patients' records and settings. Limit the vendor's named account to the approved task, then end the session and review what was done.",
       },
     ],
   },
@@ -31,26 +31,26 @@ export const checks: RetrievalItem[] = [
     id: "transfer",
     kind: "transfer",
     prompt:
-      "Your laboratory wants to change vendor remote access. Which records should you review first?",
+      "Your laboratory wants to change how the vendor connects remotely. Which records should you look at first?",
     choices: [
       {
         id: "supported",
-        label: "Review the approved access and risk assessment",
+        label: "The approved access and risk analysis",
         correct: true,
         feedback:
-          "The laboratory and security team must understand what the vendor can access and how that access is monitored and removed.",
+          "The laboratory and security team need to know what the vendor can reach, how its sessions are watched and how its access is removed.",
       },
       {
         id: "shortcut",
-        label: "Count passwords without reviewing access",
+        label: "A count of the vendor's passwords",
         feedback:
-          "A password count does not show which server files or settings the vendor can reach. Review the approved access, risk analysis and session records with security staff.",
+          "Counting passwords does not show which server files or settings the vendor can reach. Look at the approved access, the risk analysis and the session records with security staff.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "The access plan used in this lesson",
         feedback:
-          "Local systems and support arrangements may differ from this case. Review the approved access and local procedure before proposing account or connection changes.",
+          "Your systems and support contract may be quite different from this case. Start from your own approved access and local procedure before proposing changes to accounts or connections.",
       },
     ],
   },
@@ -59,26 +59,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "2",
     prompt:
-      "The LIS contains a final platelet count, but the clinician sees Pending. What comes first?",
+      "The LIS shows a final platelet count, but the clinician still sees Pending. What comes first?",
     choices: [
       {
         id: "supported",
-        label: "Communicate the verified result",
+        label: "Get the verified result to the clinician",
         correct: true,
         feedback:
-          "Use the approved downtime communication process, obtain read-back when required, and document the call while the delivery failure is investigated.",
+          "Phone it through using the downtime procedure, get a read-back if required and record the call. Then keep working out why it did not reach the chart.",
       },
       {
         id: "shortcut",
         label: "Restart the interface before calling",
         feedback:
-          "Restarting the interface may not correct the delivery problem and leaves the clinician waiting. Communicate the verified result through the approved process while the analyst investigates.",
+          "A restart may not fix the problem, and the clinician is still waiting. Phone the verified result through while the analyst works out what went wrong.",
       },
       {
         id: "incomplete",
         label: "Wait for the next scheduled report",
         feedback:
-          "Waiting for another report leaves the verified platelet count unavailable to the clinical team. Use the approved communication process and document the call now.",
+          "Waiting leaves the clinical team without a platelet count the laboratory has already verified. Phone it through now and record the call.",
       },
     ],
   },

@@ -157,7 +157,7 @@ export const manifest: LessonManifest = {
       objective: "2.4",
       summary: "Ethical and regulatory considerations",
       learnerAction:
-        "Choose the results needed to compare missed metastases across sites and the documents needed to check responsibilities, settings and authorized use.",
+        "Choose the results needed to compare missed metastases across sites and the documents needed to check who does what, the settings and the authorized use.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [

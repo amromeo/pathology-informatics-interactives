@@ -20,7 +20,7 @@ export const securityFindings: readonly SecurityFinding[] = [
     id: "heat-vent",
     title: "Server beside an instrument heat vent",
     observation:
-      "The proposed floor location has warm exhaust, no protected power, and no environmental monitoring.",
+      "The proposed spot gets warm exhaust from the instruments and has no protected power and no temperature monitoring.",
     properties: ["integrity", "availability"],
     feedback:
       "Heat or local power loss can stop result routing (availability). A sudden stop during a write can leave queued messages incomplete or damage stored files (integrity). The finding does not describe someone reading patient information.",
@@ -29,46 +29,46 @@ export const securityFindings: readonly SecurityFinding[] = [
     id: "shared-login",
     title: "Shared local login with no password",
     observation:
-      "Laboratory and support staff would use one unrestricted operating-system account.",
+      "Laboratory and support staff would all use one computer account with no restrictions.",
     properties: ["confidentiality", "integrity"],
     feedback:
-      "Opening patient results without permission threatens confidentiality. Changing routing files threatens integrity, and a shared account cannot identify who acted. This finding describes access and changes rather than a service interruption.",
+      "Opening patient results without permission breaks confidentiality. Changing routing files is an integrity problem, and with a shared login nobody can tell who did it. This finding is about access and changes, not the service stopping.",
   },
   {
     id: "flat-network",
     title: "Flat instrument network",
     observation:
-      "The middleware server and instrument workstations can communicate without a restricted network boundary.",
+      "The middleware server and the instrument workstations can all reach each other, with nothing on the network in between.",
     properties: ["confidentiality", "integrity", "availability"],
     feedback:
-      "A compromised device can expose data, alter files or configuration, and interrupt the middleware service.",
+      "One infected device could expose data, change files or settings, and stop the middleware service.",
   },
   {
     id: "persistent-vendor",
     title: "Always-on vendor support channel",
     observation:
-      "The vendor connection stays active without session-by-session approval or a laboratory review log.",
+      "The vendor's connection stays open all the time, with no approval for each session and no log the laboratory reviews.",
     properties: ["confidentiality", "integrity"],
     feedback:
-      "A persistent session can expose patient data and permit an unapproved configuration change without a complete record of who made it.",
+      "An always-open connection can expose patient data and let someone change settings without approval and without a full record of who did it.",
   },
   {
     id: "untested-backup",
     title: "Backup has never been restored",
     observation:
-      "Backup jobs report success, but staff have not rebuilt the service and verified queued orders and results.",
+      "The backup jobs report success, but nobody has rebuilt the service from a backup and checked the waiting orders and results.",
     properties: ["integrity", "availability"],
     feedback:
-      "The laboratory does not know whether the service can return or whether restored orders, results, and queues will remain complete and correct.",
+      "The laboratory does not know whether the service can be brought back, or whether the restored orders, results and queues would be complete and correct.",
   },
   {
     id: "phi-at-rest",
     title: "Protected health information stored on the server",
     observation:
-      "The server stores patient identifiers, orders, results, and message queues without a documented encryption and access review.",
+      "The server holds patient identifiers, orders, results and message queues, and nobody has reviewed and recorded how they are encrypted or who can reach them.",
     properties: ["confidentiality"],
     feedback:
-      "This finding concerns someone reading stored patient information without permission, a confidentiality risk. Encryption and access limits protect that information. The stated observation does not describe a change to a record or loss of service.",
+      "This finding is about someone reading stored patient information without permission, which is a confidentiality risk. Encryption and access limits protect it. The finding does not describe a record being changed or the service stopping.",
   },
 ];
 
@@ -117,7 +117,7 @@ export const securityControls: readonly SecurityControl[] = [
     id: "controlled-hosting",
     title: "Controlled server room and protected power",
     description:
-      "Move the server away from instrument heat and traffic; provide monitored cooling and protected power.",
+      "Move the server away from instrument heat and foot traffic, with monitored cooling and protected power.",
     budgetPoints: 4,
     staffEffort: 1,
     supports: ["availability"],
@@ -127,7 +127,7 @@ export const securityControls: readonly SecurityControl[] = [
     id: "named-accounts",
     title: "Named least-privilege accounts",
     description:
-      "Give each laboratory, IT, and vendor user a named account limited to the work that person performs; review access regularly.",
+      "Give each laboratory, IT and vendor user a named account that can do only that person's job, and review access regularly.",
     budgetPoints: 2,
     staffEffort: 2,
     supports: ["confidentiality", "integrity"],
@@ -137,7 +137,7 @@ export const securityControls: readonly SecurityControl[] = [
     id: "segmented-network",
     title: "Segmented instrument network",
     description:
-      "Place the server behind a restricted network boundary and allow only the required instrument, LIS, monitoring, and support connections.",
+      "Put the server behind a network boundary that lets through only the instrument, LIS, monitoring and support connections it needs.",
     budgetPoints: 4,
     staffEffort: 3,
     supports: ["confidentiality", "integrity", "availability"],
@@ -147,7 +147,7 @@ export const securityControls: readonly SecurityControl[] = [
     id: "controlled-vendor",
     title: "Approved, time-limited vendor sessions",
     description:
-      "Require a named request, laboratory approval, limited session window, recorded work, and prompt disconnection after support.",
+      "Each session needs a named request, laboratory approval, a set time limit and a record of the work, and is disconnected as soon as support ends.",
     budgetPoints: 2,
     staffEffort: 2,
     supports: ["confidentiality", "integrity"],
@@ -157,7 +157,7 @@ export const securityControls: readonly SecurityControl[] = [
     id: "restore-drill",
     title: "Documented backup-restoration drill",
     description:
-      "Restore the server in a test environment and verify configuration, patient data, queued orders, results, and reconnection steps.",
+      "Restore the server on a test system and check its settings, patient data, waiting orders, results and the steps to reconnect it.",
     budgetPoints: 3,
     staffEffort: 3,
     supports: ["integrity", "availability"],
@@ -167,7 +167,7 @@ export const securityControls: readonly SecurityControl[] = [
     id: "monitor-shutdown",
     title: "Environmental monitoring and controlled shutdown",
     description:
-      "Alert staff to heat or power problems and use a rehearsed shutdown procedure before the server or its storage is damaged.",
+      "Warn staff about heat or power problems, and shut the server down in a practiced way before it or its storage is damaged.",
     budgetPoints: 2,
     staffEffort: 1,
     supports: ["integrity", "availability"],
@@ -177,7 +177,7 @@ export const securityControls: readonly SecurityControl[] = [
     id: "harden-encrypt",
     title: "Server hardening, encryption, and endpoint protection",
     description:
-      "Remove unused services, encrypt stored patient data, apply supported security updates, and monitor for malicious activity.",
+      "Switch off services that are not needed, encrypt stored patient data, install security updates and watch for malicious software.",
     budgetPoints: 3,
     staffEffort: 3,
     supports: ["confidentiality", "integrity", "availability"],
@@ -187,7 +187,7 @@ export const securityControls: readonly SecurityControl[] = [
     id: "keyboard-lock",
     title: "Locking cover over the keyboard",
     description:
-      "Prevent casual use of the local keyboard without changing the shared account, network access, vendor channel, or recovery process.",
+      "Stops casual use of the keyboard, but changes nothing about the shared login, the network, the vendor connection or recovery.",
     budgetPoints: 1,
     staffEffort: 1,
     supports: ["confidentiality"],
@@ -197,7 +197,7 @@ export const securityControls: readonly SecurityControl[] = [
     id: "policy-memo",
     title: "Memo instructing staff not to change settings",
     description:
-      "Send a written reminder without changing accounts, technical permissions, network paths, vendor sessions, or audit records.",
+      "Sends a written reminder, but changes nothing about accounts, permissions, the network, vendor sessions or audit records.",
     budgetPoints: 1,
     staffEffort: 2,
     supports: ["integrity"],
@@ -255,31 +255,31 @@ export const securityScenarios: readonly SecurityScenario[] = [
     id: "thermal-power-event",
     title: "Heat and local power event",
     event:
-      "Instrument exhaust raises the room temperature while a local power interruption affects the proposed server location.",
+      "Instrument exhaust heats the room just as the power fails at the proposed server location.",
   },
   {
     id: "shared-credential-misuse",
     title: "Shared-credential misuse",
     event:
-      "A person at the console opens patient result queues and changes a routing setting through the unrestricted shared account.",
+      "Someone at the server uses the shared login to open patient result queues and change a routing setting.",
   },
   {
     id: "ransomware-traversal",
     title: "Ransomware crosses the instrument segment",
     event:
-      "Malware on an instrument workstation attempts to reach and encrypt middleware files and message queues.",
+      "Malicious software on an instrument workstation tries to reach and encrypt the middleware files and message queues.",
   },
   {
     id: "unapproved-vendor-change",
     title: "Unapproved vendor change",
     event:
-      "A vendor technician uses the persistent support channel to change a production routing setting without laboratory approval.",
+      "A vendor technician uses the always-open connection to change a live routing setting without laboratory approval.",
   },
   {
     id: "failed-restore",
     title: "Backup cannot restore service",
     event:
-      "The server fails and the team must rebuild middleware configuration, patient data, orders, results, and queued messages from backup.",
+      "The server fails, and the team has to rebuild the middleware settings, patient data, orders, results and waiting messages from backup.",
   },
 ];
 
@@ -315,43 +315,42 @@ export const evaluateScenario = (
 const scenarioNotes: Record<ScenarioId, Record<ScenarioStatus, string>> = {
   "thermal-power-event": {
     blocked:
-      "The controlled room, cooling, and protected power keep the result-routing service outside the local heat and power event.",
+      "In the controlled room, with its own cooling and protected power, result routing is not affected by the heat and power problem.",
     partial:
-      "Monitoring warns staff and the shutdown procedure may protect the server, but result routing still stops until power and temperature recover.",
+      "Monitoring warns staff and a planned shutdown may protect the server, but result routing still stops until power and temperature are back to normal.",
     unmitigated:
-      "The server remains beside the heat vent without protected power or an orderly shutdown plan, so result routing can stop abruptly.",
+      "The server is still beside the heat vent, with no protected power and no shutdown plan, so result routing can stop without warning.",
   },
   "shared-credential-misuse": {
     blocked:
-      "Named least-privilege accounts prevent routine users from opening unrestricted queues or changing the routing setting, and actions are attributable.",
+      "With named, limited accounts, ordinary users cannot open every queue or change the routing setting, and each action is tied to a person.",
     partial:
-      "Hardening and monitoring may detect or limit the change, but an authorized shared account still lacks individual accountability.",
+      "Hardening and monitoring may catch or limit the change, but the shared login still cannot show which person made it.",
     unmitigated:
-      "The unrestricted shared account still permits patient-data access and routing changes without identifying the person responsible.",
+      "The shared login still lets anyone open patient data and change routing without showing who did it.",
   },
   "ransomware-traversal": {
     blocked:
-      "The restricted network boundary denies the workstation's unneeded connection to middleware files and message queues.",
+      "The network boundary blocks the workstation from reaching the middleware files and message queues, which it never needed.",
     partial:
-      "Endpoint protection and server hardening may detect or slow encryption, but the flat network still provides a path from the workstation.",
+      "Endpoint protection and hardening may catch or slow the encryption, but the open network still gives the workstation a way in.",
     unmitigated:
-      "The flat instrument segment still lets a compromised workstation reach middleware files and interrupt order and result routing.",
+      "The open instrument network still lets an infected workstation reach the middleware files and stop orders and results from moving.",
   },
   "unapproved-vendor-change": {
     blocked:
-      "The vendor cannot connect until a named, time-limited session is approved and recorded; the laboratory can review the requested production change.",
+      "The vendor cannot connect until a named, time-limited session is approved and recorded, so the laboratory can review the change before it goes live.",
     partial:
-      "A named account records who made the change, but the persistent support channel still permits work without session-specific approval.",
+      "A named account records who made the change, but the always-open connection still lets work happen without approval for that session.",
     unmitigated:
-      "The persistent vendor channel still permits a production routing change without laboratory approval or a session record.",
+      "The always-open vendor connection still allows a live routing change with no laboratory approval and no record of the session.",
   },
   "failed-restore": {
     blocked:
-      "The tested restoration procedure rebuilds the service and verifies configuration, patient data, queued orders, and results before reconnection.",
-    partial:
-      "No selected control demonstrates that the backup can rebuild the complete middleware service.",
+      "The tested restore rebuilds the service and checks its settings, patient data, waiting orders and results before it is reconnected.",
+    partial: "None of your fixes shows that the backup can rebuild the whole middleware service.",
     unmitigated:
-      "A successful backup job is not evidence of a usable restore; service and queued laboratory work may remain unavailable or incomplete.",
+      "A backup job that reports success does not prove the backup can be restored. The service and the waiting laboratory work may stay down or come back incomplete.",
   },
 };
 
@@ -378,22 +377,22 @@ export const alternatePortfolio: readonly ControlId[] = [
 export const additionalExercises = {
   title: "Match the finding to the obligation",
   purpose:
-    "Choose the review required for each server finding before the installation is approved.",
+    "For each server question, choose the review it needs before the installation is approved.",
   questions: [
     {
       id: "REG1",
       feedbackByChoice: {
         agreement:
-          "A business associate agreement covers the vendor's handling of PHI. Jordan still needs named accounts and permissions to attribute a routing change to a person.",
+          "A business associate agreement covers how the vendor handles PHI. Jordan still needs named accounts and permissions to tie a routing change to a person.",
         breach:
-          "The shared account is an installation risk; this question reports no disclosure incident. Review account permissions and audit records before use.",
+          "The shared login is a risk in the installation plan; nothing has been disclosed yet. Review account permissions and audit records before use.",
         special:
-          "Additional protections depend on the records involved. They do not supply a named account for the person changing a routing rule.",
+          "Extra protections depend on which records are involved. They do not give the person changing a routing rule a named account.",
         accreditation:
-          "An inspector may review the same account records. The immediate work here is to correct access and attribution through security safeguards.",
+          "An inspector may look at the same account records later. The job right now is to fix access so each change is tied to a person.",
       },
       prompt:
-        "Jordan needs to replace a shared login so changes can be attributed to a person. Which review should guide that account change?",
+        "Jordan needs to replace a shared login so that each change can be tied to a person. Which review should guide that change?",
       answer: "security",
       choices: [
         {
@@ -418,19 +417,19 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "Unique user identification and access and audit controls support HIPAA Security Rule safeguards. Document risks and corrective actions; a shared password cannot identify who changed a rule.",
+        "Individual logins, access limits and audit records are among the HIPAA Security Rule safeguards. Write down the risks and the fixes; a shared password cannot show who changed a rule.",
     },
     {
       id: "REG2",
       feedbackByChoice: {
         security:
-          "Technical safeguards limit the vendor's access, but the question asks which agreement covers its handling of PHI for the hospital. Review the business associate agreement too.",
+          "Technical safeguards limit what the vendor can reach, but the question asks which agreement covers how it handles PHI for the hospital. That is the business associate agreement.",
         breach:
-          "The proposed support access is not a reported disclosure incident. Establish the business associate agreement before the vendor handles PHI.",
+          "Nothing has been disclosed; this is planned support access. Put the business associate agreement in place before the vendor handles PHI.",
         special:
-          "Additional record protections may also apply. The agreement for this service provider's handling of PHI is the business associate agreement.",
+          "Extra protections for some records may also apply, but the agreement covering how this vendor handles PHI is the business associate agreement.",
         accreditation:
-          "An accreditation review cannot substitute for the hospital's agreement with the vendor handling its PHI.",
+          "An accreditation review cannot take the place of the hospital's agreement with the vendor that handles its PHI.",
       },
       prompt: "The vendor can access patient information during support. What agreement is needed?",
       answer: "agreement",
@@ -457,19 +456,19 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "The vendor acts as a business associate when providing this service with access to protected information. A business associate agreement addresses safeguards and responsibilities; a research data use agreement serves a different purpose.",
+        "A vendor that can see protected information while providing a service is a business associate. The business associate agreement sets out its safeguards and duties; a research data use agreement is for something else.",
     },
     {
       id: "REG3",
       feedbackByChoice: {
         security:
-          "Security staff investigate and contain ransomware, but possible exposure also needs the privacy office's breach assessment and notification review.",
+          "Security staff investigate and contain the ransomware, but possible exposure of patient data also needs the privacy office to assess it as a breach and decide on notification.",
         agreement:
-          "An agreement may specify incident reporting duties. The immediate question is whether this exposure triggers breach obligations; involve the privacy office.",
+          "An agreement may say how incidents are reported. The question now is whether this exposure counts as a breach, so bring in the privacy office.",
         special:
-          "Additional record protections may affect the investigation. Possible exposure of unencrypted PHI still requires a breach assessment now.",
+          "Extra protections for some records may affect the investigation, but possible exposure of unencrypted PHI needs a breach assessment now.",
         accreditation:
-          "A later accreditation review cannot resolve a current possible disclosure. Escalate to the privacy office for breach assessment now.",
+          "A later accreditation visit cannot deal with a possible disclosure happening now. Bring in the privacy office for a breach assessment.",
       },
       prompt:
         "Ransomware may have exposed unencrypted patient information. What review starts now?",
@@ -497,19 +496,19 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "Involve the privacy office for a documented breach risk assessment and required notifications. Restoring service does not resolve disclosure obligations.",
+        "Bring in the privacy office to assess and record whether this is a breach, and to make any required notifications. Getting the service back does not settle that.",
     },
     {
       id: "REG4",
       feedbackByChoice: {
         security:
-          "General HIPAA safeguards still apply. The source treatment program raises the additional question of Part 2 and state protections for these records.",
+          "The usual HIPAA safeguards still apply. Because these records came from a treatment program, Part 2 and state protections also need checking.",
         agreement:
-          "A vendor agreement addresses its service relationship. The source program and records determine whether additional confidentiality protections apply.",
+          "A vendor agreement covers the vendor's service. Whether extra confidentiality protections apply depends on which program the records came from.",
         breach:
-          "No exposure is described in this question. Review which additional protections apply before deciding how these treatment records may be accessed or disclosed.",
+          "Nothing has been exposed. Check which extra protections apply before deciding who may see or share these treatment records.",
         accreditation:
-          "An accreditation review may examine procedures, but the specific question concerns additional confidentiality requirements for the treatment-program records.",
+          "An accreditation visit may look at procedures, but this question is about extra confidentiality rules for the treatment-program records.",
       },
       prompt:
         "The server contains records from a substance-use treatment program. What else needs review?",
@@ -537,19 +536,19 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "Some records have additional protections under 42 CFR Part 2 or state law. Determine which requirements apply to the records and proposed disclosure with the privacy office.",
+        "Some records have extra protection under 42 CFR Part 2 or state law. Work out with the privacy office which rules apply to these records and to any planned sharing.",
     },
     {
       id: "REG5",
       feedbackByChoice: {
         security:
-          "The access record also supports security safeguards. Here the inspector has requested it for an accreditation visit, so prepare that review and explain who approves changes.",
+          "The access record is also part of security work, but here the inspector has asked for it for an accreditation visit. Prepare that review and explain who approves changes.",
         agreement:
-          "A vendor agreement does not show which laboratory users can change result rules. Prepare the access-review record requested for the accreditation visit.",
+          "A vendor agreement does not show which laboratory users can change result rules. Prepare the access review the inspector asked for.",
         breach:
-          "The visit does not describe a disclosure incident. Staff need the access approvals and periodic review record requested by the accreditation inspector.",
+          "Nothing has been disclosed. Staff need the access approvals and the record of regular reviews that the inspector asked for.",
         special:
-          "No specially protected record category is identified here. The inspector is asking for the laboratory's account permissions and review history.",
+          "No specially protected records are involved here. The inspector is asking for the laboratory's account permissions and how often they are reviewed.",
       },
       prompt:
         "An accreditation inspector asks the laboratory to show who can change result rules and how access is reviewed. Which review should staff prepare for this visit?",
@@ -577,7 +576,7 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "Accreditation review includes information-system access and security practices. Retain approval and review evidence alongside the technical configuration.",
+        "Accreditation covers who can get into laboratory systems and how they are secured. Keep the approvals and review records alongside the technical settings.",
     },
   ],
 };
@@ -611,25 +610,25 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
       system: "Room",
       role: "Facilities",
       sees: "Heat and walkway exposure.",
-      implication: "Availability is weak.",
+      implication: "Service could stop.",
     },
     {
       system: "Host",
       role: "Laboratory",
       sees: "Access is shared.",
-      implication: "Accountability is weak.",
+      implication: "Nobody can tell who did what.",
     },
     {
       system: "Network",
       role: "Security",
       sees: "Instrument segment is flat.",
-      implication: "Compromise can spread.",
+      implication: "An infection can spread.",
     },
     {
       system: "Vendor",
       role: "Support",
       sees: "Remote channel is persistent.",
-      implication: "Access and contracts require control.",
+      implication: "Access and the contract both need checking.",
     },
   ],
   decisionPrompt: "What is the governance finding?",
@@ -737,9 +736,9 @@ export const caseOverview: Omit<LessonDefinition, "manifest"> = {
 
 export const lessonCopy = {
   text01:
-    "Select each area. Notice which team performs the technical work and why the laboratory still needs to review the clinical service risk.",
+    "Select each area. Notice which team does the technical work, and why the laboratory still has to review what it means for patient testing.",
   text02:
-    "Select controls that address different failure paths. The limits do not permit buying everything, and a low-cost administrative step may not change the technical risk.",
+    "Choose fixes that deal with different ways things can go wrong. You cannot afford everything, and a cheap paperwork step may not change the technical risk at all.",
   text03:
-    "Read each event and its result. Blocked applies to the event as described; partial mitigation leaves some harm or interruption possible. The coverage count includes partial results, so it is not a count of events prevented.",
+    "Read each event and its result. Blocked means the event as described is stopped; partially mitigated means some harm or interruption is still possible. The coverage count includes partial results, so it is not the number of events prevented.",
 };

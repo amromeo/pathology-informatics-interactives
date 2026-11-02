@@ -399,13 +399,13 @@ export function SecurityReviewExperience({
             >
               <strong>
                 {covered === securityScenarios.length
-                  ? "The control plan provides coverage for all five scenarios."
-                  : "The installation plan still leaves one or more scenarios unmitigated."}
+                  ? "The control plan covers all five events."
+                  : "The plan still leaves at least one event with no fix."}
               </strong>
               <p>
                 {covered === securityScenarios.length
-                  ? "Partial mitigation is not the same as prevention. The laboratory director, LIS team, security team, facilities team, and vendor-management team must review the remaining risk and the work required before approval."
-                  : "Revise the control plan and rerun the same five scenarios. Do not approve the installation while a result-routing failure path has no control."}
+                  ? "Partly reducing a risk is not the same as preventing it. The laboratory director and the LIS, security, facilities and vendor-management teams have to review what risk is left, and the work still needed, before approval."
+                  : "Change the plan and test the same five events again. Do not approve the installation while there is still a way for result routing to fail with no fix in place."}
               </p>
             </div>
           )}

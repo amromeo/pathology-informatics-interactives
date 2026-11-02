@@ -12,19 +12,19 @@ export const checks: RetrievalItem[] = [
         label: "The order linked to each accession and specimen",
         correct: true,
         feedback:
-          "Follow the specific order, accession and specimen identifiers together. That preserves which examination was requested for each container, even when both belong to the same patient.",
+          "Follow the order, accession and specimen identifiers together. That keeps track of which examination was requested for each container, even when both belong to the same patient.",
       },
       {
         id: "shortcut",
         label: "The patient name and date of collection",
         feedback:
-          "Both specimens share those details. Staff need the accession and specimen links to distinguish their examinations and follow the correct work.",
+          "Both specimens share those details. Staff need the accession and specimen links to tell the two examinations apart.",
       },
       {
         id: "incomplete",
         label: "The name of the receiving department",
         feedback:
-          "A department's worklist can contain many examinations for many specimens. Follow the order and specimen identifiers to determine which work belongs to this container.",
+          "A department's worklist can hold many examinations for many specimens. Follow the order and specimen identifiers to find which work belongs to this container.",
       },
     ],
   },
@@ -39,19 +39,19 @@ export const checks: RetrievalItem[] = [
         label: "Compare its saved destination with the approved route",
         correct: true,
         feedback:
-          "Find the new procedure's code and the version used when the case was assigned. Compare that entry with the supervisor's intended destination, then test the correction and unaffected routes.",
+          "Find the new procedure's code and the version used when the case was assigned. Compare that entry with where the supervisor meant it to go, then test the fix and the routes that were not changed.",
       },
       {
         id: "shortcut",
         label: "Change every procedure to the requested destination",
         feedback:
-          "Other procedures may need different teams. In this case, routing everything to gross would disrupt cytology and frozen-section work. Inspect the new entry before changing neighboring routes.",
+          "Other procedures may need different teams. In this case, sending everything to gross would disrupt cytology and frozen-section work. Look at the new entry before changing any other route.",
       },
       {
         id: "incomplete",
         label: "Replace every label using the new procedure code",
         feedback:
-          "A replacement label would still retrieve the accession and its saved procedure. First establish whether identity is wrong or the procedure entry supplies the wrong destination.",
+          "A new label would still open the same accession and its saved procedure. First find out whether the identity is wrong or the procedure entry has the wrong destination.",
       },
     ],
   },
@@ -64,22 +64,22 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "Communicate the verified result",
+        label: "Get the verified result to the clinician",
         correct: true,
         feedback:
-          "Use the approved communication process, obtain read-back when required and document the call. The analyst can investigate report delivery while the clinical team receives the available result.",
+          "Phone it through using the laboratory's procedure, get a read-back if required and record the call. The analyst can look into the delivery problem while the clinical team has the result.",
       },
       {
         id: "shortcut",
         label: "Restart the interface before calling",
         feedback:
-          "Restarting may not correct the delivery problem and would leave the team waiting for an available result. Communicate the verified result and document it while the connection is investigated.",
+          "A restart may not fix the problem, and the clinical team would be left waiting for a result the laboratory already has. Phone it through and record the call while the connection is checked.",
       },
       {
         id: "incomplete",
         label: "Wait for the next scheduled report",
         feedback:
-          "The result is already verified in the LIS. Waiting for another transmission leaves the clinical team without that information. Follow the laboratory's communication procedure and record the call.",
+          "The result is already verified in the LIS. Waiting for another transmission leaves the clinical team without it. Phone it through using the laboratory's procedure and record the call.",
       },
     ],
   },

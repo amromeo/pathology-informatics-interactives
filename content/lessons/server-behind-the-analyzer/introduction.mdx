@@ -2,36 +2,36 @@
 
 ## Before the server is installed
 
-In March 2026, North River University Hospital plans to install a server for laboratory middleware. This software receives instrument results, holds messages waiting for delivery, and routes them to the laboratory information system (LIS). The computer running it will contain patient identifiers, orders, results and routing settings.
+In March 2026, North River University Hospital plans to install a new server for its laboratory middleware. Middleware is the software that takes results from the instruments, holds messages until they can be delivered, and sends them on to the laboratory information system (LIS). The server it runs on will hold patient identifiers, orders, results and the settings that decide where each message goes.
 
-You are working with Dr. Maya Chen, the pathology informatics fellow, and Jordan Ellis, the LIS analyst. Dr. Elena Ruiz, the core laboratory medical director, asks you to review the proposed installation before patient testing starts.
+You are working with Dr. Maya Chen, the pathology informatics fellow, and Jordan Ellis, the LIS analyst. Dr. Elena Ruiz, medical director of the core laboratory, asks you to look over the installation plan before patient testing starts.
 
-Jordan combines the room inspection, proposed account permissions, network diagram, vendor support arrangement and backup job record into the findings below. The proposed location is beside instrument heat vents. Staff would share an unrestricted login, instrument workstations could reach the server freely, and the vendor connection would remain available between support visits. Backup jobs report success, but nobody has restored the server and checked its records.
+Jordan has walked the room, read the proposed account permissions, network diagram and vendor support arrangement, and pulled the backup job record. The findings are below. The server would sit beside the heat vents from the instruments. Staff would share one login with no restrictions. Any instrument workstation could reach the server, and the vendor's remote connection would stay open between support visits. The backup jobs report success, but nobody has ever restored the server from a backup and checked the records.
 
-Your task is to explain how these findings could affect laboratory work and recommend controls. In the later case chronology, the hospital installs the server before completing network separation and a recovery drill. Your choices here do not rewrite that history.
+Your job is to work out how each of these problems could affect the laboratory and to recommend fixes. Later in the case, the hospital installs the server before the network has been separated and before a restore has been practiced. Your choices here do not change that part of the story.
 
 ## Terms used in this case
 
-- **Server and middleware:** the server is the computer hosting the middleware application. The application routes instrument messages to the LIS.
-- **Queue:** messages waiting for processing or delivery. A result may be stored in a queue while the receiving system is unavailable.
-- **Confidentiality:** protecting information from unauthorized disclosure. Someone opening a patient result without permission threatens confidentiality.
-- **Integrity:** protecting records and settings from improper alteration or loss. An incomplete queue or an unauthorized routing change threatens integrity.
-- **Availability:** keeping information and services accessible when needed. A stopped middleware server delays electronic result delivery.
-- **Protected health information (PHI):** individually identifiable health information protected by the Health Insurance Portability and Accountability Act (HIPAA). Patient-linked orders and results are examples; electronic PHI is often called ePHI.
-- **Least privilege and audit log:** give each person only the access needed for their work, and keep a record of actions attributable to that person.
-- **Network segmentation:** restrict connections between groups of computers. For example, allow instrument messages while denying a workstation access to server files.
-- **Encryption:** encode stored or transmitted information so it requires an authorized key to read. Account permissions still control what a signed-in user can do.
-- **Hardening and endpoint protection:** reduce unnecessary services and permissions on the server, apply supported updates and monitor for malicious software. **Ransomware** is malicious software that can encrypt files and interrupt access to them.
-- **Backup and restoration:** a backup is a saved copy; restoration uses that copy to rebuild a service and its records.
-- **Business associate agreement:** an agreement covering a service provider's handling of PHI on the hospital's behalf. The vendor's support access needs this review.
+- **Server and middleware:** the server is the computer; the middleware is the program running on it that sends instrument messages to the LIS.
+- **Queue:** messages waiting to be processed or delivered. A result can sit in a queue while the receiving system is down.
+- **Confidentiality:** keeping information away from people who should not see it. Someone opening a patient's result without permission breaks confidentiality.
+- **Integrity:** keeping records and settings correct and complete. A damaged queue, or a routing setting changed without approval, is an integrity problem.
+- **Availability:** keeping information and services there when people need them. If the middleware server stops, results stop reaching the LIS electronically.
+- **Protected health information (PHI):** health information that identifies a patient and is protected by the Health Insurance Portability and Accountability Act (HIPAA). Orders and results linked to a patient are PHI; in electronic form it is often called ePHI.
+- **Least privilege and audit log:** give each person only the access their job needs, and keep a record of what each person did.
+- **Network segmentation:** limiting which computers can talk to each other. For example, instrument messages are allowed through, but a workstation cannot open the server's files.
+- **Encryption:** scrambling stored or transmitted information so it can only be read with the right key. Account permissions still decide what a signed-in user can do.
+- **Hardening and endpoint protection:** switching off services and permissions the server does not need, installing supported updates, and watching for malicious software. **Ransomware** is malicious software that locks files by encrypting them.
+- **Backup and restore:** a backup is a saved copy; a restore uses that copy to rebuild the service and its records.
+- **Business associate agreement:** a contract covering how an outside company handles PHI on the hospital's behalf. The vendor's support access needs one.
 
 ## Your task
 
-For each installation finding, select the confidentiality, integrity and availability effects described in the case. Then choose controls within the two resource limits and test them against five events. Explain any remaining risk and name the person who should check the work before Dr. Ruiz reviews the installation.
+For each finding, tick the effects on confidentiality, integrity and availability that the case describes. Then choose fixes that fit within the two spending limits, and test them against five events. Explain what risk is left, and name who should check the work before Dr. Ruiz reviews the installation.
 
 ## What you will be able to do
 
-- Explain how one server finding can affect several parts of laboratory service.
-- Compare what a proposed control prevents, reduces or leaves unchanged.
-- Distinguish a successful backup job from a tested restoration.
-- Identify the access, agreement and privacy reviews needed for the case.
+- Explain how one problem with a server can affect several parts of the laboratory's service.
+- Say what a proposed fix prevents, what it only reduces and what it leaves untouched.
+- Tell a backup job that reports success apart from a restore that has actually been tested.
+- Name the access, contract and privacy reviews this case needs.

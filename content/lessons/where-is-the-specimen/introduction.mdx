@@ -1,35 +1,35 @@
 # Where Is the Specimen?
 
-At 08:40 on Tuesday, a pathologists' assistant checks the operating-room delivery list against the gross-room worklist. A tissue excision is on the delivery list, but its accession, **S26-1042**, appears on the cytology worklist.
+At 08:40 on Tuesday, a pathologists' assistant checks the operating room's delivery list against the gross-room worklist. A tissue excision is on the delivery list, but its accession, **S26-1042**, is on the cytology worklist instead.
 
-You are the pathology resident working with the surgical pathology supervisor and a **laboratory information system (LIS)** analyst. Accessioning staff received container **C-1042-A** at 08:11 and checked its patient and part against the requisition. The available records contain no later receiving scan. Staff need to locate the container while the analyst investigates the unexpected worklist assignment.
+You are the pathology resident working with the surgical pathology supervisor and a **laboratory information system (LIS)** analyst. Accessioning received container **C-1042-A** at 08:11 and checked its patient and part against the requisition. After that, the records show no further receiving scan. Staff need to find the container while the analyst works out why the case went to the wrong worklist.
 
-On Monday, the analyst added a tissue-excision procedure entry by copying an existing entry in the LIS. That entry tells the LIS which worklist should receive an excision. The supervisor's approved destination remained the gross room. Testing before the change included routine biopsies and cytology, but omitted the newly added excision code.
+On Monday, the analyst added an entry for the tissue-excision procedure by copying an existing entry in the LIS. That entry tells the LIS which worklist an excision goes to. The destination the supervisor had approved was the gross room. The testing done before the change covered routine biopsies and cytology, but not the new excision code.
 
 ## Terms used in this case
 
 ### Records that connect the order and specimen
 
-- **Order catalog:** the list of examinations available to request, with their names, specimen requirements and collection instructions.
-- **Accession:** the laboratory record connecting an order with its patient and specimen. Here, S26-1042 contains part A, represented by container C-1042-A.
-- **Procedure code:** a short identifier the LIS uses to find an examination's settings. SP-EX identifies the tissue-excision procedure in this laboratory.
-- **Procedure dictionary:** the stored settings for each procedure code. An entry can specify a worklist, preparation instructions and report settings.
+- **Order catalog:** the list of examinations that can be ordered, with their names, specimen requirements and collection instructions.
+- **Accession:** the laboratory record that ties an order to its patient and specimen. Here, S26-1042 has one part, A, in container C-1042-A.
+- **Procedure code:** a short code the LIS uses to look up an examination's settings. In this laboratory, SP-EX is the tissue-excision procedure.
+- **Procedure dictionary:** the stored settings for each procedure code. An entry can set the worklist, preparation instructions and report settings.
 
 ### Assignment and tracking
 
-- **Worklist:** an electronic list of cases assigned to a team. The gross-room team uses its list to see which cases need processing.
-- **Routing:** the step that uses an examination's settings to assign work. Here, the LIS looks up SP-EX and reads its destination.
-- **Audit trail:** a dated history of events, including the person or program that recorded each event. It lets staff reconstruct what happened to a case.
-- **Receiving scan:** a barcode scan recorded when staff receive the physical container at a named location.
-- **Regression check:** a test of previously working behavior after a change. A routing correction should preserve the cytology and frozen-section assignments.
+- **Worklist:** an electronic list of cases assigned to a team. The gross-room team uses its list to see which cases they need to process.
+- **Routing:** the step that uses an examination's settings to assign the work. Here, the LIS looks up SP-EX and reads where it should go.
+- **Audit trail:** a dated history of events, showing the person or program that recorded each one. It lets staff piece together what happened to a case.
+- **Receiving scan:** a barcode scan recorded when staff receive the actual container at a named place.
+- **Regression check:** after a change, a test that things that already worked still work. A fix to one route should leave the cytology and frozen-section routes as they were.
 
 ## Your task
 
-Read the four events and identify the last documented physical location. Explain how the procedure entry produced the worklist assignment. Then correct the routing settings, test five procedures, and choose how staff should locate and hand off the existing container.
+Read the four events and find the last place the container was recorded. Explain how the procedure entry put the case on the cytology worklist. Then fix the routing settings, test five procedures, and choose how staff should find the container and hand it over.
 
 ## What you will be able to do
 
-- Use an event's time, author and action to explain what it establishes.
-- Follow a procedure code from the accession to its stored destination.
-- Test a corrected route, unaffected routes and an unrecognized code.
-- Describe how staff should recover the existing specimen and document its receipt.
+- Use an event's time, author and action to say what it shows.
+- Follow a procedure code from the accession to the destination stored for it.
+- Test a fixed route, the routes that were not changed, and a code the LIS does not recognize.
+- Describe how staff should find the existing specimen and record its receipt.

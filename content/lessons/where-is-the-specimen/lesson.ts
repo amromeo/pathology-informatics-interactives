@@ -47,9 +47,9 @@ export const manifest: LessonManifest = {
       id: "4.1-where-is-the-specimen",
       objective: "4.1",
       summary:
-        "Repair worklist routing and classify ordering and tracking records across laboratory sections.",
+        "Fix worklist routing, then decide which ordering and tracking records belong to anatomic pathology, clinical pathology or both.",
       learnerAction:
-        "Repair worklist routing and classify ordering and tracking records across laboratory sections.",
+        "Fix worklist routing, then decide which ordering and tracking records belong to anatomic pathology, clinical pathology or both.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -63,9 +63,9 @@ export const manifest: LessonManifest = {
       id: "4.2-where-is-the-specimen",
       objective: "4.2",
       summary:
-        "Repair worklist routing and classify ordering and tracking records across laboratory sections.",
+        "Fix worklist routing, then decide which ordering and tracking records belong to anatomic pathology, clinical pathology or both.",
       learnerAction:
-        "Repair worklist routing and classify ordering and tracking records across laboratory sections.",
+        "Fix worklist routing, then decide which ordering and tracking records belong to anatomic pathology, clinical pathology or both.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -79,9 +79,9 @@ export const manifest: LessonManifest = {
       id: "4.4-where-is-the-specimen",
       objective: "4.4",
       summary:
-        "Repair worklist routing and classify ordering and tracking records across laboratory sections.",
+        "Fix worklist routing, then decide which ordering and tracking records belong to anatomic pathology, clinical pathology or both.",
       learnerAction:
-        "Repair worklist routing and classify ordering and tracking records across laboratory sections.",
+        "Fix worklist routing, then decide which ordering and tracking records belong to anatomic pathology, clinical pathology or both.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [

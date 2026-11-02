@@ -1,8 +1,8 @@
 ### A written rule and a model trained on examples
 
-A computer follows instructions. Sometimes a person can write the necessary instructions directly: **if a quality-control result is outside the laboratory's allowed range, hold the affected patient results for review**. The computer applies a condition that the person supplied.
+A computer follows instructions. Sometimes a person can write the necessary instructions directly: **if a quality-control result is outside the laboratory's allowed range, hold the affected patient results for review**. The computer applies a condition the person wrote.
 
-Recognizing cancer in an image is harder to describe as a complete list of if/then rules. Cells vary in shape, color and arrangement. In **machine learning**, developers provide examples and use a training procedure to adjust a **model**: a set of calculations that turns an input, such as an image, into an answer. The trained model then calculates a prediction for an example it has not seen before. Machine learning is one group of methods within **artificial intelligence (AI)**, a broad term for computer methods that perform tasks such as recognizing images or producing language.
+Recognizing cancer in an image is much harder to write down as a complete list of if/then rules. Cells vary in shape, color and arrangement. In **machine learning**, developers provide examples and use a training procedure to adjust a **model**: a set of calculations that turns an input, such as an image, into an answer. The trained model then makes a prediction for an example it has not seen before. Machine learning is one group of methods within **artificial intelligence (AI)**, a broad term for computer methods that perform tasks such as recognizing images or producing language.
 
 ### What changes when a model learns?
 
@@ -14,7 +14,7 @@ For the metastasis-detection model, training follows a repeated sequence:
 2. The model calculates its own prediction from an image.
 3. The training procedure compares that prediction with the label and adjusts the parameters to reduce the errors across the training examples.
 
-Once training is finished, the team tests the model on separate cases. Success on the examples used to adjust its parameters would not tell us how well it handles new cases. During routine use, this model applies its saved parameters to each new slide. Changing those parameters would require another training step.
+Once training is finished, the team tests the model on separate cases. Doing well on the examples it was trained on would not tell us how well it handles new ones. During routine use, this model applies its saved parameters to each new slide. Changing those parameters would require another training step.
 
 <details>
 <summary>Read more about models, training and parameters</summary>
@@ -25,14 +25,14 @@ Google's [introduction to machine learning](https://developers.google.com/machin
 
 ### Four descriptions you will use below
 
-**A programmed rule** applies conditions a person has written. To check the quality-control rule, try results inside and outside the allowed range, as well as exactly at a limit. Also try an exception, such as a missing control result. Observe whether each affected patient result is held or released as the laboratory intended.
+**A programmed rule** applies conditions a person has written. To check the quality-control rule, try results inside and outside the allowed range, as well as exactly at a limit. Also try an exception, such as a missing control result. Check that each patient result is held or released as the laboratory intended.
 
-**Supervised learning** uses examples with supplied answers. “Supervised” describes how the training data are labeled. It does not mean a pathologist watches every calculation. Our image model uses a **convolutional neural network**: layers of calculations examine neighboring pixels, then combine the image patterns they find. To test it on new slides, the team compares the model's marks with diagnoses that pathologists made before running the model.
+**Supervised learning** uses examples with supplied answers. “Supervised” describes how the training data are labeled. It does not mean a pathologist watches every calculation. Our image model uses a **convolutional neural network**: layers of calculations examine neighboring pixels, then combine the image patterns they find. To test it on new slides, the team compares the model's marks with diagnoses pathologists made before the model was run.
 
-**Unsupervised clustering** groups examples by similarity without being supplied with diagnostic categories. For example, measurements of gene activity can be similar in several tumors. The program may put those tumors in the same group, called a **cluster**. Researchers then compare the tumors' diagnoses, measured gene activity and sample-preparation methods within each cluster. Do tumors with the same diagnosis tend to fall in one cluster? Or were samples in that cluster all prepared or measured differently? A cluster may reflect tumor biology, but it may also reflect how the samples were handled.
+**Unsupervised clustering** groups examples that are similar, without being told any diagnoses. For example, measurements of gene activity can be similar in several tumors. The program may put those tumors in the same group, called a **cluster**. Researchers then compare the tumors' diagnoses, measured gene activity and sample-preparation methods within each cluster. Do tumors with the same diagnosis tend to fall in one cluster? Or were samples in that cluster all prepared or measured differently? A cluster may reflect tumor biology, but it may also reflect how the samples were handled.
 
 **A generative model** produces content, such as a paragraph. A language model learns patterns in text and uses them to generate a sequence of words. A readable summary can still add a finding that was never in the reports or leave out an important qualification. Someone must compare the summary with the original reports.
 
 **Supervised** describes how a model is trained. **Generative** describes what it produces. For example, developers could train a summary model using pairs of reports and clinician-written summaries. The reports are the inputs, and the summaries are the supplied answers used during training. That model would use supervised training and generate text when used. Both descriptions would apply.
 
-For each proposal below, choose the description that best matches the information given. The slide proposal describes training with labeled images. The summary proposal describes generating text, without specifying how the model was trained. Then choose a first check that could reveal mistakes in that program's work. Further testing would still be needed before patient use.
+For each proposal below, choose the description that best matches the information given. The slide proposal describes training with labeled images. The summary proposal describes generating text, without specifying how the model was trained. Then choose a first check that could show up mistakes in that program's work. More testing would still be needed before patient use.

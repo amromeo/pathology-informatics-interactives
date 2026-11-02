@@ -1,16 +1,16 @@
 ### Keep a record staff can match later
 
-When registration cannot supply the usual medical record number, staff need another way to label the patient and specimen. A **temporary identifier** serves that purpose during downtime. Registration records each assignment in a shared index so staff can later find the correct chart.
+When registration cannot supply the usual medical record number, staff need another way to label the patient and specimen. During downtime, a **temporary identifier** does that job. Registration writes down each one it hands out in a shared index, so staff can find the right chart later.
 
 Accessioning records the specimen when it arrives and gives it a paper accession number. The paper accession log connects the order and specimen to testing and repeats. A separate critical-result call log records who called, who received the result and when. It also records the recipient's read-back of the result.
 
-When the systems return, staff compare these paper records with the electronic orders and results. This is **reconciliation**. A result collected earlier in the day keeps its original collection time; the time someone enters it later is recorded separately.
+When the systems come back, staff compare these paper records with the electronic orders and results. This is **reconciliation**. A result collected earlier in the day keeps its original collection time; the time someone enters it later is recorded separately.
 
 ### How much time and work can the laboratory recover?
 
 The laboratory first decides how long a service can be unavailable. That limit is its **recovery time objective (RTO)**. It also decides how much recent work could need recovery after a data loss. That interval is its **recovery point objective (RPO)**. Staff need records that let them identify and recheck work within that interval.
 
-For example, a two-hour RTO would require a usable service by 08:20 after a 06:20 interruption. A 15-minute RPO would require recoverable data through at least 06:05 if the primary data were lost. These example targets are separate from this hospital's observed twelve-hour network interruption. Neither target tells staff whether a paper result reached the correct chart.
+For example, a two-hour RTO would require a usable service by 08:20 after a 06:20 interruption. A 15-minute RPO would require recoverable data through at least 06:05 if the primary data were lost. These are example targets, not the twelve hours this hospital was actually down. Neither one tells staff whether a paper result reached the right chart.
 
 A backup copies data so staff can recover it later:
 
@@ -18,16 +18,16 @@ A backup copies data so staff can recover it later:
 - An **incremental backup** copies changes since the previous backup.
 - A **differential backup** copies changes since the last full backup.
 
-These methods require different sets of files during restoration. Ask staff to restore a backup and check the recovered records before relying on it during an outage.
+Each method needs a different set of files to restore. Have staff actually restore a backup and check the records before counting on it in an outage.
 
-For example, with a full Sunday backup and daily incremental copies, a Wednesday restoration needs Sunday's copy plus Monday's, Tuesday's and Wednesday's increments. With daily differential copies, it needs Sunday's full copy and Wednesday's differential copy. Staff must know which method was used, whether all needed copies are intact and whether the restored application can read them.
+For example, with a full Sunday backup and daily incremental copies, a Wednesday restoration needs Sunday's copy plus Monday's, Tuesday's and Wednesday's increments. With daily differential copies, it needs Sunday's full copy and Wednesday's differential copy. Staff need to know which method was used, whether every copy they need is intact and whether the restored application can read them.
 
 ### What is kept ready if the main system fails?
 
 A **hot standby** is kept ready for rapid use. A **warm standby** needs more recovery steps. A **cold standby** needs more setup before staff can use it.
 
-An alternate server still needs a usable network path. If it depends on the same severed route, it will not restore message delivery. Test that dependency during a drill and measure how long staff need to restore a usable service.
+A second server still needs a working network connection. If it uses the same cut cable, it will not get messages moving again. Test that during a drill, and time how long staff take to get a working service back.
 
 Copying data continuously to another system can also copy corruption. The laboratory still needs protected older backups. Rotating backup media and keeping an offsite copy help if one location is damaged. A downtime drill should test restoration, another network path and reconciliation of the work done on paper.
 
-A **data warehouse** is a separate reporting copy used for analysis. Check when it was last updated and who can use it. It may be missing recent orders and results, so staff should not treat it as the current patient-care record.
+A **data warehouse** is a separate copy of the data kept for reports and analysis. Check when it was last updated and who can use it. It may be missing recent orders and results, so staff should not treat it as the current patient record.

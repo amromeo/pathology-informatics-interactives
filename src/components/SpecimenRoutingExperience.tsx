@@ -178,7 +178,7 @@ export function SpecimenRoutingExperience({
                   >
                     {config.routes[procedure.code] === procedure.approved
                       ? "Matches the approved route."
-                      : "This entry assigns the procedure to a different work area."}
+                      : "This entry sends the procedure to a different work area."}
                   </p>
                 )}
               </div>
@@ -211,7 +211,7 @@ export function SpecimenRoutingExperience({
         <p role="status">
           {tested
             ? `${results.filter((result) => result.passed).length} of ${results.length} routing cases pass.`
-            : "Replay the cases to evaluate the current configuration."}
+            : "Replay the cases to test the current settings."}
         </p>
         <h3 id="specimen-routing-results" tabIndex={-1}>
           Routing results
@@ -234,7 +234,7 @@ export function SpecimenRoutingExperience({
                     </strong>
                     <p>
                       {result.passed
-                        ? "The configured destination matches the approved route for this case."
+                        ? "The configured destination matches the approved one for this case."
                         : result.consequence}
                     </p>
                   </div>
@@ -290,8 +290,8 @@ export function SpecimenRoutingExperience({
               </strong>
               <p>
                 {readyForReview(config, recovery)
-                  ? "The LIS analyst can document the tested configuration for clinical approval. The receiving team still must verify the container and record its actual handoff."
-                  : "Both the complete routing matrix and a documented physical recovery plan are required. A passing routing test cannot create evidence of specimen receipt."}
+                  ? "The LIS analyst can record the tested settings for the laboratory to approve. The receiving team still has to check the container and record the handoff when it happens."
+                  : "You need every routing case to pass and a written plan for finding the container. A passing routing test cannot show that anyone received the specimen."}
               </p>
             </div>
           )}

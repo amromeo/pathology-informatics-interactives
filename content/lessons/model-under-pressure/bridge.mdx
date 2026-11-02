@@ -1,13 +1,13 @@
 ### Begin with the pathologists' answers
 
-Before running the machine-learning model, pathologists examine the local slides and agree on which contain metastases. Those agreed diagnoses serve as the **reference standard** for this test: the answers against which the model's results are checked. Here, a model result counts as a detection when it correctly marks a metastasis for review.
+Before running the machine-learning model, pathologists examine the local slides and agree on which contain metastases. These agreed diagnoses are the **reference standard** for this test: the answers the model's results are checked against. Here, a model result counts as a detection when it correctly marks a metastasis for review.
 
 All 50 slides in [Table 1](#ai-local-results) contain metastases according to the pathologists' review. We can therefore ask how many the model finds and how many it misses.
 
 - A **true positive** is a slide that contains metastasis and that the model correctly calls positive.
 - A **false negative** is a slide that contains metastasis but that the model misses.
 
-A known-positive slide can become either of those outcomes when we test the model. Calling all 50 slides “true positives” would assume that it found every one.
+Each known-positive slide ends up as one or the other when we test the model. Calling all 50 slides “true positives” would assume that it found every one.
 
 ### Read one row before comparing the groups
 
@@ -17,7 +17,7 @@ This detection rate is called **sensitivity**: of all the slides that contain me
 
 ### Why test in this laboratory?
 
-The vendor reported 96% detection on its positive slides. Local detection was lower from the first test. A model's ability to work on new cases or in a different laboratory is called **generalizability**. The lower local result is a reason to investigate how well this model carries over to your laboratory.
+The vendor reported 96% detection on its positive slides. Local detection was lower from the first test. A model's ability to work on new cases or in a different laboratory is called **generalizability**. The lower local result is a reason to look at how well this model carries over to your laboratory.
 
 Images can differ because of scanners, stains, tissue preparation and the kinds of cases tested. [Table 1](#ai-local-results) alone cannot tell us which difference caused a miss. Read each row, keeping micrometastases and macrometastases separate. Ask where the model missed the largest fraction of positive slides and which cases Dr. Rao should review first.
 

@@ -60,9 +60,9 @@ export const manifest: LessonManifest = {
       id: "3.2-not-anonymous-enough",
       objective: "3.2",
       summary:
-        "Compare field combinations and transformations, then choose a governed release pathway.",
+        "Find which combinations of fields single out patients, change them, then choose how the file may be shared.",
       learnerAction:
-        "Compare field combinations and transformations, then choose a governed release pathway.",
+        "Find which combinations of fields single out patients, change them, then choose how the file may be shared.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [
@@ -76,9 +76,9 @@ export const manifest: LessonManifest = {
       id: "3.4-not-anonymous-enough",
       objective: "3.4",
       summary:
-        "Compare field combinations and transformations, then choose a governed release pathway.",
+        "Find which combinations of fields single out patients, change them, then choose how the file may be shared.",
       learnerAction:
-        "Compare field combinations and transformations, then choose a governed release pathway.",
+        "Find which combinations of fields single out patients, change them, then choose how the file may be shared.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
