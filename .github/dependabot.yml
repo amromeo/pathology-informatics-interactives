@@ -4,6 +4,18 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # Skip these major versions until the packages that depend on them catch up.
+    # Remove a rule when its condition is met, and Dependabot will offer the update again.
+    ignore:
+      # Remove when eslint-plugin-jsx-a11y supports eslint 10.
+      - dependency-name: eslint
+        versions: ["10.x"]
+      # Remove when typescript-eslint supports TypeScript 7.
+      - dependency-name: typescript
+        versions: ["7.x"]
+      # Version 6 needs Vite 8. Remove when the site moves to Vite 8.
+      - dependency-name: "@vitejs/plugin-react"
+        versions: ["6.x"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
