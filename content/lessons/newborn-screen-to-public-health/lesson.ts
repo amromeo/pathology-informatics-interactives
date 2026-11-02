@@ -14,7 +14,7 @@ export const manifest: LessonManifest = {
   id: "14",
   layout: "wide",
 
-  summary: "A newborn screening report must reach the right public-health workflow.",
+  summary: "A newborn screening report has to reach the right public health worklist.",
   sources: [
     {
       label: "PIER Essentials Release 5",
@@ -35,9 +35,9 @@ export const manifest: LessonManifest = {
       id: "5.1-newborn-screen-to-public-health",
       objective: "5.1",
       summary:
-        "Map newborn observations and answers, then match standards requests to responsible organizations.",
+        "Choose the codes for a newborn result and its answers, then match standards requests to the organizations that handle them.",
       learnerAction:
-        "Map newborn observations and answers, then match standards requests to responsible organizations.",
+        "Choose the codes for a newborn result and its answers, then match standards requests to the organizations that handle them.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -51,9 +51,9 @@ export const manifest: LessonManifest = {
       id: "5.2-newborn-screen-to-public-health",
       objective: "5.2",
       summary:
-        "Map newborn observations and answers, then match standards requests to responsible organizations.",
+        "Choose the codes for a newborn result and its answers, then match standards requests to the organizations that handle them.",
       learnerAction:
-        "Map newborn observations and answers, then match standards requests to responsible organizations.",
+        "Choose the codes for a newborn result and its answers, then match standards requests to the organizations that handle them.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [
@@ -67,9 +67,9 @@ export const manifest: LessonManifest = {
       id: "5.3-newborn-screen-to-public-health",
       objective: "5.3",
       summary:
-        "Map newborn observations and answers, then match standards requests to responsible organizations.",
+        "Choose the codes for a newborn result and its answers, then match standards requests to the organizations that handle them.",
       learnerAction:
-        "Map newborn observations and answers, then match standards requests to responsible organizations.",
+        "Choose the codes for a newborn result and its answers, then match standards requests to the organizations that handle them.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [

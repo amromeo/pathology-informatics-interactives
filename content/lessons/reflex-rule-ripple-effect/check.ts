@@ -12,19 +12,19 @@ export const checks: RetrievalItem[] = [
         label: "The saved reflex rule and its entry in the order history",
         correct: true,
         feedback:
-          "Revision 8 still used 0.40 as the lower threshold, and the order history identifies that revision at 07:18. Comparing both with the approved protocol explains why a TSH of 0.30 created an FT4.",
+          "Revision 8 still used 0.40 as the lower threshold, and the order history names that revision at 07:18. Comparing both with the approved protocol explains why a TSH of 0.30 added an FT4.",
       },
       {
         id: "shortcut",
         label: "The report's interval definition and displayed flag",
         feedback:
-          "Those records establish what the report displays. The order program reads a separate saved rule. Follow the rule revision into the order history to explain the FT4.",
+          "Those records show what the report prints. The ordering program reads a separate saved rule. Follow the rule revision into the order history to explain the FT4.",
       },
       {
         id: "incomplete",
         label: "The analyzer's assay name and reagent lot record",
         feedback:
-          "The assay change prompted this review, but its name and lot do not show which saved condition created the FT4. Inspect the reflex rule and the accession's order history.",
+          "The assay change started this review, but its name and lot do not show which saved condition added the FT4. Look at the reflex rule and the accession's order history.",
       },
     ],
   },
@@ -45,13 +45,13 @@ export const checks: RetrievalItem[] = [
         id: "shortcut",
         label: "Review only the FT4 orders created after the change",
         feedback:
-          "An accession with a missed addition has no new FT4 order to select. Starting with all eligible TSH-with-reflex accessions keeps that failure visible.",
+          "An accession whose FT4 was missed has no new FT4 order to find. Starting from every eligible TSH-with-reflex accession keeps that mistake in view.",
       },
       {
         id: "incomplete",
         label: "Compare the total FT4 count before and after the change",
         feedback:
-          "A lower total may reflect either fewer unnecessary tests or more missed tests. Review each eligible accession's expected and actual action to distinguish those possibilities.",
+          "A lower total may mean fewer unnecessary tests, or more missed ones. Check each eligible accession's expected and actual action to tell which.",
       },
     ],
   },
@@ -66,19 +66,19 @@ export const checks: RetrievalItem[] = [
         label: "The initial-order rule and its required checks",
         correct: true,
         feedback:
-          "Initial troponin orders use their separate release rule. The serial-order comparison assumes an earlier sample; the initial-order process applies its own eligibility, QC, flag and other required checks.",
+          "Initial troponin orders have their own release rule. The serial-order comparison assumes there is an earlier sample; the initial-order rule runs its own eligibility, QC, flag and other checks.",
       },
       {
         id: "shortcut",
         label: "The serial-order rule with its missing-history hold",
         feedback:
-          "A first sample may have no prior result. This laboratory directs initial orders to a separate release process so the serial history requirement is applied to the intended orders.",
+          "A first sample usually has no prior result. This laboratory sends initial orders through a separate release process, so that the history check applies only to serial orders.",
       },
       {
         id: "incomplete",
         label: "Automatic release without any further checks",
         feedback:
-          "The absence of a delta comparison leaves the other release requirements in place. Staff still need the initial-order rule's checks before the result can release.",
+          "Having no earlier result to compare with does not remove the other release checks. The initial-order rule's checks still have to pass before the result is released.",
       },
     ],
     fromLesson: "11",

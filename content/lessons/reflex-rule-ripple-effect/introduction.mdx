@@ -1,10 +1,10 @@
 # Updating a Thyroid Reflex Rule
 
-On Monday morning, the chemistry supervisor finds a **free thyroxine (FT4)** order added to an accession whose **thyroid-stimulating hormone (TSH)** result is inside the interval printed on its report. You are the pathology resident working with the **laboratory information system (LIS)** analyst to investigate how that order was created.
+On Monday morning, the chemistry supervisor finds a **free thyroxine (FT4)** order added to an accession whose **thyroid-stimulating hormone (TSH)** result is inside the interval printed on its report. You are the pathology resident working with the **laboratory information system (LIS)** analyst to find out how that order got there.
 
-The laboratory began using a new TSH assay at **06:00**. Before the change, the director reviewed the adult reference interval and separately approved the adult TSH-with-reflex protocol. The protocol's lower threshold for adding FT4 changed from **0.40 to 0.27 mIU/L**. Its upper threshold remained **4.20 mIU/L**.
+The laboratory began using a new TSH assay at **06:00**. Before the change, the director reviewed the adult reference interval and, separately, approved the adult TSH-with-reflex protocol. The protocol's lower threshold for adding FT4 moved from **0.40 to 0.27 mIU/L**. The upper threshold stayed at **4.20 mIU/L**.
 
-The analyst updated the report's reference-interval definition. The ordering program reads a separate saved rule when deciding whether to add FT4. The supervisor asks you to compare both sets of settings with the approved protocol.
+The analyst updated the reference interval that prints on the report. But when the ordering program decides whether to add FT4, it reads a separate saved rule. The supervisor asks you to compare both sets of settings with the approved protocol.
 
 Your investigation begins with **TH-01**: a final TSH of **0.30 mIU/L** at **07:18**, displayed interval **0.27–4.20 mIU/L**, and an FT4 order created at **07:18**. That accession had no earlier FT4 order.
 
@@ -12,27 +12,27 @@ Your investigation begins with **TH-01**: a final TSH of **0.30 mIU/L** at **07:
 
 ### Following an additional order
 
-- **Reflex testing:** an approved sequence in which an initial result determines whether another test is added. Here, a clinician requests TSH with reflex to FT4.
-- **Order type:** the examination or sequence the clinician requested. TSH with reflex and TSH only have different instructions for adding FT4.
-- **Accession:** the laboratory record connecting the patient, order and specimen. A newly added FT4 must be linked to the accession that supplied its TSH result.
-- **Pending order:** a test has been ordered and is awaiting completion. Checking for it helps prevent a second order for the same work.
+- **Reflex testing:** an approved sequence in which the first result decides whether another test is added. Here, the clinician orders TSH with reflex to FT4.
+- **Order type:** the test or sequence the clinician ordered. TSH with reflex and TSH only have different instructions for adding FT4.
+- **Accession:** the laboratory record that ties the patient, order and specimen together. An added FT4 has to be linked to the accession its TSH came from.
+- **Pending order:** a test that has been ordered but not yet done. Checking for one stops a second order for the same work.
 
 ### Reading the saved settings
 
-- **Reference-interval definition:** the settings used to print the interval alongside a result.
+- **Reference-interval definition:** the settings that decide which interval prints next to a result.
 - **Threshold:** a value used in a rule's comparison. “TSH below 0.27 mIU/L” uses 0.27 as its lower threshold.
 - **Boundary:** the exact value at which a comparison changes. “Below 0.27” and “at or below 0.27” give different answers when TSH equals 0.27.
-- **Rule revision:** an identified saved version of the ordering rule. The order record can show which revision was used.
-- **Dependency:** another item that uses a result or setting. The FT4 ordering rule depends on the TSH result, its status and the requested order type.
-- **Replay:** applying a set of saved records to proposed settings, then comparing the resulting actions with the expected actions.
+- **Rule revision:** a numbered saved version of the ordering rule. The order record can show which revision was used.
+- **Dependency:** anything else that uses a result or setting. The FT4 ordering rule depends on the TSH result, its status and the requested order type.
+- **Replay:** running a set of saved records through proposed settings, then comparing what happens with what should happen.
 
 ## Your task
 
-Read the report definition, approved protocol, saved rule and order record. Explain how each contributed to TH-01. Then correct the rule and replay 13 selected accessions, including boundaries, existing FT4 orders and exceptions. Recommend what the director should review before the change is used.
+Read the report definition, approved protocol, saved rule and order record. Explain how each one led to TH-01's FT4. Then fix the rule and replay 13 chosen accessions, including results exactly on a threshold, existing FT4 orders and exceptions. Recommend what the director should review before the change is used.
 
 ## What you will be able to do
 
 - Trace an additional order to the rule revision that created it.
-- Translate “below,” “above” and “either” into testable conditions.
-- Preserve necessary FT4 orders while preventing unnecessary and duplicate orders.
-- Define which records and outcomes belong in monitoring after a change.
+- Turn “below,” “above” and “either” into conditions you can test.
+- Keep the FT4 orders that are needed while stopping unnecessary and duplicate ones.
+- Decide which records and outcomes to monitor after a change.

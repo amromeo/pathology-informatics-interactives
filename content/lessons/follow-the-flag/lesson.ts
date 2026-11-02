@@ -35,9 +35,9 @@ export const manifest: LessonManifest = {
       id: "5.2-follow-the-flag",
       objective: "5.2",
       summary:
-        "Inspect whole result-message fields, repair flags and distinguish instrument-interface mechanisms.",
+        "Read the fields of a whole result message, fix the flag translation and tell the kinds of instrument interface apart.",
       learnerAction:
-        "Inspect whole result-message fields, repair flags and distinguish instrument-interface mechanisms.",
+        "Read the fields of a whole result message, fix the flag translation and tell the kinds of instrument interface apart.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [
@@ -51,9 +51,9 @@ export const manifest: LessonManifest = {
       id: "5.3-follow-the-flag",
       objective: "5.3",
       summary:
-        "Inspect whole result-message fields, repair flags and distinguish instrument-interface mechanisms.",
+        "Read the fields of a whole result message, fix the flag translation and tell the kinds of instrument interface apart.",
       learnerAction:
-        "Inspect whole result-message fields, repair flags and distinguish instrument-interface mechanisms.",
+        "Read the fields of a whole result message, fix the flag translation and tell the kinds of instrument interface apart.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [
@@ -67,9 +67,9 @@ export const manifest: LessonManifest = {
       id: "5.4-follow-the-flag",
       objective: "5.4",
       summary:
-        "Inspect whole result-message fields, repair flags and distinguish instrument-interface mechanisms.",
+        "Read the fields of a whole result message, fix the flag translation and tell the kinds of instrument interface apart.",
       learnerAction:
-        "Inspect whole result-message fields, repair flags and distinguish instrument-interface mechanisms.",
+        "Read the fields of a whole result message, fix the flag translation and tell the kinds of instrument interface apart.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [
@@ -83,9 +83,9 @@ export const manifest: LessonManifest = {
       id: "8.1-follow-the-flag",
       objective: "8.1",
       summary:
-        "Inspect whole result-message fields, repair flags and distinguish instrument-interface mechanisms.",
+        "Read the fields of a whole result message, fix the flag translation and tell the kinds of instrument interface apart.",
       learnerAction:
-        "Inspect whole result-message fields, repair flags and distinguish instrument-interface mechanisms.",
+        "Read the fields of a whole result message, fix the flag translation and tell the kinds of instrument interface apart.",
       primary: false,
       taughtIn: ["interaction"],
       evidence: [

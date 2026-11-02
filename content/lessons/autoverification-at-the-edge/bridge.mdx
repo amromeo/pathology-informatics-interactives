@@ -1,23 +1,23 @@
-### Explain what the 22 checks establish
+### Explain what the 22 checks show
 
-The [complete release check list](#release-replay-heading) contains **22 selected records**. The supervisor chose them to exercise different parts of the policy: increases, a decrease, exact boundaries, small changes, missing history, QC problems, flags and ineligible results.
+The [complete release check list](#release-replay-heading) contains **22 selected records**. The supervisor picked them to test different parts of the policy: increases, a decrease, exact boundaries, small changes, missing history, QC problems, flags and ineligible results.
 
 A boundary test examines the point where a decision changes. AV-02 has an absolute difference of exactly **50 ng/L**. AV-03 has a relative difference of exactly **200%** and an absolute difference of exactly **20 ng/L**. “At least” includes these values. AV-18 checks that a prior result exactly **24 hours old** is still within the allowed window.
 
-The records also include results that should release. For example, AV-14 changes from 11 to 12 ng/L and passes the other checks. A corrected rule must preserve that release. Review every mismatch, whether it is an unexpected release or an unnecessary hold.
+The records also include results that should release. For example, AV-14 changes from 11 to 12 ng/L and passes the other checks. The fixed rule must still release it. Look at every mismatch, whether it is a result released that should have been held or one held that should have been released.
 
-The number of passing checks describes this chosen set. Estimating the laboratory's routine hold rate would require a defined period and all eligible results during that period.
+The number of passing checks describes this hand-picked set. To estimate how often the rule holds results in routine work, you would need every eligible result over a set period.
 
 ### Check the other inputs to a calculated result
 
-A calculated result needs its own complete set of inputs. For example, the configured estimated glomerular filtration rate (**eGFR**) equation uses creatinine and patient information including age. If age is missing, staff must resolve it before that calculation can be completed.
+A calculated result needs its own complete set of inputs. For example, the configured estimated glomerular filtration rate (**eGFR**) equation uses creatinine and patient information including age. If age is missing, staff have to find it before the calculation can be done.
 
-A valid creatinine result can remain available while staff investigate the missing input for eGFR. Substituting zero for age or copying an earlier eGFR would produce a report that does not represent the intended calculation for this specimen. The additional question after the exercise asks you to identify that problem.
+A valid creatinine result can still be released while staff look for the missing age. Putting in zero for age, or copying an earlier eGFR, would produce a report that is not the right calculation for this specimen. The additional question after the exercise asks you to identify that problem.
 
 ### Prepare the change for laboratory review
 
-The analyst tests the rule in a **test environment**, a separate installation used to check changes before they affect patient work. The test record should identify the saved rule version, the cases, expected outcomes and observed outcomes.
+The analyst tests the rule in a **test environment**, a separate copy of the system used to try out changes before they touch patient work. The test record should name the saved rule version, the cases, and the expected and actual outcomes.
 
-Chemistry staff also check the surrounding workflow: where held results appear for review, how staff document their decisions, and how released results appear in the LIS and clinical chart. The director reviews the criteria and completed testing before authorizing routine use.
+Chemistry staff also check the work around the rule: where held results appear for review, how staff document their decisions, and how released results appear in the LIS and clinical chart. The director reviews the criteria and the finished testing before approving routine use.
 
-Agree on who will watch for unexpected releases, unnecessary holds and reporting delays. Record how staff would stop the revised rule or restore a previously approved version if a problem appears. That restoration plan is often called a **rollback**. It needs a named person, a saved version and a way to account for results already processed.
+Agree who will watch for results released that should have been held, results held for no reason and reporting delays. Write down how staff would switch off the new rule, or go back to the earlier approved version, if something goes wrong. Going back is often called a **rollback**. It needs a named person, a saved version and a way to deal with results already processed.

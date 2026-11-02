@@ -12,19 +12,19 @@ export const checks: RetrievalItem[] = [
         label: "The initial-order rule and its required checks",
         correct: true,
         feedback:
-          "Initial troponin orders use their separate release rule. The serial-order comparison assumes an earlier sample; the initial-order process applies its own eligibility, QC, flag and other required checks.",
+          "Initial troponin orders have their own release rule. The serial-order comparison assumes there is an earlier sample; the initial-order rule runs its own eligibility, QC, flag and other checks.",
       },
       {
         id: "shortcut",
         label: "The serial-order rule with its missing-history hold",
         feedback:
-          "A first sample may have no prior result. This laboratory directs initial orders to a separate release process so the serial history requirement is applied to the intended orders.",
+          "A first sample usually has no prior result. This laboratory sends initial orders through a separate release process, so that the history check applies only to serial orders.",
       },
       {
         id: "incomplete",
         label: "Automatic release without any further checks",
         feedback:
-          "The absence of a delta comparison leaves the other release requirements in place. Staff still need the initial-order rule's checks before the result can release.",
+          "Having no earlier result to compare with does not remove the other release checks. The initial-order rule's checks still have to pass before the result is released.",
       },
     ],
   },
@@ -39,19 +39,19 @@ export const checks: RetrievalItem[] = [
         label: "The saved conditions and the approved order-specific policy",
         correct: true,
         feedback:
-          "Identify the order type, assay, required prior result and other release checks. Comparing that policy with the saved conditions shows which change to test and which cases should remain unaffected.",
+          "Note the order type, assay, prior result needed and other release checks. Comparing the policy with the saved conditions shows which change to test and which cases should stay the same.",
       },
       {
         id: "shortcut",
         label: "The threshold and the setting that produces fewer holds",
         feedback:
-          "Fewer holds could include results that require review. Begin with the approved criteria and compare expected and actual outcomes before interpreting the number of holds.",
+          "Fewer holds could mean results that need review are being released. Start from the approved criteria, and compare expected with actual outcomes, before reading anything into the number of holds.",
       },
       {
         id: "incomplete",
         label: "The local threshold and the numbers in this lesson",
         feedback:
-          "This case's limits describe its approved policy. A local change needs the laboratory's own assay, order pathway and review criteria, followed by appropriate testing.",
+          "This case's limits come from its own approved policy. A local change has to start from your laboratory's assay, orders and review criteria, and then be tested.",
       },
     ],
   },
@@ -66,19 +66,19 @@ export const checks: RetrievalItem[] = [
         label: "The order linked to each accession and specimen",
         correct: true,
         feedback:
-          "Follow the specific order, accession and specimen identifiers together. That preserves which examination was requested for each container, even when both belong to the same patient.",
+          "Follow the order, accession and specimen identifiers together. That keeps track of which examination was requested for each container, even when both belong to the same patient.",
       },
       {
         id: "shortcut",
         label: "The patient name and date of collection",
         feedback:
-          "Both specimens share those details. Staff need the accession and specimen links to distinguish their examinations and follow the correct work.",
+          "Both specimens share those details. Staff need the accession and specimen links to tell the two examinations apart.",
       },
       {
         id: "incomplete",
         label: "The name of the receiving department",
         feedback:
-          "A department's worklist can contain many examinations for many specimens. Follow the order and specimen identifiers to determine which work belongs to this container.",
+          "A department's worklist can hold many examinations for many specimens. Follow the order and specimen identifiers to find which work belongs to this container.",
       },
     ],
     fromLesson: "10",

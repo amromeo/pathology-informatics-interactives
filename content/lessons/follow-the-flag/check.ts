@@ -4,52 +4,52 @@ export const checks: RetrievalItem[] = [
     id: "principle",
     kind: "principle",
     prompt:
-      "An interface acknowledges a critical result but drops its critical flag. What has been demonstrated?",
+      "The EHR acknowledges a critical result but drops its critical flag. What does that show?",
     choices: [
       {
         id: "supported",
-        label: "Receipt without complete meaning",
+        label: "The message arrived, but not its full meaning",
         correct: true,
         feedback:
-          "An acknowledgment establishes receipt at a handoff. Field mapping and the displayed report must also preserve clinically important interpretation.",
+          "An acknowledgment shows the message was received at one handoff. The field translation and the report clinicians see also have to keep the critical flag.",
       },
       {
         id: "shortcut",
-        label: "Verified clinical display",
+        label: "The report clinicians see has been checked",
         feedback:
-          "This leaves the central problem unresolved. An acknowledgment establishes receipt at a handoff. Field mapping and the displayed report must also preserve clinically important interpretation.",
+          "The acknowledgment comes from the receiving system, not from anyone looking at the report. Open the EHR report itself to see whether the flag is there.",
       },
       {
         id: "incomplete",
-        label: "Correct flag translation",
+        label: "The flag was translated correctly",
         feedback:
-          "This does not establish the needed conclusion. An acknowledgment establishes receipt at a handoff. Field mapping and the displayed report must also preserve clinically important interpretation.",
+          "The flag was dropped, so it was not translated correctly. Compare the flag in the sent message with the code the EHR expects.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt: "A result in your EHR is missing a flag the LIS shows. What would you check first?",
     choices: [
       {
         id: "supported",
-        label: "Compare the source message with the received report",
+        label: "The sent message beside the EHR report",
         correct: true,
         feedback:
-          "Following the same observation exposes where the flag was lost or translated incorrectly.",
+          "Following the same result from the message to the report shows where the flag was lost or translated wrongly.",
       },
       {
         id: "shortcut",
-        label: "Repeat the transmission without inspecting fields",
+        label: "Send the message again and see",
         feedback:
-          "This leaves the central problem unresolved. Following the same observation exposes where the flag was lost or translated incorrectly.",
+          "Sending it again repeats whatever went wrong the first time. Look at the flag field in the message and at the translation table first.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "This lesson's flag translations",
         feedback:
-          "This does not establish the needed conclusion. Following the same observation exposes where the flag was lost or translated incorrectly.",
+          "Your interface may use different codes and a different agreed table. Start from your own message and your own interface agreement.",
       },
     ],
   },
@@ -58,26 +58,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "2",
     prompt:
-      "The LIS contains a final platelet count, but the clinician sees Pending. What comes first?",
+      "The LIS shows a final platelet count, but the clinician still sees Pending. What comes first?",
     choices: [
       {
         id: "supported",
-        label: "Communicate the verified result",
+        label: "Get the verified result to the clinician",
         correct: true,
         feedback:
-          "Use the approved downtime communication process, obtain read-back when required, and document the call while the delivery failure is investigated.",
+          "Phone it through using the downtime procedure, get a read-back if required and record the call. Then keep working out why it did not reach the chart.",
       },
       {
         id: "shortcut",
         label: "Restart the interface before calling",
         feedback:
-          "This leaves the central problem unresolved. Use the approved downtime communication process, obtain read-back when required, and document the call while the delivery failure is investigated.",
+          "A restart may not fix the problem, and the clinician is still waiting. Phone the verified result through while the analyst works out what went wrong.",
       },
       {
         id: "incomplete",
         label: "Wait for the next scheduled report",
         feedback:
-          "This does not establish the needed conclusion. Use the approved downtime communication process, obtain read-back when required, and document the call while the delivery failure is investigated.",
+          "Waiting leaves the clinical team without a platelet count the laboratory has already verified. Phone it through now and record the call.",
       },
     ],
   },

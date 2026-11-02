@@ -51,7 +51,7 @@ export const releaseCases: readonly ReleaseCase[] = [
     prior: 100,
     expected: "Hold",
     purpose:
-      "Exactly 50 ng/L meets the inclusive absolute boundary, even though the relative change is only 50%.",
+      "Exactly 50 ng/L meets the absolute limit, because the limit includes 50, even though the relative change is only 50%.",
   },
   {
     ...base,
@@ -71,7 +71,7 @@ export const releaseCases: readonly ReleaseCase[] = [
     prior: 2,
     expected: "Release",
     purpose:
-      "A 300% change is only 6 ng/L. The minimum absolute difference prevents this ratio alone from causing a hold.",
+      "A 300% change here is only 6 ng/L. The minimum difference stops the percentage alone from causing a hold.",
   },
   {
     ...base,
@@ -81,7 +81,7 @@ export const releaseCases: readonly ReleaseCase[] = [
     prior: 80,
     expected: "Release",
     purpose:
-      "A higher concentration is not itself a release failure. The result passes this laboratory's stated technical and change checks.",
+      "A higher result is not a reason to hold it on its own. It passes this laboratory's technical and change checks.",
   },
   {
     ...base,
@@ -91,7 +91,7 @@ export const releaseCases: readonly ReleaseCase[] = [
     prior: null,
     expected: "Hold",
     purpose:
-      "The approved policy directs results without usable history to review; missing is not the same as zero.",
+      "The approved policy sends results with no usable history for review; missing is not the same as zero.",
   },
   {
     ...base,
@@ -121,7 +121,7 @@ export const releaseCases: readonly ReleaseCase[] = [
     prior: 17,
     qc: false,
     expected: "Hold",
-    purpose: "A small delta cannot override an unresolved quality-control check.",
+    purpose: "A small change cannot make up for quality control that has not been accepted.",
   },
   {
     ...base,
@@ -151,7 +151,7 @@ export const releaseCases: readonly ReleaseCase[] = [
     prior: 17,
     final: false,
     expected: "Hold",
-    purpose: "Only final results are eligible for automatic release in this workflow.",
+    purpose: "Only final results can be released automatically in this laboratory.",
   },
   {
     ...base,
@@ -161,7 +161,7 @@ export const releaseCases: readonly ReleaseCase[] = [
     prior: 1190,
     expected: "Hold",
     purpose:
-      "The case policy requires the critical-result review and communication workflow at 1,000 ng/L or above.",
+      "In this case's policy, a result of 1,000 ng/L or above goes through the critical-result process to be reviewed and phoned.",
   },
   {
     ...base,
@@ -170,7 +170,7 @@ export const releaseCases: readonly ReleaseCase[] = [
     current: 12,
     prior: 11,
     expected: "Release",
-    purpose: "A routine result should still release after the rule is corrected.",
+    purpose: "A routine result should still be released once the rule is fixed.",
   },
   {
     ...base,
@@ -179,7 +179,8 @@ export const releaseCases: readonly ReleaseCase[] = [
     current: 8,
     prior: 0,
     expected: "Hold",
-    purpose: "Division by zero cannot supply a relative delta. This comparison is sent for review.",
+    purpose:
+      "You cannot divide by zero, so there is no relative change. This result is sent for review.",
   },
   {
     ...base,
@@ -246,7 +247,7 @@ export const releaseCases: readonly ReleaseCase[] = [
     current: 1000,
     prior: 990,
     expected: "Hold",
-    purpose: "Exactly 1,000 ng/L enters the critical-result pathway under the case policy.",
+    purpose: "Exactly 1,000 ng/L goes to the critical-result process under this case's policy.",
   },
 ];
 export type ReleaseGate = { name: string; pass: boolean; note: string; skipped?: boolean };
@@ -290,7 +291,7 @@ export function evaluateRelease(row: ReleaseCase, config: ReleaseConfig) {
         ? "QC check is bypassed by this configuration."
         : row.qc
           ? "QC is accepted for the run."
-          : "QC is not accepted; staff must resolve the run before release.",
+          : "QC is not accepted; staff must sort out the run before release.",
     },
     {
       name: "Instrument flags",
@@ -353,7 +354,7 @@ export const releaseControlNotes = (
     config.delta === "either"
       ? "Either branch can hold the result, as the approved policy requires."
       : config.delta === "both"
-        ? "Requiring both branches misses results that meet only one approved hold criterion."
+        ? "Requiring both branches misses results that meet only one of the approved hold criteria."
         : "Only the absolute branch can hold a result; the relative branch is omitted.",
   absoluteLimit: `An absolute difference of ${config.absoluteLimit} ng/L or more meets this branch. The approved limit is 50 ng/L.`,
   relativeLimit: `A relative difference of ${config.relativeLimit}% or more must also meet the minimum ng/L change. The approved limit is 200%.`,
@@ -365,13 +366,13 @@ export const releaseControlNotes = (
   missingHistory:
     config.missingHistory === "hold"
       ? "Unusable history causes review even if the other checks pass."
-      : "Unusable history no longer causes a hold. A skipped delta calculation may therefore allow release.",
+      : "Unusable history no longer causes a hold, so a result whose change could not be calculated may be released.",
   checkQc: config.checkQc
     ? "Unaccepted QC blocks automatic release."
-    : "QC is bypassed; an apparently stable result may release from an unaccepted run.",
+    : "QC is skipped; a result that looks stable may be released from a run whose QC was not accepted.",
   checkFlags: config.checkFlags
     ? "Unresolved instrument flags block automatic release."
-    : "Instrument flags are bypassed even if they require investigation.",
+    : "Instrument flags are skipped, even ones that need looking into.",
 });
 export const releaseApprovalChoices = [
   {
@@ -383,22 +384,22 @@ export const releaseApprovalChoices = [
   {
     id: "validated",
     label:
-      "Document the full test set, review the policy with the laboratory director, and plan monitoring and a rollback before production use.",
+      "Record the full test set, review the policy with the laboratory director, and plan monitoring and a rollback before using the rule on patient results.",
     feedback:
-      "The LIS team documents expected and observed results. Laboratory leadership reviews the release policy and exceptions before authorizing production use; staff then monitor holds, release delays, and unexpected releases.",
+      "The LIS team records the expected and actual results. The laboratory director reviews the release policy and its exceptions before approving the rule for patient results. Staff then watch the holds, release delays and any results released that should have been held.",
   },
   {
     id: "all-hold",
     label: "Hold every result and treat a zero automatic-release rate as successful validation.",
     feedback:
-      "Routine results such as AV-14 should release under the approved policy. Holding them all would introduce reporting delays. The test set includes these results so unnecessary holds appear as failures.",
+      "Routine results such as AV-14 should be released under the approved policy. Holding them all would delay reports. The test set includes them so that unnecessary holds show up as failures.",
   },
 ];
 
 export const additionalExercises = {
   title: "Review a calculated result and the middleware",
   purpose:
-    "Check that automatic release includes required calculation inputs and the systems that apply the rules.",
+    "Check that automatic release accounts for the inputs a calculation needs, and for the systems that apply the rules.",
   questions: [
     {
       id: "CALC1",
@@ -420,12 +421,12 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "Hold the calculated result. A valid creatinine result does not supply every input required by the configured estimated glomerular filtration rate calculation. Resolve missing data and test the report behavior.",
+        "Hold the calculated result. A valid creatinine is not everything the estimated glomerular filtration rate calculation needs. Find the missing information and check how the report looks.",
       feedbackByChoice: {
-        hold: "The configured eGFR equation needs age as well as creatinine. Resolve the missing age from an authorized source, then check the calculation and report. Creatinine can remain available under its own release criteria.",
-        zero: "Entering zero would assert an age that has not been established for this patient. Resolve the missing age before using the configured equation.",
+        hold: "The eGFR equation needs age as well as creatinine. Get the missing age from an approved source, then check the calculation and the report. Creatinine can still be released under its own criteria.",
+        zero: "Entering zero would give the patient an age nobody has confirmed. Find the missing age before using the equation.",
         release:
-          "The earlier eGFR used an earlier creatinine result and its associated inputs. Copying it would attach that old calculation to the current specimen. Resolve the missing input and calculate the current result.",
+          "The earlier eGFR used an earlier creatinine and the details that went with it. Copying it would attach that old calculation to today's specimen. Find the missing age and calculate the current result.",
       },
     },
     {
@@ -448,10 +449,10 @@ export const additionalExercises = {
         },
       ],
       feedback:
-        "Instrument middleware can consolidate instruments and apply result rules before release to the LIS. Validate both its configuration and the final report after an analyzer or assay change.",
+        "Instrument middleware can connect several instruments and apply result rules before results reach the LIS. After an analyzer or assay change, check both its settings and the final report.",
       feedbackByChoice: {
         middleware:
-          "The application receives analyzer results and applies laboratory rules before sending their status to the LIS. Those are the middleware functions used in AV-01.",
+          "The application receives analyzer results and applies the laboratory's rules before passing them to the LIS. That is what the middleware did in AV-01.",
         registration:
           "A registration feed supplies patient and encounter information. The application described here receives analyzer results and applies their release checks, which is the middleware's role.",
         billing:

@@ -1,16 +1,16 @@
-### Mapping errors have been observed in working laboratories
+### Mapping errors happen in real laboratories
 
-A code can exist in LOINC and still describe the wrong observation. Published studies show that this is an operational quality problem, not merely a hypothetical mistake in an exercise.
+A code can exist in LOINC and still describe the wrong test. Published studies show this is a real quality problem, not just a made-up mistake for an exercise.
 
-- **Stram and colleagues (2020):** 90 of 1,916 invited laboratories responded to a CAP survey about coagulation and cardiac-marker tests. Of 275 submitted LOINC codes, 54 (19.6%) were incorrect. Examples included the wrong component, specimen, or a panel used for an individual result. The 4.7% response rate and selected tests limit generalization. These are submitted codes, not a count of affected patient results. [Read the study abstract](https://pubmed.ncbi.nlm.nih.gov/31603714/).
-- **McDonald and colleagues (2023):** a review of 179,537,986 mapped results for 3,029 quantitative tests in two PCORnet DataMarts found errors affecting 4.6% of mapped results. About half of the mapping errors involved the property dimension. This result-weighted percentage describes that dataset; it is not the percentage of laboratories making errors. [Read the study abstract](https://pubmed.ncbi.nlm.nih.gov/36343113/).
+- **Stram and colleagues (2020):** 90 of 1,916 invited laboratories answered a CAP survey about coagulation and cardiac-marker tests. Of the 275 LOINC codes they submitted, 54 (19.6%) were wrong. Examples included the wrong component, the wrong specimen, or a panel code used for a single result. Only 4.7% of laboratories replied, and only a few tests were asked about, so the results may not apply widely. These are submitted codes, not a count of affected patient results. [Read the study abstract](https://pubmed.ncbi.nlm.nih.gov/31603714/).
+- **McDonald and colleagues (2023):** a review of 179,537,986 mapped results for 3,029 quantitative tests in two PCORnet DataMarts found errors affecting 4.6% of the mapped results. About half of the mapping errors were in the property part. This percentage counts results in that dataset; it is not the percentage of laboratories making errors. [Read the study abstract](https://pubmed.ncbi.nlm.nih.gov/36343113/).
 
-The percentages use different denominators and study designs. They should not be averaged or interpreted as a time trend. A frequently ordered test with one wrong mapping can affect many results. Neither study shows an error rate for your own laboratory.
+The two percentages use different denominators and different study designs. Do not average them or read them as a trend over time. One wrong mapping on a commonly ordered test can affect a very large number of results. Neither study tells you the error rate in your own laboratory.
 
-### Audit what the code claims
+### Check what the code claims
 
-Compare component, specimen, property, scale, time, and relevant method with the source catalog. Code-existence checks alone miss valid-but-wrong assignments. Use unit/property checks to flag inconsistencies for investigation; a unit alone cannot confirm the specimen or method. Include common tests and clinically important exceptions in local review.
+Compare the component, specimen, property, scale, time and, where relevant, method with the local test list. Checking only that the code exists will miss codes that are real but wrong. Use mismatches between unit and property to flag mappings for a closer look; a unit alone cannot confirm the specimen or method. Include common tests and clinically important exceptions in your local review.
 
-Keep unsupported mappings in a visible work queue. Obtain the assay definition from its owner rather than guessing a nearby code. Record the local identifier, target term, terminology version, rationale, reviewer, and date. Test representative results at the destination, including units and interpretations.
+Keep mappings you cannot yet support in a work queue where people can see them. Get the assay definition from the person responsible for the assay rather than guessing a nearby code. Record the local code, the LOINC code, the LOINC version, the reason for the choice, the reviewer and the date. Test typical results in the receiving system, including units and interpretations.
 
-If a mapping was already used, identify affected records and receiving systems, assess clinical and analytic consequences, correct the mapping through change control, and plan reprocessing or reconciliation. Changing tomorrow's messages does not correct yesterday's records. Recheck affected mappings after assay, catalog, or terminology updates.
+If a wrong mapping has already been used, find the affected records and the systems that received them, work out what it means clinically and for any analyses, fix the mapping through the usual change process, and plan how to resend or correct the earlier records. Fixing tomorrow's messages does not fix yesterday's records. Check affected mappings again whenever an assay, the test list or LOINC itself changes.

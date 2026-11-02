@@ -1,38 +1,37 @@
 ### What problem does LOINC solve?
 
-Local test identifiers work inside the laboratory that defines them. Another hospital cannot reliably infer their meaning from a number or an abbreviation. Different labels can name equivalent observations, and identical labels can hide different specimens, properties, or methods.
+A local test code only works inside the laboratory that made it. Another hospital cannot reliably tell what it means from a number or an abbreviation. Different names can describe the same test, and the same name can hide a different specimen, property or method.
 
-**LOINC** stands for **Logical Observation Identifiers Names and Codes**. It provides shared identifiers and definitions for observations. In this exercise, it answers “Which glucose observation is this?” The numeric result answers “What was the measured value?” and the unit supplies its quantitative meaning. These are separate fields.
+**LOINC** stands for **Logical Observation Identifiers Names and Codes**. It provides shared codes and definitions for tests and observations. In this exercise, it answers "Which glucose test is this?" The number answers "What was the result?", and the unit says what that number is a measure of. These are separate fields.
 
-A **mapping** is a reviewed association between a local catalog entry and a standard term. The analyst configures that association; laboratory staff verify what the local assay measures and reports. The local code can be retained alongside the LOINC code. A receiving system can use a verified shared identifier to find observations despite different local names.
+A **mapping** is a checked link between a test in the local list and a standard code. The analyst sets up the link; laboratory staff confirm what the local assay measures and reports. The local code can be kept alongside the LOINC code. A receiving system can then use the shared, checked code to find results even when the local names differ.
 
-Adding a code does not rename every local test, convert a value, or prove that two assays are analytically interchangeable. A patient trend also needs compatible units, methods, specimen context, and appropriate interpretation. Never drop those checks merely because the code matches.
+Adding a code does not rename every local test, convert any values, or show that two assays give interchangeable results. Showing a patient's results as a trend also needs matching units, methods and specimens, and someone to interpret them. A matching code is never a reason to skip those checks.
 
-### Read the term, not just the code
+### Read the definition, not just the code
 
-On the LOINC website, inspect the fully specified name or Part Model. Six dimensions describe the observation:
+On the LOINC website, look at the fully specified name or the Part Model. Six parts describe the test:
 
-| Dimension | Question to ask about this glucose result |
+| Part | Question to ask about this glucose result |
 | --- | --- |
 | Component | Is glucose being measured? |
-| Property | Is the amount expressed as mass per volume or moles per volume? |
-| Time | Is this a point-in-time measurement (Pt), rather than a timed collection? |
-| System | Is the specimen serum/plasma (Ser/Plas), rather than urine or another material? |
-| Scale | Is the answer quantitative (Qn), rather than a category? |
-| Method | Does this term specify a method, or leave it unspecified? |
+| Property | Is the amount given as mass per volume or moles per volume? |
+| Time | Is this a single point in time (Pt), rather than a timed collection? |
+| System | Is the specimen serum/plasma (Ser/Plas), rather than urine or something else? |
+| Scale | Is the answer a number (Qn), rather than a category? |
+| Method | Does the code name a method, or leave it unspecified? |
 
-A blank method part means that the term does not specify one; it does not mean the laboratory used no method. MCnc denotes mass concentration; SCnc denotes substance concentration. For these records, mg/dL and mmol/L reveal that property difference. A valid LOINC number can still be the wrong mapping for a particular record.
+A blank method part means the code does not specify a method; it does not mean the laboratory used none. MCnc means mass concentration; SCnc means substance concentration. For these records, mg/dL and mmol/L show that difference in property. A real LOINC code can still be the wrong one for a particular test.
 
-### Look up the two glucose observations
+### Look up the two glucose codes
 
-Open <a href="https://loinc.org/search" target="_blank" rel="noopener noreferrer">SearchLOINC</a> in another tab and search for **glucose serum plasma**. Compare a mass-per-volume term with a moles-per-volume term. The search service may ask you to sign in to a free LOINC account. If that interrupts the session, inspect these public candidate pages directly: <a href="https://loinc.org/2345-7" target="_blank" rel="noopener noreferrer">candidate A</a> and <a href="https://loinc.org/14749-6" target="_blank" rel="noopener noreferrer">candidate B</a>. The task remains to read and compare their definitions, not to select the first search result.
+Open <a href="https://loinc.org/search" target="_blank" rel="noopener noreferrer">SearchLOINC</a> in another tab and search for **glucose serum plasma**. Compare a mass-per-volume code with a moles-per-volume code. The search may ask you to sign in to a free LOINC account. If that gets in the way, open these public pages directly: <a href="https://loinc.org/2345-7" target="_blank" rel="noopener noreferrer">candidate A</a> and <a href="https://loinc.org/14749-6" target="_blank" rel="noopener noreferrer">candidate B</a>. The job is still to read and compare their definitions, not to take the first search result.
 
-Keep the local catalog visible. Record the code for Hospitals A/B and for Hospital C, a partner hospital in Canada, then record the properties and five shared dimensions you found on the term pages. Check term status on the website and record the terminology release and review date in a real mapping log. The lesson checks the supplied comparison; it cannot verify that you visited an external website.
-
+Keep the local test list in view. Write down the code for Hospitals A and B and the code for Hospital C, the partner hospital in Canada, then the property and the five shared parts you found on each code's page. In a real mapping log, also check the code's status on the website and record the LOINC release and the date you checked. The lesson checks the comparison you enter; it cannot tell whether you visited the website.
 
 <details>
-<summary>Need a refresher on the comparison fields?</summary>
+<summary>Need a reminder of what to compare?</summary>
 
-Compare what was measured, the property, timing, specimen, scale and method when relevant; keep units available for interpretation. The same local name does not show equivalence. Revisit the assay definitions above before accepting a mapping.
+Compare what was measured, the property, the timing, the specimen, the scale and, where it matters, the method; keep the units in view for interpreting the result. The same local name does not mean two tests are the same. Look back at the assay definitions above before accepting a mapping.
 
 </details>

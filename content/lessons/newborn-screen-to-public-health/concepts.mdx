@@ -1,99 +1,45 @@
-### What must arrive together
+### What has to arrive together
 
-A newborn-screening report links an infant, a specimen, a collection event,
-observations, interpretations, and a responsible program. A number that
-identifies an infant at one hospital may also be used at another. An
-**assigning authority** says which organization issued the identifier.
-The receiver must retain that context and reconcile missing or conflicting
-identity rather than guessing from the infant's name.
+A newborn screening report links an infant, a specimen, when it was collected, the results, their interpretation and the program responsible for follow-up. A number that identifies an infant at one hospital may be in use at another hospital too. The **assigning authority** says which organization issued the identifier. The program has to keep that information, and sort out a missing or conflicting identity, rather than guessing from the infant's name.
 
-The interface sends an **overall interpretation**, not an individual analyte
-measurement or a confirmed diagnosis. Its local label NBS_SUM has meaning inside
-this laboratory, but another organization cannot reliably infer that meaning.
-**LOINC (Logical Observation Identifiers Names and Codes)** supplies shared
-identifiers for observations. Here, LOINC 57130-7 identifies the overall
-interpretation being reported; it does not supply the answer. The later
-“Why Laboratory Results Need LOINC” lesson asks you to look up and verify a
-mapping on the LOINC website.
-A condition-specific interpretation such as 46746-4 has a narrower meaning and
-cannot replace the overall field just because both concern newborn screening.
-The test being reported and its answer need separate mappings.
+The interface sends an **overall interpretation** of the screen, not a single analyte result and not a confirmed diagnosis. The local label NBS_SUM means something inside this laboratory, but another organization cannot be sure what. **LOINC (Logical Observation Identifiers Names and Codes)** provides shared codes for tests and observations. Here, LOINC 57130-7 identifies the overall interpretation being reported; it does not give the answer. The later lesson "Why Laboratory Results Need LOINC" has you look up and check a code on the LOINC website.
 
-### Codes, answer sets, and units
+A condition-specific interpretation such as 46746-4 means something narrower, and cannot stand in for the overall result just because both are about newborn screening. The test being reported and its answer each need their own code.
 
-The local answer REFERRAL describes an interpretation already assigned by
-laboratory staff. The agreed receiver profile maps it to LA25817-0 in the
-LOINC answer vocabulary. IN_RANGE maps to LA12428-1 and UNSAT to LA16205-9.
-These are a selected subset for this connection. An unfamiliar answer stays
-in an exception queue; it is not coerced to an in-range answer.
+### Codes, answer lists and units
 
-A **code system** defines identifiers and their meanings. A **value set**
-selects the allowed concepts for a particular field and use. Different fields
-may bind to different value sets. SNOMED CT can represent clinical findings or
-specimen concepts where a profile requires it; it is not interchangeable with
-the observation identifier or every answer vocabulary.
+The local answer REFERRAL is the interpretation laboratory staff have already given. The format agreed with the program translates it to LA25817-0, from LOINC's list of answer codes. IN_RANGE becomes LA12428-1 and UNSAT becomes LA16205-9. These are the few answers chosen for this connection. An answer the program does not recognize stays in the exception queue; it is not forced into "in range."
 
-Numerical analyte results also need a value and a compatible unit, commonly
-expressed using UCUM. This overall interpretation is categorical, so it does
-not acquire a numeric unit. A unit cannot repair a wrong observation mapping.
-A real report also includes individual results and collection information;
-the exercise focuses on the fields that control this receiver's routing.
+A **code system** is a set of codes and their meanings. A **value set** is the list of codes allowed in a particular field for a particular use. Different fields can have different value sets. SNOMED CT can be used for clinical findings or specimen types where the agreed format calls for it; it cannot be swapped in for the test code or for every answer list.
 
-### Standards need implementation agreements
+A numerical analyte result also needs a value and a matching unit, usually written in UCUM. This overall interpretation is a category, so it has no unit. A unit cannot fix a wrong test code. A real report also carries the individual results and collection details; the exercise looks only at the fields that decide where this program routes the report.
 
-A standards development organization maintains specifications that multiple
-systems can implement. HL7 International maintains HL7 v2 messaging and FHIR.
-Regenstrief maintains LOINC; SNOMED International maintains SNOMED CT. Their
-work provides shared definitions, but it does not configure this receiver.
+### Standards still need an agreement between the two sides
 
-An **implementation guide** constrains a standard for a defined use: message
-types, required identifiers, terminology bindings, allowed answers, error
-handling, and workflow expectations. A local interface agreement identifies
-the versions and additional decisions used by both partners. The existence
-of a standard does not show that two implementations made those same
-decisions.
+A standards development organization writes and maintains specifications that many systems can use. HL7 International maintains Health Level Seven (HL7) version 2 messaging and Fast Healthcare Interoperability Resources (FHIR). Regenstrief maintains LOINC; SNOMED International maintains SNOMED CT. These give everyone shared definitions, but they do not set up this program's system.
 
-HL7 v2 sends structured messages with segments and fields. **FHIR** represents
-information in resources, such as an Observation linked to a DiagnosticReport,
-Patient, and Specimen. Changing the transport representation to FHIR would not
-supply a missing infant authority or correct a mistaken concept. Either
-approach needs profiling, terminology agreement, and testing of actual use.
+An **implementation guide** narrows a standard down for one purpose: which message types, which identifiers are required, which codes each field uses, which answers are allowed, how errors are handled and what each side is expected to do. A local interface agreement records the versions and any extra decisions both partners have made. The fact that a standard exists does not show that two systems made the same decisions.
 
-### Contribute to standards development
+HL7 version 2 sends structured messages made of segments and fields. FHIR represents information as resources, such as an Observation linked to a DiagnosticReport, a Patient and a Specimen. Switching to FHIR would not supply the missing assigning authority or fix a wrong code. Either way, the two sides need an agreed format, agreed codes and testing in real use.
 
-Standards evolve through proposed work, stakeholder review, resolution of
-comments, publication, and maintenance. Pathologists can contribute concrete
-laboratory use cases, review whether data definitions preserve meaning, and
-report implementation problems to the relevant work group. A requested change
-is not automatically an adopted standard. In this case, if the program needs
-an answer that the agreed set cannot express, document the need with both
-partners and pursue the appropriate terminology or specification change;
-do not privately redefine an existing code.
+### Help improve the standards
 
-### Acceptance and follow-up are different events
+Standards change through proposals, review by the people who use them, responses to comments, publication and upkeep. Pathologists can contribute real laboratory examples, check whether definitions keep their meaning and report problems to the right working group. Asking for a change does not make it part of the standard. In this case, if the program needed an answer the agreed list cannot express, both partners would write down the need and ask for the right change to the code system or guide. Nobody should quietly redefine an existing code.
 
-Here the receiving application stores a structurally accepted report before
-a separate service evaluates worklist eligibility. The acknowledgment records
-that application acceptance. The exception queue records why routing did not
-occur. Check both; absence from a referral list must not be interpreted as an
-in-range screen.
+### Accepting a report is not the same as following it up
 
-An exact retransmission should retain one logical message record. A corrected
-report is a new version of an existing clinical report and must be associated
-with it. Under this program's agreed workflow, corrections receive staff review
-so that follow-up already underway is reconciled. Preliminary reports also
-remain outside the final-report routing exercised here.
+Here the program's system stores any report with a valid structure first; a separate service then decides whether it belongs on a worklist. The acknowledgment records that the report was accepted. The exception queue records why it was not routed. Check both. A report missing from the referral list must never be read as a normal screen.
 
-In the replay, F means final, C means corrected, and P means preliminary. These
-status values describe the report version and readiness; they are separate
-from its clinical interpretation.
+An exact repeat of the same message should stay as one record. A corrected report is a new version of an existing report and has to be linked to it. Under this program's agreed process, staff review every correction so that any follow-up already under way can be adjusted. Preliminary reports are also kept out of the routing for final reports tested here.
 
-NB-08 requires immediate referral even though its report is preliminary. The program's urgent communication procedure still applies, and staff must monitor the preliminary-review queue with the same urgency.
+In the replay, F means final, C means corrected and P means preliminary. They say which version the report is and whether it is ready; they say nothing about the result itself.
 
-### Who changes a standard?
+NB-08 calls for immediate referral even though the report is preliminary. The program's urgent contact procedure still applies, and staff have to watch the preliminary-review queue just as closely.
 
-HL7 International develops messages and resources. Regenstrief maintains LOINC observation identifiers. SNOMED International maintains SNOMED CT clinical concepts. Integrating the Healthcare Enterprise (IHE) combines standards into workflow profiles. The International Organization for Standardization (ISO) publishes standards including ISO 15189 for laboratory quality. The US Assistant Secretary for Technology Policy/Office of the National Coordinator for Health Information Technology (ASTP/ONC) names standards in certification policy; it is not a terminology developer.
+### Who maintains which standard?
 
-Before requesting a change, define the unmet need and search existing terms or specifications. Gather the specimen, method, scale, examples and expected recipient behavior. Submit through the maintainer's process, participate in review, then test the approved implementation with the recipient. Do not present an unapproved local code as a standard term.
+HL7 International develops messages and resources. Regenstrief maintains LOINC codes for tests and observations. SNOMED International maintains SNOMED CT clinical concepts. Integrating the Healthcare Enterprise (IHE) combines standards into profiles for particular tasks. The International Organization for Standardization (ISO) publishes standards including ISO 15189 for laboratory quality. The US Assistant Secretary for Technology Policy/Office of the National Coordinator for Health Information Technology (ASTP/ONC) names which standards certified EHR software must use; it does not write terminologies.
 
-A value set is the permitted collection of answers for a field. Here the three newborn answer codes define the receiving program's permitted categories; a valid observation code with an unsupported answer still needs review.
+Before asking for a change, describe what is missing and search the existing codes or specifications. Gather the specimen, method, scale, examples and what the receiver is expected to do. Submit through the maintainer's process, take part in the review, then test the approved result with the receiving program. Never present a home-made local code as a standard one.
+
+A value set is the list of answers a field allows. Here, the three newborn answer codes are the categories the program accepts; a valid test code with an answer outside that list still needs review.

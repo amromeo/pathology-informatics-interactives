@@ -4,52 +4,53 @@ export const checks: RetrievalItem[] = [
     id: "principle",
     kind: "principle",
     prompt:
-      "A newborn result has a valid message structure but an unrecognized local code. What remains unresolved?",
+      "A newborn result arrives in a valid message but with a local code the program does not recognize. What is still unknown?",
     choices: [
       {
         id: "supported",
-        label: "The meaning of the coded result",
+        label: "What the coded result means",
         correct: true,
         feedback:
-          "Structural validation cannot establish that both organizations understand the same test or value. Terminology and value-set agreement are needed.",
+          "A valid structure does not show that both organizations understand the same test or answer. The two sides need agreed codes and an agreed list of allowed answers.",
       },
       {
         id: "shortcut",
-        label: "Whether any bytes were received",
+        label: "Whether anything was received",
         feedback:
-          "This leaves the central problem unresolved. Structural validation cannot establish that both organizations understand the same test or value. Terminology and value-set agreement are needed.",
+          "The message arrived and its structure was valid, so it was received. What is still unknown is what the local code means to the program.",
       },
       {
         id: "incomplete",
-        label: "Whether a message control ID exists",
+        label: "Whether the message has a control number",
         feedback:
-          "This does not establish the needed conclusion. Structural validation cannot establish that both organizations understand the same test or value. Terminology and value-set agreement are needed.",
+          "A valid message already carries a control number. The control number identifies the message; it says nothing about what the result code means.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt:
+      "Your laboratory is about to send a new report to public health. What would you check first?",
     choices: [
       {
         id: "supported",
-        label: "Read the receiver implementation guide",
+        label: "The program's implementation guide",
         correct: true,
         feedback:
-          "It defines required fields, supported values and acknowledgment behavior for this exchange.",
+          "It sets out the required fields, the allowed codes and answers, and what the program sends back for each message.",
       },
       {
         id: "shortcut",
-        label: "Assume the latest standard needs no local testing",
+        label: "Whether it uses the newest standard",
         feedback:
-          "This leaves the central problem unresolved. It defines required fields, supported values and acknowledgment behavior for this exchange.",
+          "A newer standard does not settle which fields, codes and answers this program expects. Read its implementation guide and test with the program.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "The codes used in this lesson",
         feedback:
-          "This does not establish the needed conclusion. It defines required fields, supported values and acknowledgment behavior for this exchange.",
+          "Your report and your program may need different codes and answers. Start from the guide the program has published for your report.",
       },
     ],
   },
@@ -58,26 +59,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "13",
     prompt:
-      "An interface acknowledges a critical result but drops its critical flag. What has been demonstrated?",
+      "The EHR acknowledges a critical result but drops its critical flag. What does that show?",
     choices: [
       {
         id: "supported",
-        label: "Receipt without complete meaning",
+        label: "The message arrived, but not its full meaning",
         correct: true,
         feedback:
-          "An acknowledgment establishes receipt at a handoff. Field mapping and the displayed report must also preserve clinically important interpretation.",
+          "An acknowledgment shows the message was received at one handoff. The field translation and the report clinicians see also have to keep the critical flag.",
       },
       {
         id: "shortcut",
-        label: "Verified clinical display",
+        label: "The report clinicians see has been checked",
         feedback:
-          "This leaves the central problem unresolved. An acknowledgment establishes receipt at a handoff. Field mapping and the displayed report must also preserve clinically important interpretation.",
+          "The acknowledgment comes from the receiving system, not from anyone looking at the report. Open the EHR report itself to see whether the flag is there.",
       },
       {
         id: "incomplete",
-        label: "Correct flag translation",
+        label: "The flag was translated correctly",
         feedback:
-          "This does not establish the needed conclusion. An acknowledgment establishes receipt at a handoff. Field mapping and the displayed report must also preserve clinically important interpretation.",
+          "The flag was dropped, so it was not translated correctly. Compare the flag in the sent message with the code the EHR expects.",
       },
     ],
   },

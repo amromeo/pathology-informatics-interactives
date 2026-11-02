@@ -2,11 +2,11 @@
 
 The middleware needs several pieces of information before it can release a serial troponin result. It reads the current result and its status, quality-control status, instrument flags and the patient's earlier result. Each check answers a separate question about that record.
 
-In this laboratory, the current result must be final and numeric, from **2 through 10,000 ng/L**. Quality control (**QC**) must be accepted for the run, and instrument flags must be resolved. A result at or above **1,000 ng/L** goes to the laboratory's critical-result review and communication workflow.
+In this laboratory, the current result must be final and numeric, from **2 through 10,000 ng/L**. Quality control (**QC**) must be accepted for the run, and instrument flags must be resolved. A result at or above **1,000 ng/L** goes through the laboratory's critical-result process, where it is reviewed and phoned.
 
 For the delta check, the prior result must come from the same patient and assay and be no more than **24 hours old**. The program needs a positive numeric prior value to calculate a percentage. Missing, zero, different-assay and out-of-window prior values go to review under this serial-order policy.
 
-For example, a serial order with a blank prior-result field prompts staff to investigate whether the expected earlier result is available and correctly linked. Entering zero would create a value that was never measured and would still leave an impossible division by zero. Initial troponin orders use their own release process.
+For example, if a serial order has a blank prior result, staff look for the earlier result and check whether it is linked correctly. Entering zero would invent a value nobody measured, and it would still mean dividing by zero. Initial troponin orders have their own release process.
 
 ### Work through AV-01
 
@@ -17,9 +17,9 @@ Begin with **12 ng/L**, the earlier result, and **48 ng/L**, the current result.
 3. Divide that size by the prior value: **36 ÷ 12 = 3**. The change is three times the prior concentration.
 4. Multiply by 100 to express that ratio as a percentage: **3 × 100 = 300%**.
 
-The percentage describes the **change** relative to the earlier value. The current result itself is four times the prior result: it consists of the original 12 plus a change of 36.
+The percentage describes the **change** compared with the earlier value. The current result itself is four times the prior result: the original 12 plus a change of 36.
 
-The rule also checks decreases. For AV-16, 20 − 80 = −60 ng/L. Its absolute difference is **60 ng/L**, and its relative difference is **60 ÷ 80 × 100 = 75%**. Both calculations use the size of the change; its direction remains visible in the original results.
+The rule also checks decreases. For AV-16, 20 − 80 = −60 ng/L. Its absolute difference is **60 ng/L**, and its relative difference is **60 ÷ 80 × 100 = 75%**. Both calculations use the size of the change; you can still see its direction from the two results.
 
 ### Apply each branch to those numbers
 
@@ -30,7 +30,7 @@ The director approved a hold when either of the following branches is met:
 
 For AV-01, ask the questions in that order. Is 36 at least 50? No. Is 300% at least 200%? Yes. Is 36 at least 20? Yes. Both requirements inside the relative branch are met, so that branch calls for a hold.
 
-Why does the relative branch also require a minimum change in ng/L? Compare AV-04, which rises from **2 to 8 ng/L**. Its difference is 6 ng/L, and 6 ÷ 2 × 100 is also 300%. The 20 ng/L minimum keeps that small concentration change from triggering this branch solely because the prior value is small.
+Why does the relative branch also require a minimum change in ng/L? Compare AV-04, which rises from **2 to 8 ng/L**. Its difference is 6 ng/L, and 6 ÷ 2 × 100 is also 300%. The 20 ng/L minimum stops that small change from triggering this branch just because the prior value was low.
 
 ### Combine the branches with OR
 
@@ -47,14 +47,14 @@ The two **branches** are joined with OR. A hold from either branch is enough. Wi
 | Relative branch only | Hold | No delta hold |
 | Both branches | Hold | Hold |
 
-AV-01 belongs in the **relative branch only** row of [this comparison](#release-branch-examples). The transferred rule currently uses **Absolute only**, so it never lets the relative branch hold the result. Selecting OR restores that branch's intended effect.
+AV-01 belongs in the **relative branch only** row of [this comparison](#release-branch-examples). The rule as moved to the middleware uses **Absolute only**, so the relative branch can never hold the result. Selecting OR puts that branch back.
 
-“No delta hold” means the change check allows the result to continue. QC, flags, result eligibility, history and the critical-result check must also pass before the overall decision is Release.
+“No delta hold” means the change check lets the result through. QC, flags, result eligibility, history and the critical-result check all have to pass as well before the final decision is Release.
 
 ### Use the controls and read the result trace
 
 Start with the current settings and inspect AV-01 in [Follow one result through every check](#release-trace-heading). The trace lists each check, its result and the information used. Change one setting, then return to the trace to explain what changed.
 
-Select AV-04 to test the minimum absolute change, AV-06 for missing history, or AV-09 for unaccepted QC. A skipped calculation appears as **Not calculated**. Read the history and eligibility checks to see why a number was unavailable.
+Select AV-04 to test the minimum change, AV-06 for missing history, or AV-09 for QC that was not accepted. A calculation that was skipped shows as **Not calculated**; read the history and eligibility checks to see why.
 
-Use **Run all release checks** to compare the complete set with the policy. Changing a setting clears the preceding test summary and final recommendation. Run the checks again before using that summary to support the revised settings.
+Use **Run all release checks** to compare the complete set with the policy. Changing a setting clears the last test summary and the final recommendation. Run the checks again before using the summary to back the new settings.

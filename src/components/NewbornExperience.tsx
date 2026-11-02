@@ -96,7 +96,7 @@ export function NewbornExperience({ Concepts, Bridge, onAttempt }: Topic5Props) 
         <p role="status">
           {tested
             ? `${passed} of ${results.length} receiving actions match.`
-            : "Run the original configuration, then compare the complete repair."}
+            : "Run the original settings first, then compare them with the full fix."}
         </p>
         <ReplayResultList
           items={results}
@@ -132,15 +132,15 @@ export function NewbornExperience({ Concepts, Bridge, onAttempt }: Topic5Props) 
             checked={review}
             onChange={(event) => setReview(event.target.checked)}
           />
-          Include worklists, exception ownership, and correction reconciliation in acceptance
-          testing.
+          Include the worklists, who handles exceptions and how corrections are linked when signing
+          off the connection testing.
         </label>
         <div role="status" aria-live="polite" aria-atomic="true">
           {review && (
             <p className="topic5-note">
               {tested && passed === results.length
-                ? "The replay supports joint laboratory and program acceptance review."
-                : "The receiving actions must match before this configuration is ready for acceptance review."}
+                ? "The replay is ready for the laboratory and the program to review together."
+                : "Every message has to end up in the right place before these settings are ready for review."}
             </p>
           )}
         </div>

@@ -1,30 +1,30 @@
 ### Follow the four records
 
-The report definition tells the LIS which reference interval to display. The written protocol records the director's intended ordering sequence. The saved reflex rule contains the conditions the program actually tests. Finally, the order record identifies what the program did for a particular accession and which revision it used.
+The report definition tells the LIS which reference interval to display. The written protocol records the ordering sequence the director intended. The saved reflex rule holds the conditions the program actually tests. And the order record shows what the program did for a particular accession, and which revision it used.
 
-Follow TH-01 across these records. Its report uses the new interval, **0.27–4.20 mIU/L**. The saved rule is revision 8, whose lower threshold is still **0.40**. The order record names revision 8 when documenting the FT4 order at 07:18.
+Follow TH-01 across these records. Its report uses the new interval, **0.27–4.20 mIU/L**. The saved rule is revision 8, whose lower threshold is still **0.40**. The order record names revision 8 as the source of the FT4 order at 07:18.
 
-Updating one definition leaves the other at its saved value until staff change it. That is how the displayed interval and the ordering action can disagree. In this case the director explicitly approved both the new interval and the new ordering thresholds.
+Updating one definition leaves the other at its old value until someone changes it. That is how the printed interval and the ordering action can disagree. In this case the director approved both the new interval and the new ordering thresholds.
 
 ### Work through the comparison for TH-01
 
-The current TSH is **0.30 mIU/L**. Under revision 8, the lower-branch question is: **Is 0.30 below 0.40?** Yes. The program therefore continues toward adding FT4.
+The current TSH is **0.30 mIU/L**. Under revision 8, the lower-branch question is: **Is 0.30 below 0.40?** Yes. So the program goes on to add FT4.
 
 Under the revised protocol, the question becomes: **Is 0.30 below 0.27?** No. The upper-branch question is: **Is 0.30 above 4.20?** Also no. Neither threshold condition is met, so the approved action is **No reflex**.
 
-A reference interval helps with interpreting a result. A reflex threshold determines whether the program adds an order under an approved protocol. The director may choose the same numerical bounds for both, as happened here. The analyst still needs to find, update and test each place those values are stored.
+A reference interval helps someone interpret a result. A reflex threshold decides whether the program adds an order under an approved protocol. The director may choose the same numbers for both, as happened here. The analyst still has to find, update and test every place those numbers are stored.
 
 ### Check which records the rule applies to
 
-Before comparing TSH with a threshold, the program checks the patient's age and requested order type. This sequence applies to **adults aged 18 or older** whose clinician requested **TSH with reflex**. A TSH-only order or a pediatric record is outside this rule's scope.
+Before comparing TSH with a threshold, the program checks the patient's age and requested order type. This sequence applies to **adults aged 18 or older** whose clinician requested **TSH with reflex**. A TSH-only order or a child's record falls outside this rule.
 
-Next, the program requires a **final numeric TSH**. Staff review a missing or preliminary result before deciding about further testing. Treating a blank as zero would cause the program to test a concentration that was never reported.
+Next, the program needs a **final numeric TSH**. Staff review a missing or preliminary result before deciding on more testing. Treating a blank as zero would make the program test a value that was never reported.
 
-The thresholds belong to this laboratory's approved adult protocol. Other populations and clinical questions may require different testing arrangements. Keep that scope in view when testing the records below.
+The thresholds belong to this laboratory's approved adult protocol. Other patient groups and clinical questions may need different testing. Keep that in mind when testing the records below.
 
 ### Test values on both sides of a boundary
 
-The approved instruction is to add FT4 when TSH is **below 0.27 OR above 4.20 mIU/L**. OR allows either condition to trigger the next step. Values exactly equal to a boundary remain inside this protocol's interval.
+The approved instruction is to add FT4 when TSH is **below 0.27 OR above 4.20 mIU/L**. OR means either condition is enough. A value exactly equal to a threshold counts as inside the interval under this protocol.
 
 <h3 id="reflex-boundary-examples" tabIndex={-1}>Three results near the lower threshold</h3>
 
@@ -38,16 +38,16 @@ The [boundary examples](#reflex-boundary-examples) show why “below” differs 
 
 ### Check for an FT4 already on the accession
 
-After a threshold condition is met, the program looks for a pending or completed FT4 linked to that accession. If one exists, the action is **Use existing FT4**. The pending test can continue, or its completed result can be used, without creating a second order.
+After a threshold condition is met, the program looks for a pending or completed FT4 linked to that accession. If one exists, the action is **Use existing FT4**. The pending test goes ahead, or the completed result is used, without a second order.
 
-For example, TH-08 has a TSH of 0.10 and an FT4 already complete. Its low TSH meets the threshold condition. The linked FT4 then prevents a duplicate. TH-09 tests the same situation with a pending FT4.
+For example, TH-08 has a TSH of 0.10 and an FT4 already complete. Its low TSH meets the threshold, but the linked FT4 stops a duplicate. TH-09 tests the same situation with a pending FT4.
 
-Read the accession's linked-order information to identify the pending or completed FT4 that the rule will use.
+Look at the accession's linked orders to find the pending or completed FT4 the rule will use.
 
 ### Change one setting, then inspect every action
 
 First select **Replay accession records** with the original settings. Open TH-01 and follow the recorded decisions. Change only the lower threshold to the approved value and repeat the replay.
 
-Then try including exact boundaries or disabling duplicate prevention. Each change clears the previous results and recommendation. Run the records again and identify which specific accessions changed.
+Then try including the exact thresholds, or switching off duplicate prevention. Each change clears the last results and recommendation. Run the records again and see exactly which accessions changed.
 
-The four record cards at the start retain the history of how TH-01's order was created. Your changes apply to the replay, where each resulting action is compared with the approved action.
+The four record cards at the start keep the history of how TH-01's order was created. Your changes only affect the replay, where each action is compared with the approved one.
