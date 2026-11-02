@@ -2,12 +2,23 @@
 
 At 09:00, a coordinator at the newborn screening program cannot find report NB-01 on the referral worklist. The screening laboratory finalized it at 08:40 with an overall result calling for immediate referral. Staff have already started the program's urgent contact procedure, but the electronic report is stuck in the program's exception queue.
 
-The laboratory has just connected its laboratory information system (LIS) to the public health program. The interface analyst set up the message structure and the patient identifiers. But the laboratory's own name for the overall-result field, NBS_SUM, and its own answer, REFERRAL, were sent through unchanged. During testing, a sample report was stored successfully, but nobody checked whether it reached a follow-up worklist.
+The laboratory has just connected its laboratory information system (LIS) to the public health program. The interface analyst set up the message structure and the patient identifiers. But the laboratory's own name for the overall-result field, NBS_SUM, and its own answer, REFERRAL, were sent through unchanged. During testing, a sample report was stored successfully, but nobody checked whether it reached a follow-up worklist. You are the resident helping the laboratory and program staff.
 
-You are the resident helping the laboratory and program staff. Compare the fields the program received with the format both sides agreed, choose the codes for the test and its answers, and replay eight test messages. Keep the infant's identity, repeat sends, corrected reports and exceptions handled properly while getting the report onto the right worklist.
+## Terms used in this case
+
+- **Implementation guide:** the receiving program's rules for a message: which fields are required, which codes each field uses, which answers are allowed and what happens to errors.
+- **Logical Observation Identifiers Names and Codes (LOINC):** shared codes for tests and results. Here, one code names the overall newborn screening interpretation, and separate answer codes give its possible values.
+- **Assigning authority:** the organization that issued a patient identifier. The same number can belong to different infants at different hospitals.
+- **Exception queue:** where the program puts reports it cannot route, for staff to sort out.
+- **Repeat send and correction:** a repeat send is the same report sent again; a correction is a new version that replaces an earlier report.
+
+## Your task
+
+Compare the fields the program received with the format both sides agreed. Choose the codes for the test and its answers, then replay eight test messages. Keep the infant's identity, repeat sends, corrected reports and exceptions handled properly while getting the report onto the right worklist. Finally, match some requests about standards to the organizations that handle them.
 
 ## What you will be able to do
 
-- Match each standard to the question it answers.
-- Read the receiving program's implementation guide.
-- Explain why assuming the newest standard needs no local testing leads the team astray.
+- Find which fields stop a public health program from acting on a report, even when the message itself is valid.
+- Choose the code for a test, and the codes for its answers, from an agreed implementation guide.
+- Check that identity, repeat sends, corrections and unknown answers are still handled after a fix.
+- Say which organization to approach to change a standard or a code.

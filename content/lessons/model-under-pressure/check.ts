@@ -60,26 +60,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "5",
     prompt:
-      "A slide image for the tumor board belongs to the right patient but comes from the wrong tissue block. How should you repair the image's link to the case record?",
+      "A PD-L1 result from the same patient's 2024 colon specimen shows up in today's lung case view. What should happen?",
     choices: [
       {
         id: "supported",
-        label: "Verify the block against the case record",
+        label: "Keep it as history, not as today's result",
         correct: true,
         feedback:
-          "Trace the accession, part and block in the case record. Link the slide to the molecular result only after confirming which block was tested.",
+          "It belongs to the patient but not to the lung specimen being discussed. Keep it in the patient's history and find the result for the current specimen.",
       },
       {
         id: "shortcut",
-        label: "Link by patient name and report date",
+        label: "Use it, since it is the same patient",
         feedback:
-          "The patient may have several specimens and blocks from the same date. Name and date alone can still link the image to the wrong tissue.",
+          "The same patient does not mean the same tumor. A colon result from 2024 says nothing about today's lung specimen.",
       },
       {
         id: "incomplete",
-        label: "Keep it because the diagnosis agrees",
+        label: "Delete it from the patient's record",
         feedback:
-          "Two blocks can have the same diagnosis. Matching diagnoses does not show that this image comes from the block used for molecular testing.",
+          "The result is real and belongs in the patient's history. The problem is that it is linked to the wrong specimen in this view.",
       },
     ],
   },

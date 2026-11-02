@@ -48,9 +48,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "Copy this lesson's design",
+        label: "Ask clinicians what message they want",
         feedback:
-          "Your test, your clinicians and your ordering screens may be different. Watch how ordering works locally before choosing a design.",
+          "Asking helps, but people often describe ordering differently from how it actually happens. Watch the ordering itself before choosing a design.",
       },
     ],
   },
@@ -59,26 +59,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "10",
     prompt:
-      "Two specimens share a patient and collection date. Which link supports correct routing?",
+      "A new procedure code sent one test to the wrong worklist. After fixing it, what else should the analyst retest?",
     choices: [
       {
         id: "supported",
-        label: "The order and specimen identifiers",
+        label: "The routes that already worked",
         correct: true,
         feedback:
-          "The patient's identity is needed, but it does not tell two tests or specimens apart. Keep the accession and specimen linked all the way through routing.",
+          "A fix to one route can break others. Rerun the procedures that worked before, and a code the LIS does not recognize.",
       },
       {
         id: "shortcut",
-        label: "The patient name by itself",
+        label: "Only the procedure that went to the wrong worklist",
         feedback:
-          "Both specimens belong to the same patient, so the name cannot tell them apart. Use the order and specimen identifiers.",
+          "Testing only the fixed route would miss any route the change broke. Rerun the ones that already worked too.",
       },
       {
         id: "incomplete",
-        label: "The destination worklist by itself",
+        label: "Nothing more, since the change was small",
         feedback:
-          "A worklist can hold many specimens from the same patient. The destination does not say which specimen is which; the order and specimen identifiers do.",
+          "Small changes can still affect other routes, as copying an entry did here. Rerun the routes that already worked.",
       },
     ],
   },

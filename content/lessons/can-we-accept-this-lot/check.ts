@@ -9,7 +9,7 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "Review all acceptance criteria",
+        label: "Check every acceptance criterion first",
         correct: true,
         feedback:
           "The comparison found an average difference that still meets the limit for the mean shift. Before the director approves the lot, the team has to check the other concentration groups and everything else the protocol requires.",
@@ -49,38 +49,38 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "Use this lesson's troponin limits",
+        label: "Use the assay's quality-control ranges",
         feedback:
-          "The troponin limits in this lesson were set for this assay. Another assay needs its own approved protocol, based on how its results are used.",
+          "Quality-control ranges describe control material, not how big a shift in patient results the laboratory will accept. Use the approved protocol for this assay.",
       },
     ],
   },
   {
     id: "spaced",
     kind: "spaced",
+    fromLesson: "3",
     prompt:
-      "A chemistry turnaround report excludes orders without a collection time. What should its summary disclose?",
+      "A monthly report of blood culture contamination leaves out 30 cultures because their draw site is blank. What should the report say?",
     choices: [
       {
         id: "supported",
-        label: "The excluded count and missing field",
+        label: "That 30 were left out, and why",
         correct: true,
         feedback:
-          "Say how many orders were left out and that their collection times were missing; otherwise readers will assume the average covers every order. Then check whether the missing times cluster around the very delay being studied.",
+          "Readers will otherwise assume the rate covers every culture. The cultures with no draw site may also be the ones drawn in a hurry, which are more likely to be contaminated.",
       },
       {
         id: "shortcut",
-        label: "Only the mean of complete records",
+        label: "Nothing, since the rate is still accurate",
         feedback:
-          "That mean says nothing about the orders left out. If the worst delays also left timestamps missing, reporting only complete records would make things look better than they were.",
+          "The rate is only accurate for the cultures that were counted. If the missing ones differ, the report could be quite wrong, so say they were left out.",
       },
       {
         id: "incomplete",
-        label: "Only the total number of final results",
+        label: "Only the rate for cultures with a draw site",
         feedback:
-          "The total does not say how many orders went into the turnaround calculation or why the others were left out. Show both counts and name the missing field.",
+          "That is the rate it already shows. Readers also need to know how many cultures were left out and why, or they will think it covers them all.",
       },
     ],
-    fromLesson: "3",
   },
 ];

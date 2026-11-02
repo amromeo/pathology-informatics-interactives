@@ -36,7 +36,7 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "The saved conditions and the approved order-specific policy",
+        label: "The saved rule and the approved policy",
         correct: true,
         feedback:
           "Note the order type, assay, prior result needed and other release checks. Comparing the policy with the saved conditions shows which change to test and which cases should stay the same.",
@@ -49,38 +49,38 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "The local threshold and the numbers in this lesson",
+        label: "The threshold and the assay's reference interval",
         feedback:
-          "This case's limits come from its own approved policy. A local change has to start from your laboratory's assay, orders and review criteria, and then be tested.",
+          "A reference interval describes healthy people; it is not the policy for when a result is held. Compare the saved rule with the approved policy.",
       },
     ],
   },
   {
     id: "spaced",
     kind: "spaced",
+    fromLesson: "10",
     prompt:
-      "Two specimens share a patient and collection date. Which link lets staff follow the intended examination for each one?",
+      "The tracking screen says a specimen is in histology, but the last receiving scan was at accessioning. Where was it last confirmed?",
     choices: [
       {
         id: "supported",
-        label: "The order linked to each accession and specimen",
+        label: "At accessioning",
         correct: true,
         feedback:
-          "Follow the order, accession and specimen identifiers together. That keeps track of which examination was requested for each container, even when both belong to the same patient.",
+          "Only a receiving scan by a person shows where the container actually was. The histology entry may come from a worklist assignment, not a handoff.",
       },
       {
         id: "shortcut",
-        label: "The patient name and date of collection",
+        label: "In histology, as the screen says",
         feedback:
-          "Both specimens share those details. Staff need the accession and specimen links to tell the two examinations apart.",
+          "A screen can show where the work was assigned rather than where the container went. The last scan by a person was at accessioning.",
       },
       {
         id: "incomplete",
-        label: "The name of the receiving department",
+        label: "Wherever the case's worklist is",
         feedback:
-          "A department's worklist can hold many examinations for many specimens. Follow the order and specimen identifiers to find which work belongs to this container.",
+          "A worklist is where the work is assigned. It does not show where the container physically is. Go by the last receiving scan.",
       },
     ],
-    fromLesson: "10",
   },
 ];

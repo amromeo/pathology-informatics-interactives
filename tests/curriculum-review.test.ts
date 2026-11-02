@@ -138,3 +138,39 @@ test("single-answer choices do not signal the key by excessive length", async ()
   }
   assert.ok(longest / total <= 0.3, longest + " of " + total + " correct labels are longest");
 });
+
+test("Check yourself choices do not signal the key by length", async () => {
+  let total = 0,
+    longest = 0;
+  for (const l of lessons) {
+    const { checks } = await import("../content/lessons/" + l.manifest.slug + "/check.ts");
+    for (const item of checks) {
+      const right = item.choices.find((c: any) => c.correct),
+        wrong = item.choices
+          .filter((c: any) => !c.correct)
+          .map((c: any) => c.label.length)
+          .sort((a: number, b: number) => a - b);
+      const mid = Math.floor(wrong.length / 2),
+        median = wrong.length % 2 ? wrong[mid] : (wrong[mid - 1] + wrong[mid]) / 2;
+      assert.ok(
+        right.label.length <= median * 1.25,
+        l.manifest.slug + " " + item.id + ": shorten " + right.label,
+      );
+      total++;
+      if (right.label.length > Math.max(...wrong)) longest++;
+    }
+  }
+  assert.ok(longest / total <= 0.3, longest + " of " + total + " correct labels are longest");
+});
+
+test("spaced review items are not repeated across lessons", async () => {
+  const seen = new Map<string, string>();
+  for (const l of lessons) {
+    const { checks } = await import("../content/lessons/" + l.manifest.slug + "/check.ts");
+    for (const item of checks) {
+      const earlier = seen.get(item.prompt);
+      assert.equal(earlier, undefined, l.manifest.slug + " repeats a question from " + earlier);
+      seen.set(item.prompt, l.manifest.slug);
+    }
+  }
+});

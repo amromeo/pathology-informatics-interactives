@@ -48,9 +48,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "This lesson's reader study",
+        label: "How fast readers worked with the tool",
         feedback:
-          "This study had four readers and 20 slides. Look at how the vendor's study was designed before comparing the two.",
+          "Speed alone says nothing about missed mitoses. Look at the full study design first.",
       },
     ],
   },
@@ -59,26 +59,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "6",
     prompt:
-      "An image model does poorly on a new scanner from the very first local test. What does this suggest?",
+      "A model's detection was fine for six months, then fell after a stain change. What does this suggest?",
     choices: [
       {
         id: "supported",
-        label: "A generalizability problem",
+        label: "Drift worth investigating",
         correct: true,
         feedback:
-          "The model did not carry over well to a new setting. Drift is a change over time after a starting point has been measured.",
+          "Performance changed over time after a good start. The stain change is one cause to check, along with scanners, cases and slide quality.",
       },
       {
         id: "shortcut",
-        label: "A proven change over time",
+        label: "Proof that the new stain caused it",
         feedback:
-          "There is no earlier local result to compare with, so nothing has changed over time yet. The model did poorly from the start.",
+          "The timing makes the stain worth looking at, but it does not prove the cause. Other things may have changed too.",
       },
       {
         id: "incomplete",
-        label: "A rise in disease prevalence alone",
+        label: "A problem present from the first local test",
         feedback:
-          "The question is about mitoses the model missed among slides already known to have them. How common disease is does not explain those misses.",
+          "The model did well for six months, so the problem was not there at the start. Something changed later.",
       },
     ],
   },

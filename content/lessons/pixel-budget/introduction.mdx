@@ -2,14 +2,24 @@
 
 You are the pathology resident on the digital pathology committee.
 
-Dr. Rao, a surgical pathologist, asks you to look at a proposal for the image archive with Elena Park, the digital pathology technologist, and Malik from the infrastructure team. The service scans fixed-tissue hematoxylin and eosin (H&E) slides for hospital reporting. The storage forecast is more than the space set aside, so Malik proposes smaller files. Elena Park also reports that a few scans have blurred patches of tissue.
-
-Your question is whether the proposed savings keep the information pathologists need for the work they do. Compare the same patch of tissue after two different changes. Then estimate what scanning resolution, compression, extra focal planes and extra copies each cost in storage. Recommend what evidence is needed before the service's approved settings are changed.
+Dr. Rao, a surgical pathologist, asks you to look at a proposal for the image archive with Elena Park, the digital pathology technologist, and Malik from the infrastructure team. The service scans fixed-tissue hematoxylin and eosin (H&E) slides for hospital reporting. The storage forecast is more than the space set aside, so Malik proposes smaller files. Elena Park also reports that a few scans have blurred patches of tissue. Your question is whether the proposed savings keep the information pathologists need for the work they do.
 
 The comparison uses a small H&E-style patch, not a whole-slide scan. It shows how the picture changes; it cannot show that two settings are equally good for diagnosis, what the scanner can resolve, the real size of the tissue, or what level of compression is clinically acceptable.
 
+## Terms used in this case
+
+- **Pixel spacing:** the real distance between neighboring pixels in a scan. Smaller spacing means more samples across the same tissue.
+- **Downsampling:** replacing a larger grid of pixels with a smaller one.
+- **Lossy and lossless compression:** lossy compression throws some information away to make a file smaller; lossless compression gives back exactly the pixels it was given.
+- **Focal plane:** one layer of focus. Scanning several planes helps with thick material but multiplies the data.
+
+## Your task
+
+Compare the same patch of tissue after two different changes. Then estimate what scanning resolution, compression, extra focal planes and extra copies each cost in storage. Recommend what evidence is needed before the service's approved settings are changed.
+
 ## What you will be able to do
 
-- Relate image detail to storage space and how quickly images reach the viewer.
-- Start from what pathologists need to see.
-- Explain why choosing the smallest file, whatever the loss of detail, is the wrong place to start.
+- Tell the loss from downsampling apart from the loss from compression, and explain why neither fixes blur.
+- Work out how pixel spacing, focal planes, compression and copies change the storage needed.
+- Check that an image keeps its slide identity and scan history after export and retrieval.
+- Recommend what to test before changing approved image settings.

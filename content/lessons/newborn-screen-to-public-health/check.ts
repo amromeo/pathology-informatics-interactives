@@ -48,9 +48,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "The codes used in this lesson",
+        label: "A sample report from another hospital",
         feedback:
-          "Your report and your program may need different codes and answers. Start from the guide the program has published for your report.",
+          "Another hospital's report may follow an older guide or a different local agreement. Start from the program's implementation guide.",
       },
     ],
   },
@@ -59,26 +59,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "13",
     prompt:
-      "The EHR acknowledges a critical result but drops its critical flag. What does that show?",
+      "After a fix, the EHR shows critical-high potassium correctly. A critical-low sodium then arrives with no flag. What was missed?",
     choices: [
       {
         id: "supported",
-        label: "The message arrived, but not its full meaning",
+        label: "The critical-low translation",
         correct: true,
         feedback:
-          "An acknowledgment shows the message was received at one handoff. The field translation and the report clinicians see also have to keep the critical flag.",
+          "Fixing CH to HH does nothing for CL. Each critical direction needs its own translation, and both need testing.",
       },
       {
         id: "shortcut",
-        label: "The report clinicians see has been checked",
+        label: "The EHR's acknowledgment of the message",
         feedback:
-          "The acknowledgment comes from the receiving system, not from anyone looking at the report. Open the EHR report itself to see whether the flag is there.",
+          "The EHR probably acknowledged the message; that only shows it arrived. The flag was lost in translation.",
       },
       {
         id: "incomplete",
-        label: "The flag was translated correctly",
+        label: "The units for the sodium result",
         feedback:
-          "The flag was dropped, so it was not translated correctly. Compare the flag in the sent message with the code the EHR expects.",
+          "The units are a separate field. The missing flag comes from a critical-low code the EHR still does not recognize.",
       },
     ],
   },

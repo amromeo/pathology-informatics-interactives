@@ -34,7 +34,7 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "Write down its specimen, units, method and timing",
+        label: "Write down what the test measures",
         correct: true,
         feedback:
           "You need to know exactly what the test measures before you can choose a code that describes it.",
@@ -47,9 +47,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "Reuse the codes from this lesson",
+        label: "Ask the vendor which code to use",
         feedback:
-          "The glucose codes here fit these glucose tests. Your test needs its own comparison, part by part, with the candidate code.",
+          "The vendor may suggest a code, but only the laboratory knows exactly what its test measures. Write that down before choosing.",
       },
     ],
   },
@@ -58,26 +58,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "14",
     prompt:
-      "A newborn result arrives in a valid message but with a local code the program does not recognize. What is still unknown?",
+      "The public health program receives the same newborn report twice, with the same control number. What should happen to the second copy?",
     choices: [
       {
         id: "supported",
-        label: "What the coded result means",
+        label: "Keep one record, not two",
         correct: true,
         feedback:
-          "A valid structure does not show that both organizations understand the same test or answer. The two sides need agreed codes and an agreed list of allowed answers.",
+          "An exact repeat is the same report sent again. It should not create a second referral or a second follow-up.",
       },
       {
         id: "shortcut",
-        label: "Whether anything was received",
+        label: "Open a second referral to be safe",
         feedback:
-          "The message arrived and its structure was valid, so it was received. What is still unknown is what the local code means to the program.",
+          "A second referral for the same report would confuse follow-up and could mean the family is contacted twice.",
       },
       {
         id: "incomplete",
-        label: "Whether the message has a control number",
+        label: "Treat it as a corrected report",
         feedback:
-          "A valid message already carries a control number. The control number identifies the message; it says nothing about what the result code means.",
+          "A corrected report is a new version with its own status. An exact repeat with the same control number is just the same report again.",
       },
     ],
   },

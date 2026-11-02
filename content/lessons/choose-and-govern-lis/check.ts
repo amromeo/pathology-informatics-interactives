@@ -59,26 +59,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "22",
     prompt:
-      "A new test's result reaches the chart, but its reference interval is missing. Can the test go live?",
+      "A new test passes every check for positive and negative results. Nobody has tested a corrected result. Is it ready to go live?",
     choices: [
       {
         id: "supported",
-        label: "Not yet; fix the build and retest",
+        label: "Not until a correction is tested",
         correct: true,
         feedback:
-          "The number arrived, but the report is incomplete without its reference interval. Correct the build, then rerun the affected cases and some that should be unchanged before the director approves it.",
+          "A corrected result has to show as current and corrected, with the earlier version kept. Test it before go-live.",
       },
       {
         id: "shortcut",
-        label: "Yes; the number itself came through",
+        label: "Yes, positives and negatives are what matter",
         feedback:
-          "Clinicians need the interval to read the number. A result that arrives without it is not the report the laboratory approved.",
+          "Corrections are rarer but riskier. If one shows up as a second final report, clinicians may act on the wrong result.",
       },
       {
         id: "incomplete",
-        label: "Yes, once the interval is removed from the LIS too",
+        label: "Yes, if the vendor has tested corrections",
         feedback:
-          "That makes the two systems match by making both wrong. The interval belongs on the report, so the fix is in the build.",
+          "The vendor's test used its own settings. Your build needs its own test of a corrected result.",
       },
     ],
   },

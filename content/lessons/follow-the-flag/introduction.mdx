@@ -4,12 +4,21 @@ At 08:10, a chemistry supervisor opens the laboratory report for accession FL-01
 
 A new connection to the EHR went live yesterday. Testing covered normal, high and low results, but nobody checked how the laboratory's critical flags looked in the EHR. The interface engine copies result fields from the LIS into messages for the EHR. As it is set up now, it passes the flag through unchanged.
 
+## Terms used in this case
+
+- **Interface engine:** the program that takes messages from the LIS, changes fields where needed and sends them on to the EHR.
+- **Health Level Seven (HL7) version 2 message:** the standard format the LIS uses to send results. Each message is made of segments and numbered fields; the OBX segment carries one result.
+- **Flag:** a short code beside a result that says whether it is high, low or critical. This laboratory uses CH and CL for critical high and low; the EHR expects HH and LL.
+- **Translation table:** the list that turns one system's code into the other system's code. It is often called a mapping.
+- **Acknowledgment:** the reply a receiving system sends to say it got a message. It does not show what clinicians see.
+
 ## Your task
 
 Compare four records for the same result: the LIS result, the message sent, the EHR's receipt log and the report clinicians see. Select fields in the message to see what each one carries. Translate both critical flags without changing the routine ones, then test what happens to a flag the EHR does not recognize. Finish by separating the fix to the translation from the follow-up needed for results that already went out without their flag.
 
 ## What you will be able to do
 
-- Tell a message that arrived apart from a result whose meaning arrived intact.
-- Compare the message the laboratory sent with the report the EHR shows.
-- Explain why sending the message again, without looking at its fields, does not fix the problem.
+- Follow one result from the LIS, through the message, to the report clinicians see, and find where its meaning was lost.
+- Read the fields of a result message and say what each one carries.
+- Fix a flag translation without breaking the high, low, normal and unknown flags, and test it.
+- Decide what follow-up the reports already sent without their flag need.

@@ -15,13 +15,13 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "shortcut",
-        label: "Doubles the count",
+        label: "Doubles the number of pixels",
         feedback:
           "Doubling only one dimension would double the count. Doubling both multiplies width by height twice over: 2 × 2 = 4 times as many pixels.",
       },
       {
         id: "incomplete",
-        label: "Leaves the count unchanged",
+        label: "Leaves the number of pixels unchanged",
         feedback:
           "A larger grid always holds more pixels. With both dimensions doubled, the count goes up four times.",
       },
@@ -47,9 +47,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "Use this lesson's storage estimate",
+        label: "Ask the vendor for its usual compression",
         feedback:
-          "The estimate here rests on assumed slide sizes, volumes and compression. Measure your own files and needs before planning storage.",
+          "The vendor's usual setting may not keep what your pathologists need to see. Start from what they have to see.",
       },
     ],
   },
@@ -58,26 +58,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "5",
     prompt:
-      "A tumor-board image has the right patient but the wrong block. What should happen before it is shown?",
+      "A slide image's label reads block B2, but the archive links it to B1. Which do you trust?",
     choices: [
       {
         id: "supported",
-        label: "Check the block against the case record",
+        label: "Check both against the case record",
         correct: true,
         feedback:
-          "The right patient does not mean the right specimen or block. Trace the accession, part and block before linking the slide to the molecular result.",
+          "Either could be wrong. The scanner log, the label and the case record together show which block the slide came from.",
       },
       {
         id: "shortcut",
-        label: "Link by patient name and report date",
+        label: "The archive link, since the LIS made it",
         feedback:
-          "A name and a date can match several specimens from the same patient. Trace the accession, part and block before linking the slide to the molecular result.",
+          "Links made by software can be wrong, as when an image is attached to the wrong block. Check both against the case record.",
       },
       {
         id: "incomplete",
-        label: "Keep it, because the diagnosis agrees",
+        label: "The label, and change the archive link now",
         feedback:
-          "Two specimens from the same patient can share a diagnosis. Agreement does not show that this slide came from this block, so trace the accession, part and block first.",
+          "The label is good evidence, but changing the link before checking the case record risks a second mistake. Check first.",
       },
     ],
   },

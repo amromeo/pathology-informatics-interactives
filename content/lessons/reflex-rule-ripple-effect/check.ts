@@ -9,7 +9,7 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "The saved reflex rule and its entry in the order history",
+        label: "The saved reflex rule and the order history",
         correct: true,
         feedback:
           "Revision 8 still used 0.40 as the lower threshold, and the order history names that revision at 07:18. Comparing both with the approved protocol explains why a TSH of 0.30 added an FT4.",
@@ -58,29 +58,29 @@ export const checks: RetrievalItem[] = [
   {
     id: "spaced",
     kind: "spaced",
+    fromLesson: "11",
     prompt:
-      "An initial troponin order has no prior result. Which release process should staff use?",
+      "A serial troponin's prior result came from a different assay. What should the release rule do?",
     choices: [
       {
         id: "supported",
-        label: "The initial-order rule and its required checks",
+        label: "Hold the result for review",
         correct: true,
         feedback:
-          "Initial troponin orders have their own release rule. The serial-order comparison assumes there is an earlier sample; the initial-order rule runs its own eligibility, QC, flag and other checks.",
+          "Results from different assays cannot be compared directly, so there is no usable history. Under this kind of policy, the result goes to a technologist.",
       },
       {
         id: "shortcut",
-        label: "The serial-order rule with its missing-history hold",
+        label: "Compare them anyway, since both are troponin",
         feedback:
-          "A first sample usually has no prior result. This laboratory sends initial orders through a separate release process, so that the history check applies only to serial orders.",
+          "Different assays can give different numbers for the same sample. The change between them would not mean what the rule assumes.",
       },
       {
         id: "incomplete",
-        label: "Automatic release without any further checks",
+        label: "Treat the prior as zero and calculate",
         feedback:
-          "Having no earlier result to compare with does not remove the other release checks. The initial-order rule's checks still have to pass before the result is released.",
+          "Zero was never measured, and dividing by it is impossible. A missing or unusable prior result is not zero; hold the result for review.",
       },
     ],
-    fromLesson: "11",
   },
 ];

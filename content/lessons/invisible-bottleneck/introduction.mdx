@@ -4,10 +4,22 @@ At noon, the chemistry supervisor reports that specimens delivered around 10:00 
 
 You are the resident helping the supervisor and the analytics team. The dashboard is built from final results in the laboratory information system (LIS). It opens in a web page whose clock shows the current time, but its numbers come from a copy of the data made on a schedule. The middleware's review records, and accessions that are not finished yet, are kept in other systems.
 
-The review set has 14 accessions received between 08:00 and 10:07 the same day: six earlier routine ones and eight from the 10:00 delivery. Can the dashboard answer the manager's question? Look at the records and decide what, if anything, has to change before anyone proposes a fix.
+The review set has 14 accessions received between 08:00 and 10:07 the same day: six earlier routine ones and eight from the 10:00 delivery.
+
+## Terms used in this case
+
+- **Turnaround time:** the time between two set events. Here the clock starts at laboratory receipt and stops at final release.
+- **Data copy:** a scheduled copy of LIS data into a separate reporting database. The dashboard reads the copy, not the live LIS.
+- **Pending:** received by the laboratory but not yet released.
+- **Median and 90th percentile:** the median is the middle finished time; the 90th percentile is the time that 90% of finished specimens beat.
+
+## Your task
+
+Can the dashboard answer the manager's question? Check when its data were copied and which records it includes. Link the timestamps, choose a group of specimens that can answer the question, and compare the time before and after analysis. Then choose a change to try and say how you would judge it.
 
 ## What you will be able to do
 
-- Choose a denominator that includes work that is not finished.
-- Check which records the data copy picks up.
-- Explain why sorting the finished cases by longest time can mislead you.
+- Check when a dashboard's data were last copied and whether pending work is included.
+- Work out a median and 90th percentile, and show pending work alongside them.
+- Split turnaround into the time before and after analysis to find where the delay is.
+- Choose a change to try, with measures for speed and for side effects.

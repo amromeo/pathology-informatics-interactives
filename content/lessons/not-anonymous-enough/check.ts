@@ -48,9 +48,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "Make the same three changes as in this case",
+        label: "Replace names with study numbers",
         feedback:
-          "The three changes in this case may remove details another study needs. Use the method and field list approved locally, and have the privacy office review any change.",
+          "Study numbers remove names but leave dates and ZIP codes that can identify people. Find out which method of sharing was approved first.",
       },
     ],
   },
@@ -59,26 +59,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "7",
     prompt:
-      "A vendor needs remote access to service an analyzer workstation. What is the next step?",
+      "Night staff share one login to the middleware server so nobody gets locked out. What is the main problem?",
     choices: [
       {
         id: "supported",
-        label: "Set up approved, limited access",
+        label: "Nobody can tell who changed what",
         correct: true,
         feedback:
-          "The vendor needs its own named account, limited to the repair, with the session recorded. Check that a business associate agreement is in place if the vendor will see PHI. Being in a hurry does not change any of this.",
+          "With a shared login, any change to results or routing settings cannot be tied to a person. Each person needs a named account with only the access their job needs.",
       },
       {
         id: "shortcut",
-        label: "Share the supervisor login temporarily",
+        label: "Someone may forget the password",
         feedback:
-          "With a shared login, the vendor's work looks like the supervisor's. Set up named, limited access so the hospital can see who changed the workstation.",
+          "That is an inconvenience. The bigger problem is that a shared login makes every action anonymous, so changes cannot be traced.",
       },
       {
         id: "incomplete",
-        label: "Allow unrestricted access until the repair ends",
+        label: "It uses up a software license",
         feedback:
-          "The repair may need only one workstation. Limiting the session protects other records and settings, and lets the laboratory approve and review the work.",
+          "Licensing may matter, but it is not the risk. A shared login means nobody can tell who opened or changed a patient's result.",
       },
     ],
   },

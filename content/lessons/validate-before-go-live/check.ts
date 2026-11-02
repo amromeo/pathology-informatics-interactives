@@ -8,7 +8,7 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "Investigate that reader and the cases",
+        label: "Look into that reader's cases and why they differ",
         correct: true,
         feedback:
           "Combining readers can hide a problem with one reader or one way of working. Look into the causes, and whether that reader is ready for this use, before clinical approval.",
@@ -47,9 +47,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "This lesson's approval decision",
+        label: "The scanner manufacturer's approval",
         feedback:
-          "This case approved one narrow use on one tested setup. Your proposed uses need their own evidence.",
+          "The manufacturer's approval covers the device as labeled, not your screens, readers and locations. Start from the proposed use and the local plan.",
       },
     ],
   },
@@ -57,27 +57,26 @@ export const checks: RetrievalItem[] = [
     id: "spaced",
     kind: "spaced",
     fromLesson: "19",
-    prompt:
-      "Doubling both image dimensions at the same channels and bit depth does what to uncompressed pixels?",
+    prompt: "A blurred scan is saved again as a lossless file. What does that do to the blur?",
     choices: [
       {
         id: "supported",
-        label: "Multiplies the count by four",
+        label: "Nothing; the blur stays",
         correct: true,
         feedback:
-          "Width and height both double, so the number of pixels goes up four times. Compression, pyramid levels and file overhead change the stored size separately.",
+          "Lossless saving keeps exactly the pixels it is given. It cannot add back detail that was never captured in focus.",
       },
       {
         id: "shortcut",
-        label: "Doubles the count",
+        label: "Removes it, since nothing is lost",
         feedback:
-          "Doubling only one dimension would double the count. Doubling both multiplies width by height twice over: 2 × 2 = 4 times as many pixels.",
+          "Nothing more is lost, but nothing is gained either. The blur was in the scan before it was saved.",
       },
       {
         id: "incomplete",
-        label: "Leaves the count unchanged",
+        label: "Reduces it, at the cost of a larger file",
         feedback:
-          "A larger grid always holds more pixels. With both dimensions doubled, the count goes up four times.",
+          "A bigger file holds the same blurred pixels. Only rescanning in focus can capture the missing detail.",
       },
     ],
   },
