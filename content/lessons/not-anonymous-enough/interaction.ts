@@ -20,9 +20,7 @@ export type ReleaseContext = {
   dataUseAgreement: boolean;
 };
 export type DatasetClassification =
-  | "coded-reidentifiable"
-  | "limited-data-set-candidate"
-  | "deidentification-review-required";
+  "coded-reidentifiable" | "limited-data-set-candidate" | "deidentification-review-required";
 
 export const rareDiagnosis = "Breast carcinoma";
 export const generalizedDiagnosis = "Malignant neoplasm";
