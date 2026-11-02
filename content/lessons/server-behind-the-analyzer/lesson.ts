@@ -17,6 +17,30 @@ export const manifest: LessonManifest = {
   summary: "A laboratory middleware server has unresolved physical, access and recovery risks.",
   sources: [
     {
+      label: "HHS — Security Rule summary",
+      url: "https://www.hhs.gov/hipaa/for-professionals/security/laws-regulations/index.html",
+      license: "United States government guidance; cited and paraphrased",
+      use: "Current safeguard and risk-analysis obligations; proposed changes are separate.",
+    },
+    {
+      label: "HHS — Business associates",
+      url: "https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/business-associates/index.html",
+      license: "United States government guidance; cited and paraphrased",
+      use: "Vendor handling of PHI and business associate agreements.",
+    },
+    {
+      label: "HHS — Breach Notification Rule",
+      url: "https://www.hhs.gov/hipaa/for-professionals/breach-notification/index.html",
+      license: "United States government guidance; cited and paraphrased",
+      use: "Breach assessment and notification distinctions in faculty discussion.",
+    },
+    {
+      label: "HHS — Part 2 final rule fact sheet",
+      url: "https://www.hhs.gov/hipaa/for-professionals/regulatory-initiatives/fact-sheet-42-cfr-part-2-final-rule/index.html",
+      license: "United States government guidance; cited and paraphrased",
+      use: "Applicability and February 2026 compliance context.",
+    },
+    {
       label: "PIER Essentials Release 5",
       url: "https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf",
       license: "CC BY-NC-ND 4.0",

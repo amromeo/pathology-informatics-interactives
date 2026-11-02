@@ -10,6 +10,8 @@ When the systems return, staff compare these paper records with the electronic o
 
 The laboratory first decides how long a service can be unavailable. That limit is its **recovery time objective (RTO)**. It also decides how much recent work could need recovery after a data loss. That interval is its **recovery point objective (RPO)**. Staff need records that let them identify and recheck work within that interval.
 
+For example, a two-hour RTO would require a usable service by 08:20 after a 06:20 interruption. A 15-minute RPO would require recoverable data through at least 06:05 if the primary data were lost. These example targets are separate from this hospital's observed twelve-hour network interruption. Neither target tells staff whether a paper result reached the correct chart.
+
 A backup copies data so staff can recover it later:
 
 - A **full backup** copies the complete selected dataset.
@@ -18,9 +20,13 @@ A backup copies data so staff can recover it later:
 
 These methods require different sets of files during restoration. Ask staff to restore a backup and check the recovered records before relying on it during an outage.
 
+For example, with a full Sunday backup and daily incremental copies, a Wednesday restoration needs Sunday's copy plus Monday's, Tuesday's and Wednesday's increments. With daily differential copies, it needs Sunday's full copy and Wednesday's differential copy. Staff must know which method was used, whether all needed copies are intact and whether the restored application can read them.
+
 ### What is kept ready if the main system fails?
 
 A **hot standby** is kept ready for rapid use. A **warm standby** needs more recovery steps. A **cold standby** needs more setup before staff can use it.
+
+An alternate server still needs a usable network path. If it depends on the same severed route, it will not restore message delivery. Test that dependency during a drill and measure how long staff need to restore a usable service.
 
 Copying data continuously to another system can also copy corruption. The laboratory still needs protected older backups. Rotating backup media and keeping an offsite copy help if one location is damaged. A downtime drill should test restoration, another network path and reconciliation of the work done on paper.
 

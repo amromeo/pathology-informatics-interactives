@@ -17,6 +17,18 @@ export const manifest: LessonManifest = {
   summary: "A research export still contains combinations of fields that identify small groups.",
   sources: [
     {
+      label: "45 CFR 164.514 — Deidentification and limited data sets",
+      url: "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-E/section-164.514",
+      license: "United States government guidance; cited and paraphrased",
+      use: "Conditions for deidentification, retained codes and limited data sets.",
+    },
+    {
+      label: "HHS — HIPAA and research",
+      url: "https://www.hhs.gov/hipaa/for-professionals/special-topics/research/index.html",
+      license: "United States government guidance; cited and paraphrased",
+      use: "Research disclosure pathways and limited data use agreements.",
+    },
+    {
       label: "PIER Essentials Release 5",
       url: "https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf",
       license: "CC BY-NC-ND 4.0",

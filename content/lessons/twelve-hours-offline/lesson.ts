@@ -18,6 +18,12 @@ export const manifest: LessonManifest = {
     "During a twelve-hour outage, staff test on paper and phone results. Match that work to the charts when the network returns.",
   sources: [
     {
+      label: "NIST SP 800-34 Revision 1, updated November 2010",
+      url: "https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final",
+      license: "United States government guidance; cited and paraphrased",
+      use: "Contingency planning, recovery objectives, backups and alternate systems.",
+    },
+    {
       label: "PIER Essentials Release 5",
       url: "https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf",
       license: "CC BY-NC-ND 4.0",

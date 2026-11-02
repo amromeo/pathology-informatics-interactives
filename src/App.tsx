@@ -22,6 +22,7 @@ const LisSelectionExperience = lazy(() =>
   })),
 );
 import "./components/Topic7.css";
+import "./components/DowntimeExperience.css";
 const PixelBudgetExperience = lazy(() =>
   import("./components/PixelBudgetExperience").then((m) => ({ default: m.PixelBudgetExperience })),
 );

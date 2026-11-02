@@ -17,9 +17,11 @@ import {
 
 export function SpecimenRoutingExperience({
   Concepts,
+  Bridge,
   onAttempt,
 }: {
   Concepts?: ComponentType<Record<string, unknown>>;
+  Bridge?: ComponentType<Record<string, unknown>>;
   onAttempt?: (attempted: boolean) => void;
 }) {
   const [eventId, setEventId] = useState<string>(auditEvents[0].id);
@@ -53,9 +55,16 @@ export function SpecimenRoutingExperience({
           <span className="section-number">01</span>
           <div>
             <p className="eyebrow">Source records</p>
-            <h2 id="specimen-audit-title">Reconstruct the container's documented journey</h2>
+            <h2 id="specimen-audit-title" tabIndex={-1}>
+              Read the container's event history
+            </h2>
           </div>
         </div>
+        {Concepts && (
+          <div className="mdx-content embedded-mdx">
+            <Concepts />
+          </div>
+        )}
         <nav className="specimen-event-nav" aria-label="Specimen audit events">
           {auditEvents.map((item) => (
             <button
@@ -125,9 +134,9 @@ export function SpecimenRoutingExperience({
             <h2 id="specimen-routing-title">Repair the routing table</h2>
           </div>
         </div>
-        {Concepts && (
+        {Bridge && (
           <div className="mdx-content embedded-mdx">
-            <Concepts />
+            <Bridge />
           </div>
         )}
         <div className="specimen-route-grid">
@@ -204,6 +213,9 @@ export function SpecimenRoutingExperience({
             ? `${results.filter((result) => result.passed).length} of ${results.length} routing cases pass.`
             : "Replay the cases to evaluate the current configuration."}
         </p>
+        <h3 id="specimen-routing-results" tabIndex={-1}>
+          Routing results
+        </h3>
         <div className="specimen-results">
           {results.map((result) => (
             <article
@@ -237,7 +249,9 @@ export function SpecimenRoutingExperience({
           <span className="section-number">03</span>
           <div>
             <p className="eyebrow">Existing specimen</p>
-            <h2 id="specimen-recovery-title">Plan the physical handoff</h2>
+            <h2 id="specimen-recovery-title" tabIndex={-1}>
+              Plan the physical handoff
+            </h2>
           </div>
         </div>
         <fieldset className="specimen-recovery">

@@ -83,3 +83,5 @@ export const checks: RetrievalItem[] = [
     ],
   },
 ];
+
+export const feedbackHeadings = { correct: "Correct", incorrect: "Try again" };

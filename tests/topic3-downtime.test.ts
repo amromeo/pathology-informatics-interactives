@@ -4,6 +4,7 @@ import {
   applyDecision,
   buildReconciliationRecords,
   initialDowntimeState,
+  pendingRegistrationCheck,
   scoreReconciliation,
   type DowntimeState,
   type LearnerAssignments,
@@ -69,6 +70,45 @@ test("unit-specific critical-result communication removes the potassium call-log
     records.hazards.find((hazard) => hazard.id === "missing-critical-DT-202")?.kind,
     "missing-critical-result",
   );
+});
+
+test("a duplicate-chart match requires registration confirmation before it earns credit", () => {
+  const records = buildReconciliationRecords(
+    applyDecision(controlledState(), "activate", "unit-created-identifiers"),
+  );
+  const liam = records.paperRecords.find((record) => record.tempId === "DT-202")!;
+  const hazard = records.hazards.find((item) => item.registrationTempId === liam.tempId)!;
+  const assignments = correctAssignments(records);
+
+  delete assignments.actions[hazard.id];
+  assert.equal(pendingRegistrationCheck(liam, records, assignments)?.id, hazard.id);
+  assert.ok(scoreReconciliation(records, assignments).hazardsMissed.includes("identity-DT-202"));
+
+  assignments.actions[hazard.id] = hazard.correctActionId;
+  delete assignments.matches[liam.tempId];
+  assert.equal(pendingRegistrationCheck(liam, records, assignments), undefined);
+  assert.deepEqual(scoreReconciliation(records, assignments).hazardsMissed, ["identity-DT-202"]);
+
+  assignments.matches[liam.tempId] = liam.expectedMrn;
+  assert.deepEqual(scoreReconciliation(records, assignments).hazardsMissed, []);
+
+  assignments.actions[hazard.id] = "use-newest-chart";
+  assert.ok(scoreReconciliation(records, assignments).hazardsMissed.includes("identity-DT-202"));
+});
+
+test("the duplicate-order evidence identifies two requests for the same recorded specimen", () => {
+  const records = buildReconciliationRecords(controlledState());
+  const specimen = records.paperRecords.find((record) => record.tempId === "DT-204")!;
+  const hazard = records.hazards.find((item) => item.kind === "duplicate-order")!;
+  const orders = hazard.orderComparison!;
+  assert.equal(orders.length, 2);
+  assert.equal(new Set(orders.map((order) => order.orderId)).size, 2);
+  assert.equal(orders[0].orderId, specimen.restoredOrder);
+  for (const order of orders) {
+    assert.equal(order.paperAccession, specimen.paperAccession);
+    assert.equal(order.collectionTime, specimen.collectionTime);
+    assert.ok(hazard.relatedIds.includes(order.orderId));
+  }
 });
 
 test("reconciliation scoring identifies the unmatched critical result and duplicate order", () => {

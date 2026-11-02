@@ -1,27 +1,26 @@
-## Debrief: check dependent reports after changing a reflex rule
+## Debrief: trace the additional FT4 to its rule
 
-### What happened in this case
+TH-01 displayed the new reference interval, **0.27–4.20 mIU/L**, but revision 8 of the ordering rule still used **0.40** as its lower threshold. Its TSH of **0.30** was below that saved threshold. The order record connects the resulting FT4 to revision 8.
 
+With the approved lower threshold of **0.27**, TH-01 meets neither the lower nor upper condition. Correcting that threshold removes the unintended additions at TH-01, TH-02 and TH-04.
 
-Changing the assay requires reviewing every separate rule that uses its result.
+### What the complete replay shows
 
-The report definition used 0.27–4.20 mIU/L, while the order rule retained 0.40 as
-its lower threshold. TH-01, TH-02, and TH-04 therefore received additional FT4 orders
-under the original rule. Correcting the lower threshold preserves FT4 orders at
-TH-03 and TH-07 and reuses the orders already linked to TH-08 and TH-09.
+The original configuration matches **10 of 13** expected actions and creates **five** new FT4 orders. The corrected configuration matches **13 of 13** and creates **two**. TH-03 and TH-07 retain their indicated additions. TH-08 and TH-09 use FT4s already linked to their accessions.
 
-The exact boundary matters: changing “below” to “at or below” adds an order at
-0.27, and changing “above” to “at or above” adds one at 4.20. Removing scope or
-final-status restrictions changes other records even when both numeric thresholds
-are correct. This is why the full action list matters more than the new-order
-count alone.
+The [boundary examples](#reflex-boundary-examples) explain why including 0.27 or 4.20 would add unintended orders at TH-04 or TH-06. Removing duplicate prevention adds another FT4 at TH-08 and TH-09. Removing the age/order restriction or accepting preliminary results creates different errors. Each setting therefore needs an appropriate record in the test set.
 
-The replay compares 13 selected records, including records needing review and
-those outside the rule. The fall from five new FT4 orders to two identifies this
-configuration's effect in that set. It is not a measured hospital-wide utilization
-rate. Broader monitoring requires a defined population, period, and denominator.
+### What the order count leaves unanswered
 
-The analyst changes configuration; the pathologist approves clinical thresholds; laboratory operations monitors consequences.
+Fewer new orders can reflect a successful correction or missed indicated tests. Read the full [replay](#reflex-replay-heading) to determine which occurred. The fixed expected action for each record provides the comparison.
+
+For monitoring, define the period and eligible population before counting errors. Include eligible accessions that received no FT4 so that missed additions remain visible. Track review exceptions and unresolved orders as well.
+
+### Prepare the change and affected cases for review
+
+The analyst records which settings changed and retains expected and observed test actions. The director and chemistry staff review the protocol, the follow-up for affected accessions and the checks after use begins.
+
+The main lesson is to follow a change into each record or rule that uses it. Finding the correct interval on the report is one check. The order history and replay establish how the separate ordering rule behaved.
 
 <details className="teaching-supplement">
 <summary>A closer look: test the meaning of an exact boundary</summary>
@@ -36,11 +35,3 @@ Reference-interval builds have a similar translation problem when days, weeks an
 
 <p className="supplement-credit">Conference context: Darci R. Block, PhD, DABCC. Enhancing Laboratory Informatics: Result Naming Standards and Flagging in LIS Conversion. Pathology Informatics Summit 2026.</p>
 </details>
-
-### Who does what
-
-Work with the assay director and LIS analyst. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
-
-### Connection to PIER 4.3, 4.5, 4.2, 8.2
-
-The case asks you to check dependent reports after changing a reflex rule using laboratory records and explain the consequence of your choice.

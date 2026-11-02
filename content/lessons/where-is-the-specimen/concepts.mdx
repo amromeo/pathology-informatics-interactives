@@ -1,76 +1,39 @@
-### A worklist is not a location record
+### How a scan becomes a worklist entry
 
-The **accession** connects the patient, requested examination, specimen, and parts
-under one laboratory case number. Here S26-1042 is the case and C-1042-A identifies
-its container. A barcode scan retrieves that record; it does not decide the
-clinical meaning of the procedure code.
+When J. Lee scans C-1042-A at accessioning, the scanner reads the identifier encoded on the label. The LIS uses that identifier to open S26-1042, part A. J. Lee checks the patient, part and requested examination, then records receipt at the accessioning desk.
 
-One accession may contain several separately labeled parts. Matching only the
-patient is therefore insufficient: staff also compare the accession, part, and
-requested examination. In this case, the patient and part agree at receipt, so
-there is no evidence that changing the barcode or creating a replacement
-accession would solve the worklist problem.
+The accession also contains the examination code **SP-EX**. Next, the LIS uses that code to find a row in its procedure dictionary. Think of the dictionary as a set of instructions organized by examination. The routing program reads the destination in that row and adds the case to the corresponding worklist.
 
-A **procedure dictionary** stores configuration for each examination. The routing
-process reads its destination and adds the case to a **worklist**, the electronic
-list a team uses to find assigned work. A receiving scan records a different fact:
-who documented physical receipt, where, and when. The **audit trail** keeps these
-events distinguishable.
+A **revision** identifies a saved version of those settings. The 08:12 event names revision 17, so the analyst can check which settings were used at that time. This is more useful than opening the current settings and assuming they were identical.
 
-For this case, the sequence is: staff scan C-1042-A, the LIS retrieves S26-1042
-part A, and the routing process reads the stored SP-EX procedure code. It then
-looks up the destination in revision 17 of the procedure dictionary. This
-lookup succeeds technically even though its configured destination is wrong
-for a tissue excision. A valid code is not evidence that the associated
-configuration has the intended clinical meaning.
+The two steps can succeed independently: the scanner can retrieve the intended accession, and the routing program can faithfully use a destination that was entered incorrectly. To explain this case, follow the identifier into the accession, then follow SP-EX into its dictionary entry.
 
-### Compare three different questions
+### Read an event as a record of an action
 
-1. **Which patient and part does the container represent?** Compare the requisition
-   with the accessioning identity check. Agreement supports the identity, but
-   does not tell you where the container went after receipt.
-2. **Which team was assigned the case?** Inspect the procedure entry and worklist
-   assignment event. These confirm the electronic destination, but do not tell
-   you whether that team received the container.
-3. **Where was receipt last documented?** Find the named receiving scan with its
-   time and workstation. This shows the last recorded location, but not
-   necessarily the present location if no later handoff was recorded.
+Open each of the four events below. Begin with its time and author, then read the action and identifiers.
 
-A missing scan is an information gap. It may reflect an undocumented transfer,
-a container still at accessioning, or another handling problem. Contacting the
-staff involved and checking the container resolves that uncertainty. Inferring
-a location from the worklist does not.
+For example, the **08:11 receipt event** names J. Lee, workstation ACC-02, container C-1042-A and part A of S26-1042. It records a staff member receiving that container at accessioning. The **08:12 assignment event** names the LIS routing service and a destination worklist. Its author and action tell you that software assigned the case to cytology.
 
-### Repair a rule, then challenge it
+These records answer different questions:
 
-The cards below show the supervisor's approved routing plan for this
-laboratory beside the editable configuration. Change individual destinations,
-then replay the reported case and neighboring procedures. An unrecognized code
-must remain available for accessioning review rather than being silently assigned
-to a work area.
+1. **Which case was retrieved?** The receipt record links the scanned container to its patient, accession and part.
+2. **Which team was assigned the work?** The assignment event identifies the procedure code, dictionary revision and electronic destination.
+3. **Where did someone last receive the container?** A receiving event identifies the staff member, time and location of that physical handoff.
 
-Start by replaying the unchanged configuration. Then fix only SP-EX and replay
-again. The additional unknown-code case asks what should happen when an incoming
-procedure has no approved entry. Review staff must clarify that examination and
-document the destination; a default gross-room assignment would conceal the gap.
+At 08:40, the assistant finds a gap in the record after accessioning receipt. The container may still be there, or staff may have moved it without documenting the transfer. Someone needs to contact the staff involved and check the actual container. Use the records to guide that search.
 
-The neighboring tests are **regression checks**: they ask whether a correction
-changed behavior that was already correct. Cytology and intraoperative specimens
-need their own work areas in this laboratory. Moving every route to the gross
-room would correct the reported excision while disrupting those workflows.
+### How other LIS records fit together
 
-Configuration changes apply to future routing decisions in this simulation. They
-do not relocate the existing container or reconstruct an unrecorded handoff.
-The LIS analyst documents the proposed change and test results for laboratory
-review; accessioning and receiving staff separately correct the existing worklist
-assignment under the approved procedure and document the physical handoff.
+The order catalog is the clinician's starting point. A clear examination name, specimen requirement and collection instruction help the clinician request the intended work. Order-time questions can collect a specimen site or other information needed for processing. Duplicate-order checks ask staff to review a potentially repeated request. Each answer or warning must reach the person who can act on it.
 
-### From the order to the worklist
+Once the laboratory receives a specimen, the LIS connects the order to an accession and the required work. In anatomic pathology, linked records commonly include parts, blocks and slides. In clinical pathology, they commonly include orders, specimens, tests and results. Both use identifiers, worklists and audit histories to keep the work connected. Blood bank, microbiology and molecular services may use specialized systems.
 
-The order catalog presents test names, specimen requirements and collection instructions. Order-time questions collect information needed for processing; duplicate checks prompt review of existing orders; reflex orderables add tests under approved conditions. These are ways the LIS supports appropriate clinician ordering before a specimen reaches a worklist.
+Other LIS functions support this work: dictation places report text into the correct case; outreach connections carry orders and reports to outside practices; billing uses records of the services provided. When investigating a problem, identify which function performed the action you are examining.
 
-Anatomic pathology (AP) commonly organizes a case into parts, blocks and slides. Clinical pathology (CP) commonly links an order, specimen, test and result. Both require identity checks, worklists, audit history and complete reports. Blood bank, microbiology and molecular laboratories may use specialized systems. Billing, outreach connections and dictation support different parts of the service and must preserve links to the clinical record.
+### Reading a label and recording a handoff
 
-### Labeling and physical tracking
+A scan saves staff from typing an identifier. Staff still check that the label belongs to the patient, accession and part in front of them. A label on the wrong container can scan successfully.
 
-Compare two patient identifiers, such as name and date of birth, with the requisition, then confirm accession and part. A readable barcode does not prove that the correct label was applied. Linear Code 128 is used on specimen labels; two-dimensional Data Matrix codes can fit cassettes and slides; ISBT 128 supports blood-product identification. CLSI AUTO12 addresses specimen-label content and placement. Radio-frequency identification (RFID) and location dashboards can support tracking, but a dashboard assignment is not a documented receiving event.
+A linear barcode represents an identifier with bars; a two-dimensional barcode stores information in a pattern that can fit a small label. The receiving software must be configured to read that format and use its contents correctly. A radio-frequency identification (**RFID**) system reads an electronic tag using radio signals. For any tracking method, ask what event the system records and how that event is linked to the container.
+
+A tracking dashboard gathers these events into a view. Read the event names and timestamps before treating a displayed location as the container's present location. The exercise below gives you the underlying records so you can make that judgment.

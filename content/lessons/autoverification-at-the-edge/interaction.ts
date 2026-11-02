@@ -336,6 +336,16 @@ export function evaluateRelease(row: ReleaseCase, config: ReleaseConfig) {
 }
 export const releaseReplay = (config: ReleaseConfig) =>
   releaseCases.map((row) => ({ ...row, ...evaluateRelease(row, config) }));
+export const releaseControlDescriptions: Record<keyof ReleaseConfig, string> = {
+  delta: "Choose which hold branches the program uses and how it combines them.",
+  absoluteLimit: "A change this large or larger meets the absolute branch.",
+  relativeLimit: "This percentage is compared with the change divided by the prior value.",
+  minimumChange: "The relative branch also checks the size of the change in ng/L.",
+  historyHours: "A prior result must fall within this time window for comparison.",
+  missingHistory: "Choose how a serial order is handled when its prior result cannot be used.",
+  checkQc: "Use the run's quality-control status in the release decision.",
+  checkFlags: "Use the instrument's unresolved flags in the release decision.",
+};
 export const releaseControlNotes = (
   config: ReleaseConfig,
 ): Record<keyof ReleaseConfig, string> => ({
@@ -368,7 +378,7 @@ export const releaseApprovalChoices = [
     id: "incident",
     label: "Approve after the reported 12-to-48 result is held.",
     feedback:
-      "That checks one branch. It does not show that missing history, flags, boundaries, and results that should release behave correctly.",
+      "AV-01 tests the omitted relative branch. The other records check boundaries, missing history, flags and results that should release. Include them before recommending the change.",
   },
   {
     id: "validated",
@@ -381,7 +391,7 @@ export const releaseApprovalChoices = [
     id: "all-hold",
     label: "Hold every result and treat a zero automatic-release rate as successful validation.",
     feedback:
-      "Holding everything avoids some releases but defeats the intended workflow and can delay reporting. Validation must also demonstrate correct automatic release.",
+      "Routine results such as AV-14 should release under the approved policy. Holding them all would introduce reporting delays. The test set includes these results so unnecessary holds appear as failures.",
   },
 ];
 
@@ -411,6 +421,12 @@ export const additionalExercises = {
       ],
       feedback:
         "Hold the calculated result. A valid creatinine result does not supply every input required by the configured estimated glomerular filtration rate calculation. Resolve missing data and test the report behavior.",
+      feedbackByChoice: {
+        hold: "The configured eGFR equation needs age as well as creatinine. Resolve the missing age from an authorized source, then check the calculation and report. Creatinine can remain available under its own release criteria.",
+        zero: "Entering zero would assert an age that has not been established for this patient. Resolve the missing age before using the configured equation.",
+        release:
+          "The earlier eGFR used an earlier creatinine result and its associated inputs. Copying it would attach that old calculation to the current specimen. Resolve the missing input and calculate the current result.",
+      },
     },
     {
       id: "MID1",
@@ -433,6 +449,14 @@ export const additionalExercises = {
       ],
       feedback:
         "Instrument middleware can consolidate instruments and apply result rules before release to the LIS. Validate both its configuration and the final report after an analyzer or assay change.",
+      feedbackByChoice: {
+        middleware:
+          "The application receives analyzer results and applies laboratory rules before sending their status to the LIS. Those are the middleware functions used in AV-01.",
+        registration:
+          "A registration feed supplies patient and encounter information. The application described here receives analyzer results and applies their release checks, which is the middleware's role.",
+        billing:
+          "A billing interface carries information used to charge for services. The described application decides whether analyzer results meet release checks; that work is performed by the instrument middleware.",
+      },
     },
   ],
 };

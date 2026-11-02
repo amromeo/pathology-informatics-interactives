@@ -23,7 +23,7 @@ export const securityFindings: readonly SecurityFinding[] = [
       "The proposed floor location has warm exhaust, no protected power, and no environmental monitoring.",
     properties: ["integrity", "availability"],
     feedback:
-      "Heat or local power loss can stop result routing even when the instruments continue testing.",
+      "Heat or local power loss can stop result routing (availability). A sudden stop during a write can leave queued messages incomplete or damage stored files (integrity). The finding does not describe someone reading patient information.",
   },
   {
     id: "shared-login",
@@ -32,7 +32,7 @@ export const securityFindings: readonly SecurityFinding[] = [
       "Laboratory and support staff would use one unrestricted operating-system account.",
     properties: ["confidentiality", "integrity"],
     feedback:
-      "The account can expose protected health information and allows an unattributed person to change middleware settings or result-routing files.",
+      "Opening patient results without permission threatens confidentiality. Changing routing files threatens integrity, and a shared account cannot identify who acted. This finding describes access and changes rather than a service interruption.",
   },
   {
     id: "flat-network",
@@ -68,7 +68,7 @@ export const securityFindings: readonly SecurityFinding[] = [
       "The server stores patient identifiers, orders, results, and message queues without a documented encryption and access review.",
     properties: ["confidentiality"],
     feedback:
-      "Stored patient information requires access limits and protection against disclosure when the server or its storage is accessed.",
+      "This finding concerns someone reading stored patient information without permission, a confidentiality risk. Encryption and access limits protect that information. The stated observation does not describe a change to a record or loss of service.",
   },
 ];
 
@@ -382,7 +382,18 @@ export const additionalExercises = {
   questions: [
     {
       id: "REG1",
-      prompt: "A shared login prevents attribution of changes. Which obligation addresses this?",
+      feedbackByChoice: {
+        agreement:
+          "A business associate agreement covers the vendor's handling of PHI. Jordan still needs named accounts and permissions to attribute a routing change to a person.",
+        breach:
+          "The shared account is an installation risk; this question reports no disclosure incident. Review account permissions and audit records before use.",
+        special:
+          "Additional protections depend on the records involved. They do not supply a named account for the person changing a routing rule.",
+        accreditation:
+          "An inspector may review the same account records. The immediate work here is to correct access and attribution through security safeguards.",
+      },
+      prompt:
+        "Jordan needs to replace a shared login so changes can be attributed to a person. Which review should guide that account change?",
       answer: "security",
       choices: [
         {
@@ -411,6 +422,16 @@ export const additionalExercises = {
     },
     {
       id: "REG2",
+      feedbackByChoice: {
+        security:
+          "Technical safeguards limit the vendor's access, but the question asks which agreement covers its handling of PHI for the hospital. Review the business associate agreement too.",
+        breach:
+          "The proposed support access is not a reported disclosure incident. Establish the business associate agreement before the vendor handles PHI.",
+        special:
+          "Additional record protections may also apply. The agreement for this service provider's handling of PHI is the business associate agreement.",
+        accreditation:
+          "An accreditation review cannot substitute for the hospital's agreement with the vendor handling its PHI.",
+      },
       prompt: "The vendor can access patient information during support. What agreement is needed?",
       answer: "agreement",
       choices: [
@@ -440,6 +461,16 @@ export const additionalExercises = {
     },
     {
       id: "REG3",
+      feedbackByChoice: {
+        security:
+          "Security staff investigate and contain ransomware, but possible exposure also needs the privacy office's breach assessment and notification review.",
+        agreement:
+          "An agreement may specify incident reporting duties. The immediate question is whether this exposure triggers breach obligations; involve the privacy office.",
+        special:
+          "Additional record protections may affect the investigation. Possible exposure of unencrypted PHI still requires a breach assessment now.",
+        accreditation:
+          "A later accreditation review cannot resolve a current possible disclosure. Escalate to the privacy office for breach assessment now.",
+      },
       prompt:
         "Ransomware may have exposed unencrypted patient information. What review starts now?",
       answer: "breach",
@@ -470,6 +501,16 @@ export const additionalExercises = {
     },
     {
       id: "REG4",
+      feedbackByChoice: {
+        security:
+          "General HIPAA safeguards still apply. The source treatment program raises the additional question of Part 2 and state protections for these records.",
+        agreement:
+          "A vendor agreement addresses its service relationship. The source program and records determine whether additional confidentiality protections apply.",
+        breach:
+          "No exposure is described in this question. Review which additional protections apply before deciding how these treatment records may be accessed or disclosed.",
+        accreditation:
+          "An accreditation review may examine procedures, but the specific question concerns additional confidentiality requirements for the treatment-program records.",
+      },
       prompt:
         "The server contains records from a substance-use treatment program. What else needs review?",
       answer: "special",
@@ -500,8 +541,18 @@ export const additionalExercises = {
     },
     {
       id: "REG5",
+      feedbackByChoice: {
+        security:
+          "The access record also supports security safeguards. Here the inspector has requested it for an accreditation visit, so prepare that review and explain who approves changes.",
+        agreement:
+          "A vendor agreement does not show which laboratory users can change result rules. Prepare the access-review record requested for the accreditation visit.",
+        breach:
+          "The visit does not describe a disclosure incident. Staff need the access approvals and periodic review record requested by the accreditation inspector.",
+        special:
+          "No specially protected record category is identified here. The inspector is asking for the laboratory's account permissions and review history.",
+      },
       prompt:
-        "The laboratory must show who can change result rules and how access is reviewed. Which review uses this record?",
+        "An accreditation inspector asks the laboratory to show who can change result rules and how access is reviewed. Which review should staff prepare for this visit?",
       answer: "accreditation",
       choices: [
         {
@@ -690,5 +741,5 @@ export const lessonCopy = {
   text02:
     "Select controls that address different failure paths. The limits do not permit buying everything, and a low-cost administrative step may not change the technical risk.",
   text03:
-    "A blocked event is prevented by the selected controls. Partial mitigation reduces harm but leaves a path open. Not mitigated means the proposed installation still has no selected control for that event.",
+    "Read each event and its result. Blocked applies to the event as described; partial mitigation leaves some harm or interruption possible. The coverage count includes partial results, so it is not a count of events prevented.",
 };

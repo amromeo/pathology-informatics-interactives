@@ -81,7 +81,7 @@ test("the privacy workbench exposes native filters, semantic tables, and live re
   assert.match(html, /<caption>Proposed research export — matching records<\/caption>/);
   assert.match(html, /<th scope="col">Record<\/th>/);
   assert.match(html, /<th scope="row">NR-001<\/th>/);
-  assert.match(html, /<select>/);
+  assert.match(html, /<select aria-label="Diagnosis">/);
   assert.match(html, /<legend>Transform displayed fields<\/legend>/);
   assert.match(html, /type="checkbox"/);
   assert.match(html, /type="radio"/);
@@ -102,7 +102,7 @@ test("the downtime tabletop exposes phased choices and semantic reconciliation c
     /<caption>Paper records compared with the restored laboratory information system<\/caption>/,
   );
   assert.match(html, /<th scope="col">Temporary ID<\/th>/);
-  assert.match(html, /<th scope="row">DT-201<\/th>/);
+  assert.match(html, /<th scope="row" role="rowheader">DT-201<\/th>/);
   assert.match(html, /aria-label="Medical record number for DT-201"/);
   assert.match(html, /<legend>Recovery actions<\/legend>/);
   assert.match(html, /aria-live="polite"/);

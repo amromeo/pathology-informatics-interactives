@@ -1,62 +1,60 @@
-### Start with the laboratory's approved policy
+### Read the approved checks in order
 
-This laboratory's troponin policy requires a final numeric result from 2 through
-10,000 ng/L, accepted **quality control (QC)** for the run, and no unresolved
-instrument flag. Results at or above 1,000 ng/L enter its critical-result review
-and communication workflow. These are the case laboratory's configured limits,
-not diagnostic cutoffs or a release policy for every troponin assay.
+The middleware needs several pieces of information before it can release a serial troponin result. It reads the current result and its status, quality-control status, instrument flags and the patient's earlier result. Each check answers a separate question about that record.
 
-The comparison must use the same patient's prior result from the same assay,
-obtained no more than 24 hours earlier. Missing, zero, or otherwise unusable prior
-values are sent for review in this laboratory. A blank field is not a measured
-zero. A zero denominator cannot support a percentage calculation, and results
-from different assays cannot simply be substituted as a prior comparison.
+In this laboratory, the current result must be final and numeric, from **2 through 10,000 ng/L**. Quality control (**QC**) must be accepted for the run, and instrument flags must be resolved. A result at or above **1,000 ng/L** goes to the laboratory's critical-result review and communication workflow.
 
-### Calculate the two changes
+For the delta check, the prior result must come from the same patient and assay and be no more than **24 hours old**. The program needs a positive numeric prior value to calculate a percentage. Missing, zero, different-assay and out-of-window prior values go to review under this serial-order policy.
 
-The **absolute difference** is the size of the current-minus-prior difference,
-regardless of direction. For AV-01, it is 48 minus 12 = **36 ng/L**. The
-**relative difference** divides that size by the prior value: 36 / 12 × 100 =
-**300%**. Both increases and decreases are evaluated by their size.
+For example, a serial order with a blank prior-result field prompts staff to investigate whether the expected earlier result is available and correctly linked. Entering zero would create a value that was never measured and would still leave an impossible division by zero. Initial troponin orders use their own release process.
 
-The director approved a hold when **either** of these branches is met:
+### Work through AV-01
 
-1. The absolute difference is **at least 50 ng/L**.
-2. The relative difference is **at least 200%**, **and** the absolute difference
-   is **at least 20 ng/L**.
+Begin with **12 ng/L**, the earlier result, and **48 ng/L**, the current result.
 
-The 20 ng/L requirement prevents a large percentage caused by a small denominator
-from being sufficient on its own. A change from 2 to 8 ng/L is also 300%, but its
-absolute difference is only 6 ng/L. Under this policy, that change alone does not
-require a hold. In AV-01, the 36 ng/L difference is large enough for the relative
-branch, even though it is below the separate 50 ng/L limit.
+1. Subtract the prior value from the current value: **48 − 12 = 36 ng/L**.
+2. Take the size of that difference. Here it is already positive, so the absolute difference is **36 ng/L**.
+3. Divide that size by the prior value: **36 ÷ 12 = 3**. The change is three times the prior concentration.
+4. Multiply by 100 to express that ratio as a percentage: **3 × 100 = 300%**.
 
-### AND and OR change which results are held
+The percentage describes the **change** relative to the earlier value. The current result itself is four times the prior result: it consists of the original 12 plus a change of 36.
 
-The two requirements **within** the relative branch use AND: both must be true.
-The absolute and relative branches are combined with OR: either branch can hold
-the result. Combining the branches with AND would let AV-01 release because its
-absolute difference is below 50 ng/L. Keeping only the absolute branch has the
-same effect for this accession, but the defects are different configurations.
+The rule also checks decreases. For AV-16, 20 − 80 = −60 ng/L. Its absolute difference is **60 ng/L**, and its relative difference is **60 ÷ 80 × 100 = 75%**. Both calculations use the size of the change; its direction remains visible in the original results.
 
-The controls start with the transferred rule. Change one setting at a time and
-inspect its effect below. The numeric eligibility, final-status, and critical
-checks remain in place while you edit the delta, history, QC, and flag settings.
-The trace shows every check; release requires all checks to pass. A skipped delta
-calculation does not override a failed eligibility or history check.
+### Apply each branch to those numbers
 
-### A hold is a request for review
+The director approved a hold when either of the following branches is met:
 
-An unexpected change can arise from a real clinical change, specimen problems,
-patient identification problems, or analytical issues. A hold does not determine
-which explanation is correct. Staff investigate according to the laboratory's
-procedure, preserve the original result, and communicate urgent findings promptly.
-Likewise, automatic release does not mean that a result is within the reference
-interval or that the patient is well. Reference intervals, reportable ranges,
-critical-result procedures, and automatic-release criteria serve different purposes.
+- **Absolute branch:** the absolute difference is at least **50 ng/L**.
+- **Relative branch:** the relative difference is at least **200%**, **and** the absolute difference is at least **20 ng/L**.
 
-This delta rule applies to the laboratory's serial troponin order (the 1-hour and 3-hour draws in the ED chest-pain pathway). A serial order without a same-assay prior result within 24 hours suggests an ordering or identification problem, so it is held. Initial (0-hour) troponins are released through a separate rule with no delta check.
+For AV-01, ask the questions in that order. Is 36 at least 50? No. Is 300% at least 200%? Yes. Is 36 at least 20? Yes. Both requirements inside the relative branch are met, so that branch calls for a hold.
 
-### Where middleware fits
+Why does the relative branch also require a minimum change in ng/L? Compare AV-04, which rises from **2 to 8 ng/L**. Its difference is 6 ng/L, and 6 ÷ 2 × 100 is also 300%. The 20 ng/L minimum keeps that small concentration change from triggering this branch solely because the prior value is small.
 
-Instrument middleware is an application between analyzers and the LIS. It can collect results from several instruments, apply quality-control, delta and reflex checks, and hold results for technologist review. A calculated result also needs all inputs required by its validated calculation. For example, missing age can prevent the configured estimated glomerular filtration rate (eGFR) calculation even when creatinine itself is reportable.
+### Combine the branches with OR
+
+The two requirements **inside the relative branch** use AND. Both must be met for that branch to call for a hold.
+
+The two **branches** are joined with OR. A hold from either branch is enough. With AND between branches, a result would have to meet the absolute branch as well as the entire relative branch.
+
+<h3 id="release-branch-examples" tabIndex={-1}>How the two branches combine</h3>
+
+| Branches calling for a hold | With OR | With AND |
+| --- | --- | --- |
+| Neither branch | No delta hold | No delta hold |
+| Absolute branch only | Hold | No delta hold |
+| Relative branch only | Hold | No delta hold |
+| Both branches | Hold | Hold |
+
+AV-01 belongs in the **relative branch only** row of [this comparison](#release-branch-examples). The transferred rule currently uses **Absolute only**, so it never lets the relative branch hold the result. Selecting OR restores that branch's intended effect.
+
+“No delta hold” means the change check allows the result to continue. QC, flags, result eligibility, history and the critical-result check must also pass before the overall decision is Release.
+
+### Use the controls and read the result trace
+
+Start with the current settings and inspect AV-01 in [Follow one result through every check](#release-trace-heading). The trace lists each check, its result and the information used. Change one setting, then return to the trace to explain what changed.
+
+Select AV-04 to test the minimum absolute change, AV-06 for missing history, or AV-09 for unaccepted QC. A skipped calculation appears as **Not calculated**. Read the history and eligibility checks to see why a number was unavailable.
+
+Use **Run all release checks** to compare the complete set with the policy. Changing a setting clears the preceding test summary and final recommendation. Run the checks again before using that summary to support the revised settings.

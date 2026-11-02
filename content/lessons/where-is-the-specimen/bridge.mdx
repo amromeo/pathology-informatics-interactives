@@ -1,0 +1,19 @@
+### Test what each setting does
+
+The cards below put the supervisor's approved destination beside the destination currently stored for each procedure. **Configured** means the setting the program will actually use. **Approved** means the destination the supervisor intended.
+
+First, select **Replay routing cases** without changing a setting. A replay runs the listed procedure codes through the current configuration and compares each destination with the expected destination. It lets the analyst test the settings before applying them to routine work.
+
+Then inspect SP-EX. Change only that entry and replay the cases again. Look at each result, including any failure that remains. Each setting change clears the previous test result because it describes an earlier configuration.
+
+### Decide what happens when a code has no entry
+
+The fifth case uses **SP-NEW**, which has no entry in the dictionary. The setting labeled **Destination when no procedure entry matches** tells the LIS what to do in that situation.
+
+This laboratory requires accessioning staff to clarify an unrecognized procedure and document an appropriate destination. Holding the case for that review keeps the unresolved order visible. Sending it to a work area by default could start the wrong processing before anyone clarifies the examination.
+
+### Preserve the other services' work
+
+The routine biopsy, cytology and frozen-section examples test the routes that were already working. These are the regression checks introduced above. Read the expected destination for each one before considering a broad change.
+
+The replay tests future routing decisions. The existing accession has already been assigned, and the physical container still needs attention. After testing, use the [recovery decision](#specimen-recovery-title) to plan the work that accessioning and receiving staff must carry out for C-1042-A.

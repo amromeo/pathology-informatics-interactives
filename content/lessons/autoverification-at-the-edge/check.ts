@@ -1,84 +1,86 @@
 import type { RetrievalItem } from "../../../src/data/types";
+export const feedbackHeadings = { correct: "Correct", incorrect: "Try again" };
 export const checks: RetrievalItem[] = [
   {
     id: "principle",
     kind: "principle",
     prompt:
-      "An initial troponin has no prior result. Does the serial-order delta rule decide its release?",
+      "An initial troponin order has no prior result. Which release process should staff use?",
     choices: [
       {
         id: "supported",
-        label: "No; use the initial-order rule",
+        label: "The initial-order rule and its required checks",
         correct: true,
         feedback:
-          "This lesson scopes its delta rule to serial orders. Initial orders use a separate release process with no delta check; other safety checks still apply.",
+          "Initial troponin orders use their separate release rule. The serial-order comparison assumes an earlier sample; the initial-order process applies its own eligibility, QC, flag and other required checks.",
       },
       {
         id: "shortcut",
-        label: "Yes; every first result must be held",
+        label: "The serial-order rule with its missing-history hold",
         feedback:
-          "This leaves the central problem unresolved. This lesson scopes its delta rule to serial orders. Initial orders use a separate release process with no delta check; other safety checks still apply.",
+          "A first sample may have no prior result. This laboratory directs initial orders to a separate release process so the serial history requirement is applied to the intended orders.",
       },
       {
         id: "incomplete",
-        label: "No; all first results release automatically",
+        label: "Automatic release without any further checks",
         feedback:
-          "This does not establish the needed conclusion. This lesson scopes its delta rule to serial orders. Initial orders use a separate release process with no delta check; other safety checks still apply.",
+          "The absence of a delta comparison leaves the other release requirements in place. Staff still need the initial-order rule's checks before the result can release.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt:
+      "Before changing a local release threshold, what should the resident and analyst compare?",
     choices: [
       {
         id: "supported",
-        label: "Compare the rule with the approved order pathway",
+        label: "The saved conditions and the approved order-specific policy",
         correct: true,
         feedback:
-          "Confirm which order, assay, prior result and other checks apply before changing a threshold.",
+          "Identify the order type, assay, required prior result and other release checks. Comparing that policy with the saved conditions shows which change to test and which cases should remain unaffected.",
       },
       {
         id: "shortcut",
-        label: "Change the threshold until fewer cases hold",
+        label: "The threshold and the setting that produces fewer holds",
         feedback:
-          "This leaves the central problem unresolved. Confirm which order, assay, prior result and other checks apply before changing a threshold.",
+          "Fewer holds could include results that require review. Begin with the approved criteria and compare expected and actual outcomes before interpreting the number of holds.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "The local threshold and the numbers in this lesson",
         feedback:
-          "This does not establish the needed conclusion. Confirm which order, assay, prior result and other checks apply before changing a threshold.",
+          "This case's limits describe its approved policy. A local change needs the laboratory's own assay, order pathway and review criteria, followed by appropriate testing.",
       },
     ],
   },
   {
     id: "spaced",
     kind: "spaced",
-    fromLesson: "10",
     prompt:
-      "Two specimens share a patient and collection date. Which link supports correct routing?",
+      "Two specimens share a patient and collection date. Which link lets staff follow the intended examination for each one?",
     choices: [
       {
         id: "supported",
-        label: "The order and specimen identifiers",
+        label: "The order linked to each accession and specimen",
         correct: true,
         feedback:
-          "Patient identity is necessary but does not distinguish separate ordered tests or specimens. Preserve the accession and specimen relationship through routing.",
+          "Follow the specific order, accession and specimen identifiers together. That preserves which examination was requested for each container, even when both belong to the same patient.",
       },
       {
         id: "shortcut",
-        label: "The patient name by itself",
+        label: "The patient name and date of collection",
         feedback:
-          "This leaves the central problem unresolved. Patient identity is necessary but does not distinguish separate ordered tests or specimens. Preserve the accession and specimen relationship through routing.",
+          "Both specimens share those details. Staff need the accession and specimen links to distinguish their examinations and follow the correct work.",
       },
       {
         id: "incomplete",
-        label: "The destination worklist by itself",
+        label: "The name of the receiving department",
         feedback:
-          "This does not establish the needed conclusion. Patient identity is necessary but does not distinguish separate ordered tests or specimens. Preserve the accession and specimen relationship through routing.",
+          "A department's worklist can contain many examinations for many specimens. Follow the order and specimen identifiers to determine which work belongs to this container.",
       },
     ],
+    fromLesson: "10",
   },
 ];

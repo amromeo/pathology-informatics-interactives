@@ -20,8 +20,23 @@ export function AdditionalReview({ slug }: { slug: string }) {
               setChecked(false);
             }}
           />
-          <Feedback tone={answers[q.id] === q.answer ? "correct" : "incorrect"}>
-            {checked && q.feedback}
+          <Feedback
+            tone={answers[q.id] === q.answer ? "correct" : "incorrect"}
+            heading={
+              q.feedbackByChoice
+                ? answers[q.id] === q.answer
+                  ? "Correct"
+                  : "Review this choice"
+                : undefined
+            }
+          >
+            {checked &&
+              (q.feedbackByChoice
+                ? (q.feedbackByChoice[answers[q.id]] ??
+                  (answers[q.id] === q.answer
+                    ? q.feedback
+                    : "Choose a review, then check this decision."))
+                : q.feedback)}
           </Feedback>
         </div>
       ))}

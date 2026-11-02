@@ -28,6 +28,12 @@ export const manifest: LessonManifest = {
       license: "CC BY 4.0",
       use: "Foundational concepts and terminology, adapted with attribution.",
     },
+    {
+      label: "American Thyroid Association — Thyroid function tests",
+      url: "https://www.thyroid.org/thyroid-function-tests/",
+      license: "Linked source; content not reproduced.",
+      use: "Optional clinical context for TSH and FT4; the case's ordering thresholds remain its own approved protocol.",
+    },
   ],
   status: "published",
   pierCoverage: [

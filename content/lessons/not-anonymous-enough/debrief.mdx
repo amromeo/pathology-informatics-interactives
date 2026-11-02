@@ -1,15 +1,17 @@
-## Debrief: distinguish removing names from satisfying a disclosure method
+## Debrief: explain what the remaining fields reveal
 
 ### What happened in this case
 
 
-The export still identifies small groups through combinations of ZIP code, diagnosis and dates. Removing names alone does not resolve this risk.
+Jordan removed names and MRNs but kept a lookup key in the shared folder. That key can reconnect an exported code to the patient. The [original export](#raw-privacy-table) also lets a person combine diagnosis and ZIP to distinguish NR-001 from the other 17 rows.
 
-The original dataset remains coded and reidentifiable because a diagnosis combined with a five-digit ZIP isolates one record and the linkage key is inadequately protected. If you used the exercise, you also saw that transforming one field at a time leaves other distinguishing combinations. Uncontrolled release risks unauthorized disclosure of protected health information.
+The original dataset is coded and reidentifiable. Filtering to one row demonstrates a possible linkage using outside knowledge; it does not show that a real person has been identified. Breast carcinoma appears in three rows of this selected file. Its frequency in this file says nothing about its frequency in the hospital population.
 
-Increasing the smallest displayed group size reduced uniqueness in this teaching table, but the counter did not approve a release. Safe Harbor or Expert Determination review, or a properly governed limited-data-set pathway, still requires documented institutional review.
+After broadening ZIP and diagnosis, the groups contain four, four, five and five rows. The [transformed preview](#transformed-privacy-preview) shows why the minimum is four. Changing the common admission date to year leaves that count unchanged. Protecting the separate key also leaves the count unchanged. Each action addresses a different part of the proposed disclosure.
 
-The data steward and privacy or research offices define safeguards and agreements. The clinical data owner approves the permitted use and minimum necessary release.
+The complete proposal passes five exercise checks only after the field changes, key restriction, purpose, recipient and agreement are recorded. Priya still must review the whole export, the known April 18 cohort, the ZIP population conditions and the codes. If exact timing or geography is needed for the study, she can consider a limited-data-set pathway that retains permissible detail. A larger group count alone cannot choose or approve the method.
+
+Jordan prepares the approved fields and protects the key. The investigator explains which details are needed to study completion and calls. Priya and the research office determine the required disclosure review and agreement with the responsible data owner. The patient-description fields shown here still need the proposed outcome fields before the research question can be answered.
 
 <details className="teaching-supplement">
 <summary>A closer look: review the combination of fields being released</summary>
@@ -27,7 +29,7 @@ The privacy and research teams can help preserve useful information while review
 
 ### Who does what
 
-Work with the privacy office or research data steward. The person making a technical change should document the test evidence; the responsible clinical or operational lead approves the intended use.
+Ask Jordan to show the selection instructions and field list, ask the investigator to justify the requested detail, and ask Priya to document the permitted disclosure method and safeguards.
 
 ### Connection to PIER 3.2, 3.4
 

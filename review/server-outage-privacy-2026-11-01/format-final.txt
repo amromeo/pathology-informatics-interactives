@@ -1,0 +1,6 @@
+
+> pathology-informatics-interactives@0.1.0 format:check
+> prettier --check "src/**/*.{ts,tsx,css}" "scripts/*.{ts,mjs}" "tests/**/*.{ts,tsx}" "content/lessons/*/*.ts" vite.config.ts playwright.config.ts
+
+Checking formatting...
+All matched files use Prettier code style!
