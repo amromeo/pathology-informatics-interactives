@@ -59,7 +59,7 @@ export const evidenceViews = [
     id: "analyzer",
     tab: "Analyzer",
     heading: "The analyzer completed the CBC",
-    summary: "The specimen ran normally, and the analyzer sent the result to the LIS.",
+    summary: "The specimen ran without problems, and the analyzer sent the result to the LIS.",
     fields: [
       { label: "Specimen", value: "H26-01482" },
       { label: "Analysis completed", value: "09:40" },
@@ -87,7 +87,7 @@ export const evidenceViews = [
     tab: "Interface server",
     heading: "The interface application is running, but its queue is growing",
     summary:
-      "The LIS analyst opens the server status, outgoing connection settings and delivery log. Results are waiting after repeated failed delivery attempts.",
+      "The LIS analyst opens the server status, the outgoing connection settings and the delivery log. Results are piling up after repeated failed attempts to send them.",
     fields: [
       { label: "Processor", value: "18%" },
       { label: "Memory", value: "46%" },
@@ -111,7 +111,7 @@ export const evidenceViews = [
     tab: "EHR receiving service",
     heading: "Check where the EHR receives laboratory messages",
     summary:
-      "The EHR analyst opens the settings and status for the laboratory receiving service. Compare its address and port with the outgoing interface settings.",
+      "The EHR analyst opens the settings and status of the laboratory receiving service. Compare its address and port with the settings the interface engine is using.",
     fields: [
       { label: "Service", value: "Laboratory results" },
       { label: "Status", value: "Running" },
@@ -132,22 +132,21 @@ export const connectionChoices = [
     id: "analyzer-lis",
     label: "Analyzer to LIS",
     correct: false,
-    feedback:
-      "The LIS received the CBC and shows it as final, so this connection carried the result.",
+    feedback: "The LIS received the CBC and shows it as final, so this connection worked.",
   },
   {
     id: "lis-interface",
     label: "LIS to interface engine",
     correct: false,
     feedback:
-      "The result is in the interface queue, so it made it from the LIS to the interface engine.",
+      "The result is sitting in the interface queue, so it got from the LIS to the interface engine.",
   },
   {
     id: "interface-ehr",
     label: "Interface engine to EHR",
     correct: true,
     feedback:
-      "The CBC reached the interface queue. The interface engine is trying port 5100, while the EHR's laboratory receiving service listens on port 5000. The report is waiting at this connection.",
+      "The CBC reached the interface queue. The interface engine is trying port 5100, but the EHR's laboratory receiving service listens on port 5000. The report is stuck at this connection.",
   },
 ] as const;
 
@@ -157,66 +156,66 @@ export const repairChoices = [
     label: "Correct the destination port and check delivery.",
     correct: true,
     feedback:
-      "The interface analyst changes the destination port from 5100 to the agreed port 5000 and tests the connection with the EHR analyst. The team then checks delivery of waiting and new reports and accounts for results communicated during the interruption.",
+      "The interface analyst changes the destination port from 5100 to the agreed 5000 and tests the connection with the EHR analyst. Then the team checks that the waiting reports and new ones arrive, and checks the results phoned during the outage against the chart.",
   },
   {
     id: "repeat-cbc",
     label: "Repeat the patient's CBC on the analyzer.",
     correct: false,
     feedback:
-      "The LIS already contains the verified CBC. Repeating the analysis would add another result to the same waiting queue. Staff should communicate the existing result and investigate the connection.",
+      "The LIS already has the verified CBC. Running it again would only add another result to the same stuck queue. Phone the result you have, and investigate the connection.",
   },
   {
     id: "restart-interface",
     label: "Restart the running interface application.",
     correct: false,
     feedback:
-      "Restarting the application reloads its saved destination port of 5100. The EHR service listens on 5000, so the analyst needs to correct that setting before testing delivery.",
+      "Restarting the application reloads the saved destination port, 5100. The EHR listens on 5000, so the analyst has to correct that setting first, then test delivery.",
   },
   {
     id: "manual-entry",
     label: "Have the EHR team enter this CBC manually.",
     correct: false,
     feedback:
-      "Entering this CBC would address one report. Other queued reports and new results would keep waiting at the failed connection. Use the downtime process while the interface team corrects the destination port.",
+      "Typing in this CBC fixes one report. The other queued reports, and every new result, would still be stuck at the failed connection. Keep phoning results under the downtime procedure while the interface team corrects the port.",
   },
 ] as const;
 
 export const validationCases = [
   {
     passingRepairs: ["correct-port", "manual-entry"] as string[],
-    failNote: "The original report still needs verified placement in the chart.",
+    failNote: "The original report still has to be checked in the right chart.",
     id: "original",
     name: "Original CBC",
     note: "Appears once in the correct patient chart",
   },
   {
     passingRepairs: ["correct-port"] as string[],
-    failNote: "A one-result repair leaves other queued reports unresolved.",
+    failNote: "Fixing one result leaves the other queued reports stuck.",
     id: "queue",
     name: "Queued results",
     note: "All queued reports reach the correct patients without duplicates",
   },
   {
     passingRepairs: ["correct-port"] as string[],
-    failNote: "The incorrect destination port still delays new reports.",
+    failNote: "The wrong destination port still holds up new reports.",
     id: "new-cbc",
     name: "New CBC",
     note: "Transmits to the EHR without delay",
   },
   {
     passingRepairs: ["correct-port"] as string[],
-    failNote: "Other laboratory sections still use the same outgoing connection settings.",
+    failNote: "Other laboratory sections send through the same broken connection.",
     id: "other-section",
     name: "Another laboratory section",
     note: "A report using the same connection also reaches the EHR",
   },
   {
     passingRepairs: ["correct-port"] as string[],
-    failNote: "Reconcile results already communicated during the interruption.",
+    failNote: "Check the results phoned during the outage against the chart.",
     id: "downtime",
     name: "Downtime results",
-    note: "Results communicated during the interruption are reconciled",
+    note: "Results phoned during the outage match the chart",
   },
 ] as const;
 
@@ -233,44 +232,45 @@ export const firstChecks = [
     label: "Repeat the CBC now.",
     correct: false,
     feedback:
-      "First determine whether testing is actually delayed. Repeating a completed CBC would not explain why the report is missing from the EHR.",
+      "First find out whether testing is actually delayed. Repeating a finished CBC would not explain why the report is missing from the EHR.",
   },
   {
     id: "refresh",
     label: "Ask the ED to refresh the patient chart.",
     correct: false,
     feedback:
-      "A screen refresh is reasonable only after the laboratory checks whether the CBC was completed and released.",
+      "Refreshing the screen will not help until the laboratory knows whether the CBC was finished and released.",
   },
 ] as const;
 
 export const lessonCopy = {
   text01:
-    "Choose whether each named item is physical equipment, system software, application software or a communication protocol. For example, the server is physical equipment and the interface application is software running on it.",
+    "Decide whether each item is physical equipment, system software, application software or a set of network rules. For example, the server is physical equipment, and the interface application is software that runs on it.",
   text02:
-    "The LIS team starts with the laboratory systems, then follows the result toward the EHR. Open each check and decide what it rules in or out.",
+    "The LIS analyst starts with the laboratory's own systems, then follows the result toward the EHR. Open each check and decide what it rules out.",
   text03:
-    "Run the checks to see the expected result of your selected action. Read each row: would that action deliver the waiting reports and new reports, and let staff account for results communicated during the interruption?",
+    "Run the checks to see what your chosen action would do. Read each row: would it get the waiting reports and new ones through, and let staff check the results phoned during the outage?",
 };
 
 export const pathwayExplanations: Record<string, string> = {
   analyzer: "The analyzer produces the measurement and sends it to the LIS for laboratory review.",
   lis: "The LIS stores the verified report and sends it to the interface engine.",
-  interface: "The interface application prepares and queues the outbound report.",
+  interface:
+    "The interface application reformats the report and holds it in the queue until it can be sent.",
   network:
-    "The internal network carries data to the EHR computer. The destination port selects the receiving service on that computer.",
+    "The internal network carries the data to the EHR computer. The destination port picks out the receiving service on that computer.",
   ehr: "The clinical team must be able to view the complete report in the correct chart.",
 };
 export const classExplanations: Record<string, string> = {
   server:
-    "These are physical computing components that provide processing, memory, storage and connectivity.",
+    "These are the physical parts of the computer: they do the processing, hold the data and connect to the network.",
   switch: "A network switch is physical equipment that forwards traffic between connected devices.",
-  os: "The operating system manages hardware resources and provides services used by applications.",
-  lis: "The LIS application manages laboratory orders, specimens and results; it runs on an operating system.",
+  os: "The operating system runs the computer itself and lets applications use its memory, storage and network.",
+  lis: "The LIS is an application that manages laboratory orders, specimens and results. It runs on an operating system.",
   interface:
-    "The interface engine is an application that transforms and routes messages; its server is the host hardware.",
+    "The interface engine is an application that reformats messages and sends them on. The server it runs on is the hardware.",
   tcpip:
-    "TCP/IP supplies rules for sending data across a network. IP provides addressing, and TCP delivers an ordered stream of data between connected applications.",
+    "TCP/IP is the set of rules for sending data across a network. IP handles the addresses; TCP makes sure the data arrive complete and in order.",
 };
 export const evidenceQuestions: Record<
   string,
@@ -283,46 +283,46 @@ export const evidenceQuestions: Record<
 > = {
   analyzer: {
     incorrectFeedback:
-      "To assess EHR display mapping, staff need to inspect the report in the chart. The analyzer record shows completed testing and LIS acceptance, which rules out unfinished analyzer testing.",
+      "To judge how the EHR displays the result, staff need to inspect the report in the chart. This record shows the analyzer finished the test and the LIS accepted it, so it rules out unfinished testing.",
     answer: "testing",
     choices: [
       { id: "testing", label: "Incomplete analyzer testing" },
       { id: "display", label: "An incorrect EHR display mapping" },
     ],
     feedback:
-      "The completion time and LIS acceptance show that testing and the first transfer finished. Follow the report into the LIS next.",
+      "The completion time and the LIS acceptance show that testing finished and the result reached the LIS. Follow the report into the LIS next.",
   },
   lis: {
     incorrectFeedback:
-      "To investigate the connection to the EHR, inspect the interface's delivery log and the EHR's receiving service. The final status here establishes that the laboratory released the result at 09:42.",
+      "To check the connection to the EHR, look at the interface's delivery log and the EHR's receiving service. The Final status here shows only that the laboratory released the result at 09:42.",
     answer: "verification",
     choices: [
       { id: "verification", label: "An unverified laboratory result" },
       { id: "network", label: "A failed connection to the EHR" },
     ],
     feedback:
-      "Final status and the 09:42 verification show that the laboratory released the report. Staff can communicate that result while the analyst follows its electronic delivery.",
+      "The Final status and the 09:42 verification show that the laboratory released the report. Staff can phone that result through while the analyst follows the electronic report.",
   },
   interface: {
     incorrectFeedback:
-      "A refused connection is a reason to compare the destination settings with the EHR's receiving service. The processor and memory readings address the other choice: overload.",
+      "The refused connection is a reason to compare the destination settings with the EHR's receiving service, which comes next. What this record rules out is overload: look at the processor and memory readings.",
     answer: "overload",
     choices: [
       { id: "overload", label: "Server processor or memory overload" },
       { id: "routing", label: "An incorrect destination port" },
     ],
     feedback:
-      "Processor use of 18% and memory use of 46% leave capacity available at the recorded time. Compare the destination address and port in the failed connection with the EHR's receiving settings next.",
+      "With the processor at 18% and memory at 46%, the server had plenty of room. Next, compare the address and port in the failed connection with the EHR's receiving settings.",
   },
   "ehr-receiver": {
     incorrectFeedback:
-      "Assessing a hemoglobin measurement would require laboratory analytical checks. These records concern message delivery: the EHR listens on port 5000 and the interface engine is trying port 5100.",
+      "Checking the hemoglobin itself would mean looking at the analyzer and its quality control. These records are about message delivery: the EHR listens on port 5000 and the interface engine is trying port 5100.",
     answer: "normal",
     choices: [
       { id: "normal", label: "Matching sender and receiver port settings" },
       { id: "result", label: "An incorrect hemoglobin measurement" },
     ],
     feedback:
-      "The sender's destination address matches the EHR's address. The EHR receives laboratory messages on port 5000; the sender is trying 5100. Correcting the sender's port is the next step.",
+      "The sender has the right address. But the EHR receives laboratory messages on port 5000, and the sender is trying 5100. The next step is to correct the sender's port.",
   },
 };

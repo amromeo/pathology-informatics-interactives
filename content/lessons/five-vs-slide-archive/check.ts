@@ -4,52 +4,53 @@ export const checks: RetrievalItem[] = [
     id: "principle",
     kind: "principle",
     prompt:
-      "A tumor-board image has the right patient but the wrong block. What is the defensible repair?",
+      "A tumor-board image has the right patient but the wrong block. What should happen before it is shown?",
     choices: [
       {
         id: "supported",
-        label: "Verify the block against the case record",
+        label: "Check the block against the case record",
         correct: true,
         feedback:
-          "Patient identity alone cannot establish specimen or block identity. Trace the accession, part and block before linking the slide to the molecular result.",
+          "The right patient does not mean the right specimen or block. Trace the accession, part and block before linking the slide to the molecular result.",
       },
       {
         id: "shortcut",
         label: "Link by patient name and report date",
         feedback:
-          "This leaves the central problem unresolved. Patient identity alone cannot establish specimen or block identity. Trace the accession, part and block before linking the slide to the molecular result.",
+          "A name and a date can match several specimens from the same patient. Trace the accession, part and block before linking the slide to the molecular result.",
       },
       {
         id: "incomplete",
-        label: "Retain it because the diagnosis agrees",
+        label: "Keep it, because the diagnosis agrees",
         feedback:
-          "This does not establish the needed conclusion. Patient identity alone cannot establish specimen or block identity. Trace the accession, part and block before linking the slide to the molecular result.",
+          "Two specimens from the same patient can share a diagnosis. Agreement does not show that this slide came from this block, so trace the accession, part and block first.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt:
+      "Your hospital is about to combine slide images with molecular results in one view. What would you check first?",
     choices: [
       {
         id: "supported",
-        label: "Inspect the accession-to-block linkage",
+        label: "How each image is linked to its block",
         correct: true,
         feedback:
-          "Test the identities connecting each modality before treating combined records as a single clinical dataset.",
+          "Start with the links. If an image cannot be traced from accession to part to block, nothing built on top of it can be trusted.",
       },
       {
         id: "shortcut",
-        label: "Compare only total archive capacity",
+        label: "Whether the archive has enough storage",
         feedback:
-          "This leaves the central problem unresolved. Test the identities connecting each modality before treating combined records as a single clinical dataset.",
+          "Storage matters, but enough of it will not stop a slide being linked to the wrong block. Check how the records are linked first.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "Whether the vendor has used this view elsewhere",
         feedback:
-          "This does not establish the needed conclusion. Test the identities connecting each modality before treating combined records as a single clinical dataset.",
+          "Another hospital's experience does not tell you how your own images, blocks and molecular reports are linked. Check those links in your own records.",
       },
     ],
   },
@@ -58,26 +59,26 @@ export const checks: RetrievalItem[] = [
     kind: "spaced",
     fromLesson: "3",
     prompt:
-      "A chemistry turnaround report excludes orders without a collection time. What should its summary disclose?",
+      "A chemistry turnaround report leaves out orders that have no collection time. What should its summary say?",
     choices: [
       {
         id: "supported",
-        label: "The excluded count and missing field",
+        label: "How many were left out, and why",
         correct: true,
         feedback:
-          "The summary otherwise describes only the retained subset. Missing timestamps may be related to the operational problem being studied.",
+          "Without that, readers will assume the summary covers every order. The orders with missing times may be the very ones caught up in the delay being studied.",
       },
       {
         id: "shortcut",
         label: "Only the mean of complete records",
         feedback:
-          "This leaves the central problem unresolved. The summary otherwise describes only the retained subset. Missing timestamps may be related to the operational problem being studied.",
+          "That mean says nothing about the orders left out. If the worst delays also left times missing, the report would make things look better than they were.",
       },
       {
         id: "incomplete",
         label: "Only the total number of final results",
         feedback:
-          "This does not establish the needed conclusion. The summary otherwise describes only the retained subset. Missing timestamps may be related to the operational problem being studied.",
+          "The total does not say how many orders went into the turnaround calculation or why the others were left out. Show both counts and name the missing field.",
       },
     ],
   },

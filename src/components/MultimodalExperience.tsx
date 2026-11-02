@@ -54,7 +54,7 @@ export function MultimodalExperience({ Concepts, Bridge, onAttempt }: Topic5Prop
       <Section
         number={2}
         title="Check the links in the tumor-board view"
-        purpose="Compare each imported record with its source and choose the specific action needed."
+        purpose="Compare each record in the view with its source and choose what to do."
       >
         {linkedRecords.map((row) => (
           <article className="artifact-card" key={row.id}>
@@ -80,7 +80,7 @@ export function MultimodalExperience({ Concepts, Bridge, onAttempt }: Topic5Prop
       <Section
         number={3}
         title="Choose the archive test"
-        purpose="Decide what to test before supporting clinical retrieval and research at the same time."
+        purpose="Decide how to test the archive before clinicians and researchers use it at the same time."
       >
         <MdxBlock Content={Bridge} />
         <ChoiceGroup
@@ -110,7 +110,7 @@ export function MultimodalExperience({ Concepts, Bridge, onAttempt }: Topic5Prop
             results.filter((r) => r.pass).length +
               " of " +
               results.length +
-              " record actions match the source evidence. Recheck every failed link before presenting the combined view."}
+              " records have the right action. Go back to any that do not before the view goes to tumor board."}
         </Feedback>
       </Section>
       <ResetLessonButton

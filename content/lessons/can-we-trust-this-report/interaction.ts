@@ -131,7 +131,7 @@ export const openingChoices = [
     id: "review",
     label: "Look at TAT by week before deciding whether it improved",
     feedback:
-      "Yes. The post-go-live mean is worse while the median is better. Looking at the weeks separately can show whether a short period of very long TAT is pulling the mean upward.",
+      "Yes. After go-live the mean is worse but the median is better. Looking at the weeks one by one will show whether a short stretch of very long TATs is pulling the mean up.",
     correct: true,
   },
   {
@@ -145,7 +145,7 @@ export const openingChoices = [
     id: "discard",
     label: "Report that TAT worsened because the post-go-live mean is higher",
     feedback:
-      "The higher mean matters, but it does not describe what happened to most cases. First find out whether a smaller group of unusually long cases explains the difference between the mean and median.",
+      "The higher mean matters, but it does not describe what happened to most cases. First find out whether a small group of unusually long cases explains the gap between the mean and the median.",
     correct: false,
   },
 ];
@@ -155,36 +155,36 @@ export const dataPath = [
     id: "requisition",
     label: "Scanned requisition",
     detail:
-      "This case arrived after the accessioning function was taken offline Tuesday morning. The accessioning staff wrote 08:56 on the requisition and in the paper cutover log.",
+      "This case arrived after accessioning in the LIS was switched off on Tuesday morning. Accessioning staff wrote 08:56 on the requisition and in the paper cutover log.",
   },
   {
     id: "lis",
     label: "LIS accession record",
     detail:
-      "When the case was entered later, the back-entry procedure did not include the original accession time. The structured field is blank in this case and 26 other cutover cases.",
+      "When the case was typed into the LIS later, nobody entered the original accession time. The field is blank for this case and 26 other cutover cases.",
   },
   {
     id: "export",
     label: "Case list sent to the spreadsheet",
     detail:
-      "All 35 cutover cases are on the list. The structured LIS accession-time field is blank in 27 rows, so the quality coordinator checks the requisitions and cutover log.",
+      "All 35 cutover cases are on the list. The LIS accession-time field is blank in 27 rows, so the quality coordinator looks the times up on the requisitions and in the cutover log.",
   },
   {
     id: "spreadsheet",
     label: "TAT spreadsheet",
     detail:
-      "For those 27 cases, the coordinator enters the documented cutover time in a separate source-time column. The spreadsheet uses that time to calculate TAT and keeps the cases in the report.",
+      "For those 27 cases, the coordinator types the time from the paper records into a separate column. The spreadsheet uses that time to calculate TAT, and the cases stay in the report.",
   },
   {
     id: "meeting",
     label: "Summary prepared for the quality meeting",
     detail:
-      "All 35 cutover cases are included in the 245-case post-go-live group. The very long cutover cases pull the post-go-live mean up to 3.8 days, while the median remains 2.5 days.",
+      "All 35 cutover cases are in the 245-case post-go-live group. The very long cutover cases pull the post-go-live mean up to 3.8 days, while the median stays at 2.5.",
   },
 ];
 
 export const dataPathInstruction =
-  "This section connects the single case you just reviewed with the monthly report. Read the five steps from top to bottom, then answer the question below.";
+  "This section follows the case you just looked at into the monthly report. Read the five steps from top to bottom, then answer the question below.";
 
 export const dataPathChoices = [
   {
@@ -199,22 +199,22 @@ export const dataPathChoices = [
     label: "The coordinator used the requisition and cutover log",
     correct: true,
     feedback:
-      "The structured LIS field is blank, but the same accession event was documented during cutover. The coordinator entered that documented time in a separate spreadsheet column, calculated TAT, and kept the case in the report.",
+      "The LIS field is blank, but the accession time was written down on paper during cutover. The coordinator typed that time into a separate column, calculated TAT and kept the case in the report.",
   },
   {
     id: "not-final",
     label: "The spreadsheet used the time when the case was entered into the LIS later",
     correct: false,
     feedback:
-      "That later entry time is not the accession time and would make TAT look shorter. The calculation used the original time documented during cutover.",
+      "The time the case was typed in later is not the accession time, and using it would make TAT look shorter. The calculation used the original time written down during cutover.",
   },
 ] as const;
 
 export const reportTableInstructions = [
-  `Search for ${exampleMissingSource.accessionId}. Confirm that its structured LIS accession-time field is blank and that the report uses the time from the requisition and cutover log.`,
+  `Search for ${exampleMissingSource.accessionId}. Check that its LIS accession-time field is blank and that the report uses the time from the requisition and cutover log.`,
   "Clear the search and choose Cutover week as the period. All 35 cutover cases are listed.",
-  "Show the cases included in the original pre/post comparison. All 35 cutover cases are included in the post-go-live group.",
-  "Then show the cases in the post-go-live group after cutover is separated. The 35 cutover cases remain in the report, but they are no longer mixed with the later post-go-live cases.",
+  "Show the cases in the original before-and-after comparison. All 35 cutover cases are in the post-go-live group.",
+  "Then show the post-go-live group with cutover week taken out. The 35 cutover cases are still in the report, but no longer mixed in with the later weeks.",
 ] as const;
 
 export const qualityChecks = [
@@ -223,7 +223,7 @@ export const qualityChecks = [
     prompt: "Does the accession time in the LIS match the time on the requisition?",
     answer: "accuracy",
     explanation:
-      "This checks accuracy: a recorded LIS accession time should agree with the requisition. For the 428 cases with a structured time, the two can be compared. For the 27 blank fields, accuracy cannot be judged until a value exists; that gap is a completeness problem.",
+      "This checks accuracy: an accession time in the LIS should agree with the requisition. For the 428 cases that have a time in the LIS, the two can be compared. For the 27 blank fields there is nothing to compare yet; that is a completeness problem.",
   },
   {
     id: "missing-time",
@@ -237,7 +237,7 @@ export const qualityChecks = [
     prompt: "Is each timestamp in the expected format and sequence?",
     answer: "validity",
     explanation:
-      "This checks validity: a timestamp should follow the accepted format and finalization should not precede accession.",
+      "This checks validity: each timestamp should be in the right format, and no case should be signed out before it was accessioned.",
   },
   {
     id: "same-definition",
@@ -264,10 +264,10 @@ export const qualityChecks = [
   },
   {
     id: "meeting-use",
-    prompt: "Is this comparison adequate for the claim the laboratory plans to make?",
+    prompt: "Can this comparison support what the laboratory plans to say at the meeting?",
     answer: "fitness",
     explanation:
-      "This checks fitness for purpose. One post-go-live group hides the difference between a difficult cutover week and the later routine workflow.",
+      "This checks fitness for purpose. One post-go-live group hides the difference between a difficult cutover week and the ordinary weeks that followed.",
   },
 ] as const;
 
@@ -289,7 +289,7 @@ export const repairChoices = [
     detail: "Keep all 455 cases in the report and state which dates belong to each group.",
     correct: true,
     feedback:
-      "This shows the temporary cutover delay without allowing it to describe the laboratory's later performance. No cases are hidden: the 35 cutover cases remain visible in their own group.",
+      "This shows the cutover delay without letting it stand for how the laboratory did afterward. Nothing is hidden: the 35 cutover cases stay in view as their own group.",
   },
   {
     id: "missing-only",
@@ -297,7 +297,7 @@ export const repairChoices = [
     detail: "Keep the other eight cutover cases in the post-go-live group.",
     correct: false,
     feedback:
-      "The accession times for those 27 cases were recovered from the requisitions and cutover log. Removing only the delayed cases would make post-go-live TAT look better by hiding the cases with the longest delays.",
+      "The accession times for those 27 cases were found on the requisitions and in the cutover log. Removing them would make post-go-live TAT look better by hiding the longest delays.",
   },
   {
     id: "creation-time",
@@ -305,35 +305,34 @@ export const repairChoices = [
     detail: "Do not show the mean or the cutover week separately.",
     correct: false,
     feedback:
-      "The median describes the middle case, but it does not show the severe delays during cutover. The mean and median should both be reported, and cutover week should be visible as its own period.",
+      "The median describes the middle case, but it hides the severe delays during cutover. Report both the mean and the median, and show cutover week as its own period.",
   },
 ];
 
 export const validationCases = [
   {
     passingRepairs: ["defined-cutover"] as string[],
-    failNote: "The chosen grouping still mixes the transition with routine operation.",
+    failNote: "This grouping still mixes cutover week with the ordinary weeks.",
     label: "Three periods",
     result:
       "The report shows 210 pre-go-live cases, 35 cutover cases, and 210 post-go-live cases after cutover.",
   },
   {
     passingRepairs: ["defined-cutover", "creation-time"] as string[],
-    failNote: "Removing the 27 cases loses known prolonged cases.",
+    failNote: "Removing the 27 cases throws away cases known to have long delays.",
     label: "All cases retained",
     result: "Each of the 455 cases appears once; the cutover cases are separated, not deleted.",
   },
   {
     passingRepairs: ["defined-cutover", "missing-only", "creation-time"] as string[],
-    failNote: "Use one accession-to-initial-final definition for every group.",
+    failNote: "Measure every group from accession to the first final report.",
     label: "TAT definition",
     result:
       "All three periods use accession to the initial final report, measured in working days.",
   },
   {
     passingRepairs: ["defined-cutover", "creation-time"] as string[],
-    failNote:
-      "The proposed report does not explain which accession times came from the paper records.",
+    failNote: "This report does not say which accession times came from the paper records.",
     label: "Accession-time source",
     result:
       "The report identifies the 27 cutover times recovered from requisitions and the paper cutover log.",
@@ -348,13 +347,13 @@ export const validationCases = [
     passingRepairs: ["defined-cutover"] as string[],
     failNote: "The report needs the mean and median for each period, with the case counts.",
     label: "Summary statistics",
-    result: "Mean, median, and biopsy/resection counts remain available for each period.",
+    result: "The mean, median and biopsy and resection counts are shown for each period.",
   },
   {
     passingRepairs: ["defined-cutover"] as string[],
-    failNote: "The recommendation must also prevent future missing accession times.",
-    label: "Future workflow",
-    result: "The structured accession-time field is required after cutover.",
+    failNote: "The plan should also stop accession times going missing in future.",
+    label: "Before the next report",
+    result: "From now on, the LIS will not accept a case without an accession time.",
   },
 ];
 
@@ -387,15 +386,15 @@ export const lessonCopy = {
   text07:
     "Use it to confirm that all 35 cutover cases were included in the original post-go-live group and that they remain visible after cutover week is shown separately.",
   text08:
-    "The original two-period comparison mixes a difficult cutover week with six later weeks of routine operation. Choose a report structure that shows what happened without hiding any cases.",
+    "The original two-period comparison mixes a difficult cutover week with six ordinary weeks. Choose a way of reporting that shows what happened without hiding any cases.",
   text09:
     "The quality coordinator has now placed the 35 cutover cases in their own group. No cases were removed. Compare the three rows and decide whether they explain why the original post-go-live mean and median disagreed.",
   text10:
     "Cutover cases had a mean TAT of 8.4 working days and a median of 9.5. After cutover, the mean was 3.0 and the median was 2.5. Mixing those periods produced a post-go-live mean of 3.8 even though the median was 2.5.",
   text11:
-    "It shows a severe, temporary delay during cutover and a modest improvement afterward. All 455 cases remain visible, and the report states that 27 cutover accession times were recovered from requisitions and the paper cutover log.",
+    "It shows a severe but short-lived delay during cutover and a small improvement afterward. All 455 cases are still there, and the report says that 27 cutover accession times came from the requisitions and the paper cutover log.",
   text12:
-    "The weekly view shows why one pre/post summary was misleading. Follow both lines across the six pre-go-live weeks, cutover week, and the six weeks after cutover.",
+    "The weekly view shows why a single before-and-after summary was misleading. Follow both lines across the six weeks before go-live, cutover week, and the six weeks after.",
 };
 
 export const qualityChoiceFeedback: Record<string, string> = {
@@ -403,10 +402,9 @@ export const qualityChoiceFeedback: Record<string, string> = {
   completeness: "Completeness asks whether the required information is present.",
   validity: "Validity asks whether a value follows the allowed format and rules.",
   consistency:
-    "Consistency asks whether definitions and handling agree across the records being compared.",
+    "Consistency asks whether the same definitions are used for all the records being compared.",
   uniqueness: "Uniqueness asks whether the same accession has been counted more than once.",
   timeliness:
-    "Timeliness asks whether the data are current and available for the intended report date.",
-  fitness:
-    "Fitness for purpose asks whether the analysis can answer the intended laboratory question.",
+    "Timeliness asks whether the data are complete and up to date by the time the report is run.",
+  fitness: "Fitness for purpose asks whether the analysis can answer the laboratory's question.",
 };

@@ -27,35 +27,35 @@ export const orientationTasks: {
 }[] = [
   {
     id: "connection",
-    task: "Keep the network and shared systems available so the LIS and instrument connections can operate.",
+    task: "Keep the hospital network and shared systems running so the LIS and instrument connections work.",
     owner: "it",
     explanation:
-      "Hospital IT keeps these shared services running. The LIS team supports the laboratory software and tests orders and results with the laboratory.",
+      "Hospital IT keeps these shared systems running. The LIS team looks after the laboratory software and tests orders and results with the laboratory.",
   },
   {
     id: "lis-build",
-    task: "Add the test to the LIS and test the messages carrying its orders and results before laboratory review.",
+    task: "Add the test to the LIS and test the messages that carry its orders and results, before the laboratory reviews it.",
     owner: "lis-team",
     explanation:
       "The LIS analyst adds the test and changes the interface. The laboratory tells the analyst what the report should contain, then checks the finished report.",
   },
   {
     id: "report",
-    task: "Approve the order and complete result report, including how the report appears in the EHR.",
+    task: "Approve how the test is ordered and what the complete report says, including how it looks in the EHR.",
     owner: "laboratory",
     explanation:
-      "The laboratory director approves what the report says and how it appears in the EHR. The LIS and EHR analysts make the required changes.",
+      "The laboratory director approves what the report says and how it looks in the EHR. The LIS and EHR analysts make the changes.",
   },
   {
     id: "result-design",
-    task: "Help chemistry use the laboratory's usual naming and reporting practices for the new assay, including its display and corrections in the EHR.",
+    task: "Help chemistry name and report the new assay like the laboratory's other tests, including how it displays and how corrections appear in the EHR.",
     owner: "pathology-informatics",
     explanation:
-      "Pathology informatics works across laboratory sections. It helps chemistry check that the assay's name, report and corrections follow the laboratory's usual practices.",
+      "Pathology informatics works across laboratory sections. It helps chemistry check that the assay's name, report and corrections match the way the laboratory handles its other tests.",
   },
   {
     id: "cds",
-    task: "Develop and review an EHR alert that uses the troponin result along with diagnoses and medications.",
+    task: "Build and review an EHR alert that combines the troponin result with the patient's diagnoses and medications.",
     owner: "shared-cds",
     explanation:
       "Pathology informatics may lead an alert based on laboratory results. Clinical informatics and the treating clinicians also need to check how this alert uses diagnoses and medications.",
@@ -65,7 +65,7 @@ export const orientationTasks: {
     task: "Prepare staff and procedures for patient testing. Check that each shift has supplies and knows whom to call for help.",
     owner: "laboratory-administration",
     explanation:
-      "Laboratory operations staff arrange the day-to-day work at the bench. The laboratory director checks that the section can safely offer the test.",
+      "Laboratory operations staff run the day-to-day work at the bench. The laboratory director checks that the section is ready to offer the test safely.",
   },
 ];
 
@@ -81,7 +81,7 @@ export const orientationTickets: {
       "The laboratory issued a corrected troponin result report, but the report displayed in the EHR is still wrong.",
     answer: "laboratory",
     explanation:
-      "The pathologist or laboratory director should lead. The laboratory must check the complete corrected report in the EHR after the analyst repairs it.",
+      "The pathologist or laboratory director should lead. Once the analyst fixes the display, the laboratory checks the complete corrected report in the EHR.",
   },
   {
     id: "wrong-trend",
@@ -89,7 +89,7 @@ export const orientationTickets: {
       "The troponin report is correct. In the EHR trend graph, however, the result is plotted with results from a different assay.",
     answer: "pathology-informatics",
     explanation:
-      "Pathology informatics should review the assays with chemistry. The laboratory must decide whether their results can be compared before an EHR analyst changes the trend graph.",
+      "Pathology informatics should review the two assays with chemistry. Only the laboratory can say whether their results can be compared, and that has to be settled before an EHR analyst changes the trend graph.",
   },
   {
     id: "repeat-alert",
@@ -97,7 +97,7 @@ export const orientationTickets: {
       "A corrected troponin result causes the same EHR alert to fire again for the treating clinician.",
     answer: "clinical-informatics",
     explanation:
-      "Clinical informatics should coordinate the alert review. First, pathology informatics and the LIS team check whether the correction replaced the original result. In Health Level Seven version 2 (HL7 v2), status C marks a correction to the same observation. If it arrived as a new result, the laboratory team must fix that first.",
+      "Clinical informatics should coordinate the review of the alert. But first, pathology informatics and the LIS team check whether the correction replaced the original result. In Health Level Seven version 2 (HL7 v2), status C marks a correction to the same observation. If the correction arrived as a new result, the laboratory team fixes that first.",
   },
 ];
 
@@ -108,38 +108,37 @@ export const ticketOwnerOptions: { id: TicketOwnerId; label: string }[] = [
 ];
 
 export const goLiveEvidence = [
-  { label: "Analyzer to EHR", value: "Test results transmitted successfully", tone: "positive" },
+  { label: "Analyzer to EHR", value: "Test results reach the EHR", tone: "positive" },
   {
     label: "Laboratory result report",
-    value: "The interpretive comment does not appear in full in the verified EHR report location",
+    value: "Interpretive comment is cut off in the EHR report the laboratory checks",
     tone: "critical",
   },
   {
     label: "Troponin alert",
-    value: "The alert logic has not been reviewed by pathology or the chemistry laboratory",
+    value: "Pathology and chemistry have not yet reviewed the alert",
     tone: "warning",
   },
   {
     label: "Procedures, training and staffing",
-    value: "Procedures, training, and staffing coverage remain incomplete",
+    value: "Procedures, training and shift coverage not finished",
     tone: "critical",
   },
 ] as const;
 
 export const orientationCopy = {
   hints: {
-    connection:
-      "Which team keeps shared hospital services running when several departments need them?",
-    "lis-build": "Who can add a test definition and change the messages sent by the LIS?",
-    report: "Who can decide that the full report is suitable for patient care?",
+    connection: "Which team keeps the hospital's shared systems running for every department?",
+    "lis-build": "Who adds new tests to the LIS and changes the messages it sends?",
+    report: "Who decides that the full report is ready for patient care?",
     "result-design":
-      "Which group helps different laboratory sections use consistent test names and reports?",
-    cds: "This alert uses both a laboratory result and other chart information. Who needs to review those together?",
-    operations: "Who arranges the bench procedures and makes sure every shift has trained staff?",
+      "Which group helps every laboratory section name and report tests the same way?",
+    cds: "This alert uses a laboratory result and other information from the chart. Who needs to look at both together?",
+    operations: "Who writes the bench procedures and makes sure every shift has trained staff?",
   } as Record<string, string>,
-  hold: "The team still needs to repair the comment and review the alert. The section also needs completed procedures, trained staff and shift coverage.",
+  hold: "The comment still has to be fixed and the alert reviewed. The section also needs finished procedures, trained staff and every shift covered.",
   premature:
-    "The clinician would receive a report with part of the comment missing. The alert has not had pathology review, and the bench preparation is unfinished.",
+    "Clinicians would get a report with part of the comment missing. Pathology has not reviewed the alert, and the bench is not ready.",
   complete:
-    "You have assigned the build, report review and bench preparation, and identified who should lead each call. The director can use that list to follow up before Monday.",
+    "You have matched the build, report review and bench preparation to the right people, and chosen who should lead each call. The director can use your list to follow up before Monday.",
 };

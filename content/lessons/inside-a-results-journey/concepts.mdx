@@ -1,47 +1,47 @@
 ## Follow one report through the systems
 
-The analyzer sends its CBC measurements to the LIS. A technologist reviews and releases the report there. The LIS then sends a message containing the report to the interface engine. The interface engine holds messages waiting to be sent in a **queue** and delivers them to the EHR.
+The analyzer sends its CBC measurements to the LIS. A technologist reviews the result and releases it there. The LIS then sends a message containing the report to the interface engine. The interface engine holds messages waiting to go out in a **queue** and delivers them to the EHR.
 
-The message travels over the hospital's internal network to a program that receives laboratory messages for the EHR. We will call that program the **receiving service**. It reads the message and passes the report into the EHR so the patient's chart can be updated.
+The message travels over the hospital's internal network to a program that accepts laboratory messages for the EHR. We will call that program the **receiving service**. It reads the message and passes the report into the EHR, where it updates the patient's chart.
 
-Build that path below. The map shows the hospital network between the interface engine and EHR to highlight the connection you will investigate. The analyzer-to-LIS and LIS-to-interface transfers also use the network.
+Build that path below. The map shows the hospital network only between the interface engine and the EHR, because that is the connection you will investigate. The other steps use the network too.
 
-## Separate the computer from the work it performs
+## The computer and the software running on it
 
-**Hardware** means physical equipment. A server is a computer that runs services used by other computers. Its processor carries out instructions, its memory holds information being used, and its storage keeps files and records. A network adapter connects it to the network. A network switch passes traffic between connected devices.
+**Hardware** means physical equipment. A server is a computer that runs services for other computers. Its processor carries out instructions, its memory holds what is being worked on, and its storage keeps files and records. A network adapter connects it to the network, and a network switch passes traffic between the connected devices.
 
-**System software** manages those resources. The operating system starts applications and gives them access to memory, storage and network connections.
+**System software** runs the computer itself. The operating system starts applications and gives them access to memory, storage and the network.
 
-**Application software** performs a particular job. The LIS manages orders and results. The interface engine prepares and routes messages. Both applications use the operating system to access the computer's memory, storage and network connection.
+**Application software** does a particular job. The LIS manages orders and results. The interface engine reformats messages and sends them where they need to go. Both rely on the operating system to use the computer's memory, storage and network connection.
 
-For example, an interface server can have unused memory and a running application while every outgoing report waits in its queue. To investigate that delay, the analyst opens the delivery log and checks what happened when the application tried to send a report.
+A server can have plenty of free memory and a running application while every outgoing report sits in its queue. To find out why, the analyst opens the delivery log and reads what happened each time the application tried to send a report.
 
 ## What a connection needs
 
 ### IP addresses: reaching the computer
 
-A **protocol** is an agreed set of rules for communication. **Internet Protocol (IP)** provides rules for addressing and moving data across a network. Data travels in small pieces called **packets**, which carry source and destination addresses. Network equipment uses the destination address to forward each packet toward the receiving computer.
+A **protocol** is an agreed set of rules for communicating. **Internet Protocol (IP)** sets the rules for addressing data and moving it across a network. Data travel in small pieces called **packets**, each carrying the address it came from and the address it is going to. Network equipment reads the destination address and passes each packet along toward the receiving computer.
 
-An **IP address** can look like `10.20.30.40`: four numbers separated by dots. In this hospital, that is the address used to reach the EHR computer that receives laboratory messages. The interface engine's computer has its own address, `10.20.30.15`. These addresses are used within the hospital's private network.
+An **IP address** can look like `10.20.30.40`: four numbers separated by dots. In this hospital, that is the address of the EHR computer that receives laboratory messages. The interface engine's computer has its own address, `10.20.30.15`. Both addresses work only inside the hospital's private network.
 
 ### Ports: reaching the receiving service
 
-One computer can run several programs that accept network connections. A **port** is a number that directs a connection to a particular service. The EHR's laboratory receiving service is configured to wait for connections on port `5000`. Staff describe this as **listening on port 5000**.
+One computer can run several programs that accept connections. A **port** is a number that sends a connection to one particular service. The EHR's laboratory receiving service is set up to wait for connections on port `5000`. Staff say it is **listening on port 5000**.
 
-Think of the IP address as a building's street address and the port as an office number inside it. The interface engine needs both settings to connect to the receiving service. For this hospital, the destination is written as `10.20.30.40:5000`. The number after the colon is the port. The interface and EHR teams agreed on 5000 for this connection; another hospital may use a different number.
+Think of the IP address as a building's street address and the port as an office number inside it. The interface engine needs both to reach the receiving service. For this hospital, the destination is written `10.20.30.40:5000`, with the port after the colon. The interface and EHR teams agreed on 5000 for this connection; another hospital may use a different number.
 
-When you inspect the records below, compare the sender's destination address and port with the receiving service's settings. Also check that the receiving service is running and listening. Together, these checks explain where the sender is trying to connect and which service is ready to receive it.
+In the records below, compare the address and port the sender is using with the ones the receiving service is set to. Check, too, that the receiving service is running and listening. That tells you where the sender is trying to connect, and whether anything is there to answer.
 
 ### TCP/IP: moving the data between applications
 
-**Transmission Control Protocol (TCP)** establishes a connection between the two applications and keeps track of the data sent over it. TCP resends missing data and puts received data back in order. If a connection fails, the sending application can report the failure and decide when to try again.
+**Transmission Control Protocol (TCP)** sets up a connection between the two applications and keeps track of the data sent over it. It resends anything that goes missing and puts the data back in order. If the connection fails, the sending application can log the failure and try again later.
 
-**TCP/IP** is the name commonly used for this family of network communication protocols. IP supplies the addressing and packet delivery; TCP provides an ordered, reliable stream of data for applications. Hospitals use TCP/IP on their internal networks as well as for connections to outside services.
+**TCP/IP** is the usual name for this set of rules. IP gets the data to the right address; TCP makes sure the applications receive all of it, in order. Hospitals use TCP/IP on their internal networks as well as for connections to outside services.
 
-The program that opens the connection is the **client**. Here, the interface engine is the client. The **server** is the service waiting to accept that connection: the EHR's laboratory receiving service. Once connected, the two programs can exchange data in both directions.
+The program that starts the connection is the **client**. Here, that is the interface engine. The **server** is the service waiting to accept the connection: the EHR's laboratory receiving service. Once connected, the two programs can send data both ways.
 
 ### Sending and accepting the laboratory message
 
-After connecting, the interface engine sends the laboratory message. Its patient identifier, test name, result, units and other fields follow an agreed format. **Health Level Seven (HL7)** provides commonly used message formats that let the sending and receiving applications find those fields consistently.
+Once connected, the interface engine sends the laboratory message. The patient identifier, test name, result, units and other items sit in agreed fields. **Health Level Seven (HL7)** provides the message formats most laboratories use, so that the sending and receiving applications find each item in the same place.
 
-The receiving application returns an **acknowledgment (ACK)** to report acceptance or an error, according to the agreed message process. The interface engine records that reply. In this hospital, it keeps messages awaiting the expected acknowledgment in the queue and retries delivery. The laboratory then checks that the accepted message appears as a complete report in the correct patient's chart.
+The receiving application replies with an **acknowledgment (ACK)**, saying whether it accepted the message or found an error. The interface engine logs that reply. In this hospital, a message stays in the queue, and the engine keeps trying, until the acknowledgment comes back. Even then, the laboratory still checks that the complete report appears in the right patient's chart.

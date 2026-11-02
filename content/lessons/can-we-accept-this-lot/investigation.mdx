@@ -1,23 +1,23 @@
 ## How precise is the average shift?
 
-The mean of these 18 differences is +1.2 ng/L. A different set of suitable patient specimens would probably give a somewhat different mean. We need to describe that uncertainty before comparing the shift with the laboratory's limit.
+The mean of these 18 differences is +1.2 ng/L. A different set of patient specimens would probably give a slightly different mean. Before comparing the shift with the laboratory's limit, you need to know how much it could move.
 
-The **standard error** describes uncertainty in the estimated mean. It differs from the SD, which describes the spread of individual differences. Here, divide the SD of about 1.2 by the square root of 18: the standard error is about **0.28 ng/L**.
+The **standard error** describes how uncertain the mean is. It is not the same as the SD, which describes how spread out the individual differences are. Here, divide the SD of about 1.2 by the square root of 18: the standard error is about **0.28 ng/L**.
 
-A **95% confidence interval** extends on each side of the estimated mean. For these 18 pairs, the t calculation uses a multiplier of about 2.11. The margin is 2.11 × 0.28, or about 0.6 ng/L. Thus +1.2 minus or plus 0.6 gives an interval of approximately **+0.6 to +1.8 ng/L**.
+A **95% confidence interval** runs the same distance either side of the mean. For 18 pairs, the t calculation uses a multiplier of about 2.11, so the margin is 2.11 × 0.28, or about 0.6 ng/L. So +1.2 plus or minus 0.6 gives an interval of approximately **+0.6 to +1.8 ng/L**.
 
-This interval describes uncertainty about the average shift. It does not promise that 95% of individual differences lie inside it. TNI-016's +3.5 ng/L difference, for example, lies outside the interval for the mean.
+This interval is about the average shift. It does not say that 95% of individual differences fall inside it. TNI-016's difference of +3.5 ng/L, for example, lies well outside it.
 
-The 95% describes the calculation method: across many comparable samples, about 95% of intervals made this way would contain the underlying mean, if the assumptions hold. It does not guarantee the next sample's mean.
+The 95% is a property of the method. If the comparison were repeated many times with new specimens, about 95% of the intervals calculated this way would contain the true average shift, as long as the assumptions hold. It does not promise where the next comparison's mean will land.
 
 ## What question does the p-value answer?
 
-The paired t-test starts with the assumption that the underlying average difference is zero. This is called the **null hypothesis**. It compares the observed mean with its standard error to ask how unusual this result would be under that assumption.
+The paired t-test starts by assuming that the true average difference is zero. This is the **null hypothesis**. The test compares the observed mean with its standard error to ask how surprising this result would be if that assumption were true.
 
-Here, **p < 0.001** means that, if the zero-difference assumption and the test's assumptions were true, a test result this extreme or more extreme would occur less than once in a thousand such comparisons. The data therefore provide evidence of an average difference. This is not a probability that the lot is acceptable, or that a particular patient's result is correct.
+Here, **p < 0.001** means that if the average difference really were zero, and the test's assumptions held, a result this extreme or more extreme would turn up less than once in a thousand comparisons. So the data are good evidence that the lots differ on average. The p-value is not the probability that the lot is acceptable, or that any one patient's result is correct.
 
 ## Compare the size of the shift with the agreed limit
 
-Before testing, the director specified an acceptable average shift from −2 to +2 ng/L near this assay's clinical decision concentration. The interval from +0.6 to +1.8 is entirely inside that range. A measurable difference can therefore satisfy this case's criterion.
+Before testing, the director set an acceptable average shift of −2 to +2 ng/L near this assay's clinical decision concentration. The interval from +0.6 to +1.8 lies entirely inside that range. So a difference can be real and still small enough to accept.
 
-The six very low and six elevated specimens still need their separate checks. Those checks answer questions that the average of these 18 differences cannot answer.
+The six very low and six elevated specimens still need their own checks. The average of these 18 differences cannot answer the questions those checks ask.

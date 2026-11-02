@@ -2,53 +2,59 @@
 
 ## A new reagent lot
 
-You are the pathology resident rotating through the chemistry lab. The current reagent lot for the high-sensitivity cardiac troponin I assay is nearly exhausted. Before the new lot can be used for patient testing, the laboratory must compare it with the current lot.
+You are the pathology resident on your chemistry rotation. The current reagent lot for the high-sensitivity cardiac troponin I assay is nearly used up. Before the new lot goes into use for patient testing, the laboratory has to compare it with the current one.
 
-Thirty patient plasma specimens left over after testing were used for the comparison. Results range from very low troponin concentrations to markedly elevated concentrations, including several near this laboratory's assay-specific clinical decision concentration. Quality control was acceptable with both lots.
+The technologist ran 30 leftover patient plasma specimens on both lots. They range from very low troponin to markedly elevated, and several sit near the concentration this laboratory uses for clinical decisions. Quality control was acceptable on both lots.
 
-Every specimen was tested with both lots. Each row in the worksheet therefore contains two results from one specimen—one from the current lot and one from the new lot. These are called **paired results** because the two numbers belong to the same specimen.
+Because every specimen was run on both lots, each row of the worksheet holds two results for one specimen: one from the current lot and one from the new lot. These are **paired results**, because the two numbers belong to the same specimen.
 
-The technologist sends you the comparison worksheet. Each row shows the specimen number, current-lot result, new-lot result, and the difference between them. After you inspect the individual results, the lesson will show the mean, median, and standard deviation of the paired differences.
+The technologist sends you the worksheet. Each row shows the specimen number, the current-lot result, the new-lot result and the difference between them. Once you have looked at the individual results, the lesson shows the mean, median and standard deviation of those differences.
 
-Your question is straightforward: **Do the new-lot results differ from the current-lot results, and is the difference large enough to matter for patient testing?**
+Your question is simple: **Do the new-lot results differ from the current-lot results, and is the difference big enough to matter for patients?**
 
-### How the comparison is organized
+### How the comparison is set up
 
-- Six very low specimens check whether both lots give the same reportable category near the assay's lower limit.
-- Eighteen specimens near the clinical decision concentration are used for the main statistical comparison.
-- Six markedly elevated specimens check whether the lots remain acceptably close at higher concentrations.
+- Six very low specimens check that both lots put a result in the same reporting category near the bottom of the assay's range.
+- Eighteen specimens near the clinical decision concentration make up the main statistical comparison.
+- Six markedly elevated specimens check that the lots still agree at high concentrations.
 
-The laboratory uses the criteria below for this lot comparison. Other assays and laboratories need their own approved criteria.
+Before any testing, the director wrote down three acceptance criteria:
 
-Before testing, the director set three acceptance criteria: an average shift between -2 and +2 ng/L near this laboratory's 99th-percentile limit of 20 ng/L; the same less-than-2 ng/L category for the six very low specimens; and results within ±10% for the six elevated specimens. Patient specimens are used because quality-control material can respond differently from patient samples to a lot change.
+- Near this laboratory's 99th-percentile limit of 20 ng/L, the average shift must fall between −2 and +2 ng/L.
+- All six very low specimens must stay in the same less-than-2 ng/L category on both lots.
+- All six elevated specimens must agree within ±10%.
+
+These limits belong to this case. Other assays and other laboratories set their own.
+
+The comparison uses patient specimens rather than quality-control material because quality-control material does not always react to a new lot the way patient samples do.
 
 ## Terms used in this case
 
 ### Describing the paired results
 
-- **Paired results:** two measurements from the same specimen, one with each reagent lot. Keeping the pair together lets you calculate that specimen's change.
-- **Paired difference:** the new-lot result minus the current-lot result. A positive difference means that the new lot reads higher for that specimen.
-- **Mean:** the sum of the differences divided by the number of specimens. It describes the average shift between the lots.
-- **Median:** the middle difference after the differences are ordered from smallest to largest. With an even number of specimens, average the two middle values.
-- **Standard deviation (SD):** a measure of how widely the individual differences are spread around their mean. A larger SD means the shifts vary more between specimens.
+- **Paired results:** two measurements from the same specimen, one on each reagent lot. Keeping the pair together lets you work out how much that specimen changed.
+- **Paired difference:** the new-lot result minus the current-lot result. A positive difference means the new lot reads higher for that specimen.
+- **Mean:** add up the differences and divide by the number of specimens. It gives the average shift between the lots.
+- **Median:** put the differences in order from smallest to largest and take the middle one. With an even number of specimens, average the two middle values.
+- **Standard deviation (SD):** how widely the individual differences are spread around their mean. A larger SD means the shift varies more from one specimen to the next.
 
 ### Judging the comparison
 
-- **Standard error (SE):** an estimate of how much the sample mean would vary across repeated comparisons using new groups of specimens. It helps describe the precision of the estimated average shift.
-- **Confidence interval (CI):** a range calculated from the sample to describe uncertainty in the average shift between lots. Its calculation uses the standard error and a chosen confidence level.
-- **Null hypothesis:** the assumption being tested. For this comparison, it is that the average difference between the lots is zero.
-- **P-value:** the probability of a test result at least as extreme as the observed result, assuming the null hypothesis and the test's other assumptions hold. Here, the test considers the average difference relative to its standard error.
-- **Acceptance criteria:** limits agreed before testing that determine whether the lot comparison meets the laboratory's requirements. Here, the team checks the average shift and the very low and elevated results against the director's limits.
+- **Standard error (SE):** how much the mean would be expected to move if you repeated the comparison with a different set of specimens. It tells you how precisely the average shift is known.
+- **Confidence interval (CI):** a range around the mean that shows how uncertain the average shift is. It is calculated from the standard error and a chosen confidence level, such as 95%.
+- **Null hypothesis:** the starting assumption that a test checks. Here, it is that the average difference between the lots is zero.
+- **P-value:** the probability of getting a result at least as extreme as the one observed, if the null hypothesis and the test's other assumptions are true. Here, the test looks at the average difference relative to its standard error.
+- **Acceptance criteria:** limits agreed before testing that decide whether the new lot is acceptable. Here, the team checks the average shift, the very low results and the elevated results against the director's limits.
 
 ## Your task
 
-Inspect the paired results, describe their pattern and work through the average difference. Then compare the confidence interval with the director's limits and review the other concentration groups before recommending what happens next.
+Look at the paired results, describe their pattern and work out the average difference. Then compare the confidence interval with the director's limit, check the very low and elevated specimens, and recommend what happens next.
 
-The lesson explains mean, median, standard deviation, confidence intervals and p-values as you need them. You will also distinguish paired measurements from unrelated groups when choosing a statistical test.
+The lesson explains the mean, median, standard deviation, confidence interval and p-value as you need them. At the end, you will choose statistical tests for a few other study designs, including ones where the groups are not paired.
 
 ## What you will be able to do
 
-- Calculate and interpret a difference between two results from the same specimen.
-- Distinguish the spread of individual differences from uncertainty in their average.
+- Calculate and interpret the difference between two results from the same specimen.
+- Tell the spread of individual differences apart from the uncertainty in their average.
 - Compare a confidence interval with criteria agreed before testing.
-- Choose a statistical test that fits the pairing, groups and type of result.
+- Choose a statistical test that fits the pairing, the number of groups and the type of result.

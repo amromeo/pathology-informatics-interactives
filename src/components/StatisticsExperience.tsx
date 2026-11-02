@@ -638,7 +638,7 @@ export function StatisticsExperience({
             <div className={`feedback ${selectedConfidence.correct ? "correct" : "incorrect"}`}>
               <strong>
                 {selectedConfidence.correct
-                  ? "The estimated average shift remains within the laboratory's limit."
+                  ? "The average shift stays within the laboratory's limit."
                   : "This interval describes uncertainty around the mean."}
               </strong>
               <p>{selectedConfidence.feedback}</p>
@@ -798,7 +798,7 @@ export function StatisticsExperience({
             <div className={`feedback ${selectedFinal.correct ? "correct" : "incorrect"}`}>
               <strong>
                 {selectedFinal.correct
-                  ? "The new lot can be accepted with documentation and monitoring."
+                  ? "The new lot can be accepted if the shift is recorded and monitored."
                   : "This does not use all of the available evidence."}
               </strong>
               <p>{selectedFinal.feedback}</p>
@@ -860,7 +860,7 @@ export function StatisticsExperience({
         <div role="status" aria-live="polite" aria-atomic="true">
           {checksRun && finalPasses && (
             <div className="feedback correct">
-              <strong>The comparison supports use of the new lot.</strong>
+              <strong>The comparison supports using the new lot.</strong>
               <p>{lessonCopy.text06}</p>
             </div>
           )}

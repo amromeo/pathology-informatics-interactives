@@ -20,7 +20,7 @@ export const manifest: LessonManifest = {
   id: "02",
   layout: "standard",
 
-  summary: "A completed blood count remains pending in the emergency department chart.",
+  summary: "A finished blood count still shows as pending in the emergency department chart.",
   sources: [
     {
       label: "PIER Essentials Release 5",
@@ -41,9 +41,9 @@ export const manifest: LessonManifest = {
       id: "1.4-inside-a-results-journey",
       objective: "1.4",
       summary:
-        "Build the reporting path and identify the connection that prevents the ED receiving a final result.",
+        "Build the reporting path and find the connection that kept a final result from reaching the ED.",
       learnerAction:
-        "Build the reporting path and identify the connection that prevents the ED receiving a final result.",
+        "Build the reporting path and find the connection that kept a final result from reaching the ED.",
       primary: true,
       taughtIn: ["interaction"],
       evidence: [

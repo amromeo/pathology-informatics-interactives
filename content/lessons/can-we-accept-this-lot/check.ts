@@ -5,26 +5,26 @@ export const checks: RetrievalItem[] = [
     id: "principle",
     kind: "principle",
     prompt:
-      "A paired reagent comparison has p < 0.001, but its entire confidence interval for the mean shift lies inside the approved limit. What should the team do next?",
+      "A paired reagent-lot comparison has p < 0.001, but the whole confidence interval for the mean shift lies inside the agreed limit. What should the team do next?",
     choices: [
       {
         id: "supported",
         label: "Review all acceptance criteria",
         correct: true,
         feedback:
-          "The study detects an average difference that meets the mean-shift criterion. The team must still check the other concentration groups and all remaining protocol requirements before director approval.",
+          "The comparison found an average difference that still meets the limit for the mean shift. Before the director approves the lot, the team has to check the other concentration groups and everything else the protocol requires.",
       },
       {
         id: "shortcut",
         label: "Reject because p is below 0.05",
         feedback:
-          "The small p-value concerns a zero average difference. It does not say that the measured shift exceeds the laboratory's acceptance limit.",
+          "The small p-value only says the average difference is unlikely to be zero. It does not say the shift is bigger than the laboratory's limit.",
       },
       {
         id: "incomplete",
         label: "Accept without reviewing other ranges",
         feedback:
-          "The main confidence interval describes one concentration group. It cannot establish acceptable agreement at very low or elevated concentrations.",
+          "The main confidence interval describes one concentration group. It cannot tell you whether the lots agree at very low or elevated concentrations.",
       },
     ],
   },
@@ -39,19 +39,19 @@ export const checks: RetrievalItem[] = [
         label: "Read the approved acceptance protocol",
         correct: true,
         feedback:
-          "The protocol should define the specimen groups, allowed differences, required checks and approver before the results are interpreted.",
+          "The protocol should set out the specimen groups, the allowed differences, the required checks and who approves the lot, before anyone looks at the results.",
       },
       {
         id: "shortcut",
         label: "Choose a limit that fits the observed mean",
         feedback:
-          "A limit chosen after seeing the result can excuse a shift the laboratory would previously have considered unacceptable. Use the criteria agreed before testing.",
+          "A limit picked after seeing the result can excuse a shift the laboratory would have rejected beforehand. Use the criteria agreed before testing.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "Use this lesson's troponin limits",
         feedback:
-          "The troponin limits in this lesson do not automatically fit another assay. Use that assay's approved protocol and clinical requirements.",
+          "The troponin limits in this lesson were set for this assay. Another assay needs its own approved protocol, based on how its results are used.",
       },
     ],
   },
@@ -66,19 +66,19 @@ export const checks: RetrievalItem[] = [
         label: "The excluded count and missing field",
         correct: true,
         feedback:
-          "State how many orders were excluded and that their collection times were missing. The average describes only the included orders. Investigate whether the missing times are concentrated during the delay being studied.",
+          "Say how many orders were left out and that their collection times were missing; otherwise readers will assume the average covers every order. Then check whether the missing times cluster around the very delay being studied.",
       },
       {
         id: "shortcut",
         label: "Only the mean of complete records",
         feedback:
-          "That mean cannot describe the excluded orders. If the longest delays also caused missing timestamps, reporting only complete records could make performance look better than it was.",
+          "That mean says nothing about the orders left out. If the worst delays also left timestamps missing, reporting only complete records would make things look better than they were.",
       },
       {
         id: "incomplete",
         label: "Only the total number of final results",
         feedback:
-          "The total does not identify how many orders contributed to the turnaround calculation or why others were omitted. Show the included and excluded counts and the missing field.",
+          "The total does not say how many orders went into the turnaround calculation or why the others were left out. Show both counts and name the missing field.",
       },
     ],
     fromLesson: "3",

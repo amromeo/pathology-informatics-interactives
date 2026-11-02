@@ -1,23 +1,23 @@
 ## Follow the accession time into the report
 
-The LIS stores each accession time in a defined field. A spreadsheet formula can use that field to calculate TAT. It cannot automatically read a handwritten time in a scanned requisition unless a separate extraction process has been built.
+The LIS stores each accession time in its own field, and a spreadsheet formula can use that field to calculate TAT. It cannot read a time handwritten on a scanned requisition.
 
-During cutover, 27 original accession times remained on the requisitions and paper log, while their structured LIS fields were blank. The coordinator checked those documents and entered the times in a separate spreadsheet column. The report could then calculate TAT without losing those cases.
+During cutover, the original accession times for 27 cases were written only on the requisitions and the paper log; their LIS fields were left blank. The coordinator looked up those times and typed them into a separate column of the spreadsheet, so TAT could still be calculated for those cases.
 
-This creates two questions. Does the spreadsheet use the correct original event? And is the LIS field complete? A usable spreadsheet does not mean that the underlying LIS record has been repaired.
+That leaves two separate questions. Does the spreadsheet use the right time, the moment each case was actually accessioned? And is the LIS field still blank? A spreadsheet that calculates correctly does not mean the LIS record has been fixed.
 
-## Name the question each data check answers
+## Name the question each check asks
 
-A **data-quality dimension** is a way to describe a particular kind of check. Use the seven terms below to classify the checks in this case.
+Each check below asks one kind of question about the data. These kinds of question are often called **data-quality dimensions**. Use the seven below to sort the checks in this case.
 
-- **Accuracy:** does a value describe what actually happened? Compare a populated accession-time field with the contemporaneous source record.
-- **Completeness:** is the required information present? Count blank accession-time fields, even when a coordinator recovered the times elsewhere.
-- **Validity:** does the value follow the required format and rules? Check that a timestamp can be read as a date and time and that finalization does not precede accession.
-- **Consistency:** is the same definition used throughout? Confirm that all periods measure accession to the initial final report.
-- **Uniqueness:** is each accession counted once? An amendment should remain attached to its case rather than create another case row.
-- **Timeliness:** are the data available and current when they are needed? Confirm that the April 20 export includes the late-finalized cases accessioned through April 3.
-- **Fitness for purpose:** can this analysis answer the laboratory's question? A single post-go-live group hides the difference between cutover and the later weeks.
+- **Accuracy:** does the value match what actually happened? Compare a filled-in accession time with the requisition or log written at the time.
+- **Completeness:** is the required information there? Count the blank accession-time fields, even if the coordinator found the times elsewhere.
+- **Validity:** is the value in the right format, and does it make sense? Check that each timestamp reads as a date and time, and that no case is signed out before it was accessioned.
+- **Consistency:** is the same definition used throughout? Check that every period measures from accessioning to the initial final report.
+- **Uniqueness:** is each accession counted once? An amended report should stay with its case, not add another row.
+- **Timeliness:** are the data up to date when they are needed? Check that the April 20 export includes cases accessioned by April 3 that were signed out late.
+- **Fitness for purpose:** can this analysis answer the laboratory's question? Lumping all post-go-live weeks together hides the difference between cutover and the weeks that followed.
 
-For example, a correctly formatted time can pass a validity check and still fail an accuracy check if it records later data entry instead of accession. A blank field is a completeness problem; there is no value there yet to compare for accuracy.
+A time can be in the right format and still be wrong. If it records when someone typed the case in later, rather than when it was accessioned, it passes the validity check and fails the accuracy check. A blank field is a completeness problem: there is nothing there yet to judge for accuracy.
 
-Choose the main question each check addresses. Some problems affect more than one dimension, so explain your reasoning rather than treating the terms as entirely separate compartments.
+For each check below, choose the question it mainly asks. Some problems touch more than one, so be ready to explain your choice.

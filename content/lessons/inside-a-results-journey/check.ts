@@ -9,22 +9,22 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "Communicate the verified result",
+        label: "Give the clinician the result now",
         correct: true,
         feedback:
-          "The laboratory already has a verified result. Communicate it through the approved downtime process, obtain read-back when required and record the call while the analyst traces electronic delivery.",
+          "The laboratory already has a verified result. Phone it through under the downtime procedure, get a read-back when required and record the call, while the analyst works out why the electronic report did not arrive.",
       },
       {
         id: "shortcut",
         label: "Restart the interface before calling",
         feedback:
-          "Restarting may not repair the failed connection, and it delays a result already available in the LIS. Staff can communicate that result while the analyst investigates.",
+          "A restart may not fix the connection, and it keeps the clinician waiting for a result the LIS already has. Call the result first; the analyst can investigate meanwhile.",
       },
       {
         id: "incomplete",
         label: "Wait for the next scheduled report",
         feedback:
-          "A scheduled report may use the same failed connection. The clinician needs the verified result now, so use the approved downtime communication process.",
+          "The next scheduled report may go through the same broken connection. The clinician needs the result now, so phone it under the downtime procedure.",
       },
     ],
   },
@@ -39,7 +39,7 @@ export const checks: RetrievalItem[] = [
         label: "Trace the same result through the LIS, message queue and chart",
         correct: true,
         feedback:
-          "Use the same accession and result to compare the release record, outgoing message, receiving acknowledgment and chart. Each record establishes a different step in delivery.",
+          "Follow one accession and result through the release record, the outgoing message, the acknowledgment and the chart. Each record shows a different step, so the first one that is missing tells you where delivery stopped.",
       },
       {
         id: "shortcut",
@@ -49,9 +49,9 @@ export const checks: RetrievalItem[] = [
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "Correct the destination port, as in this case",
         feedback:
-          "An incorrect destination port caused this case. To choose a repair for a new incident, first trace the missing report through the local systems and identify where delivery stopped.",
+          "A wrong port caused this case, but your missing result may have a different cause. Trace it through your own systems and find where it stopped before choosing a fix.",
       },
     ],
   },
@@ -67,19 +67,19 @@ export const checks: RetrievalItem[] = [
         label: "The laboratory director",
         correct: true,
         feedback:
-          "The laboratory director or designated laboratory approver reviews the complete corrected report. The LIS and EHR teams make and test the technical change.",
+          "The laboratory director, or whoever the laboratory has named to approve reports, reviews the complete corrected report. The LIS and EHR teams make and test the change.",
       },
       {
         id: "shortcut",
         label: "The interface analyst alone",
         feedback:
-          "The analyst can change the mapping and test transmission. Clinical approval still belongs to the laboratory, which must review the complete report as it appears in the chart.",
+          "The analyst can change the units and test that the message goes through. Approving the report is still the laboratory's job, and it has to look at the complete report as it appears in the chart.",
       },
       {
         id: "incomplete",
         label: "The software vendor alone",
         feedback:
-          "The vendor can help correct the display, but it cannot replace the laboratory's review of its report. The laboratory director or designated approver confirms that the corrected result is suitable for clinical use.",
+          "The vendor can help fix the display, but it cannot approve the laboratory's report. The laboratory director, or the laboratory's named approver, decides whether the corrected report is ready for patient care.",
       },
     ],
   },

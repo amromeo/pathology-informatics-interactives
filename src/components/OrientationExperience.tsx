@@ -76,9 +76,7 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
             </label>
           ))}
         </fieldset>
-        <p>
-          You will revisit this recommendation after assigning the work and reviewing the calls.
-        </p>
+        <p>You will come back to this after you assign the work and review the calls.</p>
       </section>
       <section className="lesson-section" aria-labelledby="role-title">
         <div className="section-heading">
@@ -89,7 +87,7 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
           </div>
         </div>
         <p className="section-guidance">
-          Choose who should lead each job. Other people may need to help.
+          Choose who should lead each job. Others may need to help.
         </p>
         <div className="role-assignment-list">
           {orientationTasks.map((task, index) => {
@@ -159,7 +157,7 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
           </div>
         </div>
         <p className="section-guidance">
-          After go-live, three calls reach the laboratory. For each call, choose who should lead the
+          After go-live, the laboratory gets three calls. For each one, choose who should lead the
           response.
         </p>
         <div className="perspective-list">
@@ -213,7 +211,7 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
         </div>
         <article className="artifact-card go-live-brief">
           <header>
-            <span>System record</span>
+            <span>Case record</span>
             <strong>Friday meeting notes</strong>
           </header>
           <dl className="evidence-grid">
@@ -286,8 +284,7 @@ export function OrientationExperience({ onAttempt }: { onAttempt?: (attempted: b
           </button>
           {!allAnswered && (
             <p>
-              Complete all questions if you want a score. You can open the debrief below at any
-              time.
+              Answer every question if you want a score. You can open the debrief below at any time.
             </p>
           )}
         </div>

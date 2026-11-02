@@ -2,46 +2,45 @@
 
 ## Check the spreadsheet
 
-The hospital recently replaced its laboratory information system (LIS). The new LIS went live on Monday, February 16. You are a pathology resident working with the director of surgical pathology. The laboratory wants to know whether surgical pathology turnaround time (TAT) changed after go-live.
+The hospital has just replaced its laboratory information system (LIS). The new LIS went live on Monday, February 16. You are a pathology resident working with the director of surgical pathology, and the laboratory wants to know whether surgical pathology turnaround time (TAT) changed after go-live.
 
-The quality coordinator has prepared a spreadsheet that compares two periods:
+The quality coordinator has made a spreadsheet comparing two periods:
 
-- **Pre-go-live:** January 5–February 13, the six weeks before the new LIS went live.
-- **Post-go-live:** February 16–April 3, the cutover week and the following six weeks.
+- **Pre-go-live:** January 5 to February 13, the six weeks before the new LIS went live.
+- **Post-go-live:** February 16 to April 3, the go-live week (called cutover week here) and the six weeks after it.
 
-The director asks you to review the comparison before it is presented at the monthly quality meeting.
+The director asks you to look over the comparison before it goes to the monthly quality meeting.
 
-### How the report was prepared
+### How the report was made
 
-1. The quality coordinator asked the LIS analyst for a list of all biopsies and resections accessioned during the pre- and post-go-live periods.
-2. The LIS analyst used the reporting function in the LIS to make that list. The analyst then saved the list as a spreadsheet, with one case on each row. This is often called an **export** because information is copied out of the LIS into another file.
-3. The spreadsheet contains 210 pre-go-live cases and 245 post-go-live cases. Every case has a TAT value. The analyst supplied the LIS fields; the coordinator also checked the original requisitions and paper cutover log when an accession time was missing. You will inspect that source review below. The analyst supplied the LIS fields; the coordinator also checked the original requisitions and paper cutover log when an accession time was missing. You will inspect that source review below.
-4. The Summary tab shows the number of cases, mean TAT, and median TAT for each period.
+1. The quality coordinator asked the LIS analyst for a list of every biopsy and resection accessioned in the two periods.
+2. The analyst used the LIS's reporting tool to make that list and saved it as a spreadsheet, one case per row. Copying data out of the LIS into another file like this is called an **export**.
+3. The spreadsheet has 210 pre-go-live cases and 245 post-go-live cases, and every case has a TAT. The analyst supplied the LIS fields. Where a case had no accession time in the LIS, the coordinator looked it up on the original requisition and the paper log kept during cutover. You will look at that review below.
+4. The Summary tab shows the number of cases and the mean and median TAT for each period.
 
-For this report, the department defines TAT as working days from accession to the **initial final report**. Biopsies and resections that meet the department's usual eligibility rules are included. Later amendments are tracked separately and must not add a second row for the same accession.
+For this report, the department counts TAT in working days, from accessioning to the **initial final report**. It includes the biopsies and resections that meet the department's usual rules. Amended reports are tracked separately and must not add a second row for the same accession.
 
 ## Terms used in this case
 
 ### How data are recorded
 
-- **Field:** one defined place for one item. *Example: one field holds the specimen collection time.*
-- **Record:** the related fields kept for one case or accession. *Example: a surgical pathology accession record includes the accession number, specimen type, collection time, and case status.*
-- **Structured data:** data stored in defined fields and formats. *Example: “colon biopsy” is selected from a list and stored in the specimen-type field.*
-- **Unstructured data:** data recorded outside those fields. *Example: an accession time appears as handwriting in a scanned requisition; it is readable by a person but is not a separate searchable time field.*
-- **Query or filter:** instructions that select which records and fields to include. *Example: select biopsies and resections accessioned between January 5 and April 3.*
-- **Spreadsheet export:** a copy of selected LIS data placed in rows and columns. *Example: each row is an accession, with columns for accession time, final-report time, and specimen type.*
+- **Field:** one defined place for one item. *Example: a field that holds the specimen collection time.*
+- **Record:** all the fields kept for one case or accession. *Example: a surgical pathology accession record holds the accession number, specimen type, collection time and case status.*
+- **Structured data:** data stored in defined fields, in a set format. *Example: "colon biopsy" is picked from a list and stored in the specimen-type field.*
+- **Unstructured data:** data recorded outside those fields. *Example: an accession time handwritten on a scanned requisition. A person can read it, but a computer cannot search it or use it in a calculation.*
+- **Query or filter:** instructions that pick which records and fields to include. *Example: biopsies and resections accessioned between January 5 and April 3.*
+- **Spreadsheet export:** a copy of chosen LIS data laid out in rows and columns. *Example: one row per accession, with columns for the accession time, the final-report time and the specimen type.*
 
-The analyst ran the export on April 20, after every case accessioned through April 3 had an initial final report. An initial final report is the first signed-out report, before later amendments. Weekends are excluded; a partial day is counted as a fraction of 24 hours from the accession clock time.
-
+The analyst ran the export on April 20, by which time every case accessioned through April 3 had its initial final report. The initial final report is the first signed-out report, before any amendment. Weekends are not counted, and part of a day counts as a fraction of 24 hours from the time of accessioning.
 
 ## Your task
 
-Read the original comparison, then inspect the weeks and source records. Explain why the mean and median suggest different conclusions. Trace one accession time into the spreadsheet and choose a report that keeps the delayed cases visible.
+Read the original comparison, then look at the weeks one by one and at the source records. Explain why the mean and the median point to different conclusions. Follow one accession time from the requisition into the spreadsheet, and choose a way of reporting that keeps the delayed cases in view.
 
-You will use seven data-quality checks to distinguish a missing field, an incorrect value and a comparison that does not answer the intended question.
+Along the way, you will use seven data-quality checks to tell apart a missing value, a wrong value and a comparison that does not answer the director's question.
 
 ## What you will be able to do
 
 - Explain why the mean and median can move in different directions.
-- Trace a time from the requisition and LIS into the spreadsheet calculation.
-- Keep delayed cases visible while comparing cutover with routine weeks.
+- Follow a time from the requisition and the LIS into the spreadsheet calculation.
+- Keep delayed cases in view while comparing cutover week with ordinary weeks.

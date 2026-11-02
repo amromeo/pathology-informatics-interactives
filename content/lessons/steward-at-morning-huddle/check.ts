@@ -11,13 +11,13 @@ export const checks: RetrievalItem[] = [
         label: "The laboratory director",
         correct: true,
         feedback:
-          "The laboratory director checks that the units are correct in the complete chart report. The LIS and EHR analysts make and test the change.",
+          "The laboratory director checks that the units are right in the complete report in the chart. The LIS and EHR analysts make and test the change.",
       },
       {
         id: "shortcut",
         label: "The interface analyst alone",
         feedback:
-          "The analyst can repair the field and show that it reached the chart. The laboratory still needs to check and approve the complete report.",
+          "The analyst can fix the field and show that it reached the chart. The laboratory still has to check and approve the complete report.",
       },
       {
         id: "incomplete",
@@ -38,13 +38,13 @@ export const checks: RetrievalItem[] = [
         label: "Compare the LIS report with its complete report view in the EHR",
         correct: true,
         feedback:
-          "Compare the same report in both places. A complete comment in the LIS but a shortened one in the chart helps the analyst trace where it was cut off.",
+          "Look at the same report in both places. If the comment is complete in the LIS but short in the chart, the analyst knows where to look for the cut.",
       },
       {
         id: "shortcut",
         label: "Ask for a larger chart text box before looking at the LIS report",
         feedback:
-          "A larger text box will not recover words missing from the source report or message. Compare the reports first so the analyst changes the right part.",
+          "A bigger text box will not bring back words that are missing from the report or the message. Compare the two reports first, so the analyst fixes the right thing.",
       },
       {
         id: "incomplete",
@@ -63,22 +63,22 @@ export const checks: RetrievalItem[] = [
     choices: [
       {
         id: "supported",
-        label: "Communicate the verified result",
+        label: "Give the clinician the result now",
         correct: true,
         feedback:
-          "Call the result through the laboratory's downtime procedure, with read-back when required, and record the call. The team can investigate delivery while the clinician has the result.",
+          "Phone the result under the laboratory's downtime procedure, with read-back when required, and record the call. The team can work out what went wrong once the clinician has the result.",
       },
       {
         id: "shortcut",
         label: "Restart the interface before calling",
         feedback:
-          "A restart may not restore this result to the chart. Call the verified count first so the clinician is not left waiting during troubleshooting.",
+          "A restart may not get this result into the chart. Call the count first, so the clinician is not left waiting while the team troubleshoots.",
       },
       {
         id: "incomplete",
         label: "Wait for the next scheduled report",
         feedback:
-          "Waiting leaves the clinician with Pending even though the laboratory has a final count. Use the downtime procedure to communicate it now.",
+          "Waiting leaves the clinician looking at Pending when the laboratory already has a final count. Phone it through now under the downtime procedure.",
       },
     ],
   },
