@@ -32,10 +32,10 @@ export function AdditionalReview({ slug }: { slug: string }) {
           >
             {checked &&
               (q.feedbackByChoice
-                ? answers[q.id] === q.answer
-                  ? q.feedback
-                  : (q.feedbackByChoice[answers[q.id]] ??
-                    "Choose a review, then check this decision.")
+                ? (q.feedbackByChoice[answers[q.id]] ??
+                  (answers[q.id] === q.answer
+                    ? q.feedback
+                    : "Choose a review, then check this decision."))
                 : q.feedback)}
           </Feedback>
         </div>

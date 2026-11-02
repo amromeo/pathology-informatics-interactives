@@ -1,97 +1,58 @@
 # Faculty guide: Updating a Thyroid Reflex Rule
 
-## At a glance
-
-Allow 30 minutes. Use individually or in a small group. Project the case records and the exercise controls; keep the answer key out of view until learners commit to a decision.
-
-Learning objectives: check dependent reports after changing a reflex rule; list every result that depends on the reflex assay; justify the first local check. PIER: 4.3, 4.5, 4.2, 8.2.
+Allow 30 minutes. The resident should explain an additional FT4 using the saved rule, repair its lower threshold and account for all expected actions. The lesson addresses PIER 4.3, 4.5, 4.2 and 8.2.
 
 ## Run of show
 
-| Minutes | Activity | Ask the group |
-| --- | --- | --- |
-| 0–6 | Read the case and records | What decision has the laboratory been asked to make? |
-| 6–21 | Make, test and revise a choice | Which record supports your decision? What could fail? |
-| 21–30 | Debrief and retrieval questions | How would you verify this in your own laboratory? |
+Use about 6 minutes for the case and terms, 7 for the four records and worked comparison, 10 for the replay, and 7 for affected cases and monitoring.
 
-## Expected answers
+## Explain the separate definitions
 
+Ask the resident to identify the report definition, approved protocol, saved rule and order record. For TH-01, the report definition contains 0.27–4.20 mIU/L. Revision 8 contains a lower threshold of 0.40, and the order record names that revision.
 
-Ask learners to list every dependent object that should enter change scope: display, reflexes, calculations, decision support, interfaces, reports, validation cases, procedures, and training.
+Have the learner compare 0.30 with each threshold aloud. It is below 0.40, above 0.27 and below 4.20. The old lower condition creates the order; neither approved condition calls for one.
 
-Ask learners to explain how TH-01 can have a correct displayed interval and an
-incorrect downstream order. A complete answer identifies the separate display
-definition, reflex revision 8, its 0.40 threshold, and the order created by that
-revision. The reference interval did not itself place the FT4 order.
+The director explicitly approved both the interval and the adult reflex protocol. An assay's reference interval does not automatically determine an appropriate ordering sequence. Keep the clinical scope tied to this case.
 
-Expected configuration: lower 0.27, upper 4.20, strict outside-boundary comparison,
-adult TSH-with-reflex scope, final numeric results, and duplicate prevention for
-pending/completed FT4s on the same accession. The original rule matches 10/13
-actions and creates five orders; the correction matches 13/13 and creates two.
-An inclusive comparison fails TH-04 and TH-06. Removing duplicate prevention
-fails TH-08 and TH-09; bypassing scope fails TH-11 and TH-12; allowing preliminary
-numeric results fails TH-13. Missing TSH still requires review.
+## Test the complete protocol
 
-Require the learner to identify both removed orders and retained orders. Ask why
-a fall in order volume would also occur if all reflexes were disabled, and why
-that would not demonstrate success. Ask for the denominator: 13 selected records,
-including nine eligible final adult reflex results, two review exceptions, and
-two outside the protocol. This is not a random sample or a full-day utilization
-study.
+Expected settings: lower 0.27, upper 4.20, strictly outside the limits, adults with TSH-with-reflex orders, final numeric results, and reuse of pending or completed FT4s on the same accession.
 
-Discuss clinical approval separately from software maintenance. Reference
-intervals do not automatically define optimal reflex thresholds. The case
-explicitly states that the director approved these order criteria for the new
-assay and adult protocol. Do not generalize this sequence to all patients,
-pregnancy, pediatric testing, or suspected pituitary disease.
+The original configuration matches 10/13 and adds five orders. Changing only the lower threshold matches 13/13 and adds two. The removed additions are TH-01, TH-02 and TH-04; the retained additions are TH-03 and TH-07.
 
-The final handoff should name the approved revision, every dependent object,
-expected and observed actions, affected production accessions, monitoring
-denominators, and the person responsible for follow-up. Completed FT4 results
-are not discarded solely because the order rule was incorrect.
+Ask the learner to predict these changes before replaying:
 
-Harrison/API: Session 3, slides 7–13; Session 7, slides 17 and 27; Session 9,
-slides 7–10. Clinical context: [American Thyroid Association, Thyroid Function
-Tests](https://www.thyroid.org/thyroid-function-tests/). The exact thresholds and
-workflow here belong to the case's approved protocol, not an ATA reflex mandate.
+- Including exact boundaries adds unintended FT4s at TH-04 and TH-06.
+- Disabling duplicate prevention creates extra orders at TH-08 and TH-09.
+- Bypassing age/order scope changes TH-11 and TH-12.
+- Allowing preliminary numeric results changes TH-13. Missing TSH still requires review.
 
-## Preparing discussion with API slides
+The original investigation records remain fixed while controls change the proposed configuration. The revised results and final recommendation clear after a setting changes.
 
-Use [Association for Pathology Informatics teaching slides: Clinical Decision Support (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%207%20CDS%20slides.pptx) by James H. Harrison, Jr., and Ronald Jackups, slides 27, to prepare the discussion after residents have explained their case decision. Ask: Examine the dependence of reflex orders on intermediate results. Explain which assay configuration and order conditions must agree before the additional test is ordered. Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
+## Teach the denominator
 
-These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
+There are 13 selected records: nine eligible final numeric adult reflex results, two requiring review and two outside scope. Two of the nine eligible accessions already have a linked FT4.
 
+Ask how selecting only newly added FT4s would hide missed additions. For routine monitoring, specify a period and examine all eligible accessions, comparing expected and actual actions. Keep exceptions visible and report their handling separately.
+
+The chosen records test a mechanism and its boundaries. Their order count is not a hospital-wide utilization estimate.
 
 ## Common misconceptions
 
-- “Only the reflex order count.” Ask: what does the record actually establish? Removing an order does not automatically remove calculations or interpretations that depended on its result. Test the complete report and unaffected pathways.
-- “Only the analyzer test menu.” Ask: which conclusion would still need evidence? Removing an order does not automatically remove calculations or interpretations that depended on its result. Test the complete report and unaffected pathways.
-- “Hide the unexpected comment in the chart only.” Ask: what must be checked before making the change? The dependency list tells the team which calculations, comments and reports need regression testing.
+- **The correct display proves the rule was updated.** Ask which saved definition the order program read and which revision appears in the order history.
+- **Fewer orders proves improvement.** Widen the thresholds enough to miss TH-03 and TH-07, then compare the count with the expected actions.
+- **A value equal to the threshold is below it.** Use 0.27 and 4.20 to distinguish strict and inclusive comparisons.
+- **A pending FT4 permits another order because no result exists yet.** Ask what work the first order already represents.
+- **Every affected FT4 should be cancelled.** Review order status, completed results and the clinical situation before deciding on an approved correction.
 
-## Discussion prompts
+## Follow the change into other work
 
-1. What supports the case decision? A strong answer includes a specific record and the distinction: check dependent reports after changing a reflex rule.
-2. What would you check locally? A strong answer includes: list every result that depends on the reflex assay, because the dependency list tells the team which calculations, comments and reports need regression testing.
-3. Who needs to participate? A strong answer includes the assay director and LIS analyst and separates technical work from clinical approval.
+Ask for a list of related definitions and records: report interval, ordering rule, order type, population, status, FT4 code, duplicate check and monitoring report. A useful handoff names the changed version, expected and observed actions, affected accessions, reviewers and follow-up responsibilities.
 
-## Group variant
+The additional questions ask for a denominator and outcomes to monitor. A complete response includes missed indicated orders and unnecessary additions, with attention to duplicates, unresolved exceptions and reporting delays.
 
-Assign laboratory director, LIS analyst, laboratory operations and clinical service roles. Add clinical informatics and a patient advocate when considering ordering or chart use. Ask each person to state one requirement, one risk and the evidence needed before approval. The director then summarizes what can proceed and what must be resolved.
+## Teaching sources
 
-## Assess transfer
+[API's clinical decision support slides](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%207%20CDS%20slides.pptx), by James H. Harrison, Jr., and Ronald Jackups, provide background on result-dependent orders. Use session 7, slides 17 and 27, alongside the configuration and change-testing material in sessions 3 and 9. Ask learners to identify the intermediate result and the order that depends on it.
 
-Draw a reflex dependency map and define one quality indicator with a denominator. A strong response names the record, responsible person, first check and an unresolved risk. Use the three learner retrieval questions to distinguish an unsupported shortcut from a reasoned decision.
-
-## PIER coverage
-
-- 4.3: Repair reflex conditions and choose a denominator that captures missing and unnecessary tests.
-- 4.5: Repair reflex conditions and choose a denominator that captures missing and unnecessary tests.
-- 4.2: Repair reflex conditions and choose a denominator that captures missing and unnecessary tests.
-- 8.2: Repair reflex conditions and choose a denominator that captures missing and unnecessary tests.
-
-
-## Additional source discussion
-
-### Further study with API teaching slides
-
-In [Association for Pathology Informatics teaching slides: Clinical Decision Support (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%207%20CDS%20slides.pptx), review slides 27. Examine the dependence of reflex orders on intermediate results. Explain which assay configuration and order conditions must agree before the additional test is ordered.
+The [American Thyroid Association's thyroid function test explanation](https://www.thyroid.org/thyroid-function-tests/) provides optional clinical context for interpreting TSH and FT4. The numerical thresholds, adult scope and reflex sequence in this lesson are the case laboratory's approved policy.

@@ -1,20 +1,23 @@
-### What the complete replay shows
+### Explain what the 22 checks establish
 
-The 22 records are a selected validation set, not a sample for estimating the
-laboratory's daily hold rate. They include the reported increase, exact and nearby
-boundaries, a decrease, stable results, missing or incompatible history, QC and
-instrument exceptions, and ineligible result statuses. Expand a record to inspect
-why its expected decision matters.
+The [complete release check list](#release-replay-heading) contains **22 selected records**. The supervisor chose them to exercise different parts of the policy: increases, a decrease, exact boundaries, small changes, missing history, QC problems, flags and ineligible results.
 
-Validation must demonstrate **correct release as well as correct holds**. Holding
-every result would make some errors less visible while delaying routine reports.
-After a change, repeat the complete set and compare expected with observed actions.
-The test record belongs with the rule revision, approver, implementation date,
-and procedure for restoring the prior version if needed.
+A boundary test examines the point where a decision changes. AV-02 has an absolute difference of exactly **50 ng/L**. AV-03 has a relative difference of exactly **200%** and an absolute difference of exactly **20 ng/L**. “At least” includes these values. AV-18 checks that a prior result exactly **24 hours old** is still within the allowed window.
 
-Before use, the middleware analyst verifies the rule in the test environment,
-including how held results appear on the technologist's worklist and how released
-results appear in the LIS and EHR. The laboratory director reviews the clinical
-criteria with chemistry staff. After use begins, review unexpected releases,
-reasons for holds, manual overrides, and reporting delays. A high automatic-release
-percentage alone cannot confirm that the rule is correct.
+The records also include results that should release. For example, AV-14 changes from 11 to 12 ng/L and passes the other checks. A corrected rule must preserve that release. Review every mismatch, whether it is an unexpected release or an unnecessary hold.
+
+The number of passing checks describes this chosen set. Estimating the laboratory's routine hold rate would require a defined period and all eligible results during that period.
+
+### Check the other inputs to a calculated result
+
+A calculated result needs its own complete set of inputs. For example, the configured estimated glomerular filtration rate (**eGFR**) equation uses creatinine and patient information including age. If age is missing, staff must resolve it before that calculation can be completed.
+
+A valid creatinine result can remain available while staff investigate the missing input for eGFR. Substituting zero for age or copying an earlier eGFR would produce a report that does not represent the intended calculation for this specimen. The additional question after the exercise asks you to identify that problem.
+
+### Prepare the change for laboratory review
+
+The analyst tests the rule in a **test environment**, a separate installation used to check changes before they affect patient work. The test record should identify the saved rule version, the cases, expected outcomes and observed outcomes.
+
+Chemistry staff also check the surrounding workflow: where held results appear for review, how staff document their decisions, and how released results appear in the LIS and clinical chart. The director reviews the criteria and completed testing before authorizing routine use.
+
+Agree on who will watch for unexpected releases, unnecessary holds and reporting delays. Record how staff would stop the revised rule or restore a previously approved version if a problem appears. That restoration plan is often called a **rollback**. It needs a named person, a saved version and a way to account for results already processed.

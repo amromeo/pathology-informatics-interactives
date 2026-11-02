@@ -1,95 +1,51 @@
 # Faculty guide: Checking Automatic Result Release
 
-## At a glance
-
-Allow 35 minutes. Use individually or in a small group. Project the case records and the exercise controls; keep the answer key out of view until learners commit to a decision.
-
-Learning objectives: test a release rule with both held and releasable results; compare the rule with the approved order pathway; justify the first local check. PIER: 4.3, 4.5, 5.4, 8.2.
+Allow 35 minutes. The resident should translate the written serial-troponin policy into conditions, explain the omitted relative branch and test the correction. The lesson addresses PIER 4.3, 4.5, 5.4 and 8.2.
 
 ## Run of show
 
-| Minutes | Activity | Ask the group |
-| --- | --- | --- |
-| 0–7 | Read the case and records | What decision has the laboratory been asked to make? |
-| 7–25 | Make, test and revise a choice | Which record supports your decision? What could fail? |
-| 25–35 | Debrief and retrieval questions | How would you verify this in your own laboratory? |
+Use about 7 minutes for the case and order scope, 10 for arithmetic and branch logic, 12 for the trace and complete checks, and 6 for implementation and local discussion.
 
-## Expected answers
+## Establish the order scope first
 
+This rule covers the laboratory's serial troponin pathway. A missing same-assay prior result prompts review under that policy. Initial troponins follow a separate rule without a delta comparison.
 
-Require learners to test boundary values, missing prior results, instrument flags, stable abnormal results, and normal cases. Replaying only the reported result is not sufficient validation.
+Ask the resident why those pathways need different handling. A first sample often has no prior result; a requested serial sample calls for checking whether the expected prior sample exists and is linked correctly. Preserve the other release checks in both discussions.
 
-Have the learner calculate both AV-01 differences before changing a control.
-Ask why 36 ng/L misses the absolute branch but satisfies the minimum change in
-the relative branch. Then compare AV-04: the percentage is also 300%, but the
-6 ng/L difference does not satisfy the relative branch's minimum.
+The numerical thresholds and critical-result pathway are the case laboratory's approved policy. They are not universal troponin recommendations. Laboratories may use different validated criteria, including automatic release with a separate critical-result notification process.
 
-Expected repair: OR between branches; absolute limit 50 ng/L; relative limit
-200%; minimum change 20 ng/L; same-assay history within 24 hours; unusable history
-held; QC and instrument checks enabled. The original rule matches 20/22 records,
-failing AV-01 and AV-03. The complete policy matches 22/22. AND between branches
-fails multiple holds; bypassing QC or flags introduces new failures. The tests
-include correct releases so that an indiscriminate hold strategy cannot pass.
+## Work through the two branches
 
-Ask the learner to explain the first action for a held result. A delta check is
-not a diagnosis and should not be described as a universal reason to delay a
-troponin report. The numbers, comparison window, and hold/critical pathways are
-the case laboratory's specified policy. Actual policy depends on assay performance,
-clinical workflow, and laboratory approval; some laboratories release critical
-results automatically while maintaining a separate notification process.
+For AV-01, ask the resident to calculate 48 − 12 = 36 ng/L, then 36 ÷ 12 × 100 = 300%. Ask why 300% describes the change while the current concentration is four times the prior concentration.
 
-Require a change-review summary naming the rule revision, omitted branch,
-affected categories, expected and observed decisions, reviewer, monitoring plan,
-and rollback method. Discuss release delays and unnecessary holds alongside
-missed holds. Ask what testing is still needed outside this rule calculation:
-instrument/middleware inputs, review worklists, manual verification, and complete
-LIS/EHR reporting.
+Have the resident answer three questions aloud: is 36 at least 50; is 300 at least 200; is 36 at least 20? The answers are no, yes and yes. The relative branch calls for a hold.
 
-Harrison/API: Session 3, slides 7–13; Session 9, slides 7–10. The distinction among
-LIS configuration, testing, and production approval follows that source plan.
-Professional context: [Krasowski et al., autoverification in a core chemistry
-laboratory](https://pmc.ncbi.nlm.nih.gov/articles/PMC4023033/). The case thresholds
-are not taken from that institution's algorithm.
+The required configuration is OR between branches, absolute limit 50 ng/L, relative limit 200%, relative-branch minimum 20 ng/L, same-assay history within 24 hours, unusable history held, QC and flag checks enabled. The original configuration matches 20/22; the correction matches 22/22.
 
-## Preparing discussion with API slides
+Compare AV-04, a 2-to-8 change. Its 300% relative difference accompanies only a 6 ng/L absolute difference. Removing the minimum introduces an unnecessary hold. Then use AV-16 to show that a decrease can meet the absolute branch.
 
-Use [Association for Pathology Informatics teaching slides: System Implementation and Management (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%209%20Impl-Mgmt%20slides.pptx) by James H. Harrison, Jr., slides 8–10, to prepare the discussion after residents have explained their case decision. Ask: Compare repeated testing of existing behavior with testing a specific change. Name an unaffected release case that belongs in the test set and explain why it matters. Have residents support their answer with a specific record or result from this lesson before comparing it with the slides.
+## Read the trace and test the change
 
-These slides provide teaching background. Use the lesson's primary sources and current local policies for clinical criteria, legal requirements, and approval decisions; do not turn a slide example or numerical recommendation into a local requirement. If the PowerPoint link changes, locate the session on the [API teaching-slide page](https://www.pathologyinformatics.org/teaching-slide-sets). The lesson and discussion remain usable without the external file.
+The trace follows the selected record through each check and updates when settings change. The complete check list compares all 22 records with fixed expected outcomes. The learner should explain both a missed hold and a correct release.
 
-For initial specimens, most laboratories treat absent history as delta not applicable. The hold for missing history in this exercise is specific to the serial order; it must not be applied to every first ED troponin.
+Useful challenges include AND between branches, a zero minimum for the relative branch, disabled QC checks, missing history, a result exactly at a boundary and a preliminary result. Each setting change clears the old replay and final recommendation.
 
+Ask what remains after a passing replay. Staff must check the review worklist, manual verification, LIS/EHR reporting and response to a problem after use begins. The director reviews the policy and test record before the analyst schedules the change.
 
 ## Common misconceptions
 
-- “Yes; every first result must be held.” Ask: what does the record actually establish? This lesson scopes its delta rule to serial orders. Initial orders use a separate release process with no delta check; other safety checks still apply.
-- “No; all first results release automatically.” Ask: which conclusion would still need evidence? This lesson scopes its delta rule to serial orders. Initial orders use a separate release process with no delta check; other safety checks still apply.
-- “Change the threshold until fewer cases hold.” Ask: what must be checked before making the change? Confirm which order, assay, prior result and other checks apply before changing a threshold.
+- **A 300% change means the current value is three times the prior value.** Work through the change and the total separately.
+- **AND makes the rule more cautious.** With AND between hold branches, fewer results meet the hold condition. Use AV-01 to demonstrate.
+- **Holding everything proves the rule is safe.** Include results expected to release and discuss the effect of delaying them.
+- **A missing prior result is zero.** Ask what measurement zero would assert and what happens when a percentage calculation divides by zero.
+- **Passing creatinine checks supplies every eGFR input.** Review the additional calculation question. Age must be resolved from an authorized source before the configured equation can be used.
 
-## Discussion prompts
+## Teaching sources
 
-1. What supports the case decision? A strong answer includes a specific record and the distinction: test a release rule with both held and releasable results.
-2. What would you check locally? A strong answer includes: compare the rule with the approved order pathway, because confirm which order, assay, prior result and other checks apply before changing a threshold.
-3. Who needs to participate? A strong answer includes a chemistry supervisor and middleware analyst and separates technical work from clinical approval.
+[CLSI AUTO15](https://clsi.org/shop/standards/auto15/) provides professional guidance on designing and validating autoverification for specified laboratory disciplines. Its scope does not supply this lesson's troponin thresholds.
 
-## Group variant
+For an optional example of practice, [Krasowski and colleagues' core chemistry study](https://pmc.ncbi.nlm.nih.gov/articles/PMC4023033/) describes rules involving middleware, instrument information and patient-result comparisons. Ask residents which checks their own laboratory uses; do not transfer the study's algorithm into local policy.
 
-Assign laboratory director, LIS analyst, laboratory operations and clinical service roles. Add clinical informatics and a patient advocate when considering ordering or chart use. Ask each person to state one requirement, one risk and the evidence needed before approval. The director then summarizes what can proceed and what must be resolved.
+[NIDDK's adult eGFR equations](https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults) identify inputs used in the calculation, including age. Use this optional reference to discuss why accepting a creatinine result does not resolve a missing calculation input.
 
-## Assess transfer
-
-Build a release/hold matrix including missing history, missing calculation inputs and an acceptable result. A strong response names the record, responsible person, first check and an unresolved risk. Use the three learner retrieval questions to distinguish an unsupported shortcut from a reasoned decision.
-
-## PIER coverage
-
-- 4.3: Run automatic-release cases, review missing calculation inputs and identify middleware responsibilities.
-- 4.5: Run automatic-release cases, review missing calculation inputs and identify middleware responsibilities.
-- 5.4: Run automatic-release cases, review missing calculation inputs and identify middleware responsibilities.
-- 8.2: Run automatic-release cases, review missing calculation inputs and identify middleware responsibilities.
-
-
-## Additional source discussion
-
-### Further study with API teaching slides
-
-In [Association for Pathology Informatics teaching slides: System Implementation and Management (PowerPoint)](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%209%20Impl-Mgmt%20slides.pptx), review slides 8–10. Compare repeated testing of existing behavior with testing a specific change. Name an unaffected release case that belongs in the test set and explain why it matters.
+[API's system implementation and management slides](https://www.pathologyinformatics.org/assets/lms/jimharrison/PathInformatics%209%20Impl-Mgmt%20slides.pptx), by James H. Harrison, Jr., support discussion of testing and controlled changes. Use session 9, slides 7–10, with the LIS configuration concepts from session 3, slides 7–13. Ask the resident to name an unaffected release case that must be retested.

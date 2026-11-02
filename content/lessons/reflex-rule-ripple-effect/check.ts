@@ -1,84 +1,86 @@
 import type { RetrievalItem } from "../../../src/data/types";
+export const feedbackHeadings = { correct: "Correct", incorrect: "Try again" };
 export const checks: RetrievalItem[] = [
   {
     id: "principle",
     kind: "principle",
     prompt:
-      "A reflex assay stops running, but its dependent interpretation remains. What needs review?",
+      "TH-01 shows the new reference interval but received an unexpected FT4 order. Which records explain the added order?",
     choices: [
       {
         id: "supported",
-        label: "The dependent result and report logic",
+        label: "The saved reflex rule and its entry in the order history",
         correct: true,
         feedback:
-          "Removing an order does not automatically remove calculations or interpretations that depended on its result. Test the complete report and unaffected pathways.",
+          "Revision 8 still used 0.40 as the lower threshold, and the order history identifies that revision at 07:18. Comparing both with the approved protocol explains why a TSH of 0.30 created an FT4.",
       },
       {
         id: "shortcut",
-        label: "Only the reflex order count",
+        label: "The report's interval definition and displayed flag",
         feedback:
-          "This leaves the central problem unresolved. Removing an order does not automatically remove calculations or interpretations that depended on its result. Test the complete report and unaffected pathways.",
+          "Those records establish what the report displays. The order program reads a separate saved rule. Follow the rule revision into the order history to explain the FT4.",
       },
       {
         id: "incomplete",
-        label: "Only the analyzer test menu",
+        label: "The analyzer's assay name and reagent lot record",
         feedback:
-          "This does not establish the needed conclusion. Removing an order does not automatically remove calculations or interpretations that depended on its result. Test the complete report and unaffected pathways.",
+          "The assay change prompted this review, but its name and lot do not show which saved condition created the FT4. Inspect the reflex rule and the accession's order history.",
       },
     ],
   },
   {
     id: "transfer",
     kind: "transfer",
-    prompt: "At your institution, what would you check first before proposing a change?",
+    prompt:
+      "After a reflex-rule correction, which review can reveal a follow-up test that should have been added but was missed?",
     choices: [
       {
         id: "supported",
-        label: "List every result that depends on the reflex assay",
+        label: "Compare expected and actual actions for all eligible accessions",
         correct: true,
         feedback:
-          "The dependency list tells the team which calculations, comments and reports need regression testing.",
+          "Include eligible accessions with and without a new FT4 order. A missed addition appears where the protocol calls for a test but the order record shows none.",
       },
       {
         id: "shortcut",
-        label: "Hide the unexpected comment in the chart only",
+        label: "Review only the FT4 orders created after the change",
         feedback:
-          "This leaves the central problem unresolved. The dependency list tells the team which calculations, comments and reports need regression testing.",
+          "An accession with a missed addition has no new FT4 order to select. Starting with all eligible TSH-with-reflex accessions keeps that failure visible.",
       },
       {
         id: "incomplete",
-        label: "Apply this case decision without checking local policy",
+        label: "Compare the total FT4 count before and after the change",
         feedback:
-          "This does not establish the needed conclusion. The dependency list tells the team which calculations, comments and reports need regression testing.",
+          "A lower total may reflect either fewer unnecessary tests or more missed tests. Review each eligible accession's expected and actual action to distinguish those possibilities.",
       },
     ],
   },
   {
     id: "spaced",
     kind: "spaced",
-    fromLesson: "11",
     prompt:
-      "An initial troponin has no prior result. Does the serial-order delta rule decide its release?",
+      "An initial troponin order has no prior result. Which release process should staff use?",
     choices: [
       {
         id: "supported",
-        label: "No; use the initial-order rule",
+        label: "The initial-order rule and its required checks",
         correct: true,
         feedback:
-          "This lesson scopes its delta rule to serial orders. Initial orders use a separate release process with no delta check; other safety checks still apply.",
+          "Initial troponin orders use their separate release rule. The serial-order comparison assumes an earlier sample; the initial-order process applies its own eligibility, QC, flag and other required checks.",
       },
       {
         id: "shortcut",
-        label: "Yes; every first result must be held",
+        label: "The serial-order rule with its missing-history hold",
         feedback:
-          "This leaves the central problem unresolved. This lesson scopes its delta rule to serial orders. Initial orders use a separate release process with no delta check; other safety checks still apply.",
+          "A first sample may have no prior result. This laboratory directs initial orders to a separate release process so the serial history requirement is applied to the intended orders.",
       },
       {
         id: "incomplete",
-        label: "No; all first results release automatically",
+        label: "Automatic release without any further checks",
         feedback:
-          "This does not establish the needed conclusion. This lesson scopes its delta rule to serial orders. Initial orders use a separate release process with no delta check; other safety checks still apply.",
+          "The absence of a delta comparison leaves the other release requirements in place. Staff still need the initial-order rule's checks before the result can release.",
       },
     ],
+    fromLesson: "11",
   },
 ];
