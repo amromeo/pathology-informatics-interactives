@@ -22,10 +22,6 @@ An **implementation guide** narrows a standard down for one purpose: which messa
 
 HL7 version 2 sends structured messages made of segments and fields. FHIR represents information as resources, such as an Observation linked to a DiagnosticReport, a Patient and a Specimen. Switching to FHIR would not supply the missing assigning authority or fix a wrong code. Either way, the two sides need an agreed format, agreed codes and testing in real use.
 
-### Help improve the standards
-
-Standards change through proposals, review by the people who use them, responses to comments, publication and upkeep. Pathologists can contribute real laboratory examples, check whether definitions keep their meaning and report problems to the right working group. Asking for a change does not make it part of the standard. In this case, if the program needed an answer the agreed list cannot express, both partners would write down the need and ask for the right change to the code system or guide. Nobody should quietly redefine an existing code.
-
 ### Accepting a report is not the same as following it up
 
 Here the program's system stores any report with a valid structure first; a separate service then decides whether it belongs on a worklist. The acknowledgment records that the report was accepted. The exception queue records why it was not routed. Check both. A report missing from the referral list must never be read as a normal screen.
@@ -36,10 +32,17 @@ In the replay, F means final, C means corrected and P means preliminary. They sa
 
 NB-08 calls for immediate referral even though the report is preliminary. The program's urgent contact procedure still applies, and staff have to watch the preliminary-review queue just as closely.
 
+<details>
+<summary>For the questions at the end: who maintains each standard, and how to ask for a change</summary>
+
 ### Who maintains which standard?
 
 HL7 International develops messages and resources. Regenstrief maintains LOINC codes for tests and observations. SNOMED International maintains SNOMED CT clinical concepts. Integrating the Healthcare Enterprise (IHE) combines standards into profiles for particular tasks. The International Organization for Standardization (ISO) publishes standards including ISO 15189 for laboratory quality. The US Assistant Secretary for Technology Policy/Office of the National Coordinator for Health Information Technology (ASTP/ONC) names which standards certified EHR software must use; it does not write terminologies.
 
 Before asking for a change, describe what is missing and search the existing codes or specifications. Gather the specimen, method, scale, examples and what the receiver is expected to do. Submit through the maintainer's process, take part in the review, then test the approved result with the receiving program. Never present a home-made local code as a standard one.
 
-A value set is the list of answers a field allows. Here, the three newborn answer codes are the categories the program accepts; a valid test code with an answer outside that list still needs review.
+### Help improve the standards
+
+Standards change through proposals, review by the people who use them, responses to comments, publication and upkeep. Pathologists can contribute real laboratory examples, check whether definitions keep their meaning and report problems to the right working group. Asking for a change does not make it part of the standard. In this case, if the program needed an answer the agreed list cannot express, both partners would write down the need and ask for the right change to the code system or guide. Nobody should quietly redefine an existing code.
+
+</details>
